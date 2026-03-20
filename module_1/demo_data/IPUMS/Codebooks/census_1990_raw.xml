@@ -1,0 +1,976 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  IPUMS USA: extract summary
+</title>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="icon" href="/favicon.ico">
+
+<style>
+    @font-face {
+        font-family: "Cabrito Sans Subset";
+    }
+    @font-face {
+        font-family: "Cabrito Sans";
+    }
+</style>
+<link type="text/css" rel="stylesheet" href="//assets.ipums.org/_css/font-faces.1.2.css" media="all" />
+
+  <link rel="stylesheet" href="/usa-action/assets/extract-dff59703dd4bc8830371b0603e69d7b665a744ba3e1f6654b94f436ff05a66ee.css" />
+
+
+    <link rel="stylesheet" href="/usa-action/assets/controller/extract_requests-d76424c1eacc0839f6b9e8e969e19a36cbae46cd28b1f46b14f31b66cc137b5f.css" />
+
+    <link rel="stylesheet" href="/usa-action/assets/project/usa-59e06499188848a6ce0775a4e66b5e7bd48f915e0af5a776116fe0a843f3c48d.css" />
+
+<script src="/usa-action/assets/application-12b20f85b95acbeb81acad8e35f424199afe0fdd870c666315be8d67735adc42.js"></script>
+
+<script type="text/javascript" src="//assets.ipums.org/_js/ffo/fontfaceobserver.js"></script>
+<script type="text/javascript" src="//assets.ipums.org/_js/load-fonts.1.3.js"></script>
+
+
+  <script type="text/javascript">
+    // when the page unloads, save the extract description
+    window.addEventListener('beforeunload', (event) => {
+      sessionStorage.setItem('description_30502663',$('#extract_request_description').val());
+    });
+
+    // if there is a saved description for this page, reload it once the page loads.
+    if (sessionStorage.getItem('description_30502663')) {
+      window.addEventListener('load', (event) => {
+        $('#extract_request_description').val(sessionStorage.getItem('description_30502663'));
+      });
+    }
+  </script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="1F0VZcC0vGpS1IU5K9zEiLPkUlKpan0WHRvejDbPltDkQVilewKf1y9R0_pAjLy0CnqIW1bKgTKBMij7mRMxrg" />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PDMCB39');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body id="usa" class="extract">
+<div id="canvas">
+  <div id="noscript-msg">
+  <noscript>
+    <p><strong>Alert:</strong> Portions of this website require JavaScript to function properly.<br />
+    Please enable Javascript in your browser.  Thank you.</p>
+    
+  </noscript>
+</div>
+
+
+  
+<nav id="user_bar">
+  <ul class="list-menu">
+    <!-- this list will stack right to left -->
+    <li><a href="https://www.ipums.org" class="external_link_icon">ipums.org</a></li>
+    <li id="logInLink" style="display: inline;"><a href="/usa-action/users/logout">Log out</a></li>
+        <li><a href="/usa-action/menu">Account</a></li>
+        <li>Welcome, Brasdy&nbsp;&nbsp;</li>
+  </ul>
+</nav>
+
+<div id="header" class="line">
+  <div id="logoitem" class="item">
+    <div class="sap-content"> <!--prevents redraw bug in IE-->
+
+      <div id="title" class="replace">
+        <a href="/usa/index.shtml">IPUMS USA<span></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="navline" class="line">
+  <div id="primary_nav" class="item">
+    <div class="sap-content">
+      <div id="project_top_menu">
+  <ul>
+  </ul>
+  <p class="projectSubtitle"></p>
+</div>
+
+      <ul>
+        <li><a href="/usa/index.shtml">HOME</a></li>
+        <li><a href="/usa-action/variables/group">Select Data</a></li>
+        <li><a href="/usa-action/data_requests/download">My Data</a></li>
+        <li><a href="/usa/support.shtml">Support</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  <div id="main" class="line nomenu">
+    <!--content-->
+    <div id="maincontent" class="item">
+      <div class="sap-content">
+        <div class="content">
+          	<div class="alert alert-info">
+	  The 2024 ACS 1-Year PUMS file has not yet been released amidst the U.S. federal government shutdown. Once these data are available, IPUMS will process and release them as quickly as possible.
+	</div>
+
+          <div id="flashContainer"></div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    
+  });
+</script>
+
+          <!-- BEGIN PLACING PAGE CONTENT -->
+          
+  
+<h1>Extract Request <span class="help">(<a target="_blank" class="" style="" href="/usa-action/faq#ques34">help</a>)</span></h1>
+
+
+
+
+
+<div class="sectionHeader summaryHeader">
+    <div class="extractProperty">Samples:</div>
+  <div class="extractPropertyValue">1</div>
+  <div class="show">
+    (<a href="#" onclick="toggleShowHide('sampleSection', this); toggleShowHide('linkedPairsSection', this); return false;">show</a>)
+  </div>
+  <div class="change"><a href="/usa-action/samples">Change</a></div>
+</div>
+
+<table class="summaryItem" style="display:none;" id='sampleSection'>
+  <tr>
+    <th class="sample">Sample</th>
+        <th class="density">Density</th>
+      <th class="note">Note</th>
+  </tr>
+
+
+        <tr class="">
+          <td class="sample">
+                <a target="_blank" href="/usa/sampdesc.shtml#us1990a">1990 5% state</a>
+          </td>
+              <td class="density">5.0%</td>
+            <td class="note"></td>
+        </tr>
+
+</table>
+
+
+
+<div class="sectionHeader summaryHeader">
+  <div class="extractProperty">Variables:</div>
+  <div class="extractPropertyValue">49</div>
+  <div class="show">(<a href="#" onclick="toggleShowHide('variableSection', this); return false;">show</a>)</div>
+  <div class="change"><a href="/usa-action/extract_requests/variables">Change</a></div>
+</div>
+
+<div style="display:none;" id='variableSection'>
+  <table class="summaryItem">
+    <tr class="variables">
+        <th class="type"><a target="_blank" class="" style="" href="/usa-action/faq#ques33">Type</a></th>
+      <th class="mbasic variable">Variable</th>
+      <th class="mbasic label">Label</th>
+
+    </tr>
+
+
+    
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/YEAR">YEAR</a>
+      </td>
+      <td class="mbasic label">Census year</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/SAMPLE">SAMPLE</a>
+      </td>
+      <td class="mbasic label">IPUMS sample identifier</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/SERIAL">SERIAL</a>
+      </td>
+      <td class="mbasic label">Household serial number</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/HHWT">HHWT</a>
+      </td>
+      <td class="mbasic label">Household weight</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/CLUSTER">CLUSTER</a>
+      </td>
+      <td class="mbasic label">Household cluster for variance estimation</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/STRATA">STRATA</a>
+      </td>
+      <td class="mbasic label">Household strata for variance estimation</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/GQ">GQ</a>
+      </td>
+      <td class="mbasic label">Group quarters status</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/HHTYPE">HHTYPE</a>
+      </td>
+      <td class="mbasic label">Household Type</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/STATEICP">STATEICP</a>
+      </td>
+      <td class="mbasic label">State (ICPSR code)</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/STATEFIP">STATEFIP</a>
+      </td>
+      <td class="mbasic label">State (FIPS code)</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/COUNTYICP">COUNTYICP</a>
+      </td>
+      <td class="mbasic label">County (ICPSR code, identifiable counties only)</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/COUNTYFIP">COUNTYFIP</a>
+      </td>
+      <td class="mbasic label">County (FIPS code, identifiable counties only)</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">H</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/PUMA">PUMA</a>
+      </td>
+      <td class="mbasic label">Public Use Microdata Area</td>
+
+    </tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">H</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/METAREA">METAREA</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Metropolitan area (pre-2013 delineations, identifiable areas only) [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">H</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/METAREA">METAREAD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Metropolitan area (pre-2013 delineations, identifiable areas only) [detailed version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">H</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/GQTYPE">GQTYPE</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Group quarters type [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">H</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/GQTYPE">GQTYPED</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Group quarters type [detailed version]
+  </td>
+
+
+</tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/PERNUM">PERNUM</a>
+      </td>
+      <td class="mbasic label">Person number in sample unit</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/PERWT">PERWT</a>
+      </td>
+      <td class="mbasic label">Person weight</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/SLWT">SLWT</a>
+      </td>
+      <td class="mbasic label">Sample-line weight</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/SEX">SEX</a>
+      </td>
+      <td class="mbasic label">Sex</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/AGE">AGE</a>
+      </td>
+      <td class="mbasic label">Age</td>
+
+    </tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/HISPAN">HISPAN</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Hispanic origin [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/HISPAN">HISPAND</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Hispanic origin [detailed version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/BPL">BPL</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Birthplace [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/BPL">BPLD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Birthplace [detailed version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/EDUC">EDUC</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Educational attainment [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/EDUC">EDUCD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Educational attainment [detailed version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/EMPSTAT">EMPSTAT</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Employment status [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/EMPSTAT">EMPSTATD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Employment status [detailed version]
+  </td>
+
+
+</tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/LABFORCE">LABFORCE</a>
+      </td>
+      <td class="mbasic label">Labor force status</td>
+
+    </tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/CLASSWKR">CLASSWKR</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Class of worker [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/CLASSWKR">CLASSWKRD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Class of worker [detailed version]
+  </td>
+
+
+</tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/OCC">OCC</a>
+      </td>
+      <td class="mbasic label">Occupation</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/OCC1990">OCC1990</a>
+      </td>
+      <td class="mbasic label">Occupation, 1990 basis</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/IND">IND</a>
+      </td>
+      <td class="mbasic label">Industry</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/IND1990">IND1990</a>
+      </td>
+      <td class="mbasic label">Industry, 1990 basis</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/WKSWORK1">WKSWORK1</a>
+      </td>
+      <td class="mbasic label">Weeks worked last year</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/WKSWORK2">WKSWORK2</a>
+      </td>
+      <td class="mbasic label">Weeks worked last year, intervalled</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/HRSWORK1">HRSWORK1</a>
+      </td>
+      <td class="mbasic label">Hours worked last week</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/HRSWORK2">HRSWORK2</a>
+      </td>
+      <td class="mbasic label">Hours worked last week, intervalled</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/UHRSWORK">UHRSWORK</a>
+      </td>
+      <td class="mbasic label">Usual hours worked per week</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/WORKEDYR">WORKEDYR</a>
+      </td>
+      <td class="mbasic label">Worked last year</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/INCWAGE">INCWAGE</a>
+      </td>
+      <td class="mbasic label">Wage and salary income</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/POVERTY">POVERTY</a>
+      </td>
+      <td class="mbasic label">Poverty status</td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/SEI">SEI</a>
+      </td>
+      <td class="mbasic label">Duncan Socioeconomic Index </td>
+
+    </tr>
+
+
+    <tr class="variables  ">
+        <td class="type">P</td>
+
+      <td class="mbasic variable">
+        <a target="var_desc" href="/usa-action/variables/HWSEI">HWSEI</a>
+      </td>
+      <td class="mbasic label">Socioeconomic Index, Hauser and Warren</td>
+
+    </tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/RACESING">RACESING</a>
+    (general)
+  </td>
+  <td class="mbasic label">
+    Race: Single race identification (old version) [general version]
+  </td>
+
+
+</tr>
+
+
+
+    
+<tr class="variables ">
+  <td class="type">P</td>
+  <td class="mbasic variable">
+    <a target="var_desc" href="/usa-action/variables/RACESING">RACESINGD</a>
+    (detailed)
+  </td>
+  <td class="mbasic label">
+    Race: Single race identification (old version) [detailed version]
+  </td>
+
+
+</tr>
+
+
+
+  </table>
+
+  
+</div>
+
+
+
+
+
+
+
+<div class="sectionHeader summaryHeader">
+  <div class="extractProperty">Data format:</div>
+  <div class="extractPropertyValue">
+    .csv
+  </div>
+  <div class="show">&nbsp;</div>
+  <div class="change" >
+    <a href="/usa-action/extract_requests/structure">Change</a>
+  </div>
+</div>
+
+<div class="sectionHeader summaryHeader">
+  <div class="extractProperty">Structure:</div>
+  <div class="extractPropertyValue">
+      Rectangular
+      (person)
+  </div>
+  <div class="show">&nbsp;</div>
+  <div class="change">
+    <a href="/usa-action/extract_requests/structure">Change</a>
+  </div>
+</div>
+
+
+
+
+
+<div class="sectionHeader summaryHeader">
+  <div class="extractProperty">Estimated size:</div>
+  <div class="extractPropertyValue">
+      2098.3 MB
+  </div>
+  <div class="show">&nbsp;</div>
+  <div class="change"><a target="_blank" class="" style="" href="/usa-action/faq#ques14">How to reduce extract size</a></div>
+</div>
+
+
+
+
+
+<h2 id="options">Options</h2>
+    <div class="reviseButton">
+      <form class="button_to" method="get" action="/usa-action/extract_requests/flags"><input type="submit" value="Select data quality flags" /></form>
+      <span class="explanatory">
+            Include data quality flags for selected variables.
+      </span>
+    </div>
+
+
+    <div class="reviseButton">
+        <form class="button_to" method="get" action="/usa-action/extract_requests/variables_for_cases"><input type="submit" value="Select cases" /></form>
+      <span class="explanatory">
+            Include only specified cases (for example, persons age 60 and older).
+      </span>
+    </div>
+
+
+    <div class="reviseButton">
+      <form class="button_to" method="get" action="/usa-action/extract_requests/attached"><input type="submit" value="Attach characteristics" /></form>
+      <span class="explanatory">
+            Attach data from mother, father, spouse or household head as a new variable (for
+            example, education of mother).
+
+      </span>
+    </div>
+
+
+    <div class="reviseButton">
+      <form class="button_to" method="get" action="/usa-action/extract_requests/density"><input type="submit" value="Customize sample sizes" /></form>
+          <span class="explanatory">Specify the number of cases to include from each sample in your extract.</span>
+    </div>
+
+  <div class="reviseButton">
+    <form class="button_to" method="get" action="/usa-action/extract_requests/monetary_standardization"><input type="submit" value="Adjust Monetary Values" /></form>
+    <span class="explanatory">
+            Attach new monetary variable(s) adjusted to constant values using a pricing index (e.g., CPI-U)
+      </span>
+  </div>
+
+
+<form class="edit_extract_request" id="edit_extract_request_30502663" action="/usa-action/extract_requests/submit" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="Yo_IiCU6F52r2H-e2QzY3n5wQ4VjhohJ079H0kuJhgawOjdk4MINOJmn0LkHZ49GIqHdUzIgb2NtAUfk5eclSQ" autocomplete="off" />
+    <input type="hidden" name="cart_version_token" id="cart_version_token" value="rv1/PKT29YGfMz4oGY0rE5FqIqCI/o7zZuq/AIdAosQ=::2" autocomplete="off" />
+
+    <div class="describe">
+      <p id="describe">Describe your extract</p>
+
+      <textarea rows="3" cols="75" name="extract_request[description]" id="extract_request_description">
+Revision of (Revision of (Revision of (census_1990_raw occ_1990)))</textarea>
+    </div>
+
+
+
+    <p>
+        <input type="submit" name="commit" value="Submit extract" data-disable-with="Submitting..." class="createExtract medium" />
+    </p>
+</form>
+
+
+<div id="popup">
+  <div id="popup_loading">
+    <img src="/usa-action/assets/ajax-loader-3d0eaafca10b29dd00e7960a95712f89f62969536226e0216f90fb57705e7516.gif" />
+    <br/>
+    Loading...
+  </div>
+  <iframe style="width: 100%; height: 100%; border: none; display: block;" id="popup_frame"></iframe>
+</div>
+
+
+
+          <!-- END PLACING PAGE CONTENT -->
+        </div>
+      </div>
+    </div> <!-- end maincontent -->
+  </div> <!-- end main (line 3) -->
+
+  <div id="footerline" class="line">
+    <div class="item" id="footer">
+      <div class="sap-content">
+        <div id="firstFooter">
+          <div id="fundedBy">
+            <p>
+  Supported by:
+  <a href="http://www.nih.gov/">National Institutes of Health</a>,
+  <a href="http://www.nsf.gov/">National Science Foundation</a>,
+  <a href="http://www.ancestry.com/">Ancestry</a>,
+  <a href="http://www.stattransfer.com/">Stat/Transfer</a>, and
+  <a href="http://umn.edu/">University of Minnesota</a>.
+</p>
+
+          </div>
+        </div>
+
+        <div id="secondFooter">
+          <p>Copyright &copy; <a href="http://www.pop.umn.edu">Minnesota Population Center</a>, <a href="http://www.umn.edu">University of Minnesota</a>.</p>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </div>	<!-- end footer (line 4) -->
+
+</div>
+<!-- end canvas -->
+
+<!-- hidden form field to ensure (w/handle_back_button.js that AJAX-y elements are reloaded
+from the server when arriving on a page via the back button -->
+<input id="reloadValue" type="text" style="display:none;" name="reloadValue" value="" />
+
+</body>
+</html>
+

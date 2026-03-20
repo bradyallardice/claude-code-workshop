@@ -1,2 +1,13 @@
 # Large raw IPUMS census files (use sampled versions for git)
-module_1/demo_data/IPUMS/*.csv.gz
+module_1/demo_data/IPUMS/*_raw.csv.gz
+
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
