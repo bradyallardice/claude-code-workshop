@@ -1,0 +1,2 @@
+# Large raw IPUMS census files (use sampled versions for git)
+module_1/demo_data/IPUMS/*.csv.gz
