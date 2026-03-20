@@ -39,18 +39,118 @@
 }
 
 % ── Metadata ──────────────────────────────────────────────────────
-\title{Module 1: What This Is and What You Can Do With It}
-\subtitle{Claude Code for Academic Researchers}
-\author{} % Instructor name
+\title{Claude Code for Academic Researchers}
+\subtitle{A Methods Workshop in AI-Assisted Research}
+\author{Brady Allardice}
 \date{}
-\institute{}
+\institute{Universitat Pompeu Fabra \& Institut Barcelona d'Estudis Internacionals (IBEI)}
 
 % ══════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── Title ─────────────────────────────────────────────────────────
+% ── Course Title ──────────────────────────────────────────────────
 \begin{frame}[plain]
   \titlepage
+\end{frame}
+
+% ── About the Instructor ─────────────────────────────────────────
+\begin{frame}{About Me}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \textbf{Brady Allardice}\\
+      PhD Candidate, Political \& Social Sciences\\
+      UPF / IBEI, Barcelona
+
+      \vspace{0.5em}
+      \textbf{Research:} Political economy of technological change
+      \begin{itemize}
+        \item Automation, AI, and electoral behavior
+        \item LLM-based text classification pipelines
+        \item Causal inference with panel data
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Background:}
+      \begin{itemize}
+        \item M.Sc.\ Economics (Barcelona School of Economics)
+        \item Former data scientist (Paysafe Group)
+        \item Former research associate (UC Riverside)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \textbf{Why this course:}
+      \begin{itemize}
+        \item Daily user of Claude Code for academic research
+        \item Use it across the full pipeline: data cleaning, analysis, robustness checks, code auditing, replication
+        \item These tools can dramatically expand what a researcher can accomplish---if used with the right workflows
+      \end{itemize}
+
+      \vspace{0.5em}
+      {\small brady.allardice@upf.edu\\github.com/bradyall}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ── Course Overview ───────────────────────────────────────────────
+\begin{frame}{Today's Plan}
+  \small
+  \begin{tabular}{@{}r l l l@{}}
+    \toprule
+    \textbf{\#} & \textbf{Module} & \textbf{Time} & \textbf{Format} \\
+    \midrule
+    1 & What This Is and What You Can Do With It & 50 min & Demo + Exercise \\
+    2 & How Claude Code Works & 75 min & Lecture + Exercise \\
+    3 & Automating Research Tasks & 60 min & Exercise-Heavy \\
+    4 & Robustness and Replication & 60 min & Exercise-Heavy \\
+    \midrule
+      & \textit{Break} & \textit{15 min} & \\
+    \midrule
+    5 & Code Auditing and Review & 60 min & Exercise + Discussion \\
+    6 & Version Control with Git & 45 min & Exercise-Heavy \\
+    7 & Developing Expert Judgment & 40 min & Group Discussion \\
+    8 & The Anthropic API (Bonus) & 35 min & Demo + Exercise \\
+    9 & Capstone Project & 90 min & Independent Work \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  {\footnotesize ${\sim}$8.5 hours \quad$\vert$\quad 60--70\% hands-on \quad$\vert$\quad Pair programming throughout}
+\end{frame}
+
+\begin{frame}{Core Framework}
+  \begin{alertblock}{The Central Idea}
+    You are the principal investigator. Claude Code is the research assistant.\\
+    You direct the work, make analytical decisions, and verify every result.\\
+    Claude Code handles the mechanical execution.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  The question is never ``can Claude Code do this''---it almost always can.
+
+  \vspace{0.3em}
+  The question is: \textbf{what is the most productive and reliable way to get this done?}
+
+  \vspace{0.8em}
+  \textbf{By the end of today, you will be able to:}
+  \begin{itemize}
+    \item Automate data cleaning, robustness checks, code auditing, and documentation
+    \item Choose the right execution mode for each task
+    \item Verify output against known properties of your data
+    \item Recognize when Claude Code is failing and intervene effectively
+  \end{itemize}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  MODULE 1 BEGINS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\Large\textbf{Module 1}}\\[0.5em]
+  {\large What This Is and What You Can Do With It}\\[0.3em]
+  {\small 50 minutes \quad$\vert$\quad Demo + Exercise}
+  \vfill
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
