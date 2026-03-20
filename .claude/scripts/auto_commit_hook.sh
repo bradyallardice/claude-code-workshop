@@ -54,54 +54,10 @@ except:
     print('unknown')
 " 2>/dev/null || echo "unknown")
 
-# Generate commit message using a Python helper that reads diff info directly
-MSG=$(python3 - << 'PYEOF'
-import subprocess, sys
+# Generate commit message using Claude
+DIFF=$(git diff --cached 2>/dev/null | head -300)
 
-def run(cmd):
-    return subprocess.run(cmd, capture_output=True, text=True).stdout.strip()
-
-stat = run(["git", "diff", "--cached", "--stat"])
-diff = run(["git", "diff", "--cached"])
-added_files = set(run(["git", "diff", "--cached", "--diff-filter=A", "--name-only"]).split("\n"))
-deleted_files = set(run(["git", "diff", "--cached", "--diff-filter=D", "--name-only"]).split("\n"))
-
-lines = stat.strip().split("\n")
-files = [l.strip().split("|")[0].strip() for l in lines if "|" in l]
-n_files = len(files)
-
-if n_files == 0:
-    sys.exit(1)
-
-parts = []
-for f in files:
-    name = f.split("/")[-1]
-    if f in added_files:
-        parts.append(f"add {name}")
-    elif f in deleted_files:
-        parts.append(f"remove {name}")
-    else:
-        parts.append(f"update {name}")
-
-if n_files <= 3:
-    msg = "[auto] " + ", ".join(parts)
-else:
-    dirs = set("/".join(f.split("/")[:-1]) for f in files if "/" in f)
-    dir_str = ", ".join(sorted(dirs)) if dirs else "project"
-    msg = f"[auto] update {n_files} files in {dir_str}"
-
-# Add context hint from first meaningful added line
-add_lines = [l[1:].strip() for l in diff.split("\n")
-             if l.startswith("+") and not l.startswith("+++") and len(l[1:].strip()) > 10]
-if add_lines and n_files <= 3:
-    hint = add_lines[0][:60]
-    if len(add_lines[0]) > 60:
-        hint += "..."
-    msg += f" — {hint}"
-
-print(msg)
-PYEOF
-)
+MSG=$(echo "$DIFF" | claude --print --model haiku "Write a short git commit message (one line, max 72 chars) for this diff. No quotes, no prefix, just the message:" 2>/dev/null)
 
 if [ -z "$MSG" ]; then
     FILES=$(git diff --cached --name-only 2>/dev/null | head -3 | xargs -I{} basename {})
