@@ -39,8 +39,7 @@ git rm --quiet module_*/instructor_notes.md 2>/dev/null || true
 git rm --quiet module_4/base_regression.py module_5/buggy_script.py \
     module_8/api_template.py 2>/dev/null || true
 git rm -r --quiet slides/img/ 2>/dev/null || true
-git rm --quiet slides/*.tex slides/*.fdb_latexmk slides/*.fls \
-    slides/*.synctex.gz slides/*.vrb 2>/dev/null || true
+git ls-files slides/ | grep -v '\.pdf$' | xargs -r git rm --quiet 2>/dev/null || true
 
 # Commit
 git commit -m "Sync student branch from teacher ($(date +%Y-%m-%d))"
