@@ -1,11 +1,11 @@
 """Build a county-level panel joining presidential vote shares with IPUMS demographics.
 
 Reads:
-  - module_1/data/countypres_sample.csv (MIT Election Data + Science Lab)
-  - module_1/data/IPUMS/census_{year}_sample.csv.gz (IPUMS USA microdata)
+  - module_1/data/election/countypres_sample.csv (MIT Election Data + Science Lab)
+  - module_1/data/ipums/census_{year}_sample.csv.gz (IPUMS USA microdata)
 
 Outputs:
-  - module_1/data/county_panel.csv
+  - module_1/output/county_panel.csv
   - module_1/output/vote_share_over_time.png
   - module_1/output/demographics_over_time.png
 
@@ -51,7 +51,7 @@ ELECTION_TO_IPUMS = {
 
 def load_election_data():
     """Load and reshape presidential election data to county-year level vote shares."""
-    df = pd.read_csv(os.path.join(DATA_DIR, "countypres_sample.csv"))
+    df = pd.read_csv(os.path.join(DATA_DIR, "election", "countypres_sample.csv"))
     n_raw = len(df)
 
     # Keep only TOTAL mode rows (excludes absentee/provisional breakdowns in 2020)
@@ -123,7 +123,7 @@ def load_ipums_county(year):
       - RACE: general version, 1-9 scale (see docstring for full coding)
     """
     filename = ELECTION_TO_IPUMS[year]
-    filepath = os.path.join(DATA_DIR, "IPUMS", filename)
+    filepath = os.path.join(DATA_DIR, "ipums", filename)
 
     if not os.path.exists(filepath):
         print(f"  WARNING: {filepath} not found, skipping year {year}")
@@ -313,7 +313,7 @@ def main():
     print(f"  Population: all positive (min={panel['population'].min():,.0f}, max={panel['population'].max():,.0f})")
 
     # Save panel
-    outpath = os.path.join(DATA_DIR, "county_panel.csv")
+    outpath = os.path.join(OUTPUT_DIR, "county_panel.csv")
     panel.to_csv(outpath, index=False)
     print(f"\nPanel saved to {outpath}")
     print(f"Shape: {panel.shape}")

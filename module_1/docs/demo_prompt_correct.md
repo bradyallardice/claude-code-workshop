@@ -1,4 +1,4 @@
-I have county-level presidential election data and IPUMS census microdata in `module_1/data/`. The election data is in `countypres_sample.csv` and the IPUMS files are in `module_1/data/IPUMS/` as `census_{year}_sample.csv.gz` for years 2012, 2016, 2020, and 2024.
+I have county-level presidential election data and IPUMS census microdata in `module_1/data/`. The election data is in `module_1/data/election/countypres_sample.csv` and the IPUMS files are in `module_1/data/ipums/` as `census_{year}_sample.csv.gz` for years 2012, 2016, 2020, and 2024.
 
 Build a balanced county-year panel that merges election results with demographics. Specifically:
 
