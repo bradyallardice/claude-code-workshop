@@ -48,7 +48,7 @@ ELECTION_TO_IPUMS = {
 
 census_panels = []
 for year, filename in ELECTION_TO_IPUMS.items():
-    filepath = os.path.join(DATA_DIR, "IPUMS", filename)
+    filepath = os.path.join(DATA_DIR, "ipums", filename)
     df = pd.read_csv(filepath, compression="gzip")
     df = df[df["COUNTYFIP"] != 0].copy()
 
