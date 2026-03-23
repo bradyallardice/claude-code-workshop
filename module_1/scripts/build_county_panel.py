@@ -1,11 +1,11 @@
 """Build a county-level panel joining presidential vote shares with IPUMS demographics.
 
 Reads:
-  - module_1/data/countypres_sample.csv (MIT Election Data + Science Lab)
-  - module_1/data/IPUMS/census_{year}_sample.csv.gz (IPUMS USA microdata)
+  - module_1/data/election/countypres_sample.csv (MIT Election Data + Science Lab)
+  - module_1/data/ipums/census_{year}_sample.csv.gz (IPUMS USA microdata)
 
 Outputs:
-  - module_1/data/county_panel.csv
+  - module_1/output/county_panel.csv
   - module_1/output/vote_share_over_time.png
   - module_1/output/demographics_over_time.png
 
