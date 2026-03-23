@@ -710,11 +710,10 @@ claude
 \end{frame}
 
 \begin{frame}{What Changes When You Use Scripts}
-  \textbf{No persistent state.} You cannot run one line, inspect the output, then run the next.\\
-  Every time you run the file, it starts from scratch.
+  \textbf{You can run scripts line by line} in VS Code (Shift+Enter), just like a notebook. But scripts aren't really built for that.
 
   \vspace{0.5em}
-  \textbf{No intermediate output.} You cannot see what a dataframe looks like mid-pipeline unless you explicitly print or save it.
+  Their strength is that they run \textbf{end-to-end}: \lstinline{python my_script.py} always does the same thing, top to bottom. That is what makes them reproducible, and what Claude Code needs.
 
   \vspace{0.8em}
   \textbf{What this means for your workflow:}
