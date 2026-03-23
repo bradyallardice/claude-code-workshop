@@ -51,7 +51,7 @@ ELECTION_TO_IPUMS = {
 
 def load_election_data():
     """Load and reshape presidential election data to county-year level vote shares."""
-    df = pd.read_csv(os.path.join(DATA_DIR, "countypres_sample.csv"))
+    df = pd.read_csv(os.path.join(DATA_DIR, "election", "countypres_sample.csv"))
     n_raw = len(df)
 
     # Keep only TOTAL mode rows (excludes absentee/provisional breakdowns in 2020)
