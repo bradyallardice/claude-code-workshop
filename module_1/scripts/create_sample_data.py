@@ -15,7 +15,8 @@ import pandas as pd
 import os
 
 DATA_DIR = os.path.join("module_1", "data")
-IPUMS_DIR = os.path.join(DATA_DIR, "IPUMS")
+IPUMS_DIR = os.path.join(DATA_DIR, "full", "ipums")
+SAMPLE_IPUMS_DIR = os.path.join(DATA_DIR, "ipums")
 
 YEARS = [2012, 2016, 2020, 2024]
 SAMPLE_FRAC = 0.10
