@@ -313,7 +313,7 @@ def main():
     print(f"  Population: all positive (min={panel['population'].min():,.0f}, max={panel['population'].max():,.0f})")
 
     # Save panel
-    outpath = os.path.join(DATA_DIR, "county_panel.csv")
+    outpath = os.path.join(OUTPUT_DIR, "county_panel.csv")
     panel.to_csv(outpath, index=False)
     print(f"\nPanel saved to {outpath}")
     print(f"Shape: {panel.shape}")
