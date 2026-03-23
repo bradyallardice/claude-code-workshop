@@ -1,0 +1,33 @@
+\frametitle{What Is the Terminal?}
+\textbf{The terminal} is a text-based interface to your computer. Instead of clicking, you type commands.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.42\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/terminal.png}
+      {\footnotesize\textit{Claude Code writing and running code in the terminal.}}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \textbf{Essential commands:}
+      \vspace{0.2em}
+\begin{lstlisting}
+# Where am I?
+pwd
+
+# What's in this folder?
+ls
+
+# Move into a folder
+cd my_project/
+
+# Run a Python script
+python my_script.py
+
+# Launch Claude Code
+claude
+\end{lstlisting}
+      \vspace{0.2em}
+      {\small You may hear it called: terminal, command line, shell, console. All roughly the same thing.}
+    \end{column}
+  \end{columns}
