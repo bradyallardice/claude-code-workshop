@@ -15,7 +15,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Load election data ---
 
-elec = pd.read_csv(os.path.join(DATA_DIR, "countypres_sample.csv"))
+elec = pd.read_csv(os.path.join(DATA_DIR, "election", "countypres_sample.csv"))
 elec = elec[elec["mode"] == "TOTAL"].copy()
 elec = elec.dropna(subset=["county_fips"])
 elec["county_fips"] = elec["county_fips"].astype(float).astype(int).astype(str).str.zfill(5)
