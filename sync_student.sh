@@ -32,6 +32,7 @@ git reset --hard teacher
 
 # Remove teacher-only files
 git rm -r --quiet module_1/output/ 2>/dev/null || true
+git rm -r --quiet module_1/data/full/ 2>/dev/null || true
 git rm -r --quiet module_1/solutions/ module_2/solutions/ module_3/solutions/ \
     module_4/solutions/ module_5/solutions/ module_8/solutions/ 2>/dev/null || true
 git rm --quiet module_1/demo_prompt_correct.md 2>/dev/null || true
