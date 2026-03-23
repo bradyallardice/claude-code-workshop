@@ -60,7 +60,7 @@ def main():
     # --- Save election sample ---
     print("\nCreating election sample...")
     elec_sample = elec[elec["county_fips"].isin(matched_any_year) & elec["year"].isin(YEARS)]
-    outpath = os.path.join(DATA_DIR, "countypres_sample.csv")
+    outpath = os.path.join(DATA_DIR, "election", "countypres_sample.csv")
     elec_sample.to_csv(outpath, index=False)
     print(f"  {len(elec_sample)} rows, {elec_sample['county_fips'].nunique()} counties -> {outpath}")
     for yr in YEARS:
