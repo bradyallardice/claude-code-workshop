@@ -123,7 +123,7 @@ def load_ipums_county(year):
       - RACE: general version, 1-9 scale (see docstring for full coding)
     """
     filename = ELECTION_TO_IPUMS[year]
-    filepath = os.path.join(DATA_DIR, "IPUMS", filename)
+    filepath = os.path.join(DATA_DIR, "ipums", filename)
 
     if not os.path.exists(filepath):
         print(f"  WARNING: {filepath} not found, skipping year {year}")
