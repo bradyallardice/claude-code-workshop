@@ -74,7 +74,7 @@ census = pd.concat(census_panels, ignore_index=True)
 # --- Merge and save ---
 
 panel = election.merge(census, on=["county_fips", "year"], how="inner")
-panel.to_csv(os.path.join(DATA_DIR, "county_panel.csv"), index=False)
+panel.to_csv(os.path.join(OUTPUT_DIR, "county_panel.csv"), index=False)
 
 # ══════════════════════════════════════════════════════════════════
 #  EXPLORATORY DATA ANALYSIS
