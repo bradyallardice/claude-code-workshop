@@ -91,7 +91,7 @@ def main():
         # 10% random sample of persons
         df = df.sample(frac=SAMPLE_FRAC, random_state=42)
 
-        outpath = os.path.join(IPUMS_DIR, f"census_{yr}_sample.csv.gz")
+        outpath = os.path.join(SAMPLE_IPUMS_DIR, f"census_{yr}_sample.csv.gz")
         df.to_csv(outpath, index=False, compression="gzip")
         print(f"    {len(df):,} rows, {n_counties} counties, {len(use_cols)} cols -> {outpath}")
 
