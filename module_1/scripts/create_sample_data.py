@@ -32,7 +32,7 @@ def main():
     # --- Find counties in both datasets for at least one year ---
     print("Finding matched counties across datasets...")
 
-    elec = pd.read_csv(os.path.join(DATA_DIR, "countypres_2000-2024.csv"))
+    elec = pd.read_csv(os.path.join(DATA_DIR, "full", "election", "countypres_2000-2024.csv"))
     elec = elec.dropna(subset=["county_fips"])
     elec["county_fips"] = elec["county_fips"].astype(int).astype(str).str.zfill(5)
     elec = elec[~elec["county_fips"].str[:2].isin([str(s).zfill(2) for s in EXCLUDE_STATES])]
