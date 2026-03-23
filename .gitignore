@@ -1,3 +1,6 @@
+# Teacher-only files — do not push to student branch
+admin/lesson_plan.docx
+
 # Large raw IPUMS census files (use sampled versions for git)
 module_1/data/full/ipums/*_raw.csv.gz
 
