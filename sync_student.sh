@@ -33,12 +33,20 @@ git reset --hard teacher
 # Remove teacher-only files
 git rm -r --quiet module_1/output/ 2>/dev/null || true
 git rm -r --quiet module_1/data/full/ 2>/dev/null || true
-git rm -r --quiet module_1/solutions/ module_2/solutions/ module_3/solutions/ \
-    module_4/solutions/ module_5/solutions/ module_8/solutions/ 2>/dev/null || true
-git rm --quiet module_1/demo_prompt_correct.md 2>/dev/null || true
-git rm --quiet module_*/instructor_notes.md 2>/dev/null || true
-git rm --quiet module_4/base_regression.py module_5/buggy_script.py \
-    module_8/api_template.py 2>/dev/null || true
+
+# Remove docs: instructor notes, correct prompts, decisions
+git ls-files 'module_*/docs/instructor_notes.md' | xargs -r git rm --quiet 2>/dev/null || true
+git rm --quiet module_1/docs/demo_prompt_correct.md 2>/dev/null || true
+git rm --quiet module_1/docs/decisions.md 2>/dev/null || true
+
+# Remove teacher-only scripts (keep only module_1/scripts/exercise_build_panel.py)
+git rm --quiet module_1/scripts/build_county_panel.py module_1/scripts/create_sample_data.py 2>/dev/null || true
+git rm --quiet module_2/scripts/build_county_panel.py 2>/dev/null || true
+git rm --quiet module_4/scripts/base_regression.py 2>/dev/null || true
+git rm --quiet module_5/scripts/buggy_script.py 2>/dev/null || true
+git rm --quiet module_8/scripts/api_template.py 2>/dev/null || true
+
+# Remove slide source files (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true
 git ls-files slides/ | grep -v '\.pdf$' | xargs -r git rm --quiet 2>/dev/null || true
 
