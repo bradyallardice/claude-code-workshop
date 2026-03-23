@@ -17,5 +17,5 @@ Write a test that verifies:
   \begin{itemize}
     \item Forces you to engage with the data at the observation level
     \item Catches silent recoding, wrong joins, and off-by-one errors
-    \item Tests survive across refactors---rerun them after every change
+    \item Tests survive across refactors. Rerun them after every change
   \end{itemize}
