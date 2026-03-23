@@ -36,6 +36,7 @@
   framerule=0pt,
   breaklines=true,
   columns=fullflexible,
+  literate={_}{\_}1,
 }
 
 % ── Metadata ──────────────────────────────────────────────────────
@@ -123,7 +124,7 @@
   \end{alertblock}
 
   \vspace{0.5em}
-  The question is never ``can Claude Code do this''---it almost always can.
+  The question is never ``can Claude Code do this.'' It almost always can.
 
   \vspace{0.3em}
   The question is: \textbf{what is the most productive and reliable way to get this done?}
@@ -160,7 +161,7 @@
   \begin{itemize}
     \item Source: MIT Election Data + Science Lab
     \item County-level vote totals by candidate and party, 2000--2024
-    \item ${\sim}$94{,}000 rows --- one row per county $\times$ year $\times$ candidate
+    \item ${\sim}$94{,}000 rows, one row per county $\times$ year $\times$ candidate
     \item Variables: FIPS codes, candidate names, party, vote counts, vote mode
   \end{itemize}
 
@@ -169,7 +170,7 @@
   \begin{itemize}
     \item Source: IPUMS USA (University of Minnesota)
     \item Person-level survey records with demographic, economic, and geographic variables
-    \item ${\sim}$15 million rows per year --- one row per person
+    \item ${\sim}$15 million rows per year, one row per person
     \item Variables: age, education, employment, income, race, poverty status, county FIPS
   \end{itemize}
 \end{frame}
@@ -189,7 +190,6 @@
   \vspace{0.5em}
   In Stata or R, this takes 30--45 minutes of careful coding.
 
-  {\footnotesize\textit{[Switch to terminal]}}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -243,7 +243,7 @@
   \end{block}
 
   \vspace{0.5em}
-  You have all managed RAs. You know how valuable---and how dangerous---that profile is.
+  You have all managed RAs. You know how valuable, and how dangerous, that profile is.
 
   \vspace{0.5em}
   \textbf{This course teaches you to capture the value while managing the risk.}
@@ -253,75 +253,235 @@
 %  THE CODING PARADIGM SPECTRUM  [10:00–16:00]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{The Coding Paradigm Spectrum}
-  \begin{tikzpicture}[
-    node distance=0.3cm,
-    every node/.style={draw, rounded corners, minimum width=10cm, minimum height=0.9cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-  ]
-    \node (manual) at (0,3.6) {\textbf{Manual Coding} --- You write every line (Stata/R today)};
-    \node (copilot) at (0,2.4) {\textbf{Autocomplete / Copilot} --- AI suggests; you accept or reject};
-    \node (chat) at (0,1.2) {\textbf{Web Chat} --- You describe; AI gives code to copy-paste};
-    \node[fill=anthropic!15] (agentic) at (0,0) {\textbf{Agentic Coding} --- AI reads, writes, and runs code in your project};
-  \end{tikzpicture}
+% --- Paradigm 1: Manual Coding ---
+\begin{frame}{The Coding Paradigm Spectrum: Manual Coding}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \vspace{0.5em}
+      \begin{tikzpicture}[
+        every node/.style={draw, rounded corners, minimum width=6cm, minimum height=0.8cm, align=center, font=\small}
+      ]
+        \node[fill=lightgray, draw=anthropic, line width=1.5pt] (manual) at (0,3.0) {\textbf{Manual Coding}};
+        \node (copilot) at (0,2.0) {Autocomplete / Copilot};
+        \node (chat) at (0,1.0) {Web Chat};
+        \node (agentic) at (0,0) {Agentic Coding};
+      \end{tikzpicture}
 
-  \vspace{0.5em}
-  \centering
-  \small $\uparrow$ More autonomy, more power, more risk $\uparrow$
+      \vspace{1em}
+      You write every line. Full control, no assistance.
+
+      \vspace{0.5em}
+      This is what you do now in Stata or R.
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \vspace{0.5em}
+      \includegraphics[width=\textwidth]{img/manual_coding.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% --- Paradigm 2: Copilot ---
+\begin{frame}{The Coding Paradigm Spectrum: Autocomplete / Copilot}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \vspace{0.5em}
+      \begin{tikzpicture}[
+        every node/.style={draw, rounded corners, minimum width=6cm, minimum height=0.8cm, align=center, font=\small}
+      ]
+        \node (manual) at (0,3.0) {Manual Coding};
+        \node[fill=lightgray, draw=anthropic, line width=1.5pt] (copilot) at (0,2.0) {\textbf{Autocomplete / Copilot}};
+        \node (chat) at (0,1.0) {Web Chat};
+        \node (agentic) at (0,0) {Agentic Coding};
+      \end{tikzpicture}
+
+      \vspace{1em}
+      AI suggests the next line as you type.
+
+      \vspace{0.5em}
+      You accept or reject. The AI assists; you drive.
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \vspace{0.5em}
+      \includegraphics[width=\textwidth]{img/copilot.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% --- Paradigm 3: Web Chat ---
+\begin{frame}{The Coding Paradigm Spectrum: Web Chat}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \vspace{0.5em}
+      \begin{tikzpicture}[
+        every node/.style={draw, rounded corners, minimum width=6cm, minimum height=0.8cm, align=center, font=\small}
+      ]
+        \node (manual) at (0,3.0) {Manual Coding};
+        \node (copilot) at (0,2.0) {Autocomplete / Copilot};
+        \node[fill=lightgray, draw=anthropic, line width=1.5pt] (chat) at (0,1.0) {\textbf{Web Chat}};
+        \node (agentic) at (0,0) {Agentic Coding};
+      \end{tikzpicture}
+
+      \vspace{1em}
+      You describe a task; AI gives you code to copy-paste.
+
+      \vspace{0.5em}
+      The AI cannot see your project.
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \vspace{0.5em}
+      \includegraphics[width=\textwidth]{img/claude_web.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% --- Paradigm 4: Agentic Coding ---
+\begin{frame}{The Coding Paradigm Spectrum: Agentic Coding}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \vspace{0.5em}
+      \begin{tikzpicture}[
+        every node/.style={draw, rounded corners, minimum width=6cm, minimum height=0.8cm, align=center, font=\small}
+      ]
+        \node (manual) at (0,3.0) {Manual Coding};
+        \node (copilot) at (0,2.0) {Autocomplete / Copilot};
+        \node (chat) at (0,1.0) {Web Chat};
+        \node[fill=lightgray, draw=anthropic, line width=1.5pt] (agentic) at (0,0) {\textbf{Agentic Coding}};
+      \end{tikzpicture}
+
+      \vspace{1em}
+      AI reads, writes, and runs code \textbf{in your project}.
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \vspace{0.5em}
+      \includegraphics[width=\textwidth]{img/agentic_coding.png}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Why Agentic Coding Is Different}
+  \small
+  \begin{tabular}{@{}l l l@{}}
+    \toprule
+    \textbf{Paradigm} & \textbf{Pros} & \textbf{Cons} \\
+    \midrule
+    Manual Coding & Full control & Slow, everything by hand \\
+    Autocomplete / Copilot & You control logic and structure & Still line-by-line \\
+    Web Chat & Can handle complex tasks & Copy-paste; AI misses context \\
+    \textbf{Agentic Coding} & \textbf{Fastest; works on your project} & \textbf{Can act autonomously} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
   \begin{alertblock}{The Key Insight}
-    Agentic coding is the first paradigm where the tool \textbf{modifies your project directly}.
+    Agentic coding is the first paradigm where the tool \textbf{interacts with your project directly and autonomously}.
+    That is what makes it so productive, and why learning to use it well matters.
   \end{alertblock}
 
-  \vspace{0.5em}
-  That is what makes it so productive---and why learning to use it well matters.
-
-  \vspace{0.5em}
-  These principles apply to Claude Code, Cursor, Windsurf, or whatever comes next.
+  \vspace{0.3em}
+  These principles apply to Claude Code, Cursor, Codex, Windsurf, or whatever comes next.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
 %  WHAT IT CAN AND CANNOT DO  [16:00–19:00]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{What Claude Code Can Do}
+\begin{frame}{What Claude Code Can Do for Academic Research}
+  \footnotesize
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
-      \textbf{Delegate freely:}
+      \textbf{Data Work}
       \begin{itemize}
-        \item Write code rapidly
-        \item Clean data
-        \item Generate robustness checks
-        \item Create visualizations
+        \item Clean, reshape, and merge datasets
+        \item Construct variables from raw data
+        \item Build panel datasets across sources
+        \item Handle missing data, recoding, harmonization
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Analysis}
+      \begin{itemize}
+        \item Exploratory data analysis and summary statistics
+        \item Generate robustness checks and specification variants
+        \item Create publication-quality visualizations
+        \item Synthesize results across specifications
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \textbf{Delegate freely (cont.):}
+      \textbf{Writing and Review}
       \begin{itemize}
-        \item Audit existing code
-        \item Write documentation
-        \item Build replication packages
-        \item Process text at scale
+        \item Draft methods sections, data descriptions, results summaries
+        \item Audit existing scripts for silent errors
+        \item Review code against your methods section
+        \item Write documentation, READMEs, replication packages
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Research Infrastructure}
+      \begin{itemize}
+        \item Process text corpora at scale (NLP, classification)
+        \item Web scraping and API data collection
+        \item Crosswalk and linkage construction
+        \item Refactor and optimize slow pipelines
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{frame}{What Requires Human Judgment}
-  \begin{block}{The Referee Test}
-    If a referee questioned this choice, who would need to answer---you or the RA?
-  \end{block}
+\begin{frame}{A Tool Built for Software Engineers}
+  Claude Code was designed for professional developers. Their world is different from ours.
 
   \vspace{0.5em}
-  \textbf{Do not delegate:}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Software Engineering}
+      \begin{itemize}
+        \item ``Works'' = \textbf{runs correctly}. Clear success criteria: tests pass, feature ships, users are happy
+        \item Code is the product
+        \item Errors are caught by automated tests
+        \item Speed and iteration are paramount
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Academic Research}
+      \begin{itemize}
+        \item ``Works'' = \textbf{???}. Code that runs without errors can produce completely wrong results. Output that looks plausible can be based on the wrong sample, wrong specification, or wrong variable
+        \item Code is the \textit{instrument}; the paper is the product
+        \item Errors are caught by \textit{you}, or by Reviewer 2
+        \item Correctness matters more than speed
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  The defaults, instincts, and shortcuts built into these tools reflect engineering priorities.\\
+  \textbf{Using them well for research means overriding some of those defaults.}
+\end{frame}
+
+\begin{frame}{Do You Own It?}
+  \begin{block}{}
+    Pick any result your code produced. Without looking at the code:\\
+    what got dropped, what got merged, and why?
+  \end{block}
+
+  \vspace{0.3em}
+  If you can't answer that in 30 seconds, you don't own it.
+
+  \vspace{0.5em}
+  \textbf{Before you delegate:}
   \begin{itemize}
-    \item Choosing specifications
-    \item Interpreting results
-    \item Identification strategies
-    \item Sample selection decisions
+    \item What would wrong look like? Can I describe a specific failure mode before I run this?
   \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{After you delegate:}
+  \begin{itemize}
+    \item Can I describe what this code does without reading it?
+    \item Can I state what decisions shaped the output and why?
+  \end{itemize}
+
+  \vspace{0.5em}
+  You didn't write it. That's fine.\\
+  But every decision in it is yours. \textbf{Can you justify it as if you chose it yourself?}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -371,28 +531,255 @@
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Why Python}
-  \begin{itemize}
-    \item Claude Code is substantially better at Python than Stata or R
-    \item The principles---task decomposition, verification, control---transfer to any language
-    \item Python is increasingly where the tools and ecosystem are for computational research
-  \end{itemize}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Claude Code is substantially better at Python than Stata or R
+        \item The principles (task decomposition, verification, control) transfer to any language
+        \item Python is increasingly where the tools and ecosystem are for computational research
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/python_vs_r.png}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  SETUP  [27:00–37:00]
+%  ORIENTATION: TERMINAL, VS CODE, FILE TYPES  [27:00–37:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Where Does Claude Code Live?}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      Claude Code runs \textbf{inside your terminal}, not in a browser, not in an app.
+
+      \vspace{0.5em}
+      \begin{enumerate}
+        \item You open a terminal
+        \item Navigate to your project: \lstinline{cd my_project/}
+        \item Type \lstinline{claude} and press Enter
+        \item You're now talking to Claude Code
+      \end{enumerate}
+
+      \vspace{0.5em}
+      It can see your files, read your data, write scripts, and run them, all without copying and pasting.
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/claude_code_terminal.png}
+
+      \vspace{0.3em}
+      {\footnotesize\textit{This is what Claude Code looks like when you launch it.}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{What Is the Terminal?}
+  \textbf{The terminal} is a text-based interface to your computer. Instead of clicking, you type commands.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.42\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/terminal.png}
+      {\footnotesize\textit{Claude Code writing and running code in the terminal.}}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \textbf{Essential commands:}
+      \vspace{0.2em}
+\begin{lstlisting}
+# Where am I?
+pwd
+
+# What's in this folder?
+ls
+
+# Move into a folder
+cd my_project/
+
+# Run a Python script
+python my_script.py
+
+# Launch Claude Code
+claude
+\end{lstlisting}
+      \vspace{0.2em}
+      {\small You may hear it called: terminal, command line, shell, console. All roughly the same thing.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Why VS Code?}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.38\textwidth}
+      \textbf{VS Code} is a free code editor with a built-in terminal.
+
+      \vspace{0.3em}
+      Everything in one window:
+      \begin{itemize}
+        \item \textbf{Left:} file explorer
+        \item \textbf{Center:} your code
+        \item \textbf{Right:} Claude Code
+      \end{itemize}
+
+      \vspace{0.3em}
+      You see what Claude Code writes \textit{as it writes it}.
+
+      \vspace{0.3em}
+      Today we use three features:
+      \begin{enumerate}
+        \item Open a folder
+        \item View files in the editor
+        \item Talk to Claude Code
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \includegraphics[width=\textwidth]{img/claude_mid_update.png}
+
+      \vspace{0.2em}
+      {\footnotesize Coming from RStudio? \href{https://www.youtube.com/watch?v=rKPfssR66GM}{\beamergotobutton{Configure VS Code to look like RStudio}}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Python Files: \texttt{.py} vs.\ \texttt{.ipynb}}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Notebooks} (\texttt{.ipynb})
+
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/notebook_dataframe.png}
+
+      \vspace{0.2em}
+      \includegraphics[width=0.7\textwidth]{img/notebook_example.png}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Scripts} (\texttt{.py})
+
+      \vspace{0.3em}
+      \includegraphics[width=0.75\textwidth]{img/py_script_example.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Why Scripts for This Course}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Notebooks} (\texttt{.ipynb})
+      \begin{itemize}
+        \item Cells you run one at a time
+        \item Great for exploration and teaching
+        \item State depends on which cells you ran and in what order
+        \item Hard for Claude Code to work with because it cannot ``click'' cells
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Scripts} (\texttt{.py})
+      \begin{itemize}
+        \item Plain text file, runs top to bottom
+        \item Reproducible: \lstinline{python my_script.py} always does the same thing
+        \item Claude Code can read, write, and run them directly
+        \item \textbf{This is what we use today}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{The Key Difference}
+    Claude Code operates on files, not interactive sessions. Scripts run end-to-end and produce the same result every time, exactly what you need for reproducible research.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{What Changes When You Use Scripts}
+  \textbf{No persistent state.} You cannot run one line, inspect the output, then run the next.\\
+  Every time you run the file, it starts from scratch.
+
+  \vspace{0.5em}
+  \textbf{No intermediate output.} You cannot see what a dataframe looks like mid-pipeline unless you explicitly print or save it.
+
+  \vspace{0.8em}
+  \textbf{What this means for your workflow:}
+  \begin{itemize}
+    \item More \textbf{checkpointing}: save intermediate datasets to disk so you can inspect them
+    \item More \textbf{logging}: print row counts, shapes, and summaries as the script runs
+    \item More \textbf{intermediate file saves}: write CSVs between pipeline stages
+    \item Overall \textbf{less interactive}, more structured
+  \end{itemize}
+
+  \vspace{0.5em}
+  This feels slower at first. But it produces pipelines that are reproducible, debuggable, and that Claude Code can work with directly.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  VIRTUAL ENVIRONMENTS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Virtual Environments}
+  \textbf{What is a virtual environment?}\\
+  A self-contained folder that holds a separate copy of Python and its packages. Each project gets its own environment, so packages from one project don't interfere with another.
+
+  \vspace{0.5em}
+  \textbf{Why you need one:}
+  \begin{itemize}
+    \item Without it, every project shares the same packages, and updating one project can break another
+    \item Claude Code installs packages when it needs them. You want that isolated, not touching your system Python
+    \item Reproducibility: you know exactly which packages your project uses
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Think of it like this:} a virtual environment is a clean desk for each project. You only put the tools you need on it, and cleaning up one desk does not affect the others.
+\end{frame}
+
+\begin{frame}{Setting Up a Virtual Environment}
+  Run these commands in your terminal, from your project folder:
+
+  \vspace{0.5em}
+\begin{lstlisting}
+# 1. Create the environment (once per project)
+python3 -m venv AIAgents
+
+# 2. Activate it (every time you open a new terminal)
+source AIAgents/bin/activate      # Mac/Linux
+AIAgents\Scripts\activate         # Windows
+
+# 3. Install packages
+pip install pandas numpy statsmodels
+
+# 4. Confirm it's active (you should see (AIAgents) in your prompt)
+which python
+\end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{In VS Code:} once you create the \texttt{AIAgents} folder, VS Code will detect it and ask to use it as your interpreter. Say yes. After that, every terminal it opens will activate the environment automatically.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  SETUP CHECK
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Setup Check}
+  Open the terminal in VS Code (or your standalone terminal) and run:
+
+  \vspace{0.5em}
   \begin{enumerate}
-    \item Open your terminal
     \item Verify Node.js: \lstinline{node --version}
     \item Verify Claude Code: \lstinline{claude --version}
-    \item Authenticate: \lstinline{claude}
+    \item Launch Claude Code: \lstinline{claude}
   \end{enumerate}
+
+  \vspace{0.8em}
+  You should see Claude Code's interface appear in your terminal.
+
+  \vspace{0.5em}
+  Try typing a simple message: \lstinline{What files are in this directory?}
 
   \vspace{1em}
   \textbf{If you completed pre-work:} help your neighbor.\\
-  \textbf{If you're stuck:} pair with someone who is set up---we'll troubleshoot at break.
+  \textbf{If you're stuck:} pair with someone who is set up. We'll troubleshoot at break.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -410,7 +797,7 @@
 
   \vspace{0.8em}
   \textbf{Stretch:}\\
-  Ask Claude Code to handle a new edge case---negative values in a column that should be positive.
+  Ask Claude Code to handle a new edge case: negative values in a column that should be positive.
 \end{frame}
 
 \begin{frame}{Exercise Debrief}

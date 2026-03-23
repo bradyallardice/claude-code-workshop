@@ -1,0 +1,348 @@
+% Module 3: Automating Research Tasks
+% Beamer Presentation — Claude Code for Academic Researchers
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ── Theme and Colors ──────────────────────────────────────────────
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Custom colors
+\definecolor{anthropic}{RGB}{50, 50, 80}
+\definecolor{accent}{RGB}{180, 90, 40}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+\setbeamercolor{structure}{fg=anthropic}
+\setbeamercolor{frametitle}{bg=anthropic, fg=white}
+\setbeamercolor{title}{bg=anthropic, fg=white}
+\setbeamercolor{block title}{bg=anthropic, fg=white}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{alerted text}{fg=accent}
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+
+% ── Packages ──────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{fontenc}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  framerule=0pt,
+  breaklines=true,
+  columns=fullflexible,
+}
+
+% ── Metadata ──────────────────────────────────────────────────────
+\title{Module 3: Automating Research Tasks}
+\subtitle{Claude Code for Academic Researchers}
+\author{} % Instructor name
+\date{}
+\institute{}
+
+% ══════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  STRATEGIES FOR WORKING WITH CLAUDE CODE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Strategies for Working Within the Context Window}
+  Recall from Module 2: Claude Code can only ``see'' a limited amount of text at once.\\
+  Errors compound when it loses track of earlier decisions.
+
+  \vspace{0.5em}
+  \textbf{Five strategies to work within this constraint:}
+  \begin{enumerate}
+    \item Keep tasks focused
+    \item Maintain project documentation
+    \item Summarize work between conversations
+    \item Validate iteratively
+    \item Write token-aware prompts
+  \end{enumerate}
+\end{frame}
+
+% ── Context Compacting ──────────────────────────────────────────
+\begin{frame}{What Happens When the Context Window Fills Up}
+  As a conversation grows, Claude Code eventually runs out of room.\\
+  When this happens, it \textbf{auto-compacts}: it summarizes older parts of the conversation to free up space.
+
+  \vspace{0.5em}
+  \textbf{What auto-compacting does:}
+  \begin{itemize}
+    \item Replaces earlier messages with a compressed summary
+    \item Keeps recent messages and tool results intact
+    \item Happens automatically. You will see a notice in the chat
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{The risk:} Details from early in the conversation (variable definitions, decisions you discussed, constraints you mentioned) may be lost or simplified in the summary.
+
+  \vspace{0.5em}
+  \textbf{You can also compact manually:}\\
+  Type \texttt{/compact} to force a summary and free up context space.\\
+  Useful when you notice Claude Code forgetting earlier decisions or when you want to pivot to a new subtask within the same conversation.
+
+  \vspace{0.5em}
+  \alert{This is why CLAUDE.md matters:} it survives compacting because it is reloaded from disk, not from conversation history.
+\end{frame}
+
+% ── Strategy 1 ──────────────────────────────────────────────────
+\begin{frame}{Strategy 1: Keep Tasks Focused}
+  \centering
+  {\large \textbf{One topic, one conversation.}}
+
+  \vspace{1em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Avoid:}
+      \begin{itemize}
+        \item ``Clean the data, build the panel, run the regressions, and make tables''
+        \item Long conversations that drift across topics
+        \item Asking Claude Code to hold your entire project in its head
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Instead:}
+      \begin{itemize}
+        \item ``Clean and reshape the raw census file''
+        \item Start a new conversation for each distinct task
+        \item Let each conversation do one thing well
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Why}
+    A focused task fits comfortably in the context window. A sprawling task forces Claude Code to forget earlier steps, and that is where silent errors enter.
+  \end{alertblock}
+\end{frame}
+
+% ── Strategy 2 ──────────────────────────────────────────────────
+\begin{frame}{Strategy 2: Maintain Project Documentation}
+  Claude Code reads certain files \textbf{automatically} every time it starts.
+
+  \vspace{0.5em}
+  \textbf{Keep these up to date:}
+  \begin{itemize}
+    \item \texttt{CLAUDE.md}: conventions, constraints, variable definitions
+    \item \texttt{README.md}: project structure, what each directory contains
+    \item Directory-level \texttt{CLAUDE.md} files for subfolders with specific rules
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Tell Claude Code what to \textit{ignore}:}
+  \begin{itemize}
+    \item \texttt{.claudeignore} works like \texttt{.gitignore}
+    \item Exclude large data files, build artifacts, logs
+    \item Prevents Claude Code from wasting context on irrelevant files
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The Payoff}
+    Good documentation means Claude Code starts every conversation already knowing your conventions, without you spending tokens re-explaining them.
+  \end{block}
+\end{frame}
+
+% ── Strategy 3 ──────────────────────────────────────────────────
+\begin{frame}[fragile]{Strategy 3: Summarize Work Between Conversations}
+  When you finish a conversation, the context is gone. The next conversation starts fresh.
+
+  \vspace{0.8em}
+  \textbf{Before ending a conversation:}
+  \begin{enumerate}
+    \item Ask Claude Code to summarize what it did and what remains
+    \item Save that summary (in a file, a commit message, or your notes)
+    \item Paste the summary into the \textit{next} conversation as context
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}
+Summarize what we did in this session: what files
+were changed, what decisions were made, and what
+still needs to be done.
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \alert{Think of it like a handoff memo between research assistants.}\\
+  The next ``assistant'' knows nothing unless you brief it.
+\end{frame}
+
+% ── Strategy 4 ──────────────────────────────────────────────────
+\begin{frame}{Strategy 4: Validate Iteratively}
+  \begin{alertblock}{The Compounding Error Problem}
+    If step 1 is wrong and you do not catch it, steps 2--5 build on that mistake. By the time you check the final output, the error is buried.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  \textbf{Check each step before moving to the next:}
+  \begin{enumerate}
+    \item Clean the data $\rightarrow$ \textit{verify row counts and distributions}
+    \item Construct variables $\rightarrow$ \textit{spot-check values against known cases}
+    \item Run the merge $\rightarrow$ \textit{confirm pre- and post-merge row counts}
+  \end{enumerate}
+
+  \vspace{0.5em}
+  Slower per step, but \textbf{much faster overall} because you never have to unwind a chain of errors you didn't catch.
+\end{frame}
+
+% ── Strategy 5 ──────────────────────────────────────────────────
+\begin{frame}{Strategy 5: Token-Aware Prompting}
+  Every word in your prompt costs tokens. Make them count.
+
+  \vspace{0.5em}
+  \textbf{A good prompt tells Claude Code three things:}
+  \begin{enumerate}
+    \item \textbf{What files matter:} ``Read \texttt{data/raw/census.csv} and \texttt{scripts/clean.py}''
+    \item \textbf{What the goal is:} ``Create a county-year panel with one row per county per decade''
+    \item \textbf{What constraints apply:} ``Keep all 3,143 counties; do not drop rows with missing population''
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Vague:}\\
+      {\small ``Clean up the data and make it ready for analysis''}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Specific:}\\
+      {\small ``Read \texttt{census.csv}, drop rows where \texttt{year < 1950}, and save as \texttt{panel\_clean.csv}''}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{block}{The Rule}
+    Be specific about \textit{inputs}, \textit{outputs}, and \textit{constraints}. Be brief about everything else. Context is finite; spend it on what matters.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  VALIDATION TECHNIQUES
+% ══════════════════════════════════════════════════════════════════
+
+% ── Validation 1 ────────────────────────────────────────────────
+\begin{frame}[fragile]{Validation: Check Known Properties}
+  Before you look at results, ask: \textit{what do I already know must be true?}
+
+  \vspace{0.5em}
+  \textbf{Examples:}
+  \begin{itemize}
+    \item A 1:1 merge should not change the number of rows
+    \item A county-year panel with 50 states $\times$ 10 years = 500 rows
+    \item A share variable must be between 0 and 1
+    \item No duplicate county-year pairs after reshaping
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Ask Claude Code to assert these explicitly:}
+  \begin{lstlisting}
+After the merge, assert that the output has the
+same number of rows as the left table and that
+there are no duplicate fips-year pairs.
+  \end{lstlisting}
+
+  If the assertion fails, you catch the error immediately, not three steps later.
+\end{frame}
+
+% ── Validation 2 ────────────────────────────────────────────────
+\begin{frame}{Validation: Write Down Expectations First}
+  \begin{block}{The Pre-Registration Analogy}
+    Just as you pre-register hypotheses before seeing results, write down what a correct transformation should produce \textit{before} you run it.
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{Before a merge or transformation, state:}
+  \begin{itemize}
+    \item Expected output dimensions (rows $\times$ columns)
+    \item Which columns should appear and their types
+    \item How missing values should be handled
+    \item A specific row you can trace through by hand
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Then compare the actual result to your expectations.}\\
+  Discrepancies are either a bug or a misunderstanding, both worth catching early.
+\end{frame}
+
+% ── Validation 3 ────────────────────────────────────────────────
+\begin{frame}[fragile]{Validation: Unit Tests Against Known Values}
+  Pick a handful of observations and compute the correct answer by hand.\\
+  Then verify the code reproduces them.
+
+  \vspace{0.5em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}
+Write a test that verifies:
+- Cook County (fips=17031) in 2010 has
+  population = 5,194,675
+- The migration_share for fips=06037
+  in 2000 is between 0.28 and 0.32
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Why this works:}
+  \begin{itemize}
+    \item Forces you to engage with the data at the observation level
+    \item Catches silent recoding, wrong joins, and off-by-one errors
+    \item Tests survive across refactors. Rerun them after every change
+  \end{itemize}
+\end{frame}
+
+% ── Validation 4 ────────────────────────────────────────────────
+\begin{frame}{Validation: Replicate Before You Extend}
+  \textbf{Building on someone else's work?}\\
+  Have Claude Code reproduce their results first.
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item Give Claude Code the original paper's code or description
+    \item Ask it to replicate a key table or figure
+    \item Compare output to the published result
+    \item Only after replication succeeds, begin your extension
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Why}
+    If you cannot reproduce the baseline, anything you build on top of it is uninterpretable. Replication is not a detour; it is the foundation.
+  \end{alertblock}
+\end{frame}
+
+% ── Validation 5 ────────────────────────────────────────────────
+\begin{frame}{Validation: Adversarial Agents}
+  Use a \textit{second} Claude Code conversation as a critic of the first.
+
+  \vspace{0.5em}
+  \textbf{How:}
+  \begin{enumerate}
+    \item Agent 1 writes the code
+    \item Open a new conversation (Agent 2) and ask it to review:\\
+      {\small ``Read \texttt{scripts/build\_panel.py} and identify any bugs, silent data loss, or decisions that could change the results.''}
+    \item Agent 2 has fresh context and no attachment to the code
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{Why this is powerful:}
+  \begin{itemize}
+    \item The writing agent has blind spots because it wrote the code and ``believes'' it is correct
+    \item A fresh agent reads the code like a skeptical reviewer
+    \item Catches issues you would miss because you watched it being built
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{Treat your agents like co-authors who check each other's work, not a single assistant you trust unconditionally.}
+\end{frame}
+
+% TODO: Add exercise slides, debrief, and summary for Module 3
+
+\end{document}

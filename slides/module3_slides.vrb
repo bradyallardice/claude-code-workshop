@@ -1,0 +1,21 @@
+\frametitle{Validation: Unit Tests Against Known Values}
+Pick a handful of observations and compute the correct answer by hand.\\
+  Then verify the code reproduces them.
+
+  \vspace{0.5em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}
+Write a test that verifies:
+- Cook County (fips=17031) in 2010 has
+  population = 5,194,675
+- The migration_share for fips=06037
+  in 2000 is between 0.28 and 0.32
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Why this works:}
+  \begin{itemize}
+    \item Forces you to engage with the data at the observation level
+    \item Catches silent recoding, wrong joins, and off-by-one errors
+    \item Tests survive across refactors---rerun them after every change
+  \end{itemize}
