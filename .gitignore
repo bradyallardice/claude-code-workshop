@@ -9,8 +9,11 @@ module_1/data/full/ipums/*_raw.csv.gz
 
 # LaTeX build artifacts
 *.aux
+*.fdb_latexmk
+*.fls
 *.log
 *.nav
 *.out
 *.snm
 *.toc
+*.vrb
