@@ -376,6 +376,62 @@ b1a2c33 Initial commit
   \end{block}
 \end{frame}
 
+\begin{frame}[fragile]{Git and Data: What Not to Track}
+  Git is designed for \textbf{code and text files} --- things that change line by line.\\
+  It is \textit{not} designed for large data files.
+
+  \vspace{0.5em}
+  \textbf{What to commit:}
+  \begin{itemize}
+    \item Scripts (\texttt{.py}, \texttt{.R}, \texttt{.do})
+    \item \LaTeX{} files (\texttt{.tex}, \texttt{.bib})
+    \item Documentation (\texttt{CLAUDE.md}, \texttt{README.md})
+    \item Small data files (under a few MB) that are hard to recreate
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{What \textit{not} to commit:}
+  \begin{itemize}
+    \item Large datasets (CSVs over 50MB, anything in the hundreds of MB)
+    \item Generated output you can recreate by running your scripts
+    \item Sensitive data (personally identifiable information, API keys)
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{block}{Rule of Thumb}
+    Commit anything a collaborator would need to \textit{understand} your project. Do not commit anything they could \textit{regenerate} by running the code.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{.gitignore}: Telling Git What to Skip}
+  A \texttt{.gitignore} file lists patterns for files git should never track.\\
+  Create it in the root of your project directory.
+
+  \vspace{0.5em}
+  \textbf{Example \texttt{.gitignore} for a research project:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Large data files
+data/raw/*.csv
+
+# Generated output (recreatable from scripts)
+output/*.png
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.synctex.gz
+
+# System files
+.DS_Store
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Lines starting with \texttt{\#} are comments. The \texttt{*} means ``any file name.''
+
+  \vspace{0.3em}
+  \alert{You can ask Claude Code to write a \texttt{.gitignore} for you.} It knows the common patterns for Python, \LaTeX{}, and research projects.
+\end{frame}
+
 \begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
   \begin{enumerate}
     \item \textbf{Initialize git} in your project directory (if you have not already):
