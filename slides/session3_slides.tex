@@ -380,26 +380,30 @@ b1a2c33 Initial commit
   Git is designed for \textbf{code and text files} --- things that change line by line.\\
   It is \textit{not} designed for large data files.
 
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Commit:}
+      \begin{itemize}
+        \item Scripts (\texttt{.py}, \texttt{.R}, \texttt{.do})
+        \item \LaTeX{} files (\texttt{.tex}, \texttt{.bib})
+        \item Documentation (\texttt{CLAUDE.md})
+        \item Small data files (under a few MB)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Do not commit:}
+      \begin{itemize}
+        \item Large datasets (50MB+)
+        \item Output you can regenerate
+        \item Sensitive data (PII, API keys)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
   \vspace{0.5em}
-  \textbf{What to commit:}
-  \begin{itemize}
-    \item Scripts (\texttt{.py}, \texttt{.R}, \texttt{.do})
-    \item \LaTeX{} files (\texttt{.tex}, \texttt{.bib})
-    \item Documentation (\texttt{CLAUDE.md}, \texttt{README.md})
-    \item Small data files (under a few MB) that are hard to recreate
-  \end{itemize}
-
-  \vspace{0.3em}
-  \textbf{What \textit{not} to commit:}
-  \begin{itemize}
-    \item Large datasets (CSVs over 50MB, anything in the hundreds of MB)
-    \item Generated output you can recreate by running your scripts
-    \item Sensitive data (personally identifiable information, API keys)
-  \end{itemize}
-
-  \vspace{0.3em}
   \begin{block}{Rule of Thumb}
-    Commit anything a collaborator would need to \textit{understand} your project. Do not commit anything they could \textit{regenerate} by running the code.
+    Commit what a collaborator needs to \textit{understand} your project. Skip what they could \textit{regenerate} by running the code.
   \end{block}
 \end{frame}
 
