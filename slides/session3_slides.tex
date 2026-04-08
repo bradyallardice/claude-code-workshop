@@ -201,78 +201,179 @@
   }
 \end{frame}
 
-\begin{frame}[fragile]{Step 1: Commit Before You Instruct}
-  \textbf{Always save your working state before Claude Code touches anything.}
-
-  \vspace{0.8em}
-  \begin{lstlisting}
-git add -A
-git commit -m "Working merge script before adding controls"
-  \end{lstlisting}
-
-  \vspace{0.8em}
-  \textbf{What this gives you:}
-  \begin{itemize}
-    \item A snapshot you can always return to
-    \item A clear ``before'' to compare against
-    \item Permission to let Claude Code experiment --- you can always undo
-  \end{itemize}
+\begin{frame}[fragile]{Command 1: \texttt{git init}}
+  \textbf{What it does:} Turns a regular folder into a git project.
 
   \vspace{0.5em}
-  \begin{block}{The Mindset Shift}
-    Commits are not milestones. They are save points. Commit early, commit often, commit before every interaction with Claude Code.
+  \begin{lstlisting}
+git init
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item You run this \textbf{once}, when you start a new project
+    \item It creates a hidden \texttt{.git/} folder that stores your project's history
+    \item Nothing else changes --- your files stay exactly as they are
+  \end{itemize}
+
+  \vspace{0.8em}
+  Think of it as saying: ``I want to start tracking this folder.''
+
+  \vspace{0.5em}
+  \begin{block}{Note}
+    If you cloned this course repository, git is already initialized. You can check by running \texttt{git status} --- if it prints something, you are already set up.
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2: Review the Diff}
-  After Claude Code makes changes, see exactly what it did:
+\begin{frame}[fragile]{Command 2: \texttt{git add}}
+  \textbf{What it does:} Selects which files to include in your next save point.
+
+  \vspace{0.5em}
+  \begin{lstlisting}
+git add -A
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \texttt{-A} means ``add everything that changed'' --- new files, modified files, deleted files
+    \item This does not save anything yet. It just marks what will be included in the next commit.
+  \end{itemize}
+
+  \vspace{0.8em}
+  You can also add specific files instead of everything:
+  \begin{lstlisting}
+git add scripts/analysis.py
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  Think of it as putting files in a box before sealing it. \texttt{git add} fills the box; \texttt{git commit} seals it.
+\end{frame}
+
+\begin{frame}[fragile]{Command 3: \texttt{git commit}}
+  \textbf{What it does:} Saves a snapshot of everything you added.
+
+  \vspace{0.5em}
+  \begin{lstlisting}
+git commit -m "Clean merge script, verified row counts"
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \texttt{-m} stands for ``message'' --- a short note describing what this snapshot contains
+    \item The message goes in quotes. Write something your future self will understand.
+    \item After committing, you have a permanent save point you can always return to.
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{In practice, you will almost always run add and commit together:}
+  \begin{lstlisting}
+git add -A && git commit -m "your message"
+  \end{lstlisting}
 
   \vspace{0.3em}
+  The \texttt{\&\&} just means ``run the second command after the first one finishes.''
+\end{frame}
+
+\begin{frame}[fragile]{Command 4: \texttt{git diff}}
+  \textbf{What it does:} Shows you exactly what changed since your last commit.
+
+  \vspace{0.5em}
   \begin{lstlisting}
 git diff
   \end{lstlisting}
 
-  \vspace{0.3em}
-  \textbf{What to look for:}
+  \vspace{0.5em}
+  The output looks like the diff view you already know from VS Code:
   \begin{itemize}
-    \item Files you did not ask it to change
-    \item Lines removed that should not have been
-    \item ``Helpful'' additions you did not request
+    \item Lines starting with \texttt{+} were added (green in VS Code)
+    \item Lines starting with \texttt{-} were removed (red in VS Code)
+    \item Everything else is unchanged context
   \end{itemize}
 
-  \vspace{0.3em}
-  \textbf{You can also ask Claude Code to explain the diff:}
-  \begin{lstlisting}
-Run git diff and explain each change you made.
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  \alert{Read the diff, not just the output.} The diff shows you what actually changed.
-\end{frame}
-
-\begin{frame}[fragile]{Step 3: Keep or Revert}
-  \textbf{If everything looks good:}
-  \begin{lstlisting}
-git add -A
-git commit -m "Add demographic controls"
-  \end{lstlisting}
+  \vspace{0.5em}
+  \textbf{When to use it:} After Claude Code makes changes, run \texttt{git diff} to see \textit{everything} it touched --- not just the file it told you about.
 
   \vspace{0.5em}
-  \textbf{If something is wrong --- revert a specific file:}
+  \begin{block}{Tip}
+    You can also ask Claude Code: ``Run git diff and explain each change you made.''
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Command 5: \texttt{git checkout}}
+  \textbf{What it does:} Undoes changes by restoring a file to its last committed state.
+
+  \vspace{0.5em}
+  \textbf{Undo changes to one file:}
   \begin{lstlisting}
 git checkout -- scripts/analysis.py
   \end{lstlisting}
 
   \vspace{0.3em}
-  \textbf{If everything is wrong --- revert all changes:}
+  This throws away all changes to that file since your last commit. The file goes back to exactly how it was.
+
+  \vspace{0.8em}
+  \textbf{Undo all changes (reset everything):}
   \begin{lstlisting}
 git checkout -- .
   \end{lstlisting}
 
+  \vspace{0.3em}
+  The \texttt{.} means ``this directory'' --- it reverts every file in your project.
+
   \vspace{0.5em}
-  \begin{alertblock}{The 30-Second Safety Net}
-    This entire cycle takes 30 seconds of overhead. That is the cost of never losing work.
+  \begin{alertblock}{This is your undo button}
+    Claude Code changed something you did not want? One command and it is gone. This only works if you committed first --- which is why you always commit before instructing.
   \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Command 6: \texttt{git log}}
+  \textbf{What it does:} Shows you the history of all your commits.
+
+  \vspace{0.5em}
+  \begin{lstlisting}
+git log --oneline
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Output looks like:}
+  \begin{lstlisting}
+a3f7b21 Add robustness checks
+e5c9d04 Clean merge script, verified row counts
+b1a2c33 Initial commit
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Each line is one commit --- one save point
+    \item The letters and numbers on the left are the commit ID
+    \item The message on the right is what you wrote with \texttt{-m}
+    \item Most recent commits are at the top
+  \end{itemize}
+
+  \vspace{0.3em}
+  This is your project's timeline. You can always see what you did and when.
+\end{frame}
+
+\begin{frame}{Putting It Together: The Cycle}
+  \textbf{Before every interaction with Claude Code:}
+
+  \vspace{0.3em}
+  \begin{enumerate}
+    \item \texttt{git add -A \&\& git commit -m "message"} --- save your current state
+    \item Give Claude Code an instruction
+    \item \texttt{git diff} --- see what it changed
+    \item Decide:
+    \begin{itemize}
+      \item Happy? $\rightarrow$ \texttt{git add -A \&\& git commit -m "message"}
+      \item Not happy? $\rightarrow$ \texttt{git checkout -- .}
+    \end{itemize}
+    \item Repeat
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{The Mindset Shift}
+    Commits are not milestones. They are save points --- like pressing Ctrl+S. Commit early, commit often, commit before every interaction with Claude Code.
+  \end{block}
 \end{frame}
 
 \begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
