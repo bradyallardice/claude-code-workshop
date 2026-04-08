@@ -228,52 +228,51 @@ git commit -m "Working merge script before adding controls"
 \begin{frame}[fragile]{Step 2: Review the Diff}
   After Claude Code makes changes, see exactly what it did:
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \begin{lstlisting}
 git diff
   \end{lstlisting}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \textbf{What to look for:}
   \begin{itemize}
     \item Files you did not ask it to change
     \item Lines removed that should not have been
     \item ``Helpful'' additions you did not request
-    \item Changes that look correct but are in the wrong file
   \end{itemize}
 
-  \vspace{0.8em}
+  \vspace{0.3em}
   \textbf{You can also ask Claude Code to explain the diff:}
   \begin{lstlisting}
 Run git diff and explain each change you made.
   \end{lstlisting}
 
-  \vspace{0.5em}
-  \alert{Read the diff, not just the output.} The diff shows you what actually changed in your project.
+  \vspace{0.3em}
+  \alert{Read the diff, not just the output.} The diff shows you what actually changed.
 \end{frame}
 
 \begin{frame}[fragile]{Step 3: Keep or Revert}
   \textbf{If everything looks good:}
   \begin{lstlisting}
 git add -A
-git commit -m "Add demographic controls to specification"
+git commit -m "Add demographic controls"
   \end{lstlisting}
 
-  \vspace{0.8em}
+  \vspace{0.5em}
   \textbf{If something is wrong --- revert a specific file:}
   \begin{lstlisting}
 git checkout -- scripts/analysis.py
   \end{lstlisting}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \textbf{If everything is wrong --- revert all changes:}
   \begin{lstlisting}
 git checkout -- .
   \end{lstlisting}
 
-  \vspace{0.8em}
+  \vspace{0.5em}
   \begin{alertblock}{The 30-Second Safety Net}
-    This entire cycle --- commit, instruct, diff, decide --- takes 30 seconds of overhead. That is the cost of never losing work.
+    This entire cycle takes 30 seconds of overhead. That is the cost of never losing work.
   \end{alertblock}
 \end{frame}
 
