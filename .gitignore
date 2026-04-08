@@ -15,5 +15,7 @@ module_1/data/full/ipums/*_raw.csv.gz
 *.nav
 *.out
 *.snm
+*.synctex.gz
 *.toc
 *.vrb
+texput.log
