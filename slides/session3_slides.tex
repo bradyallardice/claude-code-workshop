@@ -441,22 +441,22 @@ output/*.png
     \item Large files slow down every git operation --- commits, diffs, cloning.
   \end{itemize}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \textbf{For most research projects (data under a few GB):}
   \begin{itemize}
     \item Keep data in a synced folder: \textbf{Dropbox}, \textbf{OneDrive}, \textbf{Google Drive}
-    \item Your code lives in git. Your data lives next to it (or in a shared folder). Your \texttt{.gitignore} keeps them separate.
-    \item This is simple, familiar, and good enough for most social science workflows
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{For larger or more complex needs:}
-  \begin{itemize}
-    \item \textbf{Object storage:} AWS S3, Google Cloud Storage --- cheap, scalable, accessible from anywhere
-    \item \textbf{Data versioning:} DVC (Data Version Control) --- git-like tracking for large files
+    \item Your code lives in git. Your data lives next to it. Your \texttt{.gitignore} keeps them separate.
+    \item Simple, familiar, and good enough for most social science workflows
   \end{itemize}
 
   \vspace{0.3em}
+  \textbf{For larger or more complex needs:}
+  \begin{itemize}
+    \item \textbf{Object storage:} AWS S3, Google Cloud Storage --- cheap, scalable
+    \item \textbf{Data versioning:} DVC (Data Version Control) --- git-like tracking for large files
+  \end{itemize}
+
+  \vspace{0.2em}
   {\small You do not need these today. But if your data outgrows Dropbox, they exist.}
 \end{frame}
 
