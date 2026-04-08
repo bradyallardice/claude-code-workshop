@@ -433,6 +433,33 @@ output/*.png
   \alert{Ask Claude Code to write a \texttt{.gitignore} for you.} It knows the common patterns.
 \end{frame}
 
+\begin{frame}{So Where Does the Data Go?}
+  \textbf{Why git is bad for data:}
+  \begin{itemize}
+    \item Git stores \textit{every version} of every file. A 200MB CSV edited 10 times = 2GB of history.
+    \item Git compares files line by line. Change one cell in a CSV and git sees the entire row as new.
+    \item Large files slow down every git operation --- commits, diffs, cloning.
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{For most research projects (data under a few GB):}
+  \begin{itemize}
+    \item Keep data in a synced folder: \textbf{Dropbox}, \textbf{OneDrive}, \textbf{Google Drive}
+    \item Your code lives in git. Your data lives next to it (or in a shared folder). Your \texttt{.gitignore} keeps them separate.
+    \item This is simple, familiar, and good enough for most social science workflows
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{For larger or more complex needs:}
+  \begin{itemize}
+    \item \textbf{Object storage:} AWS S3, Google Cloud Storage --- cheap, scalable, accessible from anywhere
+    \item \textbf{Data versioning:} DVC (Data Version Control) --- git-like tracking for large files
+  \end{itemize}
+
+  \vspace{0.3em}
+  {\small You do not need these today. But if your data outgrows Dropbox, they exist.}
+\end{frame}
+
 \begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
   \begin{enumerate}
     \item \textbf{Initialize git} in your project directory (if you have not already):
