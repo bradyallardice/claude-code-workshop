@@ -411,29 +411,26 @@ b1a2c33 Initial commit
   A \texttt{.gitignore} file lists patterns for files git should never track.\\
   Create it in the root of your project directory.
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \textbf{Example \texttt{.gitignore} for a research project:}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 # Large data files
 data/raw/*.csv
-
-# Generated output (recreatable from scripts)
+# Generated output
 output/*.png
-
 # LaTeX build artifacts
 *.aux
 *.log
 *.synctex.gz
-
 # System files
 .DS_Store
   \end{lstlisting}
 
-  \vspace{0.3em}
+  \vspace{0.2em}
   Lines starting with \texttt{\#} are comments. The \texttt{*} means ``any file name.''
 
-  \vspace{0.3em}
-  \alert{You can ask Claude Code to write a \texttt{.gitignore} for you.} It knows the common patterns for Python, \LaTeX{}, and research projects.
+  \vspace{0.2em}
+  \alert{Ask Claude Code to write a \texttt{.gitignore} for you.} It knows the common patterns.
 \end{frame}
 
 \begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
