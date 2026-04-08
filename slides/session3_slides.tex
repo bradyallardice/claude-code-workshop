@@ -171,8 +171,8 @@
 \begin{frame}[fragile]{The Minimum Viable Git Workflow}
   \begin{center}
   \begin{tikzpicture}[
-    node distance=1.0cm and 2.5cm,
-    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3.5cm, minimum height=0.8cm, align=center, font=\small\ttfamily},
+    node distance=0.8cm and 1.2cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=2.8cm, minimum height=0.7cm, align=center, font=\footnotesize\ttfamily},
     arr/.style={->, thick, color=anthropic}
   ]
     \node[box] (commit) {git add + commit};
@@ -183,18 +183,17 @@
     \draw[arr] (commit) -- (instruct);
     \draw[arr] (instruct) -- (diff);
     \draw[arr] (diff) -- (decide);
-    \draw[arr, rounded corners=12pt] (decide.south) -- ++(0,-0.5) -| (commit.south);
+    \draw[arr, rounded corners=10pt] (decide.south) -- ++(0,-0.35) -| (commit.south);
   \end{tikzpicture}
   \end{center}
 
-  \vspace{0.3em}
   {\small
   \begin{tabular}{ll}
     \toprule
     \textbf{Command} & \textbf{What it does} \\
     \midrule
     \texttt{git add -A \&\& git commit -m "msg"} & Snapshot your current state \\
-    \texttt{git diff} & See what changed since the last commit \\
+    \texttt{git diff} & See what changed since last commit \\
     \texttt{git checkout -- file.py} & Undo changes to a specific file \\
     \texttt{git log --oneline} & See your commit history \\
     \bottomrule
