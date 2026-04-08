@@ -1,0 +1,565 @@
+% Session 3: Code Auditing, Git, and LaTeX in VS Code
+% Beamer Presentation — Claude Code for Academic Researchers
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ── Theme and Colors ──────────────────────────────────────────────
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Custom colors
+\definecolor{anthropic}{RGB}{50, 50, 80}
+\definecolor{accent}{RGB}{180, 90, 40}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+\setbeamercolor{structure}{fg=anthropic}
+\setbeamercolor{frametitle}{bg=anthropic, fg=white}
+\setbeamercolor{title}{bg=anthropic, fg=white}
+\setbeamercolor{block title}{bg=anthropic, fg=white}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{alerted text}{fg=accent}
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+
+% ── Packages ──────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{fontenc}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  framerule=0pt,
+  breaklines=true,
+  columns=fullflexible,
+  literate={_}{\_}1,
+}
+
+% ── Metadata ──────────────────────────────────────────────────────
+\title{Session 3: Git and \LaTeX{} in VS Code}
+\subtitle{Version Control and the Integrated Research Environment}
+\author{Brady Allardice}
+\date{}
+\institute{UPF \& IBEI}
+
+% ══════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHERE WE ARE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Where We Are}
+  \textbf{Session 1:} What Claude Code can do. How it works. CLAUDE.md and plan mode.
+
+  \vspace{0.5em}
+  \textbf{Session 2:} The core workflow. Data cleaning, estimation, robustness, \LaTeX{} tables.
+
+  \vspace{0.5em}
+  \textbf{Session 3:} Building infrastructure around the workflow.
+
+  \vspace{1em}
+  Today you will:
+  \begin{enumerate}
+    \item Learn the minimum viable git workflow for agentic coding
+    \item Bring your paper into the same project directory as your code
+    \item Use Claude Code to write, compile, and version-control a \LaTeX{} document
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Session 2 taught you to verify Claude Code's work. Today you get the tools to manage it.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 1: VERSION CONTROL WITH GIT
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 1: Version Control with Git}
+  \centering
+  \vspace{2em}
+  {\Large Git is research insurance,\\[0.3em]
+  not software engineering ceremony.}
+
+  \vspace{2em}
+  You need exactly four commands.
+\end{frame}
+
+\begin{frame}{What Are Git and GitHub?}
+  \textbf{Git} is a tool that tracks every change to every file in a project.\\
+  It runs on your computer. It is free and open source.
+
+  \vspace{0.5em}
+  Think of it as ``track changes'' for your entire project directory --- not just one document, but every file: code, data descriptions, \LaTeX{} files, everything.
+
+  \vspace{0.5em}
+  \textbf{GitHub} is a website that hosts git projects online.
+  \begin{itemize}
+    \item It is where open-source code, replication packages, and increasingly papers live
+    \item Git works entirely on your machine. GitHub is optional --- it adds backup, sharing, and collaboration
+    \item Today we only use git locally. GitHub comes in Session 4.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{block}{The Key Idea}
+    Git lets you save snapshots of your project at any point. You can always see what changed between snapshots, and go back to any previous one.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Why Researchers Should Care About Git}
+  \textbf{Without git, you have probably done this:}
+  \begin{itemize}
+    \item \texttt{analysis\_v2.py}, \texttt{analysis\_v2\_final.py}, \texttt{analysis\_v2\_final\_REAL.py}
+    \item ``Which version of the cleaning script produced these results?''
+    \item ``I changed something last week and now the code is broken''
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{With git:}
+  \begin{itemize}
+    \item One file, full history. Every version is recoverable.
+    \item You can see exactly what changed, when, and why.
+    \item You can undo any change --- even from weeks ago.
+  \end{itemize}
+
+  \vspace{0.8em}
+  Git is useful for any research project. But when you are working with an agent that modifies your files directly, it goes from useful to \alert{essential}.
+\end{frame}
+
+\begin{frame}{You Have Already Seen This}
+  {\small In VS Code, when Claude Code proposes a change, you see a \textbf{diff view}:}
+
+  \begin{center}
+    \includegraphics[width=0.70\textwidth]{img/claude_mid_update.png}
+  \end{center}
+
+  {\small Red = removed, green = added. You have been reading diffs since Session 1.\\
+  \textbf{Git does the same thing} --- but for your entire project, across \textit{every} change, and you can undo any of them after the fact.}
+\end{frame}
+
+\begin{frame}{Why Git Matters for Agentic Coding}
+  \textbf{The problem:} Claude Code modifies your files directly.
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item It might change a file you did not ask it to change
+    \item It might overwrite working code with something broken
+    \item It might make 10 changes when you only wanted 3
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Without git:} You try to manually undo changes. You are not sure what the file looked like before. You lose work.
+
+  \vspace{0.5em}
+  \textbf{With git:} You see exactly what changed, line by line. You revert anything you do not want. You never lose work.
+
+  \vspace{0.8em}
+  \begin{alertblock}{The Rule}
+    Never let Claude Code touch your project without a recent commit to fall back on.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{The Minimum Viable Git Workflow}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.0cm and 2.5cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3.5cm, minimum height=0.8cm, align=center, font=\small\ttfamily},
+    arr/.style={->, thick, color=anthropic}
+  ]
+    \node[box] (commit) {git add + commit};
+    \node[box, right=of commit] (instruct) {Instruct Claude Code};
+    \node[box, right=of instruct] (diff) {git diff};
+    \node[box, below=of diff] (decide) {Keep or revert};
+
+    \draw[arr] (commit) -- (instruct);
+    \draw[arr] (instruct) -- (diff);
+    \draw[arr] (diff) -- (decide);
+    \draw[arr, rounded corners=12pt] (decide.south) -- ++(0,-0.5) -| (commit.south);
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.3em}
+  {\small
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Command} & \textbf{What it does} \\
+    \midrule
+    \texttt{git add -A \&\& git commit -m "msg"} & Snapshot your current state \\
+    \texttt{git diff} & See what changed since the last commit \\
+    \texttt{git checkout -- file.py} & Undo changes to a specific file \\
+    \texttt{git log --oneline} & See your commit history \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Step 1: Commit Before You Instruct}
+  \textbf{Always save your working state before Claude Code touches anything.}
+
+  \vspace{0.8em}
+  \begin{lstlisting}
+git add -A
+git commit -m "Working merge script before adding controls"
+  \end{lstlisting}
+
+  \vspace{0.8em}
+  \textbf{What this gives you:}
+  \begin{itemize}
+    \item A snapshot you can always return to
+    \item A clear ``before'' to compare against
+    \item Permission to let Claude Code experiment --- you can always undo
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The Mindset Shift}
+    Commits are not milestones. They are save points. Commit early, commit often, commit before every interaction with Claude Code.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2: Review the Diff}
+  After Claude Code makes changes, see exactly what it did:
+
+  \vspace{0.5em}
+  \begin{lstlisting}
+git diff
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{What to look for:}
+  \begin{itemize}
+    \item Files you did not ask it to change
+    \item Lines removed that should not have been
+    \item ``Helpful'' additions you did not request
+    \item Changes that look correct but are in the wrong file
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{You can also ask Claude Code to explain the diff:}
+  \begin{lstlisting}
+Run git diff and explain each change you made.
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \alert{Read the diff, not just the output.} The diff shows you what actually changed in your project.
+\end{frame}
+
+\begin{frame}[fragile]{Step 3: Keep or Revert}
+  \textbf{If everything looks good:}
+  \begin{lstlisting}
+git add -A
+git commit -m "Add demographic controls to specification"
+  \end{lstlisting}
+
+  \vspace{0.8em}
+  \textbf{If something is wrong --- revert a specific file:}
+  \begin{lstlisting}
+git checkout -- scripts/analysis.py
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{If everything is wrong --- revert all changes:}
+  \begin{lstlisting}
+git checkout -- .
+  \end{lstlisting}
+
+  \vspace{0.8em}
+  \begin{alertblock}{The 30-Second Safety Net}
+    This entire cycle --- commit, instruct, diff, decide --- takes 30 seconds of overhead. That is the cost of never losing work.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
+  \begin{enumerate}
+    \item \textbf{Initialize git} in your project directory (if you have not already):
+    \begin{itemize}
+      \item \texttt{git init}
+      \item \texttt{git add -A \&\& git commit -m "Initial commit"}
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Commit} your current work from Sessions 1--2.
+    \begin{itemize}
+      \item \texttt{git add -A \&\& git commit -m "Session 2 work: merge, estimation, robustness"}
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Run} \texttt{git log --oneline} to see your history.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  You now have a snapshot of everything that works. Whatever happens next, you can always come back here.
+\end{frame}
+
+\begin{frame}{Exercise Part 2: The Cycle (25 min)}
+  Do this \textbf{at least three times:}
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item \textbf{Commit} your current state
+    \item \textbf{Instruct Claude Code} to make a change:
+    \begin{itemize}
+      \item Round 1: Add a new control variable to your specification
+      \item Round 2: Refactor the analysis script into functions
+      \item Round 3: Change the sample restriction
+    \end{itemize}
+    \item \textbf{Run} \texttt{git diff} and read what changed
+    \item \textbf{Decide:} keep (commit) or revert (\texttt{git checkout -- .})
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{Try to revert at least once.} The point is to see that you can always undo.
+
+  \vspace{0.5em}
+  \alert{Commit first, instruct second, diff third, decide fourth.}\\
+  If you take one thing from this module, it is this sequence.
+\end{frame}
+
+\begin{frame}{Git Debrief}
+  \textbf{Discussion:}
+  \begin{itemize}
+    \item Did Claude Code change any files you did not expect?
+    \item Was the diff easy to read? What was confusing?
+    \item Did anyone revert a change? What went wrong?
+  \end{itemize}
+
+  \vspace{1em}
+  \begin{block}{The Habit}
+    \textbf{Commit $\rightarrow$ Instruct $\rightarrow$ Diff $\rightarrow$ Decide.}\\[0.3em]
+    This is not optional when working with an agent that modifies your files. It is the minimum responsible workflow.
+  \end{block}
+
+  \vspace{0.5em}
+  In Session 4, we will automate the commit step with a hook --- so you never forget.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 3: THE INTEGRATED RESEARCH ENVIRONMENT
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 3: The Integrated Research Environment}
+  \centering
+  \vspace{2em}
+  {\Large What if your paper lived in the same place\\[0.3em]
+  as your code and data?}
+
+  \vspace{2em}
+  This is the conceptual pivot of the course.
+\end{frame}
+
+\begin{frame}{The Problem with Overleaf}
+  \textbf{Most researchers keep their paper in a separate tool.}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Code lives in a project directory (or on your Desktop)
+    \item Data lives next to the code (maybe)
+    \item The paper lives in Overleaf (or Word, or Google Docs)
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{What this means for Claude Code:}
+  \begin{itemize}
+    \item It cannot read your paper
+    \item It cannot check the methods section against your code
+    \item It cannot update a table when the analysis changes
+    \item It cannot commit changes to your paper alongside code changes
+  \end{itemize}
+
+  \vspace{0.8em}
+  \begin{alertblock}{The Limitation}
+    If Claude Code cannot see it, Claude Code cannot operate on it.\\
+    Your paper is the biggest piece of your project that is currently invisible.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{The Solution: \LaTeX{} in VS Code}
+  \textbf{Bring your paper into the project directory.}
+
+  \vspace{0.8em}
+  \begin{itemize}
+    \item Your \texttt{.tex} file lives alongside \texttt{scripts/} and \texttt{data/}
+    \item Claude Code can read it, write it, and edit it --- just like any other file
+    \item Changes to the paper are tracked by git, just like code changes
+    \item Coauthors review changes through version control, not ``track changes''
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{What becomes possible:}
+  \begin{itemize}
+    \item Claude Code writes a methods section and you verify it against the code
+    \item The analysis changes $\rightarrow$ the table updates $\rightarrow$ the paper updates
+    \item Every version of the paper is recoverable through git
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The Point}
+    This is not about \LaTeX{} vs.\ Word. It is about bringing your paper into the agentic workflow.
+  \end{block}
+\end{frame}
+
+\begin{frame}{\LaTeX{} in VS Code: The Setup}
+  \textbf{What you need (should be installed from pre-work):}
+  \begin{enumerate}
+    \item A \TeX{} distribution: TeX Live (Linux/Windows) or MacTeX (Mac)
+    \item The \textbf{LaTeX Workshop} extension in VS Code
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \textbf{What you get:}
+  \begin{itemize}
+    \item Syntax highlighting for \texttt{.tex} files
+    \item One-click compilation to PDF
+    \item PDF preview in a split pane --- side by side with your code
+    \item Error messages in the VS Code terminal
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{The workflow:}\\
+  Edit \texttt{.tex} $\rightarrow$ Save $\rightarrow$ Auto-compile $\rightarrow$ PDF updates in the preview pane.
+
+  \vspace{0.5em}
+  You never leave VS Code. Your paper is right next to your code.
+\end{frame}
+
+\begin{frame}[fragile]{\LaTeX{} Basics (For Those New to It)}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+\documentclass{article}
+\usepackage{booktabs}
+\title{My Research Paper}
+\author{Your Name}
+\begin{document}
+\maketitle
+\section{Data Description}
+We use a survey of 2,044 Polish adults...
+\section{Results}
+\input{output/robustness_table.tex}
+\end{document}
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Key idea:} \texttt{\textbackslash input\{output/robustness\_table.tex\}} pulls in the table from Session 2. When the table updates, the paper updates.
+\end{frame}
+
+\begin{frame}{Demo: The Full Loop}
+  \centering
+  \vspace{1em}
+  \begin{tikzpicture}[
+    node distance=0.6cm and 0.3cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3cm, minimum height=0.7cm, align=center, font=\small},
+    arr/.style={->, thick, color=accent}
+  ]
+    \node[box] (write) {Claude Code writes\\a methods section};
+    \node[box, right=of write] (check) {You verify it\\against the code};
+    \node[box, right=of check] (compile) {Compile to PDF};
+    \node[box, right=of compile] (commit) {Commit with git};
+
+    \draw[arr] (write) -- (check);
+    \draw[arr] (check) -- (compile);
+    \draw[arr] (compile) -- (commit);
+  \end{tikzpicture}
+
+  \vspace{1.5em}
+  {\large Everything happens in VS Code.\\[0.3em]
+  Everything is version-controlled.\\[0.3em]
+  Everything is visible to Claude Code.}
+\end{frame}
+
+\begin{frame}{Exercise Part 3: Build a \LaTeX{} Document (30 min)}
+  Using the provided template:
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item \textbf{Commit} your current state (the habit starts now)
+
+    \vspace{0.3em}
+    \item \textbf{Ask Claude Code} to create a \texttt{.tex} file with:
+    \begin{itemize}
+      \item A data description section based on your Session 2 pipeline
+      \item The robustness table via \texttt{\textbackslash input\{output/robustness\_table.tex\}}
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Compile} to PDF and verify it renders correctly
+
+    \vspace{0.3em}
+    \item \textbf{Diff and commit} the new file
+
+    \vspace{0.3em}
+    \item \textbf{Ask Claude Code} to write a results paragraph interpreting the table.
+    Review what it writes --- would you sign off on this for a paper?
+
+    \vspace{0.3em}
+    \item \textbf{Ask Claude Code} to check the data description against the actual cleaning code. Does the text match what the code does?
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \alert{Notice: you are now using git and \LaTeX{} together.} Every change to the paper is tracked.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  DEBRIEF
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What You Built Today}
+  \begin{enumerate}
+    \item \textbf{Git:} You have a safety net. Commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide. You practiced reverting changes and saw that you can always go back.
+
+    \vspace{0.5em}
+    \item \textbf{\LaTeX{} in VS Code:} Your paper is now part of your project. Claude Code can see it, edit it, and check it against your code.
+
+    \vspace{0.5em}
+    \item \textbf{The two together:} Every change to your paper is version-controlled, just like every change to your code. You used the git cycle on your \texttt{.tex} file.
+  \end{enumerate}
+
+  \vspace{1em}
+  \begin{block}{The Bigger Picture}
+    Your project directory now contains: data, code, output, and a paper --- all under version control, all visible to Claude Code. This is the foundation for everything in Session 4.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Debrief}
+  \textbf{Discussion questions:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item Did Claude Code change any files you did not expect? How did you handle it?
+    \item Did anyone revert a change? What went wrong?
+    \item When Claude Code wrote parts of the \LaTeX{} document, what did you have to correct?
+    \item How does this compare to your current workflow --- Overleaf, Word, separate directories?
+  \end{enumerate}
+
+  \vspace{1em}
+  \begin{block}{Key Takeaway}
+    The skill is not just using Claude Code. It is building an environment where Claude Code can do its best work --- and where you can verify and undo everything it does.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Next Session}
+  \textbf{Session 4: Power Features --- Hooks, MCPs, and Skills}
+
+  \vspace{1em}
+  \begin{itemize}
+    \item \textbf{Hooks:} Automate the commit step --- every change Claude Code makes is tracked automatically
+    \item \textbf{MCPs:} Connect Zotero --- search your library and pull citations from inside Claude Code
+    \item \textbf{Skills:} Reusable workflows --- spec validation, robustness checks, and more
+  \end{itemize}
+
+  \vspace{1em}
+  \textbf{Before next session:}
+  \begin{itemize}
+    \item Practice the commit-instruct-diff-decide cycle on your own project
+    \item Try asking Claude Code to review a piece of your own code
+    \item Make sure your Zotero account is set up (instructions in the setup guide)
+  \end{itemize}
+\end{frame}
+
+\end{document}

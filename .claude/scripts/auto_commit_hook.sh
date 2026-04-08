@@ -55,7 +55,7 @@ except:
 " 2>/dev/null || echo "unknown")
 
 # Generate commit message using Claude
-DIFF=$(git diff --cached 2>/dev/null | head -300)
+DIFF=$(git diff --cached 2>/dev/null | head -300 || true)
 
 MSG=$(echo "$DIFF" | claude --print --model haiku "Write a short git commit message (one line, max 72 chars) for this diff. No quotes, no prefix, just the message:" 2>/dev/null)
 

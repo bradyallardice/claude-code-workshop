@@ -1,0 +1,31 @@
+\begin{table}[htbp]
+\centering
+\caption{Logistic Regression: Support for Government Intervention}
+\label{tab:robustness}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+ & \scriptsize Base (weighted) & \scriptsize Base (unweighted) & \scriptsize + Controls & \scriptsize Full controls & \scriptsize Pooled treatment & \scriptsize Urban only \\
+\midrule
+Info treatment & $0.302**$ & $0.290**$ & $0.324**$ & $0.267$ &  & $0.326*$ \\
+ & $(0.126)$ & $(0.126)$ & $(0.127)$ & $(0.170)$ &  & $(0.167)$ \\[0.3em]
+History treatment & $0.123$ & $0.047$ & $0.133$ & $0.261$ &  & $0.242$ \\
+ & $(0.128)$ & $(0.127)$ & $(0.130)$ & $(0.174)$ &  & $(0.169)$ \\[0.3em]
+Hungary treatment & $0.194$ & $0.145$ & $0.185$ & $0.225$ &  & $0.221$ \\
+ & $(0.130)$ & $(0.129)$ & $(0.131)$ & $(0.176)$ &  & $(0.169)$ \\[0.3em]
+Any information &  &  &  &  & $0.218**$ &  \\
+ &  &  &  &  & $(0.107)$ &  \\[0.3em]
+FX exposed (current) &  &  & $1.287***$ & $1.251***$ & $1.290***$ & $1.256***$ \\
+ &  &  & $(0.283)$ & $(0.352)$ & $(0.283)$ & $(0.319)$ \\[0.3em]
+FX exposed (past) &  &  & $-0.163$ & $-0.168$ & $-0.158$ & $-0.049$ \\
+ &  &  & $(0.289)$ & $(0.356)$ & $(0.289)$ & $(0.331)$ \\[0.3em]
+\midrule
+Demographic controls & No & No & Yes & Yes & Yes & Yes \\
+Survey weights & Yes & No & Yes & Yes & Yes & Yes \\
+Sample & Full & Full & Full & Full & Full & Urban \\
+N & 2036 & 2036 & 2035 & 1151 & 2035 & 1208 \\
+\bottomrule
+\multicolumn{7}{l}{\scriptsize $^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$. Reference: control group, no FX loan.} \\
+\end{tabular}
+\end{table}
