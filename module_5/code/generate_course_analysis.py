@@ -343,8 +343,32 @@ def table_to_png(df, filename, title="", academic=True):
     plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
 
-# Create PNG versions of tables
-table_to_png(summary_df, 'module_5/paper/figures/summary_stats_table.png', 'Summary Statistics')
+# Create PNG versions of tables in academic style
+# Create a DataFrame representation of the regression results for PNG
+regression_df_for_png = pd.DataFrame({
+    'Variable': ['Attended Course', 'Experience (years)', 'Age', 'Constant', '', 'Observations', 'R²'],
+    'Coefficient': [
+        f'{coef_attended:.2f}***',
+        f'{coef_exp:.2f}',
+        f'{coef_age:.2f}**',
+        f'{intercept:.2f}',
+        '',
+        f'{len(y)}',
+        f'{r_squared:.4f}'
+    ],
+    '(Std. Error)': [
+        f'({se_attended:.2f})',
+        f'({se_exp:.2f})',
+        f'({se_age:.2f})',
+        '',
+        '',
+        '',
+        ''
+    ]
+})
+
+table_to_png(summary_df, 'module_5/paper/figures/summary_stats_table.png', 'Summary Statistics', academic=True)
+table_to_png(regression_df_for_png, 'module_5/paper/figures/regression_results_table.png', 'Regression Results: Effect on Earnings', academic=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 6. SUMMARY
