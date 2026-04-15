@@ -456,24 +456,41 @@ __pycache__/
   Then add: \texttt{data/raw/}, \texttt{*.csv.gz}, any large files.
 \end{frame}
 
-\begin{frame}[fragile]{What a \texttt{.gitignore} File Looks Like}
-  \begin{lstlisting}[basicstyle=\ttfamily\small]
-# Paths (match folders)
+\begin{frame}[fragile]{What Ignore Files Look Like}
+  \begin{columns}
+    \column{0.48\textwidth}
+    \textbf{\texttt{.gitignore}}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+# Folders
 data/raw/
 output/
-
-# Wildcards (* = any filename)
-*.pyc
-*.log
-*.csv.gz
 
 # Specific files
 .env
 .DS_Store
 
-# Folders (with trailing /)
+# All Python cache
 __pycache__/
-  \end{lstlisting}
+    \end{lstlisting}
+
+    \column{0.48\textwidth}
+    \textbf{\texttt{.claudeignore}}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+# Sensitive files
+.env
+.DS_Store
+
+# Very large files
+*.csv.gz
+output/
+
+# Python cache
+__pycache__/
+    \end{lstlisting}
+  \end{columns}
+
+  \vspace{0.15em}
+  {\small \textbf{Wildcards:} \texttt{*} matches any characters. \texttt{*.pyc} = all .pyc files anywhere. \texttt{*.csv.gz} = all compressed CSVs.}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
