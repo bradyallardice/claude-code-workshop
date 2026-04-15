@@ -432,6 +432,7 @@ b1a2c33 Initial commit
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 my_project/              <- run "git init" here
   .gitignore            <- goes here
+  .claudeignore         <- goes here
   code/
     analysis.py
   data/
@@ -507,37 +508,19 @@ results/
   Now, in your chosen project directory:
 
   \begin{enumerate}
-    \item \textbf{Create a \texttt{.claudeignore}} FIRST (before asking Claude Code for help):
-    \begin{itemize}
-      \item In VS Code: File → New File → name it \texttt{.claudeignore}
-      \item Or in terminal: \texttt{echo ".env" > .claudeignore}
-      \item Add \texttt{.env} and any other sensitive files
-    \end{itemize}
+    \item {\small \textbf{Create a \texttt{.claudeignore}} FIRST:} In VS Code (File → New File) or terminal (\texttt{echo ".env" > .claudeignore}). Add \texttt{.env} and any other sensitive files.
+    {\tiny \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Exclude it immediately.}
 
-    {\small \alert{Important:} If using Option B, you will find a \texttt{.env} file. These are my real credentials. Exclude it from Claude Code immediately.}
+    \vspace{0.08em}
+    \item {\small \textbf{Create a \texttt{.gitignore}} now:} Ask Claude Code to help. Include large data files, regenerated output, and system files.
+    {\tiny Note: \texttt{.claudeignore} uses the same syntax.}
 
-    \vspace{0.2em}
-    \item \textbf{Create a \texttt{.gitignore}} for your project (now you can ask Claude Code to help):
-    \begin{itemize}
-      \item Large data files: \texttt{*.csv.gz}, \texttt{*.parquet}, \texttt{data/raw/}
-      \item Output that regenerates: \texttt{output/}, \texttt{*.pdf}
-      \item System files: \texttt{.DS\_Store}, \texttt{.env}, \texttt{*.pyc}
-    \end{itemize}
-    {\small Note: \texttt{.claudeignore} uses the exact same syntax and patterns. You can copy lines between them.}
+    \vspace{0.08em}
+    \item {\small \textbf{Initialize git:}} \texttt{git init} then \texttt{git add -A \&\& git commit -m "Initial commit"}
 
-    \vspace{0.2em}
-    \item \textbf{Initialize git} from the terminal in VS Code:
-    \begin{itemize}
-      \item \texttt{git init}
-      \item \texttt{git add -A \&\& git commit -m "Initial commit with .gitignore"}
-    \end{itemize}
-
-    \vspace{0.2em}
-    \item \textbf{Run} \texttt{git log --oneline} to see your history.
+    \vspace{0.08em}
+    \item {\small \textbf{Run:}} \texttt{git log --oneline}
   \end{enumerate}
-
-  \vspace{0.3em}
-  You now have a snapshot. Whatever happens next, you can always come back here.
 \end{frame}
 
 \begin{frame}{Exercise Part 2: The Cycle (25 min)}
