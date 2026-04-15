@@ -771,6 +771,24 @@ Ctrl+Alt+V  Open PDF preview
   Add to VS Code settings: \texttt{"latex-workshop.latex.autoBuild.run": "onFileChange"}
 \end{frame}
 
+\begin{frame}{\LaTeX{} Errors and the Problems Pane}
+  When you compile, LaTeX Workshop checks for errors and syntax issues. They appear in the \textbf{Problems} pane at the bottom of VS Code.
+
+  \vspace{0.5em}
+  \textbf{To view the Problems pane:}
+  \begin{itemize}
+    \item Keyboard: \texttt{Ctrl+Shift+M} (or \texttt{Cmd+Shift+M} on Mac)
+    \item Menu: \texttt{View} \textrightarrow{} \texttt{Problems}
+  \end{itemize}
+
+  \vspace{0.8em}
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/problems_latex.png}
+
+  \vspace{0.3em}
+  {\small Errors and warnings appear here with line numbers. Click any error to jump to that line in your \texttt{.tex} file.}
+\end{frame}
+
 \begin{frame}[fragile]{\LaTeX{} Basics (For Those New to It)}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 \documentclass{article}
