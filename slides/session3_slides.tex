@@ -876,35 +876,40 @@ We use a survey of 2,044 Polish adults...
 \end{frame}
 
 \begin{frame}{Exercise Part 3: Build a \LaTeX{} Document (30 min)}
-  Using the provided template:
+  \textbf{Choose your adventure:}
+  \begin{itemize}
+    \item \textbf{Option A:} Use \textbf{your own work} --- a current or recent research project with tables and figures you already have
+    \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_5/}) with pre-generated tables and figures about the course
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Your goal:} Build out three sections of a paper ---
+  \textbf{Data}, \textbf{Methods}, and \textbf{Results}.
 
   \vspace{0.5em}
   \begin{enumerate}
     \item \textbf{Commit} your current state (the habit starts now)
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Ask Claude Code} to create a \texttt{.tex} file with:
     \begin{itemize}
-      \item A data description section based on your Session 2 pipeline
-      \item The robustness table via \texttt{\textbackslash input\{output/robustness\_table.tex\}}
+      \item A \textbf{Data} section describing your variables and sample
+      \item A \textbf{Methods} section explaining your empirical approach
+      \item A \textbf{Results} section pulling in tables via \texttt{\textbackslash input\{...\}} and figures via \texttt{\textbackslash includegraphics\{...\}}
     \end{itemize}
 
-    \vspace{0.3em}
-    \item \textbf{Compile} to PDF and verify it renders correctly
+    \vspace{0.2em}
+    \item \textbf{Compile} to PDF and verify it renders correctly (fix errors with Claude Code)
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Diff and commit} the new file
 
-    \vspace{0.3em}
-    \item \textbf{Ask Claude Code} to write a results paragraph interpreting the table.
-    Review what it writes --- would you sign off on this for a paper?
-
-    \vspace{0.3em}
-    \item \textbf{Ask Claude Code} to check the data description against the actual cleaning code. Does the text match what the code does?
+    \vspace{0.2em}
+    \item \textbf{Ask Claude Code} to check the data and methods sections against your actual code. Does the text match what the code does?
   \end{enumerate}
 
-  \vspace{0.3em}
-  \alert{Notice: you are now using git and \LaTeX{} together.} Every change to the paper is tracked.
+  \vspace{0.2em}
+  \alert{You are now using git and \LaTeX{} together.} Every change to the paper is tracked.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
