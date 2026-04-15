@@ -98,26 +98,33 @@
 \end{frame}
 
 \begin{frame}{What Happens When the Context Window Fills Up}
-  As a conversation grows, Claude Code eventually runs out of room.\\
-  When this happens, it \textbf{auto-compacts}: it summarizes older parts of the conversation to free up space.
+  \begin{columns}
+    \column{0.7\textwidth}
+    As a conversation grows, Claude Code eventually runs out of room.\\
+    When this happens, it \textbf{auto-compacts}: it summarizes older parts of the conversation to free up space.
 
-  \vspace{0.5em}
-  \textbf{What auto-compacting does:}
-  \begin{itemize}
-    \item Replaces earlier messages with a compressed summary
-    \item Keeps recent messages and tool results intact
-    \item Happens automatically. You will see a notice in the chat
-  \end{itemize}
+    \vspace{0.5em}
+    \textbf{What auto-compacting does:}
+    \begin{itemize}
+      \item Replaces earlier messages with a compressed summary
+      \item Keeps recent messages and tool results intact
+      \item Happens automatically. You will see a notice in the chat
+    \end{itemize}
 
-  \vspace{0.5em}
-  \textbf{The risk:} Details from early in the conversation (variable definitions, decisions you discussed, constraints you mentioned) may be lost or simplified in the summary.
+    \vspace{0.5em}
+    \textbf{The risk:} Details from early in the conversation (variable definitions, decisions you discussed, constraints you mentioned) may be lost or simplified in the summary.
 
-  \vspace{0.5em}
-  \textbf{You can also compact manually:}\\
-  Type \texttt{/compact} to force a summary and free up context space.
+    \vspace{0.5em}
+    \textbf{You can also compact manually:}\\
+    Type \texttt{/compact} to force a summary and free up context space.
 
-  \vspace{0.5em}
-  \alert{This is why CLAUDE.md matters:} it survives compacting because it is reloaded from disk, not from conversation history.
+    \vspace{0.5em}
+    \alert{This is why CLAUDE.md matters:} it survives compacting because it is reloaded from disk, not from conversation history.
+
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{img/github.png}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Strategy 1: Keep Tasks Focused}
