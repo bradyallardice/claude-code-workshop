@@ -164,22 +164,48 @@ ss_res = np.sum((y - y_pred)**2)
 ss_tot = np.sum((y - y.mean())**2)
 r_squared = 1 - (ss_res / ss_tot)
 
-# Create regression results table
-regression_results = pd.DataFrame({
-    'Variable': ['Attended Course', 'Experience (years)', 'Age', 'Constant'],
-    'Coefficient': [f'{coef_attended:.2f}', f'{coef_exp:.2f}', f'{coef_age:.2f}', f'{intercept:.2f}'],
-    'Std. Error': [f'{se_attended:.2f}', f'{se_exp:.2f}', f'{se_age:.2f}', ''],
-    't-statistic': [f'{t_attended:.3f}', '', '', ''],
-    'p-value': [f'{p_attended:.4f}', '', '', ''],
-})
+# Create regression results table in standard academic format
+# Create detailed results for each variable
+def format_coef(coef, se, t_stat, p_val):
+    """Format coefficient with significance stars."""
+    sig = ''
+    if p_val < 0.001:
+        sig = '$^{***}$'
+    elif p_val < 0.01:
+        sig = '$^{**}$'
+    elif p_val < 0.05:
+        sig = '$^{*}$'
+    return f'{coef:.2f}{sig}'
 
-latex_regression = regression_results.to_latex(index=False, escape=False)
-latex_regression = latex_regression.replace(r'\toprule', r'\hline')
-latex_regression = latex_regression.replace(r'\midrule', r'\hline')
-latex_regression = latex_regression.replace(r'\bottomrule', r'\hline')
+# Calculate t-stats and p-values for all coefficients
+t_exp = coef_exp / se_exp
+p_exp = 2 * (1 - stats.t.cdf(np.abs(t_exp), len(y) - 3))
+
+t_age = coef_age / se_age
+p_age = 2 * (1 - stats.t.cdf(np.abs(t_age), len(y) - 3))
+
+# Build the LaTeX table manually with proper formatting
+latex_table = r'''\begin{tabular}{lcc}
+\hline\hline
+Variable & Coefficient & (Std. Error) \\
+\hline
+Attended Course & ''' + format_coef(coef_attended, se_attended, t_attended, p_attended) + r''' & (''' + f'{se_attended:.2f}' + r''') \\
+Experience (years) & ''' + format_coef(coef_exp, se_exp, t_exp, p_exp) + r''' & (''' + f'{se_exp:.2f}' + r''') \\
+Age & ''' + format_coef(coef_age, se_age, t_age, p_age) + r''' & (''' + f'{se_age:.2f}' + r''') \\
+Constant & ''' + f'{intercept:.2f}' + r''' & \\
+\hline
+Observations & ''' + f'{len(y)}' + r''' & \\
+R$^2$ & ''' + f'{r_squared:.4f}' + r''' & \\
+\hline\hline
+\end{tabular}
+
+\vspace{0.3em}
+
+\textit{Note:} ''' + r'''Dependent variable is post-course earnings in USD. Standard errors in parentheses.''' + '\n' + \
+r'''Significance levels: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$.'''
 
 with open('module_5/paper/tables/regression_earnings.tex', 'w') as f:
-    f.write(latex_regression)
+    f.write(latex_table)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 4. CREATE FIGURES
