@@ -490,7 +490,13 @@ __pycache__/
   \end{columns}
 
   \vspace{0.15em}
-  {\small \textbf{Wildcards:} \texttt{*} matches any characters. \texttt{*.pyc} = all .pyc files anywhere. \texttt{*.csv.gz} = all compressed CSVs.}
+  {\small \textbf{Wildcards:} \texttt{*} matches any characters.
+  \begin{itemize}
+    \item \texttt{*.pyc} = all .pyc files
+    \item \texttt{data.*.csv} = data.raw.csv, data.clean.csv, etc.
+    \item \texttt{analysis_*.py} = analysis_v1.py, analysis_v2.py, etc.
+  \end{itemize}
+  \textbf{Folders} must end with \texttt{/} (e.g., \texttt{output/}, \texttt{__pycache__/})}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
