@@ -269,7 +269,7 @@ git commit -m "Clean merge script, verified row counts"
   \end{itemize}
 
   \vspace{0.5em}
-  \textbf{In practice, you will almost always run add and commit together:}
+  \textbf{In practice, you can always run add and commit together (but you don't have to):}
   \begin{lstlisting}
 git add -A && git commit -m "your message"
   \end{lstlisting}
@@ -425,29 +425,36 @@ b1a2c33 Initial commit
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{.gitignore}: Telling Git What to Skip}
-  A \texttt{.gitignore} file lists patterns for files git should never track.\\
-  Create it in the root of your project directory.
+  A \texttt{.gitignore} file lists patterns for files git should never track. Place it in the folder where you ran \texttt{git init}.
 
-  \vspace{0.3em}
-  \textbf{Example \texttt{.gitignore} for a research project:}
+  \vspace{0.15em}
+  \textbf{Paths are relative to that folder.} Example:
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-# Large data files
-data/raw/*.csv
-# Generated output
-output/*.png
-# LaTeX build artifacts
-*.aux
-*.log
-*.synctex.gz
-# System files
-.DS_Store
+my_project/              <- run "git init" here
+  .gitignore            <- goes here
+  code/
+    analysis.py
+  data/
+    raw/                <- "data/raw/" in .gitignore
+    processed/
+  output/               <- "output/" in .gitignore
   \end{lstlisting}
 
   \vspace{0.2em}
-  Lines starting with \texttt{\#} are comments. The \texttt{*} means ``any file name.''
+  \textbf{Always include:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+.DS_Store
+.env
+*.pyc
+__pycache__/
+*.aux
+*.log
+output/
+results/
+  \end{lstlisting}
 
-  \vspace{0.2em}
-  \alert{Ask Claude Code to write a \texttt{.gitignore} for you.} It knows the common patterns.
+  \vspace{0.1em}
+  Then add: \texttt{data/raw/}, \texttt{*.csv.gz}, any large files.
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
@@ -481,7 +488,7 @@ output/*.png
   Work in \textbf{your own research project}, not in a provided starter.
 
   \begin{enumerate}
-    \item \textbf{Create a \texttt{.gitignore}} for your project:
+    \item \textbf{Create a \texttt{.gitignore}} for your project (Ask Claude Code to help):
     \begin{itemize}
       \item Large data files: \texttt{*.csv.gz}, \texttt{*.parquet}, \texttt{data/raw/}
       \item Output that regenerates: \texttt{output/}, \texttt{*.pdf}
