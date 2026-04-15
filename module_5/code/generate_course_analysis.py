@@ -325,7 +325,6 @@ def table_to_png(df, filename, title=""):
 
 # Create PNG versions of tables
 table_to_png(summary_df, 'module_5/paper/figures/summary_stats_table.png', 'Summary Statistics')
-table_to_png(regression_results, 'module_5/paper/figures/regression_results_table.png', 'Regression Results: Effect on Earnings')
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 6. SUMMARY
