@@ -487,16 +487,16 @@ results/
 \begin{frame}{Exercise Part 1: Choose Your Project}
   \textbf{Option A: Your own research project}
   \begin{itemize}
-    \item Open your project folder in a \textbf{new VS Code window}: File → Open Folder
+    \item Open your project folder in VS Code: File → New Window → File → Open Folder
     \item Use whatever code and data you have in that project
   \end{itemize}
 
   \vspace{0.5em}
-  \textbf{Option B: Practice sandbox (recommended if you want to be cautious)}
+  \textbf{Option B: Practice sandbox}
   \begin{itemize}
     \item On your Desktop, create a new folder: \texttt{mkdir \textasciitilde/Desktop/session\_2\_git\_practice}
     \item Copy Session 2 materials into it: \texttt{cp -r module\_2/* \textasciitilde/Desktop/session\_2\_git\_practice/}
-    \item Open it in VS Code: File → Open Folder → select \texttt{session\_2\_git\_practice} on Desktop
+    \item Open it in VS Code: File → New Window → File → Open Folder → select \texttt{session\_2\_git\_practice} on Desktop
   \end{itemize}
 
   \vspace{0.5em}
@@ -513,6 +513,8 @@ results/
       \item Output that regenerates: \texttt{output/}, \texttt{*.pdf}
       \item System files: \texttt{.DS\_Store}, \texttt{.env}, \texttt{*.pyc}
     \end{itemize}
+
+    {\small \textbf{Bonus:} If you're in your own project and want Claude Code to ignore certain files, create a \texttt{.claudeignore} file using the exact same syntax. Works the same way.}
 
     \vspace{0.2em}
     \item \textbf{Initialize git} from the terminal in VS Code:
