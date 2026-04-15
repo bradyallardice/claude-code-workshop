@@ -425,8 +425,9 @@ b1a2c33 Initial commit
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{.gitignore} vs. \texttt{.claudeignore}}
-  Both files use the same syntax. Place them where you ran \texttt{git init}.
+  A \texttt{.gitignore}/\texttt{.claudeignore} file lists patterns for files git/claude should never track. Place it in the folder where you ran \texttt{git init}.
 
+  \vspace{0.08em}
   \begin{columns}
     \column{0.48\textwidth}
     \textbf{Paths are relative to that folder:}
@@ -462,6 +463,9 @@ output/
 __pycache__/
     \end{lstlisting}
   \end{columns}
+
+  \vspace{0.1em}
+  {\tiny \textbf{Always include in both:} \texttt{.env}, \texttt{.DS\_Store}, \texttt{*.pyc}, \texttt{*.log}, \texttt{*.aux}}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
