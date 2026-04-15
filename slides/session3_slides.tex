@@ -424,36 +424,44 @@ b1a2c33 Initial commit
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{.gitignore}: Telling Git What to Skip     \texttt{.claudeignore}: Telling Claude What to Skip}
-  A \texttt{.gitignore}/\texttt{.claudeignore} file lists patterns for files git/claude should never track. Place it in the folder where you ran \texttt{git init}.
+\begin{frame}[fragile]{\texttt{.gitignore} vs. \texttt{.claudeignore}}
+  Both files use the same syntax. Place them where you ran \texttt{git init}.
 
-  \vspace{0.08em}
-  \textbf{Paths are relative to that folder.} Example:
-  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
-my_project/              <- run "git init" here
-  .gitignore            <- goes here
-  .claudeignore         <- goes here
-  code/
-    analysis.py
-  data/                 <- put in .gitignore but NOT .claudeignore
-    raw/                
+  \begin{columns}
+    \column{0.48\textwidth}
+    \textbf{Paths are relative to that folder:}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+my_project/
+  .gitignore
+  code/analysis.py
+  data/
+    raw/
     processed/
-  output/               <- put in .gitignore but NOT .claudeignore
-  \end{lstlisting}
+  output/
+    results.csv
+    plot.png
+    \end{lstlisting}
 
-  \vspace{0.08em}
-  \textbf{Always include in .gitignore and .claudeignore:}
-  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
-.DS_Store
-.env      <- usually contains sensitive information
+    \column{0.48\textwidth}
+    \textbf{Example \texttt{.gitignore} file:}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+# Paths (match folders)
+data/raw/
+output/
+
+# Wildcards (* = any)
 *.pyc
-__pycache__/
-*.aux
 *.log
-  \end{lstlisting}
+*.csv.gz
 
-  \vspace{0.05em}
-  Then add: \texttt{data/raw/}, \texttt{*.csv.gz}, any large files.
+# Specific files
+.env
+.DS_Store
+
+# Folders
+__pycache__/
+    \end{lstlisting}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
