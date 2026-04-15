@@ -263,15 +263,60 @@ plt.savefig('module_5/paper/figures/earnings_effect.png', dpi=300, bbox_inches='
 plt.close()
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 5. SUMMARY
+# 5. CREATE TABLE PNGS
+# ══════════════════════════════════════════════════════════════════════════════
+
+def table_to_png(df, filename, title=""):
+    """Convert a DataFrame to a PNG image."""
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.axis('tight')
+    ax.axis('off')
+
+    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1, 2)
+
+    # Style header row
+    for i in range(len(df.columns)):
+        table[(0, i)].set_facecolor('#4472C4')
+        table[(0, i)].set_text_props(weight='bold', color='white')
+
+    # Alternate row colors
+    for i in range(1, len(df) + 1):
+        for j in range(len(df.columns)):
+            if i % 2 == 0:
+                table[(i, j)].set_facecolor('#E7E6E6')
+            else:
+                table[(i, j)].set_facecolor('#F2F2F2')
+
+    if title:
+        plt.title(title, fontsize=12, fontweight='bold', pad=20)
+
+    plt.tight_layout()
+    plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
+    plt.close()
+
+# Create PNG versions of tables
+table_to_png(summary_df, 'module_5/paper/figures/summary_stats_table.png', 'Summary Statistics')
+table_to_png(regression_results, 'module_5/paper/figures/regression_results_table.png', 'Regression Results: Effect on Earnings')
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 6. SUMMARY
 # ══════════════════════════════════════════════════════════════════════════════
 
 print("\n✓ Data generation complete!")
 print(f"\nGenerated:")
 print(f"  • {len(df)} total participants ({len(df[df['attended']==1])} attended, {len(df[df['attended']==0])} waitlist)")
 print(f"  • {n_completed} students completed the course")
-print(f"  • Summary statistics table: module_5/paper/tables/summary_stats.tex")
-print(f"  • Regression results table: module_5/paper/tables/regression_earnings.tex")
-print(f"  • 4 figures in module_5/paper/figures/")
+print(f"\nLaTeX tables:")
+print(f"  • module_5/paper/tables/summary_stats.tex")
+print(f"  • module_5/paper/tables/regression_earnings.tex")
+print(f"\nFigures:")
+print(f"  • 4 data visualization PNGs in module_5/paper/figures/")
+print(f"  • 2 table PNGs in module_5/paper/figures/")
+print(f"\nData files:")
+print(f"  • module_5/data/course_participants.csv")
+print(f"  • module_5/data/satisfaction.csv")
 print(f"\nRegression: Course attendance effect = ${coef_attended:.2f} (p = {p_attended:.4f})")
 print(f"R-squared: {r_squared:.4f}")
