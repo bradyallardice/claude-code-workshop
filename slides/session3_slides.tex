@@ -435,17 +435,17 @@ my_project/              <- run "git init" here
   .claudeignore         <- goes here
   code/
     analysis.py
-  data/
-    raw/                <- put in .gitignore but NOT .claudeignore
+  data/                 <- put in .gitignore but NOT .claudeignore
+    raw/                
     processed/
   output/               <- put in .gitignore but NOT .claudeignore
   \end{lstlisting}
 
   \vspace{0.08em}
-  \textbf{Always include:}
+  \textbf{Always include in .gitignore and .claudeignore:}
   \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 .DS_Store
-.env
+.env      <- usually contains sensitive information
 *.pyc
 __pycache__/
 *.aux
@@ -507,11 +507,11 @@ __pycache__/
 
   \begin{enumerate}
     \item {\small \textbf{Create a \texttt{.claudeignore}} FIRST:} In VS Code (File → New File) or terminal (\texttt{echo ".env" > .claudeignore}). Add \texttt{.env} and any other sensitive files.
-    {\tiny \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Exclude it immediately.}
+    {\small \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Exclude it immediately.}
 
     \vspace{0.08em}
     \item {\small \textbf{Create a \texttt{.gitignore}} now:} Ask Claude Code to help. Include large data files, regenerated output, and system files.
-    {\tiny Note: \texttt{.claudeignore} uses the same syntax.}
+    {\small Note: \texttt{.claudeignore} uses the same syntax.}
 
     \vspace{0.08em}
     \item {\small \textbf{Initialize git:}} \texttt{git init} then \texttt{git add -A \&\& git commit -m "Initial commit"}
