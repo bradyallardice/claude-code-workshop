@@ -292,59 +292,56 @@ plt.close()
 # 5. CREATE TABLE PNGS
 # ══════════════════════════════════════════════════════════════════════════════
 
-def table_to_png(df, filename, title="", academic=True):
-    """Convert a DataFrame to a PNG image in booktabs academic style."""
-    fig, ax = plt.subplots(figsize=(12, len(df)*0.35 + 1.2))
-    ax.axis('tight')
-    ax.axis('off')
+def latex_table_to_png(tex_table_path, png_output_path, title=""):
+    """Compile a LaTeX table file to PNG using pdflatex and pdf2image."""
+    import subprocess
+    import tempfile
+    from pdf2image import convert_from_path
 
-    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
-    table.auto_set_font_size(False)
-    table.set_fontsize(10)
-    table.scale(1, 2.0)
+    # Read the table content
+    with open(tex_table_path, 'r') as f:
+        table_content = f.read()
 
-    if academic:
-        # Booktabs style: only horizontal lines, no vertical grid
-        n_rows = len(df) + 1  # +1 for header
-        n_cols = len(df.columns)
-
-        # First pass: remove all borders
-        for i in range(n_rows + 1):
-            for j in range(n_cols):
-                if (i, j) in table.get_celld():
-                    cell = table[(i, j)]
-                    cell.set_linewidth(0)
-                    cell.set_facecolor('white')
-                    # Make text bold for header
-                    if i == 0:
-                        cell.set_text_props(weight='bold', fontsize=10)
-
-        # Add only horizontal lines (top, below header, bottom)
-        for j in range(n_cols):
-            # Top line
-            if (0, j) in table.get_celld():
-                table[(0, j)].set_linewidth(1.5)
-                table[(0, j)].set_edgecolor('black')
-                table[(0, j)].set_linestyle('-')
-
-            # Line below header
-            if (1, j) in table.get_celld():
-                table[(1, j)].set_linewidth(1.2)
-                table[(1, j)].set_edgecolor('black')
-                table[(1, j)].set_linestyle('-')
-
-            # Bottom line
-            if (n_rows, j) in table.get_celld():
-                table[(n_rows, j)].set_linewidth(1.5)
-                table[(n_rows, j)].set_edgecolor('black')
-                table[(n_rows, j)].set_linestyle('-')
-
+    # Create a minimal LaTeX document wrapping the table
+    title_block = ''
     if title:
-        plt.title(title, fontsize=11, fontweight='bold', pad=12)
+        title_block = r'\begin{center}\textbf{\large ' + title + r'}\end{center}' + '\n\\vspace{0.5em}\n'
 
-    plt.tight_layout()
-    plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    plt.close()
+    wrapper = r'''\documentclass[border=10pt]{standalone}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\begin{document}
+''' + title_block + table_content + r'''
+\end{document}
+'''
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tex_path = os.path.join(tmpdir, 'table.tex')
+        pdf_path = os.path.join(tmpdir, 'table.pdf')
+
+        with open(tex_path, 'w') as f:
+            f.write(wrapper)
+
+        # Compile with pdflatex
+        result = subprocess.run(
+            ['pdflatex', '-interaction=nonstopmode', '-output-directory', tmpdir, tex_path],
+            capture_output=True, text=True
+        )
+
+        if not os.path.exists(pdf_path):
+            print(f"Error compiling {tex_table_path}:")
+            print(result.stdout[-1000:])
+            return False
+
+        # Convert PDF to PNG
+        images = convert_from_path(pdf_path, dpi=300)
+        images[0].save(png_output_path, 'PNG')
+        return True
+
+
+def table_to_png(df, filename, title="", academic=True):
+    """Legacy function — kept for compatibility but unused for academic tables."""
+    pass
 
 # Create PNG versions of tables in academic style
 # Create a DataFrame representation of the regression results for PNG
