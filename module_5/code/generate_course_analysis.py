@@ -293,51 +293,45 @@ plt.close()
 # ══════════════════════════════════════════════════════════════════════════════
 
 def table_to_png(df, filename, title="", academic=True):
-    """Convert a DataFrame to a PNG image in academic style."""
-    fig, ax = plt.subplots(figsize=(11, len(df)*0.4 + 1.5))
+    """Convert a DataFrame to a PNG image in booktabs academic style."""
+    fig, ax = plt.subplots(figsize=(12, len(df)*0.35 + 1.2))
     ax.axis('tight')
     ax.axis('off')
 
     table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
     table.auto_set_font_size(False)
-    table.set_fontsize(9.5)
-    table.scale(1, 2.2)
+    table.set_fontsize(10)
+    table.scale(1, 2.0)
 
     if academic:
-        # Academic style: minimal color, emphasis on lines
-        # Header row
-        for i in range(len(df.columns)):
-            table[(0, i)].set_facecolor('white')
-            table[(0, i)].set_text_props(weight='bold', color='black')
-            table[(0, i)].set_edgecolor('black')
-            table[(0, i)].set_linewidth(1.5)
+        # Booktabs style: horizontal lines only, no vertical lines
+        # Remove all borders first
+        for key, cell in table.get_celld().items():
+            cell.set_linewidth(0)
+            cell.set_edgecolor('none')
+            cell.set_facecolor('white')
 
-        # Data rows - white background
-        for i in range(1, len(df) + 1):
-            for j in range(len(df.columns)):
-                table[(i, j)].set_facecolor('white')
-                table[(i, j)].set_edgecolor('lightgray')
-                table[(i, j)].set_linewidth(0.5)
-
-        # Add top and bottom lines
+        # Header row - bold with bottom line
         for j in range(len(df.columns)):
-            table[(0, j)].set_linewidth(2)
-            table[(len(df), j)].set_linewidth(2)
-    else:
-        # Blue/grey style for other tables
-        for i in range(len(df.columns)):
-            table[(0, i)].set_facecolor('#4472C4')
-            table[(0, i)].set_text_props(weight='bold', color='white')
+            table[(0, j)].set_text_props(weight='bold', fontsize=10)
+            table[(0, j)].set_linewidth(1.2)
+            table[(0, j)].set_edgecolor('black')
+            table[(0, j)].set_line_position('bottom')
 
-        for i in range(1, len(df) + 1):
-            for j in range(len(df.columns)):
-                if i % 2 == 0:
-                    table[(i, j)].set_facecolor('#E7E6E6')
-                else:
-                    table[(i, j)].set_facecolor('#F2F2F2')
+        # Top line
+        for j in range(len(df.columns)):
+            table[(0, j)].set_linewidth(1.5)
+            table[(0, j)].set_edgecolor('black')
+            table[(0, j)].set_line_position('top')
+
+        # Bottom line
+        for j in range(len(df.columns)):
+            table[(len(df), j)].set_linewidth(1.5)
+            table[(len(df), j)].set_edgecolor('black')
+            table[(len(df), j)].set_line_position('bottom')
 
     if title:
-        plt.title(title, fontsize=11, fontweight='bold', pad=15)
+        plt.title(title, fontsize=11, fontweight='bold', pad=12)
 
     plt.tight_layout()
     plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
