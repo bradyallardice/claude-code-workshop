@@ -292,32 +292,52 @@ plt.close()
 # 5. CREATE TABLE PNGS
 # ══════════════════════════════════════════════════════════════════════════════
 
-def table_to_png(df, filename, title=""):
-    """Convert a DataFrame to a PNG image."""
-    fig, ax = plt.subplots(figsize=(10, 4))
+def table_to_png(df, filename, title="", academic=True):
+    """Convert a DataFrame to a PNG image in academic style."""
+    fig, ax = plt.subplots(figsize=(11, len(df)*0.4 + 1.5))
     ax.axis('tight')
     ax.axis('off')
 
     table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
     table.auto_set_font_size(False)
-    table.set_fontsize(10)
-    table.scale(1, 2)
+    table.set_fontsize(9.5)
+    table.scale(1, 2.2)
 
-    # Style header row
-    for i in range(len(df.columns)):
-        table[(0, i)].set_facecolor('#4472C4')
-        table[(0, i)].set_text_props(weight='bold', color='white')
+    if academic:
+        # Academic style: minimal color, emphasis on lines
+        # Header row
+        for i in range(len(df.columns)):
+            table[(0, i)].set_facecolor('white')
+            table[(0, i)].set_text_props(weight='bold', color='black')
+            table[(0, i)].set_edgecolor('black')
+            table[(0, i)].set_linewidth(1.5)
 
-    # Alternate row colors
-    for i in range(1, len(df) + 1):
+        # Data rows - white background
+        for i in range(1, len(df) + 1):
+            for j in range(len(df.columns)):
+                table[(i, j)].set_facecolor('white')
+                table[(i, j)].set_edgecolor('lightgray')
+                table[(i, j)].set_linewidth(0.5)
+
+        # Add top and bottom lines
         for j in range(len(df.columns)):
-            if i % 2 == 0:
-                table[(i, j)].set_facecolor('#E7E6E6')
-            else:
-                table[(i, j)].set_facecolor('#F2F2F2')
+            table[(0, j)].set_linewidth(2)
+            table[(len(df), j)].set_linewidth(2)
+    else:
+        # Blue/grey style for other tables
+        for i in range(len(df.columns)):
+            table[(0, i)].set_facecolor('#4472C4')
+            table[(0, i)].set_text_props(weight='bold', color='white')
+
+        for i in range(1, len(df) + 1):
+            for j in range(len(df.columns)):
+                if i % 2 == 0:
+                    table[(i, j)].set_facecolor('#E7E6E6')
+                else:
+                    table[(i, j)].set_facecolor('#F2F2F2')
 
     if title:
-        plt.title(title, fontsize=12, fontweight='bold', pad=20)
+        plt.title(title, fontsize=11, fontweight='bold', pad=15)
 
     plt.tight_layout()
     plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
