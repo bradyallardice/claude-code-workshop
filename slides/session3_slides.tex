@@ -95,7 +95,7 @@
 
 \end{frame}
 
-\begin{frame}{What We Want to Know}
+\begin{frame}{What I Want to Know}
   \begin{itemize}
     \item \textbf{Current usage:} Are you using Claude Code in your work at all?
     \item \textbf{What for:} What kind of tasks?
@@ -105,8 +105,6 @@
     \item \textbf{Trust:} Are you confident in the code it produces?
   \end{itemize}
 
-  \vspace{0.5em}
-  This is feedback, not judgment. Tell us what's actually going on.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -735,6 +733,32 @@ __pycache__/
 
   \vspace{0.5em}
   You never leave VS Code. Your paper is right next to your code.
+\end{frame}
+
+\begin{frame}[fragile]{\LaTeX{} Workshop: Essential Commands}
+  \textbf{Build and Preview (Mac):}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Cmd+Alt+B    Compile to PDF
+Cmd+Alt+V    Open PDF preview
+  \end{lstlisting}
+
+  \textbf{Build and Preview (Windows/Linux):}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Ctrl+Alt+B   Compile to PDF
+Ctrl+Alt+V   Open PDF preview
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Once the preview is open:}
+  \begin{itemize}
+    \item Right-click the PDF preview tab
+    \item Select \texttt{Move into Side Panel} to dock it on the right
+    \item Now you have code on the left, PDF on the right
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Optional: Auto-compile on save}\\
+  Add to VS Code settings: \texttt{"latex-workshop.latex.autoBuild.run": "onFileChange"}
 \end{frame}
 
 \begin{frame}[fragile]{\LaTeX{} Basics (For Those New to It)}
