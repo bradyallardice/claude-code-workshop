@@ -736,27 +736,37 @@ __pycache__/
 \end{frame}
 
 \begin{frame}[fragile]{\LaTeX{} Workshop: Essential Commands}
-  \textbf{Build and Preview (Mac):}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Cmd+Alt+B    Compile to PDF
-Cmd+Alt+V    Open PDF preview
-  \end{lstlisting}
+  \textbf{Three ways to compile:}
 
-  \textbf{Build and Preview (Windows/Linux):}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Ctrl+Alt+B   Compile to PDF
-Ctrl+Alt+V   Open PDF preview
-  \end{lstlisting}
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \textbf{Keyboard Shortcuts (Mac):}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+Cmd+Alt+B   Compile to PDF
+Cmd+Alt+V   Open PDF preview
+    \end{lstlisting}
 
-  \vspace{0.5em}
+    \textbf{Keyboard Shortcuts (Windows/Linux):}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+Ctrl+Alt+B  Compile to PDF
+Ctrl+Alt+V  Open PDF preview
+    \end{lstlisting}
+
+    \column{0.5\textwidth}
+    \textbf{Or click the green button:}\\
+    \vspace{0.3em}
+    \includegraphics[width=0.6\textwidth]{img/compile_button.png}
+  \end{columns}
+
+  \vspace{0.8em}
   \textbf{Once the preview is open:}
   \begin{itemize}
-    \item Right-click the PDF preview tab
-    \item Select \texttt{Move into Side Panel} to dock it on the right
+    \item Right-click the PDF preview tab and select \texttt{Move into Side Panel}
     \item Now you have code on the left, PDF on the right
   \end{itemize}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \textbf{Optional: Auto-compile on save}\\
   Add to VS Code settings: \texttt{"latex-workshop.latex.autoBuild.run": "onFileChange"}
 \end{frame}
