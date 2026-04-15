@@ -506,7 +506,7 @@ __pycache__/
   Now, in your chosen project directory:
 
   \begin{enumerate}
-    \item {\small \textbf{Create a \texttt{.claudeignore}} FIRST:} In VS Code (File → New File) or terminal (\texttt{echo ".env" > .claudeignore}). Add \texttt{.env} and any other sensitive files.
+    \item {\small \textbf{Create a \texttt{.claudeignore}} FIRST:} In VS Code (File → New File → name it .claudeignore) or terminal (\texttt{echo ".env" > .claudeignore}). Add \texttt{.env} and any other sensitive files.
 
     {\small \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Exclude it immediately.}
 
@@ -524,27 +524,26 @@ __pycache__/
 \end{frame}
 
 \begin{frame}{Exercise Part 2: The Cycle (25 min)}
-  Do this \textbf{at least three times:}
+  Do this \textbf{three times} (you decide what changes):
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \begin{enumerate}
     \item \textbf{Commit} your current state
-    \item \textbf{Instruct Claude Code} to make a change:
+    \item \textbf{Instruct Claude Code} to make a change. Pick anything:
     \begin{itemize}
-      \item Round 1: Add a new control variable to your specification
-      \item Round 2: Refactor the analysis script into functions
-      \item Round 3: Change the sample restriction
+      \item Add a control variable, refactor into functions, change sample restriction
+      \item Fix a bug, improve documentation, rename variables
+      \item Add a new analysis, create a visualization, write a summary
     \end{itemize}
     \item \textbf{Run} \texttt{git diff} and read what changed
     \item \textbf{Decide:} keep (commit) or revert (\texttt{git checkout -- .})
   \end{enumerate}
 
-  \vspace{0.5em}
-  \textbf{Try to revert at least once.} The point is to see that you can always undo.
+  \vspace{0.3em}
+  {\small \textbf{Goal:} Try to revert at least once. See that you can always undo.}
 
-  \vspace{0.5em}
-  \alert{Commit first, instruct second, diff third, decide fourth.}\\
-  If you take one thing from this module, it is this sequence.
+  \vspace{0.2em}
+  \alert{Commit → Instruct → Diff → Decide}
 \end{frame}
 
 \begin{frame}{Git Debrief}
