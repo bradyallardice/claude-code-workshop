@@ -304,31 +304,40 @@ def table_to_png(df, filename, title="", academic=True):
     table.scale(1, 2.0)
 
     if academic:
-        # Booktabs style: horizontal lines only, no vertical lines
-        # Remove all borders first
-        for key, cell in table.get_celld().items():
-            cell.set_linewidth(0)
-            cell.set_edgecolor('none')
-            cell.set_facecolor('white')
+        # Booktabs style: only horizontal lines, no vertical grid
+        n_rows = len(df) + 1  # +1 for header
+        n_cols = len(df.columns)
 
-        # Header row - bold with bottom line
-        for j in range(len(df.columns)):
-            table[(0, j)].set_text_props(weight='bold', fontsize=10)
-            table[(0, j)].set_linewidth(1.2)
-            table[(0, j)].set_edgecolor('black')
-            table[(0, j)].set_line_position('bottom')
+        # First pass: remove all borders
+        for i in range(n_rows + 1):
+            for j in range(n_cols):
+                if (i, j) in table.get_celld():
+                    cell = table[(i, j)]
+                    cell.set_linewidth(0)
+                    cell.set_facecolor('white')
+                    # Make text bold for header
+                    if i == 0:
+                        cell.set_text_props(weight='bold', fontsize=10)
 
-        # Top line
-        for j in range(len(df.columns)):
-            table[(0, j)].set_linewidth(1.5)
-            table[(0, j)].set_edgecolor('black')
-            table[(0, j)].set_line_position('top')
+        # Add only horizontal lines (top, below header, bottom)
+        for j in range(n_cols):
+            # Top line
+            if (0, j) in table.get_celld():
+                table[(0, j)].set_linewidth(1.5)
+                table[(0, j)].set_edgecolor('black')
+                table[(0, j)].set_linestyle('-')
 
-        # Bottom line
-        for j in range(len(df.columns)):
-            table[(len(df), j)].set_linewidth(1.5)
-            table[(len(df), j)].set_edgecolor('black')
-            table[(len(df), j)].set_line_position('bottom')
+            # Line below header
+            if (1, j) in table.get_celld():
+                table[(1, j)].set_linewidth(1.2)
+                table[(1, j)].set_edgecolor('black')
+                table[(1, j)].set_linestyle('-')
+
+            # Bottom line
+            if (n_rows, j) in table.get_celld():
+                table[(n_rows, j)].set_linewidth(1.5)
+                table[(n_rows, j)].set_edgecolor('black')
+                table[(n_rows, j)].set_linestyle('-')
 
     if title:
         plt.title(title, fontsize=11, fontweight='bold', pad=12)
