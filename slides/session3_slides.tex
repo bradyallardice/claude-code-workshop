@@ -879,37 +879,37 @@ We use a survey of 2,044 Polish adults...
   \textbf{Choose your adventure:}
   \begin{itemize}
     \item \textbf{Option A:} Use \textbf{your own work} --- a current or recent research project with tables and figures you already have
-    \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_3/}) with data, scripts, and the robustness table from Session 2
+    \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_3/}) with FX data, summary stats, main table, and robustness table
   \end{itemize}
 
   \vspace{0.5em}
-  \textbf{Your goal:} Build out three sections of a paper ---
-  \textbf{Data}, \textbf{Methods}, and \textbf{Results}.
+  \textbf{Your goal:} Build out two sections of a paper --- \textbf{Data} and \textbf{Results}.
 
   \vspace{0.5em}
   \begin{enumerate}
     \item \textbf{Commit} your current state (the habit starts now)
 
     \vspace{0.2em}
-    \item \textbf{Ask Claude Code} to create a \texttt{.tex} file with:
+    \item \textbf{Data section:} Ask Claude Code to
     \begin{itemize}
-      \item A \textbf{Data} section describing your variables and sample
-      \item A \textbf{Methods} section explaining your empirical approach
-      \item A \textbf{Results} section pulling in tables via \texttt{\textbackslash input\{...\}} and figures via \texttt{\textbackslash includegraphics\{...\}}
+      \item Write text describing the data
+      \item Include one descriptive figure (Option B: the FX exchange rate over time, \texttt{fx\_rate\_figure.png})
     \end{itemize}
 
     \vspace{0.2em}
-    \item \textbf{Compile} to PDF and verify it renders correctly (fix errors with Claude Code)
+    \item \textbf{Results section:} Ask Claude Code to include three tables, each with a paragraph of text describing what it shows:
+    \begin{itemize}
+      \item Summary statistics (\texttt{summary\_stats.tex})
+      \item Main results (\texttt{main\_table.tex})
+      \item Robustness (\texttt{robustness\_table.tex})
+    \end{itemize}
 
     \vspace{0.2em}
-    \item \textbf{Diff and commit} the new file
+    \item \textbf{Compile} to PDF, fix errors with Claude Code, then \textbf{diff and commit}
 
     \vspace{0.2em}
-    \item \textbf{Ask Claude Code} to check the data and methods sections against your actual code. Does the text match what the code does?
+    \item \textbf{Ask Claude Code} to check your text against the actual code. Does what you wrote match what the code does?
   \end{enumerate}
-
-  \vspace{0.2em}
-  \alert{You are now using git and \LaTeX{} together.} Every change to the paper is tracked.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
