@@ -484,14 +484,28 @@ results/
   {\small You do not need these today. But if your data outgrows Dropbox, they exist.}
 \end{frame}
 
-\begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
-  Choose one:
+\begin{frame}{Exercise Part 1: Choose Your Project}
+  \textbf{Option A: Your own research project}
   \begin{itemize}
-    \item \textbf{Option A:} Work in your own research project directory
-    \item \textbf{Option B:} Create a new directory (e.g., \texttt{session\_2\_git\_practice/}), copy your Session 2 code and data into it, and use that as a clean sandbox
+    \item Open your project folder in a \textbf{new VS Code window}: File → Open Folder
+    \item Make sure you have all your Session 1--2 work inside
   \end{itemize}
 
-  \vspace{0.3em}
+  \vspace{0.5em}
+  \textbf{Option B: Practice sandbox (recommended if you want to be cautious)}
+  \begin{itemize}
+    \item Create a new directory: \texttt{mkdir session\_2\_git\_practice}
+    \item Copy your Session 2 code and data into it: \texttt{cp -r module\_2/* session\_2\_git\_practice/}
+    \item Open it in VS Code: File → Open Folder → \texttt{session\_2\_git\_practice}
+  \end{itemize}
+
+  \vspace{0.5em}
+  Pick one and open it in VS Code. Then proceed to the next slide.
+\end{frame}
+
+\begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
+  Now, in your chosen project directory:
+
   \begin{enumerate}
     \item \textbf{Create a \texttt{.gitignore}} for your project (Ask Claude Code to help):
     \begin{itemize}
@@ -501,18 +515,18 @@ results/
     \end{itemize}
 
     \vspace{0.2em}
-    \item \textbf{Initialize git}:
+    \item \textbf{Initialize git} from the terminal in VS Code:
     \begin{itemize}
       \item \texttt{git init}
       \item \texttt{git add -A \&\& git commit -m "Initial commit with .gitignore"}
     \end{itemize}
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Run} \texttt{git log --oneline} to see your history.
   \end{enumerate}
 
   \vspace{0.3em}
-  You now have a snapshot of everything that works. Whatever happens next, you can always come back here.
+  You now have a snapshot. Whatever happens next, you can always come back here.
 \end{frame}
 
 \begin{frame}{Exercise Part 2: The Cycle (25 min)}
