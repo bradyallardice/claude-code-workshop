@@ -463,11 +463,13 @@ __pycache__/
     \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 # Folders
 data/raw/
+data/*/administrative/
 output/
 
 # Specific files
 .env
 .DS_Store
+data_merged.csv
 
 # All Python cache
 __pycache__/
@@ -492,11 +494,13 @@ __pycache__/
   \vspace{0.15em}
   {\small \textbf{Wildcards:} \texttt{*} matches any characters.
   \begin{itemize}
-    \item \texttt{*.pyc} = all \texttt{.pyc} files
+    \item \texttt{*.pyc} = all \texttt{.pyc} files (anywhere in project)
     \item \texttt{data.*.csv} = \texttt{data.raw.csv}, \texttt{data.clean.csv}, etc.
     \item \texttt{analysis\_*.py} = \texttt{analysis\_v1.py}, \texttt{analysis\_v2.py}, etc.
   \end{itemize}
-  \textbf{Folders} must end with \texttt{/} (e.g., \texttt{output/}, \texttt{\_\_pycache\_\_/})}
+  \textbf{Folders} must end with \texttt{/} (e.g., \texttt{output/}, \texttt{\_\_pycache\_\_/})
+
+  \textit{Note:} Patterns like \texttt{data\_merged.csv} match that filename in any subfolder. Use \texttt{data/data\_merged.csv} to match only within the \texttt{data/} folder.}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}
