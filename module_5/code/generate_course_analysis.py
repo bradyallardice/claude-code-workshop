@@ -340,32 +340,18 @@ def table_to_png(df, filename, title="", academic=True):
     """Legacy function — kept for compatibility but unused for academic tables."""
     pass
 
-# Create PNG versions of tables in academic style
-# Create a DataFrame representation of the regression results for PNG
-regression_df_for_png = pd.DataFrame({
-    'Variable': ['Attended Course', 'Experience (years)', 'Age', 'Constant', '', 'Observations', 'R²'],
-    'Coefficient': [
-        f'{coef_attended:.2f}***',
-        f'{coef_exp:.2f}',
-        f'{coef_age:.2f}**',
-        f'{intercept:.2f}',
-        '',
-        f'{len(y)}',
-        f'{r_squared:.4f}'
-    ],
-    '(Std. Error)': [
-        f'({se_attended:.2f})',
-        f'({se_exp:.2f})',
-        f'({se_age:.2f})',
-        '',
-        '',
-        '',
-        ''
-    ]
-})
+# Create PNG versions of tables by compiling the actual LaTeX files with pdflatex
+latex_table_to_png(
+    'module_5/paper/tables/summary_stats.tex',
+    'module_5/paper/figures/summary_stats_table.png',
+    title='Summary Statistics'
+)
 
-table_to_png(summary_df, 'module_5/paper/figures/summary_stats_table.png', 'Summary Statistics', academic=True)
-table_to_png(regression_df_for_png, 'module_5/paper/figures/regression_results_table.png', 'Regression Results: Effect on Earnings', academic=True)
+latex_table_to_png(
+    'module_5/paper/tables/regression_earnings.tex',
+    'module_5/paper/figures/regression_results_table.png',
+    title='Regression Results: Effect on Earnings'
+)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 6. SUMMARY
