@@ -826,6 +826,31 @@ We use a survey of 2,044 Polish adults...
   \textbf{Key idea:} \texttt{\textbackslash input\{output/robustness\_table.tex\}} pulls in the table from Session 2. When the table updates, the paper updates.
 \end{frame}
 
+\begin{frame}{Live Demo: Building a Paper from Scratch}
+  \textbf{What I'm going to show you:}
+
+  \vspace{0.5em}
+  I have a folder with pre-generated outputs from a fake analysis of \textit{this course}:
+  \begin{itemize}
+    \item Summary statistics table (\texttt{.tex})
+    \item Regression results table (\texttt{.tex})
+    \item Four figures: enrollment, satisfaction, attrition, earnings effect
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Starting from nothing,} I'll use Claude Code to:
+  \begin{enumerate}
+    \item Create a blank \texttt{course\_paper.tex} file
+    \item Write methods and data sections describing the study
+    \item Pull in the pre-generated tables with \texttt{\textbackslash input\{...\}}
+    \item Embed the figures with \texttt{\textbackslash includegraphics\{...\}}
+    \item Compile to PDF and fix any errors that come up
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Watch how Claude Code reads the Problems pane and iterates without me copy-pasting errors.}
+\end{frame}
+
 \begin{frame}{Demo: The Full Loop}
   \centering
   \vspace{1em}
