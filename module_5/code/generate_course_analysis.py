@@ -116,10 +116,7 @@ summary_df = create_summary_stats_table(df)
 
 # Convert to LaTeX table
 latex_summary = summary_df.to_latex(index=False, escape=False)
-# Clean up the LaTeX
-latex_summary = latex_summary.replace(r'\toprule', r'\hline')
-latex_summary = latex_summary.replace(r'\midrule', r'\hline')
-latex_summary = latex_summary.replace(r'\bottomrule', r'\hline')
+# Keep booktabs format (toprule, midrule, bottomrule) for academic style
 
 with open('module_5/paper/tables/summary_stats.tex', 'w') as f:
     f.write(latex_summary)
