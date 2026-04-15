@@ -509,8 +509,9 @@ results/
   \begin{enumerate}
     \item \textbf{Create a \texttt{.claudeignore}} FIRST (before asking Claude Code for help):
     \begin{itemize}
-      \item Add \texttt{.env} (if present)
-      \item Use the same patterns as \texttt{.gitignore}
+      \item In VS Code: File → New File → name it \texttt{.claudeignore}
+      \item Or in terminal: \texttt{echo ".env" > .claudeignore}
+      \item Add \texttt{.env} and any other sensitive files
     \end{itemize}
 
     {\small \alert{Important:} If using Option B, you will find a \texttt{.env} file. These are my real credentials. Exclude it from Claude Code immediately.}
