@@ -882,21 +882,26 @@ We use a survey of 2,044 Polish adults...
     \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_3/}) with FX data, summary stats, main table, and robustness table
   \end{itemize}
 
-  \vspace{0.5em}
+  \vspace{1em}
   \textbf{Your goal:} Build out two sections of a paper --- \textbf{Data} and \textbf{Results}.
 
-  \vspace{0.5em}
+  \vspace{1em}
   \begin{enumerate}
     \item \textbf{Commit} your current state (the habit starts now)
 
-    \vspace{0.2em}
+    \vspace{0.4em}
     \item \textbf{Data section:} Ask Claude Code to
     \begin{itemize}
       \item Write text describing the data
-      \item Include one descriptive figure (Option B: the FX exchange rate over time, \texttt{fx\_rate\_figure.png})
+      \item Include one descriptive figure\\
+      (Option B: the FX exchange rate over time, \texttt{fx\_rate\_figure.png})
     \end{itemize}
+  \end{enumerate}
+\end{frame}
 
-    \vspace{0.2em}
+\begin{frame}{Exercise Part 3: Build a \LaTeX{} Document (cont.)}
+  \begin{enumerate}
+    \setcounter{enumi}{2}
     \item \textbf{Results section:} Ask Claude Code to include three tables, each with a paragraph of text describing what it shows:
     \begin{itemize}
       \item Summary statistics (\texttt{summary\_stats.tex})
@@ -904,12 +909,15 @@ We use a survey of 2,044 Polish adults...
       \item Robustness (\texttt{robustness\_table.tex})
     \end{itemize}
 
-    \vspace{0.2em}
+    \vspace{0.6em}
     \item \textbf{Compile} to PDF, fix errors with Claude Code, then \textbf{diff and commit}
 
-    \vspace{0.2em}
+    \vspace{0.6em}
     \item \textbf{Ask Claude Code} to check your text against the actual code. Does what you wrote match what the code does?
   \end{enumerate}
+
+  \vspace{1em}
+  \alert{You are now using git and \LaTeX{} together.} Every change to the paper is tracked.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
