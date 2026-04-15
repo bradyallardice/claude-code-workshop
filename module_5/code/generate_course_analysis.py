@@ -181,19 +181,19 @@ p_exp = 2 * (1 - stats.t.cdf(np.abs(t_exp), len(y) - 3))
 t_age = coef_age / se_age
 p_age = 2 * (1 - stats.t.cdf(np.abs(t_age), len(y) - 3))
 
-# Build the LaTeX table manually with proper formatting
+# Build the LaTeX table manually with booktabs academic formatting
 latex_table = r'''\begin{tabular}{lcc}
-\hline\hline
+\toprule
 Variable & Coefficient & (Std. Error) \\
-\hline
+\midrule
 Attended Course & ''' + format_coef(coef_attended, se_attended, t_attended, p_attended) + r''' & (''' + f'{se_attended:.2f}' + r''') \\
 Experience (years) & ''' + format_coef(coef_exp, se_exp, t_exp, p_exp) + r''' & (''' + f'{se_exp:.2f}' + r''') \\
 Age & ''' + format_coef(coef_age, se_age, t_age, p_age) + r''' & (''' + f'{se_age:.2f}' + r''') \\
 Constant & ''' + f'{intercept:.2f}' + r''' & \\
-\hline
+\midrule
 Observations & ''' + f'{len(y)}' + r''' & \\
 R$^2$ & ''' + f'{r_squared:.4f}' + r''' & \\
-\hline\hline
+\bottomrule
 \end{tabular}
 
 \vspace{0.3em}
