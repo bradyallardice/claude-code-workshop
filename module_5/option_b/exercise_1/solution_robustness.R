@@ -19,8 +19,9 @@ fit_logit <- function(formula, data, wt_col = NULL) {
   if (is.null(wt_col)) {
     glm(formula, data = data, family = binomial())
   } else {
-    w <- data[[wt_col]]
-    glm(formula, data = data, family = binomial(), weights = w)
+    # Add weights column to data and reference by name to avoid scoping issues
+    data$.wt <- data[[wt_col]]
+    eval(bquote(glm(.(formula), data = data, family = binomial(), weights = .wt)))
   }
 }
 
