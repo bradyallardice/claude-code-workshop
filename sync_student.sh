@@ -79,6 +79,12 @@ git rm -r --quiet module_5/option_b/exercise_2/demo/ 2>/dev/null || true
 git rm --quiet module_5/option_b/exercise_2/paper.tex 2>/dev/null || true
 git rm --quiet module_5/option_b/exercise_2/paper.pdf 2>/dev/null || true
 
+# Module 5 Option B Exercise 2: students generate these themselves in Exercise 1
+git rm --quiet module_5/option_b/exercise_2/tables/summary_stats.tex 2>/dev/null || true
+git rm --quiet module_5/option_b/exercise_2/tables/main_table.tex 2>/dev/null || true
+git rm --quiet module_5/option_b/exercise_2/tables/robustness_table.tex 2>/dev/null || true
+git rm --quiet module_5/option_b/exercise_2/figures/fx_rate_figure.png 2>/dev/null || true
+
 # Remove slide source files and images (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true
 git ls-files slides/ | grep -v '\.pdf$' | xargs -r git rm --quiet 2>/dev/null || true
