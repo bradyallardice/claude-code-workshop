@@ -62,6 +62,22 @@ git rm --quiet module_8/scripts/api_template.py 2>/dev/null || true
 git rm --quiet module_3/output/merged_survey.csv 2>/dev/null || true
 git rm --quiet module_3/output/robustness_table.png 2>/dev/null || true
 git rm --quiet module_3/output/robustness_table.tex 2>/dev/null || true
+git rm --quiet module_3/output/fx_rate_figure.png 2>/dev/null || true
+git rm --quiet module_3/output/main_table.tex 2>/dev/null || true
+git rm --quiet module_3/output/summary_stats.tex 2>/dev/null || true
+
+# Remove teacher-only figure generation script
+git rm --quiet module_3/scripts/generate_fx_figure.py 2>/dev/null || true
+
+# Module 5: remove instructor-only demo code, data, and docs
+git rm -r --quiet module_5/code/ 2>/dev/null || true
+git rm -r --quiet module_5/data/ 2>/dev/null || true
+git rm --quiet module_5/docs/methods_paragraph.md 2>/dev/null || true
+
+# Module 5 Option B: remove the instructor demo folder and reference paper
+git rm -r --quiet module_5/option_b/exercise_2/demo/ 2>/dev/null || true
+git rm --quiet module_5/option_b/exercise_2/paper.tex 2>/dev/null || true
+git rm --quiet module_5/option_b/exercise_2/paper.pdf 2>/dev/null || true
 
 # Remove slide source files and images (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true
