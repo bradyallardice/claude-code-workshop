@@ -54,5 +54,5 @@ print("\n=== INCOME QUINTILE = 0 ===")
 print(f"Respondents with income_quintile = 0: {(merged['income_quintile'] == 0).sum()}")
 
 # ── Save ─────────────────────────────────────────────────────────
-merged.to_csv("module_3/output/merged_survey.csv", index=False)
-print("\nSaved merged data to module_3/output/merged_survey.csv")
+merged.to_csv("module_5/option_b/output/merged_survey.csv", index=False)
+print("\nSaved merged data to module_5/option_b/output/merged_survey.csv")
