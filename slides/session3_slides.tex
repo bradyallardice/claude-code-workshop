@@ -899,49 +899,66 @@ We use a survey of 2,044 Polish adults...
   Everything is visible to Claude Code.}
 \end{frame}
 
-\begin{frame}{Exercise Part 3: Build a \LaTeX{} Document (30 min)}
-  \textbf{Choose your adventure:}
+\begin{frame}{Exercise Part 3: Choose Your Adventure}
   \begin{itemize}
-    \item \textbf{Option A:} Use \textbf{your own work} --- a current or recent research project with tables and figures you already have
-    \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_3/}) with FX data, summary stats, main table, and robustness table
+    \item \textbf{Option A:} Use \textbf{your own work} --- a current or recent research project with data, code, and outputs you already have
+    \item \textbf{Option B:} Use the \textbf{provided project} (\texttt{module\_5/option\_b/}) with data, scripts, and a skeleton to fill in
   \end{itemize}
 
   \vspace{1em}
-  \textbf{Your goal:} Build out two sections of a paper --- \textbf{Data} and \textbf{Results}.
+  \textbf{Two exercises:}
+  \begin{enumerate}
+    \item \textbf{Exercise 1:} Practice git --- modify scripts, create a new one, generate your outputs
+    \item \textbf{Exercise 2:} Use those outputs to build a \LaTeX{} paper
+  \end{enumerate}
 
   \vspace{1em}
-  \begin{enumerate}
-    \item \textbf{Commit} your current state (the habit starts now)
+  \alert{Commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide.} You should be committing throughout both exercises.
+\end{frame}
 
-    \vspace{0.4em}
-    \item \textbf{Data section:} Ask Claude Code to
-    \begin{itemize}
-      \item Write text describing the data
-      \item Include one descriptive figure\\
-      (Option B: the FX exchange rate over time, \texttt{fx\_rate\_figure.png})
-    \end{itemize}
+\begin{frame}{Exercise 1: Practice Git, Generate Outputs (20 min)}
+  \textbf{Option B:} You have three scripts in \texttt{module\_5/option\_b/exercise\_1/}:
+  \begin{itemize}
+    \item \texttt{solution\_merge.py} --- merges survey with demographics
+    \item \texttt{solution\_estimate.py} --- main regression, summary stats
+    \item \texttt{solution\_robustness.py} --- robustness checks
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{Your tasks:}
+  \begin{enumerate}
+    \item \textbf{Commit} your starting state
+    \item \textbf{Modify} something in \texttt{solution\_estimate.py} or \texttt{solution\_robustness.py} --- add a variable to the summary table, change a specification, rename something. \textbf{Diff, commit, revert} as you go.
+    \item \textbf{Ask Claude Code} to create a new \texttt{generate\_fx\_figure.py} script that plots the CHF/PLN exchange rate from \texttt{data/PLN\_CHF\_EUR\_FXdata.csv} over time
+    \item \textbf{Run all four scripts} --- outputs should appear in \texttt{exercise\_2/tables/} and \texttt{exercise\_2/figures/}
+    \item \textbf{Commit} the generated outputs
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Exercise Part 3: Build a \LaTeX{} Document (cont.)}
+\begin{frame}{Exercise 2: Build the Paper (30 min)}
+  Your goal: build two sections --- \textbf{Data} and \textbf{Results} --- using the outputs you just generated.
+
+  \vspace{0.5em}
   \begin{enumerate}
-    \setcounter{enumi}{2}
-    \item \textbf{Results section:} Ask Claude Code to include three tables, each with a paragraph of text describing what it shows:
+    \item \textbf{Data section:} Ask Claude Code to
     \begin{itemize}
-      \item Summary statistics (\texttt{summary\_stats.tex})
-      \item Main results (\texttt{main\_table.tex})
-      \item Robustness (\texttt{robustness\_table.tex})
+      \item Write text describing the data
+      \item Include your FX figure via \texttt{\textbackslash includegraphics\{figures/fx\_rate\_figure.png\}}
     \end{itemize}
 
-    \vspace{0.6em}
+    \vspace{0.3em}
+    \item \textbf{Results section:} Include three tables, each with a paragraph of text:
+    \begin{itemize}
+      \item Summary statistics, main results, robustness
+      \item Pull them in with \texttt{\textbackslash input\{tables/...\}}
+    \end{itemize}
+
+    \vspace{0.3em}
     \item \textbf{Compile} to PDF, fix errors with Claude Code, then \textbf{diff and commit}
 
-    \vspace{0.6em}
-    \item \textbf{Ask Claude Code} to check your text against the actual code. Does what you wrote match what the code does?
+    \vspace{0.3em}
+    \item \textbf{Ask Claude Code} to check your text against your (possibly modified) scripts. Does the paper match what the code actually does?
   \end{enumerate}
-
-  \vspace{1em}
-  \alert{You are now using git and \LaTeX{} together.} Every change to the paper is tracked.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
