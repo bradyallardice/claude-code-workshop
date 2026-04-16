@@ -33,7 +33,7 @@ specs <- list(
   "(1)" = list(formula = as.formula(paste("supports_intervention ~", treat)),
                data = df, wt_col = "survey_weight", label = "Base (weighted)"),
   "(2)" = list(formula = as.formula(paste("supports_intervention ~", treat)),
-               data = df, weights = NULL,            label = "Base (unweighted)"),
+               data = df, wt_col = NULL,            label = "Base (unweighted)"),
   "(3)" = list(formula = as.formula(paste("supports_intervention ~", treat, "+", fx3, "+", demog)),
                data = df, wt_col = "survey_weight", label = "+ Controls"),
   "(4)" = list(formula = as.formula(paste("supports_intervention ~", treat, "+", fx3, "+", full)),
