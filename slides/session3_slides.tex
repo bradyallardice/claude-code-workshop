@@ -330,7 +330,35 @@ git diff
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Command 5: \texttt{git checkout}}
+\begin{frame}[fragile]{Command 5: \texttt{git log}}
+  \textbf{What it does:} Shows you the history of all your commits.
+
+  \vspace{0.5em}
+  \begin{lstlisting}
+git log --oneline
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Output looks like:}
+  \begin{lstlisting}
+a3f7b21 Add robustness checks
+e5c9d04 Clean merge script, verified row counts
+b1a2c33 Initial commit
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Each line is one commit --- one save point
+    \item The letters and numbers on the left are the commit ID
+    \item The message on the right is what you wrote with \texttt{-m}
+    \item Most recent commits are at the top
+  \end{itemize}
+
+  \vspace{0.3em}
+  This is your project's timeline. You can always see what you did and when.
+\end{frame}
+
+\begin{frame}[fragile]{Command 6: \texttt{git checkout}}
   \textbf{What it does:} Undoes changes by restoring files to a previous committed state.
 
   \vspace{0.5em}
@@ -379,34 +407,6 @@ git reflog    # shows every action you've taken
   \begin{alertblock}{This all only works if you committed first}
     Checkout lets you jump between snapshots --- but you need snapshots to jump to. That is why you always commit before instructing Claude Code.
   \end{alertblock}
-\end{frame}
-
-\begin{frame}[fragile]{Command 6: \texttt{git log}}
-  \textbf{What it does:} Shows you the history of all your commits.
-
-  \vspace{0.5em}
-  \begin{lstlisting}
-git log --oneline
-  \end{lstlisting}
-
-  \vspace{0.5em}
-  \textbf{Output looks like:}
-  \begin{lstlisting}
-a3f7b21 Add robustness checks
-e5c9d04 Clean merge script, verified row counts
-b1a2c33 Initial commit
-  \end{lstlisting}
-
-  \vspace{0.5em}
-  \begin{itemize}
-    \item Each line is one commit --- one save point
-    \item The letters and numbers on the left are the commit ID
-    \item The message on the right is what you wrote with \texttt{-m}
-    \item Most recent commits are at the top
-  \end{itemize}
-
-  \vspace{0.3em}
-  This is your project's timeline. You can always see what you did and when.
 \end{frame}
 
 \begin{frame}{Putting It Together: The Cycle}
