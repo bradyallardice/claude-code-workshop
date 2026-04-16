@@ -145,9 +145,9 @@ for var, label in summary_vars.items():
     )
 summary_latex += "\\bottomrule\n\\end{tabular}\n"
 
-with open("module_3/output/summary_stats.tex", "w") as f:
+with open("module_5/option_b/exercise_2/tables/summary_stats.tex", "w") as f:
     f.write(summary_latex)
-print("\n✓ Saved: module_3/output/summary_stats.tex")
+print("\n✓ Saved: module_5/option_b/exercise_2/tables/summary_stats.tex")
 
 # ── Export main regression table ─────────────────────────────────
 def stars(p):
