@@ -31,17 +31,17 @@ full  <- "age + female + ed_level + urban_rural + income_quintile + left_right"
 
 specs <- list(
   "(1)" = list(formula = as.formula(paste("supports_intervention ~", treat)),
-               data = df, weights = "survey_weight", label = "Base (weighted)"),
+               data = df, wt_col = "survey_weight", label = "Base (weighted)"),
   "(2)" = list(formula = as.formula(paste("supports_intervention ~", treat)),
                data = df, weights = NULL,            label = "Base (unweighted)"),
   "(3)" = list(formula = as.formula(paste("supports_intervention ~", treat, "+", fx3, "+", demog)),
-               data = df, weights = "survey_weight", label = "+ Controls"),
+               data = df, wt_col = "survey_weight", label = "+ Controls"),
   "(4)" = list(formula = as.formula(paste("supports_intervention ~", treat, "+", fx3, "+", full)),
-               data = df, weights = "survey_weight", label = "Full controls"),
+               data = df, wt_col = "survey_weight", label = "Full controls"),
   "(5)" = list(formula = as.formula(paste("supports_intervention ~ any_info +", fx3, "+", demog)),
-               data = df, weights = "survey_weight", label = "Pooled treatment"),
+               data = df, wt_col = "survey_weight", label = "Pooled treatment"),
   "(6)" = list(formula = as.formula(paste("supports_intervention ~", treat, "+", fx3, "+", demog)),
-               data = df %>% filter(urban_rural >= 2), weights = "survey_weight", label = "Urban only")
+               data = df %>% filter(urban_rural >= 2), wt_col = "survey_weight", label = "Urban only")
 )
 
 # ── Fit all models ───────────────────────────────────────────────
