@@ -85,6 +85,9 @@ git rm --quiet module_5/option_b/exercise_2/tables/main_table.tex 2>/dev/null ||
 git rm --quiet module_5/option_b/exercise_2/tables/robustness_table.tex 2>/dev/null || true
 git rm --quiet module_5/option_b/exercise_2/figures/fx_rate_figure.png 2>/dev/null || true
 
+# Module 5 Option B output: students generate merged_survey.csv themselves
+git rm --quiet module_5/option_b/output/merged_survey.csv 2>/dev/null || true
+
 # Remove slide source files and images (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true
 git ls-files slides/ | grep -v '\.pdf$' | xargs -r git rm --quiet 2>/dev/null || true
