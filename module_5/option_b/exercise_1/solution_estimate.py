@@ -199,6 +199,6 @@ main_latex += (
     "\\end{tabular}\n"
 )
 
-with open("module_3/output/main_table.tex", "w") as f:
+with open("module_5/option_b/exercise_2/tables/main_table.tex", "w") as f:
     f.write(main_latex)
-print("✓ Saved: module_3/output/main_table.tex")
+print("✓ Saved: module_5/option_b/exercise_2/tables/main_table.tex")
