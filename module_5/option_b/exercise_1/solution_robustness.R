@@ -15,11 +15,12 @@ df$fx_status <- factor(df$fx_status, levels = c("none", "current", "past"))
 df$any_info <- as.integer(df$treatment != "cntrl")
 
 # ── Define specifications ────────────────────────────────────────
-fit_logit <- function(formula, data, weights = NULL) {
-  if (is.null(weights)) {
+fit_logit <- function(formula, data, wt_col = NULL) {
+  if (is.null(wt_col)) {
     glm(formula, data = data, family = binomial())
   } else {
-    glm(formula, data = data, family = binomial(), weights = data[[weights]])
+    w <- data[[wt_col]]
+    glm(formula, data = data, family = binomial(), weights = w)
   }
 }
 
