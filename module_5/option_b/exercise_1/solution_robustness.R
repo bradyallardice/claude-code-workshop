@@ -48,7 +48,7 @@ specs <- list(
 models <- list()
 for (name in names(specs)) {
   spec <- specs[[name]]
-  m <- fit_logit(spec$formula, spec$data, spec$weights)
+  m <- fit_logit(spec$formula, spec$data, spec$wt_col)
   models[[name]] <- m
   cat(sprintf("%s %-20s N=%d\n", name, spec$label, nobs(m)))
 }
