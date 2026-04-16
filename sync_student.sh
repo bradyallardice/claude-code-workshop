@@ -93,7 +93,10 @@ git rm -r --quiet slides/img/ 2>/dev/null || true
 git ls-files slides/ | grep -v '\.pdf$' | xargs -r git rm --quiet 2>/dev/null || true
 
 # Remove old module-numbered slide PDFs (superseded by session-numbered slides)
-git rm --quiet slides/module1_slides.pdf slides/module2_slides.pdf slides/module3_slides.pdf 2>/dev/null || true
+# Use separate rm calls so a missing file doesn't abort removal of the others
+git rm --quiet slides/module1_slides.pdf 2>/dev/null || true
+git rm --quiet slides/module2_slides.pdf 2>/dev/null || true
+git rm --quiet slides/module3_slides.pdf 2>/dev/null || true
 
 # Commit
 git commit -m "Sync student branch from teacher ($(date +%Y-%m-%d))"
