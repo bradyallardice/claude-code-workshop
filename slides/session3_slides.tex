@@ -95,7 +95,7 @@
 
 \end{frame}
 
-\begin{frame}{What I Want to Know}
+\begin{frame}{Check-In: Claude Code in Your Work}
   \begin{itemize}
     \item \textbf{Current usage:} Are you using Claude Code in your work at all?
     \item \textbf{What for:} What kind of tasks?
@@ -331,29 +331,53 @@ git diff
 \end{frame}
 
 \begin{frame}[fragile]{Command 5: \texttt{git checkout}}
-  \textbf{What it does:} Undoes changes by restoring a file to its last committed state.
+  \textbf{What it does:} Undoes changes by restoring files to a previous committed state.
 
   \vspace{0.5em}
-  \textbf{Undo changes to one file:}
+  \textbf{Undo uncommitted changes to one file:}
   \begin{lstlisting}
 git checkout -- scripts/analysis.py
   \end{lstlisting}
 
-  \vspace{0.3em}
-  This throws away all changes to that file since your last commit. The file goes back to exactly how it was.
-
-  \vspace{0.8em}
-  \textbf{Undo all changes (reset everything):}
+  \vspace{0.4em}
+  \textbf{Undo all uncommitted changes:}
   \begin{lstlisting}
 git checkout -- .
   \end{lstlisting}
 
+  \vspace{0.4em}
+  \textbf{Go back several commits (rewind the whole project):}
+  \begin{lstlisting}
+git log --oneline         # find the commit you want
+git checkout <commit-hash>  # jump to that commit
+git checkout main         # come back to the latest
+  \end{lstlisting}
+
   \vspace{0.3em}
-  The \texttt{.} means ``this directory'' --- it reverts every file in your project.
+  Or use \texttt{HEAD\~{}N} to go back \texttt{N} commits from your current position:
+  \begin{lstlisting}
+git checkout HEAD~3    # go back 3 commits
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{git checkout}: Your Undo Button}
+  \textbf{The mental model:}
+  \begin{itemize}
+    \item \texttt{git checkout -- .} \quad\textrightarrow\ undo \textit{uncommitted} work
+    \item \texttt{git checkout <hash>} \quad\textrightarrow\ travel back to any previous commit
+    \item \texttt{git checkout main} \quad\textrightarrow\ return to the latest state
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Recovering if something goes wrong:}
+  \begin{lstlisting}
+git reflog    # shows every action you've taken
+  \end{lstlisting}
+  Even changes you thought were gone are usually recoverable.
 
   \vspace{0.5em}
-  \begin{alertblock}{This is your undo button}
-    Claude Code changed something you did not want? One command and it is gone. This only works if you committed first --- which is why you always commit before instructing.
+  \begin{alertblock}{This all only works if you committed first}
+    Checkout lets you jump between snapshots --- but you need snapshots to jump to. That is why you always commit before instructing Claude Code.
   \end{alertblock}
 \end{frame}
 
@@ -579,7 +603,7 @@ __pycache__/
   \end{itemize}
 
   \vspace{0.5em}
-  Pick one and open it in VS Code. Then proceed to the next slide.
+  Pick one and open it in VS Code.
 \end{frame}
 
 \begin{frame}{Exercise Part 1: Initialize and Commit (10 min)}
