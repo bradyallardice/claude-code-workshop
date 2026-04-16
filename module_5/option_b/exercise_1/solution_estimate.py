@@ -10,7 +10,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 # ── Load merged data ─────────────────────────────────────────────
-df = pd.read_csv("module_3/output/merged_survey.csv")
+df = pd.read_csv("module_5/option_b/output/merged_survey.csv")
 
 # ── Set reference categories explicitly ──────────────────────────
 df["treatment"] = pd.Categorical(
