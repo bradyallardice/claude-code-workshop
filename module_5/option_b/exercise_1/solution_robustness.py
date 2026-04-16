@@ -191,8 +191,8 @@ latex_lines.append(r"\end{table}")
 latex_output = "\n".join(latex_lines)
 
 # Save LaTeX table
-with open("module_3/output/robustness_table.tex", "w") as f:
+with open("module_5/option_b/exercise_2/tables/robustness_table.tex", "w") as f:
     f.write(latex_output)
 
-print("\n\nLaTeX table saved to module_3/output/robustness_table.tex")
+print("\n\nLaTeX table saved to module_5/option_b/exercise_2/tables/robustness_table.tex")
 print("\n" + latex_output)
