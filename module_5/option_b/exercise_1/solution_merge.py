@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 
 # ── Load data ────────────────────────────────────────────────────
-survey = pd.read_csv("module_3/data/swiss_franc_survey.csv")
-demog = pd.read_csv("module_3/data/respondent_demographics.csv")
+survey = pd.read_csv("module_5/option_b/data/swiss_franc_survey.csv")
+demog = pd.read_csv("module_5/option_b/data/respondent_demographics.csv")
 
 print("Survey shape:", survey.shape)
 print("Demographics shape:", demog.shape)
