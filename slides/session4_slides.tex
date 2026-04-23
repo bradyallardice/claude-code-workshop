@@ -100,17 +100,19 @@
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[fragile]{This Is Not Reliable}
-  \textbf{Reasonable assumption:} \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git. Every one of those posts says so.
+\begin{frame}[fragile]{\texttt{.claudeignore}: Works, Sometimes}
+  The natural guess: \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git. A lot of the internet says so.
 
   \vspace{0.8em}
-  I created the file and tested it. Claude Code read right through it --- \texttt{Read}, \texttt{Grep}, and \texttt{Glob} all returned the ``hidden'' files.
+  What the testing actually shows:
+  \begin{itemize}
+    \item If you tell Claude \emph{explicitly} to respect it, it usually does.
+    \item If you don't --- even if it has just read \texttt{.claudeignore} and seen the pattern --- it will read the file anyway.
+    \item There's no tool-level enforcement. It's a polite request that only lands when the model is listening.
+  \end{itemize}
 
-  \vspace{0.8em}
-  \alert{\texttt{.claudeignore} is not a real feature.} Nobody reads the actual docs; one person writes a confident post; everyone cites it. \textbf{An internet-wide hallucination.}
-
-  \vspace{0.8em}
-  It can \emph{appear} to work when Claude happens not to touch the file --- indistinguishable from no ignore at all. That's how the story stays alive.
+  \vspace{0.6em}
+  So it ``works'' the way a sticky note on someone's monitor works: useful, sometimes, for people who happen to read it.
 \end{frame}
 
 \begin{frame}[fragile]{The ``Official'' Answer Doesn't Work Either}
