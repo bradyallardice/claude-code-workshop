@@ -116,18 +116,15 @@
     \column{0.66\textwidth}
     \textbf{GitHub is where code lives on the internet.}
 
-    \vspace{0.3em}
+    \vspace{0.4em}
     Every project is a \emph{repository} --- a folder with all its files plus the full history of every change.
 
-    \vspace{0.5em}
+    \vspace{0.6em}
     \textbf{Two copies of everything:}
     \begin{itemize}
       \item \textbf{Remote} --- the shared version on \texttt{github.com}
       \item \textbf{Local} --- the version on your machine
     \end{itemize}
-
-    \vspace{0.3em}
-    \textbf{Changes flow between them:} \texttt{clone}, \texttt{pull}, \texttt{push}, plus \textbf{branches} and \textbf{pull requests} (PRs) to propose and merge work.
 
     \column{0.30\textwidth}
     \centering
@@ -135,9 +132,27 @@
     \includegraphics[width=0.7\textwidth]{img/github.png}
   \end{columns}
 
-  \vspace{0.6em}
+  \vspace{0.8em}
   \begin{block}{The short version}
     GitHub hosts the \emph{shared} copy. You work on your \emph{local} copy. Git keeps them in sync.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Vocabulary}
+  \textbf{Five words that will keep coming back today:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \textbf{\texttt{clone}} --- make your first local copy of a remote repo
+    \item \textbf{\texttt{pull}} --- fetch the latest changes \emph{from} the remote into your local copy
+    \item \textbf{\texttt{push}} --- send your local changes \emph{to} the remote
+    \item \textbf{branch} --- a parallel line of work inside the repo; changes on a branch don't affect anyone else until it's merged
+    \item \textbf{pull request (PR)} --- a proposal to merge one branch into another, with a page on GitHub for review and discussion
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The flow}
+    \texttt{clone} once. \texttt{pull} before you start. Make a \textbf{branch}, commit, \texttt{push}, open a \textbf{PR}. Someone reviews and merges.
   \end{block}
 \end{frame}
 
