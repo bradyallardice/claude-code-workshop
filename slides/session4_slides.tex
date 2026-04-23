@@ -138,7 +138,10 @@
   \textbf{The catch:} it blocks \texttt{Read}/\texttt{Grep}/\texttt{Glob}, not \texttt{Bash}. A \texttt{cat} or \texttt{head} in a shell command reads the file anyway.
 
   \vspace{0.6em}
-  \textbf{The honest version:} on emerging tools, multiple paths look reasonable and each has gaps. Know the gaps, combine with care. We'll see a stronger mechanism later when we cover \alert{hooks}.
+  \textbf{The honest version:} on emerging tools, multiple paths look reasonable and each has gaps. Know the gaps, combine with care.
+
+  \vspace{0.4em}
+  \alert{For now, the only safe assumption is: if you put it in the project, Claude can read it. Be deliberate about what you give it access to.} We'll see a stronger mechanism when we cover \alert{hooks}.
 \end{frame}
 
 \begin{frame}{Check-In}
