@@ -931,6 +931,40 @@ abstract and any notes I have on it.
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Working With Branches: The Commands}
+  \textbf{The whole branch workflow in four moves:}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Start from an up-to-date main
+git checkout main
+git pull
+
+# 2. Create a new branch and switch to it
+git checkout -b my-branch-name
+
+# 3. Commit as usual (the solo loop still applies)
+git add <files>
+git commit -m "..."
+
+# 4. Push your branch to GitHub (first time uses -u)
+git push -u origin my-branch-name
+# later pushes on the same branch:
+git push
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Seeing and switching between branches:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git branch                    # list branches; * is your current one
+git checkout main             # switch back to main
+git checkout my-branch-name   # switch to an existing branch
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \alert{\small Commit before switching. Uncommitted edits follow you between branches and cause confusion.}
+\end{frame}
+
 \begin{frame}{Exercise: The Collaborative Story}
   \textbf{A shared class repo. You will write one chapter of an episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
 
