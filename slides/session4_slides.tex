@@ -363,14 +363,14 @@ description: Use when generating a
     \vspace{0.3em}
     \begin{enumerate}\small
       \item At session start, Claude sees every skill's \texttt{name} + \texttt{description} --- nothing more
-      \item When a task matches the description, Claude invokes the skill
+      \item \textbf{Two ways to invoke:} Claude auto-calls when a task matches the description, OR you invoke it explicitly (e.g. \texttt{/latex-tables})
       \item The full body of \texttt{SKILL.md} loads into context on demand
       \item Claude follows those instructions
     \end{enumerate}
 
     \vspace{0.3em}
     \begin{block}{\small The key idea}
-      \small The \texttt{description} is the trigger. Write it so Claude can tell \emph{when} this skill applies.
+      \small The \texttt{description} is the trigger for auto-calls. Write it so Claude can tell \emph{when} this skill applies --- or invoke it yourself when you know you want it.
     \end{block}
   \end{columns}
 \end{frame}
