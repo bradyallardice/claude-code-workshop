@@ -74,9 +74,9 @@
   Today you will:
   \begin{enumerate}
     \item Migrate to a cleaner repo workflow (a structural fix, not an agent fix)
-    \item Build a framework for deciding when a \textbf{skill} earns its keep
-    \item Connect two \textbf{MCPs} (Zotero, GitHub) and use them in practice
-    \item Learn when to reach for a \textbf{subagent} --- and when not to
+    \item Learn to route a wish --- is it a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
+    \item Connect two MCPs (Zotero, GitHub) in practice
+    \item See when to reach for a \textbf{subagent} --- and when not to
   \end{enumerate}
 
   \vspace{0.5em}
@@ -194,7 +194,7 @@ cd ~/my_workspace/session_4 && code .
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  PART 2: SKILLS DEEP-DIVE (CENTERPIECE)
+%  PART 2: SKILLS (CENTERPIECE)
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Part 2: Skills}
@@ -207,283 +207,312 @@ cd ~/my_workspace/session_4 && code .
   {\Large Let's figure out which ones survive.}
 
   \vspace{2em}
-  The centerpiece of today.
+  Fifty minutes. The centerpiece of today.
 \end{frame}
 
-% ---- 2a: What skills are + taxonomy ------------------------------
+% ---- 2a: The honest admission -----------------------------------
 
-\begin{frame}{Skills, Defined}
-  \textbf{A skill is a reusable instruction bundle that Claude Code loads when relevant.}
+\begin{frame}{Starting With an Admission}
+  \textbf{I have built four skills:}
 
   \vspace{0.6em}
   \begin{itemize}
-    \item Invoked by name: \texttt{/skill-name}
-    \item Or auto-triggered when the description matches what you are doing
-    \item Lives in \texttt{.claude/skills/<name>/SKILL.md}
-    \item Can include helper scripts alongside the instruction file
+    \item \texttt{auto-commit}
+    \item \texttt{research-docs}
+    \item \texttt{robustness-checks}
+    \item \texttt{spec-validator}
   \end{itemize}
 
   \vspace{0.8em}
-  \textbf{Think of it as:}
+  \textbf{I barely use any of them.}
+
+  \vspace{0.8em}
+  \alert{I'm not teaching you an aspiration. I'm teaching you what I learned from building four things I don't use.}
+\end{frame}
+
+\begin{frame}{Why They Didn't Stick}
+  \textbf{Looking back, what these four have in common:}
+
+  \vspace{0.5em}
   \begin{itemize}
-    \item CLAUDE.md sets \emph{project-wide} conventions. Always on.
-    \item A skill encodes a \emph{specific task}. Loads when you need it.
+    \item Built \emph{on spec} --- ``this would be good to have'' --- not in response to pain
+    \item Flavored toward \emph{generic discipline} --- ``good research practice''
+    \item Not tied to a specific failure mode I actually hit
+    \item Each could be replaced by a prompt the moment I needed it
   \end{itemize}
 
   \vspace{0.5em}
-  \begin{block}{The one-sentence definition}
-    A skill is a named, reusable prompt with enough structure that it's worth loading on demand.
-  \end{block}
-\end{frame}
+  The pattern is predictable once you see it. A skill built on an idea of how research \emph{should} go --- rather than on a pain I kept hitting --- doesn't survive contact with actual work.
 
-\begin{frame}[fragile]{Anatomy of a Skill}
-  A \texttt{SKILL.md} looks like this:
-
-  \vspace{0.2em}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
----
-name: spec-validator
-description: Validate data, variables, and transformations
-  BEFORE estimation. Use when the user is about to run a
-  regression, has loaded data, or mentions specification.
----
-
-# Instructions
-
-Before any estimation, verify:
-1. Variable types match the spec ...
-2. Missing data handling is explicit ...
-3. Sample sizes are reported ...
-[... full instructions ...]
-  \end{lstlisting}
-
-  \vspace{0.2em}
-  \textbf{The description is what earns the skill its load.} Claude Code reads it on every turn and decides whether this skill is relevant.
-
-  \vspace{0.2em}
-  \alert{Specific enough to be useful. Narrow enough not to misfire.}
-\end{frame}
-
-\begin{frame}{Skill vs. Prompt vs. CLAUDE.md}
-  \textbf{The key question:} when is something worth being a skill?
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item \textbf{Just prompt} --- one-off, simple, low stakes.\\
-    {\small Example: ``Rename this variable from \texttt{x} to \texttt{income}.''}
-
-    \vspace{0.3em}
-    \item \textbf{CLAUDE.md entry} --- project-wide convention, always on.\\
-    {\small Example: ``Use pandas for data manipulation.''}
-
-    \vspace{0.3em}
-    \item \textbf{Skill} --- task-specific, recurring, carries non-trivial structure or knowledge.\\
-    {\small Example: ``Before estimation, run these 12 validation checks.''}
-  \end{itemize}
-
-  \vspace{0.8em}
-  \begin{alertblock}{The test question}
-    Would a fresh prompt do this just as well? If yes, it's not a skill --- it's a habit you can write down. If no, ask: what is the skill actually carrying?
+  \vspace{0.4em}
+  \begin{alertblock}{The lesson}
+    Most skills people build get abandoned. The ones that survive are tied to concrete, repeated failure modes or stable conventions.
   \end{alertblock}
 \end{frame}
 
-\begin{frame}{A Taxonomy for Evaluating Skills}
-  \textbf{A skill earns its keep when it is doing one of these things:}
+% ---- 2b: The architecture ---------------------------------------
 
-  \vspace{0.6em}
-  \begin{enumerate}
-    \item \textbf{Domain knowledge} --- encodes facts the model would miss otherwise.\\
-    {\small Discipline-specific conventions, clustering rules, staggered-DiD pitfalls.}
-
-    \vspace{0.3em}
-    \item \textbf{Workflow structure} --- enforces a multi-step procedure you'd otherwise skip steps of.\\
-    {\small A 12-step validation protocol; a structured robustness battery.}
-
-    \vspace{0.3em}
-    \item \textbf{Critique / persona} --- applies a specific lens the model wouldn't spontaneously adopt.\\
-    {\small ``Read this as a skeptical referee.'' ``Audit this for replication errors.''}
-
-    \vspace{0.3em}
-    \item \textbf{Output format} --- produces artifacts with a rigid shape.\\
-    {\small Codebook entries; decision-log lines; LaTeX tables in your house style.}
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \alert{If a skill doesn't fit one of these four boxes, it's probably a habit pretending to be infrastructure.}
-\end{frame}
-
-\begin{frame}{The Test, Concretely}
-  \textbf{For any candidate skill, ask three questions:}
+\begin{frame}{Before You Build a Skill, Ask Where It Belongs}
+  \textbf{Three things look alike but are different tools:}
 
   \vspace{0.8em}
   \begin{enumerate}
-    \item \textbf{Would a fresh prompt produce the same output?}\\
-    {\small If yes $\rightarrow$ not a skill.}
-
-    \vspace{0.4em}
-    \item \textbf{Which taxonomy category is it in?}\\
-    {\small Domain knowledge / workflow / critique / format. If you can't name one, be suspicious.}
-
-    \vspace{0.4em}
-    \item \textbf{Will you actually invoke it?}\\
-    {\small Skills you built and never use are dead weight. They clutter the description-matching space and make other skills worse.}
+    \item \textbf{Skills} --- reusable instruction bundles, loaded on demand
+    \item \textbf{Project context} --- a CLAUDE.md inside your paper's directory
+    \item \textbf{MCPs} --- connections to external systems
   \end{enumerate}
 
   \vspace{1em}
-  \begin{block}{The honest version}
-    Most people build more skills than they need. The discipline isn't in building them --- it's in culling them.
-  \end{block}
-\end{frame}
-
-% ---- 2b: Critique demo (pedagogical heart) ----------------------
-
-\begin{frame}{Demo: Critiquing My Own Skills}
-  \textbf{I'm going to walk through my actual skill list.}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item Some clearly earn their keep --- I will say why.
-    \item Some are marginal --- I will think out loud and let you watch me arrive at an honest answer.
-    \item No skill gets a pass just because I built it.
-  \end{itemize}
-
-  \vspace{0.8em}
-  \alert{This is the exercise I want you to be able to do for your own skills later.}
-
-  \vspace{0.6em}
-  \begin{block}{The stance}
-    You will build skills. Some will be great. Some will be ceremony. The difference between a useful toolkit and a bloated one is whether you're willing to kill your own creations.
-  \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{My Current Skill List}
-  From \texttt{\textasciitilde/.claude/skills/}:
-
-  \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-spec-validator/       Validate data + specs before estimation
-robustness-checks/    Structured robustness battery (panel,
-                      2SLS, DiD, RDD)
-research-docs/        Auto-maintain README + codebook +
-                      decision log
-auto-commit/          Install the auto-commit hook
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  \textbf{Plus a few global ones} (I'll mention but not dissect every one).
-
-  \vspace{0.3em}
-  We'll look at two in detail: one that clearly earns its keep, and one I'm less sure about.
-\end{frame}
-
-\begin{frame}{Earns Its Keep: \texttt{spec-validator}}
-  \textbf{What it does:} before any regression, walks through variable types, value ranges, missingness patterns, merge diagnostics, clustering assumptions, scale mismatches.
-
-  \vspace{0.6em}
-  \textbf{Why it's a skill and not a prompt:}
-  \begin{itemize}
-    \item \textbf{Domain knowledge} --- encodes the dozen silent-error patterns that actually invalidate estimation (NaN coercion, wrong join keys, sample drops, improper clustering).
-    \item \textbf{Workflow structure} --- a 12-step protocol I would skip half of if I prompted ad hoc.
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{The fresh-prompt counterfactual:}
-  \begin{itemize}
-    \item ``Check my data before I run this regression'' misses most of what matters
-    \item A fresh prompt catches maybe 3 of the 12 checks
-  \end{itemize}
-
-  \vspace{0.5em}
-  \begin{block}{Verdict}
-    Earns its keep. Two taxonomy categories. Clear value-added over a prompt.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Marginal Case: \texttt{research-docs}}
-  \textbf{What it claims:} auto-maintain README + codebook + decision log as I work.
+  \textbf{Most wishes of the form \emph{``I wish Claude knew X''} route to one of these three.}
 
   \vspace{0.4em}
-  \textbf{Walking through the test:}
-  \begin{itemize}
-    \item \emph{Fresh-prompt counterfactual:} could I just say ``log this in the codebook''? Mostly yes.
-    \item \emph{Domain knowledge?} A little --- knows what belongs in a codebook vs.\ a README.
-    \item \emph{Workflow structure?} Some --- the three files stay in sync. But that's format, not structure.
-    \item \emph{Will I invoke it?} Honestly... sometimes. Often I just write a note.
-  \end{itemize}
-
-  \vspace{0.3em}
-  \textbf{Thinking out loud:} probably a \emph{format} skill pretending to be a workflow one. Might earn its keep if I used it religiously. I don't.
-
-  \vspace{0.3em}
-  \begin{alertblock}{Honest verdict}
-    Leaning: demote to a CLAUDE.md paragraph and a habit. I'd rather have three skills I use than ten I built.
-  \end{alertblock}
+  Knowing which one saves you from building a skill that should have been something else. It also tells you when a skill is \emph{too narrow} a tool for the job.
 \end{frame}
 
-% ---- 2c: Hands-on ------------------------------------------------
-
-\begin{frame}{Exercise 1: Evaluate Three Skills (8 min)}
-  \textbf{Pairs. I'll put three skill descriptions on the screen.} For each, decide together:
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item \textbf{Keep} --- it clearly fits the taxonomy and they would use it
-    \item \textbf{Kill} --- a fresh prompt would do the same work
-    \item \textbf{Demote} --- it's a CLAUDE.md line or a habit, not a skill
-  \end{itemize}
-
-  \vspace{0.8em}
-  \textbf{For each one, name:}
-  \begin{enumerate}
-    \item Your verdict
-    \item Which taxonomy category (if keep) or why not (if kill/demote)
-  \end{enumerate}
-
-  \vspace{0.8em}
-  We'll share two or three answers as a group.
-
-  \vspace{0.5em}
-  \alert{Disagreement is the point. If everyone agrees, I picked the wrong examples.}
-\end{frame}
-
-\begin{frame}{Exercise 2: Sketch a Skill of Your Own (10 min)}
-  \textbf{Individually, write a four-line spec for one skill you'd actually build for your own research.}
-
-  \vspace{0.6em}
-  \begin{enumerate}
-    \item \textbf{Name}
-    \item \textbf{One-sentence description}
-    \item \textbf{Taxonomy category:} domain knowledge / workflow / critique / format
-    \item \textbf{Why a fresh prompt wouldn't do it just as well}
-  \end{enumerate}
-
-  \vspace{0.8em}
-  A few will share. No coding, no installation. The deliverable is the reasoning.
-
-  \vspace{0.6em}
-  \begin{block}{The bar}
-    If you can justify it under the test question --- ``would a fresh prompt do this just as well?'' --- you have a skill. If you can't, you have a habit. Both are fine. They just live in different places.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Skills: What to Take Away}
-  \textbf{You will leave this session with:}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item A vocabulary: domain knowledge / workflow / critique / format
-    \item A test question: \emph{would a fresh prompt do this just as well?}
-    \item An honest example of a marginal case, from my own toolkit
-    \item One sketch of a skill you could build
-  \end{itemize}
-
+\begin{frame}{The Routing Rule}
+  \centering
   \vspace{1em}
-  \begin{alertblock}{What I did not give you}
-    A step-by-step install guide. Building a working skill is about 15 minutes with the docs once you know you want one. Knowing whether you want one is the hard part --- and that's what today was about.
+  {\Large
+    \textbf{Skills} $\rightarrow$ what's stable \emph{about you}\\[0.7em]
+    \textbf{Projects} $\rightarrow$ what's stable \emph{within a paper}\\[0.7em]
+    \textbf{MCPs} $\rightarrow$ what's \emph{live}
+  }
+
+  \vspace{1.8em}
+  \begin{block}{}
+    If X changes when the project changes, it's not a skill.\\[0.2em]
+    If X is alive in an external system, it's not a skill either.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Rule, Applied}
+  \small
+  \begin{tabular}{@{}p{6.8cm} p{5.8cm}@{}}
+    \toprule
+    \textbf{What you want Claude to know} & \textbf{Where it belongs} \\
+    \midrule
+    Your \LaTeX{} table conventions & Skill (stable about you) \\[0.3em]
+    The variables \& specs of your current paper & Project context (within a paper) \\[0.3em]
+    Your Zotero library & MCP (live external state) \\[0.3em]
+    Your writing voice & Skill (stable about you) \\[0.3em]
+    What your current paper argues & Project context (within a paper) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \begin{block}{Why this matters}
+    Skills are a narrower tool than most people assume. That's a feature --- narrower tools are easier to use well.
+  \end{block}
+\end{frame}
+
+% ---- 2c: Two clusters -------------------------------------------
+
+\begin{frame}{Within Skills: Two Different Jobs}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Verification skills}
+
+    \vspace{0.3em}
+    Fire \emph{during or after} work to check it.
+
+    \vspace{0.3em}
+    \textit{Examples:} LLM-mistake checker, sanity-check validator, replication auditor.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} catching real problems, even if used infrequently.
+
+    \column{0.48\textwidth}
+    \textbf{Production skills}
+
+    \vspace{0.3em}
+    Fire \emph{during the making} of something to shape it.
+
+    \vspace{0.3em}
+    \textit{Examples:} \LaTeX{} table skill, writing-style skill.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} frequency --- every table, every document.
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Why the distinction matters}
+    ``Is this worth it?'' has a different answer for each. Verification skills need to catch high-cost errors. Production skills need to fire often.
   \end{alertblock}
+\end{frame}
+
+% ---- 2d: The heuristic ------------------------------------------
+
+\begin{frame}{The Heuristic}
+  \centering
+  \vspace{1em}
+  {\Large Skills are for \textbf{conventions}\\[0.4em]
+  you hold about how to do\\[0.4em]
+  a thing correctly.}
+
+  \vspace{1.2em}
+  \small
+  Conventions about table formatting. About sanity-checking data.\\[0.1em]
+  About responding to reviewers. About engaging with the literature.
+
+  \vspace{0.8em}
+  \normalsize
+  \alert{If what you want to codify isn't a convention, it's probably not a skill.}
+\end{frame}
+
+% ---- 2e: Worked example: LaTeX table skill ----------------------
+
+\begin{frame}{The One I Actually Use: \LaTeX{} Tables}
+  \textbf{Failure mode it addresses:}
+
+  \vspace{0.2em}
+  Every table I generate needs two or three rounds of formatting before it's submission-ready. Same rounds, every time.
+
+  \vspace{0.5em}
+  \textbf{Conventions the skill encodes:}
+  \begin{itemize}
+    \item Significance notation (stars vs.\ p-values; thresholds; footnote placement)
+    \item Standard-error style (robust, clustered, which level to display)
+    \item Table-notes format (variable definitions, sample restrictions)
+    \item Override conditions for journal-specific requirements
+  \end{itemize}
 
   \vspace{0.4em}
-  {\small Pointer to the docs: \url{https://docs.claude.com/en/docs/claude-code/skills}}
+  \begin{block}{Why this is a convention, not a prompt}
+    Re-specifying these rules every time is expensive. The conventions are stable. They're about me, not about the paper.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Where It Helped (This Past Week)}
+  \textbf{Concrete example:}
+
+  \vspace{0.3em}
+  Regenerated three robustness tables after a referee asked for a different clustering structure. With the skill, each table came out consistent with my house style on the first pass --- notes, significance stars, SE labels all in place.
+
+  \vspace{0.6em}
+  \textbf{What the skill saved:}
+  \begin{itemize}
+    \item Roughly 15 minutes per table of formatting fixes
+    \item Zero context-switching between ``what did I format like last time?'' and the actual analysis
+    \item Consistency across tables in the same paper --- something I'd drift on manually
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{Small per-use savings. But tables compound --- every paper has many.}
+\end{frame}
+
+\begin{frame}{Where It Fell Short (And What I'd Change)}
+  \textbf{Where it fired wrong:}
+  \begin{itemize}
+    \item Over-eager on notes --- added full table notes when I wanted the slide version
+    \item Didn't know the target journal's specific significance conventions until I told it
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{What I'd change:}
+  \begin{itemize}
+    \item Explicit trigger conditions: paper conventions vs.\ slide conventions
+    \item A one-line journal-override mechanism at the top of the skill
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{alertblock}{The point}
+    Skills are empirical artifacts. You build them, fail at them, refine them. The \LaTeX{} skill is on version three.
+  \end{alertblock}
+\end{frame}
+
+% ---- 2f: Probationary skills ------------------------------------
+
+\begin{frame}{Four More I've Built. Not Yet Trialed.}
+  \textbf{Explicitly a different bucket from the \LaTeX{} skill:}
+
+  \vspace{0.6em}
+  \begin{enumerate}
+    \item \textbf{LLM-mistake checker} --- catches the class of errors Claude systematically makes (silent NaN drops, wrong merge keys, ignored clustering)
+    \item \textbf{Sanity-check validator} --- fires on freshly-loaded data to verify ranges, types, and counts match expectations
+    \item \textbf{Testing-philosophy skill} --- prevents over-mocked tests that pass but don't catch real bugs
+    \item \textbf{[Fourth: to be decided before class]}
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \alert{These I built. I'll trial each once before class. But none are yet validated by real use.}
+\end{frame}
+
+\begin{frame}{Why I Think These Might Stick}
+  \textbf{What's different from the earlier four:}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Each is tied to a \emph{specific LLM failure mode}, not generic ``good practice''
+    \item Each is a \emph{verification skill} --- fires when there's a concrete question (``is this code right?'' ``is this data clean?''), not when I'm ambiently ``doing research''
+    \item The trigger condition for each is sharp --- I can picture the moment I'd reach for it
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{What I'm waiting to learn:}
+
+  \vspace{0.2em}
+  Whether they fire at the right moments --- or whether the description matching misses the cases that actually matter.
+
+  \vspace{0.4em}
+  \begin{block}{Place your bets}
+    Which of the four survives three months? I'll report back in a later class.\\
+    Skill adoption is empirical, not theoretical.
+  \end{block}
+\end{frame}
+
+% ---- 2g: Hands-on -----------------------------------------------
+
+\begin{frame}{Exercise: Generate a Candidate (10 min)}
+  \textbf{Pairs.} Each of you names one concrete moment, in the last two weeks, where:
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item You wished Claude had already known something, \textbf{or}
+    \item You retyped context you'd typed before
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Partner helps you decide:}
+  \begin{enumerate}
+    \item Is this a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
+    \item If a skill: is it a \textbf{convention}?
+    \item Is it \textbf{verification} or \textbf{production}?
+    \item What \textbf{specific failure mode or convention} does it address?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Deliverable}
+  \textbf{One candidate skill, with a one-sentence justification.}
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \textbf{What:} a name and a one-sentence description
+    \item \textbf{Why it's a skill:} not a project artifact, not an MCP
+    \item \textbf{What it addresses:} a named failure mode or convention
+  \end{itemize}
+
+  \vspace{0.7em}
+  Two or three pairs share out.
+
+  \vspace{0.7em}
+  \begin{alertblock}{The goal}
+    Not that you leave having built a skill. That you leave able to recognize when a candidate is worth building --- and when it isn't. So you don't repeat my four-built-none-used pattern.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Skills: The Arc}
+  \begin{enumerate}
+    \item Skills get abandoned when they're built on spec, not on pain
+    \item Before building, \textbf{route:} stable-about-you, stable-within-a-paper, or live?
+    \item Within skills, ask: \textbf{verification} or \textbf{production}?
+    \item Skills are for \textbf{conventions} about how to do a thing correctly --- not for good intentions
+    \item Skills are \textbf{empirical}: build, fail, refine
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{The durable takeaway}
+    If what you want to codify is a convention about how \emph{you} do a thing correctly, and it doesn't live inside a paper or an external system --- then maybe it's a skill. Otherwise it's something else. And that's a feature.
+  \end{block}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -496,7 +525,11 @@ auto-commit/          Install the auto-commit hook
   {\Large Connecting Claude Code\\[0.3em]
   to systems outside your project.}
 
-  \vspace{2em}
+  \vspace{1.5em}
+  {\small From the routing rule: \emph{MCPs are for what's live.}\\
+  Here are two live things worth connecting.}
+
+  \vspace{1.5em}
   Forty-five minutes. Two MCPs. One pair exercise.
 \end{frame}
 
@@ -523,7 +556,7 @@ auto-commit/          Install the auto-commit hook
 \end{frame}
 
 \begin{frame}{The Two-Reason Rule}
-  \textbf{Build or adopt an MCP for exactly one of two reasons:}
+  \textbf{Once you've routed something to an MCP, ask: which of two reasons?}
 
   \vspace{0.6em}
   \begin{enumerate}
@@ -817,17 +850,17 @@ sentence citing each in methods.tex.
   \begin{enumerate}
     \item \textbf{A cleaner workflow.} You're working in your own workspace. No more merge conflicts against the shared repo.
 
-    \vspace{0.4em}
-    \item \textbf{A framework for skills.} Four categories, one test question. Enough to decide what earns a skill and what's just a habit.
+    \vspace{0.3em}
+    \item \textbf{A framework for skills.} A routing rule (stable-about-you / within-a-paper / live) plus the honest view: skills are empirical, and most get abandoned.
 
-    \vspace{0.4em}
+    \vspace{0.3em}
     \item \textbf{Two MCPs on your map.} Zotero (friction) and GitHub (capability). The two-reason rule to evaluate others.
 
-    \vspace{0.4em}
+    \vspace{0.3em}
     \item \textbf{An honest view of subagents.} Know they exist. Know the shape of problem they solve. Don't reach for them until your problem has that shape.
   \end{enumerate}
 
-  \vspace{0.8em}
+  \vspace{0.6em}
   \begin{block}{The thread running through}
     Agents solve symptoms well. Your job is to notice when the structure is wrong, when the skill is ceremony, when the MCP is novelty, and when the subagent is overkill.
   \end{block}
@@ -847,11 +880,11 @@ sentence citing each in methods.tex.
   \textbf{Before next session:}
   \begin{enumerate}
     \item \textbf{Install the Zotero MCP} (setup guide linked in the course README)
-    \item \textbf{Skim your own skill list} --- if you have any, run today's test on them
+    \item \textbf{Run the routing test} on one thing you wished Claude already knew --- is it a skill, project context, or MCP?
     \item \textbf{Try one thing from today} on your actual research: a skill, an MCP, or just the new repo workflow
   \end{enumerate}
 
-  \vspace{0.8em}
+  \vspace{0.6em}
   \alert{Bring a question, a frustration, or a small win from the week. Session 5 opens with those.}
 \end{frame}
 
