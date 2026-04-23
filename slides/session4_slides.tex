@@ -1263,34 +1263,18 @@ commit it on a branch, open a PR, and merge it.
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Building a Team of Specialized Agents}
-  \textbf{Named subagents you define once and invoke on demand.} Each has its own scope, system prompt, and tool allowlist --- like a team of focused collaborators.
+\begin{frame}{Coming Next Session}
+  \centering
+  \vspace{2em}
+  {\Large Session 5: \textbf{Building a team of specialized agents}.}
 
-  \vspace{0.4em}
-  \textbf{Define one:} a markdown file at \texttt{\textasciitilde/.claude/agents/<name>.md} (user-level) or \texttt{.claude/agents/<name>.md} (project-level).
+  \vspace{1em}
+  {\large Named subagents you define once and invoke on demand ---\\[0.3em]
+  each with its own scope, tools, and system prompt.}
 
-  \vspace{0.2em}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
----
-name: lit-search
-description: Use for multi-database literature searches on a topic.
-tools: [mcp__zotero__*, WebSearch, WebFetch]
-model: sonnet
----
-You are a literature search specialist. Return a structured
-bibliography with the key claim from each paper.
-  \end{lstlisting}
-
-  \vspace{0.2em}
-  \textbf{Activate it:}
-  \begin{itemize}\small
-    \item Claude reads every agent's \texttt{description} at startup and spawns one when a task matches
-    \item Or invoke it explicitly: \emph{``use the \texttt{lit-search} agent to\ldots''}
-    \item Spawn several in a single message --- they run in parallel
-  \end{itemize}
-
-  \vspace{0.2em}
-  \alert{\small Permissions work as usual: any tools the agent uses need to be allowed in \texttt{.claude/settings.json}.}
+  \vspace{1.5em}
+  A \texttt{lit-search} agent. A \texttt{robustness-check} agent. A \texttt{draft-reviewer} agent.\\[0.3em]
+  Running in parallel when the work lets them.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
