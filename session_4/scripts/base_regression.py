@@ -9,6 +9,8 @@ Two models:
 Includes step-by-step data validation, sample size reporting, and model summaries.
 """
 
+import os
+
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
