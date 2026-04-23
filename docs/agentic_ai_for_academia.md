@@ -1,6 +1,6 @@
 # Ten Ways to Use Agentic AI in Academic Research
 
-Short, standalone blurbs describing concrete uses for AI coding agents (Claude Code, Cursor, and similar) in academic work — the kinds of tasks covered in the workshop.
+Short, standalone blurbs describing concrete uses for AI coding agents (Claude Code, Cursor, and similar) in academic work: the kinds of tasks covered in the workshop.
 
 ## 1. Literature triage and synthesis
 

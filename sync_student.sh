@@ -43,13 +43,13 @@ git rm -r --quiet session_1/output/ 2>/dev/null || true
 git rm -r --quiet session_1/data/full/ 2>/dev/null || true
 
 # Remove docs: instructor notes, answer keys, correct prompts, decisions
-git ls-files 'module_*/docs/instructor_notes.md' | xargs -r git rm --quiet 2>/dev/null || true
-git ls-files 'module_*/docs/instructor_answer_key.md' | xargs -r git rm --quiet 2>/dev/null || true
+git ls-files 'session_*/docs/instructor_notes.md' | xargs -r git rm --quiet 2>/dev/null || true
+git ls-files 'session_*/docs/instructor_answer_key.md' | xargs -r git rm --quiet 2>/dev/null || true
 git rm --quiet session_1/docs/demo_prompt_correct.md 2>/dev/null || true
 git rm --quiet session_1/docs/decisions.md 2>/dev/null || true
 
 # Remove solution scripts
-git ls-files 'module_*/scripts/solution_*.py' | xargs -r git rm --quiet 2>/dev/null || true
+git ls-files 'session_*/scripts/solution_*.py' | xargs -r git rm --quiet 2>/dev/null || true
 
 # Remove teacher-only scripts
 git rm --quiet session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py 2>/dev/null || true
