@@ -1,0 +1,219 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{titling}
+
+\definecolor{headingblue}{RGB}{40,85,140}
+\definecolor{alertred}{RGB}{180,40,40}
+\definecolor{codegray}{RGB}{240,240,240}
+
+\sectionfont{\color{headingblue}\normalsize\bfseries}
+\subsectionfont{\color{headingblue}\small\bfseries}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=headingblue,
+  linkcolor=headingblue
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\newcommand{\cmd}[1]{\par\vspace{0.2em}\colorbox{codegray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\ttfamily\small #1}}\par\vspace{0.2em}}
+\newcommand{\alert}[1]{{\color{alertred}\textbf{\rule[-0.2ex]{0.8ex}{2ex}\ #1}}}
+\newcommand{\plat}[1]{{\color{headingblue}\textbf{#1}}}
+
+\title{\vspace{-2em}\Huge\bfseries Session 4 Pre-Work\\[0.3em]\Large\mdseries\itshape Skills, MCPs, and the Collaborative Story}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-2em}
+\begin{center}
+Instructor: Brady Allardice --- \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu}
+\end{center}
+
+\hrule
+\vspace{0.8em}
+
+Session 4 introduces \textbf{MCPs} --- the way Claude Code talks to systems outside your project. We will use two of them live: \textbf{GitHub} (for a collaborative writing exercise) and \textbf{Zotero} (for a citations demo). Both need to be installed and authenticated before class --- they take 15--20 minutes each and the setup is too fiddly to do in the room.
+
+Please complete \textbf{all six steps} below. Budget \textbf{45--60 minutes total}. If you get stuck for more than 10 minutes, stop and email me --- don't try to debug it yourself. Once you are done, run the verification commands at the end and \textbf{send me a screenshot} of the output \emph{and} your GitHub username (Step 2).
+
+\section*{What You Need Before Starting}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Everything from the original Pre-Workshop Setup Guide working (Claude Code authenticated, VS Code running, Python installed)
+  \item A GitHub account (created during initial setup)
+  \item A free Zotero account --- we'll create one in Step 5 if you don't have one
+\end{itemize}
+
+\alert{If \texttt{claude --version} or \texttt{git --version} doesn't work, fix that first --- these steps assume the original setup is intact.}
+
+\section*{Step 1: Refresh the Course Repo}
+
+I have pushed new material into \texttt{session\_4/}. Pull it down so you have it locally.
+
+Open a terminal, navigate to wherever you cloned the course repo, and run:
+\cmd{git pull}
+
+You should see new files under \texttt{session\_4/}. If \texttt{git pull} fails with a merge conflict, that is exactly the problem we fix in class --- don't try to resolve it. Just email me and I will help you reset cleanly.
+
+\section*{Step 2: Send Me Your GitHub Username}
+
+In Session 4 we run a \textbf{collaborative writing exercise} using a separate class GitHub repository. I need to add each of you as a collaborator before class so you can push branches and open pull requests.
+
+\textbf{Email me your GitHub username} (not your email --- the username, e.g.\ \texttt{octocat}) at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu}. You can find it in the top-right of \textbf{https://github.com} after logging in.
+
+\alert{If I don't have your username before Tuesday evening, you won't be able to participate in the exercise.}
+
+\section*{Step 3: Update Claude Code}
+
+The MCP install commands below assume Claude Code 2.1 or newer. Update to the latest version:
+\cmd{claude update}
+
+Then confirm the version:
+\cmd{claude -\/-version}
+
+\textit{Expected: 2.1.x or higher.}
+
+\section*{Step 4: Install the GitHub MCP}
+
+The GitHub MCP lets Claude Code open pull requests, leave review comments, and create issues directly from the chat. We use it during the collaborative story exercise.
+
+\subsection*{4a. Create a GitHub Personal Access Token}
+
+A Personal Access Token (PAT) is a password-like string that lets the MCP act on your behalf. \textbf{Treat it like a password} --- don't paste it into chat, don't commit it to git.
+
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://github.com/settings/tokens?type=beta}
+  \item Click \textbf{Generate new token}
+  \item \textbf{Token name:} \texttt{claude-code-workshop}
+  \item \textbf{Expiration:} 90 days
+  \item \textbf{Repository access:} ``All repositories'' is fine for the workshop
+  \item \textbf{Repository permissions:} grant \textbf{Read and write} on \emph{Contents}, \emph{Issues}, and \emph{Pull requests}
+  \item Click \textbf{Generate token}, then \textbf{copy the token immediately} --- GitHub will not show it again
+\end{itemize}
+
+Paste it into a temporary scratch file you will delete after Step 4b.
+
+\subsection*{4b. Add the GitHub MCP to Claude Code}
+
+In your terminal, run (replace \texttt{YOUR\_PAT} with the token you just copied):
+\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
+
+Then verify:
+\cmd{claude mcp list}
+
+You should see \texttt{github} in the list with a \texttt{$\checkmark$ Connected} status. \textbf{Now delete the scratch file containing your token.}
+
+\subsection*{4c. Confirm it works}
+Open Claude Code in any directory and ask:
+\cmd{Use the GitHub MCP to list the five most recent public repos owned by my account.}
+
+If it returns a list, you are done. If it asks you to authenticate or returns an error, see Troubleshooting at the end.
+
+\section*{Step 5: Install the Zotero MCP}
+
+The Zotero MCP lets Claude Code search your Zotero library, pull BibTeX, and insert citations into a draft. We use it for a citations demo and you will use it for your own papers afterward.
+
+\subsection*{5a. Make sure you have a Zotero account with items in it}
+
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item If you don't have one, create a free account at \textbf{https://www.zotero.org/user/register}
+  \item Open the Zotero desktop app (or the web library) and confirm you have \textbf{at least 5--10 items} in your library --- if your library is empty, the demo has nothing to search. If it is, drag a few PDFs in or use the browser connector to grab a handful of papers
+\end{itemize}
+
+\subsection*{5b. Get your Zotero API key and Library ID}
+
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.zotero.org/settings/keys}
+  \item Your \textbf{Library ID} (a number, e.g.\ \texttt{1234567}) is shown at the top under ``Your userID for use in API calls''
+  \item Click \textbf{Create new private key}
+  \item \textbf{Key name:} \texttt{claude-code-workshop}
+  \item Check \textbf{Allow library access} (read-only is fine; check write access too if you want Claude to add items)
+  \item Click \textbf{Save Key}, then \textbf{copy the key immediately}
+\end{itemize}
+
+Save both the key and your Library ID into a temporary scratch file.
+
+\subsection*{5c. Install the \texttt{zotero-mcp} package}
+
+\plat{Mac:}
+\cmd{pip install zotero-mcp}
+If \texttt{pip} is not found, use:
+\cmd{pip3 install zotero-mcp}
+
+\plat{Windows:}
+\cmd{py -m pip install zotero-mcp}
+
+Then confirm it installed:
+\cmd{zotero-mcp -\/-help}
+
+\textit{Expected: a help message listing options. If you see ``command not found,'' close and reopen your terminal first.}
+
+\subsection*{5d. Add the Zotero MCP to Claude Code}
+
+Run (substituting your real values from Step 5b):
+\cmd{claude mcp add zotero -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp}
+
+Then verify:
+\cmd{claude mcp list}
+
+You should now see both \texttt{github} and \texttt{zotero} listed with \texttt{$\checkmark$ Connected}. \textbf{Delete the scratch file with your key and Library ID.}
+
+\subsection*{5e. Confirm it works}
+
+Open Claude Code in any directory and ask:
+\cmd{Use the Zotero MCP to list 5 items from my library.}
+
+If it returns a list of titles you recognize, you are done.
+
+\section*{Step 6: Re-Read the Session 3 Git Cycle (5 min)}
+
+Session 4 leans heavily on the Git workflow from Session 3. Spend five minutes re-reading the slides from Session 3 (\texttt{slides/session3\_slides.pdf} in the course repo), specifically the \texttt{commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide} cycle and how branches work. The collaborative story exercise will move faster than this if those concepts are fresh.
+
+\section*{Verification: Confirm Everything Works}
+
+Open a terminal and run each of the following. \textbf{Take a screenshot of the full output and send it to me} along with your GitHub username from Step 2.
+
+\cmd{claude -\/-version}
+\textit{Expected: \texttt{2.1.x} or higher.}
+
+\cmd{claude mcp list}
+\textit{Expected: both \texttt{github} and \texttt{zotero} listed with \texttt{$\checkmark$ Connected}.}
+
+\cmd{zotero-mcp -\/-help}
+\textit{Expected: a help message (any output is fine; ``command not found'' is the failure mode).}
+
+\textbf{Also confirm:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item \texttt{git pull} on the course repo succeeds and you see a \texttt{session\_4/} folder with new content
+  \item Asking Claude Code ``list 5 items from my Zotero library'' returns titles
+  \item Asking Claude Code ``list my five most recent GitHub repos'' returns repo names
+  \item You have emailed me your GitHub username
+\end{itemize}
+
+\section*{Troubleshooting}
+
+\textbf{\texttt{claude mcp add} fails with ``unknown flag'':} You are on an older Claude Code. Run \texttt{claude update} (Step 3) and try again.
+
+\textbf{GitHub MCP shows ``Connected'' but tool calls fail with 401/403:} Your PAT is missing a permission. Regenerate it (Step 4a) and make sure \emph{Contents}, \emph{Issues}, and \emph{Pull requests} are all set to \emph{Read and write}. Then re-run the \texttt{claude mcp add} command --- it will overwrite the existing entry.
+
+\textbf{Zotero MCP shows ``Connected'' but returns empty results:} Your library is genuinely empty, or \texttt{ZOTERO\_LIBRARY\_TYPE} is wrong. If you set up a \emph{group} library instead of a personal one, change \texttt{user} to \texttt{group} in the env var.
+
+\textbf{\texttt{zotero-mcp: command not found} after \texttt{pip install}:} Close and reopen your terminal. If still failing, the install went to a directory not on your PATH --- email me with the output of \texttt{pip show zotero-mcp} and I will help.
+
+\textbf{You accidentally pasted a token into a chat or committed it to git:} Revoke it immediately (GitHub: \textbf{https://github.com/settings/tokens}; Zotero: \textbf{https://www.zotero.org/settings/keys}) and generate a new one. Tokens are easy to rotate; a leaked token in a public repo is not.
+
+\textbf{Anything else:} Email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu}. Do not spend more than 10 minutes troubleshooting on your own. I would much rather help you before the workshop than lose time during it.
+
+\end{document}
