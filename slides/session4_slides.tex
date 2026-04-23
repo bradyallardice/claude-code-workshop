@@ -1020,6 +1020,35 @@ git push -u origin chapter-N
   \alert{After all PRs are merged, I'll run the assembly script and read us the story.}
 \end{frame}
 
+\begin{frame}{What the GitHub MCP Adds on Top}
+  \textbf{You just did the whole collaboration loop with plain git.} The GitHub MCP doesn't replace any of that --- it lets Claude Code \emph{reach} the parts that live on GitHub, not just on your disk:
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item Open a pull request from a branch you've been working on
+    \item Leave review comments on a coauthor's PR
+    \item Create issues to track tasks you don't want to lose
+    \item Push files to a remote repository
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{Why it earns its keep}
+    \textbf{Extend capability.} ``Open a PR'' isn't something Claude Code can do without this. It's a genuine new capability, not a friction fix.
+  \end{block}
+\end{frame}
+
+\begin{frame}{MCP as Helper, Not Substitute}
+  \textbf{The exercise you just did is the backbone.} The MCP is a helper \emph{on top} --- it can open PRs and review them for you, but it doesn't know anything you don't.
+
+  \vspace{0.8em}
+  \begin{alertblock}{The discipline}
+    Use \texttt{git} directly. Reach for the MCP when it genuinely saves steps, or when you're asking Claude to do something that \emph{requires} GitHub access (opening a PR, commenting, creating an issue).
+
+    \vspace{0.4em}
+    When things break, you need to understand what's actually happening --- and the MCP abstracts that away. The students who struggled most in the exercise are the ones who'd struggle most if the MCP hid everything from them.
+  \end{alertblock}
+\end{frame}
+
 \begin{frame}{MCPs: The Meta-Lesson, Again}
   \textbf{GitHub MCP is optional infrastructure. The underlying git workflow is not.}
 
