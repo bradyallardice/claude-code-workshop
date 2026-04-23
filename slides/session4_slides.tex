@@ -948,28 +948,50 @@ git push -u origin my-branch-name
   \alert{\small \texttt{git branch} lists branches (\texttt{*} marks current). Commit before switching --- uncommitted edits follow you between branches.}
 \end{frame}
 
-\begin{frame}{Pull Requests: From Branch to Main}
-  \textbf{Your branch is pushed. A PR is the proposal to merge it into \texttt{main}.}
+\begin{frame}[fragile]{What Is a Pull Request?}
+  \textbf{A pull request (PR) is the proposal to merge one branch into another.} Everyone branches off \texttt{main}, works independently, then opens a PR to rejoin.
 
-  \vspace{0.5em}
-  \textbf{Drafter --- open the PR on GitHub}
-  \begin{enumerate}
-    \item After you push, GitHub shows a yellow banner: \textbf{``Compare \& pull request''}. Click it.
-    \item Check the \textbf{base} is \texttt{main} and the \textbf{compare} is your branch
-    \item Write a short title and description
-    \item Assign your partner as reviewer, then \textbf{Create pull request}
-  \end{enumerate}
+  \vspace{0.6em}
+  \begin{center}
+  \begin{tikzpicture}[
+    scale=0.9, transform shape,
+    mcommit/.style={circle, fill=accent, minimum size=0.22cm, inner sep=0},
+    bcommit/.style={circle, fill=anthropic, minimum size=0.2cm, inner sep=0},
+    mainline/.style={very thick, color=accent},
+    branchline/.style={thick, color=anthropic},
+    lbl/.style={font=\scriptsize\ttfamily},
+    mlbl/.style={font=\tiny\itshape, text=accent}
+  ]
+    \foreach \x in {0, 2, 4.5, 6, 8.5, 10.5} {
+      \node[mcommit] at (\x, 0) {};
+    }
+    \draw[mainline] (0,0) -- (10.5,0);
+    \node[lbl, text=accent, anchor=east] at (-0.15, 0) {\textbf{main}};
 
-  \vspace{0.5em}
-  \textbf{Reviewer --- on the PR page}
-  \begin{enumerate}
-    \item Click \textbf{Files changed} to see the diff
-    \item \textbf{Review changes} $\rightarrow$ \textbf{Approve}
-    \item Once approved: \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm merge}
-  \end{enumerate}
+    \draw[branchline] (2,0) to[out=-30, in=180] (2.8,-1) -- (4,-1) to[out=0, in=210] (4.5, 0);
+    \node[bcommit] at (3.1, -1) {};
+    \node[bcommit] at (3.7, -1) {};
+    \node[lbl, text=anthropic, anchor=north] at (3.4, -1.15) {branch-a};
+    \node[mlbl, anchor=south west] at (4.4, 0.08) {PR + merge};
 
-  \vspace{0.4em}
-  \alert{\small Nothing in \texttt{main} changes until someone clicks Merge. That's the point --- review happens first.}
+    \draw[branchline] (6,0) to[out=30, in=180] (6.8,1) -- (8,1) to[out=0, in=150] (8.5, 0);
+    \node[bcommit] at (7.1, 1) {};
+    \node[bcommit] at (7.7, 1) {};
+    \node[lbl, text=anthropic, anchor=south] at (7.4, 1.15) {branch-b};
+    \node[mlbl, anchor=north west] at (8.4, -0.08) {PR + merge};
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.3em}
+  \textbf{What a PR page gives you:}
+  \begin{itemize}\small
+    \item A diff of every change on the branch (\textbf{Files changed})
+    \item A conversation thread for review, questions, requested changes
+    \item An approve-and-merge button guarded by the reviewer
+  \end{itemize}
+
+  \vspace{0.2em}
+  \alert{\small Nothing in \texttt{main} changes until someone clicks Merge. The PR is the gate.}
 \end{frame}
 
 \begin{frame}{Exercise: The Collaborative Story}
