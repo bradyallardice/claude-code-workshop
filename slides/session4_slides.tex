@@ -111,6 +111,60 @@
   Fifteen minutes. One migration. The meta-lesson for the rest of the session.
 \end{frame}
 
+\begin{frame}{First: What Is GitHub?}
+  \begin{columns}[T]
+    \column{0.62\textwidth}
+    \textbf{GitHub is where code lives on the internet.}
+
+    \vspace{0.5em}
+    Every project is a \emph{repository} (``repo'') --- a folder with all its files, plus the full history of every change.
+
+    \vspace{0.6em}
+    \textbf{Two copies of everything:}
+    \begin{itemize}
+      \item \textbf{Remote} --- the shared version on \texttt{github.com}
+      \item \textbf{Local} --- the version on your machine
+    \end{itemize}
+
+    \vspace{0.4em}
+    \textbf{Changes flow between them:}
+    \begin{itemize}
+      \item \texttt{clone} --- first copy of the remote onto your machine
+      \item \texttt{pull} --- fetch the latest remote changes
+      \item \texttt{push} --- send your local changes to the remote
+      \item \textbf{branches} + \textbf{PRs} --- how people propose and merge work
+    \end{itemize}
+
+    \column{0.34\textwidth}
+    \centering
+    \vspace{1.5em}
+    \includegraphics[width=0.65\textwidth]{img/github.png}
+  \end{columns}
+
+  \vspace{0.4em}
+  \begin{block}{The short version}
+    GitHub hosts the \emph{shared} copy. You work on your \emph{local} copy. Git is the tool that keeps them in sync.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Course Repo}
+  \textbf{Our materials live in one GitHub repo.} Everything I push goes there; everything you pull comes from there.
+
+  \vspace{0.6em}
+  \textbf{Let's look at the page together.} Things to notice:
+  \begin{itemize}
+    \item The \textbf{file tree} --- \texttt{session\_1/}, \texttt{session\_2/}, \ldots, \texttt{session\_4/}
+    \item The \textbf{README} --- what the repo is and how to use it
+    \item The \textbf{commit history} --- every change I've made, with a message
+    \item The \textbf{branches} --- \texttt{main} is the shared one; others are work-in-progress
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{alertblock}{Why this matters for what's next}
+    The issue we hit last session lives exactly here: you and I were both editing files in the \emph{same} repo. To explain what went wrong, we need the picture of where things live.
+  \end{alertblock}
+\end{frame}
+
 \begin{frame}{The Problem We Had}
   \textbf{Every session so far, someone has hit a merge conflict.}
 
