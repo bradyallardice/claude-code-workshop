@@ -115,7 +115,7 @@
   So it ``works'' the way a sticky note on someone's monitor works: useful, sometimes, for people who happen to read it.
 \end{frame}
 
-\begin{frame}[fragile]{The ``Official'' Answer Doesn't Work Either}
+\begin{frame}[fragile]{The Official Approach --- With Real Gaps}
   The docs point you at \texttt{permissions.deny} in \texttt{.claude/settings.json}:
 
   \vspace{0.4em}
@@ -132,10 +132,10 @@
   \end{lstlisting}
 
   \vspace{0.2em}
-  \textbf{But:} it only blocks Claude's \texttt{Read}/\texttt{Grep}/\texttt{Glob}. A \texttt{Bash(cat file)} reads the file anyway. Claude will route around the fence the moment it needs to.
+  \textbf{The catch:} it blocks \texttt{Read}/\texttt{Grep}/\texttt{Glob}, not \texttt{Bash}. A \texttt{cat} or \texttt{head} in a shell command reads the file anyway.
 
   \vspace{0.6em}
-  \textbf{Coming later:} when we cover \alert{hooks}, we'll see a mechanism that actually stops the model from reaching what you want hidden.
+  \textbf{The honest version:} on emerging tools, multiple paths look reasonable and each has gaps. Know the gaps, combine with care. We'll see a stronger mechanism later when we cover \alert{hooks}.
 \end{frame}
 
 \begin{frame}{Check-In}
