@@ -129,10 +129,25 @@ The Zotero MCP lets Claude Code search your Zotero library, pull BibTeX, and ins
 
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
   \item If you don't have one, create a free account at \textbf{https://www.zotero.org/user/register}
-  \item Open the Zotero desktop app (or the web library) and confirm you have \textbf{at least 5--10 items} in your library --- if your library is empty, the demo has nothing to search. If it is, drag a few PDFs in or use the browser connector to grab a handful of papers
+  \item Install the \textbf{Zotero desktop app} from \textbf{https://www.zotero.org/download/} if you don't already have it --- the MCP needs the desktop app running to read your local library (including full-text PDFs)
+  \item Open the desktop app, sign in, and confirm you have \textbf{at least 5--10 items} in your library --- if it's empty, the demo has nothing to search. Drag a few PDFs in or use the browser connector to grab a handful of papers
 \end{itemize}
 
-\subsection*{5b. Get your Zotero API key and Library ID}
+\subsection*{5b. Let Claude Code talk to your Zotero app}
+
+Zotero blocks other applications from connecting by default. Turn that off:
+
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Open the Zotero desktop app
+  \item \plat{Mac:} \textbf{Zotero $\rightarrow$ Settings} \quad \plat{Windows:} \textbf{Edit $\rightarrow$ Settings}
+  \item Go to the \textbf{Advanced} tab
+  \item Under \textbf{General}, check the box \textbf{``Allow other applications on this computer to communicate with Zotero''}
+  \item Close the Settings window. \textbf{Leave Zotero running} --- the MCP needs it open to query your library
+\end{itemize}
+
+\alert{The MCP also falls back to the Zotero Web API if the desktop app is closed, but the local connection is faster and gives Claude Code access to your PDFs --- worth turning on.}
+
+\subsection*{5c. Get your Zotero API key and Library ID}
 
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
   \item Go to \textbf{https://www.zotero.org/settings/keys}
