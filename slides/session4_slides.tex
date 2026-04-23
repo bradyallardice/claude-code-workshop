@@ -550,6 +550,43 @@ description: Use when generating a
   \end{itemize}
 \end{frame}
 
+% ---- 2f3: Worked example ----------------------------------------
+
+\begin{frame}[fragile]{Let's Build One: \texttt{tex-reference-audit}}
+  \textbf{The need:} before submission, I want to know every \texttt{\textbackslash cite}, \texttt{\textbackslash ref}, and \texttt{\textbackslash label} in the manuscript actually resolves.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.50\textwidth}
+    \textbf{What it checks:}
+    \begin{itemize}\footnotesize
+      \item Every \texttt{\textbackslash cite\{key\}} resolves to a \texttt{.bib} entry
+      \item Every \texttt{.bib} entry has required fields (author, year, title, journal, pages\ldots)
+      \item Every \texttt{\textbackslash ref\{label\}} points to an existing \texttt{\textbackslash label}
+      \item Every \texttt{\textbackslash label} is actually referenced (no orphans)
+      \item Figures use \texttt{fig:}, tables use \texttt{tab:}
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Start with the description} --- the trigger:
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+---
+name: tex-reference-audit
+description: Use when reviewing or
+  finalizing a LaTeX manuscript.
+  Audits \cite against the .bib file,
+  \ref/\label pairs for figures and
+  tables, flags missing fields,
+  duplicates, and orphans. Trigger
+  on: "check refs," "audit
+  citations," "review LaTeX."
+---
+    \end{lstlisting}
+
+    \footnotesize Then: a Python script under \texttt{examples/} parses the \texttt{.tex} and \texttt{.bib}, runs the checks, writes a diagnostic report.
+  \end{columns}
+\end{frame}
+
 % ---- 2g: Hands-on -----------------------------------------------
 
 \begin{frame}{Exercise: Generate a Candidate (10 min)}
