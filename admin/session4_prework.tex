@@ -58,14 +58,20 @@ Please complete \textbf{all six steps} below. Budget \textbf{45--60 minutes tota
 
 \alert{If \texttt{claude --version} or \texttt{git --version} doesn't work, fix that first --- these steps assume the original setup is intact.}
 
-\section*{Step 1: Refresh the Course Repo}
+\section*{Step 1: Refresh the Course Repo and Set Up Your Workspace}
 
-I have pushed new material into \texttt{session\_4/}. Pull it down so you have it locally.
+Starting with Session 4 we are switching to a new workflow: the course repo stays \textbf{read-only} on your side, and you do all your actual work in a separate \texttt{\textasciitilde/my\_workspace/} folder. This means I can push new material any time without breaking whatever you have in progress, and you can edit/break/delete freely without worrying about merge conflicts against the shared repo.
 
-Open a terminal, navigate to wherever you cloned the course repo, and run:
-\cmd{git pull}
+\textbf{Run these three commands now}, and plan to run them at the start of every future session too:
 
-You should see new files under \texttt{session\_4/}. If \texttt{git pull} fails with a merge conflict, that is exactly the problem we fix in class --- don't try to resolve it. Just email me and I will help you reset cleanly.
+\cmd{\# 1. Pull the latest course repo\\cd \textasciitilde/claude-code-workshop \&\& git pull\\\\\# 2. Copy today's session folder into your workspace\\mkdir -p \textasciitilde/my\_workspace \&\& cp -r session\_4/ \textasciitilde/my\_workspace/session\_4/\\\\\# 3. Open your copy in VS Code and work there\\cd \textasciitilde/my\_workspace/session\_4 \&\& code .}
+
+\textit{If you cloned the repo somewhere other than \texttt{\textasciitilde/claude-code-workshop} (e.g.\ inside Dropbox or Documents), substitute your actual path in step 1.} If you don't already have the course repo cloned at all, run this first:
+\cmd{cd \textasciitilde \&\& git clone https://github.com/bradyallardice/claude-code-workshop.git}
+
+After Step 2, you should see a \texttt{session\_4/} folder inside \texttt{\textasciitilde/my\_workspace/} containing the new material. After Step 3, VS Code should open in that copy. From now on, \textbf{edit files in \texttt{\textasciitilde/my\_workspace/session\_4/}, not in the course repo itself.}
+
+If \texttt{git pull} fails with a merge conflict, that is exactly the problem we fix in class --- don't try to resolve it. Just email me and I will help you reset cleanly.
 
 \section*{Step 2: Send Me Your GitHub Username}
 
