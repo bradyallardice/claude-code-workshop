@@ -113,10 +113,10 @@
   It can \emph{appear} to work when Claude happens not to touch the file --- indistinguishable from no ignore at all. That's how the story stays alive.
 \end{frame}
 
-\begin{frame}[fragile]{The Official Answer --- for Now}
-  Hide files from Claude's read tools via \texttt{permissions.deny} in \texttt{.claude/settings.json}:
+\begin{frame}[fragile]{The ``Official'' Answer Doesn't Work Either}
+  The docs point you at \texttt{permissions.deny} in \texttt{.claude/settings.json}:
 
-  \vspace{0.6em}
+  \vspace{0.4em}
   \begin{lstlisting}
 {
   "permissions": {
@@ -130,10 +130,10 @@
   \end{lstlisting}
 
   \vspace{0.2em}
-  \textbf{Caveat:} deny rules don't block Bash --- \texttt{cat file} still reads it.
+  \textbf{But:} it only blocks Claude's \texttt{Read}/\texttt{Grep}/\texttt{Glob}. A \texttt{Bash(cat file)} reads the file anyway. Claude will route around the fence the moment it needs to.
 
   \vspace{0.6em}
-  \textbf{Coming later:} when we cover \alert{hooks}, we'll see a cleaner mechanism for controlling what Claude touches and when.
+  \textbf{Coming later:} when we cover \alert{hooks}, we'll see a mechanism that actually stops the model from reaching what you want hidden.
 \end{frame}
 
 \begin{frame}{Check-In}
