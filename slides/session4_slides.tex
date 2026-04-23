@@ -889,45 +889,42 @@ abstract and any notes I have on it.
 \end{frame}
 
 \begin{frame}[fragile]{GitHub's Answer: Branches + PRs}
-  \textbf{Three layers. \texttt{main} is the center. A branch is your lane. The solo loop runs locally on that branch.}
-
-  \vspace{0.3em}
   \begin{center}
   \begin{tikzpicture}[
-    mainnode/.style={draw=accent, very thick, fill=lightgray, rounded corners, minimum width=5.2cm, minimum height=0.8cm, align=center, font=\small\bfseries\ttfamily},
-    branchnode/.style={draw=accent, fill=lightgray, rounded corners, minimum width=5.2cm, minimum height=0.7cm, align=center, font=\small\ttfamily},
-    localnode/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=8.2cm, minimum height=1.4cm, align=center},
-    box/.style={draw=anthropic, fill=white, rounded corners, minimum width=1.5cm, minimum height=0.5cm, align=center, font=\scriptsize\ttfamily},
+    mainnode/.style={draw=accent, very thick, fill=lightgray, rounded corners, minimum width=4.8cm, minimum height=0.7cm, align=center, font=\small\bfseries\ttfamily},
+    branchnode/.style={draw=accent, fill=lightgray, rounded corners, minimum width=4.8cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    localnode/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=7.6cm, minimum height=1.15cm, align=center},
+    box/.style={draw=anthropic, fill=white, rounded corners, minimum width=1.4cm, minimum height=0.45cm, align=center, font=\scriptsize\ttfamily},
     arr/.style={->, thick, color=anthropic},
     arrgh/.style={->, thick, color=accent}
   ]
-    \node[mainnode] (main) at (0,3.9) {GitHub: \texttt{main}};
-    \node[branchnode] (branch) at (0,2.3) {your branch \textit{(origin/my-branch)}};
-    \node[localnode] (local) at (0,0.25) {};
+    \node[mainnode] (main) at (0,3.1) {GitHub: \texttt{main}};
+    \node[branchnode] (branch) at (0,1.9) {your branch \textit{(origin/my-branch)}};
+    \node[localnode] (local) at (0,0.35) {};
 
-    \node[box] (c) at (-2.6, 0.25) {commit};
-    \node[box] (i) at (-0.87, 0.25) {instruct};
-    \node[box] (d) at (0.87, 0.25) {diff};
-    \node[box] (k) at (2.6, 0.25) {keep/revert};
+    \node[box] (c) at (-2.4, 0.3) {commit};
+    \node[box] (i) at (-0.8, 0.3) {instruct};
+    \node[box] (d) at (0.8, 0.3) {diff};
+    \node[box] (k) at (2.4, 0.3) {keep/revert};
     \draw[arr] (c) -- (i);
     \draw[arr] (i) -- (d);
     \draw[arr] (d) -- (k);
-    \draw[arr, rounded corners=4pt] (k.south) -- ++(0,-0.25) -| (c.south);
+    \draw[arr, rounded corners=3pt] (k.south) -- ++(0,-0.2) -| (c.south);
 
-    \node[font=\scriptsize\itshape, text=anthropic, anchor=north west] at ([xshift=0.1cm, yshift=-0.05cm]local.north west) {local};
+    \node[font=\tiny\itshape, text=anthropic, anchor=north west] at ([xshift=0.08cm, yshift=-0.05cm]local.north west) {local};
 
-    \draw[arrgh] ([xshift=-1.5cm]main.south) -- ([xshift=-1.5cm]branch.north) node[midway, left, font=\scriptsize] {new branch};
-    \draw[arrgh] ([xshift=1.5cm]branch.north) -- ([xshift=1.5cm]main.south) node[midway, right, font=\scriptsize] {PR + merge};
-    \draw[arrgh] ([xshift=-1.5cm]branch.south) -- ([xshift=-1.5cm]local.north) node[midway, left, font=\scriptsize] {pull};
-    \draw[arrgh] ([xshift=1.5cm]local.north) -- ([xshift=1.5cm]branch.south) node[midway, right, font=\scriptsize] {push};
+    \draw[arrgh] ([xshift=-1.4cm]main.south) -- ([xshift=-1.4cm]branch.north) node[midway, left, font=\tiny] {new branch};
+    \draw[arrgh] ([xshift=1.4cm]branch.north) -- ([xshift=1.4cm]main.south) node[midway, right, font=\tiny] {PR + merge};
+    \draw[arrgh] ([xshift=-1.4cm]branch.south) -- ([xshift=-1.4cm]local.north) node[midway, left, font=\tiny] {pull};
+    \draw[arrgh] ([xshift=1.4cm]local.north) -- ([xshift=1.4cm]branch.south) node[midway, right, font=\tiny] {push};
   \end{tikzpicture}
   \end{center}
 
-  \vspace{0.2em}
+  \vspace{0.3em}
   \begin{itemize}\small
-    \item \textbf{\texttt{main}} is the shared source of truth. Everyone branches off of it; changes only return via PR + merge.
-    \item \textbf{Your branch} is a parallel lane on GitHub. It exists so your work stays separate until reviewed.
-    \item \textbf{Locally} is where the solo loop keeps running --- on the files of your checked-out branch.
+    \item \textbf{\texttt{main}} is the shared source of truth. Changes only return via PR + merge.
+    \item \textbf{Your branch} is a parallel lane on GitHub --- your work stays separate until reviewed.
+    \item \textbf{Locally} is where the solo loop runs, on the files of your checked-out branch.
   \end{itemize}
 \end{frame}
 
