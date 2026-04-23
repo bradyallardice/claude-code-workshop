@@ -948,6 +948,30 @@ git push -u origin my-branch-name
   \alert{\small \texttt{git branch} lists branches (\texttt{*} marks current). Commit before switching --- uncommitted edits follow you between branches.}
 \end{frame}
 
+\begin{frame}{Pull Requests: From Branch to Main}
+  \textbf{Your branch is pushed. A PR is the proposal to merge it into \texttt{main}.}
+
+  \vspace{0.5em}
+  \textbf{Drafter --- open the PR on GitHub}
+  \begin{enumerate}
+    \item After you push, GitHub shows a yellow banner: \textbf{``Compare \& pull request''}. Click it.
+    \item Check the \textbf{base} is \texttt{main} and the \textbf{compare} is your branch
+    \item Write a short title and description
+    \item Assign your partner as reviewer, then \textbf{Create pull request}
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{Reviewer --- on the PR page}
+  \begin{enumerate}
+    \item Click \textbf{Files changed} to see the diff
+    \item \textbf{Review changes} $\rightarrow$ \textbf{Approve}
+    \item Once approved: \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm merge}
+  \end{enumerate}
+
+  \vspace{0.4em}
+  \alert{\small Nothing in \texttt{main} changes until someone clicks Merge. That's the point --- review happens first.}
+\end{frame}
+
 \begin{frame}{Exercise: The Collaborative Story}
   \textbf{A shared class repo. You will write one chapter of an episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
 
@@ -960,20 +984,7 @@ git push -u origin my-branch-name
   \end{enumerate}
 
   \vspace{0.5em}
-  \alert{Once you vote, I'll demo the whole git workflow --- on a branch --- by making the cast of characters for your story and merging it to \texttt{main}. Then you clone and write.}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \vspace{2em}
-  {\Huge Demo}
-
-  \vspace{1em}
-  {\Large I'll make the characters for your story\\[0.2em] --- on a branch, via PR.}
-
-  \vspace{2em}
-  {\small Watch the branch get created, pushed, opened as a PR,\\
-  reviewed, and merged. Then \texttt{main} has the cast, and you clone from there to write your chapters.}
+  \alert{Once you vote, I'll push the cast of characters for your story to \texttt{main}. Then you clone and write.}
 \end{frame}
 
 \begin{frame}{Your Role, Your Chapter}
