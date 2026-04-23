@@ -590,41 +590,44 @@ description: Use when reviewing
 
 % ---- 2g: Hands-on -----------------------------------------------
 
-\begin{frame}{Exercise: Generate a Candidate (10 min)}
-  \textbf{Pairs.} Each of you names one concrete moment, in the last two weeks, where:
+\begin{frame}{Exercise: Build a Skill (25 min)}
+  \textbf{Working solo. Each of you walks out with one skill installed and tested.}
 
   \vspace{0.5em}
-  \begin{itemize}
-    \item You wished Claude had already known something, \textbf{or}
-    \item You retyped context you'd typed before
-  \end{itemize}
-
-  \vspace{0.8em}
-  \textbf{Partner helps you decide:}
   \begin{enumerate}
-    \item Is this a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
-    \item If a skill: is it a \textbf{convention}?
-    \item Is it \textbf{verification} or \textbf{production}?
-    \item What \textbf{specific failure mode or convention} does it address?
+    \item \textbf{Pick a convention (3 min).} Something you actually did in the last two weeks --- a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
+
+    \vspace{0.2em}
+    \item \textbf{Route it (2 min).} Confirm with your neighbor: is this \emph{really} a skill? Not project context, not an MCP. If a skill, is it \textbf{verification} or \textbf{production}?
+
+    \vspace{0.2em}
+    \item \textbf{Write \texttt{SKILL.md} (10 min).} A clear \texttt{name}, a \texttt{description} that tells Claude \emph{when} to fire, and the instructions for when it does.
+
+    \vspace{0.2em}
+    \item \textbf{Install (1 min).} Save to \texttt{\textasciitilde/.claude/skills/<your-skill>/SKILL.md}.
+
+    \vspace{0.2em}
+    \item \textbf{Try it (9 min).} Open a \emph{fresh} Claude Code session. Ask for a task that should trigger it. If it doesn't fire, the \texttt{description} is wrong --- fix and retry.
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Deliverable}
-  \textbf{One candidate skill, with a one-sentence justification.}
+\begin{frame}[fragile]{Deliverable}
+  \textbf{A working skill, installed and fired at least once.}
 
   \vspace{0.5em}
+  \textbf{What you leave with:}
   \begin{itemize}
-    \item \textbf{What:} a name and a one-sentence description
-    \item \textbf{Why it's a skill:} not a project artifact, not an MCP
-    \item \textbf{What it addresses:} a named failure mode or convention
+    \item A folder at \texttt{\textasciitilde/.claude/skills/<your-skill>/} with a real \texttt{SKILL.md}
+    \item One transcript where Claude triggered the skill on a real task
+    \item One concrete thing you'd change now that you've seen it run
   \end{itemize}
 
-  \vspace{0.7em}
-  Two or three pairs share out.
+  \vspace{0.5em}
+  Two or three people share: \emph{What is it? Did it trigger on the first try? What surprised you?}
 
-  \vspace{0.7em}
+  \vspace{0.5em}
   \begin{alertblock}{The goal}
-    Not that you leave having built a skill. That you leave able to recognize when a candidate is worth building --- and when it isn't. So you don't repeat my four-built-none-used pattern.
+    You leave having built one thing, seen it fire, and learned where the \texttt{description} is too vague or too narrow. That is the empirical loop. Everything else is speculation about skills you haven't tried.
   \end{alertblock}
 \end{frame}
 
