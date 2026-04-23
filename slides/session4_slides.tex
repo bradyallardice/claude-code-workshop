@@ -987,11 +987,11 @@ git push -u origin my-branch-name
   \begin{itemize}\small
     \item A diff of every change on the branch (\textbf{Files changed})
     \item A conversation thread for review, questions, requested changes
-    \item An approve-and-merge button guarded by the reviewer
+    \item A designated \textbf{reviewer} --- whoever the drafter assigns --- who must approve before it can be merged
   \end{itemize}
 
   \vspace{0.2em}
-  \alert{\small Nothing in \texttt{main} changes until someone clicks Merge. The PR is the gate.}
+  \alert{\small On a collaborative repo, every PR has an assigned reviewer. They have to click approve \emph{and} merge --- nothing reaches \texttt{main} until they do.}
 \end{frame}
 
 \begin{frame}{Exercise: The Collaborative Story}
