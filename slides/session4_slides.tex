@@ -531,6 +531,25 @@ description: Use when generating a
   \end{alertblock}
 \end{frame}
 
+% ---- 2f2: How to build one that works ---------------------------
+
+\begin{frame}{How to Build One That Works}
+  \textbf{What separates a skill that fires right from one that sits unused:}
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \textbf{Write the description for the trigger, not the reader.} Claude decides whether to auto-call on the description alone. Name the task, the keywords, and what the skill does \emph{not} handle.
+
+    \item \textbf{Keep it narrow.} One genre of table, one kind of audit, one workflow. Broad skills fire at the wrong moment, or never.
+
+    \item \textbf{Encode your convention, not generic knowledge.} The \texttt{SKILL.md} should capture the judgment calls \emph{you} make. Claude already knows boilerplate.
+
+    \item \textbf{Ship a reference example.} An \texttt{examples/} folder with a real working artifact gives Claude something concrete to pattern-match on.
+
+    \item \textbf{Revise after the first real use.} Version one fires wrong somewhere. Fix the trigger or the instructions, retry.
+  \end{itemize}
+\end{frame}
+
 % ---- 2g: Hands-on -----------------------------------------------
 
 \begin{frame}{Exercise: Generate a Candidate (10 min)}
