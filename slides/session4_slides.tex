@@ -931,51 +931,6 @@ abstract and any notes I have on it.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{The Capability Case: GitHub}
-  \textbf{GitHub MCP lets Claude Code do things you couldn't do by just editing files:}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item Open a pull request from a branch you've been working on
-    \item Leave review comments on a coauthor's PR
-    \item Create issues to track tasks you don't want to lose
-    \item Push files to a remote repository
-  \end{itemize}
-
-  \vspace{0.8em}
-  \textbf{Why now?} This morning's Git restructuring put you in a clean state. You are working in your own workspace. You understand the three states: local copy, pushed branch, shared main. The GitHub MCP is what closes the collaboration loop.
-
-  \vspace{0.5em}
-  \begin{block}{Why it earns its keep}
-    \textbf{Extend capability.} ``Open a PR'' isn't something Claude Code can do without this. It's a genuine new capability, not a friction fix.
-  \end{block}
-\end{frame}
-
-\begin{frame}{The Mental Model}
-  \centering
-  \vspace{0.3em}
-  \begin{tikzpicture}[
-    node distance=0.8cm and 1.2cm,
-    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3.3cm, minimum height=1cm, align=center, font=\small},
-    arr/.style={->, thick, color=accent}
-  ]
-    \node[box] (local) {\textbf{Your local copy}\\ \texttt{\textasciitilde/my\_workspace/...}};
-    \node[box, right=of local] (branch) {\textbf{Your pushed branch}\\ \texttt{origin/your-branch}};
-    \node[box, right=of branch] (main) {\textbf{Shared main}\\ \texttt{origin/main}};
-
-    \draw[arr] (local) -- node[above, font=\tiny] {push} (branch);
-    \draw[arr] (branch) -- node[above, font=\tiny] {PR + merge} (main);
-  \end{tikzpicture}
-
-  \vspace{1em}
-  \textbf{Branches + PRs are the collaboration mechanism.} The GitHub MCP is a \emph{helper} on top --- not a substitute.
-
-  \vspace{0.5em}
-  \begin{alertblock}{The discipline}
-    Use \texttt{git} directly. Use the MCP when you're stuck or when the MCP genuinely saves steps. When things break, you need to understand what's actually happening --- and the MCP abstracts that away.
-  \end{alertblock}
-\end{frame}
-
 \begin{frame}{Exercise: The Collaborative Story}
   \textbf{A shared class repo. You will write one chapter of an episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
 
