@@ -1199,12 +1199,12 @@ commit it on a branch, open a PR, and merge it.
 \begin{frame}{Part 4: Subagents}
   \centering
   \vspace{2em}
-  {\Large Know they exist.\\[0.3em]
-  Know when to reach for them.\\[0.3em]
-  Don't over-invest.}
+  {\Large A focused agent spawned for a bounded job ---\\[0.3em]
+  the right tool for the parallelizable, scoped work\\[0.3em]
+  that already shows up in your pipeline.}
 
   \vspace{2em}
-  Ten minutes. No hands-on.
+  Ten minutes. Concrete patterns.
 \end{frame}
 
 \begin{frame}{What a Subagent Is}
@@ -1214,63 +1214,53 @@ commit it on a branch, open a PR, and merge it.
   \begin{itemize}
     \item It has its own context window
     \item It gets a scoped task and a scoped tool set
-    \item It returns a summary (not its raw output) to your main conversation
+    \item It returns a summary to your main conversation --- not its raw trace
   \end{itemize}
 
   \vspace{0.8em}
-  \textbf{Two values:}
+  \textbf{What that buys you:}
   \begin{enumerate}
-    \item \textbf{Parallelism} --- run three searches at once instead of serially
-    \item \textbf{Context hygiene} --- a big messy search doesn't pollute your main conversation
+    \item \textbf{Parallelism} --- run three searches at once instead of one after the other
+    \item \textbf{Context hygiene} --- a big messy exploration stays out of your main context budget
   \end{enumerate}
 
   \vspace{0.5em}
   \begin{block}{Think of it as}
-    Delegating a bounded sub-task to a fresh colleague who doesn't see your notes --- and who reports back only the conclusion.
+    Delegating a bounded sub-task to a focused colleague who returns a clean, structured answer --- so your main conversation stays on the high-level work.
   \end{block}
 \end{frame}
 
-\begin{frame}{When They Shine --- and When They Don't}
-  \textbf{Subagents help when subtasks are:}
+\begin{frame}{Where Subagents Shine}
+  \textbf{Reach for a subagent when the subtask is:}
   \begin{itemize}
     \item \textbf{Parallelizable} --- independent work that doesn't need to be sequenced
     \item \textbf{Bounded} --- clear inputs, clear outputs, no back-and-forth
-    \item \textbf{Independently verifiable} --- you can check the result without needing the agent's full trace
+    \item \textbf{Independently verifiable} --- you can check the result without reading the full trace
   \end{itemize}
 
-  \vspace{0.6em}
-  \textbf{Research workflows that fit:}
+  \vspace{0.7em}
+  \textbf{Concrete research use cases:}
   \begin{itemize}
-    \item Multi-database literature searches (one agent per database)
-    \item Coding many documents against a fixed rubric
-    \item Parallel robustness checks on independent specifications
-  \end{itemize}
-
-  \vspace{0.6em}
-  \textbf{Research workflows that don't fit:}
-  \begin{itemize}
-    \item Anything sequential and judgment-heavy --- most of your drafting, most of your analysis decisions
-    \item Tasks that depend on your ongoing conversation context (subagents start cold)
+    \item \textbf{Multi-database literature searches} --- one agent per database, all running in parallel
+    \item \textbf{Coding many documents} against a fixed rubric
+    \item \textbf{Parallel robustness checks} across independent specifications
+    \item \textbf{Running the same sanity-check} script over many datasets
+    \item \textbf{Exploring a codebase} --- send a subagent to map out the files, keep the summary in your main context
   \end{itemize}
 \end{frame}
 
-\begin{frame}{The Honest Teaching}
-  \textbf{Most research tasks do not have the shape that makes subagents worth it.}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item Most of what you do is sequential
-    \item Most of your decisions depend on context the subagent won't see
-    \item Most of your verification needs the full trace, not a summary
-  \end{itemize}
+\begin{frame}{Using Subagents Well}
+  \textbf{Three habits that make subagents pay off:}
+  \begin{enumerate}
+    \item \textbf{Brief them like a contractor.} Concrete deliverable, all the context they need up front --- they don't see your conversation history.
+    \item \textbf{Ask for structured output} (bullet list, table, JSON). You'll be consuming the result; make it easy to read and verify.
+    \item \textbf{Verify independently.} You get a summary, not the full trace. Spot-check the way you would a student's work.
+  \end{enumerate}
 
   \vspace{0.8em}
-  \textbf{If your workflow has parallel, independent, verifiable subtasks --- revisit this.} Otherwise, don't over-engineer.
-
-  \vspace{0.8em}
-  \begin{alertblock}{The meta-lesson, one more time}
-    Subagents are genuinely useful for a specific shape of problem. They're also the shiniest thing in the toolkit right now. Asking \emph{``does my problem have that shape?''} is the whole game.
-  \end{alertblock}
+  \begin{block}{The payoff}
+    A literature sweep, robustness battery, or repo survey that would have taken an hour finishes in minutes --- and doesn't eat into your main conversation's context. That's what makes them worth reaching for.
+  \end{block}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
