@@ -1260,4 +1260,114 @@ git checkout chapter-N
   \end{itemize}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  APPENDIX: MERGE CONFLICTS (deeper dive, linked from troubleshooting)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile,label=merge-conflicts]{Anatomy of a Merge Conflict}
+  \textbf{When git can't auto-combine two versions of the same lines, it leaves the file marked up like this:}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+The keynote speaker took the stage.
+<<<<<<< HEAD
+He launched into a 90-minute monologue about LLMs.
+=======
+She fumbled with the slide remote for two full minutes.
+>>>>>>> origin/main
+The audience applauded politely.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Three parts:}
+  \begin{itemize}\footnotesize
+    \item \texttt{<<<<<<< HEAD} --- start of \textbf{your} version (the branch you're on)
+    \item \texttt{=======} --- divider
+    \item \texttt{>>>>>>> origin/main} --- end, plus the name of the \textbf{incoming} version
+  \end{itemize}
+
+  \vspace{0.2em}
+  \alert{Git isn't broken. It just can't tell which version you want --- and is asking you to decide.}
+\end{frame}
+
+\begin{frame}[fragile]{Resolving a Conflict by Hand}
+  \textbf{1. See which files are conflicted.}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git status     # files appear under "both modified"
+  \end{lstlisting}
+
+  \textbf{2. Open each one. Edit until only the version you want remains --- no markers left.}
+
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textit{Before:}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+<<<<<<< HEAD
+He launched into a
+90-min monologue
+about LLMs.
+=======
+She fumbled with the
+slide remote for two
+full minutes.
+>>>>>>> origin/main
+    \end{lstlisting}
+
+    \column{0.48\textwidth}
+    \textit{After (your call --- keep one, the other, or merge them):}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+She fumbled with the
+slide remote for two
+full minutes, then
+launched into a 90-min
+monologue about LLMs.
+    \end{lstlisting}
+  \end{columns}
+
+  \vspace{0.3em}
+  \textbf{3. Stage the file and continue.}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git add chapters/chapter_3.md
+git rebase --continue   # or: git commit (if you were merging)
+  \end{lstlisting}
+
+  {\small \textbf{Want to bail out?} \texttt{git rebase -{}-abort} (or \texttt{git merge -{}-abort}) puts the file back to its pre-conflict state.}
+\end{frame}
+
+\begin{frame}[fragile]{Letting Claude Resolve It}
+  \textbf{Claude Code is good at the mechanical part --- finding the markers and proposing a sensible merge.}
+
+  \vspace{0.3em}
+  A prompt that works:
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+There's a merge conflict in chapters/chapter_3.md.
+Read both sides, propose a resolution that keeps the
+intent of both, and apply it. Show me the diff first
+- do not commit.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Safe to delegate:}
+    \begin{itemize}\footnotesize
+      \item Trivial conflicts (formatting, adjacent edits)
+      \item One side is clearly the newer or correct version
+      \item Prose where the diff is short and you can read it end-to-end
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Do it yourself:}
+    \begin{itemize}\footnotesize
+      \item Code where behavior changes --- you need to understand both sides
+      \item Numerical results, tables, anything you'd want to verify line-by-line
+      \item Conflicts touching more than a handful of files
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.4em}
+  \alert{\small Always read the diff. ``Resolved'' is not the same as ``correct.''}
+\end{frame}
+
 \end{document}
