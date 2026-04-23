@@ -568,22 +568,23 @@ description: Use when generating a
     \end{itemize}
 
     \column{0.48\textwidth}
-    \textbf{Start with the description} --- the trigger:
+    \textbf{The description} --- copy, paste, build live:
     \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 ---
 name: tex-reference-audit
-description: Use when reviewing or
-  finalizing a LaTeX manuscript.
-  Audits \cite against the .bib file,
-  \ref/\label pairs for figures and
-  tables, flags missing fields,
-  duplicates, and orphans. Trigger
-  on: "check refs," "audit
-  citations," "review LaTeX."
+description: Use when reviewing
+  or finalizing a LaTeX manuscript.
+  Audits \cite against the .bib
+  file, \ref/\label pairs for
+  figures and tables, flags
+  missing fields, duplicates, and
+  orphans. Trigger: "check refs,"
+  "audit citations," "review
+  LaTeX."
 ---
     \end{lstlisting}
 
-    \footnotesize Then: a Python script under \texttt{examples/} parses the \texttt{.tex} and \texttt{.bib}, runs the checks, writes a diagnostic report.
+    \footnotesize No script --- the body is just instructions Claude follows to parse, check, and report.
   \end{columns}
 \end{frame}
 
