@@ -1243,29 +1243,23 @@ git push -u origin chapter-N
 \begin{frame}[fragile,label=troubleshooting]{Troubleshooting: When GitHub Fights Back}
   \textbf{Common failure modes during the exercise --- and the fix.}
 
-  \vspace{0.3em}
-  \begin{itemize}\small
-    \item \textbf{Authentication fails on first push.} \\
-    Run \texttt{gh auth login} and pick HTTPS + browser. Install with \texttt{brew install gh} if you don't have it.
+  \vspace{0.2em}
+  \begin{itemize}\footnotesize
+    \item \textbf{Authentication fails on first push.} Run \texttt{gh auth login} and pick HTTPS + browser. (\texttt{brew install gh} first if needed.)
 
-    \item \textbf{``Updates were rejected''} --- \texttt{main} moved while you worked.
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-git pull --rebase origin main && git push
-    \end{lstlisting}
+    \item \textbf{``Updates were rejected''} --- \texttt{main} moved while you worked. \\
+    \texttt{git pull -{}-rebase origin main \&\& git push}
 
-    \item \textbf{Conflict markers (\texttt{<<<<<<<}) in a file.} \\
-    Open it, edit to the version you want, delete the markers. Then \texttt{git add <file>} and \texttt{git rebase --continue} (or \texttt{git commit} if you were merging).
+    \item \textbf{Conflict markers (\texttt{<<<<<<<}) in a file.} Open it, edit to the version you want, delete the markers. Then \texttt{git add <file>} and \texttt{git rebase -{}-continue} (or \texttt{git commit} if merging).
 
-    \item \textbf{You committed to \texttt{main} by accident.} \\
-    Save the work to a new branch, then rewind \texttt{main}:
+    \item \textbf{You committed to \texttt{main} by accident.} Save the work to a new branch, then rewind \texttt{main}:
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 git checkout -b chapter-N
 git checkout main && git reset --hard origin/main
 git checkout chapter-N
     \end{lstlisting}
 
-    \item \textbf{PR opened against the wrong base.} \\
-    Edit the base branch in the GitHub UI at the top of the PR --- no need to close and reopen.
+    \item \textbf{PR opened against the wrong base.} Edit the base branch in the GitHub UI at the top of the PR --- no need to close and reopen.
 
     \item \textbf{Stuck for more than 90 seconds.} Flag me. Don't silently spin --- the fix is usually one command.
   \end{itemize}
