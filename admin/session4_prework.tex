@@ -125,13 +125,32 @@ If it returns a list, you are done. If it asks you to authenticate or returns an
 
 The Zotero MCP lets Claude Code search your Zotero library, pull BibTeX, and insert citations into a draft. We use it for a citations demo and you will use it for your own papers afterward.
 
-\subsection*{5a. Make sure you have a Zotero account with items in it}
+\subsection*{5a. Set up Zotero and import the practice library}
 
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
-  \item If you don't have one, create a free account at \textbf{https://www.zotero.org/user/register}
-  \item Install the \textbf{Zotero desktop app} from \textbf{https://www.zotero.org/download/} if you don't already have it --- the MCP needs the desktop app running to read your local library (including full-text PDFs)
-  \item Open the desktop app, sign in, and confirm you have \textbf{at least 5--10 items} in your library --- if it's empty, the demo has nothing to search. Drag a few PDFs in or use the browser connector to grab a handful of papers
+  \item If you don't have a Zotero account, create a free one at \textbf{https://www.zotero.org/user/register}
+  \item Install the \textbf{Zotero desktop app} from \textbf{https://www.zotero.org/download/} if you don't already have it --- the MCP needs the desktop app running to read your library (including full-text PDFs)
+  \item Open the desktop app and sign in
 \end{itemize}
+
+\textbf{Now import the practice library.} I have prepared a bundle of 10 papers (with PDFs and notes) for the in-class demo. It lives in the course repo at:
+
+\cmd{session\_4/docs/claude\_code\_zotero/}
+
+After running \texttt{git pull} from Step 1, that folder contains a \texttt{claude\_code\_zotero.rdf} file and a \texttt{files/} subfolder of PDFs.
+
+\textbf{To import:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item In the Zotero desktop app, click \textbf{File $\rightarrow$ Import\ldots}
+  \item Choose \textbf{``A file (BibTeX, RIS, Zotero RDF, etc.)''}, click \textbf{Continue}
+  \item Navigate to \texttt{session\_4/docs/claude\_code\_zotero/} and select \texttt{claude\_code\_zotero.rdf}
+  \item On the next screen, check \textbf{``Place imported collections and items into new collection''} and \textbf{``Copy files to the Zotero storage folder''}
+  \item Click \textbf{Continue}
+\end{itemize}
+
+You should end up with a new collection called \texttt{claude\_code\_zotero} in the left sidebar containing 10 items, each with a PDF attached. \textbf{Confirm by clicking on the collection and verifying you see all 10 papers with attachment paperclip icons.}
+
+\alert{Critical:} keep the \texttt{files/} folder \emph{next to} the \texttt{.rdf} on disk during import --- if you move just the .rdf or import it from elsewhere, Zotero will import the metadata but not the PDFs.
 
 \subsection*{5b. Let Claude Code talk to your Zotero app}
 
