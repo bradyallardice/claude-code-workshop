@@ -16,8 +16,8 @@ output="story.md"
   echo ""
   for f in chapters/chapter_*.md; do
     # Skip files that still contain the placeholder comment
-    # (i.e., chapters no pair wrote)
-    if grep -q "Drafter: replace this comment" "$f"; then
+    # (i.e., chapters nobody wrote)
+    if grep -q "Replace this comment with your chapter" "$f"; then
       continue
     fi
     cat "$f"
