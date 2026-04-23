@@ -889,45 +889,45 @@ abstract and any notes I have on it.
 \end{frame}
 
 \begin{frame}[fragile]{GitHub's Answer: Branches + PRs}
-  \textbf{The solo loop still runs --- but on a \emph{branch}. When you're ready to share, three more steps join it:}
+  \textbf{Three layers. \texttt{main} is the center. A branch is your lane. The solo loop runs locally on that branch.}
 
-  \vspace{0.6em}
+  \vspace{0.3em}
   \begin{center}
   \begin{tikzpicture}[
-    node distance=0.45cm and 0.4cm,
-    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=2.2cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
-    ghbox/.style={draw=accent, fill=lightgray, rounded corners, minimum width=2.2cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    mainnode/.style={draw=accent, very thick, fill=lightgray, rounded corners, minimum width=5.2cm, minimum height=0.8cm, align=center, font=\small\bfseries\ttfamily},
+    branchnode/.style={draw=accent, fill=lightgray, rounded corners, minimum width=5.2cm, minimum height=0.7cm, align=center, font=\small\ttfamily},
+    localnode/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=8.2cm, minimum height=1.4cm, align=center},
+    box/.style={draw=anthropic, fill=white, rounded corners, minimum width=1.5cm, minimum height=0.5cm, align=center, font=\scriptsize\ttfamily},
     arr/.style={->, thick, color=anthropic},
     arrgh/.style={->, thick, color=accent}
   ]
-    \node[box] (commit) {commit};
-    \node[box, right=of commit] (instruct) {instruct Claude};
-    \node[box, right=of instruct] (diff) {diff};
-    \node[box, right=of diff] (decide) {keep or revert};
-    \draw[arr] (commit) -- (instruct);
-    \draw[arr] (instruct) -- (diff);
-    \draw[arr] (diff) -- (decide);
-    \draw[arr, rounded corners=6pt] (decide.north) -- ++(0,0.3) -| (commit.north);
+    \node[mainnode] (main) at (0,3.9) {GitHub: \texttt{main}};
+    \node[branchnode] (branch) at (0,2.3) {your branch \textit{(origin/my-branch)}};
+    \node[localnode] (local) at (0,0.25) {};
 
-    \node[ghbox, below=1.4cm of commit] (push) {push};
-    \node[ghbox, right=of push] (pr) {open PR};
-    \node[ghbox, right=of pr] (review) {review};
-    \node[ghbox, right=of review] (merge) {merge to main};
-    \draw[arrgh] (push) -- (pr);
-    \draw[arrgh] (pr) -- (review);
-    \draw[arrgh] (review) -- (merge);
+    \node[box] (c) at (-2.6, 0.25) {commit};
+    \node[box] (i) at (-0.87, 0.25) {instruct};
+    \node[box] (d) at (0.87, 0.25) {diff};
+    \node[box] (k) at (2.6, 0.25) {keep/revert};
+    \draw[arr] (c) -- (i);
+    \draw[arr] (i) -- (d);
+    \draw[arr] (d) -- (k);
+    \draw[arr, rounded corners=4pt] (k.south) -- ++(0,-0.25) -| (c.south);
 
-    \draw[arrgh, rounded corners=6pt] (decide.south) -- ++(0,-0.4) -| (push.north);
+    \node[font=\scriptsize\itshape, text=anthropic, anchor=north west] at ([xshift=0.1cm, yshift=-0.05cm]local.north west) {local};
 
-    \node[left=0.2cm of commit, font=\scriptsize\itshape, anchor=east, text=anthropic] {on your \textbf{branch}};
-    \node[left=0.2cm of push, font=\scriptsize\itshape, anchor=east, text=accent] {on \textbf{GitHub}};
+    \draw[arrgh] ([xshift=-1.5cm]main.south) -- ([xshift=-1.5cm]branch.north) node[midway, left, font=\scriptsize] {new branch};
+    \draw[arrgh] ([xshift=1.5cm]branch.north) -- ([xshift=1.5cm]main.south) node[midway, right, font=\scriptsize] {PR + merge};
+    \draw[arrgh] ([xshift=-1.5cm]branch.south) -- ([xshift=-1.5cm]local.north) node[midway, left, font=\scriptsize] {pull};
+    \draw[arrgh] ([xshift=1.5cm]local.north) -- ([xshift=1.5cm]branch.south) node[midway, right, font=\scriptsize] {push};
   \end{tikzpicture}
   \end{center}
 
-  \vspace{0.4em}
+  \vspace{0.2em}
   \begin{itemize}\small
-    \item \textbf{Branch} = your lane. The whole solo loop happens here; \texttt{main} never sees it until you decide.
-    \item \textbf{Pull request} = the proposal. \emph{``Here are the changes from my branch --- review and merge them into \texttt{main}.''}
+    \item \textbf{\texttt{main}} is the shared source of truth. Everyone branches off of it; changes only return via PR + merge.
+    \item \textbf{Your branch} is a parallel lane on GitHub. It exists so your work stays separate until reviewed.
+    \item \textbf{Locally} is where the solo loop keeps running --- on the files of your checked-out branch.
   \end{itemize}
 \end{frame}
 
