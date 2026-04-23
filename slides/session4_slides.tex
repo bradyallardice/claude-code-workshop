@@ -121,8 +121,8 @@
 \begin{frame}[fragile]{The Official Approach --- With Real Gaps}
   The docs point you at \texttt{permissions.deny} in \texttt{.claude/settings.json}:
 
-  \vspace{0.4em}
-  \begin{lstlisting}
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 {
   "permissions": {
     "deny": [
@@ -135,13 +135,10 @@
   \end{lstlisting}
 
   \vspace{0.2em}
-  \textbf{The catch:} it blocks \texttt{Read}/\texttt{Grep}/\texttt{Glob}, not \texttt{Bash}. A \texttt{cat} or \texttt{head} in a shell command reads the file anyway.
+  \textbf{The catch:} it blocks \texttt{Read}/\texttt{Grep}/\texttt{Glob}, not \texttt{Bash}. A \texttt{cat} in a shell command reads the file anyway.
 
-  \vspace{0.6em}
-  \textbf{The honest version:} on emerging tools, multiple paths look reasonable and each has gaps. Know the gaps, combine with care.
-
-  \vspace{0.4em}
-  \alert{For now, the only safe assumption is: if you put it in the project, Claude can read it. Be deliberate about what you give it access to.} We'll see a stronger mechanism when we cover \alert{hooks}.
+  \vspace{0.3em}
+  \alert{Safe assumption: if it's in the project, Claude can read it. Be deliberate.} Stronger mechanism coming with \alert{hooks}.
 \end{frame}
 
 \begin{frame}{Check-In}
