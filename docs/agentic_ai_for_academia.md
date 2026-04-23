@@ -32,7 +32,7 @@ Lecture slides, problem sets, exam questions, TA guides, syllabi. Agents can ada
 
 ## 8. LaTeX and figure tooling
 
-Regression tables formatted to journal specs, Beamer slide layouts, BibTeX cleanup, tikz diagrams, and debugging the obscure compile errors that appear the morning a submission is due. LaTeX has a steep learning curve and a long tail of weird failure modes — agents are fluent in both and save hours of StackOverflow. The same holds for matplotlib, ggplot, and the unreasonable amount of time academics spend wrestling legends and axis labels.
+Regression tables formatted to journal specs, Beamer slide layouts, BibTeX cleanup, tikz diagrams, and debugging the obscure compile errors that appear the morning a submission is due. LaTeX has a steep learning curve and a long tail of weird failure modes; agents are fluent in both and save hours of StackOverflow. The same holds for matplotlib, ggplot, and the unreasonable amount of time academics spend wrestling legends and axis labels.
 
 ## 9. Research decision logging and replication documentation
 
