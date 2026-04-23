@@ -777,63 +777,104 @@ sentence citing each in methods.tex.
   \end{alertblock}
 \end{frame}
 
-\begin{frame}{Exercise Setup: Collaboration Pairs (5 min)}
-  \textbf{Find a partner.} You will work as a pair for the next 25 minutes.
+\begin{frame}{Exercise: The Collaborative Story}
+  \textbf{A shared class repo. You will write one chapter of a weird, episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
 
-  \vspace{0.6em}
-  \textbf{Each pair gets:} a link to a small template repo with 2--3 editable files and a README explaining the exercise.
-
-  \vspace{0.6em}
-  \textbf{The arc:}
+  \vspace{0.5em}
+  \textbf{Three premises --- we vote on one:}
   \begin{enumerate}
-    \item Fork the template (each of you --- separate forks)
-    \item Each makes a change on your own branch
-    \item Open a PR on your partner's fork
-    \item Partner reviews and merges
+    \item \textbf{The Conference From Hell} --- every session, break, and hallway moment at an academic conference goes sideways
+    \item \textbf{The Dissertation That Wrote Itself} --- a PhD student's dissertation has gained sentience; each chapter is one night of it doing something weirder
+    \item \textbf{The Department Mouse} --- a very literate mouse is stealing specific things from the department; it appears to have a plan
   \end{enumerate}
 
-  \vspace{0.8em}
-  \alert{Use Claude Code + the GitHub MCP to do the PR opening and reviewing. Use \texttt{git} directly for the commits and branches.}
+  \vspace{0.5em}
+  \alert{The writing is short on purpose. The point is the Git workflow, not the prose.}
 \end{frame}
 
-\begin{frame}{Exercise: The PR Loop (20 min)}
-  \textbf{Pair workflow:}
+\begin{frame}{Your Role, Your Chapter}
+  \textbf{Pairs are pre-assigned.} Find yours in \texttt{PAIRS.md} at the root of the class repo.
 
-  \vspace{0.3em}
-  \begin{enumerate}
-    \item \textbf{Fork} the template repo I shared in chat
-    \item \textbf{Clone} your fork to \texttt{\textasciitilde/my\_workspace/}
-    \item \textbf{Branch:} \texttt{git checkout -b my-change}
-    \item \textbf{Edit} one of the files (different files for you and your partner)
-    \item \textbf{Commit + push} the branch
-    \item \textbf{Ask Claude Code} to open a PR using the GitHub MCP:\\[0.2em]
-    \quad \emph{``Open a PR from my-change to main on my fork with title X and body Y.''}
-    \item \textbf{Partner reviews} the PR (also via Claude Code + GitHub MCP) and merges it
-  \end{enumerate}
+  \vspace{0.5em}
+  \textbf{Each pair writes one chapter. Two roles:}
+  \begin{itemize}
+    \item \textbf{Drafter} --- writes the chapter, commits, pushes, opens the PR
+    \item \textbf{Reviewer} --- reads the partner's PR, approves, merges
+  \end{itemize}
 
   \vspace{0.4em}
-  \textbf{Extension, if you finish early:} each edit the \emph{same} file, hit a conflict, resolve it together.
+  Your chapter number is next to your name. The prompt for that chapter is in the winning premise file under \texttt{premises/}.
 
-  \vspace{0.3em}
-  {\small I will circulate. Flag me when you're stuck --- don't silently spin.}
+  \vspace{0.6em}
+  \begin{block}{Ground rules}
+    \begin{itemize}
+      \item \textbf{Length doesn't matter.} A paragraph is fine.
+      \item \textbf{Don't try to match other chapters.} You can't --- everyone is writing simultaneously.
+      \item \textbf{Don't polish.} Five minutes. Write, push, move on.
+      \item \textbf{Weird is the point.}
+    \end{itemize}
+  \end{block}
 \end{frame}
+
+\begin{frame}[fragile]{Reference Card}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+    \textbf{Drafter}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git checkout main && git pull
+git checkout -b chapter-N
+
+# edit chapters/chapter_N.md
+
+git add chapters/chapter_N.md
+git commit -m "Draft chapter N"
+git push -u origin chapter-N
+    \end{lstlisting}
+
+    \vspace{0.2em}
+    Then open the PR. Either:
+    \begin{itemize}\small
+      \item Click the banner on GitHub, base \texttt{main}, assign your partner
+      \item Or ask Claude Code: \emph{``Open a PR from chapter-N to main''}
+    \end{itemize}
+
+    \column{0.46\textwidth}
+    \textbf{Reviewer}
+    \begin{enumerate}\small
+      \item Wait for your partner's PR link
+      \item Open it, click \textbf{Files changed}
+      \item Skim --- if it reads like a chapter, done
+      \item \textbf{Review changes} $\rightarrow$ \textbf{Approve}
+      \item \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm}
+    \end{enumerate}
+
+    \vspace{0.4em}
+    \alert{You are not grading. Approve and merge.}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{block}{Time budget (\textasciitilde{}15 min total)}
+    Vote: 1 min \quad|\quad Draft: 5 min \quad|\quad PR + review + merge: 4--6 min \quad|\quad Assemble: 2 min
+  \end{block}
+\end{frame>
 
 \begin{frame}{What to Expect}
   \textbf{Some pairs will finish. Some will not. Both are fine.}
 
-  \vspace{0.8em}
-  The goal is that \emph{everyone sees the workflow end-to-end}: branch, push, PR, review, merge. Even if you needed help at every step, you will recognize the shape next time.
+  \vspace{0.6em}
+  The goal is that \emph{everyone sees the loop end-to-end}: branch, push, PR, review, merge. Even if you need help at every step, you will recognize the shape next time.
 
-  \vspace{0.8em}
+  \vspace{0.6em}
   \textbf{What will go wrong (for some of you):}
   \begin{itemize}
-    \item The GitHub MCP will ask for a token you don't have. (I have a fallback.)
-    \item The PR will open against the wrong base branch. (Fixable in the UI.)
-    \item Your partner will merge something you weren't ready for. (That's the workflow.)
+    \item \textbf{Push rejected} because \texttt{main} moved. Run \texttt{git pull --rebase origin main} and push again.
+    \item \textbf{PR opened against the wrong base.} Edit the base branch in the GitHub UI, or close and reopen.
+    \item \textbf{GitHub MCP asks for a token} you haven't set up. Use the GitHub UI --- both paths work.
+    \item \textbf{You get stuck for more than 90 seconds.} Flag me. Don't silently spin.
   \end{itemize}
 
-  \vspace{0.8em}
-  \alert{You will practice more of this in Session 5. Today: just get the shape in your head.}
+  \vspace{0.4em}
+  \alert{After all PRs are merged, I'll run the assembly script and read us the story.}
 \end{frame}
 
 \begin{frame}{MCPs: The Meta-Lesson, Again}
