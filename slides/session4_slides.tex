@@ -699,19 +699,50 @@ sentence citing each in methods.tex.
   \alert{Watch the tool calls, not just the output. Seeing which tools fire tells you what the MCP actually does.}
 \end{frame}
 
-\begin{frame}{Where Would This Reduce Friction for You?}
-  \textbf{One minute, with the person next to you:}
+\begin{frame}[fragile]{Exercise: Mini Literature Review (15 min)}
+  \textbf{You installed the Zotero MCP as Session 4 prework and pointed it at the shared group library \texttt{aina-articles} --- recent papers on economic voting.}
 
-  \vspace{0.8em}
-  \begin{itemize}
-    \item Where in your own drafting workflow do you break flow to check Zotero?
-    \item Is it frequent enough that removing the context-switch would actually matter?
-    \item Or is it rare enough that the setup cost isn't worth it?
+  \vspace{0.4em}
+  \textbf{Your task.} Draft a \textbf{five-sentence literature review} on \emph{one} of:
+  \begin{itemize}\small
+    \item How economic conditions shape vote choice
+    \item Whether voters punish incumbents for bad economies
+    \item How economic voting differs across contexts (regimes, institutions, crises)
   \end{itemize}
 
-  \vspace{1em}
-  \begin{alertblock}{You already installed it}
-    The Zotero MCP setup was in your Session 4 prework. If you completed it, the demo you just saw runs on your machine too --- try the same prompt against your own library after class.
+  \vspace{0.3em}
+  \textbf{Rules:}
+  \begin{itemize}\small
+    \item Every sentence cites at least one paper from \texttt{aina-articles}
+    \item Only use cite keys that \emph{actually exist} in the library --- no hallucinations
+    \item Claude does the searching, full-text reading, and drafting
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{Prompt to start from:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Using only papers in my Zotero 'aina-articles' collection, find
+5 relevant to [topic]. Pull the key claim from each full text,
+then draft a 5-sentence lit review with \cite{} for each.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{What to Watch For}
+  \textbf{While the model works, watch the tool calls:}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Did it run \texttt{zotero\_semantic\_search}, or skip search and guess?
+    \item Did it actually pull \texttt{zotero\_get\_item\_fulltext}, or cite from titles alone?
+    \item Do the claims in your sentences match what the papers actually say?
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{After drafting, spot-check one citation.} Open the paper in Zotero. Does the sentence you wrote accurately represent what the paper argues?
+
+  \vspace{0.6em}
+  \begin{alertblock}{The real lesson}
+    An MCP gives Claude \emph{access}. It does not give Claude \emph{judgment}. The failure mode to expect: a plausible sentence citing a paper that says something adjacent --- but not quite that. \textbf{You still read.}
   \end{alertblock}
 \end{frame}
 
