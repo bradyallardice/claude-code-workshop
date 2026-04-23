@@ -934,29 +934,18 @@ abstract and any notes I have on it.
 # 1. Start from an up-to-date main
 git checkout main
 git pull
-
 # 2. Create a new branch
 git branch my-branch-name
-
 # 3. Switch to it
 git checkout my-branch-name
-
-# 4. Commit as usual (the solo loop still applies)
+# 4. Commit
 git add <files>
 git commit -m "..."
-
-# 5. Push to GitHub (first time uses -u; later pushes: git push)
+# 5. Push (first time uses -u; later pushes: git push)
 git push -u origin my-branch-name
   \end{lstlisting}
 
-  \textbf{Seeing and switching between branches:}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-git branch                    # list branches; * is your current one
-git checkout main             # switch back to main
-git checkout my-branch-name   # switch to an existing branch
-  \end{lstlisting}
-
-  \alert{\small Commit before switching. Uncommitted edits follow you between branches.}
+  \alert{\small \texttt{git branch} lists branches (\texttt{*} marks current). Commit before switching --- uncommitted edits follow you between branches.}
 \end{frame}
 
 \begin{frame}
