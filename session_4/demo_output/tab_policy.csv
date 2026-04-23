@@ -1,7 +1,9 @@
 row_type,display_order,spec,dv,dv_label,coef_type,coef,se,pvalue,value_num,value_str,fe_name
 spec_label,1,pooled,,,,,,,,Pooled,
-spec_label,2,by_year,,,,,,,,Year FE,
-spec_label,3,by_year_region,,,,,,,,Year+Region FE,
+spec_label,2,by_year,,,,,,,,Year FE Only,
+spec_label,3,by_year_region,,,,,,,,Year + Region,
+fe_label,1,,,,,,,,,Year FE,year
+fe_label,2,,,,,,,,,Region FE,region
 coefficient,1,pooled,support_policy,Supports Policy,treat,0.150,0.042,0.0004,,,
 coefficient,1,by_year,support_policy,Supports Policy,treat,0.128,0.039,0.0011,,,
 coefficient,1,by_year_region,support_policy,Supports Policy,treat,0.104,0.037,0.0052,,,
