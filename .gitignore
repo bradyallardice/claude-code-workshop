@@ -2,7 +2,7 @@
 admin/lesson_plan.docx
 
 # Large raw IPUMS census files (use sampled versions for git)
-module_1/data/full/ipums/*_raw.csv.gz
+session_1/data/full/ipums/*_raw.csv.gz
 
 # macOS
 .DS_Store

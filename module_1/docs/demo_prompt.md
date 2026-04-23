@@ -1,1 +1,0 @@
-I have county-level presidential election data and IPUMS census microdata in `module_1/data/`. Merge them into a county-year panel with vote shares and demographics. Then do some basic EDA: print summaries, show me the biggest swings across counties and years, and make a few plots showing trends over time. Save everything to `module_1/output/`.

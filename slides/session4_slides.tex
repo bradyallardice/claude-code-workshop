@@ -1,0 +1,1459 @@
+% Session 4: Advanced Claude Code --- Skills, MCPs, Subagents
+% Beamer Presentation --- Claude Code for Academic Researchers
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ── Theme and Colors ──────────────────────────────────────────────
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\definecolor{anthropic}{RGB}{50, 50, 80}
+\definecolor{accent}{RGB}{180, 90, 40}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+\setbeamercolor{structure}{fg=anthropic}
+\setbeamercolor{frametitle}{bg=anthropic, fg=white}
+\setbeamercolor{title}{bg=anthropic, fg=white}
+\setbeamercolor{block title}{bg=anthropic, fg=white}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{alerted text}{fg=accent}
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+
+% ── Packages ──────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{fontenc}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  framerule=0pt,
+  breaklines=true,
+  columns=fullflexible,
+  literate={_}{\_}1,
+}
+
+% ── Metadata ──────────────────────────────────────────────────────
+\title{Session 4: Advanced Claude Code}
+\subtitle{Skills, MCPs, and Subagents}
+\author{Brady Allardice}
+\date{}
+\institute{UPF \& IBEI}
+
+% ══════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHERE WE ARE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Where We Are}
+  \textbf{Session 1:} What Claude Code can do. How it works. CLAUDE.md and plan mode.
+
+  \vspace{0.4em}
+  \textbf{Session 2:} The core workflow. Data cleaning, estimation, robustness, \LaTeX{} tables.
+
+  \vspace{0.4em}
+  \textbf{Session 3:} Git and \LaTeX{} in VS Code. Your paper joins the project.
+
+  \vspace{0.4em}
+  \textbf{Session 4:} The layer above the core workflow --- infrastructure.
+
+  \vspace{1em}
+  Today you will:
+  \begin{enumerate}
+    \item Migrate to a cleaner repo workflow (a structural fix, not an agent fix)
+    \item Learn to route a wish --- is it a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
+    \item Connect two MCPs (Zotero, GitHub) in practice
+    \item See when to reach for a \textbf{subagent} --- and when not to
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Today is about knowing which tool does real work and which is just novelty.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  INTERLUDE: DANGERS OF EMERGING TECHNOLOGIES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Dangers of Emerging Technologies}
+  \vspace{0.6em}
+  \centering
+  \begin{tikzpicture}
+    \node[rotate=5]  at (-1.2, 1.6) {\includegraphics[width=5cm]{img/article_ignore.png}};
+    \node[rotate=-4] at ( 3.2, 0.7) {\includegraphics[width=5cm]{img/reddit_ignore.png}};
+    \node[rotate=6]  at (-3.8,-2.0) {\includegraphics[width=5cm]{img/claude_ignore.png}};
+    \node[rotate=-3] at ( 0.3,-1.5) {\includegraphics[width=5cm]{img/dev_ignore.png}};
+    \node[rotate=8]  at ( 4.2,-2.1) {\includegraphics[width=5cm]{img/gemini_ignore.png}};
+    \node[rotate=-7] at ( 3.8, 1.3) {\includegraphics[width=5cm]{img/git_ignore.png}};
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{.claudeignore}: Works, Sometimes}
+  The \texttt{.ignore} convention is everywhere in software:
+  \begin{itemize}
+    \item \texttt{.gitignore} (git), \texttt{.dockerignore} (Docker)
+    \item \texttt{.npmignore} (npm), \texttt{.eslintignore}, \texttt{.prettierignore}
+    \item \texttt{.gcloudignore}, \texttt{.terraformignore}, and many more
+  \end{itemize}
+  So \texttt{.claudeignore} is a commonly taught, perfectly reasonable extrapolation. You'll see it recommended across blogs, Reddit, and LLM-generated advice.
+
+  \vspace{0.6em}
+  What the testing actually shows:
+  \begin{itemize}
+    \item If you tell Claude \emph{explicitly} to respect it, it usually does.
+    \item If you don't --- even after it reads \texttt{.claudeignore} and sees the pattern --- it will read the file anyway.
+    \item There's no tool-level enforcement. It's a polite request that only lands when the model is listening.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The Official Approach --- With Real Gaps}
+  The docs point you at \texttt{permissions.deny} in \texttt{.claude/settings.json}:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+{
+  "permissions": {
+    "deny": [
+      "Read(session_4/demo_output/tab_policy.*)",
+      "Grep(session_4/demo_output/tab_policy.*)",
+      "Glob(session_4/demo_output/tab_policy.*)"
+    ]
+  }
+}
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \textbf{The catch:} it blocks \texttt{Read}/\texttt{Grep}/\texttt{Glob}, not \texttt{Bash}. A \texttt{cat} in a shell command reads the file anyway.
+
+  \vspace{0.3em}
+  \alert{Safe assumption: if it's in the project, Claude can read it. Be deliberate.} Stronger mechanism coming with \alert{hooks}.
+\end{frame}
+
+\begin{frame}{Check-In}
+  \textbf{Since Session 3:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item Did the git cycle (commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide) stick?
+    \item Did anyone bring their paper into VS Code? How did it feel?
+    \item Any tool fight back at you --- compilation errors, merge conflicts, something else?
+  \end{itemize}
+
+  \vspace{0.8em}
+  Hold onto the merge-conflict stories. We start there.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 1: GIT RESTRUCTURING + META-LESSON
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{First: What Is GitHub?}
+  \begin{columns}[T]
+    \column{0.66\textwidth}
+    \textbf{GitHub is where code lives on the internet.}
+
+    \vspace{0.4em}
+    Every project is a \emph{repository} --- a folder with all its files plus the full history of every change.
+
+    \vspace{0.6em}
+    \textbf{Two copies of everything:}
+    \begin{itemize}
+      \item \textbf{Remote} --- the shared version on \texttt{github.com}
+      \item \textbf{Local} --- the version on your machine
+    \end{itemize}
+
+    \column{0.30\textwidth}
+    \centering
+    \vspace{1em}
+    \includegraphics[width=0.7\textwidth]{img/github.png}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{block}{The short version}
+    GitHub hosts the \emph{shared} copy. You work on your \emph{local} copy. Git keeps them in sync.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Vocabulary}
+  \textbf{Five words that will keep coming back today:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \textbf{\texttt{clone}} --- make your first local copy of a remote repo
+    \item \textbf{\texttt{pull}} --- fetch the latest changes \emph{from} the remote into your local copy
+    \item \textbf{\texttt{push}} --- send your local changes \emph{to} the remote
+    \item \textbf{branch} --- a parallel line of work inside the repo; changes on a branch don't affect anyone else until it's merged
+    \item \textbf{pull request (PR)} --- a proposal to merge one branch into another, with a page on GitHub for review and discussion
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The flow}
+    \texttt{clone} once. \texttt{pull} before you start. Make a \textbf{branch}, commit, \texttt{push}, open a \textbf{PR}. Someone reviews and merges.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Course Repo}
+  \textbf{Our materials live in one GitHub repo.} Everything I push goes there; everything you pull comes from there.
+
+  \vspace{0.6em}
+  \textbf{Let's look at the page together.} Things to notice:
+  \begin{itemize}
+    \item The \textbf{file tree} --- \texttt{session\_1/}, \texttt{session\_2/}, \ldots, \texttt{session\_4/}
+    \item The \textbf{README} --- what the repo is and how to use it
+    \item The \textbf{commit history} --- every change I've made, with a message
+    \item The \textbf{branches} --- \texttt{main} is the shared one; others are work-in-progress
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{alertblock}{Why this matters for what's next}
+    The issue we hit last session lives exactly here: you and I were both editing files in the \emph{same} repo. To explain what went wrong, we need the picture of where things live.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{The Problem We Had}
+  \textbf{Every session so far, someone has hit a merge conflict.}
+
+  \vspace{0.6em}
+  What we did about it:
+  \begin{itemize}
+    \item Deleted the local repo and recloned
+    \item Asked Claude Code to resolve the conflict markers
+    \item Copied work to the Desktop, wiped the directory, copied back
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{That worked.} Everyone got unstuck. But it was a symptom fix.
+
+  \vspace{0.8em}
+  \begin{alertblock}{The Root Cause}
+    You were editing files \emph{inside} the shared course repository. Every time I pushed new material, git had to reconcile your changes with mine. Conflicts were guaranteed by the structure, not by accident.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{The Structural Fix}
+  \textbf{New layout on my side:} each session is a self-contained folder.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+claude-code-workshop/
+  session_1/
+  session_2/
+  session_3/
+  session_4/     <- today's materials live here
+  ...
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{New workflow on your side:} copy the session folder out of the repo into your own workspace. Work there. The shared repo stays read-only for you.
+
+  \vspace{0.6em}
+  \begin{block}{What this changes}
+    I can push new material anytime without breaking anything in your workspace. You can edit, break, delete, and redo without worrying about the shared state. No more conflicts.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{The Three-Step Ritual}
+  \textbf{Do this at the start of every session from now on:}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Pull the latest course repo
+cd ~/claude-code-workshop && git pull
+
+# 2. Copy today's session folder into your workspace
+cp -r session_4/ ~/my_workspace/session_4/
+
+# 3. Open your copy in VS Code and work there
+cd ~/my_workspace/session_4 && code .
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  {\small\textbf{If you don't already have the course repo} (you should): \\
+  \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
+
+  \vspace{0.4em}
+  \textbf{We do it together now, live.} Five minutes. Everyone ends up in the same clean state before we move on.
+
+  \vspace{0.3em}
+  {\small If you had in-progress work inside the course repo, copy it into \texttt{\textasciitilde/my\_workspace/} too.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 2: SKILLS (CENTERPIECE)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 2: Skills}
+  \centering
+  \vspace{0.5em}
+  \includegraphics[width=0.55\textwidth,trim=0 300 0 300,clip]{img/claude_skills.png}
+
+  \vspace{0.8em}
+  {\Large A \textbf{skill} is a reusable instruction bundle\\[0.3em]
+  Claude loads on demand when a task matches.}
+
+  \vspace{0.8em}
+  {\Large It codifies a \emph{convention} ---\\[0.3em]
+  how \emph{you} do a thing correctly ---\\[0.3em]
+  so you don't re-explain it every session.}
+
+\end{frame}
+
+% ---- 2-prelude: What skills do, concretely ----------------------
+
+\begin{frame}{What a Skill Actually Does}
+  \textbf{Skills from my setup, and when each one fires:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \texttt{latex-regression-table} --- I ask for a results table. It writes a canonical CSV, renders a booktabs \texttt{.tex}, and compiles a PNG. One house style across the whole paper.
+
+    \item \texttt{abstract-structure-audit} --- I paste a draft abstract. It checks whether the four standard moves (puzzle, approach, findings, contribution) are present, vague, or missing.
+
+    \item \texttt{paragraph-structure-audit} --- I share a paragraph. It flags multiple claims per paragraph, smuggled assumptions, and weak transitions.
+
+    \item \texttt{robustness-checks} --- I run a regression. It proposes a structured battery (alternative SEs, subsamples, IV, event study) and executes it.
+  \end{itemize}
+
+  \vspace{0.6em}
+  \alert{Each one is a recurring workflow done the same way every time.}
+\end{frame}
+
+% ---- 2a: How a skill works --------------------------------------
+
+\begin{frame}[fragile]{How a Skill Works}
+  \textbf{A skill is a folder with a \texttt{SKILL.md} file in it.}
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+    \textbf{What you set up:}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+~/.claude/skills/latex-tables/
+  SKILL.md       <- required
+  template.tex   <- optional
+  examples/      <- optional
+    \end{lstlisting}
+
+    \textbf{\texttt{SKILL.md}} starts with frontmatter:
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+---
+name: latex-tables
+description: Use when generating a
+  regression or summary-stats table.
+---
+
+# Instructions Claude follows
+...
+    \end{lstlisting}
+
+    \column{0.46\textwidth}
+    \textbf{How Claude uses it:}
+
+    \vspace{0.3em}
+    \begin{enumerate}\footnotesize
+      \item At session start, Claude sees every skill's \texttt{name} + \texttt{description} --- nothing more
+      \item \textbf{Two ways to invoke:} auto-call on a description match, or you call it yourself (\texttt{/latex-tables})
+      \item The full \texttt{SKILL.md} body loads into context on demand
+      \item Claude follows those instructions
+    \end{enumerate}
+
+    \vspace{0.2em}
+    \begin{block}{\footnotesize The key idea}
+      \footnotesize The \texttt{description} is the auto-call trigger. Write it so Claude can tell \emph{when} this skill applies.
+    \end{block}
+  \end{columns}
+\end{frame}
+
+% ---- 2b: The architecture ---------------------------------------
+
+\begin{frame}{Before You Build a Skill, Ask Where It Belongs}
+  \textbf{Three things look alike but are different tools:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item \textbf{Skills} --- reusable instruction bundles, loaded on demand
+    \item \textbf{Project context} --- a CLAUDE.md inside your paper's directory
+    \item \textbf{MCPs} --- connections to external systems
+  \end{enumerate}
+
+  \vspace{1em}
+  \textbf{Most wishes of the form \emph{``I wish Claude knew X''} route to one of these three.}
+
+  \vspace{0.4em}
+  Knowing which one saves you from building a skill that should have been something else. It also tells you when a skill is \emph{too narrow} a tool for the job.
+\end{frame}
+
+\begin{frame}{The Routing Rule}
+  \centering
+  \vspace{1em}
+  {\Large
+    \textbf{Skills} $\rightarrow$ what's stable \emph{about you}\\[0.7em]
+    \textbf{Projects} $\rightarrow$ what's stable \emph{within a paper}\\[0.7em]
+    \textbf{MCPs} $\rightarrow$ what's \emph{live}
+  }
+
+  \vspace{1.8em}
+  \begin{block}{}
+    If X changes when the project changes, it's not a skill.\\[0.2em]
+    If X is alive in an external system, it's not a skill either.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Rule, Applied}
+  \small
+  \begin{tabular}{@{}p{6.8cm} p{5.8cm}@{}}
+    \toprule
+    \textbf{What you want Claude to know} & \textbf{Where it belongs} \\
+    \midrule
+    Your \LaTeX{} table conventions & Skill (stable about you) \\[0.3em]
+    The variables \& specs of your current paper & Project context (within a paper) \\[0.3em]
+    Your Zotero library & MCP (live external state) \\[0.3em]
+    Your writing voice & Skill (stable about you) \\[0.3em]
+    What your current paper argues & Project context (within a paper) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \begin{block}{Why this matters}
+    Skills are a narrower tool than most people assume. That's a feature --- narrower tools are easier to use well.
+  \end{block}
+\end{frame}
+
+% ---- 2c: Two clusters -------------------------------------------
+
+\begin{frame}{Within Skills: Two Different Jobs}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Verification skills}
+
+    \vspace{0.3em}
+    Fire \emph{during or after} work to check it.
+
+    \vspace{0.3em}
+    \textit{Examples:} LLM-mistake checker, sanity-check validator, replication auditor.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} catching real problems, even if used infrequently.
+
+    \column{0.48\textwidth}
+    \textbf{Production skills}
+
+    \vspace{0.3em}
+    Fire \emph{during the making} of something to shape it.
+
+    \vspace{0.3em}
+    \textit{Examples:} \LaTeX{} table skill, writing-style skill.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} frequency --- every table, every document.
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Why the distinction matters}
+    ``Is this worth it?'' has a different answer for each. Verification skills need to catch high-cost errors. Production skills need to fire often.
+  \end{alertblock}
+\end{frame}
+
+% ---- 2d: The heuristic ------------------------------------------
+
+\begin{frame}{The Heuristic}
+  \centering
+  \vspace{1em}
+  {\Large Skills are for \textbf{conventions}\\[0.4em]
+  you hold about how to do\\[0.4em]
+  a thing correctly.}
+
+  \vspace{1.2em}
+  \small
+  Conventions about table formatting. About sanity-checking data.\\[0.1em]
+  About responding to reviewers. About engaging with the literature.
+
+  \vspace{0.8em}
+  \normalsize
+  \alert{If what you want to codify isn't a convention, it's probably not a skill.}
+\end{frame}
+
+% ---- 2e: Worked examples ----------------------------------------
+
+\begin{frame}{Skills I Actually Use}
+  \textbf{Two skills I reach for regularly:}
+
+  \vspace{0.6em}
+  \textbf{1. \LaTeX{} tables.} Encodes my house style for regression tables: significance notation, SE labels, table-notes format, journal overrides. Fires every time I generate a table. Saves \textasciitilde{}15 min per table and keeps formatting consistent across a paper. On version three.
+
+  \vspace{0.7em}
+  \textbf{2. Paragraph-structure audit.} One claim per paragraph, mis-cited claims, smuggled assumptions, weak transitions. Fires when I'm editing my own drafts --- catches the kind of sloppiness I stop seeing after four re-reads.
+
+  \vspace{0.8em}
+  \begin{block}{What they have in common}
+    Each codifies a \emph{convention} I already hold. Each fires at a predictable moment --- generating a table, reviewing a draft. Each has been revised through actual use.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \vspace{3em}
+  {\Huge Demo}
+
+  \vspace{1em}
+  {\Large The \LaTeX{} tables skill, applied live.}
+\end{frame}
+
+% ---- 2f: The skills I don't use ---------------------------------
+
+\begin{frame}{Finding Good Use Cases Is Hard}
+  \textbf{Two skills I built but barely use:}
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \texttt{auto-commit} --- commits after every file edit
+    \item \texttt{spec-validator} --- pre-estimation data and spec checks
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{What they have in common:} each sounded useful in the abstract. Each was built on an idea of how research \emph{should} go. Each got replaced by a one-off prompt the first time I actually needed the job done.
+
+  \vspace{0.4em}
+  The specificity can also work against you --- a tightly scoped skill only fires when the exact shape of the task matches, and it's easy to build one whose niche never actually shows up.
+
+  \vspace{0.5em}
+  \begin{alertblock}{Strong recommendation}
+    Do not go build five skills this weekend. You will not use most of them.\\[0.3em]
+    Instead: \textbf{build one.} Try it on your current work. Tweak it where it fires wrong. Let it earn its place in your workflow. \emph{Then} add another.
+  \end{alertblock}
+\end{frame}
+
+% ---- 2f2: How to build one that works ---------------------------
+
+\begin{frame}{How to Build One That Works}
+  \textbf{What separates a skill that fires right from one that sits unused:}
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \textbf{Write the description for the trigger, not the reader.} Claude decides whether to auto-call on the description alone. Name the task, the keywords, and what the skill does \emph{not} handle.
+
+    \item \textbf{Keep it narrow.} One genre of table, one kind of audit, one workflow. Broad skills fire at the wrong moment, or never.
+
+    \item \textbf{Encode your convention, not generic knowledge.} The \texttt{SKILL.md} should capture the judgment calls \emph{you} make. Claude already knows boilerplate.
+
+    \item \textbf{Ship a reference example.} An \texttt{examples/} folder with a real working artifact gives Claude something concrete to pattern-match on.
+
+    \item \textbf{Revise after the first real use.} Version one fires wrong somewhere. Fix the trigger or the instructions, retry.
+  \end{itemize}
+\end{frame}
+
+% ---- 2f3: Worked example ----------------------------------------
+
+\begin{frame}[fragile]{Let's Build One: \texttt{tex-reference-audit}}
+  \textbf{The need:} before submission, I want to know every \texttt{\textbackslash cite}, \texttt{\textbackslash ref}, and \texttt{\textbackslash label} in the manuscript actually resolves.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.50\textwidth}
+    \textbf{What it checks:}
+    \begin{itemize}\footnotesize
+      \item Every \texttt{\textbackslash cite\{key\}} resolves to a \texttt{.bib} entry
+      \item Every \texttt{.bib} entry has required fields (author, year, title, journal, pages\ldots)
+      \item Every \texttt{\textbackslash ref\{label\}} points to an existing \texttt{\textbackslash label}
+      \item Every \texttt{\textbackslash label} is actually referenced (no orphans)
+      \item Figures use \texttt{fig:}, tables use \texttt{tab:}
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{The description} --- copy, paste, build live:
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+---
+name: tex-reference-audit
+description: Use when reviewing
+  or finalizing a LaTeX manuscript.
+  Audits \cite against the .bib
+  file, \ref/\label pairs for
+  figures and tables, flags
+  missing fields, duplicates, and
+  orphans. Trigger: "check refs,"
+  "audit citations," "review
+  LaTeX."
+---
+    \end{lstlisting}
+
+    \footnotesize No script --- the body is just instructions Claude follows to parse, check, and report.
+  \end{columns}
+\end{frame}
+
+% ---- 2g: Hands-on -----------------------------------------------
+
+\begin{frame}{Exercise: Build a Skill (25 min)}
+  \textbf{Working solo. Each of you walks out with one skill installed and tested.}
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item \textbf{Pick a convention (3 min).} Something you actually did in the last two weeks --- a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
+
+    \vspace{0.2em}
+    \item \textbf{Route it (2 min).} Confirm with your neighbor: is this \emph{really} a skill? Not project context, not an MCP. If a skill, is it \textbf{verification} or \textbf{production}?
+
+    \vspace{0.2em}
+    \item \textbf{Write \texttt{SKILL.md} (10 min).} A clear \texttt{name}, a \texttt{description} that tells Claude \emph{when} to fire, and the instructions for when it does.
+
+    \vspace{0.2em}
+    \item \textbf{Install (1 min).} Save to \texttt{\textasciitilde/.claude/skills/<your-skill>/SKILL.md}.
+
+    \vspace{0.2em}
+    \item \textbf{Try it (9 min).} Open a \emph{fresh} Claude Code session. Ask for a task that should trigger it. If it doesn't fire, the \texttt{description} is wrong --- fix and retry.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Deliverable}
+  \textbf{A working skill, installed and fired at least once.}
+
+  \vspace{0.5em}
+  \textbf{What you leave with:}
+  \begin{itemize}
+    \item A folder at \texttt{\textasciitilde/.claude/skills/<your-skill>/} with a real \texttt{SKILL.md}
+    \item One transcript where Claude triggered the skill on a real task
+    \item One concrete thing you'd change now that you've seen it run
+  \end{itemize}
+
+  \vspace{0.5em}
+  Two or three people share: \emph{What is it? Did it trigger on the first try? What surprised you?}
+
+  \vspace{0.5em}
+  \begin{alertblock}{The goal}
+    You leave having built one thing, seen it fire, and learned where the \texttt{description} is too vague or too narrow. That is the empirical loop. Everything else is speculation about skills you haven't tried.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Skills: The Arc}
+  \textbf{You now have everything you need to make skills work for you:}
+
+  \vspace{0.4em}
+  \begin{enumerate}
+    \item A \textbf{routing rule} to spot a real candidate --- stable-about-you, not within-a-paper, not live
+    \item A \textbf{typology} --- verification vs.\ production --- to predict when and how often it'll fire
+    \item A \textbf{heuristic} --- skills codify the conventions you already hold
+    \item An \textbf{empirical loop} --- build, fire, refine, which you just ran end-to-end
+    \item \textbf{One skill already installed} on your machine
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{The durable takeaway}
+    Every convention you hold about how to do a thing correctly is a candidate skill waiting to be written down. The ones that earn their place will compound across every project you work on --- and you now know how to tell the good candidates from the noise.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 3: MCPS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 3: MCPs}
+  \centering
+  \vspace{2em}
+  {\Large Connecting Claude Code\\[0.3em]
+  to systems outside your project.}
+
+  \vspace{1.5em}
+  {\small From the routing rule: \emph{MCPs are for what's live.}\\
+  Here are two live things worth connecting.}
+
+  \vspace{1.5em}
+  Forty-five minutes. Two MCPs. One pair exercise.
+\end{frame}
+
+% ---- 3a: Framing -------------------------------------------------
+
+\begin{frame}{What an MCP Is}
+  \textbf{MCP = Model Context Protocol.} An open standard for plugging external tools into Claude Code.
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item Each MCP is a separate server.
+    \item Claude Code speaks to it over a standard protocol.
+    \item The server exposes \emph{tools} (like \texttt{zotero\_search}) that Claude Code can call.
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Without MCPs:} Claude Code reads and writes files in your project. That's it.\\[0.2em]
+  \textbf{With MCPs:} it can query your Zotero library, open a GitHub PR, read a database, post to Slack --- anything someone has built a server for.
+
+  \vspace{0.8em}
+  \begin{block}{The framing}
+    MCPs turn Claude Code from a tool that operates on your \emph{files} into a tool that operates on your \emph{workflow}.
+  \end{block}
+\end{frame}
+
+% ---- Skill + MCP composition (bridge concept) -------------------
+
+\begin{frame}{Where Skills and MCPs Compose}
+  \textbf{The paragraph-structure skill is the first one you've seen that invokes an MCP.}
+
+  \vspace{0.5em}
+  \textbf{Alone:}
+  \begin{itemize}
+    \item \emph{Skill only:} ``This claim needs a citation. Figure one out.''
+    \item \emph{MCP only:} ``Here's your Zotero library.'' But nothing knows when to search.
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Composed:}
+  \begin{itemize}
+    \item The skill knows \emph{when} a claim is mis-cited or uncited
+    \item The MCP returns actual papers from your library that would support it
+    \item The MCP constrains the skill to real papers --- no hallucinated citations
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{alertblock}{The pattern}
+    A skill knows \emph{when} to act; an MCP provides \emph{live data}. Together, they do what neither can alone.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{The Two-Reason Rule}
+  \textbf{Once you've routed something to an MCP, ask: which of two reasons?}
+
+  \vspace{0.6em}
+  \begin{enumerate}
+    \item \textbf{Extend capability.} Let Claude Code do something it couldn't do at all.\\
+    {\small Example: open a GitHub pull request. Query your Zotero library. Run a SQL query against your database.}
+
+    \vspace{0.4em}
+    \item \textbf{Reduce friction at a boundary.} Let it do something you \emph{could} already do, but where context-switching between tools kills the flow.\\
+    {\small Example: inserting citations while drafting. You could look them up in Zotero and paste. But stopping to do that breaks writing flow.}
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \alert{Today I'm showing two specific MCPs I think are worth adopting. There are dozens more. The \emph{framework} is what transfers; the two cases are how you learn it.}
+
+  \vspace{0.4em}
+  Callback to the meta-lesson: MCPs are easy to accumulate. Ask what each one earns.
+\end{frame}
+
+% ---- 3b: Zotero --------------------------------------------------
+
+\begin{frame}{The Friction Case: Zotero}
+  \textbf{Drafting with citations normally looks like:}
+
+  \vspace{0.3em}
+  \begin{enumerate}
+    \item Write a sentence that needs a citation
+    \item Stop. Open Zotero. Search. Find the paper. Copy the cite key.
+    \item Come back to the editor. Paste. Context-switch back into drafting.
+    \item Repeat ten times per paragraph.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{With the Zotero MCP:} ``Find me the Smith 2019 paper on voter ID, add it to refs.bib, and cite it here.'' Claude Code does the search, the BibTeX export, the \texttt{\textbackslash cite\{\}} insertion --- without you leaving the \texttt{.tex} file.
+
+  \vspace{0.5em}
+  \begin{block}{Why it earns its keep}
+    \textbf{Reduce friction at a boundary.} You could already do all of this manually. The MCP just removes the tool-switch.
+  \end{block}
+\end{frame}
+
+\begin{frame}{What the Zotero MCP Can Do}
+  \textbf{The Zotero MCP exposes around two dozen tools. They fall into two buckets:}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Read from your library}
+    \begin{itemize}\small
+      \item \textbf{Search:} keyword, semantic (natural language), by tag, advanced filters
+      \item \textbf{Browse:} collections, recent items, saved searches, RSS feeds
+      \item \textbf{Pull metadata:} title, authors, abstract, BibTeX fields
+      \item \textbf{Pull full text} of attached PDFs
+      \item \textbf{Read} your existing notes and annotations
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Write back to your library}
+    \begin{itemize}\small
+      \item \textbf{Add papers} by DOI, URL, or local PDF (auto-fetches metadata + open-access PDFs)
+      \item \textbf{Create notes} attached to items
+      \item \textbf{Create and organize collections}
+      \item \textbf{Update item metadata} --- tags, titles, abstracts
+    \end{itemize}
+
+    \vspace{0.6em}
+    \begin{block}{\small What this unlocks}
+      \small Claude can read the \emph{actual full text} of papers in your library --- not just the title --- so it can reason about what's \emph{in} the paper, not just whether the citation exists.
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Zotero MCP: Live Demo}
+  \textbf{A single prompt:}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Find all papers in my claude_code_zotero collection
+on local economic voting, and for each give me the
+abstract and any notes I have on it.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{What you'll see in the tool-call log:}
+  \begin{enumerate}
+    \item \texttt{zotero\_get\_collection\_items("claude\_code\_zotero")} --- lists the collection
+    \item \texttt{zotero\_semantic\_search("local economic voting")} --- filters to the topic
+    \item \texttt{zotero\_get\_item\_metadata(...)} --- pulls title, authors, abstract
+    \item \texttt{zotero\_get\_notes(...)} --- pulls my existing notes on each item
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Watch the tool calls, not just the output. Seeing which tools fire tells you what the MCP actually does.}
+\end{frame}
+
+\begin{frame}{Exercise: Mini Literature Review (15 min)}
+  \textbf{You installed the Zotero MCP as Session 4 prework and pointed it at the shared group library \texttt{claude\_code\_zotero} --- nine papers on economic voting.}
+
+  \vspace{0.5em}
+  \textbf{Your task.} Draft a \textbf{five-sentence literature review} on \emph{one} of:
+  \begin{itemize}\small
+    \item How economic conditions shape vote choice
+    \item Whether voters punish incumbents for bad economies
+    \item Whether voters respond to the \emph{local} economy versus the national one
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Rules:}
+  \begin{itemize}\small
+    \item Every sentence cites at least one paper from \texttt{claude\_code\_zotero}
+    \item Only use cite keys that \emph{actually exist} in the collection --- no hallucinations
+    \item Claude does the searching, full-text reading, and drafting
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What to Watch For}
+  \textbf{While the model works, watch the tool calls:}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Did it run \texttt{zotero\_semantic\_search}, or skip search and guess?
+    \item Did it actually pull \texttt{zotero\_get\_item\_fulltext}, or cite from titles alone?
+    \item Do the claims in your sentences match what the papers actually say?
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{After drafting, spot-check one citation.} Open the paper in Zotero. Does the sentence you wrote accurately represent what the paper argues?
+
+  \vspace{0.6em}
+  \begin{alertblock}{The real lesson}
+    An MCP gives Claude \emph{access}. It does not give Claude \emph{judgment}. The failure mode to expect: a plausible sentence citing a paper that says something adjacent --- but not quite that. \textbf{You still read.}
+  \end{alertblock}
+\end{frame}
+
+% ---- 3c: GitHub + pair exercise ----------------------------------
+
+\begin{frame}[fragile]{How GitHub Works as a Collaborator}
+  \textbf{Session 3 was the solo loop:}
+
+  \vspace{0.3em}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=0.55cm and 0.6cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=2.4cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    arr/.style={->, thick, color=anthropic}
+  ]
+    \node[box] (commit) {commit};
+    \node[box, right=of commit] (instruct) {instruct Claude};
+    \node[box, right=of instruct] (diff) {diff};
+    \node[box, right=of diff] (decide) {keep or revert};
+    \draw[arr] (commit) -- (instruct);
+    \draw[arr] (instruct) -- (diff);
+    \draw[arr] (diff) -- (decide);
+    \draw[arr, rounded corners=6pt] (decide.south) -- ++(0,-0.3) -| (commit.south);
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.3em}
+  \textbf{One person, one copy.} Everything happens on your machine.
+
+  \vspace{0.8em}
+  \textbf{Add a coauthor and two new problems appear:}
+  \begin{enumerate}
+    \item \textbf{Parallel work.} You both want to edit at once. Whose version wins?
+    \item \textbf{Combining work.} Your changes live on your laptop, theirs on theirs. How do they become one shared version?
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \centering
+  \alert{GitHub's answer uses two moves: branches and pull requests.}
+\end{frame}
+
+\begin{frame}[fragile]{GitHub's Answer: Branches + PRs}
+  \begin{center}
+  \begin{tikzpicture}[
+    mainnode/.style={draw=accent, very thick, fill=lightgray, rounded corners, minimum width=4.8cm, minimum height=0.7cm, align=center, font=\small\bfseries\ttfamily},
+    branchnode/.style={draw=accent, fill=lightgray, rounded corners, minimum width=4.8cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    localnode/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=11cm, minimum height=1.3cm, align=center},
+    box/.style={draw=anthropic, fill=white, rounded corners, minimum width=1.9cm, minimum height=0.5cm, align=center, font=\scriptsize\ttfamily},
+    arr/.style={->, thick, color=anthropic},
+    arrgh/.style={->, thick, color=accent}
+  ]
+    \node[mainnode] (main) at (0,3.1) {GitHub: \texttt{main}};
+    \node[branchnode] (branch) at (0,1.9) {your branch \textit{(origin/my-branch)}};
+    \node[localnode] (local) at (0,0.35) {};
+
+    \node[box] (c) at (-3.6, 0.35) {commit};
+    \node[box] (i) at (-1.2, 0.35) {instruct};
+    \node[box] (d) at (1.2, 0.35) {diff};
+    \node[box] (k) at (3.6, 0.35) {keep/revert};
+    \draw[arr] (c) -- (i);
+    \draw[arr] (i) -- (d);
+    \draw[arr] (d) -- (k);
+    \draw[arr, rounded corners=3pt] (k.south) -- ++(0,-0.2) -| (c.south);
+
+    \node[font=\tiny\itshape, text=anthropic, anchor=north west] at ([xshift=0.08cm, yshift=-0.05cm]local.north west) {local};
+
+    \draw[arrgh] ([xshift=-1.4cm]main.south) -- ([xshift=-1.4cm]branch.north) node[midway, left, font=\tiny] {new branch};
+    \draw[arrgh] ([xshift=1.4cm]branch.north) -- ([xshift=1.4cm]main.south) node[midway, right, font=\tiny] {PR + merge};
+    \draw[arrgh] ([xshift=-1.4cm]branch.south) -- ([xshift=-1.4cm]local.north) node[midway, left, font=\tiny] {pull};
+    \draw[arrgh] ([xshift=1.4cm]local.north) -- ([xshift=1.4cm]branch.south) node[midway, right, font=\tiny] {push};
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.3em}
+  \begin{itemize}\small
+    \item \textbf{\texttt{main}} is the shared source of truth. Changes only return via PR + merge.
+    \item \textbf{Your branch} is a parallel lane on GitHub --- your work stays separate until reviewed.
+    \item \textbf{Locally} is where the solo loop runs, on the files of your checked-out branch.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Working With Branches: The Commands}
+  \textbf{The whole branch workflow in five moves:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+# 1. Start from an up-to-date main
+git checkout main
+git pull
+# 2. Create a new branch
+git branch my-branch-name
+# 3. Switch to it
+git checkout my-branch-name
+# 4. Commit
+git add <files>
+git commit -m "..."
+# 5. Push (first time uses -u; later pushes: git push)
+git push -u origin my-branch-name
+  \end{lstlisting}
+
+  \alert{\small \texttt{git branch} lists branches (\texttt{*} marks current). Commit before switching --- uncommitted edits follow you between branches.}
+\end{frame}
+
+\begin{frame}[fragile]{What Is a Pull Request?}
+  \textbf{A pull request (PR) is the proposal to merge one branch into another.} Everyone branches off \texttt{main}, works independently, then opens a PR to rejoin.
+
+  \vspace{0.3em}
+  \begin{center}
+  \begin{tikzpicture}[
+    scale=0.8, transform shape,
+    mcommit/.style={circle, fill=accent, minimum size=0.22cm, inner sep=0},
+    bcommit/.style={circle, fill=anthropic, minimum size=0.2cm, inner sep=0},
+    mainline/.style={very thick, color=accent},
+    branchline/.style={thick, color=anthropic},
+    lbl/.style={font=\scriptsize\ttfamily},
+    mlbl/.style={font=\tiny\itshape, text=accent}
+  ]
+    \foreach \x in {0, 2, 4.5, 6, 8.5, 10.5} {
+      \node[mcommit] at (\x, 0) {};
+    }
+    \draw[mainline] (0,0) -- (10.5,0);
+    \node[lbl, text=accent, anchor=east] at (-0.15, 0) {\textbf{main}};
+
+    \draw[branchline] (2,0) to[out=-30, in=180] (2.8,-1) -- (4,-1) to[out=0, in=210] (4.5, 0);
+    \node[bcommit] at (3.1, -1) {};
+    \node[bcommit] at (3.7, -1) {};
+    \node[lbl, text=anthropic, anchor=north] at (3.4, -1.15) {branch-a};
+    \node[mlbl, anchor=south west] at (4.4, 0.08) {PR + merge};
+
+    \draw[branchline] (6,0) to[out=30, in=180] (6.8,1) -- (8,1) to[out=0, in=150] (8.5, 0);
+    \node[bcommit] at (7.1, 1) {};
+    \node[bcommit] at (7.7, 1) {};
+    \node[lbl, text=anthropic, anchor=south] at (7.4, 1.15) {branch-b};
+    \node[mlbl, anchor=north west] at (8.4, -0.08) {PR + merge};
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.2em}
+  \textbf{On the PR page:} a diff, a conversation thread, and an approve-and-merge button gated by the drafter's assigned \textbf{reviewer}.
+
+  \vspace{0.3em}
+  \alert{\small On a collaborative repo, every PR has an assigned reviewer. They have to click approve \emph{and} merge --- nothing reaches \texttt{main} until they do.}
+\end{frame}
+
+\begin{frame}{Collaboration, Live}
+  \textbf{Time to see the whole loop on a real repo.} I'll walk through branches, commits, push, PR, review, and merge --- on \texttt{github.com/bradyallardice/github\_collaboration\_practice}.
+
+  \vspace{0.8em}
+  \textbf{What I'll do:} write a list of characters for a story. You pick which story:
+
+  \vspace{0.3em}
+  \begin{enumerate}
+    \item \textbf{The Conference From Hell} --- every session, break, and hallway moment at an academic conference goes sideways
+    \item \textbf{The Dissertation That Wrote Itself} --- a PhD student's dissertation has gained sentience; each chapter is one night of it taking new liberties
+    \item \textbf{The Department Mouse} --- a very literate mouse is stealing specific things from the department; it appears to have a plan
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \alert{Watch the steps. Ask questions. I'll end with the cast pushed to \texttt{main}.}
+\end{frame}
+
+\begin{frame}{Before We Go Further: GitHub Access}
+  \textbf{Two quick things:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item \textbf{If you haven't already emailed me your GitHub username, write it on the paper going around now.}
+
+    \vspace{0.4em}
+    \item \textbf{Everyone: check your email and accept the collaboration request for the class repo.} Without it you can't push a branch or open a PR.
+  \end{enumerate}
+
+  \vspace{0.8em}
+  The invite appears as an email from GitHub, and also as a banner on the repo page if you're logged in. Click \textbf{Accept invitation}.
+
+  \vspace{0.5em}
+  \alert{One minute. Shout if it doesn't show up --- I'll re-send.}
+\end{frame}
+
+\begin{frame}{\ldots Now You're Going to Write the Story}
+  \textbf{That repo I just pushed to? You're going to write the rest of it.}
+
+  \vspace{0.6em}
+  Each of you claims one of the 16 chapter slots, featuring the cast I just pushed. Write, branch, PR, merge your own chapter --- all the way through. At the end, we assemble every chapter and read the story out loud.
+
+  \vspace{0.8em}
+  \textbf{Your chapter should feature at least one of the named characters.} Beyond that, go wherever it takes you.
+
+  \vspace{0.6em}
+  \alert{The writing is short on purpose. The point is the Git workflow, not the prose.}
+\end{frame}
+
+\begin{frame}{Your Chapter}
+  \textbf{I've assigned each of you a specific chapter.} Open \texttt{CHAPTERS.md} at the root of the class repo --- your name is next to a numbered slot. That's your chapter.
+
+  \vspace{0.5em}
+  \textbf{Then you run the whole loop yourself:}
+  \begin{itemize}
+    \item Branch from \texttt{main}, write your chapter at \texttt{chapters/chapter\_N.md}
+    \item Commit, push, open a PR
+    \item Approve and merge your own PR
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{Ground rules}
+    \begin{itemize}
+      \item \textbf{Length doesn't matter.} A paragraph is fine.
+      \item \textbf{Don't try to match other chapters.} You can't --- everyone is writing simultaneously.
+      \item \textbf{Don't polish.} Five minutes. Write, push, merge, move on.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Reference Card}
+  \textbf{1. Clone the repo, open it, branch, write, commit, push:}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+git clone https://github.com/bradyallardice/github_collaboration_practice.git
+cd github_collaboration_practice
+code .                            # open the repo in VS Code
+git checkout -b chapter-N
+# write your assigned chapter at chapters/chapter_N.md
+git add chapters/chapter_N.md
+git commit -m "Chapter N"
+git push -u origin chapter-N
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{2. Open and merge the PR on GitHub:}
+  \begin{enumerate}\small
+    \item Click the \textbf{Compare \& pull request} banner, base = \texttt{main}
+    \item \textbf{Create pull request}
+    \item \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm merge}
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \centerline{\small Something break? \hyperlink{troubleshooting}{\alert{$\rightarrow$ Troubleshooting GitHub}}}
+\end{frame}
+
+\begin{frame}{What to Expect}
+  \textbf{Some of you will finish. Some will not. Both are fine.}
+
+  \vspace{0.6em}
+  The goal is that \emph{everyone sees the loop end-to-end}: branch, push, PR, merge. Even if you need help at every step, you will recognize the shape next time.
+
+  \vspace{0.6em}
+  \textbf{What will go wrong (for some of you):}
+  \begin{itemize}
+    \item \textbf{Push rejected} because \texttt{main} moved. Run \texttt{git pull --rebase origin main} and push again.
+    \item \textbf{PR opened against the wrong base.} Edit the base branch in the GitHub UI, or close and reopen.
+    \item \textbf{You get stuck for more than 90 seconds.} Flag me. Don't silently spin.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{After all PRs are merged, I'll run the assembly script and read us the story.}
+\end{frame}
+
+\begin{frame}{What the GitHub MCP Adds on Top}
+  \textbf{You just did the whole collaboration loop with plain git.} The GitHub MCP doesn't replace any of that --- it lets Claude Code \emph{reach} the parts that live on GitHub, not just on your disk:
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Open a pull request from a branch you've been working on
+    \item Leave review comments on a coauthor's PR
+    \item \textbf{Approve and merge a PR} --- including its own
+    \item Create issues to track tasks you don't want to lose
+    \item Push files to a remote repository
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{Why it earns its keep}
+    \textbf{Extend capability.} ``Open a PR'' and ``merge it'' aren't things Claude Code can do without this. It's a genuine new capability, not a friction fix.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Demo: Finish the Story with the MCP}
+  \textbf{All your chapters are on \texttt{main}.} Watch me close the story out --- Claude Code does the whole thing through the MCP.
+
+  \vspace{0.4em}
+  \textbf{A single prompt:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Pull the latest main, read every chapter in chapters/,
+write a short conclusion that ties the threads together,
+commit it on a branch, open a PR, and merge it.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{What you'll see in the tool-call log:}
+  \begin{enumerate}\small
+    \item \texttt{git pull} --- bring \texttt{main} up to date
+    \item \texttt{Read} each chapter file, then \texttt{Write} the conclusion
+    \item \texttt{git commit} + \texttt{git push} on a new branch
+    \item \texttt{mcp\_\_github\_\_create\_pull\_request}
+    \item \texttt{mcp\_\_github\_\_merge\_pull\_request} \alert{--- the autonomous one}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{MCP as Helper, Not Substitute}
+  \textbf{Did you notice what just happened?} One prompt. One merge into \texttt{main}. No second pair of eyes.
+
+  \vspace{0.4em}
+  \begin{alertblock}{The risk the MCP unlocks}
+    The GitHub MCP can approve and merge PRs autonomously. If you say ``handle the PR,'' Claude can push to \texttt{main} with no human review --- fine for a playful class story, dangerous on a real research repo.
+  \end{alertblock}
+
+  \vspace{0.4em}
+  \textbf{How to stay safe:}
+  \begin{itemize}\small
+    \item \textbf{Turn on branch protection} --- a GitHub setting (Repo $\rightarrow$ Settings $\rightarrow$ Branches) that refuses to merge a PR unless it has at least one approval from \emph{someone other than the author}. The MCP has to obey it, same as the web UI.
+    \item \textbf{Scope what you let Claude do.} ``Open a PR'' is fine; ``merge it'' should make you pause.
+    \item \textbf{Watch the tool-call log} when the MCP acts on branches.
+  \end{itemize}
+
+  \vspace{0.2em}
+  \alert{\small The exercise \emph{asked for} two humans --- that was a convention, not a GitHub rule. By default, anyone with write access (including Claude via the MCP) can merge a PR alone. The branch-protection setting is what actually makes human review mandatory.}
+\end{frame}
+
+\begin{frame}{MCPs: The Meta-Lesson, Again}
+  \textbf{GitHub MCP is optional infrastructure. The underlying git workflow is not.}
+
+  \vspace{0.8em}
+  If you find yourself reaching for the MCP to fix a conflict --- sometimes that's the right move. But sometimes (like this morning's session-folder fix) it's papering over a structural problem.
+
+  \vspace{0.8em}
+  \begin{block}{Before adopting an MCP, ask}
+    \begin{enumerate}
+      \item Does this genuinely extend what I can do, or reduce real friction?
+      \item Will I invoke it more than three times a month?
+      \item Am I using it because it helps, or because it's new?
+    \end{enumerate}
+  \end{block}
+
+  \vspace{0.5em}
+  Most MCPs fail question 2. The two today pass all three --- \textit{for me}. Your answers may differ.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 4: SUBAGENTS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 4: Subagents}
+  \centering
+  \vspace{2em}
+  {\Large A focused agent spawned for a bounded job ---\\[0.3em]
+  the right tool for the parallelizable, scoped work\\[0.3em]
+  that already shows up in your pipeline.}
+
+  \vspace{2em}
+  Ten minutes. Concrete patterns.
+\end{frame}
+
+\begin{frame}{What a Subagent Is}
+  \textbf{Claude Code can spawn another Claude Code instance inside your current session --- a subagent.}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item It has its own context window
+    \item It gets a scoped task and a scoped tool set
+    \item It returns a summary to your main conversation --- not its raw trace
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{What that buys you:}
+  \begin{enumerate}
+    \item \textbf{Parallelism} --- run three searches at once instead of one after the other
+    \item \textbf{Context hygiene} --- a big messy exploration stays out of your main context budget
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{Think of it as}
+    Delegating a bounded sub-task to a focused colleague who returns a clean, structured answer --- so your main conversation stays on the high-level work.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Where Subagents Shine}
+  \textbf{Reach for a subagent when the subtask is:}
+  \begin{itemize}
+    \item \textbf{Parallelizable} --- independent work that doesn't need to be sequenced
+    \item \textbf{Bounded} --- clear inputs, clear outputs, no back-and-forth
+    \item \textbf{Independently verifiable} --- you can check the result without reading the full trace
+  \end{itemize}
+
+  \vspace{0.7em}
+  \textbf{Concrete research use cases:}
+  \begin{itemize}
+    \item \textbf{Multi-database literature searches} --- one agent per database, all running in parallel
+    \item \textbf{Coding many documents} against a fixed rubric
+    \item \textbf{Parallel robustness checks} across independent specifications
+    \item \textbf{Running the same sanity-check} script over many datasets
+    \item \textbf{Exploring a codebase} --- send a subagent to map out the files, keep the summary in your main context
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Using Subagents Well}
+  \textbf{Three habits that make subagents pay off:}
+  \begin{enumerate}
+    \item \textbf{Brief them like a contractor.} Concrete deliverable, all the context they need up front --- they don't see your conversation history.
+    \item \textbf{Ask for structured output} (bullet list, table, JSON). You'll be consuming the result; make it easy to read and verify.
+    \item \textbf{Verify independently.} You get a summary, not the full trace. Spot-check the way you would a student's work.
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{The payoff}
+    A literature sweep, robustness battery, or repo survey that would have taken an hour finishes in minutes --- and doesn't eat into your main conversation's context. That's what makes them worth reaching for.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Coming Next Session}
+  \centering
+  \vspace{1.5em}
+  {\Large \textbf{Session 5} covers three things:}
+
+  \vspace{1.2em}
+  \begin{flushleft}
+  \hspace{2em}\textbf{1. Multi-agent teams} --- named subagents you define once and invoke on demand, each with its own scope, tools, and system prompt.
+
+  \vspace{0.6em}
+  \hspace{2em}\textbf{2. Hooks} --- shell commands that run automatically on events (file writes, session start, tool use), for enforcement that doesn't depend on Claude remembering.
+
+  \vspace{0.6em}
+  \hspace{2em}\textbf{3. The final project} --- an end-to-end research artifact built with everything from Sessions 1--4, plus what you learn in Session 5.
+  \end{flushleft}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  CLOSING
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What You Built Today}
+  \begin{enumerate}
+    \item \textbf{A cleaner workflow.} You're working in your own workspace. No more merge conflicts against the shared repo.
+
+    \vspace{0.3em}
+    \item \textbf{A framework for skills.} A routing rule (stable-about-you / within-a-paper / live), a verification vs.\ production typology, and one skill already installed on your machine.
+
+    \vspace{0.3em}
+    \item \textbf{Two MCPs on your map.} Zotero (friction) and GitHub (capability). The two-reason rule to evaluate others.
+
+    \vspace{0.3em}
+    \item \textbf{A practical view of subagents.} What they are, where they pay off, and the three habits that make them count --- with specialized teams coming next session.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \begin{block}{The thread running through}
+    Agents solve symptoms well. Your job is to notice when the structure is wrong, when the skill is ceremony, when the MCP is novelty, and when the subagent is overkill.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Next Session + Prework}
+  \textbf{Session 5: Multi-Agent Teams, Hooks, and the Final Project.}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \textbf{Multi-agent teams} --- define a team of specialized subagents and orchestrate them
+    \item \textbf{Hooks} --- automatic shell commands on events (file writes, tool calls, session start)
+    \item \textbf{Final project} --- an end-to-end research artifact using everything from Sessions 1--5
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Before next session:}
+  \begin{enumerate}
+    \item \textbf{Point your Zotero MCP at your own library} and run today's lit-review prompt on a real topic from your research
+    \item \textbf{Run the routing test} on one thing you wished Claude already knew --- is it a skill, project context, or MCP?
+    \item \textbf{Try one thing from today} on your actual research: a skill, an MCP, or just the new repo workflow
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \alert{Bring a question, a frustration, or a small win from the week. Session 5 opens with those.}
+\end{frame}
+
+\begin{frame}
+  ~
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  APPENDIX: TROUBLESHOOTING (linked from Reference Card)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile,label=troubleshooting]{Troubleshooting: When GitHub Fights Back}
+  \textbf{Common failure modes during the exercise --- and the fix.}
+
+  \vspace{0.2em}
+  \begin{itemize}\footnotesize
+    \item \textbf{Authentication fails on first push.} Run \texttt{gh auth login} and pick HTTPS + browser. (\texttt{brew install gh} first if needed.)
+
+    \item \textbf{``Updates were rejected''} --- \texttt{main} moved while you worked. \\
+    \texttt{git pull -{}-rebase origin main \&\& git push}
+
+    \item \textbf{Conflict markers (\texttt{<<<<<<<}) in a file.} Open it, edit to the version you want, delete the markers. Then \texttt{git add <file>} and \texttt{git rebase -{}-continue} (or \texttt{git commit} if merging). \hyperlink{merge-conflicts}{\alert{Walkthrough $\rightarrow$}}
+
+    \item \textbf{You committed to \texttt{main} by accident.} Save the work to a new branch, then rewind \texttt{main}:
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git checkout -b chapter-N
+git checkout main && git reset --hard origin/main
+git checkout chapter-N
+    \end{lstlisting}
+
+    \item \textbf{PR opened against the wrong base.} Edit the base branch in the GitHub UI at the top of the PR --- no need to close and reopen.
+
+    \item \textbf{Stuck for more than 90 seconds.} Flag me. Don't silently spin --- the fix is usually one command.
+  \end{itemize}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  APPENDIX: MERGE CONFLICTS (deeper dive, linked from troubleshooting)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile,label=merge-conflicts]{Anatomy of a Merge Conflict}
+  \textbf{When git can't auto-combine two versions of the same lines, it leaves the file marked up like this:}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+The keynote speaker took the stage.
+<<<<<<< HEAD
+He launched into a 90-minute monologue about LLMs.
+=======
+She fumbled with the slide remote for two full minutes.
+>>>>>>> origin/main
+The audience applauded politely.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Three parts:}
+  \begin{itemize}\footnotesize
+    \item \texttt{<<<<<<< HEAD} --- start of \textbf{your} version (the branch you're on)
+    \item \texttt{=======} --- divider
+    \item \texttt{>>>>>>> origin/main} --- end, plus the name of the \textbf{incoming} version
+  \end{itemize}
+
+  \vspace{0.2em}
+  \alert{Git isn't broken. It just can't tell which version you want --- and is asking you to decide.}
+\end{frame}
+
+\begin{frame}[fragile]{Resolving a Conflict by Hand}
+  \textbf{1. Find them:} \texttt{\small git status} \;\;\textit{\small (conflicted files appear under ``both modified'')}
+
+  \vspace{0.4em}
+  \textbf{2. Open each one. Edit until only the version you want remains --- no markers.}
+
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textit{\small Before:}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+<<<<<<< HEAD
+He launched into a 90-min
+monologue about LLMs.
+=======
+She fumbled with the slide
+remote for two full minutes.
+>>>>>>> origin/main
+    \end{lstlisting}
+
+    \column{0.48\textwidth}
+    \textit{\small After (keep one, the other, or merge):}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+She fumbled with the slide
+remote for two full minutes,
+then launched into a 90-min
+monologue about LLMs.
+    \end{lstlisting}
+  \end{columns}
+
+  \vspace{0.3em}
+  \textbf{3. Stage the file and continue.}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git add chapters/chapter_3.md && git rebase --continue
+# (or: git commit, if you were merging instead of rebasing)
+  \end{lstlisting}
+
+  {\footnotesize \textbf{Want to bail out?} \texttt{git rebase -{}-abort} (or \texttt{git merge -{}-abort}) reverts to the pre-conflict state.}
+\end{frame}
+
+\begin{frame}[fragile]{Letting Claude Resolve It}
+  \textbf{Claude Code is good at the mechanical part --- finding the markers and proposing a sensible merge.}
+
+  \vspace{0.3em}
+  A prompt that works:
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+There's a merge conflict in chapters/chapter_3.md.
+Read both sides, propose a resolution that keeps the
+intent of both, and apply it. Show me the diff first
+- do not commit.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Safe to delegate:}
+    \begin{itemize}\footnotesize
+      \item Trivial conflicts (formatting, adjacent edits)
+      \item One side is clearly the newer or correct version
+      \item Prose where the diff is short and you can read it end-to-end
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Do it yourself:}
+    \begin{itemize}\footnotesize
+      \item Code where behavior changes --- you need to understand both sides
+      \item Numerical results, tables, anything you'd want to verify line-by-line
+      \item Conflicts touching more than a handful of files
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.4em}
+  \alert{\small Always read the diff. ``Resolved'' is not the same as ``correct.''}
+\end{frame}
+
+\end{document}

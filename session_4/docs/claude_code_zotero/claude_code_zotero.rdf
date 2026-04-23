@@ -1,0 +1,514 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Article rdf:about="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/gone-for-good-deindustrialization-white-voter-backlash-and-us-presidential-voting/B647DC5EE8CE52562B09797E6D5AF37E">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0003-0554,%201537-5943"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Baccini</foaf:surname>
+                        <foaf:givenName>Leonardo</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Weymouth</foaf:surname>
+                        <foaf:givenName>Stephen</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1609"/>
+        <link:link rdf:resource="#item_1587"/>
+        <dc:title>Gone For Good: Deindustrialization, White Voter Backlash, and US Presidential Voting</dc:title>
+        <dcterms:abstract>Globalization and automation have contributed to deindustrialization and the loss of millions of manufacturing jobs, yielding important electoral implications across advanced democracies. Coupling insights from economic voting and social identity theory, we consider how different groups in society may construe manufacturing job losses in contrasting ways. We argue that deindustrialization threatens dominant group status, leading some white voters in affected localities to favor candidates they believe will address economic distress and defend racial hierarchy. Examining three US presidential elections, we find white voters were more likely to vote for Republican challengers where manufacturing layoffs were high, whereas Black voters in hard-hit localities were more likely to vote for Democrats. In survey data, white respondents, in contrast to people of color, associated local manufacturing job losses with obstacles to individual upward mobility and with broader American economic decline. Group-based identities help explain divergent political reactions to common economic shocks.</dcterms:abstract>
+        <dc:date>2021/05</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Gone For Good</z:shortTitle>
+        <z:libraryCatalog>Cambridge University Press</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/journals/american-political-science-review/article/abs/gone-for-good-deindustrialization-white-voter-backlash-and-us-presidential-voting/B647DC5EE8CE52562B09797E6D5AF37E</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 17:05:57</dcterms:dateSubmitted>
+        <bib:pages>550-567</bib:pages>
+        <z:citationKey>bacciniGoneGoodDeindustrialization2021</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0003-0554,%201537-5943">
+        <prism:volume>115</prism:volume>
+        <dc:title>American Political Science Review</dc:title>
+        <dc:identifier>DOI 10.1017/S0003055421000022</dc:identifier>
+        <prism:number>2</prism:number>
+        <dc:identifier>ISSN 0003-0554, 1537-5943</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1609">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1609/American J Political Sci - 2025 - Becher - Global competition local unions and political representation Disentangling.pdf"/>
+        <dc:title>American J Political Sci - 2025 - Becher - Global competition local unions and political representation Disentangling</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1587">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1587/Baccini and Weymouth - 2021 - Gone For Good Deindustrialization, White Voter Backlash, and US Presidential Voting.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/when-do-citizens-respond-politically-to-the-local-economy-evidence-from-registry-data-on-local-housing-markets/B8498EB35AFFE95EF92A867D3C1D695D">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>113</prism:volume>
+                <dc:title>American Political Science Review</dc:title>
+                <dc:identifier>DOI 10.1017/S0003055419000029</dc:identifier>
+                <prism:number>2</prism:number>
+                <dc:identifier>ISSN 0003-0554, 1537-5943</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Larsen</foaf:surname>
+                        <foaf:givenName>Martin Vinæs</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hjorth</foaf:surname>
+                        <foaf:givenName>Frederik</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dinesen</foaf:surname>
+                        <foaf:givenName>Peter Thisted</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sønderskov</foaf:surname>
+                        <foaf:givenName>Kim Mannemar</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1352"/>
+        <dc:title>When Do Citizens Respond Politically to the Local Economy? Evidence from Registry Data on Local Housing Markets</dc:title>
+        <dcterms:abstract>Recent studies of economic voting have focused on the role of the local economy, but with inconclusive results. We argue that while local economic conditions affect incumbent support on average, the importance of the local economy varies by citizens’ interactions with it. More recent and frequent encounters with aspects of the local economy make those aspects more salient and, in turn, feature more prominently in evaluations of the incumbent government. We label this process “context priming.” We provide evidence for these propositions by studying local housing markets. Linking granularly detailed data on housing prices from Danish public registries to both precinct-level election returns and an individual-level panel survey, we find that when individuals interact with the housing market, their support for the incumbent government is more responsive to changes in local housing prices. The study thus provides a framework for understanding when citizens respond politically to the local economy.</dcterms:abstract>
+        <dc:date>2019/05</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>When Do Citizens Respond Politically to the Local Economy?</z:shortTitle>
+        <z:libraryCatalog>Cambridge University Press</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/journals/american-political-science-review/article/abs/when-do-citizens-respond-politically-to-the-local-economy-evidence-from-registry-data-on-local-housing-markets/B8498EB35AFFE95EF92A867D3C1D695D</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 17:11:14</dcterms:dateSubmitted>
+        <bib:pages>499-516</bib:pages>
+        <z:citationKey>larsenWhenCitizensRespond2019</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1352">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1352/Larsen et al. - 2019 - When Do Citizens Respond Politically to the Local Economy Evidence from Registry Data on Local Hous.pdf"/>
+        <dc:title>Submitted Version</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://curis.ku.dk/ws/files/212498839/Larsen_et_al._When_Do_Citizens_Respond_Politically_to_the_Local_Economy.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 17:11:22</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/accountability-for-the-local-economy-at-all-levels-of-government-in-united-states-elections/6B61FD69CF47F0DA6E55341A5FF12454">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>114</prism:volume>
+                <dc:title>American Political Science Review</dc:title>
+                <dc:identifier>DOI 10.1017/S0003055420000027</dc:identifier>
+                <prism:number>3</prism:number>
+                <dc:identifier>ISSN 0003-0554, 1537-5943</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Benedictis-Kessner</foaf:surname>
+                        <foaf:givenName>Justin De</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Warshaw</foaf:surname>
+                        <foaf:givenName>Christopher</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1617"/>
+        <dc:title>Accountability for the Local Economy at All Levels of Government in United States Elections</dc:title>
+        <dcterms:abstract>Retrospective voting is a crucial component of democratic accountability. A large literature on retrospective voting in the United States finds that the president’s party is rewarded in presidential elections for strong economic performance and punished for weak performance. By contrast, there is no clear consensus about whether politicians are held accountable for the local economy at other levels of government, nor how voters react to the economy in a complex system of multilevel responsibility. In this study, we use administrative data on county-level economic conditions from 1969 to 2018 and election results across multiple levels of government to examine the effect of the local economy on elections for local, state, and federal offices in the United States. We find that the president’s party is held accountable for economic performance across nearly all levels of government. We also find that incumbents are held accountable for the economy in U.S. House and gubernatorial elections. Our findings have broad implications for literatures on representation, accountability, and elections.</dcterms:abstract>
+        <dc:date>2020/08</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Cambridge University Press</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/journals/american-political-science-review/article/abs/accountability-for-the-local-economy-at-all-levels-of-government-in-united-states-elections/6B61FD69CF47F0DA6E55341A5FF12454</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 17:16:29</dcterms:dateSubmitted>
+        <bib:pages>660-676</bib:pages>
+        <z:citationKey>benedictis-kessnerAccountabilityLocalEconomy2020</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1617">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1617/Benedictis-Kessner and Warshaw - 2020 - Accountability for the Local Economy at All Levels of Government in United States Elections.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.journals.uchicago.edu/doi/10.1086/681591">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>77</prism:volume>
+                <dc:title>The Journal of Politics</dc:title>
+                <dc:identifier>DOI 10.1086/681591</dc:identifier>
+                <prism:number>3</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bisgaard</foaf:surname>
+                        <foaf:givenName>Martin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1615"/>
+        <dc:title>Bias Will Find a Way: Economic Perceptions, Attributions of Blame, and Partisan-Motivated Reasoning during Crisis</dc:title>
+        <dcterms:abstract>Partisans often perceive real world conditions in a manner that credits their own party. Yet recent findings suggest that partisans are capable of setting their loyalties aside when confronted with clear evidence, for example, during an economic crisis. This study examines a different possibility. While partisans may acknowledge the same reality, they may find other ways of aligning undeniable realities with their party loyalties. Using monthly survey data collected before and after the unexpected collapse of the British national economy (2004–10), this study presents one key finding: As partisans came to agree that economic conditions had gotten much worse, they conversely polarized in whether they thought the government was responsible. While the most committed partisans were surprisingly apt in acknowledging the economic collapse, they were also the most eager to attribute responsibility selectively. For that substantial share of the electorate, partisan-motivated reasoning seems highly adaptive.</dcterms:abstract>
+        <dc:date>2015</dc:date>
+        <z:language>english</z:language>
+        <z:shortTitle>Bias Will Find a Way</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.uchicago.edu/doi/10.1086/681591</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30</dcterms:dateSubmitted>
+        <dc:description>Citation Key: bisgaardBiasWillFind2015</dc:description>
+        <bib:pages>849–860</bib:pages>
+        <z:citationKey>bisgaardBiasWillFind2015</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1615">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1615/Bisgaard - 2015 - Bias Will Find a Way Economic Perceptions, Attributions of Blame, and Partisan-Motivated Reasoning.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.journals.uchicago.edu/doi/10.1086/683832">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>78</prism:volume>
+                <dc:title>The Journal of Politics</dc:title>
+                <dc:identifier>DOI 10.1086/683832</dc:identifier>
+                <prism:number>2</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Alt</foaf:surname>
+                        <foaf:givenName>James E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Marshall</foaf:surname>
+                        <foaf:givenName>John</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lassen</foaf:surname>
+                        <foaf:givenName>David Dreyer</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1565"/>
+        <dc:title>Credible Sources and Sophisticated Voters: When Does New Information Induce Economic Voting?</dc:title>
+        <dcterms:abstract>When does new economic information cause voters to reevaluate the government’s competence and ultimately vote economically? Since politically relevant information is often conveyed by actors with incentives to influence voter perceptions, the credibility of information sources can vary significantly. This article randomly varies whether voters receive an aggregate unemployment forecast from the central bank, government or main opposition party using a survey experiment in Denmark linked to detailed panel data. We find that politically sophisticated voters discern differences in institutional credibility and the political cost of the signal and update their unemployment expectations accordingly. Despite failing to differentiate political costs, unsophisticated voters still substantially update their expectations. However, while sophisticated voters intend to engage in substantial prospective economic voting, unsophisticated voters do not relate their new unemployment expectations to their vote intention. These findings suggest that economic information supports economic voting most when it is credible and reaches sophisticated voters.</dcterms:abstract>
+        <dc:date>2016</dc:date>
+        <z:language>english</z:language>
+        <z:shortTitle>Credible Sources and Sophisticated Voters</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.uchicago.edu/doi/10.1086/683832</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30</dcterms:dateSubmitted>
+        <dc:description>Citation Key: altCredibleSourcesSophisticated2016</dc:description>
+        <bib:pages>327–342</bib:pages>
+        <z:citationKey>altCredibleSourcesSophisticated2016</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1565">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1565/Alt et al. - 2016 - Credible Sources and Sophisticated Voters When Does New Information Induce Economic Voting.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.journals.uchicago.edu/doi/10.1086/692785">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>79</prism:volume>
+                <dc:title>The Journal of Politics</dc:title>
+                <dc:identifier>DOI 10.1086/692785</dc:identifier>
+                <prism:number>4</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Healy</foaf:surname>
+                        <foaf:givenName>Andrew</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lenz</foaf:surname>
+                        <foaf:givenName>Gabriel S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1714"/>
+        <dc:title>Presidential Voting and the Local Economy: Evidence from Two Population-Based Data Sets</dc:title>
+        <dcterms:abstract>We show that standard economic measures based on samples and richer newly available ones based on populations lead to different conclusions about democratic accountability. Previous research, which has primarily relied on sample-based measures, has mostly missed an important determinant of presidential election outcomes: the local economy. We detect the local economy’s impact with two unique data sets, one of which includes data on all consumer loans made in California and the other a census of businesses. In contrast to measures subject to sampling error, these population-based measures indicate that economic conditions at the ZIP code and county level have an impact on presidential election outcomes. Presidents therefore face incentives to focus on electorally important geographic regions.</dcterms:abstract>
+        <dc:date>2017</dc:date>
+        <z:language>english</z:language>
+        <z:shortTitle>Presidential Voting and the Local Economy</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.uchicago.edu/doi/10.1086/692785</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30</dcterms:dateSubmitted>
+        <dc:description>Citation Key: healyPresidentialVotingLocal2017</dc:description>
+        <bib:pages>1419–1432</bib:pages>
+        <z:citationKey>healyPresidentialVotingLocal2017</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1714">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1714/Healy and Lenz - 2017 - Presidential Voting and the Local Economy Evidence from Two Population-Based Data Sets.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://doi.org/10.1007/s11109-021-09677-y">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1573-6687"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Guntermann</foaf:surname>
+                        <foaf:givenName>Eric</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lenz</foaf:surname>
+                        <foaf:givenName>Gabriel S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Myers</foaf:surname>
+                        <foaf:givenName>Jeffrey R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1510"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Economic voting</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>American politics</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Presidential elections</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>The Impact of the Economy on Presidential Elections Throughout US History</dc:title>
+        <dcterms:abstract>As numerous studies in the US and elsewhere document, voters often hold incumbents accountable for recent economic circumstances. However, our knowledge of the conditions that allow voters to do so remains incomplete. In particular, most findings about economic voting come from studies of modern economies (post World War II). Modern economies have a host of characteristics that seem to lend themselves to economic voting. Their governments play a large role in the economy and have the Keynesian toolset necessary to influence the economy. Their voters are educated and have access to detailed economic data from ubiquitous media. Are these and other modern conditions necessary for economic voting? Would voters still hold politicians accountable even under adverse conditions? Using economic measures now available back to the 1790s, we study economic voting from the earliest days of the US Republic when none of these conditions were met. Voters, we find, appear to judge incumbent presidents on the economy all the way back to George Washington. Consistent with this pattern, we also find that the economy appears to shape presidents' decisions to run again throughout US history. These findings support recent comparative evidence that economic voting is pervasive across a variety of contexts.</dcterms:abstract>
+        <dc:date>2021-06-01</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Springer Link</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://doi.org/10.1007/s11109-021-09677-y</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 19:00:54</dcterms:dateSubmitted>
+        <bib:pages>837-857</bib:pages>
+        <z:citationKey>guntermannImpactEconomyPresidential2021</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1573-6687">
+        <prism:volume>43</prism:volume>
+        <dc:title>Political Behavior</dc:title>
+        <dc:identifier>DOI 10.1007/s11109-021-09677-y</dc:identifier>
+        <prism:number>2</prism:number>
+        <dcterms:alternative>Polit Behav</dcterms:alternative>
+        <dc:identifier>ISSN 1573-6687</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1510">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1510/Guntermann et al. - 2021 - The Impact of the Economy on Presidential Elections Throughout US History.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://link.springer.com/content/pdf/10.1007%2Fs11109-021-09677-y.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 19:00:57</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/motivated-reasoning-and-democratic-accountability/A5FDC6F7175255BDE8AA6AC054CD9176">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>116</prism:volume>
+                <dc:title>American Political Science Review</dc:title>
+                <dc:identifier>DOI 10.1017/S0003055421001209</dc:identifier>
+                <prism:number>2</prism:number>
+                <dc:identifier>ISSN 0003-0554, 1537-5943</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Little</foaf:surname>
+                        <foaf:givenName>Andrew T.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Schnakenberg</foaf:surname>
+                        <foaf:givenName>Keith E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Turner</foaf:surname>
+                        <foaf:givenName>Ian R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1881"/>
+        <dc:title>Motivated Reasoning and Democratic Accountability</dc:title>
+        <dcterms:abstract>Does motivated reasoning harm democratic accountability? Substantial evidence from political behavior research indicates that voters have “directional motives” beyond accuracy, which is often taken as evidence that they are ill equipped to hold politicians accountable. We develop a model of electoral accountability with voters as motivated reasoners. Directional motives have two effects: (1) divergence—voters with different preferences hold different beliefs, and (2) desensitization—the relationship between incumbent performance and voter beliefs is weakened. While motivated reasoning does harm accountability, this is generally driven by desensitized voters rather than polarized partisans with politically motivated divergent beliefs. We also analyze the relationship between government performance and vote shares, showing that while motivated reasoning always weakens this relationship, we cannot infer that accountability is also harmed. Finally, we show that our model can be mapped to standard models in which voters are fully Bayesian but have different preferences or information.</dcterms:abstract>
+        <dc:date>2022/05</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Cambridge University Press</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/journals/american-political-science-review/article/abs/motivated-reasoning-and-democratic-accountability/A5FDC6F7175255BDE8AA6AC054CD9176</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 19:13:59</dcterms:dateSubmitted>
+        <bib:pages>751-767</bib:pages>
+        <z:citationKey>littleMotivatedReasoningDemocratic2022</z:citationKey>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1881">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1881/Little et al. - 2022 - Motivated Reasoning and Democratic Accountability.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.journals.uchicago.edu/doi/10.1086/686157">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0022-3816,%201468-2508"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hicks</foaf:surname>
+                        <foaf:givenName>Timothy</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jacobs</foaf:surname>
+                        <foaf:givenName>Alan M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Matthews</foaf:surname>
+                        <foaf:givenName>J. Scott</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1771"/>
+        <dc:title>Inequality and Electoral Accountability: Class-Biased Economic Voting in Comparative Perspective</dc:title>
+        <dc:date>10/2016</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Inequality and Electoral Accountability</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.uchicago.edu/doi/10.1086/686157</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-20 13:16:31</dcterms:dateSubmitted>
+        <bib:pages>1076-1093</bib:pages>
+        <z:citationKey>hicksInequalityElectoralAccountability2016</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0022-3816,%201468-2508">
+        <prism:volume>78</prism:volume>
+        <dc:title>The Journal of Politics</dc:title>
+        <dc:identifier>DOI 10.1086/686157</dc:identifier>
+        <prism:number>4</prism:number>
+        <dcterms:alternative>The Journal of Politics</dcterms:alternative>
+        <dc:identifier>ISSN 0022-3816, 1468-2508</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1771">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1771/Hicks et al. - 2016 - Inequality and Electoral Accountability Class-Biased Economic Voting in Comparative Perspective.pdf"/>
+        <dc:title>Submitted Version</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://discovery.ucl.ac.uk/1475464/13/Hicks_Inequality_Electoral_Accountability_VoR.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-20 13:16:35</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+</rdf:RDF>

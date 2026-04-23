@@ -1,6 +1,6 @@
 # Ten Ways to Use Agentic AI in Academic Research
 
-Short, standalone blurbs describing concrete uses for AI coding agents (Claude Code, Cursor, and similar) in academic work — the kinds of tasks covered in the workshop.
+Short, standalone blurbs describing concrete uses for AI coding agents (Claude Code, Cursor, and similar) in academic work: the kinds of tasks covered in the workshop.
 
 ## 1. Literature triage and synthesis
 
@@ -20,7 +20,7 @@ Before you run an analysis — quantitative or qualitative — ask the agent to 
 
 ## 5. Drafting and editing prose
 
-Abstracts, introductions, response-to-referee letters, grant narratives, cover letters, job-talk intros. Agents are strong at tightening flabby prose without changing your argument, reorganizing sections for flow, and flipping register between technical and lay audiences — useful for the same paper being pitched to a field journal, a general audience, and a funder. Used well, an agent is not a ghostwriter; it's a patient editor who will read your eighth draft at 11pm without complaint.
+Abstracts, introductions, response-to-referee letters, grant narratives, cover letters, job-talk intros. Agents are strong at tightening flabby prose without changing your argument, reorganizing sections for flow, and flipping register between technical and lay audiences, which is useful for the same paper being pitched to a field journal, a general audience, and a funder. Used well, an agent is a patient editor who will read your eighth draft at 11pm without complaint.
 
 ## 6. Red-teaming your own paper
 
@@ -32,7 +32,7 @@ Lecture slides, problem sets, exam questions, TA guides, syllabi. Agents can ada
 
 ## 8. LaTeX and figure tooling
 
-Regression tables formatted to journal specs, Beamer slide layouts, BibTeX cleanup, tikz diagrams, and debugging the obscure compile errors that appear the morning a submission is due. LaTeX has a steep learning curve and a long tail of weird failure modes — agents are fluent in both and save hours of StackOverflow. The same holds for matplotlib, ggplot, and the unreasonable amount of time academics spend wrestling legends and axis labels.
+Regression tables formatted to journal specs, Beamer slide layouts, BibTeX cleanup, tikz diagrams, and debugging the obscure compile errors that appear the morning a submission is due. LaTeX has a steep learning curve and a long tail of weird failure modes; agents are fluent in both and save hours of StackOverflow. The same holds for matplotlib, ggplot, and the unreasonable amount of time academics spend wrestling legends and axis labels.
 
 ## 9. Research decision logging and replication documentation
 
