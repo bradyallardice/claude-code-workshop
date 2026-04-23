@@ -100,22 +100,17 @@
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[fragile]{I Tried It. It Didn't Work.}
-  \textbf{Reasonable assumption:} \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git.
+\begin{frame}[fragile]{This Is Not Reliable}
+  \textbf{Reasonable assumption:} \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git. Every one of those posts says so.
 
   \vspace{0.8em}
-  I created the file. Claude Code read right through it --- \texttt{Read}, \texttt{Grep}, and \texttt{Glob} all returned the ``hidden'' files.
+  I created the file and tested it. Claude Code read right through it --- \texttt{Read}, \texttt{Grep}, and \texttt{Glob} all returned the ``hidden'' files.
 
   \vspace{0.8em}
-  The blog posts and Reddit threads are half-right at best:
-  \begin{itemize}
-    \item \texttt{.claudeignore} is not a real feature.
-    \item It \emph{sometimes} appears to work --- when Claude happens to not look at the file, which is indistinguishable from doing nothing.
-    \item There are dozens of community ``workarounds'' circulating. Most add a gitignore entry and hope.
-  \end{itemize}
+  \alert{\texttt{.claudeignore} is not a real feature.} Nobody reads the actual docs; one person writes a confident post; everyone cites it. \textbf{An internet-wide hallucination.}
 
   \vspace{0.8em}
-  \alert{Emerging tools invite confident guessing by analogy. The analogy lies.}
+  It can \emph{appear} to work when Claude happens not to touch the file --- indistinguishable from no ignore at all. That's how the story stays alive.
 \end{frame}
 
 \begin{frame}[fragile]{The Official Answer --- for Now}
