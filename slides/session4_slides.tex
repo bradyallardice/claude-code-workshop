@@ -852,6 +852,44 @@ abstract and any notes I have on it.
 
 % ---- 3c: GitHub + pair exercise ----------------------------------
 
+\begin{frame}[fragile]{How GitHub Works as a Collaborator}
+  \textbf{Session 3 was the solo loop:}
+
+  \vspace{0.2em}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=0.55cm and 0.6cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=2.4cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    arr/.style={->, thick, color=anthropic}
+  ]
+    \node[box] (commit) {commit};
+    \node[box, right=of commit] (instruct) {instruct Claude};
+    \node[box, right=of instruct] (diff) {diff};
+    \node[box, right=of diff] (decide) {keep or revert};
+    \draw[arr] (commit) -- (instruct);
+    \draw[arr] (instruct) -- (diff);
+    \draw[arr] (diff) -- (decide);
+    \draw[arr, rounded corners=6pt] (decide.south) -- ++(0,-0.3) -| (commit.south);
+  \end{tikzpicture}
+  \end{center}
+
+  \textbf{One person, one copy.} Everything happens on your machine.
+
+  \vspace{0.5em}
+  \textbf{Add a coauthor and two new problems appear:}
+  \begin{enumerate}
+    \item \textbf{Parallel work.} You both want to edit at once. Whose version wins?
+    \item \textbf{Combining work.} Your changes live on your laptop, theirs on theirs. How do they become one shared version?
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \textbf{GitHub's answer, in two moves:}
+  \begin{itemize}
+    \item \textbf{Branches} solve parallel work --- each person gets a named lane. Edits on your branch don't touch anyone else's until you ask them to.
+    \item \textbf{Pull requests} solve combining --- \emph{``here are my changes; review them, then merge them into the shared copy.''} Nothing joins \texttt{main} until someone approves it.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{The Capability Case: GitHub}
   \textbf{GitHub MCP lets Claude Code do things you couldn't do by just editing files:}
 
