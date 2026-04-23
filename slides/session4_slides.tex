@@ -948,30 +948,32 @@ git push -u origin my-branch-name
   \alert{\small \texttt{git branch} lists branches (\texttt{*} marks current). Commit before switching --- uncommitted edits follow you between branches.}
 \end{frame}
 
+\begin{frame}{Exercise: The Collaborative Story}
+  \textbf{A shared class repo. You will write one chapter of an episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
+
+  \vspace{0.6em}
+  \textbf{Three premises --- vote on one:}
+  \begin{enumerate}
+    \item \textbf{The Conference From Hell} --- every session, break, and hallway moment at an academic conference goes sideways
+    \item \textbf{The Dissertation That Wrote Itself} --- a PhD student's dissertation has gained sentience; each chapter is one night of it taking new liberties
+    \item \textbf{The Department Mouse} --- a very literate mouse is stealing specific things from the department; it appears to have a plan
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Once you vote, I'll demo the whole git workflow --- on a branch --- by making the cast of characters for your story and merging it to \texttt{main}. Then you clone and write.}
+\end{frame}
+
 \begin{frame}
   \centering
   \vspace{2em}
   {\Huge Demo}
 
   \vspace{1em}
-  {\Large The whole collaboration loop,\\[0.2em] once through with a tiny chapter.}
+  {\Large I'll make the characters for your story\\[0.2em] --- on a branch, via PR.}
 
   \vspace{2em}
   {\small Watch the branch get created, pushed, opened as a PR,\\
-  reviewed, and merged --- then see what happens to \texttt{main}.}
-\end{frame}
-
-\begin{frame}{Exercise: The Collaborative Story}
-  \textbf{A shared class repo. You will write one chapter of an episodic story.} Your partner reviews and merges. At the end, we assemble all chapters and read the result out loud.
-
-  \vspace{0.8em}
-  \textbf{The setup is already on \texttt{main}.} I've pushed a \texttt{README} with the premise, a cast of named characters, and a \texttt{chapters/} folder. You \texttt{clone} the repo, then work from there.
-
-  \vspace{0.8em}
-  \textbf{Your chapter should feature at least one of the named characters.} Beyond that, go wherever it takes you.
-
-  \vspace{0.8em}
-  \alert{The writing is short on purpose. The point is the Git workflow, not the prose.}
+  reviewed, and merged. Then \texttt{main} has the cast, and you clone from there to write your chapters.}
 \end{frame}
 
 \begin{frame}{Your Role, Your Chapter}
