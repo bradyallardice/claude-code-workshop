@@ -283,25 +283,23 @@ cd ~/my_workspace/session_4 && code .
 \begin{frame}[fragile]{How a Skill Works}
   \textbf{A skill is a folder with a \texttt{SKILL.md} file in it.}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \begin{columns}[T]
     \column{0.52\textwidth}
     \textbf{What you set up:}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 ~/.claude/skills/latex-tables/
   SKILL.md       <- required
   template.tex   <- optional
   examples/      <- optional
     \end{lstlisting}
 
-    \vspace{0.2em}
     \textbf{\texttt{SKILL.md}} starts with frontmatter:
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 ---
 name: latex-tables
-description: Use when generating
-  a regression or summary-stats
-  table for the paper.
+description: Use when generating a
+  regression or summary-stats table.
 ---
 
 # Instructions Claude follows
@@ -311,17 +309,17 @@ description: Use when generating
     \column{0.46\textwidth}
     \textbf{How Claude uses it:}
 
-    \vspace{0.4em}
-    \begin{enumerate}
-      \item At session start, Claude sees every skill's \texttt{name} and \texttt{description} --- nothing more
+    \vspace{0.3em}
+    \begin{enumerate}\small
+      \item At session start, Claude sees every skill's \texttt{name} + \texttt{description} --- nothing more
       \item When a task matches the description, Claude invokes the skill
       \item The full body of \texttt{SKILL.md} loads into context on demand
-      \item Claude follows those instructions for the current task
+      \item Claude follows those instructions
     \end{enumerate}
 
-    \vspace{0.5em}
-    \begin{block}{The key idea}
-      The \texttt{description} is the trigger. Write it so Claude can tell \emph{when} this skill applies.
+    \vspace{0.3em}
+    \begin{block}{\small The key idea}
+      \small The \texttt{description} is the trigger. Write it so Claude can tell \emph{when} this skill applies.
     \end{block}
   \end{columns}
 \end{frame}
