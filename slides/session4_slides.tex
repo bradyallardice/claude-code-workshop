@@ -433,125 +433,53 @@ description: Use when generating a
   \alert{If what you want to codify isn't a convention, it's probably not a skill.}
 \end{frame}
 
-\begin{frame}{Why They Didn't Stick}
-  \textbf{Looking back, what these four have in common:}
+% ---- 2e: Worked examples ----------------------------------------
 
-  \vspace{0.5em}
-  \begin{itemize}
-    \item Built \emph{on spec} --- ``this would be good to have'' --- not in response to pain
-    \item Flavored toward \emph{generic discipline} --- ``good research practice''
-    \item Not tied to a specific failure mode I actually hit
-    \item Each could be replaced by a prompt the moment I needed it
-  \end{itemize}
+\begin{frame}{Skills I Actually Use}
+  \textbf{Two skills I reach for regularly:}
 
-  \vspace{0.5em}
-  The pattern is predictable once you see it. A skill built on an idea of how research \emph{should} go --- rather than on a pain I kept hitting --- doesn't survive contact with actual work.
+  \vspace{0.6em}
+  \textbf{1. \LaTeX{} tables.} Encodes my house style for regression tables: significance notation, SE labels, table-notes format, journal overrides. Fires every time I generate a table. Saves \textasciitilde{}15 min per table and keeps formatting consistent across a paper. On version three.
 
-  \vspace{0.4em}
-  \begin{alertblock}{The lesson}
-    Most skills people build get abandoned. The ones that survive are tied to concrete, repeated failure modes or stable conventions.
-  \end{alertblock}
-\end{frame}
+  \vspace{0.7em}
+  \textbf{2. Paragraph-structure audit.} One claim per paragraph, mis-cited claims, smuggled assumptions, weak transitions. Fires when I'm editing my own drafts --- catches the kind of sloppiness I stop seeing after four re-reads.
 
-% ---- 2e: Worked example: LaTeX table skill ----------------------
-
-\begin{frame}{The One I Actually Use: \LaTeX{} Tables}
-  \textbf{Failure mode it addresses:}
-
-  \vspace{0.2em}
-  Every table I generate needs two or three rounds of formatting before it's submission-ready. Same rounds, every time.
-
-  \vspace{0.5em}
-  \textbf{Conventions the skill encodes:}
-  \begin{itemize}
-    \item Significance notation (stars vs.\ p-values; thresholds; footnote placement)
-    \item Standard-error style (robust, clustered, which level to display)
-    \item Table-notes format (variable definitions, sample restrictions)
-    \item Override conditions for journal-specific requirements
-  \end{itemize}
-
-  \vspace{0.4em}
-  \begin{block}{Why this is a convention, not a prompt}
-    Re-specifying these rules every time is expensive. The conventions are stable. They're about me, not about the paper.
+  \vspace{0.8em}
+  \begin{block}{What they have in common}
+    Each codifies a \emph{convention} I already hold. Each fires at a predictable moment --- generating a table, reviewing a draft. Each has been revised through actual use.
   \end{block}
 \end{frame}
 
-\begin{frame}{Where It Helped (This Past Week)}
-  \textbf{Concrete example:}
+\begin{frame}
+  \centering
+  \vspace{3em}
+  {\Huge Demo}
+
+  \vspace{1em}
+  {\Large The \LaTeX{} tables skill, applied live.}
+\end{frame}
+
+% ---- 2f: The skills I don't use ---------------------------------
+
+\begin{frame}{Finding Good Use Cases Is Hard}
+  \textbf{Four skills I built but barely use:}
 
   \vspace{0.3em}
-  Regenerated three robustness tables after a referee asked for a different clustering structure. With the skill, each table came out consistent with my house style on the first pass --- notes, significance stars, SE labels all in place.
-
-  \vspace{0.6em}
-  \textbf{What the skill saved:}
   \begin{itemize}
-    \item Roughly 15 minutes per table of formatting fixes
-    \item Zero context-switching between ``what did I format like last time?'' and the actual analysis
-    \item Consistency across tables in the same paper --- something I'd drift on manually
+    \item \texttt{auto-commit} --- commits after every file edit
+    \item \texttt{research-docs} --- maintains project documentation
+    \item \texttt{robustness-checks} --- structured robustness-spec battery
+    \item \texttt{spec-validator} --- pre-estimation data and spec checks
   \end{itemize}
 
   \vspace{0.5em}
-  \alert{Small per-use savings. But tables compound --- every paper has many.}
-\end{frame}
-
-\begin{frame}{Where It Fell Short (And What I'd Change)}
-  \textbf{Where it fired wrong:}
-  \begin{itemize}
-    \item Over-eager on notes --- added full table notes when I wanted the slide version
-    \item Didn't know the target journal's specific significance conventions until I told it
-  \end{itemize}
+  \textbf{What they have in common:} each sounded useful in the abstract. Each was built on an idea of how research \emph{should} go. Each got replaced by a one-off prompt the first time I actually needed the job done.
 
   \vspace{0.5em}
-  \textbf{What I'd change:}
-  \begin{itemize}
-    \item Explicit trigger conditions: paper conventions vs.\ slide conventions
-    \item A one-line journal-override mechanism at the top of the skill
-  \end{itemize}
-
-  \vspace{0.5em}
-  \begin{alertblock}{The point}
-    Skills are empirical artifacts. You build them, fail at them, refine them. The \LaTeX{} skill is on version three.
+  \begin{alertblock}{Strong recommendation}
+    Do not go build five skills this weekend. You will not use most of them.\\[0.3em]
+    Instead: \textbf{build one.} Try it on your current work. Tweak it where it fires wrong. Let it earn its place in your workflow. \emph{Then} add another.
   \end{alertblock}
-\end{frame}
-
-% ---- 2f: Probationary skills ------------------------------------
-
-\begin{frame}{Four More I've Built. Not Yet Trialed.}
-  \textbf{Explicitly a different bucket from the \LaTeX{} skill:}
-
-  \vspace{0.6em}
-  \begin{enumerate}
-    \item \textbf{LLM-mistake checker} --- catches the class of errors Claude systematically makes (silent NaN drops, wrong merge keys, ignored clustering)
-    \item \textbf{Sanity-check validator} --- fires on freshly-loaded data to verify ranges, types, and counts match expectations
-    \item \textbf{Testing-philosophy skill} --- prevents over-mocked tests that pass but don't catch real bugs
-    \item \textbf{Paragraph-structure audit} --- one claim per paragraph, mis-cited claims, smuggled assumptions, weak transitions. The integrated version queries Zotero for candidate citations when claims are uncited.
-  \end{enumerate}
-
-  \vspace{0.6em}
-  \alert{These I built. I'll trial each once before class. But none are yet validated by real use.}
-\end{frame}
-
-\begin{frame}{Why I Think These Might Stick}
-  \textbf{What's different from the earlier four:}
-
-  \vspace{0.4em}
-  \begin{itemize}
-    \item Each is tied to a \emph{specific LLM failure mode}, not generic ``good practice''
-    \item Each is a \emph{verification skill} --- fires when there's a concrete question (``is this code right?'' ``is this data clean?''), not when I'm ambiently ``doing research''
-    \item The trigger condition for each is sharp --- I can picture the moment I'd reach for it
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{What I'm waiting to learn:}
-
-  \vspace{0.2em}
-  Whether they fire at the right moments --- or whether the description matching misses the cases that actually matter.
-
-  \vspace{0.4em}
-  \begin{block}{Place your bets}
-    Which of the four survives three months? I'll report back in a later class.\\
-    Skill adoption is empirical, not theoretical.
-  \end{block}
 \end{frame}
 
 % ---- 2f2: Skill + MCP composition (teachable pattern) -----------
