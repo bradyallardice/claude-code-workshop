@@ -1,6 +1,5 @@
 # Chapter 2
 
-<!-- Drafter: replace this comment with your chapter.
-     Find your prompt in the winning premise file under premises/.
-     Your chapter prompt is the one labeled "Chapter 2".
-     Length doesn't matter. Weird is good. Five minutes. -->
+<!-- Replace this comment with your chapter.
+     Feature at least one of the named characters (see README.md).
+     Length doesn't matter. Five minutes. Write, push, merge, move on. -->
