@@ -855,7 +855,7 @@ abstract and any notes I have on it.
 \begin{frame}[fragile]{How GitHub Works as a Collaborator}
   \textbf{Session 3 was the solo loop:}
 
-  \vspace{0.2em}
+  \vspace{0.3em}
   \begin{center}
   \begin{tikzpicture}[
     node distance=0.55cm and 0.6cm,
@@ -873,20 +873,61 @@ abstract and any notes I have on it.
   \end{tikzpicture}
   \end{center}
 
+  \vspace{0.3em}
   \textbf{One person, one copy.} Everything happens on your machine.
 
-  \vspace{0.5em}
+  \vspace{0.8em}
   \textbf{Add a coauthor and two new problems appear:}
   \begin{enumerate}
     \item \textbf{Parallel work.} You both want to edit at once. Whose version wins?
     \item \textbf{Combining work.} Your changes live on your laptop, theirs on theirs. How do they become one shared version?
   \end{enumerate}
 
-  \vspace{0.3em}
-  \textbf{GitHub's answer, in two moves:}
-  \begin{itemize}
-    \item \textbf{Branches} solve parallel work --- each person gets a named lane. Edits on your branch don't touch anyone else's until you ask them to.
-    \item \textbf{Pull requests} solve combining --- \emph{``here are my changes; review them, then merge them into the shared copy.''} Nothing joins \texttt{main} until someone approves it.
+  \vspace{0.8em}
+  \centering
+  \alert{GitHub's answer uses two moves: branches and pull requests.}
+\end{frame}
+
+\begin{frame}[fragile]{GitHub's Answer: Branches + PRs}
+  \textbf{The solo loop still runs --- but on a \emph{branch}. When you're ready to share, three more steps join it:}
+
+  \vspace{0.6em}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=0.45cm and 0.4cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=2.2cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    ghbox/.style={draw=accent, fill=lightgray, rounded corners, minimum width=2.2cm, minimum height=0.6cm, align=center, font=\scriptsize\ttfamily},
+    arr/.style={->, thick, color=anthropic},
+    arrgh/.style={->, thick, color=accent}
+  ]
+    \node[box] (commit) {commit};
+    \node[box, right=of commit] (instruct) {instruct Claude};
+    \node[box, right=of instruct] (diff) {diff};
+    \node[box, right=of diff] (decide) {keep or revert};
+    \draw[arr] (commit) -- (instruct);
+    \draw[arr] (instruct) -- (diff);
+    \draw[arr] (diff) -- (decide);
+    \draw[arr, rounded corners=6pt] (decide.north) -- ++(0,0.3) -| (commit.north);
+
+    \node[ghbox, below=1.4cm of commit] (push) {push};
+    \node[ghbox, right=of push] (pr) {open PR};
+    \node[ghbox, right=of pr] (review) {review};
+    \node[ghbox, right=of review] (merge) {merge to main};
+    \draw[arrgh] (push) -- (pr);
+    \draw[arrgh] (pr) -- (review);
+    \draw[arrgh] (review) -- (merge);
+
+    \draw[arrgh, rounded corners=6pt] (decide.south) -- ++(0,-0.4) -| (push.north);
+
+    \node[left=0.2cm of commit, font=\scriptsize\itshape, anchor=east, text=anthropic] {on your \textbf{branch}};
+    \node[left=0.2cm of push, font=\scriptsize\itshape, anchor=east, text=accent] {on \textbf{GitHub}};
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.4em}
+  \begin{itemize}\small
+    \item \textbf{Branch} = your lane. The whole solo loop happens here; \texttt{main} never sees it until you decide.
+    \item \textbf{Pull request} = the proposal. \emph{``Here are the changes from my branch --- review and merge them into \texttt{main}.''}
   \end{itemize}
 \end{frame}
 
