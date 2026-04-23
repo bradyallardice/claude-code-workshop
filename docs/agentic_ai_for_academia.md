@@ -20,7 +20,7 @@ Before you run an analysis — quantitative or qualitative — ask the agent to 
 
 ## 5. Drafting and editing prose
 
-Abstracts, introductions, response-to-referee letters, grant narratives, cover letters, job-talk intros. Agents are strong at tightening flabby prose without changing your argument, reorganizing sections for flow, and flipping register between technical and lay audiences — useful for the same paper being pitched to a field journal, a general audience, and a funder. Used well, an agent is not a ghostwriter; it's a patient editor who will read your eighth draft at 11pm without complaint.
+Abstracts, introductions, response-to-referee letters, grant narratives, cover letters, job-talk intros. Agents are strong at tightening flabby prose without changing your argument, reorganizing sections for flow, and flipping register between technical and lay audiences, which is useful for the same paper being pitched to a field journal, a general audience, and a funder. Used well, an agent is a patient editor who will read your eighth draft at 11pm without complaint.
 
 ## 6. Red-teaming your own paper
 
