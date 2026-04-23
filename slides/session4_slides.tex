@@ -309,6 +309,26 @@ cd ~/my_workspace/session_4 && code .
 
 \end{frame}
 
+% ---- 2-prelude: What skills do, concretely ----------------------
+
+\begin{frame}{What a Skill Actually Does}
+  \textbf{Skills from my setup, and when each one fires:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \texttt{latex-regression-table} --- I ask for a results table. It writes a canonical CSV, renders a booktabs \texttt{.tex}, and compiles a PNG. One house style across the whole paper.
+
+    \item \texttt{abstract-structure-audit} --- I paste a draft abstract. It checks whether the four standard moves (puzzle, approach, findings, contribution) are present, vague, or missing.
+
+    \item \texttt{paragraph-structure-audit} --- I share a paragraph. It flags multiple claims per paragraph, smuggled assumptions, and weak transitions.
+
+    \item \texttt{robustness-checks} --- I run a regression. It proposes a structured battery (alternative SEs, subsamples, IV, event study) and executes it.
+  \end{itemize}
+
+  \vspace{0.6em}
+  \alert{Each one is a recurring workflow done the same way every time.}
+\end{frame}
+
 % ---- 2a: How a skill works --------------------------------------
 
 \begin{frame}[fragile]{How a Skill Works}
