@@ -793,18 +793,18 @@ description: Use when reviewing
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Find three recent papers on voter ID laws from my
-Zotero library, add them to refs.bib, and draft one
-sentence citing each in methods.tex.
+Find all papers in my aina_articles collection on
+local economic voting, and for each give me the
+abstract and any notes I have on it.
   \end{lstlisting}
 
   \vspace{0.4em}
   \textbf{What you'll see in the tool-call log:}
   \begin{enumerate}
-    \item \texttt{zotero\_semantic\_search("voter ID laws")} --- finds candidates
-    \item \texttt{zotero\_get\_item\_metadata(...)} --- pulls BibTeX fields for each
-    \item \texttt{Write refs.bib} --- creates or appends to the bibliography
-    \item \texttt{Edit methods.tex} --- inserts three sentences with \texttt{\textbackslash cite\{...\}}
+    \item \texttt{zotero\_get\_collection\_items("aina\_articles")} --- lists the collection
+    \item \texttt{zotero\_semantic\_search("local economic voting")} --- filters to the topic
+    \item \texttt{zotero\_get\_item\_metadata(...)} --- pulls title, authors, abstract
+    \item \texttt{zotero\_get\_notes(...)} --- pulls my existing notes on each item
   \end{enumerate}
 
   \vspace{0.5em}
