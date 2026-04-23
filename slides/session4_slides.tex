@@ -1245,7 +1245,7 @@ git push -u origin chapter-N
     \item \textbf{``Updates were rejected''} --- \texttt{main} moved while you worked. \\
     \texttt{git pull -{}-rebase origin main \&\& git push}
 
-    \item \textbf{Conflict markers (\texttt{<<<<<<<}) in a file.} Open it, edit to the version you want, delete the markers. Then \texttt{git add <file>} and \texttt{git rebase -{}-continue} (or \texttt{git commit} if merging).
+    \item \textbf{Conflict markers (\texttt{<<<<<<<}) in a file.} Open it, edit to the version you want, delete the markers. Then \texttt{git add <file>} and \texttt{git rebase -{}-continue} (or \texttt{git commit} if merging). \hyperlink{merge-conflicts}{\alert{Walkthrough $\rightarrow$}}
 
     \item \textbf{You committed to \texttt{main} by accident.} Save the work to a new branch, then rewind \texttt{main}:
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
