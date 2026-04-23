@@ -1293,48 +1293,43 @@ The audience applauded politely.
 \end{frame}
 
 \begin{frame}[fragile]{Resolving a Conflict by Hand}
-  \textbf{1. See which files are conflicted.}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-git status     # files appear under "both modified"
-  \end{lstlisting}
+  \textbf{1. Find them:} \texttt{\small git status} \;\;\textit{\small (conflicted files appear under ``both modified'')}
 
-  \textbf{2. Open each one. Edit until only the version you want remains --- no markers left.}
+  \vspace{0.4em}
+  \textbf{2. Open each one. Edit until only the version you want remains --- no markers.}
 
   \vspace{0.2em}
   \begin{columns}[T]
     \column{0.48\textwidth}
-    \textit{Before:}
+    \textit{\small Before:}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 <<<<<<< HEAD
-He launched into a
-90-min monologue
-about LLMs.
+He launched into a 90-min
+monologue about LLMs.
 =======
-She fumbled with the
-slide remote for two
-full minutes.
+She fumbled with the slide
+remote for two full minutes.
 >>>>>>> origin/main
     \end{lstlisting}
 
     \column{0.48\textwidth}
-    \textit{After (your call --- keep one, the other, or merge them):}
+    \textit{\small After (keep one, the other, or merge):}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-She fumbled with the
-slide remote for two
-full minutes, then
-launched into a 90-min
+She fumbled with the slide
+remote for two full minutes,
+then launched into a 90-min
 monologue about LLMs.
     \end{lstlisting}
   \end{columns}
 
   \vspace{0.3em}
   \textbf{3. Stage the file and continue.}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-git add chapters/chapter_3.md
-git rebase --continue   # or: git commit (if you were merging)
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git add chapters/chapter_3.md && git rebase --continue
+# (or: git commit, if you were merging instead of rebasing)
   \end{lstlisting}
 
-  {\small \textbf{Want to bail out?} \texttt{git rebase -{}-abort} (or \texttt{git merge -{}-abort}) puts the file back to its pre-conflict state.}
+  {\footnotesize \textbf{Want to bail out?} \texttt{git rebase -{}-abort} (or \texttt{git merge -{}-abort}) reverts to the pre-conflict state.}
 \end{frame}
 
 \begin{frame}[fragile]{Letting Claude Resolve It}
