@@ -1164,13 +1164,13 @@ commit it on a branch, open a PR, and merge it.
   \vspace{0.4em}
   \textbf{How to stay safe:}
   \begin{itemize}\small
-    \item \textbf{Branch protection} on \texttt{main} requiring a human review. The MCP obeys it --- same API as the UI.
+    \item \textbf{Turn on branch protection} --- a GitHub setting (Repo $\rightarrow$ Settings $\rightarrow$ Branches) that refuses to merge a PR unless it has at least one human approval. The MCP has to obey it, same as the web UI.
     \item \textbf{Scope what you let Claude do.} ``Open a PR'' is fine; ``merge it'' should make you pause.
     \item \textbf{Watch the tool-call log} when the MCP acts on branches.
   \end{itemize}
 
   \vspace{0.2em}
-  \alert{\small The exercise \emph{asked for} two humans --- that was a convention, not a GitHub rule. By default, anyone with write access (including Claude via the MCP) can merge a PR alone. Branch protection is what actually makes review mandatory.}
+  \alert{\small The exercise \emph{asked for} two humans --- that was a convention, not a GitHub rule. By default, anyone with write access (including Claude via the MCP) can merge a PR alone. The branch-protection setting is what actually makes human review mandatory.}
 \end{frame}
 
 \begin{frame}{MCPs: The Meta-Lesson, Again}
