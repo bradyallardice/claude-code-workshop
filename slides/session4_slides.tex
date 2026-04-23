@@ -83,6 +83,64 @@
   \alert{Today is about knowing which tool does real work and which is just novelty.}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  INTERLUDE: DANGERS OF EMERGING TECHNOLOGIES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Dangers of Emerging Technologies}
+  \vspace{0.6em}
+  \centering
+  \begin{tikzpicture}
+    \node[rotate=-7] at (-5.0, 0.9) {\includegraphics[width=5cm]{img/git_ignore.png}};
+    \node[rotate=5]  at (-1.2, 1.6) {\includegraphics[width=5cm]{img/article_ignore.png}};
+    \node[rotate=-4] at ( 3.2, 0.7) {\includegraphics[width=5cm]{img/reddit_ignore.png}};
+    \node[rotate=6]  at (-3.8,-2.0) {\includegraphics[width=5cm]{img/claude_ignore.png}};
+    \node[rotate=-3] at ( 0.3,-1.5) {\includegraphics[width=5cm]{img/dev_ignore.png}};
+    \node[rotate=8]  at ( 4.2,-2.1) {\includegraphics[width=5cm]{img/gemini_ignore.png}};
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{I Tried It. It Didn't Work.}
+  \textbf{Reasonable assumption:} \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git.
+
+  \vspace{0.8em}
+  I created the file. Claude Code read right through it --- \texttt{Read}, \texttt{Grep}, and \texttt{Glob} all returned the ``hidden'' files.
+
+  \vspace{0.8em}
+  The blog posts and Reddit threads are half-right at best:
+  \begin{itemize}
+    \item \texttt{.claudeignore} is not a real feature.
+    \item It \emph{sometimes} appears to work --- when Claude happens to not look at the file, which is indistinguishable from doing nothing.
+    \item There are dozens of community ``workarounds'' circulating. Most add a gitignore entry and hope.
+  \end{itemize}
+
+  \vspace{0.8em}
+  \alert{Emerging tools invite confident guessing by analogy. The analogy lies.}
+\end{frame}
+
+\begin{frame}[fragile]{The Official Answer --- for Now}
+  Hide files from Claude's read tools via \texttt{permissions.deny} in \texttt{.claude/settings.json}:
+
+  \vspace{0.6em}
+  \begin{lstlisting}
+{
+  "permissions": {
+    "deny": [
+      "Read(session_4/demo_output/tab_policy.*)",
+      "Grep(session_4/demo_output/tab_policy.*)",
+      "Glob(session_4/demo_output/tab_policy.*)"
+    ]
+  }
+}
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \textbf{Caveat:} deny rules don't block Bash --- \texttt{cat file} still reads it.
+
+  \vspace{0.6em}
+  \textbf{Coming later:} when we cover \alert{hooks}, we'll see a cleaner mechanism for controlling what Claude touches and when.
+\end{frame}
+
 \begin{frame}{Check-In}
   \textbf{Since Session 3:}
 
