@@ -930,9 +930,7 @@ abstract and any notes I have on it.
 
 \begin{frame}[fragile]{Working With Branches: The Commands}
   \textbf{The whole branch workflow in five moves:}
-
-  \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 # 1. Start from an up-to-date main
 git checkout main
 git pull
@@ -947,22 +945,18 @@ git checkout my-branch-name
 git add <files>
 git commit -m "..."
 
-# 5. Push your branch to GitHub (first time uses -u)
+# 5. Push to GitHub (first time uses -u; later pushes: git push)
 git push -u origin my-branch-name
-# later pushes on the same branch:
-git push
   \end{lstlisting}
 
-  \vspace{0.3em}
   \textbf{Seeing and switching between branches:}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 git branch                    # list branches; * is your current one
 git checkout main             # switch back to main
 git checkout my-branch-name   # switch to an existing branch
   \end{lstlisting}
 
-  \vspace{0.2em}
-  \alert{\small Commit before switching. Uncommitted edits follow you between branches and cause confusion.}
+  \alert{\small Commit before switching. Uncommitted edits follow you between branches.}
 \end{frame}
 
 \begin{frame}{Exercise: The Collaborative Story}
