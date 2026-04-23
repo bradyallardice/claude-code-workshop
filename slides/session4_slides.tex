@@ -929,7 +929,7 @@ abstract and any notes I have on it.
 \end{frame}
 
 \begin{frame}[fragile]{Working With Branches: The Commands}
-  \textbf{The whole branch workflow in four moves:}
+  \textbf{The whole branch workflow in five moves:}
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
@@ -937,14 +937,17 @@ abstract and any notes I have on it.
 git checkout main
 git pull
 
-# 2. Create a new branch and switch to it
-git checkout -b my-branch-name
+# 2. Create a new branch
+git branch my-branch-name
 
-# 3. Commit as usual (the solo loop still applies)
+# 3. Switch to it
+git checkout my-branch-name
+
+# 4. Commit as usual (the solo loop still applies)
 git add <files>
 git commit -m "..."
 
-# 4. Push your branch to GitHub (first time uses -u)
+# 5. Push your branch to GitHub (first time uses -u)
 git push -u origin my-branch-name
 # later pushes on the same branch:
 git push
