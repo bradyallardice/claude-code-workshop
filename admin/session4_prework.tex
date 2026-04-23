@@ -105,8 +105,11 @@ Paste it into a temporary scratch file you will delete after Step 4b.
 
 \subsection*{4b. Add the GitHub MCP to Claude Code}
 
-In your terminal, run (replace \texttt{YOUR\_PAT} with the token you just copied):
+In your terminal, paste the command below, \textbf{but before pressing Enter, replace the literal text \texttt{YOUR\_PAT} with the token you just copied} (keep the word \texttt{Bearer} and the space before the token --- you are only replacing \texttt{YOUR\_PAT}, nothing else):
 \cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
+
+\textit{Example of what it should look like after substitution (with a fake token):}
+\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
 
 Then verify:
 \cmd{claude mcp list}
