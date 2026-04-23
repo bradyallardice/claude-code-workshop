@@ -133,14 +133,105 @@ m2 = run_logit(
                 "Reference: treatment='cntrl', fx_status='none'.",
 )
 
+# ── Additional specs for the main results table ──────────────────────
+# Spec 1 = m1 (pooled, weighted)
+# Spec 2: weighted with additive fx_status controls (not the interaction in m2)
+m_spec2 = run_logit(
+    formula="supports_intervention ~ C(treatment, Treatment('cntrl')) + C(fx_status, Treatment('none'))",
+    data=df,
+    weights="survey_weight",
+    label="Spec 2: Treatment + fx_status controls (weighted)",
+    description="Weighted logit with additive fx_status controls.",
+)
+
+# Spec 3: unweighted pooled
+m_spec3 = run_logit(
+    formula="supports_intervention ~ C(treatment, Treatment('cntrl'))",
+    data=df,
+    weights=None,
+    label="Spec 3: Treatment effect (unweighted)",
+    description="Unweighted baseline logit.",
+)
+
 # ── Summary of sample sizes ──────────────────────────────────────────
 print("\n" + "=" * 65)
 print("SUMMARY: SAMPLE SIZES ACROSS MODELS")
 print("=" * 65)
 models = {
-    "Model 1 (treatment only)": m1,
+    "Model 1 (treatment only, weighted)": m1,
     "Model 2 (treatment × fx_status)": m2,
+    "Spec 2 (treatment + fx_status, weighted)": m_spec2,
+    "Spec 3 (treatment only, unweighted)": m_spec3,
 }
 for name, m in models.items():
-    print(f"  {name:40s} N = {int(m.nobs):,}")
+    print(f"  {name:42s} N = {int(m.nobs):,}")
 print("=" * 65)
+
+
+# ── Long-format CSV for the latex-regression-table skill ─────────────
+# Reports the treatment[Hungary] coefficient across three specs.
+HUNGARY_COEF = "C(treatment, Treatment('cntrl'))[T.Hungary]"
+
+# True row counts (model.nobs with freq_weights returns sum of weights, not N).
+n_pooled = len(df.dropna(subset=["supports_intervention", "treatment"]))
+n_with_fx = len(df.dropna(subset=["supports_intervention", "treatment", "fx_status"]))
+
+specs = [
+    # (spec_id, label, model, weighted?, has_fx_controls?, n)
+    ("pooled",     "Pooled (weighted)",       m1,      True,  False, n_pooled),
+    ("with_fx",    "Weighted + FX Controls",  m_spec2, True,  True,  n_with_fx),
+    ("unweighted", "Unweighted",              m_spec3, False, False, n_pooled),
+]
+
+rows = []
+
+# spec_label rows
+for i, (spec, label, *_rest) in enumerate(specs, start=1):
+    rows.append({"row_type": "spec_label", "display_order": i, "spec": spec,
+                 "value_str": label})
+
+# fe_label rows (used here for non-FE indicators: weights + controls)
+rows.append({"row_type": "fe_label", "display_order": 1,
+             "value_str": "Survey Weights", "fe_name": "weights"})
+rows.append({"row_type": "fe_label", "display_order": 2,
+             "value_str": "FX Status Controls", "fe_name": "fx_controls"})
+
+# coefficient rows
+for spec, _label, model, *_rest in specs:
+    rows.append({
+        "row_type": "coefficient", "display_order": 1, "spec": spec,
+        "dv": "supports_intervention", "dv_label": "Supports Intervention",
+        "coef_type": "hungary",
+        "coef": float(model.params[HUNGARY_COEF]),
+        "se": float(model.bse[HUNGARY_COEF]),
+        "pvalue": float(model.pvalues[HUNGARY_COEF]),
+    })
+
+# fe_indicator rows
+for spec, _label, _model, weighted, fx, _n in specs:
+    rows.append({"row_type": "fe_indicator", "display_order": 1, "spec": spec,
+                 "value_str": "yes" if weighted else "no", "fe_name": "weights"})
+    rows.append({"row_type": "fe_indicator", "display_order": 2, "spec": spec,
+                 "value_str": "yes" if fx else "no", "fe_name": "fx_controls"})
+
+# n rows
+for i, (spec, *_mid, n) in enumerate(specs, start=1):
+    rows.append({"row_type": "n", "display_order": i, "spec": spec,
+                 "value_num": n})
+
+# note row
+rows.append({
+    "row_type": "note", "display_order": 1,
+    "value_str": ("Logit coefficients on the Hungary treatment indicator "
+                  "(reference: control). Standard errors in parentheses."),
+})
+
+CSV_COLUMNS = ["row_type", "display_order", "spec", "dv", "dv_label",
+               "coef_type", "coef", "se", "pvalue", "value_num",
+               "value_str", "fe_name"]
+tab = pd.DataFrame(rows).reindex(columns=CSV_COLUMNS)
+
+os.makedirs("session_4/demo_output", exist_ok=True)
+out_csv = "session_4/demo_output/tab_main.csv"
+tab.to_csv(out_csv, index=False)
+print(f"\nWrote table CSV to {out_csv}")
