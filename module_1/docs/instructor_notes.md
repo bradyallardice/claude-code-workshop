@@ -37,7 +37,7 @@ Break at 0:55, then Module 2 starts at 1:05.
 - Quick orientation. Hit the PI/RA analogy once here; it comes back after the demo.
 
 ### Live Demo (5 min)
-- The demo prompt is in `module_1/docs/demo_prompt.md`. Have it ready to paste.
+- The demo prompt is in `session_1/docs/demo_prompt.md`. Have it ready to paste.
 - Goal: wow factor. Show Claude Code reading two datasets, writing a merge script, and running it. Don't narrate every step — let them watch.
 - If the demo takes longer than 5 min (network lag, errors), narrate what's happening and move on. You can show the finished output.
 

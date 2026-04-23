@@ -2,12 +2,12 @@
 
 ## Setup
 
-You have two datasets in `module_3/data/`:
+You have two datasets in `session_3/data/`:
 
 - `swiss_franc_survey.csv` — a survey of 2,044 Polish adults about government intervention after the 2015 Swiss franc shock
 - `respondent_demographics.csv` — additional demographic variables (income, ideology) for survey respondents
 
-Read the codebook in `module_3/docs/codebook.md` before you begin.
+Read the codebook in `session_3/docs/codebook.md` before you begin.
 
 ## Research Question
 
@@ -47,4 +47,4 @@ Use Claude Code in **plan mode** for each step below. Review every plan before a
 
 9. **Format as LaTeX.** Ask Claude Code to produce a publication-style LaTeX regression table with all specifications side by side. Compile to PDF.
 
-10. **Save everything.** All scripts, output, and the LaTeX table should be in `module_3/output/`.
+10. **Save everything.** All scripts, output, and the LaTeX table should be in `session_3/output/`.

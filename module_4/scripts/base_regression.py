@@ -16,7 +16,7 @@ import statsmodels.formula.api as smf
 
 
 # ── Load data ────────────────────────────────────────────────────────
-df = pd.read_csv("module_3/output/merged_survey.csv")
+df = pd.read_csv("session_3/output/merged_survey.csv")
 
 # ── Data validation block ────────────────────────────────────────────
 print("\n" + "=" * 65)

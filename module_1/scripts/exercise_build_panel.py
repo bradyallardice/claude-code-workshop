@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-DATA_DIR = os.path.join("module_1", "data")
-OUTPUT_DIR = os.path.join("module_1", "output")
+DATA_DIR = os.path.join("session_1", "data")
+OUTPUT_DIR = os.path.join("session_1", "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # --- Load election data ---

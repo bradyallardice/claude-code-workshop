@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # ── Load FX data ─────────────────────────────────────────────────
-df = pd.read_csv("module_3/data/PLN_CHF_EUR_FXdata.csv")
+df = pd.read_csv("session_3/data/PLN_CHF_EUR_FXdata.csv")
 df["date"] = pd.to_datetime(df["YYYY/MM/DD"])
 df = df.sort_values("date")
 
@@ -39,7 +39,7 @@ plt.setp(ax.xaxis.get_majorticklabels(), rotation=30, ha="right")
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("module_3/output/fx_rate_figure.png", dpi=300, bbox_inches="tight")
+plt.savefig("session_3/output/fx_rate_figure.png", dpi=300, bbox_inches="tight")
 plt.close()
 
-print("✓ Saved: module_3/output/fx_rate_figure.png")
+print("✓ Saved: session_3/output/fx_rate_figure.png")

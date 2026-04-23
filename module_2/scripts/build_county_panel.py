@@ -1,13 +1,13 @@
 """Build a county-level panel joining presidential vote shares with IPUMS demographics.
 
 Reads:
-  - module_1/data/election/countypres_sample.csv (MIT Election Data + Science Lab)
-  - module_1/data/ipums/census_{year}_sample.csv.gz (IPUMS USA microdata)
+  - session_1/data/election/countypres_sample.csv (MIT Election Data + Science Lab)
+  - session_1/data/ipums/census_{year}_sample.csv.gz (IPUMS USA microdata)
 
 Outputs:
-  - module_1/output/county_panel.csv
-  - module_1/output/vote_share_over_time.png
-  - module_1/output/demographics_over_time.png
+  - session_1/output/county_panel.csv
+  - session_1/output/vote_share_over_time.png
+  - session_1/output/demographics_over_time.png
 
 Variable coding (from IPUMS codebooks):
   EDUC: 0=N/A or no schooling, 1=nursery-grade 4, 2=grade 5-8, 3=grade 9,
@@ -25,7 +25,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-DATA_DIR = os.path.join("module_1", "data")
+DATA_DIR = os.path.join("session_1", "data")
 
 
 def _weighted_median(values, weights):
@@ -38,7 +38,7 @@ def _weighted_median(values, weights):
     return sorted_values[cumulative >= cutoff][0]
 
 
-OUTPUT_DIR = os.path.join("module_1", "output")
+OUTPUT_DIR = os.path.join("session_1", "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 ELECTION_TO_IPUMS = {

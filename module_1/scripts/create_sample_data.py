@@ -2,19 +2,19 @@
 
 Finds counties that appear in both the election data and IPUMS for at least
 one year (2012-2024), excluding Alaska and Hawaii. Then creates:
-  - module_1/data/election/countypres_sample.csv (election data, matched counties, all years)
-  - module_1/data/ipums/census_{year}_sample.csv.gz (10% person-level sample, matched counties)
+  - session_1/data/election/countypres_sample.csv (election data, matched counties, all years)
+  - session_1/data/ipums/census_{year}_sample.csv.gz (10% person-level sample, matched counties)
 
 The resulting sample is intentionally unbalanced — not every county appears in
 every IPUMS year — so that students encounter this as a data quality issue.
 
-Run from the project root: python module_1/scripts/create_sample_data.py
+Run from the project root: python session_1/scripts/create_sample_data.py
 """
 
 import pandas as pd
 import os
 
-DATA_DIR = os.path.join("module_1", "data")
+DATA_DIR = os.path.join("session_1", "data")
 IPUMS_DIR = os.path.join(DATA_DIR, "full", "ipums")
 SAMPLE_IPUMS_DIR = os.path.join(DATA_DIR, "ipums")
 

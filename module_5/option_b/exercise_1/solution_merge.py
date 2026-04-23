@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 
 # ── Load data ────────────────────────────────────────────────────
-survey = pd.read_csv("module_5/option_b/data/swiss_franc_survey.csv")
-demog = pd.read_csv("module_5/option_b/data/respondent_demographics.csv")
+survey = pd.read_csv("session_5/option_b/data/swiss_franc_survey.csv")
+demog = pd.read_csv("session_5/option_b/data/respondent_demographics.csv")
 
 print("Survey shape:", survey.shape)
 print("Demographics shape:", demog.shape)
@@ -54,5 +54,5 @@ print("\n=== INCOME QUINTILE = 0 ===")
 print(f"Respondents with income_quintile = 0: {(merged['income_quintile'] == 0).sum()}")
 
 # ── Save ─────────────────────────────────────────────────────────
-merged.to_csv("module_5/option_b/output/merged_survey.csv", index=False)
-print("\nSaved merged data to module_5/option_b/output/merged_survey.csv")
+merged.to_csv("session_5/option_b/output/merged_survey.csv", index=False)
+print("\nSaved merged data to session_5/option_b/output/merged_survey.csv")

@@ -9,7 +9,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 # ── Load merged data ─────────────────────────────────────────────
-df = pd.read_csv("module_5/option_b/output/merged_survey.csv")
+df = pd.read_csv("session_5/option_b/output/merged_survey.csv")
 
 # Set reference categories
 df["treatment"] = pd.Categorical(
@@ -191,8 +191,8 @@ latex_lines.append(r"\end{table}")
 latex_output = "\n".join(latex_lines)
 
 # Save LaTeX table
-with open("module_5/option_b/exercise_2/tables/robustness_table.tex", "w") as f:
+with open("session_5/option_b/exercise_2/tables/robustness_table.tex", "w") as f:
     f.write(latex_output)
 
-print("\n\nLaTeX table saved to module_5/option_b/exercise_2/tables/robustness_table.tex")
+print("\n\nLaTeX table saved to session_5/option_b/exercise_2/tables/robustness_table.tex")
 print("\n" + latex_output)

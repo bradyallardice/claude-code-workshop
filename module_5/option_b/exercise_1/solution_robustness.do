@@ -6,7 +6,7 @@ clear all
 set more off
 
 * ── Load merged data ─────────────────────────────────────────────
-import delimited "module_5/option_b/output/merged_survey.csv", clear varnames(1)
+import delimited "session_5/option_b/output/merged_survey.csv", clear varnames(1)
 
 * Encode categorical variables with explicit reference categories
 encode treatment, gen(treat_num)
@@ -66,7 +66,7 @@ di "(6) Urban only:            N=`n6'"
 * ── Export LaTeX table with esttab ───────────────────────────────
 * Renames make output labels consistent with the Python/R versions
 
-esttab m1 m2 m3 m4 m5 m6 using "module_5/option_b/exercise_2/tables/robustness_table.tex", ///
+esttab m1 m2 m3 m4 m5 m6 using "session_5/option_b/exercise_2/tables/robustness_table.tex", ///
     replace                                               ///
     label booktabs                                        ///
     b(%9.3f) se(%9.3f)                                    ///
@@ -87,4 +87,4 @@ esttab m1 m2 m3 m4 m5 m6 using "module_5/option_b/exercise_2/tables/robustness_t
     nonumbers nonotes                                     ///
     addnotes("\scriptsize \$^{***}p<0.01\$; \$^{**}p<0.05\$; \$^{*}p<0.1\$. Reference: control group, no FX loan.")
 
-di _n "LaTeX table saved to module_5/option_b/exercise_2/tables/robustness_table.tex"
+di _n "LaTeX table saved to session_5/option_b/exercise_2/tables/robustness_table.tex"
