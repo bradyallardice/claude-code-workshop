@@ -101,18 +101,21 @@
 \end{frame}
 
 \begin{frame}[fragile]{\texttt{.claudeignore}: Works, Sometimes}
-  The natural guess: \texttt{.claudeignore} is to Claude Code what \texttt{.gitignore} is to git. A lot of the internet says so.
+  The \texttt{.ignore} convention is everywhere in software:
+  \begin{itemize}
+    \item \texttt{.gitignore} (git), \texttt{.dockerignore} (Docker)
+    \item \texttt{.npmignore} (npm), \texttt{.eslintignore}, \texttt{.prettierignore}
+    \item \texttt{.gcloudignore}, \texttt{.terraformignore}, and many more
+  \end{itemize}
+  So \texttt{.claudeignore} is a commonly taught, perfectly reasonable extrapolation. You'll see it recommended across blogs, Reddit, and LLM-generated advice.
 
-  \vspace{0.8em}
+  \vspace{0.6em}
   What the testing actually shows:
   \begin{itemize}
     \item If you tell Claude \emph{explicitly} to respect it, it usually does.
-    \item If you don't --- even if it has just read \texttt{.claudeignore} and seen the pattern --- it will read the file anyway.
+    \item If you don't --- even after it reads \texttt{.claudeignore} and sees the pattern --- it will read the file anyway.
     \item There's no tool-level enforcement. It's a polite request that only lands when the model is listening.
   \end{itemize}
-
-  \vspace{0.6em}
-  So it ``works'' the way a sticky note on someone's monitor works: useful, sometimes, for people who happen to read it.
 \end{frame}
 
 \begin{frame}[fragile]{The Official Approach --- With Real Gaps}
