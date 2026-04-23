@@ -1059,35 +1059,25 @@ git push -u origin my-branch-name
 \end{frame}
 
 \begin{frame}[fragile]{Reference Card}
-  \begin{columns}[T]
-    \column{0.52\textwidth}
-    \textbf{Drafter}
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+  \textbf{1. Clone the repo, open it, branch, write, commit, push:}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 git clone https://github.com/bradyallardice/github_collaboration_practice.git
 cd github_collaboration_practice
 code .                            # open the repo in VS Code
 git checkout -b chapter-N
-# edit chapters/chapter_N.md
-git add chapters/chapter_N.md
-git commit -m "Draft chapter N"
+# claim your slot in CHAPTERS.md, then write chapters/chapter_N.md
+git add CHAPTERS.md chapters/chapter_N.md
+git commit -m "Chapter N"
 git push -u origin chapter-N
-    \end{lstlisting}
+  \end{lstlisting}
 
-    Then open the PR on GitHub: click the banner, set base to \texttt{main}, assign your partner as reviewer.
-
-    \column{0.46\textwidth}
-    \textbf{Reviewer}
-    \begin{enumerate}\small
-      \item Wait for your partner's PR link
-      \item Open it, click \textbf{Files changed}
-      \item Skim --- if it reads like a chapter, done
-      \item \textbf{Review changes} $\rightarrow$ \textbf{Approve}
-      \item \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm}
-    \end{enumerate}
-
-    \vspace{0.3em}
-    \alert{\small You are not grading. Approve and merge.}
-  \end{columns}
+  \vspace{0.3em}
+  \textbf{2. Open and merge the PR on GitHub:}
+  \begin{enumerate}\small
+    \item Click the \textbf{Compare \& pull request} banner, base = \texttt{main}
+    \item \textbf{Create pull request}
+    \item \textbf{Merge pull request} $\rightarrow$ \textbf{Confirm merge}
+  \end{enumerate}
 
   \vspace{0.3em}
   \centerline{\small Something break? \hyperlink{troubleshooting}{\alert{$\rightarrow$ Troubleshooting GitHub}}}
