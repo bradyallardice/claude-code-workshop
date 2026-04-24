@@ -290,6 +290,33 @@ cd ~/my_workspace/session_4 && code .
   {\small If you had in-progress work inside the course repo, copy it into \texttt{\textasciitilde/my\_workspace/} too.}
 \end{frame}
 
+\begin{frame}[fragile]{If \texttt{git pull} Fights Back}
+  Some of you may have committed work inside the repo before today. Those commits diverge from what's on the server, and \texttt{git pull} will complain.
+
+  \vspace{0.4em}
+  \textbf{Recovery recipe --- run these in the course repo:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Save any uncommitted edits
+git stash -u
+
+# 2. Save any local commits on a backup branch
+git branch backup-prework
+
+# 3. Force local student to match the server
+git fetch origin
+git reset --hard origin/student
+
+# 4. Reapply uncommitted edits (skip if nothing was stashed)
+git stash pop
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then continue with Step 2 and Step 3 of the ritual.
+
+  \vspace{0.3em}
+  {\small Your old commits are safe on \texttt{backup-prework}. If \texttt{git branch} says ``already exists,'' add a suffix: \texttt{backup-prework-2}.}
+\end{frame}
+
 % ══════════════════════════════════════════════════════════════════
 %  PART 2: SKILLS (CENTERPIECE)
 % ══════════════════════════════════════════════════════════════════
