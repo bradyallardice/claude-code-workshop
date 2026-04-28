@@ -152,6 +152,30 @@
 %  NAMED SUBAGENTS / MULTI-AGENT TEAMS
 % ══════════════════════════════════════════════════════════════════
 
+\begin{frame}{Why Define a Named Subagent at All?}
+  \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
+
+  \vspace{0.5em}
+  Because the unit you're reusing isn't the same.
+
+  \vspace{0.6em}
+  \begin{block}{The framing}
+    \textbf{Skills are knowledge. Subagents are roles.}\\
+    A role bundles a disposition, a tool scope, and an invocation contract --- and \textit{then} draws on skills to execute.
+  \end{block}
+
+  \vspace{0.4em}
+  \textbf{Three things a role gives you that a skill can't:}
+  \begin{enumerate}
+    \item \textbf{Tool scope --- enforced.} A code-review subagent has read-only file access, no bash. A skill is just instructions; Claude can work around them.
+    \item \textbf{Identity, not advice.} The system prompt frames the whole disposition --- ``you find problems, you don't fix them.'' Skills layer on; subagents \textit{are} the disposition.
+    \item \textbf{A stable invocation contract.} ``Delegate code review $\to$ get back a structured critique.'' Ad-hoc means re-specifying the contract every time --- which is where things drift.
+  \end{enumerate}
+
+  \vspace{0.4em}
+  \alert{Pre-define a subagent when the \textbf{role} is the reusable unit, not just the know-how.}
+\end{frame}
+
 \begin{frame}[fragile]{Building a Team of Specialized Agents}
   \textbf{Named subagents you define once and invoke on demand.} Each has its own scope, system prompt, and tool allowlist --- like a team of focused collaborators.
 
