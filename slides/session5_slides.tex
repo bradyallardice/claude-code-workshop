@@ -296,27 +296,27 @@ Don't propose fixes.
 \end{frame}
 
 \begin{frame}{Building a Specialized Agent}
-  \textbf{Worked example: turn that lit-search prompt into a reusable role.}
+  \textbf{Worked example: turn ``audit my regression script'' into a reusable role.}
 
   \vspace{0.4em}
   \textbf{Walking through the four fields:}
   \begin{enumerate}\small
     \item \textbf{Name + description.} What it does, plus the one-line trigger Claude reads to decide when to spawn it.\\
-    \emph{``Use for multi-database literature searches on a topic.''}
-    \item \textbf{Tool allowlist.} Only what it needs --- \texttt{mcp\_\_zotero\_\_*}, \texttt{WebSearch}, \texttt{WebFetch}. No \texttt{Bash}, no \texttt{Edit}: a search agent shouldn't be writing files.
-    \item \textbf{Model.} \texttt{sonnet} --- search-and-synthesize is moderate weight, no need for Opus.
-    \item \textbf{System prompt.} The disposition + the output contract: \emph{``You are a literature search specialist. Return a structured bibliography with the key claim from each paper.''}
+    \emph{``Audit a regression script for silent issues.''}
+    \item \textbf{Tool allowlist.} \texttt{Read}, \texttt{Grep}, \texttt{Glob} --- read-only. No \texttt{Edit}, no \texttt{Bash}: a critic that can fix code is no longer a critic.
+    \item \textbf{Model.} \texttt{sonnet} --- careful pattern-matching is moderate weight, no need for Opus.
+    \item \textbf{System prompt.} The disposition + the output contract: \emph{``You are a skeptical specification reviewer. Flag issues that would invalidate results. Return: line, issue, why. Don't propose fixes.''}
   \end{enumerate}
 
   \vspace{0.3em}
-  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/lit-search.md} --- you saw the resulting YAML two slides back.
+  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/spec-critic.md} --- you saw the resulting YAML two slides back.
 
   \vspace{0.4em}
   \textbf{Now in any session:}
   \begin{itemize}\small
     \item Claude auto-spawns it when a task matches the \texttt{description}
-    \item Or invoke it explicitly: \emph{``use \texttt{lit-search} for FX mortgages + 2015 SNB shock, max 10''}
-    \item Spawn several in one message --- still parallel
+    \item Or invoke it explicitly: \emph{``use \texttt{spec-critic} on \texttt{session\_3/scripts/solution\_estimate.py}''}
+    \item The role is enforced --- if it suggests a fix, it's broken its own contract
   \end{itemize}
 
   \vspace{0.2em}
