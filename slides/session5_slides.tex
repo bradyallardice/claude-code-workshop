@@ -152,6 +152,31 @@
 %  NAMED SUBAGENTS / MULTI-AGENT TEAMS
 % ══════════════════════════════════════════════════════════════════
 
+\begin{frame}{What a Predefined Subagent Looks Like}
+  \textbf{A predefined subagent is a small markdown file --- author it once, Claude spawns it many times.}
+
+  \vspace{0.5em}
+  \textbf{Where it lives:}
+  \begin{itemize}
+    \item \texttt{\textasciitilde/.claude/agents/<name>.md} --- user-level, available across projects
+    \item \texttt{.claude/agents/<name>.md} --- project-level, this repo only
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{What you specify:}
+  \begin{itemize}
+    \item \textbf{Identity} --- a \texttt{name} and a one-line \texttt{description}. The description is what Claude reads to decide when to spawn this agent.
+    \item \textbf{Tool allowlist} --- exactly which tools the agent can use (e.g.\ \texttt{Read} only, no \texttt{Bash}; or a specific MCP).
+    \item \textbf{Model} --- Opus, Sonnet, or Haiku, depending on how heavy the work is.
+    \item \textbf{System prompt} --- the body of the file: role, disposition, expected output format --- everything you'd brief a colleague on.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{block}{The shape of the file}
+    YAML frontmatter for the metadata; everything below the second \texttt{-{}-{}-} is the system prompt.
+  \end{block}
+\end{frame}
+
 \begin{frame}{Why Define a Named Subagent at All?}
   \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
 
