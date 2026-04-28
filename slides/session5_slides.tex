@@ -111,6 +111,29 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{How to Trigger a Subagent}
+  \textbf{You don't have to set anything up --- just ask.}
+
+  \vspace{0.6em}
+  Claude Code ships with a general-purpose subagent built in. To spawn one, describe the work in plain English:
+  \begin{itemize}
+    \item \textit{``Send a subagent to map the directory structure''}
+    \item \textit{``Use a subagent to find every place we set the random seed''}
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{For parallelism, say so explicitly.}
+  \begin{itemize}
+    \item \textit{``Spawn three agents \textbf{in parallel} to search Zotero, Google Scholar, and Connected Papers''}
+    \item ``In parallel'' / ``at the same time'' / ``concurrently'' all signal that the agents should run in one batch rather than sequentially
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{No setup required}
+    The general-purpose agent ships with Claude Code. Defining your own named agent (later this session) is for when you want to reuse a scoped role across many sessions.
+  \end{block}
+\end{frame}
+
 \begin{frame}{Using Subagents Well}
   \textbf{Three habits that make subagents pay off:}
   \begin{enumerate}
