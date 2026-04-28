@@ -248,30 +248,32 @@ it appears in.
   \alert{\small Plain text --- metadata sits between two \texttt{-{}-{}-} lines at the top of the file; the system prompt is everything below.}
 \end{frame}
 
-\begin{frame}[fragile]{What YAML Looks Like}
-  \textbf{A complete predefined subagent --- short enough to read at a glance:}
+\begin{frame}[fragile]{Building a Specialized Agent}
+  \textbf{Worked example: turn ``audit my regression script'' into a reusable role.}
+
+  \vspace{0.4em}
+  \textbf{Walking through the four fields:}
+  \begin{enumerate}\small
+    \item \textbf{Name + description.} What it does, plus the one-line trigger Claude reads to decide when to spawn it.\\
+    \emph{``Audit a regression script for silent issues.''}
+    \item \textbf{Tool allowlist.} \texttt{Read}, \texttt{Grep}, \texttt{Glob} --- read-only. A critic that can fix code is no longer a critic.
+    \item \textbf{Model.} \texttt{haiku} --- fast and cheap, fine for systematic pattern-matching.
+    \item \textbf{System prompt.} Disposition + output contract: \emph{``You're a skeptical reviewer. Flag invalidating issues. Return: line, issue, why. Don't propose fixes.''}
+  \end{enumerate}
 
   \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
----
-name: spec-critic
-description: Audit a regression script for silent issues.
-tools: [Read, Grep, Glob]
-model: sonnet
----
-You are a skeptical specification reviewer. Flag issues that
-would invalidate results: silent NaN drops, sample changes,
-scale mismatches, weak clustering. Return: line, issue, why.
-Don't propose fixes.
-  \end{lstlisting}
+  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/spec-critic.md}.
 
   \vspace{0.3em}
-  \textbf{Reading it:}
+  \textbf{Now in any session:}
   \begin{itemize}\small
-    \item Lines between \texttt{-{}-{}-} are YAML: one \texttt{key: value} per line; lists in square brackets.
-    \item \texttt{name}, \texttt{description}, \texttt{tools}, \texttt{model} are the four fields you'll use.
-    \item Everything below the second \texttt{-{}-{}-} is the system prompt --- plain English.
+    \item Claude auto-spawns it when a task matches the \texttt{description}
+    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{solution\_estimate.py}''}
+    \item Role is enforced --- if it suggests a fix, it broke its own contract
   \end{itemize}
+
+  \vspace{0.2em}
+  \alert{\small Permissions still apply: tools the agent uses must be allowed in \texttt{.claude/settings.json}.}
 \end{frame}
 
 \begin{frame}{Why Define a Named Subagent at All?}
