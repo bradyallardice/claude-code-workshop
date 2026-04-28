@@ -209,7 +209,6 @@ it appears in.
   \end{itemize}
 
   \vspace{0.2em}
-  \alert{\small Cheap, local, no tokens spent on web traffic --- the kind of read-and-summarize job where context hygiene is the whole point.}
 \end{frame}
 
 \begin{frame}{Using Subagents Well}
@@ -250,18 +249,20 @@ it appears in.
 \end{frame}
 
 \begin{frame}[fragile]{What YAML Looks Like}
-  \textbf{A complete predefined subagent fits in eight lines:}
+  \textbf{A complete predefined subagent --- short enough to read at a glance:}
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 ---
-name: lit-search
-description: Use for multi-database literature searches.
-tools: [mcp__zotero__*, WebSearch, WebFetch]
+name: spec-critic
+description: Audit a regression script for silent issues.
+tools: [Read, Grep, Glob]
 model: sonnet
 ---
-You are a literature search specialist. Return a structured
-bibliography with the key claim from each paper.
+You are a skeptical specification reviewer. Flag issues that
+would invalidate results: silent NaN drops, sample changes,
+scale mismatches, weak clustering. Return: line, issue, why.
+Don't propose fixes.
   \end{lstlisting}
 
   \vspace{0.3em}
