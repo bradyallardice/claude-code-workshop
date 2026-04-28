@@ -187,29 +187,29 @@ cd ~/my_workspace/session_5 && code .
 \end{frame}
 
 \begin{frame}[fragile]{Using a Generic Subagent in Practice}
-  \textbf{Worked example: tightly-scoped literature scan on the running Swiss franc topic.}
+  \textbf{Worked example: one subagent, one bounded local task.}
 
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Spawn two subagents in parallel:
-  1. Search my Zotero library for papers on
-     FX-denominated household debt and the 2015 SNB shock.
-  2. WebSearch for 2023+ working papers on the same topic.
-Return one merged list, max 10 entries:
-  author + year | source | one-line finding.
+Spawn a subagent to read the slides for sessions 1-4
+and return a deduplicated list of every unique terminal
+command I'll need across the course.
+
+Output as: command | what it does | first session
+it appears in.
   \end{lstlisting}
 
   \vspace{0.2em}
   \textbf{What Claude does:}
   \begin{itemize}\small
-    \item Spawns both general-purpose subagents in one message --- they run concurrently
-    \item Each searches in its own context window with its own tool calls
-    \item You get one short table back; the search noise stayed inside the subagents
+    \item Spawns one general-purpose subagent and hands it the four \texttt{.tex} files
+    \item The subagent does the reading, extraction, and dedup in its own context
+    \item You get back the table; the slide text never lands in your main conversation
   \end{itemize}
 
   \vspace{0.2em}
-  \alert{\small Capping output (``max 10 entries'', one line each) keeps the round-trip cheap --- subagents will fill whatever space you give them.}
+  \alert{\small Cheap, local, no tokens spent on web traffic --- the kind of read-and-summarize job where context hygiene is the whole point.}
 \end{frame}
 
 \begin{frame}{Using Subagents Well}
