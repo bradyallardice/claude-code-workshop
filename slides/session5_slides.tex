@@ -134,6 +134,31 @@
   \end{block}
 \end{frame}
 
+\begin{frame}[fragile]{Using a Generic Subagent in Practice}
+  \textbf{Worked example: a parallel literature scan across three sources.}
+
+  \vspace{0.3em}
+  \textbf{Your prompt to Claude:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Spawn three subagents in parallel:
+  1. Search my Zotero library for papers using
+     regression discontinuity in education.
+  2. WebSearch for recent (2023+) arxiv papers
+     on the same topic.
+  3. WebFetch a few key journal pages I'll list.
+Return one combined table: title, year, source,
+one-sentence claim, link.
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \textbf{What Claude does:}
+  \begin{itemize}\small
+    \item Spawns three general-purpose subagents in a single message --- they run concurrently
+    \item Each searches in its own context window with its own tool calls
+    \item You get one clean table back; the search noise stayed inside the subagents
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Using Subagents Well}
   \textbf{Three habits that make subagents pay off:}
   \begin{enumerate}
