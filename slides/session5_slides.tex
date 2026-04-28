@@ -55,6 +55,36 @@
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
+%  START-OF-SESSION RITUAL
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile]{Start-of-Session Ritual}
+  \textbf{Same three steps as last session, with today's folder.}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Pull the latest course repo
+cd ~/claude-code-workshop && git pull
+
+# 2. Copy today's session folder into your workspace
+cp -r session_5/ ~/my_workspace/session_5/
+
+# 3. Open your copy in VS Code and work there
+cd ~/my_workspace/session_5 && code .
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  {\small\textbf{Don't have the course repo yet?}\\
+  \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
+
+  \vspace{0.4em}
+  \textbf{Five minutes, together, live.} Everyone in a clean state before we move on.
+
+  \vspace{0.2em}
+  {\small If \texttt{git pull} fights back, use the recovery from Session 4: \texttt{git stash -u}, \texttt{git branch backup-s5}, \texttt{git fetch origin}, \texttt{git reset -{}-hard origin/student}, \texttt{git stash pop}.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
 %  SUBAGENTS
 % ══════════════════════════════════════════════════════════════════
 
