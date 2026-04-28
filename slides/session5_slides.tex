@@ -187,28 +187,29 @@ cd ~/my_workspace/session_5 && code .
 \end{frame}
 
 \begin{frame}[fragile]{Using a Generic Subagent in Practice}
-  \textbf{Worked example: a parallel literature scan across three sources.}
+  \textbf{Worked example: tightly-scoped literature scan on the running Swiss franc topic.}
 
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Spawn three subagents in parallel:
-  1. Search my Zotero library for papers using
-     regression discontinuity in education.
-  2. WebSearch for recent (2023+) arxiv papers
-     on the same topic.
-  3. WebFetch a few key journal pages I'll list.
-Return one combined table: title, year, source,
-one-sentence claim, link.
+Spawn two subagents in parallel:
+  1. Search my Zotero library for papers on
+     FX-denominated household debt and the 2015 SNB shock.
+  2. WebSearch for 2023+ working papers on the same topic.
+Return one merged list, max 10 entries:
+  author + year | source | one-line finding.
   \end{lstlisting}
 
   \vspace{0.2em}
   \textbf{What Claude does:}
   \begin{itemize}\small
-    \item Spawns three general-purpose subagents in a single message --- they run concurrently
+    \item Spawns both general-purpose subagents in one message --- they run concurrently
     \item Each searches in its own context window with its own tool calls
-    \item You get one clean table back; the search noise stayed inside the subagents
+    \item You get one short table back; the search noise stayed inside the subagents
   \end{itemize}
+
+  \vspace{0.2em}
+  \alert{\small Capping output (``max 10 entries'', one line each) keeps the round-trip cheap --- subagents will fill whatever space you give them.}
 \end{frame}
 
 \begin{frame}{Using Subagents Well}
