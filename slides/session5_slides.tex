@@ -155,25 +155,22 @@
 \begin{frame}{Why Define a Named Subagent at All?}
   \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
 
-  \vspace{0.5em}
-  Because the unit you're reusing isn't the same.
-
-  \vspace{0.6em}
+  \vspace{0.4em}
   \begin{block}{The framing}
     \textbf{Skills are knowledge. Subagents are roles.}\\
-    A role bundles a disposition, a tool scope, and an invocation contract --- and \textit{then} draws on skills to execute.
+    A role bundles a disposition, a tool scope, and an invocation contract --- and then draws on skills to execute.
   \end{block}
 
-  \vspace{0.4em}
+  \vspace{0.3em}
   \textbf{Three things a role gives you that a skill can't:}
   \begin{enumerate}
-    \item \textbf{Tool scope --- enforced.} A code-review subagent has read-only file access, no bash. A skill is just instructions; Claude can work around them.
-    \item \textbf{Identity, not advice.} The system prompt frames the whole disposition --- ``you find problems, you don't fix them.'' Skills layer on; subagents \textit{are} the disposition.
-    \item \textbf{A stable invocation contract.} ``Delegate code review $\to$ get back a structured critique.'' Ad-hoc means re-specifying the contract every time --- which is where things drift.
+    \item \textbf{Tool scope --- enforced.} A code-review subagent has read-only access, no bash. Skills are advisory; tool scopes aren't.
+    \item \textbf{Identity, not advice.} The system prompt frames the whole disposition --- ``find problems, don't fix them.'' Subagents \textit{are} the disposition.
+    \item \textbf{A stable invocation contract.} Delegate code review $\to$ get a structured critique. Ad-hoc means re-specifying the contract each time.
   \end{enumerate}
 
-  \vspace{0.4em}
-  \alert{Pre-define a subagent when the \textbf{role} is the reusable unit, not just the know-how.}
+  \vspace{0.3em}
+  \alert{\small Pre-define a subagent when the \textbf{role} is the reusable unit, not just the know-how.}
 \end{frame}
 
 \begin{frame}[fragile]{Building a Team of Specialized Agents}
