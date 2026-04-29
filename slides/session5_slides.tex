@@ -352,8 +352,33 @@ Return: original issues | proposed fixes | residual issues.
     \item Your main conversation only sees the final summary; intermediate traces stay isolated
   \end{itemize}
 
-  \vspace{0.3em}
-  \alert{\small Caveat: every extra stage adds drift risk. Prefer one well-scoped agent over a five-stage Rube Goldberg.}
+\end{frame}
+
+\begin{frame}{One Agent or Many?}
+  \textbf{Default to one agent. A team has to earn its keep.}
+
+  \vspace{0.5em}
+  \textbf{Stick with one agent when:}
+  \begin{itemize}\small
+    \item The task is bounded enough to fit one context window
+    \item One disposition is enough --- no producer/critic split
+    \item You're still exploring --- you don't yet know the right stages
+    \item Orchestration overhead would dominate the actual work
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Reach for a team when:}
+  \begin{itemize}\small
+    \item The work has naturally distinct roles (writer + reviewer; auditor + fixer)
+    \item Independent verification is the point --- a separate set of eyes
+    \item You'll run the workflow many times --- the setup cost amortizes
+    \item N independent inputs need the same treatment in parallel
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{block}{The test}
+    Each extra agent is a stage that can drift. Add one only if it does something the previous one demonstrably can't.
+  \end{block}
 \end{frame}
 
 \end{document}
