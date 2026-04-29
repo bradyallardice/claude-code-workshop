@@ -499,17 +499,22 @@ cd ~/my_workspace/my_project && claude-ignore init
   replicate one published figure,\\[0.35em]
   run one small extension.}
 
-  \vspace{1.2em}
+  \vspace{0.8em}
+  {\scriptsize\textbf{Assigned paper:} Magistro, Borwein, Alvarez, Bonikowski, and Loewen (2026),\\
+  ``Attitudes Toward Artificial Intelligence (AI) and Globalization:\\
+  Common Microfoundations and Political Implications,'' \emph{AJPS}.}
+
+  \vspace{0.8em}
   \begin{block}{The point}
     Use Claude Code as a research assistant, not as a vending machine. You learn the paper, direct the task, inspect the code, verify the output, and decide what the result means.
   \end{block}
 \end{frame}
 
-\begin{frame}{Assume You Have Not Read the Paper}
-  \textbf{The first output is not code. It is orientation.}
+\begin{frame}{Orient Yourself with the Paper}
+  \textbf{Start with the assigned paper and my notes.}
 
   \vspace{0.5em}
-  Before asking Claude to replicate anything, you should be able to answer:
+  Use \texttt{zotero/pdfs/} for the paper PDFs and the provided instructor notes for the quick synthesis. Your first task is to map:
   \begin{itemize}\small
     \item What is the paper's research question?
     \item What is the paper's core contribution?
@@ -520,17 +525,42 @@ cd ~/my_workspace/my_project && claude-ignore init
   \end{itemize}
 
   \vspace{0.5em}
-  \alert{\small Read the paper and my notes first. If Claude starts coding before you understand the target, stop it.}
+  \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1: Clone, Teams, Branches}
-  \textbf{Two-person teams, all working in the GitHub collaboration repo from Session 4.}
+\begin{frame}[fragile]{Step 1: Create Your Team Repo}
+  \textbf{Two-person teams, each with their own repo.}
+
+  \vspace{0.3em}
+  One partner is the \textbf{repo owner}. They create an empty GitHub repo:
+  \texttt{capstone-<lastname>-<lastname>}.
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 git clone https://github.com/bradyallardice/github_collaboration_practice.git
 cd github_collaboration_practice
-git switch -c team-<n>/<your-name>-<strand>
+git remote remove origin
+git remote add origin https://github.com/<owner>/<team-repo>.git
+git push -u origin main
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then the owner adds their partner as a collaborator. The partner clones the new team repo.
+
+  \vspace{0.3em}
+  \alert{\small The original repo is the starter. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1b: Branch and Review}
+  \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+# Partner A
+git switch -c lit/<name>
+
+# Partner B
+git switch -c analysis/<name>
   \end{lstlisting}
 
   \vspace{0.4em}
@@ -542,7 +572,7 @@ git switch -c team-<n>/<your-name>-<strand>
   \end{itemize}
 
   \vspace{0.4em}
-  \alert{\small Everyone is doing the same capstone task. Branches keep identical work from colliding. Reviews keep partner specialization from becoming blind trust.}
+  \alert{\small Open PRs into your team repo's \texttt{main}. Your partner reviews before merge. If GitHub allows it, turn on branch protection: require one approval.}
 \end{frame}
 
 \begin{frame}{Step 2: Zotero, Not Local BibTeX}
@@ -664,7 +694,7 @@ changes the sample, or skips verification, reject it.
 
 \begin{frame}{Capstone Flow}
   \begin{enumerate}
-    \item \textbf{Clone and organize.} Two-person teams in \texttt{github\_collaboration\_practice}; one branch per person.
+    \item \textbf{Create the team repo.} Copy \texttt{github\_collaboration\_practice} into a fresh two-person repo.
     \item \textbf{Set the citation boundary.} Import \texttt{zotero/capstone\_library.bib}; use Zotero, not local BibTeX.
     \item \textbf{Understand the paper.} Read the article and instructor notes.
     \item \textbf{Write the literature review.} Use Zotero search, then verify the claims.
