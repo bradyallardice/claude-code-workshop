@@ -297,4 +297,63 @@ it appears in.
   \alert{\small Pre-define a subagent when the \textbf{role} is the reusable unit, not just the know-how.}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  MULTI-AGENT WORKFLOWS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Multi-Agent Workflows}
+  \centering
+  \vspace{2em}
+  {\Large When one specialist isn't enough.\\[0.3em]
+  Compose subagents into pipelines, fan-outs,\\[0.3em]
+  and critic-builder loops.}
+
+  \vspace{2em}
+  Three patterns, one worked example.
+\end{frame}
+
+\begin{frame}{Three Composition Patterns}
+  \textbf{Most multi-agent workflows are one of three shapes.}
+
+  \vspace{0.7em}
+  \begin{enumerate}
+    \item \textbf{Fan-out / map-reduce.} N inputs, one specialist per input, merge at the end.\\
+    \emph{Example:} code 50 interview transcripts against the same rubric --- one agent per transcript, then synthesize.
+
+    \vspace{0.5em}
+    \item \textbf{Pipeline.} Each stage's output is the next stage's input. Named and generic agents can mix.\\
+    \emph{Example:} \texttt{spec-critic} flags issues $\to$ generic agent drafts fixes $\to$ \texttt{spec-critic} re-audits.
+
+    \vspace{0.5em}
+    \item \textbf{Critic-builder loop.} One agent produces, another reviews, the producer revises.\\
+    \emph{Example:} a paragraph drafter $\leftrightarrow$ a paragraph-reviewer, two or three rounds.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{A Pipeline in Practice}
+  \textbf{Worked example: hardening a regression script in three stages.}
+
+  \vspace{0.3em}
+  \textbf{Your prompt to Claude:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Run this pipeline on solution_estimate.py:
+  1. Use spec-critic to list every silent issue.
+  2. Spawn a subagent to draft minimal-diff fixes
+     for each issue.
+  3. Re-run spec-critic on the patched script.
+Return: original issues | proposed fixes | residual issues.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{What makes this work:}
+  \begin{itemize}\small
+    \item Each stage has a stable input/output contract --- so they compose
+    \item Two \texttt{spec-critic} calls share a role but run in fresh contexts --- consistent without state
+    \item Your main conversation only sees the final summary; intermediate traces stay isolated
+  \end{itemize}
+
+  \vspace{0.3em}
+  \alert{\small Caveat: every extra stage adds drift risk. Prefer one well-scoped agent over a five-stage Rube Goldberg.}
+\end{frame}
+
 \end{document}
