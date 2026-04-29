@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{microtype}
+
+\onehalfspacing
+\bibpunct{(}{)}{;}{a}{,}{,}
+
+% ── Title ─────────────────────────────────────────────────────────────────────
+\title{% TODO: write your title here
+  Replication and Extension of Magistro et al. (2026):\\
+  % TODO: add a subtitle that captures your extension
+  [Your Extension Title Here]
+}
+
+\author{
+  % TODO: add your names
+  Author One \and Author Two
+}
+
+\date{\today}
+
+% ── Document ──────────────────────────────────────────────────────────────────
+\begin{document}
+
+\maketitle
+
+% ── Abstract ──────────────────────────────────────────────────────────────────
+\begin{abstract}
+% TODO: 3–4 sentences.
+% Sentence 1: What question does this paper address?
+% Sentence 2: What is the design and data?
+% Sentence 3: What do you find?
+% Sentence 4 (optional): What does it imply?
+[Abstract placeholder.]
+\end{abstract}
+
+\newpage
+
+% ── 1. Introduction ───────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+% TODO: ~3–4 paragraphs.
+% Para 1: Motivate the question. Why do public attitudes toward AI-driven
+%         economic disruption matter for politics?
+% Para 2: What does Magistro et al. 2026 find? Briefly summarize the
+%         paper's claim, design, and main result.
+% Para 3: What does your extension add? State the extension question clearly
+%         and explain why it matters given the paper's argument.
+% Para 4 (optional): Road map sentence.
+
+[Introduction placeholder.]
+
+% ── 2. Data and Design ────────────────────────────────────────────────────────
+\section{Data and Design}
+\label{sec:design}
+
+% TODO: ~2 paragraphs.
+% Para 1: Describe the conjoint experiment — sample (N=6,056, US+Canada, YouGov),
+%         conjoint attributes (price, customer service jobs, factory jobs,
+%         data science jobs), treatment arms (AI vs. Offshoring framing),
+%         and outcome (support rating 1–5).
+% Para 2: Describe your extension approach — what additional variable or
+%         specification you introduce and why it addresses your question.
+
+[Data and design placeholder.]
+
+% ── 3. Results ────────────────────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+
+% TODO: ~2–3 paragraphs + figure/table.
+% Para 1: Replication — summarize what Figure~\ref{fig:replication} shows.
+%         Does your Figure 1 match Magistro et al.?
+% Para 2: Extension — describe your main finding.
+%         Reference your figure or table (Figure~\ref{fig:extension} or
+%         Table~\ref{tab:main}).
+% Para 3 (optional): Any surprising or null result worth noting.
+
+\subsection{Replication}
+
+[Replication results placeholder.]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/figure1_replication.png}
+  \caption{Replication of Figure 1: Marginal means by treatment condition
+           (AI vs. Offshoring). Points show marginal means; horizontal lines
+           are 95\% confidence intervals. Dashed vertical line at 3 (midpoint
+           of the 1--5 support scale).}
+  \label{fig:replication}
+\end{figure}
+
+\subsection{Extension}
+
+[Extension results placeholder.]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/extension_result.png}
+  \caption{% TODO: write a caption that describes what this figure shows.
+  }
+  \label{fig:extension}
+\end{figure}
+
+% Uncomment if you have a regression table:
+% \input{tables/main.tex}
+
+% ── 4. Discussion ─────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+
+% TODO: ~2 paragraphs.
+% Para 1: What do your results mean for the paper's argument about common
+%         microfoundations of AI and offshoring attitudes?
+% Para 2: Limitations and what a future study would need.
+
+[Discussion placeholder.]
+
+% ── 5. Conclusion ─────────────────────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+
+% TODO: 2–3 sentences. Restate the contribution; no new information.
+
+[Conclusion placeholder.]
+
+% ── References ────────────────────────────────────────────────────────────────
+\bibliographystyle{apsr}
+\bibliography{refs}
+
+\end{document}
