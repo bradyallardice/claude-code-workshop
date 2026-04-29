@@ -381,4 +381,94 @@ Return: original issues | proposed fixes | residual issues.
   \end{block}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  HOOKS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Hooks}
+  \centering
+  \vspace{2em}
+  {\Large Shell commands the harness runs automatically\\[0.3em]
+  on events --- file writes, tool calls, session start.\\[0.3em]
+  Enforcement that doesn't depend on Claude remembering.}
+
+  \vspace{2em}
+  Concept, one example, when to reach for one.
+\end{frame}
+
+\begin{frame}{What a Hook Is}
+  \textbf{A hook is a shell command wired to a Claude Code event.} Configured in \texttt{.claude/settings.json}; run by the harness, not by Claude.
+
+  \vspace{0.5em}
+  \textbf{Common events:}
+  \begin{itemize}\small
+    \item \textbf{PreToolUse} --- before a tool runs (can block it)
+    \item \textbf{PostToolUse} --- after a tool runs
+    \item \textbf{SessionStart} --- at the start of a session
+    \item \textbf{UserPromptSubmit} --- when you submit a prompt
+    \item \textbf{Stop} --- when Claude finishes responding
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{What this buys you:}
+  \begin{itemize}\small
+    \item \textbf{Enforcement, not advice.} The hook runs whether Claude remembers it or not.
+    \item \textbf{Auditability.} Log every tool use, every edit, every Bash call.
+    \item \textbf{Automation.} Format on save, refresh derived files, notify on completion.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Worked Example: A Research Audit Log}
+  \textbf{Goal: every Bash command Claude runs gets logged with a timestamp --- automatically, every session.}
+
+  \vspace{0.4em}
+  \textbf{Add to \texttt{.claude/settings.json}:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{
+          "type": "command",
+          "command": "echo \"$(date '+%F %T') $CLAUDE_TOOL_INPUT\" >> ~/research_log.txt"
+        }]
+      }
+    ]
+  }
+}
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{What happens:}
+  \begin{itemize}\small
+    \item Before every \texttt{Bash} call, the harness runs the command above
+    \item Each invocation appends a timestamped line to your research log
+    \item Claude can't bypass it --- the harness, not the model, runs hooks
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hook, Skill, or Agent?}
+  \textbf{Three layers of automation, three different things.}
+
+  \vspace{0.5em}
+  \begin{block}{The framing}
+    \textbf{Skills are knowledge. Subagents are roles. Hooks are guarantees.}
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{Reach for a:}
+  \begin{itemize}\small
+    \item \textbf{Skill} when Claude needs to know \textit{how} to do X.\\
+    \emph{``When the user asks for a robustness table, follow this procedure.''}
+    \item \textbf{Subagent} when you want a delegated worker with a scoped role.\\
+    \emph{``Audit my regression script and return issues, no fixes.''}
+    \item \textbf{Hook} when something must happen regardless of what Claude remembers.\\
+    \emph{``Log every Bash command to a research log, every time.''}
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Hooks are the only one of the three the harness enforces. Skills are advice; subagents have agency; hooks are mechanical.}
+\end{frame}
+
 \end{document}
