@@ -426,26 +426,19 @@ Return: original issues | proposed fixes | residual issues.
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 {
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [{
-          "type": "command",
-          "command": "echo \"$(date '+%F %T') $CLAUDE_TOOL_INPUT\" >> ~/research_log.txt"
-        }]
-      }
-    ]
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{
+        "type": "command",
+        "command": "echo \"$(date '+%F %T') $CLAUDE_TOOL_INPUT\" >> ~/research_log.txt"
+      }]
+    }]
   }
 }
   \end{lstlisting}
 
   \vspace{0.3em}
-  \textbf{What happens:}
-  \begin{itemize}\small
-    \item Before every \texttt{Bash} call, the harness runs the command above
-    \item Each invocation appends a timestamped line to your research log
-    \item Claude can't bypass it --- the harness, not the model, runs hooks
-  \end{itemize}
+  \textbf{What happens:} Before every \texttt{Bash} call, the harness runs the command above and appends a timestamped line to your research log. Claude can't bypass it --- the harness, not the model, runs hooks.
 \end{frame}
 
 \begin{frame}{Hook, Skill, or Agent?}
