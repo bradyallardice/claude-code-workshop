@@ -393,6 +393,35 @@ description: Use when generating a
 
 % ---- 2b: The architecture ---------------------------------------
 
+\begin{frame}[fragile]{Where Skills Live: The Hierarchy, Again}
+  Remember the user $\rightarrow$ project $\rightarrow$ subfolder hierarchy from CLAUDE.md in Session 1? \textbf{Skills follow the same pattern.}
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{User level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+~/.claude/skills/latex-tables/
+  SKILL.md
+\end{lstlisting}
+    {\small Available in \emph{every} project. For things stable \emph{about you}.}
+
+    \column{0.48\textwidth}
+    \textbf{Project level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+your-project/.claude/skills/
+  paper-style/
+    SKILL.md
+\end{lstlisting}
+    {\small Loaded only in this project. Checked into git, shared with collaborators.}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{block}{The same hierarchy keeps showing up}
+    \textbf{Hooks}, \textbf{MCP servers and permissions}, and \textbf{subagents} all live at either the user or project level too. The decision is always the same: \emph{is this stable about me, or specific to this project?}
+  \end{block}
+\end{frame}
+
 \begin{frame}{Before You Build a Skill, Ask Where It Belongs}
   \textbf{Three things look alike but are different tools:}
 
