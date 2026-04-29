@@ -27,11 +27,20 @@ The BibTeX seed is included so you can import the collection into Zotero. Claude
 
 ## Team repo setup
 
-Each two-person team creates its own GitHub repo from the starter repo. The original `github_collaboration_practice` repo is the starter. Your team repo is the workspace. Your team repo's `main` branch is the final submission.
+Each two-person team creates its own GitHub repo on `github.com`. Your team repo is the workspace. Your team repo's `main` branch is the final submission.
+
+Start by opening this folder and reading this README:
+
+```bash
+cd capstone-template
+code README.md
+```
+
+Then set up a clean team repo.
 
 ### 1. Pick a repo owner
 
-One partner creates an empty GitHub repo, for example:
+One partner is the repo owner. The owner goes to `github.com` and creates a new empty repository, for example:
 
 ```text
 capstone-garcia-chen
@@ -39,17 +48,47 @@ capstone-garcia-chen
 
 Do not initialize it with a README, `.gitignore`, or license.
 
-### 2. Owner copies the starter into the team repo
+### 2. Owner clones the empty repo
+
+Clone the empty repo somewhere outside the course repo, for example on your Desktop:
 
 ```bash
-git clone https://github.com/bradyallardice/github_collaboration_practice.git
-cd github_collaboration_practice
-git remote remove origin
-git remote add origin https://github.com/<owner>/<team-repo>.git
+cd ~/Desktop
+git clone https://github.com/<owner>/<team-repo>.git
+cd <team-repo>
+```
+
+Git may warn that you cloned an empty repository. That is expected.
+
+### 3. Owner copies the capstone files into the team repo
+
+From inside the empty team repo, copy the contents of the course repo's `capstone-template/` folder:
+
+```bash
+rsync -av --exclude='.git' /path/to/AIAgentsCourse/capstone-template/ ./
+```
+
+Replace `/path/to/AIAgentsCourse` with the location of your course repo. The trailing slash after `capstone-template/` matters: it copies the contents of the folder, including hidden files like `.claude/` and `.claudeignore`.
+
+Check that the files are in the right place:
+
+```bash
+ls
+ls -a
+```
+
+You should see files like `README.md`, `CLAUDE.md`, `.claude/`, `starter/`, `paper/`, `data/`, and `zotero/`.
+
+### 4. Owner commits and pushes the starter files
+
+```bash
+git status
+git add .
+git commit -m "Add capstone starter files"
 git push -u origin main
 ```
 
-### 3. Owner adds partner
+### 5. Owner adds partner
 
 On GitHub:
 
@@ -65,7 +104,7 @@ cd <team-repo>
 code .
 ```
 
-### 4. Fill in roles
+### 6. Fill in roles
 
 Edit `ROLES.md` before branching. Use two ownership lanes:
 
@@ -74,7 +113,7 @@ Edit `ROLES.md` before branching. Use two ownership lanes:
 
 Both partners review each other's pull requests before merging.
 
-### 5. Create branches
+### 7. Create branches
 
 ```bash
 # Partner A

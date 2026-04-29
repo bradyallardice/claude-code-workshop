@@ -528,19 +528,71 @@ cd ~/my_workspace/my_project && claude-ignore init
   \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1: Create Your Team Repo}
-  \textbf{Two-person teams, each with their own repo.}
+\begin{frame}{Step 1: Start in the Capstone Folder}
+  \textbf{Everything you need is already in this course repo.}
 
-  \vspace{0.3em}
-  One partner is the \textbf{repo owner}. They create an empty GitHub repo:
-  \texttt{capstone-<lastname>-<lastname>}.
+  \vspace{0.6em}
+  First:
+  \begin{enumerate}\small
+    \item Open the course repo on your machine.
+    \item Go to \texttt{capstone-template/}.
+    \item Read \texttt{README.md}.
+    \item Decide who will be the \textbf{repo owner}.
+  \end{enumerate}
 
-  \vspace{0.3em}
+  \vspace{0.6em}
+  The repo owner's first job is to create a clean team repo on \texttt{github.com}.
+
+  \vspace{0.6em}
+  \alert{\small Do not use the old collaboration-practice repo for the capstone. It was for learning the loop. The capstone starts from \texttt{capstone-template/}.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1a: Create an Empty GitHub Repo}
+  \textbf{The owner creates the team repo on \texttt{github.com}.}
+
+  \vspace{0.4em}
+  In GitHub:
+  \begin{enumerate}\small
+    \item Click \textbf{New repository}.
+    \item Name it \texttt{capstone-<lastname>-<lastname>}.
+    \item Leave it empty: no README, no \texttt{.gitignore}, no license.
+    \item Click \textbf{Create repository}.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  Then clone that empty repo somewhere outside the course repo:
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-git clone https://github.com/bradyallardice/github_collaboration_practice.git
-cd github_collaboration_practice
-git remote remove origin
-git remote add origin https://github.com/<owner>/<team-repo>.git
+cd ~/Desktop
+git clone https://github.com/<owner>/<team-repo>.git
+cd <team-repo>
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \alert{\small Git may warn that you cloned an empty repo. That is expected.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1b: Copy in the Capstone Files}
+  \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
+
+  \vspace{0.4em}
+  From inside the empty team repo:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+rsync -av --exclude='.git' \
+  /path/to/AIAgentsCourse/capstone-template/ ./
+
+ls
+ls -a
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  You should see \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}.
+
+  \vspace{0.5em}
+  Commit and push:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git status
+git add .
+git commit -m "Add capstone starter files"
 git push -u origin main
   \end{lstlisting}
 
@@ -548,10 +600,10 @@ git push -u origin main
   Then the owner adds their partner as a collaborator. The partner clones the new team repo.
 
   \vspace{0.3em}
-  \alert{\small The original repo is the starter. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+  \alert{\small \texttt{capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1b: Branch and Review}
+\begin{frame}[fragile]{Step 1c: Branch and Review}
   \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
 
   \vspace{0.3em}
