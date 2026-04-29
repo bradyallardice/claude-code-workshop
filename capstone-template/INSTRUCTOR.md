@@ -64,6 +64,16 @@ Create two throwaway GitHub accounts and run the full workflow as a pair:
 
 Time yourself. If it takes you more than 20 minutes, find the rough edges.
 
+### 6. Verify Claude Code infrastructure
+
+The template includes project-level hooks, skills, and subagents under `.claude/`.
+
+- Hooks: `.claude/settings.json` wires `.claudeignore`, `reference_code/` protection, main-branch protection, paper compile checks, and branch-only auto-commit.
+- Skills: `.claude/skills/` contains data validation, robustness, table, citation, documentation, and prose-audit skills. The Figure 1 replication is intentionally not packaged as a skill so students practice writing a project-specific prompt.
+- Subagents: `.claude/agents/` contains `spec-critic`, `results-trace-auditor`, `pr-referee`, and `note-reviewer`.
+
+Before class, open the template in Claude Code and confirm it sees the project-level skills and agents. Then test one blocked edit to `reference_code/main.R` and one allowed edit on a feature branch.
+
 ---
 
 ## During class
@@ -76,7 +86,8 @@ Time yourself. If it takes you more than 20 minutes, find the rough edges.
 | 10–25 min | Data validation + replication kickoff (both roles working) |
 | 25–60 min | Replication + extension running in parallel |
 | 60–90 min | Writing the research note |
-| 90–110 min | Compile, final PRs, merge |
+| 90–105 min | Compile, final PRs, merge |
+| 105–110 min | Fill in `AI_WORKFLOW_REFLECTION.md` |
 | 110–120 min | Presentations (5 min/group, ~4–5 groups present) |
 
 ### Common failure modes
@@ -85,6 +96,8 @@ Time yourself. If it takes you more than 20 minutes, find the rough edges.
 - **Push rejected.** `git pull --rebase origin main` then push again.
 - **PR against wrong base.** Fix in GitHub UI (change base branch dropdown).
 - **Committed directly to main.** Branch protection should block the push. Help them: `git checkout -b <branch>` then `git push -u origin <branch>`.
+- **Claude says main is blocked.** This is the main-branch hook working. They should create `replication` or `extension`, except for the initial `ROLES.md` / `CLAUDE.md` setup edit.
+- **Claude says reference_code is read-only.** This is expected. They should copy logic into `starter/`, not edit original replication code.
 - **Merge conflict in paper.tex.** Expected — two people editing the same file. Walk them through resolving it in VS Code (the merge conflict editor makes this easy). This is the pedagogically useful failure mode.
 - **latexmk not found.** `brew install --cask mactex` takes too long in class. Have a fallback: Overleaf or `pdflatex -interaction=nonstopmode paper.tex`.
 - **cregg package version mismatch.** `reference_code/main.R` installs version 0.4.0 explicitly. If R throws errors, check `packageVersion("cregg")`.
@@ -101,5 +114,6 @@ With 8 groups of 2 (16 students), all three extensions get ~2–3 groups each. F
 ## After class
 
 - Collect `paper/paper.pdf` from each group's `main` branch as the deliverable.
+- Collect `AI_WORKFLOW_REFLECTION.md` with the paper. It is the transfer exercise: what would become context, a skill, a subagent, or a hook in their own research.
 - For a new cohort: create fresh group repos from the template — do not reuse old repos (PR history confuses new students).
 - If you want to inspect git history quality: `git log --oneline` in each group's repo. The auto-commit hook should produce a dense, descriptive history.

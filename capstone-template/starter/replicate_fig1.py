@@ -37,12 +37,14 @@ multi2_reshape = None  # replace with your reshaped DataFrame
 mm_by = None  # replace with your marginal means DataFrame
 
 # ── TODO: plot ────────────────────────────────────────────────────────────────
-# Reproduce Figure 1: horizontal pointrange (errorbar) plot,
-# one panel per attribute, colored by treatment.
+# Reproduce Figure 1 exactly: one-column faceted marginal-means plot,
+# gray strip headers, dashed midpoint line at 3, AI blue, Offshoring orange,
+# legend at bottom. Axis should run from 2.0 to 4.0 and be labeled
+# "Marginal mean". Save to paper/figures/figure1_replication.png.
 #
 # group.colors = {"Offshoring": "#E58606", "AI": "#5D69B1"}
 
-fig, axes = plt.subplots(1, 1, figsize=(6.5, 8))  # adjust subplots as needed
+fig = None  # replace with your matplotlib figure
 
 # your plotting code here
 

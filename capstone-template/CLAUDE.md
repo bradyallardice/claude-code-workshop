@@ -30,10 +30,11 @@ Choose one of:
 ## Conventions
 
 - R, Python, or Stata — group's choice; be consistent
-- Run all scripts from the repo root: `capstone-template/`
+- Run all scripts from the repo root
 - Data path: `data/clean_AJPS.csv`
 - `reference_code/` is read-only — copy and adapt, never edit in place
 - Figures save to `paper/figures/`, tables to `paper/tables/`
+- Work on `replication` or `extension`, not directly on `main`, after the setup commit
 
 ## Skills available
 
@@ -44,7 +45,32 @@ Use these Claude Code skills at the appropriate steps:
 | Validate data before analysis | `spec-validator` |
 | Extension analysis | `robustness-checks` (Extension B especially) |
 | Generate regression tables | `latex-regression-table` |
-| Full paper review | `/note-reviewer` subagent (runs 5 audits in one shot) |
+| Full paper review | `note-reviewer` subagent (runs 5 audits in one shot) |
 | Individual prose audits | `intro-structure-audit`, `abstract-structure-audit`, `paragraph-structure-audit`, `causal-language-audit`, `llm-prose-audit` |
 | Check citations and cross-refs | `tex-reference-audit` |
 | Track analysis decisions | `research-docs` |
+
+The Figure 1 replication is intentionally not packaged as a skill. Use the reference code, starter comments, and your own prompt so you practice directing Claude through a project-specific task.
+
+## Subagents available
+
+Use these named subagents when you need a separate reviewer role:
+
+| Task | Subagent |
+|------|----------|
+| Audit analysis code before interpreting results | `spec-critic` |
+| Check that paper claims match figures/tables/scripts | `results-trace-auditor` |
+| Review the branch diff before opening or merging a PR | `pr-referee` |
+| Consolidated prose review of the full note | `note-reviewer` |
+
+## Hooks installed
+
+- `.claudeignore` read guard blocks sensitive paths before Claude reads them.
+- `reference_code/` guard blocks edits to the original replication code.
+- Main-branch guard blocks Claude edits on `main` except setup files.
+- Paper compile check runs when `paper/paper.tex` changes and a TeX engine is available.
+- Auto-commit runs after Claude file edits on feature branches, but skips `main`.
+
+## Reflection deliverable
+
+Before the final presentation, fill in `AI_WORKFLOW_REFLECTION.md`. The point is to decide which parts of this capstone were one-off prompts, which patterns would become skills or subagents in your own work, and which rules deserve hooks.

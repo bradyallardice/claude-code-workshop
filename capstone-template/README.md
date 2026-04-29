@@ -24,6 +24,8 @@ Read `zotero/synthesis.md` before you start. Skim the annotated `zotero/magistro
 4. Fill in `ROLES.md` — names and branch assignment — and commit to `main`.
 5. Each person creates their branch: `git checkout -b replication` or `git checkout -b extension`.
 
+The template includes hooks that protect the workflow: Claude cannot edit `reference_code/`, auto-commit skips `main`, and paper edits trigger a compile check when LaTeX is available.
+
 ---
 
 ## The workflow
@@ -42,6 +44,17 @@ Fix any issues the skill flags, then proceed.
 
 Fill in `starter/replicate_fig1.R`. The goal is a marginal means plot by treatment condition (AI vs. Offshoring) that visually matches Figure 1 of the paper. `reference_code/main.R` is your guide — read it, don't copy-paste blindly.
 
+Before asking Claude Code to write code, write your instruction in your own words. It should specify:
+
+- the input file
+- the reshape target (one respondent-task per row)
+- the estimand (marginal means by AI vs. Offshoring treatment)
+- the visual target (the Figure 1 style)
+- the output path
+- the checks you expect it to print before saving the figure
+
+After it runs, inspect the code and output. If you want a second set of eyes, spawn `spec-critic` on the replication script.
+
 When done: commit, push, open a PR into `main`. Your partner reviews and merges.
 
 ### Step 3 — Extension analysis (45–60 min, extension)
@@ -53,6 +66,14 @@ Fill in `starter/extend_TEMPLATE.R`. Your extension is one of:
 - **C — Prior trade attitudes as moderator**
 
 Your assignment is in `CLAUDE.md`. The `robustness-checks` skill is especially useful for Extension B. For A and C, ask Claude to generate the analysis code, then review and run it.
+
+Before opening the PR:
+
+```text
+spawn the spec-critic subagent on starter/extend_TEMPLATE.R
+```
+
+You can also ask `pr-referee` to review the branch diff, but your partner is still the reviewer who decides whether to merge.
 
 When done: commit, push, open a PR. Your partner reviews and merges.
 
@@ -74,7 +95,16 @@ Run the `note-reviewer` subagent when you have a full draft:
 spawn the note-reviewer subagent on paper/paper.tex
 ```
 
-It runs five prose audits in one shot and returns a consolidated review. Revise, then commit.
+It runs five prose audits in one shot and returns a consolidated review.
+
+Then trace claims back to outputs:
+
+```text
+spawn the results-trace-auditor subagent on paper/paper.tex
+use tex-reference-audit on paper/paper.tex
+```
+
+Revise, then commit.
 
 ### Step 5 — Compile and present (10 min)
 
@@ -83,6 +113,16 @@ cd paper && latexmk -pdf paper.tex
 ```
 
 Each group presents for ~5 minutes: what was your extension, what did you find, anything surprising?
+
+### Step 6 — Reflect on the AI workflow (10 min)
+
+Fill in `AI_WORKFLOW_REFLECTION.md`. This is where you separate:
+
+- what was a one-off prompt for this capstone
+- what would belong in `CLAUDE.md` for your own project
+- what would be worth turning into a skill
+- what reviewer role would be worth turning into a subagent
+- what safety rule would be worth enforcing with a hook
 
 ---
 
@@ -133,4 +173,5 @@ Then open a PR on GitHub:
 
 ## Deliverable
 
-A compiled `paper/paper.pdf` — 2–3 pages, including your replication figure and extension result.
+- A compiled `paper/paper.pdf` — 2–3 pages, including your replication figure and extension result.
+- A completed `AI_WORKFLOW_REFLECTION.md`.

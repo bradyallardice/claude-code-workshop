@@ -23,11 +23,18 @@
 set -euo pipefail
 
 # Find repo root
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || true)
+START_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"
+REPO_ROOT=$(git -C "$START_DIR" rev-parse --show-toplevel 2>/dev/null || true)
 if [ -z "$REPO_ROOT" ]; then
     exit 0
 fi
 cd "$REPO_ROOT"
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+    echo "Auto-commit skipped on $BRANCH. Create a replication or extension branch first." >&2
+    exit 0
+fi
 
 # Skip if no changes
 if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then

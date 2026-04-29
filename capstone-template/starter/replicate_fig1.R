@@ -40,7 +40,10 @@ multi2_reshape <- NULL  # replace this with your reshaped data
 mm_by <- NULL  # replace with your cj() call
 
 # ── TODO: plot ────────────────────────────────────────────────────────────────
-# Reproduce Figure 1: pointrange plot, faceted by attribute, colored by treatment
+# Reproduce Figure 1 exactly: one-column faceted marginal-means plot, gray facet
+# strips, dashed midpoint line at 3, AI blue, Offshoring orange, legend at bottom.
+# Axis should run from 2.0 to 4.0 and be labeled "Marginal mean".
+# Save the finished figure to paper/figures/figure1_replication.png.
 # See reference_code/main.R lines ~137–165
 
 plot <- NULL  # replace with your ggplot() call

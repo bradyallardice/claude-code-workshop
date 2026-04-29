@@ -1,0 +1,10 @@
+# Sensitive local files
+.env
+*.pem
+*.key
+*.secret
+
+# Data locations that should stay out of model context if students add them
+data/raw/
+data/restricted/
+data/*/administrative/

@@ -99,11 +99,11 @@ cd ~/my_workspace/session_5 && code .
     \item \textbf{Hooks.} Shell commands that run automatically on events (file writes, tool use, session start) --- enforcement that doesn't depend on Claude remembering.
 
     \vspace{0.5em}
-    \item \textbf{Putting it together.} Use today's pieces (plus everything from Sessions 1--4) to build the spine of a research paper end-to-end.
+    \item \textbf{Putting it together.} Build a short replication + extension note, then decide which parts of the workflow transfer to your own research.
   \end{enumerate}
 
   \vspace{0.8em}
-  \alert{The earlier sessions taught the moves. This one is about composing them into something you'd actually submit.}
+  \alert{The capstone is not a test of whether a prepared AI can finish a template. It is a test of whether you can direct, verify, and route the work.}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -485,6 +485,131 @@ cd ~/my_workspace/my_project && claude-ignore init
 
   \vspace{0.5em}
   \alert{\small Hooks are the only one of the three the harness enforces. Skills are advice; subagents have agency; hooks are mechanical.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  CAPSTONE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Capstone}
+  \centering
+  \vspace{1.6em}
+  {\Large Replicate one published figure,\\[0.35em]
+  run one small extension,\\[0.35em]
+  write a 2--3 page research note.}
+
+  \vspace{1.6em}
+  \begin{block}{The point}
+    Use Claude Code as a research assistant, not as a vending machine. You direct the task, inspect the code, verify the output, and decide what the result means.
+  \end{block}
+\end{frame}
+
+\begin{frame}{What Is Provided}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Course infrastructure}
+    \begin{itemize}\small
+      \item A template repo with data, starter scripts, paper skeleton
+      \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
+      \item General skills: data validation, robustness, tables, references, prose review
+      \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Your work}
+    \begin{itemize}\small
+      \item Write the replication instruction yourself
+      \item Decide what Claude may infer and what you must specify
+      \item Read the code and check the output
+      \item Interpret the extension cautiously
+      \item Explain which AI workflow pieces would transfer to your own work
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.7em}
+  \alert{\small The safety rails are prebuilt. The analytical direction is not.}
+\end{frame}
+
+\begin{frame}{Why Figure 1 Is Not a Skill}
+  \textbf{Inside this capstone, reproducing Figure 1 happens once.}
+
+  \vspace{0.6em}
+  It is project-specific: one paper, one dataset, one reference figure, one visual target.
+
+  \vspace{0.8em}
+  \textbf{So it should not be an installed skill.} The transferable move is not ``run my Figure 1 skill.'' The transferable move is:
+
+  \vspace{0.5em}
+  \begin{enumerate}\small
+    \item Read the reference code
+    \item State the reshape target and estimand
+    \item Specify what the output should look like
+    \item Tell Claude what checks to print before saving
+    \item Review the plan, the code, and the final figure
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{The routing lesson}
+    Some work is one-off for this project but still teaches a reusable pattern for your own research.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Your Replication Prompt}
+  \textbf{Before Claude writes code, write the instruction yourself.}
+
+  \vspace{0.4em}
+  It should specify:
+  \begin{itemize}\small
+    \item \textbf{Input:} \texttt{data/clean\_AJPS.csv}
+    \item \textbf{Reshape:} one respondent-task per row
+    \item \textbf{Estimand:} marginal means by AI vs. Offshoring treatment
+    \item \textbf{Visual target:} four stacked panels matching Figure 1
+    \item \textbf{Output:} \texttt{paper/figures/figure1\_replication.png}
+    \item \textbf{Checks:} row counts, task counts, treatment counts before save
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Ask Claude for a plan first. If the plan chooses a join,
+changes the sample, or skips verification, reject it.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Capstone Flow}
+  \begin{enumerate}
+    \item \textbf{Set up roles and branches.} Replication branch, extension branch, PRs into \texttt{main}.
+    \item \textbf{Validate the data.} Use \texttt{spec-validator}; decide what any warning means.
+    \item \textbf{Replicate Figure 1.} Prompt, plan, code, run, inspect, commit.
+    \item \textbf{Run the extension.} Use the assigned extension; verify sample and estimand.
+    \item \textbf{Write the note.} Use the paper skeleton; review prose and claim-output alignment.
+    \item \textbf{Reflect.} Fill in \texttt{AI\_WORKFLOW\_REFLECTION.md}.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \alert{\small The deliverable is not just the PDF. It is the PDF plus evidence that you stayed in control of the workflow.}
+\end{frame}
+
+\begin{frame}{The Reflection Is the Transfer}
+  \textbf{The capstone uses course-provided infrastructure. Your own research will not.}
+
+  \vspace{0.6em}
+  In \texttt{AI\_WORKFLOW\_REFLECTION.md}, answer:
+
+  \vspace{0.4em}
+  \begin{itemize}\small
+    \item What did you delegate to Claude?
+    \item What did you personally verify?
+    \item What did you refuse to let Claude decide?
+    \item What would belong in \texttt{CLAUDE.md} for your own paper?
+    \item What repeated convention would become a skill?
+    \item What reviewer role would become a subagent?
+    \item What safety rule would become a hook?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{What I am looking for}
+    Not ``I used all the tools.'' I want to see that you can choose the right layer for the next project.
+  \end{block}
 \end{frame}
 
 \end{document}

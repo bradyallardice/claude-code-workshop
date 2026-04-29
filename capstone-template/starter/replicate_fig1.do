@@ -30,7 +30,14 @@ import delimited "data/clean_AJPS.csv", clear varnames(1) case(lower)
 * your estimation code here
 
 * ── TODO: plot ─────────────────────────────────────────────────────────────
-* Reproduce Figure 1: horizontal coefficient plot by attribute and treatment.
+* Reproduce Figure 1 exactly:
+*   - four stacked panels: price, customer service, factory, data science
+*   - gray panel headers
+*   - dashed vertical reference line at marginal mean = 3
+*   - x-axis from 2.0 to 4.0, title "Marginal mean"
+*   - horizontal confidence intervals with points
+*   - AI in blue (#5D69B1), Offshoring in orange (#E58606)
+*   - legend at bottom, ordered AI then Offshoring
 * coefplot or twoway rspike + scatter are both workable.
 
 * your plotting code here
