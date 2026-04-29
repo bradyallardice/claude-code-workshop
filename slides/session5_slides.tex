@@ -720,54 +720,83 @@ changes the sample, or skips verification, reject it.
   {\small Source: \href{https://support.claude.com/en/articles/14554000-claude-code-power-user-tips}{support.claude.com --- Claude Code power-user tips}.}
 \end{frame}
 
-% ── Cloud sessions / Cowork ───────────────────────────────────────
+% ── Cloud version of Claude Code ──────────────────────────────────
 
-\begin{frame}[fragile]{Cloud Sessions and Cowork}
-  \textbf{What it is.} Run Claude Code on a sandboxed cloud machine instead of your laptop. Cowork Dispatch is the version that can also reach into your local Desktop app for things like Slack, files, and calendar.
+\begin{frame}[fragile]{Claude Code in the Cloud}
+  \textbf{What it is.} The same Claude Code, but running on an Anthropic-hosted sandbox instead of your laptop. You launch it from the Claude app or \texttt{claude.ai/code}, point it at a GitHub repo you've connected, and it works there.
 
   \vspace{0.4em}
   \textbf{Why it is useful.}
   \begin{itemize}\small
     \item Long jobs (replications, sweeps, paper rebuilds) keep running with the lid closed.
-    \item Multiple parallel sessions without burning your local CPU or worktrees.
-    \item Useful when you are travelling and want to dispatch work from a phone.
+    \item Several sessions in parallel without burning your local CPU or stepping on your worktrees.
+    \item It is how you dispatch work from a phone or browser when you don't have a terminal.
+    \item \textbf{Cowork} is the variant that can also reach into your Desktop app to act on local context (files, Slack, calendar) when you authorize it.
   \end{itemize}
-
-  \vspace{0.4em}
-  \textbf{How to use it.} From the Claude app or web (\texttt{claude.ai/code}), open the \emph{Code} tab and start a cloud session against a connected GitHub repo. Output and PRs come back as if you had run it locally.
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-# Example: kick off a long replication from your phone
-"In session_5/, rerun the full extension grid and open
- a PR with the updated tables and figures."
-  \end{lstlisting}
-\end{frame}
-
-% ── Teleport / remote control ─────────────────────────────────────
-
-\begin{frame}[fragile]{Teleport and Remote Control}
-  \textbf{What it is.} \texttt{/teleport} hands the current session off to another device --- terminal, desktop app, web, or phone --- with full history intact. \texttt{/remote-control} lets a phone drive a session that is still running on your laptop.
-
-  \vspace{0.4em}
-  \textbf{Why it is useful.}
-  \begin{itemize}\small
-    \item Start a long task at your desk; check on it from a caf\'e without restarting context.
-    \item Read the agent's output on a bigger screen than your terminal.
-    \item Keep one canonical session, not three half-finished ones across devices.
-  \end{itemize}
-
-  \vspace{0.4em}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-# In a terminal session, hand it off:
-/teleport
-
-# Or pair your phone to drive this session:
-/remote-control
+# At claude.ai/code, open the "Code" tab, pick the repo, and prompt:
+"On a new branch, rerun the full extension grid in session_5/
+ and open a PR with the updated tables and figures."
   \end{lstlisting}
 
   \vspace{0.2em}
-  {\small \alert{Caveat.} Teleporting does not move local files. Only sessions where Claude is working through git or the cloud transfer cleanly.}
+  {\small \alert{Trade-off.} Cloud sessions are great for repo-shaped work. Anything that depends on your local files, your local data, or unpushed commits stays on your machine.}
+\end{frame}
+
+% ── Teleport / remote control ─ slide 1 of 2 ─────────────────────
+
+\begin{frame}{Teleport and Remote Control: What They Are}
+  \textbf{Two ways to keep \emph{one} session continuous across devices.}
+
+  \vspace{0.7em}
+  \begin{itemize}
+    \item \textbf{Teleport.} A handoff. Your current Claude Code session --- conversation, plan, todos, working directory --- moves to another device (terminal, desktop app, web, or phone). The original session ends; the new one picks up exactly where it left off.
+
+    \vspace{0.4em}
+    \item \textbf{Remote control.} A pairing. The session keeps running where it started (usually your laptop), and your phone becomes a remote that can read the output and send prompts. The work still happens on the laptop.
+  \end{itemize}
+
+  \vspace{0.7em}
+  \textbf{Why it is useful for a researcher.}
+  \begin{itemize}\small
+    \item You start a long agent run at your desk and want to monitor it on the train without restarting context.
+    \item You think of a follow-up prompt while away from the laptop and want it queued, not forgotten.
+    \item You don't want three half-finished sessions across three devices --- just one canonical thread.
+  \end{itemize}
+\end{frame}
+
+% ── Teleport / remote control ─ slide 2 of 2 ─────────────────────
+
+\begin{frame}[fragile]{Teleport and Remote Control: How to Use Them}
+  \textbf{Two short flows.}
+
+  \vspace{0.4em}
+  \textbf{Flow 1 --- Teleport (hand the session off).}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# At your desk, mid-session:
+/teleport
+# Pick the destination device (phone / web / desktop app)
+# from the prompt. The session continues there;
+# this terminal session ends.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Flow 2 --- Remote control (drive from your phone).}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Laptop, before walking away:
+/remote-control
+# Pair your phone (one-time, via the Claude mobile app).
+# Now the laptop keeps running the agent;
+# the phone shows output and can send prompts.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  {\small \alert{Rule of thumb.} Teleport when you are leaving the laptop behind. Remote-control when the laptop is the right machine for the work but you want the phone as a window.}
+
+  \vspace{0.2em}
+  {\small \textbf{Caveat.} Neither moves uncommitted local files. Sessions that rely on a working tree only travel cleanly if the relevant work is committed or pushed.}
 \end{frame}
 
 % ── Scheduled and recurring ───────────────────────────────────────

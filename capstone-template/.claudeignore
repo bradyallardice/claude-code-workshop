@@ -9,5 +9,7 @@ data/raw/
 data/restricted/
 data/*/administrative/
 
-# Zotero import seed: students import this into Zotero, Claude should query Zotero instead
+# Zotero import seed: students import this into Zotero.
+# PDFs in zotero/pdfs/ intentionally ship for student reading.
+# Claude should query Zotero instead of mining the BibTeX directly.
 zotero/*.bib
