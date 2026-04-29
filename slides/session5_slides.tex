@@ -571,7 +571,7 @@ cd <team-repo>
   \alert{\small Git may warn that you cloned an empty repo. That is expected.}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1b: Copy in the Capstone Files}
+\begin{frame}[fragile,shrink=8]{Step 1b: Copy in the Capstone Files}
   \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
 
   \vspace{0.4em}
@@ -609,10 +609,10 @@ git push -u origin main
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 # Partner A
-git switch -c lit/<name>
+git checkout -b lit/<name>
 
 # Partner B
-git switch -c analysis/<name>
+git checkout -b analysis/<name>
   \end{lstlisting}
 
   \vspace{0.4em}
@@ -652,21 +652,24 @@ git switch -c analysis/<name>
 \end{frame}
 
 \begin{frame}{Step 3: Write the Literature Review}
-  \textbf{Use Claude for search and synthesis, but keep the claims accountable.}
+  \textbf{The synthesis notes are already in your Zotero library. Use them.}
 
   \vspace{0.5em}
   A useful first prompt:
   \begin{quote}\small
-    Search the Zotero library for papers most relevant to this article's research question. Return a table with citation key, mechanism, empirical setting, and how it connects to the capstone paper. Do not write prose yet.
+    Read the synthesis notes attached to each paper in the Zotero library.
+    Across all notes, identify the three or four recurring mechanisms that
+    connect automation and trade shocks to political preferences. Then draft
+    2--3 paragraphs that position the capstone paper relative to those
+    mechanisms. Every sentence must be traceable to a specific note.
   \end{quote}
 
   \vspace{0.4em}
   Then:
   \begin{itemize}\small
-    \item Open the most important PDFs and the provided synthesis notes yourself.
-    \item Decide which claims belong in a short review.
-    \item Draft 2--3 paragraphs that position the capstone paper.
     \item Check that every citation supports the sentence attached to it.
+    \item Add any connections the model missed that you saw in the highlights.
+    \item Cut anything that doesn't directly motivate the capstone's design.
   \end{itemize}
 \end{frame}
 

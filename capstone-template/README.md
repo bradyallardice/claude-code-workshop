@@ -40,13 +40,21 @@ Then set up a clean team repo.
 
 ### 1. Pick a repo owner
 
-One partner is the repo owner. The owner goes to `github.com` and creates a new empty repository, for example:
+One partner is the repo owner. The owner creates the team repo on `github.com`:
+
+1. Sign in to `github.com`.
+2. Click **New repository**.
+3. Choose the owner's account as the repository owner.
+4. Name the repo, for example:
 
 ```text
 capstone-garcia-chen
 ```
 
-Do not initialize it with a README, `.gitignore`, or license.
+5. Choose the visibility your instructor asks for.
+6. Do not initialize it with a README, `.gitignore`, or license.
+7. Click **Create repository**.
+8. Copy the HTTPS URL GitHub shows for the empty repo.
 
 ### 2. Owner clones the empty repo
 
@@ -117,10 +125,10 @@ Both partners review each other's pull requests before merging.
 
 ```bash
 # Partner A
-git switch -c lit/<name>
+git checkout -b lit/<name>
 
 # Partner B
-git switch -c analysis/<name>
+git checkout -b analysis/<name>
 ```
 
 Open pull requests into your team repo's `main`. If GitHub allows it, protect `main` so it requires one approval and does not allow self-approval.
@@ -261,7 +269,7 @@ Fill in `AI_WORKFLOW_REFLECTION.md`. This is where you separate:
 
 ```bash
 # Start a branch
-git switch -c <branch>
+git checkout -b <branch>
 
 # Commit work
 git status
@@ -272,7 +280,7 @@ git commit -m "brief description"
 git push -u origin <branch>
 
 # After your partner merges a PR
-git switch main
+git checkout main
 git pull origin main
 ```
 
