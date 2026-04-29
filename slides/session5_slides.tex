@@ -548,11 +548,14 @@ git switch -c team-<n>/<your-name>-<strand>
 \begin{frame}{Step 2: Zotero, Not Local BibTeX}
   \textbf{The literature review uses a prebuilt Zotero library.}
 
+  \vspace{0.4em}
+  The seed file is \texttt{zotero/capstone\_library.bib}. Its attached PDFs ship in \texttt{zotero/pdfs/}.
+
   \vspace{0.5em}
   The workflow:
   \begin{enumerate}\small
     \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
-    \item Confirm the Zotero MCP can find the papers.
+    \item Confirm Zotero imported the PDF attachments and the MCP can find the papers.
     \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
     \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
   \end{enumerate}
@@ -563,7 +566,7 @@ git switch -c team-<n>/<your-name>-<strand>
   \end{block}
 
   \vspace{0.3em}
-  \alert{\small Instructor setup: the seed file sits in the repo for import, but \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
+  \alert{\small The PDFs are for students to read. The BibTeX seed is for Zotero import; \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
 \end{frame}
 
 \begin{frame}{Step 3: Write the Literature Review}
@@ -578,7 +581,7 @@ git switch -c team-<n>/<your-name>-<strand>
   \vspace{0.4em}
   Then:
   \begin{itemize}\small
-    \item Open the most important papers or notes yourself.
+    \item Open the most important PDFs and the provided synthesis notes yourself.
     \item Decide which claims belong in a short review.
     \item Draft 2--3 paragraphs that position the capstone paper.
     \item Check that every citation supports the sentence attached to it.
@@ -591,7 +594,7 @@ git switch -c team-<n>/<your-name>-<strand>
     \textbf{Course infrastructure}
     \begin{itemize}\small
       \item A template repo with data, starter scripts, paper skeleton
-      \item The paper, instructor notes, and \texttt{zotero/capstone\_library.bib}
+      \item The paper, instructor notes, \texttt{zotero/capstone\_library.bib}, and attached PDFs
       \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
       \item General skills: data validation, robustness, tables, references, prose review
       \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
@@ -827,33 +830,6 @@ changes the sample, or skips verification, reject it.
 
   \vspace{0.2em}
   {\small Use sparingly. A loop that runs an unverified workflow is a loop that produces unverified output on a schedule.}
-\end{frame}
-
-% ── Permissions / safety ──────────────────────────────────────────
-
-\begin{frame}[fragile]{Permissions and Safety}
-  \textbf{What it is.} A set of layers that control what Claude can do without asking. \texttt{/permissions} is the allowlist. \texttt{--enable-auto-mode} adds a classifier that auto-approves safe actions and flags risky ones. \texttt{/sandbox} isolates files and network so you don't have to gate every read.
-
-  \vspace{0.4em}
-  \textbf{Why it is useful.}
-  \begin{itemize}\small
-    \item Stop approving the same five \texttt{Bash(python ...)} prompts every session.
-    \item Keep destructive actions (\texttt{rm}, \texttt{git push --force}, dropping tables) gated.
-    \item Run a risky agent inside a sandbox without giving it your whole filesystem.
-  \end{itemize}
-
-  \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-# Pre-approve common safe operations for this project
-/permissions
-# then add lines like:
-#   "Bash(python session_5/*.py)"
-#   "Edit(session_5/**)"
-#   "Read(**)"
-  \end{lstlisting}
-
-  \vspace{0.2em}
-  {\small \alert{Rule of thumb.} Allowlist things you'd let a junior collaborator do unsupervised. Keep the rest gated.}
 \end{frame}
 
 % ── Customizing environment ───────────────────────────────────────
