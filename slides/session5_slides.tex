@@ -441,6 +441,31 @@ Return: original issues | proposed fixes | residual issues.
   \textbf{What happens:} Before every \texttt{Bash} call, the harness runs the command above and appends a timestamped line to your research log. Claude can't bypass it --- the harness, not the model, runs hooks.
 \end{frame}
 
+\begin{frame}[fragile]{Installing a Pre-Built Hook: \texttt{claude-ignore}}
+  \textbf{Many useful hooks already exist --- you don't have to write your own.}
+
+  \vspace{0.3em}
+  \texttt{claude-ignore} blocks Claude from reading files that match a \texttt{.claudeignore} file (same patterns as \texttt{.gitignore}). Use it for \texttt{.env}, secrets, raw data --- anything you don't want in the model's context.
+
+  \vspace{0.4em}
+  \textbf{Install (one-time):}
+  \begin{lstlisting}[basicstyle=\ttfamily\small]
+npm install -g claudeignore
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \textbf{Initialize in your project:}
+  \begin{lstlisting}[basicstyle=\ttfamily\small]
+cd ~/my_workspace/my_project && claude-ignore init
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \texttt{init} creates a \texttt{.claudeignore} file (your patterns) and wires a \texttt{PreToolUse} hook on \texttt{Read} into \texttt{.claude/settings.json}.
+
+  \vspace{0.3em}
+  \alert{\small Source: \texttt{github.com/li-zhixin/claude-ignore}. Requires Node.js (npm).}
+\end{frame}
+
 \begin{frame}{Hook, Skill, or Agent?}
   \textbf{Three layers of automation, three different things.}
 
