@@ -8,3 +8,6 @@
 data/raw/
 data/restricted/
 data/*/administrative/
+
+# Zotero import seed: students import this into Zotero, Claude should query Zotero instead
+zotero/*.bib

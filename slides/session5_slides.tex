@@ -551,9 +551,9 @@ git switch -c team-<n>/<your-name>-<strand>
   \vspace{0.5em}
   The workflow:
   \begin{enumerate}\small
-    \item Import the provided BibTeX seed into Zotero.
+    \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
     \item Confirm the Zotero MCP can find the papers.
-    \item Remove the local import file from the project workspace.
+    \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
     \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
   \end{enumerate}
 
@@ -563,7 +563,7 @@ git switch -c team-<n>/<your-name>-<strand>
   \end{block}
 
   \vspace{0.3em}
-  \alert{\small Instructor setup: the seed file should be a one-time import file, not a source Claude reads during drafting. If it must sit in the repo, block it with \texttt{.claudeignore} and the read guard.}
+  \alert{\small Instructor setup: the seed file sits in the repo for import, but \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
 \end{frame}
 
 \begin{frame}{Step 3: Write the Literature Review}
@@ -591,7 +591,7 @@ git switch -c team-<n>/<your-name>-<strand>
     \textbf{Course infrastructure}
     \begin{itemize}\small
       \item A template repo with data, starter scripts, paper skeleton
-      \item The paper, instructor notes, and a Zotero library seed
+      \item The paper, instructor notes, and \texttt{zotero/capstone\_library.bib}
       \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
       \item General skills: data validation, robustness, tables, references, prose review
       \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
@@ -662,7 +662,7 @@ changes the sample, or skips verification, reject it.
 \begin{frame}{Capstone Flow}
   \begin{enumerate}
     \item \textbf{Clone and organize.} Two-person teams in \texttt{github\_collaboration\_practice}; one branch per person.
-    \item \textbf{Set the citation boundary.} Import the seed into Zotero; remove or block the local \texttt{.bib}.
+    \item \textbf{Set the citation boundary.} Import \texttt{zotero/capstone\_library.bib}; use Zotero, not local BibTeX.
     \item \textbf{Understand the paper.} Read the article and instructor notes.
     \item \textbf{Write the literature review.} Use Zotero search, then verify the claims.
     \item \textbf{Validate the data.} Use \texttt{spec-validator}; decide what any warning means.
@@ -703,14 +703,13 @@ changes the sample, or skips verification, reject it.
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Beyond the Terminal}
-  \textbf{Five power-user features worth knowing about.}
+  \textbf{Four power-user features worth knowing about.}
 
   \vspace{0.7em}
   \begin{enumerate}
-    \item \textbf{Cloud sessions and Cowork.} Run Claude on Anthropic's machines, not yours.
-    \item \textbf{Teleport and remote control.} Move a session between laptop and phone.
+    \item \textbf{Claude Code in the cloud.} Run Claude on Anthropic's machines, not yours.
+    \item \textbf{Teleport and remote control.} Move a session between laptop and phone --- two slides, because it is the most useful and the least obvious.
     \item \textbf{Scheduled and recurring tasks.} \texttt{/loop} and \texttt{/schedule}.
-    \item \textbf{Permissions and safety.} Pre-approve safe actions; gate the rest.
     \item \textbf{Customizing your environment.} Status line, colors, keybindings, voice, output styles.
   \end{enumerate}
 
