@@ -445,24 +445,25 @@ Return: original issues | proposed fixes | residual issues.
   \textbf{Many useful hooks already exist --- you don't have to write your own.}
 
   \vspace{0.3em}
-  \texttt{claude-ignore} blocks Claude from reading files that match a \texttt{.claudeignore} file (same patterns as \texttt{.gitignore}). Use it for \texttt{.env}, secrets, raw data --- anything you don't want in the model's context.
+  \textbf{What \texttt{claude-ignore} does:}
+  \begin{itemize}\small
+    \item A \texttt{PreToolUse} hook on \texttt{Read} that blocks files matched by a \texttt{.claudeignore} (gitignore-syntax patterns; comments and blank lines are ignored)
+    \item Walks up from the current directory to root, merging every \texttt{.claudeignore} it finds --- different rules at different folder levels
+    \item On a match, exits with code 2: hard block. Claude sees the failure and can't bypass it
+    \item Use for \texttt{.env}, \texttt{*.secret}, raw data --- anything you don't want in the model's context
+  \end{itemize}
 
-  \vspace{0.4em}
-  \textbf{Install (one-time):}
+  \vspace{0.3em}
+  \textbf{Install + initialize:}
   \begin{lstlisting}[basicstyle=\ttfamily\small]
 npm install -g claudeignore
-  \end{lstlisting}
-
-  \vspace{0.2em}
-  \textbf{Initialize in your project:}
-  \begin{lstlisting}[basicstyle=\ttfamily\small]
 cd ~/my_workspace/my_project && claude-ignore init
   \end{lstlisting}
 
-  \vspace{0.3em}
-  \texttt{init} creates a \texttt{.claudeignore} file (your patterns) and wires a \texttt{PreToolUse} hook on \texttt{Read} into \texttt{.claude/settings.json}.
+  \vspace{0.2em}
+  \texttt{init} creates a \texttt{.claudeignore} and wires the hook into \texttt{.claude/settings.json}.
 
-  \vspace{0.3em}
+  \vspace{0.2em}
   \alert{\small Source: \texttt{github.com/li-zhixin/claude-ignore}. Requires Node.js (npm).}
 \end{frame}
 
