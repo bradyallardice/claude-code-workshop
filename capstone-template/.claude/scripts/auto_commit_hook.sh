@@ -54,10 +54,9 @@ except:
     print('unknown')
 " 2>/dev/null || echo "unknown")
 
-# Generate commit message using Claude
-DIFF=$(git diff --cached 2>/dev/null | head -300 || true)
-
-MSG=$(echo "$DIFF" | claude --print --model haiku "Write a short git commit message (one line, max 72 chars) for this diff. No quotes, no prefix, just the message:" 2>/dev/null)
+# Haiku-generated commit message disabled to reduce token usage.
+# Fall back to filename-based message.
+MSG=""
 
 if [ -z "$MSG" ]; then
     FILES=$(git diff --cached --name-only 2>/dev/null | head -3 | xargs -I{} basename {})
