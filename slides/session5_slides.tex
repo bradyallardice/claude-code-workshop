@@ -698,4 +698,181 @@ changes the sample, or skips verification, reject it.
   \end{block}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  POWER-USER FEATURES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Beyond the Terminal}
+  \textbf{Five power-user features worth knowing about.}
+
+  \vspace{0.7em}
+  \begin{enumerate}
+    \item \textbf{Cloud sessions and Cowork.} Run Claude on Anthropic's machines, not yours.
+    \item \textbf{Teleport and remote control.} Move a session between laptop and phone.
+    \item \textbf{Scheduled and recurring tasks.} \texttt{/loop} and \texttt{/schedule}.
+    \item \textbf{Permissions and safety.} Pre-approve safe actions; gate the rest.
+    \item \textbf{Customizing your environment.} Status line, colors, keybindings, voice, output styles.
+  \end{enumerate}
+
+  \vspace{0.7em}
+  \alert{None of these are required for research work. They are optional comforts that compound once you use Claude every day.}
+
+  \vspace{0.5em}
+  {\small Source: \href{https://support.claude.com/en/articles/14554000-claude-code-power-user-tips}{support.claude.com --- Claude Code power-user tips}.}
+\end{frame}
+
+% ── Cloud sessions / Cowork ───────────────────────────────────────
+
+\begin{frame}[fragile]{Cloud Sessions and Cowork}
+  \textbf{What it is.} Run Claude Code on a sandboxed cloud machine instead of your laptop. Cowork Dispatch is the version that can also reach into your local Desktop app for things like Slack, files, and calendar.
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.}
+  \begin{itemize}\small
+    \item Long jobs (replications, sweeps, paper rebuilds) keep running with the lid closed.
+    \item Multiple parallel sessions without burning your local CPU or worktrees.
+    \item Useful when you are travelling and want to dispatch work from a phone.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \textbf{How to use it.} From the Claude app or web (\texttt{claude.ai/code}), open the \emph{Code} tab and start a cloud session against a connected GitHub repo. Output and PRs come back as if you had run it locally.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Example: kick off a long replication from your phone
+"In session_5/, rerun the full extension grid and open
+ a PR with the updated tables and figures."
+  \end{lstlisting}
+\end{frame}
+
+% ── Teleport / remote control ─────────────────────────────────────
+
+\begin{frame}[fragile]{Teleport and Remote Control}
+  \textbf{What it is.} \texttt{/teleport} hands the current session off to another device --- terminal, desktop app, web, or phone --- with full history intact. \texttt{/remote-control} lets a phone drive a session that is still running on your laptop.
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.}
+  \begin{itemize}\small
+    \item Start a long task at your desk; check on it from a caf\'e without restarting context.
+    \item Read the agent's output on a bigger screen than your terminal.
+    \item Keep one canonical session, not three half-finished ones across devices.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# In a terminal session, hand it off:
+/teleport
+
+# Or pair your phone to drive this session:
+/remote-control
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small \alert{Caveat.} Teleporting does not move local files. Only sessions where Claude is working through git or the cloud transfer cleanly.}
+\end{frame}
+
+% ── Scheduled and recurring ───────────────────────────────────────
+
+\begin{frame}[fragile]{Scheduled and Recurring Tasks}
+  \textbf{What it is.} Two ways to make Claude run on a clock instead of on your keystroke.
+  \begin{itemize}\small
+    \item \texttt{/loop} --- repeat a prompt or slash command locally, on an interval, for up to a few days.
+    \item \texttt{/schedule} --- create a cloud-side cron job that runs even when your machine is off.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \textbf{Why it is useful for research.}
+  \begin{itemize}\small
+    \item Re-run a robustness battery every time results change.
+    \item Sweep your Zotero feed for new papers and append a digest to a notes file.
+    \item Babysit PRs and CI without sitting in front of the terminal.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Every 30 minutes, recheck open PRs and address review comments
+/loop 30m /babysit-prs
+
+# Cloud cron: every Monday 9am, summarize new Zotero items into NOTES.md
+/schedule
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small Use sparingly. A loop that runs an unverified workflow is a loop that produces unverified output on a schedule.}
+\end{frame}
+
+% ── Permissions / safety ──────────────────────────────────────────
+
+\begin{frame}[fragile]{Permissions and Safety}
+  \textbf{What it is.} A set of layers that control what Claude can do without asking. \texttt{/permissions} is the allowlist. \texttt{--enable-auto-mode} adds a classifier that auto-approves safe actions and flags risky ones. \texttt{/sandbox} isolates files and network so you don't have to gate every read.
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.}
+  \begin{itemize}\small
+    \item Stop approving the same five \texttt{Bash(python ...)} prompts every session.
+    \item Keep destructive actions (\texttt{rm}, \texttt{git push --force}, dropping tables) gated.
+    \item Run a risky agent inside a sandbox without giving it your whole filesystem.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Pre-approve common safe operations for this project
+/permissions
+# then add lines like:
+#   "Bash(python session_5/*.py)"
+#   "Edit(session_5/**)"
+#   "Read(**)"
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small \alert{Rule of thumb.} Allowlist things you'd let a junior collaborator do unsupervised. Keep the rest gated.}
+\end{frame}
+
+% ── Customizing environment ───────────────────────────────────────
+
+\begin{frame}[fragile]{Customizing Your Environment}
+  \textbf{What it is.} Small quality-of-life knobs in the CLI and Desktop app.
+  \begin{itemize}\small
+    \item \texttt{/config} --- theme, model, output style (e.g.\ ``Explanatory'' or ``Learning'').
+    \item \texttt{/statusline} --- show model, working directory, context usage at a glance.
+    \item \texttt{/color}, \texttt{/keybindings} --- distinguish parallel sessions, rebind keys.
+    \item \texttt{/terminal-setup} --- enable \texttt{Shift+Enter} for newlines.
+    \item \texttt{/voice} --- dictate prompts instead of typing.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.} Friction compounds. If two sessions look identical and you paste the wrong thing into the wrong worktree, the cost is real.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Two parallel worktrees, visually distinct
+# Terminal A:
+/color blue
+# Terminal B:
+/color red
+
+# Switch to a verbose, teaching-style mode while learning a new tool
+/config   # then pick output style "Explanatory"
+  \end{lstlisting}
+\end{frame}
+
+% ── Closing ───────────────────────────────────────────────────────
+
+\begin{frame}{Pick One, Not All}
+  \textbf{Don't try to adopt all of these in the same week.}
+
+  \vspace{0.6em}
+  A reasonable order for a researcher:
+  \begin{enumerate}\small
+    \item \textbf{Permissions} first --- the prompts you stop seeing are the ones you stop rubber-stamping.
+    \item \textbf{Status line and colors} second --- cheap, prevents real mistakes across worktrees.
+    \item \textbf{Cloud sessions / Cowork} when you have a job that genuinely doesn't fit on your laptop.
+    \item \textbf{\texttt{/loop} and \texttt{/schedule}} only once a workflow is verified --- never to discover whether it works.
+    \item \textbf{Teleport} when you actually need it. Most people don't, most weeks.
+  \end{enumerate}
+
+  \vspace{0.7em}
+  \alert{The best power-user setup is the smallest one that removes a friction you actually feel.}
+\end{frame}
+
 \end{document}
