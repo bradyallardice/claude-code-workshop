@@ -99,11 +99,11 @@ cd ~/my_workspace/session_5 && code .
     \item \textbf{Hooks.} Shell commands that run automatically on events (file writes, tool use, session start) --- enforcement that doesn't depend on Claude remembering.
 
     \vspace{0.5em}
-    \item \textbf{Putting it together.} Build a short replication + extension note, then decide which parts of the workflow transfer to your own research.
+    \item \textbf{Putting it together.} Start from an unfamiliar paper, use a Zotero library to write the literature review, then build a short replication + extension note.
   \end{enumerate}
 
   \vspace{0.8em}
-  \alert{The capstone is not a test of whether a prepared AI can finish a template. It is a test of whether you can direct, verify, and route the work.}
+  \alert{The capstone is not a test of whether a prepared AI can finish a template. It is a test of whether you can learn the paper, direct the workflow, verify the output, and route the work.}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -493,15 +493,96 @@ cd ~/my_workspace/my_project && claude-ignore init
 
 \begin{frame}{Capstone}
   \centering
-  \vspace{1.6em}
-  {\Large Replicate one published figure,\\[0.35em]
-  run one small extension,\\[0.35em]
-  write a 2--3 page research note.}
+  \vspace{1.2em}
+  {\Large Read an unfamiliar paper,\\[0.35em]
+  write a short literature review,\\[0.35em]
+  replicate one published figure,\\[0.35em]
+  run one small extension.}
 
-  \vspace{1.6em}
+  \vspace{1.2em}
   \begin{block}{The point}
-    Use Claude Code as a research assistant, not as a vending machine. You direct the task, inspect the code, verify the output, and decide what the result means.
+    Use Claude Code as a research assistant, not as a vending machine. You learn the paper, direct the task, inspect the code, verify the output, and decide what the result means.
   \end{block}
+\end{frame}
+
+\begin{frame}{Assume You Have Not Read the Paper}
+  \textbf{The first output is not code. It is orientation.}
+
+  \vspace{0.5em}
+  Before asking Claude to replicate anything, you should be able to answer:
+  \begin{itemize}\small
+    \item What is the paper's research question?
+    \item What is the paper's core contribution?
+    \item What treatment, attributes, and outcome are being analyzed?
+    \item What does Figure 1 estimate, and why is it central?
+    \item What does the assigned extension change or add?
+    \item Which literatures does the paper claim to speak to?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{\small Read the paper and my notes first. If Claude starts coding before you understand the target, stop it.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1: Clone, Teams, Branches}
+  \textbf{Two-person teams, all working in the GitHub collaboration repo from Session 4.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git clone https://github.com/bradyallardice/github_collaboration_practice.git
+cd github_collaboration_practice
+git switch -c team-<n>/<your-name>-<strand>
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{Assign two ownership lanes before touching files:}
+  \begin{itemize}\small
+    \item \textbf{Partner A: paper + literature lane} --- paper notes, Zotero search, literature review draft, claim checking
+    \item \textbf{Partner B: data + analysis lane} --- data validation, Figure 1 script, extension script, output checks
+    \item \textbf{Both: reciprocal review} --- each person reviews the other's PR before merging into the team branch
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Everyone is doing the same capstone task. Branches keep identical work from colliding. Reviews keep partner specialization from becoming blind trust.}
+\end{frame}
+
+\begin{frame}{Step 2: Zotero, Not Local BibTeX}
+  \textbf{The literature review uses a prebuilt Zotero library.}
+
+  \vspace{0.5em}
+  The workflow:
+  \begin{enumerate}\small
+    \item Import the provided BibTeX seed into Zotero.
+    \item Confirm the Zotero MCP can find the papers.
+    \item Remove the local import file from the project workspace.
+    \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \begin{block}{Why}
+    A local \texttt{.bib} file lets Claude pattern-match citations without understanding the literature. Zotero forces the workflow closer to the thing you would do in a real project: search, inspect, cite, and verify.
+  \end{block}
+
+  \vspace{0.3em}
+  \alert{\small Instructor setup: the seed file should be a one-time import file, not a source Claude reads during drafting. If it must sit in the repo, block it with \texttt{.claudeignore} and the read guard.}
+\end{frame}
+
+\begin{frame}{Step 3: Write the Literature Review}
+  \textbf{Use Claude for search and synthesis, but keep the claims accountable.}
+
+  \vspace{0.5em}
+  A useful first prompt:
+  \begin{quote}\small
+    Search the Zotero library for papers most relevant to this article's research question. Return a table with citation key, mechanism, empirical setting, and how it connects to the capstone paper. Do not write prose yet.
+  \end{quote}
+
+  \vspace{0.4em}
+  Then:
+  \begin{itemize}\small
+    \item Open the most important papers or notes yourself.
+    \item Decide which claims belong in a short review.
+    \item Draft 2--3 paragraphs that position the capstone paper.
+    \item Check that every citation supports the sentence attached to it.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{What Is Provided}
@@ -510,6 +591,7 @@ cd ~/my_workspace/my_project && claude-ignore init
     \textbf{Course infrastructure}
     \begin{itemize}\small
       \item A template repo with data, starter scripts, paper skeleton
+      \item The paper, instructor notes, and a Zotero library seed
       \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
       \item General skills: data validation, robustness, tables, references, prose review
       \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
@@ -518,6 +600,8 @@ cd ~/my_workspace/my_project && claude-ignore init
     \column{0.48\textwidth}
     \textbf{Your work}
     \begin{itemize}\small
+      \item Read the paper and instructor notes
+      \item Write the literature review from the Zotero library
       \item Write the replication instruction yourself
       \item Decide what Claude may infer and what you must specify
       \item Read the code and check the output
@@ -577,11 +661,13 @@ changes the sample, or skips verification, reject it.
 
 \begin{frame}{Capstone Flow}
   \begin{enumerate}
-    \item \textbf{Set up roles and branches.} Replication branch, extension branch, PRs into \texttt{main}.
+    \item \textbf{Clone and organize.} Two-person teams in \texttt{github\_collaboration\_practice}; one branch per person.
+    \item \textbf{Set the citation boundary.} Import the seed into Zotero; remove or block the local \texttt{.bib}.
+    \item \textbf{Understand the paper.} Read the article and instructor notes.
+    \item \textbf{Write the literature review.} Use Zotero search, then verify the claims.
     \item \textbf{Validate the data.} Use \texttt{spec-validator}; decide what any warning means.
     \item \textbf{Replicate Figure 1.} Prompt, plan, code, run, inspect, commit.
-    \item \textbf{Run the extension.} Use the assigned extension; verify sample and estimand.
-    \item \textbf{Write the note.} Use the paper skeleton; review prose and claim-output alignment.
+    \item \textbf{Run the extension and finish the note.} Verify sample, estimand, prose, and tables.
     \item \textbf{Reflect.} Fill in \texttt{AI\_WORKFLOW\_REFLECTION.md}.
   \end{enumerate}
 
