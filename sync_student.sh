@@ -55,7 +55,7 @@ git ls-files 'session_*/scripts/solution_*.py' | xargs -r git rm --quiet 2>/dev/
 git rm --quiet session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py 2>/dev/null || true
 git rm --quiet session_2/scripts/build_county_panel.py 2>/dev/null || true
 git rm --quiet session_4/scripts/base_regression.py 2>/dev/null || true
-git rm --quiet session_5/scripts/buggy_script.py 2>/dev/null || true
+git rm --quiet session_4/scripts/buggy_script.py 2>/dev/null || true
 git rm --quiet session_8/scripts/api_template.py 2>/dev/null || true
 
 # Remove pre-computed output students should generate themselves
@@ -69,24 +69,31 @@ git rm --quiet session_3/output/summary_stats.tex 2>/dev/null || true
 # Remove teacher-only figure generation script
 git rm --quiet session_3/scripts/generate_fx_figure.py 2>/dev/null || true
 
-# Module 5: remove instructor-only demo code, data, and docs
-git rm -r --quiet session_5/code/ 2>/dev/null || true
-git rm -r --quiet session_5/data/ 2>/dev/null || true
-git rm --quiet session_5/docs/methods_paragraph.md 2>/dev/null || true
+# Session 4 moved-in debugging/capstone-prep material: remove instructor-only demo code, data, and docs
+git rm -r --quiet session_4/code/ 2>/dev/null || true
+git rm --quiet session_4/data/course_participants.csv 2>/dev/null || true
+git rm --quiet session_4/data/satisfaction.csv 2>/dev/null || true
+git rm --quiet session_4/docs/methods_paragraph.md 2>/dev/null || true
+git rm --quiet session_4/docs/instructor_notes_debugging.md 2>/dev/null || true
+git rm --quiet session_4/github_collaboration_practice/INSTRUCTOR.md 2>/dev/null || true
 
-# Module 5 Option B: remove the instructor demo folder and reference paper
-git rm -r --quiet session_5/option_b/exercise_2/demo/ 2>/dev/null || true
-git rm --quiet session_5/option_b/exercise_2/paper.tex 2>/dev/null || true
-git rm --quiet session_5/option_b/exercise_2/paper.pdf 2>/dev/null || true
+# Session 4 Option B: remove the instructor demo folder and reference paper
+git rm -r --quiet session_4/option_b/exercise_2/demo/ 2>/dev/null || true
+git rm --quiet session_4/option_b/exercise_2/paper.tex 2>/dev/null || true
+git rm --quiet session_4/option_b/exercise_2/paper.pdf 2>/dev/null || true
 
-# Module 5 Option B Exercise 2: students generate these themselves in Exercise 1
-git rm --quiet session_5/option_b/exercise_2/tables/summary_stats.tex 2>/dev/null || true
-git rm --quiet session_5/option_b/exercise_2/tables/main_table.tex 2>/dev/null || true
-git rm --quiet session_5/option_b/exercise_2/tables/robustness_table.tex 2>/dev/null || true
-git rm --quiet session_5/option_b/exercise_2/figures/fx_rate_figure.png 2>/dev/null || true
+# Session 4 Option B Exercise 2: students generate these themselves in Exercise 1
+git rm --quiet session_4/option_b/exercise_2/tables/summary_stats.tex 2>/dev/null || true
+git rm --quiet session_4/option_b/exercise_2/tables/main_table.tex 2>/dev/null || true
+git rm --quiet session_4/option_b/exercise_2/tables/robustness_table.tex 2>/dev/null || true
+git rm --quiet session_4/option_b/exercise_2/figures/fx_rate_figure.png 2>/dev/null || true
 
-# Module 5 Option B output: students generate merged_survey.csv themselves
-git rm --quiet session_5/option_b/output/merged_survey.csv 2>/dev/null || true
+# Session 4 Option B output: students generate merged_survey.csv themselves
+git rm --quiet session_4/option_b/output/merged_survey.csv 2>/dev/null || true
+
+# Session 5 capstone: keep student-facing materials, remove instructor-only notes.
+git rm --quiet session_5/capstone-template/INSTRUCTOR.md 2>/dev/null || true
+git rm --quiet session_5/session5_slides.tex 2>/dev/null || true
 
 # Remove slide source files and images (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true

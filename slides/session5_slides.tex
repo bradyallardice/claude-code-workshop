@@ -268,12 +268,20 @@ it appears in.
   \textbf{Now in any session:}
   \begin{itemize}\small
     \item Claude auto-spawns it when a task matches the \texttt{description}
-    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{solution\_estimate.py}''}
+    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{option\_b/exercise\_1/solution\_estimate.py}''}
     \item Role is enforced --- if it suggests a fix, it broke its own contract
   \end{itemize}
 
   \vspace{0.2em}
   \alert{\small Permissions still apply: tools the agent uses must be allowed in \texttt{.claude/settings.json}.}
+\end{frame}
+
+\begin{frame}{Why Define a Named Subagent at All?}
+  \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
+
+  \vspace{1.5em}
+  \centering
+  {\large\itshape Think about it for a moment \ldots}
 \end{frame}
 
 \begin{frame}{Why Define a Named Subagent at All?}
@@ -336,7 +344,7 @@ it appears in.
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Run this pipeline on solution_estimate.py:
+Run this pipeline on option_b/exercise_1/solution_estimate.py:
   1. Use spec-critic to list every silent issue.
   2. Spawn a subagent to draft minimal-diff fixes
      for each issue.
@@ -535,7 +543,7 @@ cd ~/my_workspace/my_project && claude-ignore init
   First:
   \begin{enumerate}\small
     \item Open the course repo on your machine.
-    \item Go to \texttt{capstone-template/}.
+    \item Go to \texttt{session\_5/capstone-template/}.
     \item Read \texttt{README.md}.
     \item Decide who will be the \textbf{repo owner}.
   \end{enumerate}
@@ -544,7 +552,7 @@ cd ~/my_workspace/my_project && claude-ignore init
   The repo owner's first job is to create a clean team repo on \texttt{github.com}.
 
   \vspace{0.6em}
-  \alert{\small Do not use the old collaboration-practice repo for the capstone. It was for learning the loop. The capstone starts from \texttt{capstone-template/}.}
+  \alert{\small Do not use the old collaboration-practice repo for the capstone. It was for learning the loop. The capstone starts from \texttt{session\_5/capstone-template/}.}
 \end{frame}
 
 \begin{frame}[fragile]{Step 1a: Create an Empty GitHub Repo}
@@ -572,13 +580,13 @@ cd <team-repo>
 \end{frame}
 
 \begin{frame}[fragile,shrink=8]{Step 1b: Copy in the Capstone Files}
-  \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
+  \textbf{Copy \texttt{session\_5/capstone-template/} into the empty team repo.}
 
   \vspace{0.4em}
   From inside the empty team repo:
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 rsync -av --exclude='.git' \
-  /path/to/AIAgentsCourse/capstone-template/ ./
+  /path/to/course-repo/session_5/capstone-template/ ./
 
 ls
 ls -a
@@ -600,7 +608,7 @@ git push -u origin main
   Then the owner adds their partner as a collaborator. The partner clones the new team repo.
 
   \vspace{0.3em}
-  \alert{\small \texttt{capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+  \alert{\small \texttt{session\_5/capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
 \end{frame}
 
 \begin{frame}[fragile]{Step 1c: Branch and Review}
@@ -825,8 +833,9 @@ changes the sample, or skips verification, reject it.
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 # At claude.ai/code, open the "Code" tab, pick the repo, and prompt:
-"On a new branch, rerun the full extension grid in session_5/
- and open a PR with the updated tables and figures."
+"On a new branch, run the assigned capstone extension in
+ session_5/capstone-template/ and open a PR with the
+ updated tables and figures."
   \end{lstlisting}
 
   \vspace{0.2em}

@@ -8,9 +8,9 @@ This file is for you. Remove it or keep it private before students access the re
 
 ### 1. Prepare the capstone folder
 
-The capstone assumes students already have the course repo. Everything they need should be inside `capstone-template/`.
+The capstone assumes students already have the course repo. Everything they need should be inside `session_5/capstone-template/`.
 
-Before class, make sure students can find `capstone-template/README.md` from the course repo. They will create their own empty GitHub repos, clone those empty repos, and copy the contents of `capstone-template/` into them.
+Before class, make sure students can find `session_5/capstone-template/README.md` from the course repo. They will create their own empty GitHub repos, clone those empty repos, and copy the contents of `session_5/capstone-template/` into them.
 
 ### 2. Verify instructor-provided files
 
@@ -41,7 +41,7 @@ Recommended flow:
 
 1. One partner creates an empty repo on `github.com`.
 2. That partner clones the empty repo to their computer.
-3. That partner copies the contents of `capstone-template/` into the empty repo.
+3. That partner copies the contents of `session_5/capstone-template/` into the empty repo.
 4. That partner commits and pushes the starter files to `main`.
 5. The owner adds the partner as a collaborator.
 6. The partner accepts the invite and clones the team repo.
@@ -61,7 +61,7 @@ You cannot configure this in advance because the teams create their own repos.
 
 Create one throwaway empty team repo on GitHub and run the full workflow as a pair:
 
-- Owner clones the empty repo, copies in `capstone-template/`, commits, pushes, and adds the partner.
+- Owner clones the empty repo, copies in `session_5/capstone-template/`, commits, pushes, and adds the partner.
 - Partner clones the team repo.
 - Team fills in `ROLES.md`.
 - Partner A creates `lit/<name>` and edits literature/prose files.
@@ -128,4 +128,4 @@ With 8 teams of 2 (16 students), all three extensions get about 2-3 teams each. 
 - Collect `paper/paper.pdf` from each team's `main` branch as the deliverable.
 - Collect `AI_WORKFLOW_REFLECTION.md` with the paper. It is the transfer exercise: what would become context, a skill, a subagent, or a hook in their own research.
 - If you want to inspect collaboration quality, check each team's PRs and `git log --oneline`.
-- For a new cohort, refresh `capstone-template/` in the course repo. Do not reuse old team repos because PR history and permissions confuse new students.
+- For a new cohort, refresh `session_5/capstone-template/` in the course repo. Do not reuse old team repos because PR history and permissions confuse new students.
