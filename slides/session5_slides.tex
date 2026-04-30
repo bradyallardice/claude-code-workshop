@@ -587,13 +587,13 @@ cd [my_workspace]/my_project && claude-ignore init
       \item Write the replication instruction yourself
       \item Decide what Claude may infer and what you must specify
       \item Read the code and check the output
-      \item Interpret the extension cautiously
+      \item Interpret the extension
+      \item Turn it into a 2--3 page research note on GitHub
       \item Explain which AI workflow pieces would transfer to your own work
     \end{itemize}
   \end{columns}
 
   \vspace{0.7em}
-  \alert{\small The safety rails are prebuilt. The analytical direction is not.}
 \end{frame}
 
 \begin{frame}{Step 1: Orient Yourself with the Paper}
@@ -1052,6 +1052,137 @@ starter/extend_TEMPLATE.do
 
   \vspace{0.7em}
   \alert{The best power-user setup is the smallest one that removes a friction you actually feel.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WEB SCRAPING AND THE CLAUDE API
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Two More Research Tools Worth Knowing}
+  \centering
+  \vspace{1.5em}
+  {\Large Web scraping with Claude Code\\[0.5em]
+  and the Claude API.}
+
+  \vspace{1em}
+  {\small Not part of today's capstone --- but both come up quickly once you start using Claude for real research tasks.}
+\end{frame}
+
+\begin{frame}{Web Scraping with Claude Code}
+  \textbf{Claude Code can write and run scraping scripts in your session.}
+
+  \vspace{0.5em}
+  A typical workflow:
+  \begin{enumerate}\small
+    \item Describe the target page and what you want to extract.
+    \item Claude writes a script (Python with \texttt{requests} + \texttt{BeautifulSoup}, or \texttt{playwright} for dynamic pages).
+    \item You inspect the output before saving anything.
+    \item Claude adjusts selectors if the structure doesn't match.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{What it handles well:}
+  \begin{itemize}\small
+    \item Static HTML pages --- legislative records, committee lists, government databases
+    \item Paginated tables where the pattern repeats
+    \item Light dynamic content with \texttt{playwright} or \texttt{selenium}
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Always check the site's \texttt{robots.txt} and terms of service before scraping. Pause between requests. Don't hammer public servers.}
+\end{frame}
+
+\begin{frame}[fragile]{Scraping: A Worked Prompt}
+  \textbf{Example: scrape a table of legislative votes.}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+The page at [URL] has a table of roll-call votes. Each row has:
+  legislator name, party, constituency, and vote (Y/N/Abstain).
+The table spans multiple pages (next-page button at bottom).
+
+Write a Python script that:
+  1. Fetches each page with a 1-second pause between requests
+  2. Parses the table using BeautifulSoup
+  3. Saves the combined result to data/votes_raw.csv
+  4. Prints row count and NA counts before saving
+
+Do not run it yet - show me the plan first.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small Then: review the plan, approve, run, inspect the CSV, and commit. Same workflow as replication.}
+\end{frame}
+
+\begin{frame}{The Claude API}
+  \textbf{When Claude Code is not the right tool.}
+
+  \vspace{0.5em}
+  Claude Code is an interactive assistant. The \textbf{Claude API} (via the Anthropic Python or TypeScript SDK) is for when you need to:
+  \begin{itemize}\small
+    \item Run the same prompt over \textbf{thousands of observations} --- coding open-ended survey responses, classifying documents at scale
+    \item Embed Claude in a \textbf{pipeline} --- a script that processes each row and writes results to a dataframe
+    \item Control \textbf{exact model, temperature, and token budget} for reproducibility
+    \item Build a \textbf{custom tool} that wraps Claude for a specific recurring task
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The distinction}
+    Claude Code is for you-and-Claude working together. The API is for Claude working at scale, without you in the loop for each item.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Claude API: A Minimal Research Example}
+  \textbf{Coding 500 open-ended survey responses.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+import anthropic, pandas as pd
+
+client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+df = pd.read_csv("data/survey_responses.csv")
+
+def code_response(text):
+    msg = client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=64,
+        messages=[{"role": "user", "content":
+            f"Classify this response as Positive, Negative, or Neutral.\n"
+            f"Response: {text}\nLabel:"}]
+    )
+    return msg.content[0].text.strip()
+
+df["label"] = df["open_ended"].apply(code_response)
+df.to_csv("data/survey_coded.csv", index=False)
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small\alert{In practice: add prompt caching (\texttt{cache\_control}) for the system prompt, validate a random sample of labels, and log the model version and date for reproducibility.}}
+\end{frame}
+
+\begin{frame}{API vs.\ Claude Code: When to Use Which}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Use Claude Code when:}
+    \begin{itemize}\small
+      \item You are exploring, iterating, or debugging
+      \item The task requires your judgment at each step
+      \item You want to write a scraper, plan an analysis, or review output interactively
+      \item One-off or low-volume tasks
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Use the API when:}
+    \begin{itemize}\small
+      \item You have a fixed prompt and many inputs
+      \item You need the results in a dataframe or database
+      \item Reproducibility requires logging exact model and parameters
+      \item You are building a tool others will run without Claude Code installed
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.8em}
+  \alert{\small The API is not more powerful than Claude Code --- it is differently suited. Most research workflows use both: Claude Code to design the prompt and test it, the API to run it at scale.}
 \end{frame}
 
 \end{document}
