@@ -1,0 +1,23 @@
+.DS_Store
+.env
+*.pem
+*.key
+*.secret
+__pycache__/
+*.pyc
+.claude/settings.local.json
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Local or regenerated data
+data/raw/
+data/restricted/

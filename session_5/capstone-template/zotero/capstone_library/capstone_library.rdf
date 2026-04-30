@@ -1,0 +1,832 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Article rdf:about="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12959">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1540-5907"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Magistro</foaf:surname>
+                        <foaf:givenName>Beatrice</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Borwein</foaf:surname>
+                        <foaf:givenName>Sophie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Alvarez</foaf:surname>
+                        <foaf:givenName>R. Michael</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bonikowski</foaf:surname>
+                        <foaf:givenName>Bart</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Loewen</foaf:surname>
+                        <foaf:givenName>Peter John</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2000"/>
+        <link:link rdf:resource="#item_1285"/>
+        <dc:title>Attitudes toward artificial intelligence (AI) and globalization: Common microfoundations and political implications</dc:title>
+        <dcterms:abstract>Advances in artificial intelligence (AI) are reshaping labor markets and sparking political debates. Like economic globalization, AI developments promise benefits, including job creation and lower prices, but also costs such as job displacement, raising crucial questions about public perceptions. Will AI, like globalization, challenge existing paradigms and trigger a backlash? Leveraging a conjoint experiment with 6,000 respondents from the United States and Canada, we examine public opinion toward offshoring and generative AI, focusing on the multidimensional trade-offs between job and price changes. Across all scenarios, respondents are equally or more sensitive to price changes than employment shifts. AI is favored over offshoring, especially among Democrats, highlighting an emerging partisan divide in the United States. Republicans and Canadians show more varied support, indicating AI is not immune to opposition. By focusing on the microfoundations of opinion formation, we identify scenarios that may trigger or temper protectionist stances.</dcterms:abstract>
+        <dc:date>2026</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Attitudes toward artificial intelligence (AI) and globalization</z:shortTitle>
+        <z:libraryCatalog>Wiley Online Library</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12959</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 14:31:34</dcterms:dateSubmitted>
+        <dc:rights>© 2025 The Author(s). American Journal of Political Science published by Wiley Periodicals LLC on behalf of Midwest Political Science Association.</dc:rights>
+        <dc:description>_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12959</dc:description>
+        <bib:pages>348-365</bib:pages>
+        <z:citationKey>magistroAttitudesArtificialIntelligence2026</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1540-5907">
+        <prism:volume>70</prism:volume>
+        <dc:title>American Journal of Political Science</dc:title>
+        <dc:identifier>DOI 10.1111/ajps.12959</dc:identifier>
+        <prism:number>1</prism:number>
+        <dc:identifier>ISSN 1540-5907</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2000">
+        <rdf:value>&lt;h1&gt;Synthesis — Magistro et al. 2026 (Capstone)&lt;/h1&gt;&lt;p&gt;Magistro, Borwein, Alvarez, Bonikowski, Loewen (2026). &quot;Attitudes toward artificial intelligence (AI) and globalization: Common microfoundations and political implications.&quot; American Journal of Political Science 70(1): 348–365. DOI: 10.1111/ajps.12959&lt;/p&gt;&lt;p&gt;One-line claim: People evaluate AI and offshoring economic shocks through the same microfoundational lens — price sensitivity dominates employment sensitivity — but AI is viewed more favorably than offshoring, especially by Democrats.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;- **Abstract (p. 348):** &quot;Advances in artificial intelligence (AI) are reshaping labor markets... Will AI, like globalization, challenge existing paradigms and trigger a backlash?&quot; — The AI-as-globalization-parallel thesis in its most compressed form.&lt;/p&gt;&lt;p&gt;- **Introduction (p. 350):** &quot;People are as responsive or more responsive to price changes than they are to employment changes, similarly for offshoring and AI; furthermore, they are always more sensitive to job losses than job gains.&quot; — Core result: price sensitivity &amp;gt; employment sensitivity; loss aversion confirmed symmetrically for both frames.&lt;/p&gt;&lt;p&gt;- **Introduction (p. 350):** &quot;A shift from worst-case to best-case scenarios can increase support for AI and offshoring by 36% and 34%, respectively... it can move people from weak opposition to weak support.&quot; — The politically actionable finding: crossing the neutral threshold (3/5), not just shifting means.&lt;/p&gt;&lt;p&gt;- **Introduction (p. 350–351):** Consumer identity mechanism — &quot;some individuals may prioritize their roles as consumers over their roles as workers when assessing economic changes.&quot; — The theoretical contribution distinguishing this from pure trade-attitudes literature.&lt;/p&gt;&lt;p&gt;- **Results (p. 358):** &quot;None of the effects differ between AI and offshoring, suggesting that people respond similarly to changes in prices and employment that result from either shock.&quot; — Counter-intuitive null: the frame shifts levels (AI favored) but not response slopes. Critical for Extension A.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;- **Results (p. 358):** Authors report the weights vs. unweighted robustness check and endorse unweighted (minimal variation, higher power). → Extension B replication baseline.&lt;/p&gt;&lt;p&gt;- **Results (p. 358, fn. 13):** Null result on demographic subgroups (age, gender, income, education): &quot;no significant differences in the effects (AMCEs) of price and job changes across most subgroups.&quot; → Baseline for Extension A — standard cuts don't move slopes, raising the question of whether frame × job-type does.&lt;/p&gt;&lt;p&gt;- **Results (p. 359):** &quot;Republicans never cross the neutral line (3), they do move from opposed to neutral positions... Republicans are slightly more responsive than Democrats to price changes.&quot; → Nuances the partisan story; relevant for Extension C's prior trade attitudes moderator.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;| Citation | Why it matters |&lt;br/&gt;|---|---|&lt;br/&gt;| **Hainmueller, Hopkins &amp;amp; Yamamoto (2014)** *Political Analysis* 22(1): 1–30 | Foundational conjoint AMCE paper — required for understanding the estimation framework underlying the replication and all three extensions |&lt;br/&gt;| **Leeper, Hobolt &amp;amp; Tilley (2020)** *Political Analysis* 28(2): 207–21 | Marginal means for subgroup comparisons — the direct method reference for Figure 1 replication and Extensions A/C |&lt;br/&gt;| **Bansak et al. (2021a, 2021b)** | 2021a on satisficing; 2021b conjoint chapter — relevant to Extension B's attention-filter robustness check |&lt;br/&gt;| **Gallego &amp;amp; Kurer (2022)** *ARPS* 25: 463–84 | Synthesis on automation/AI in political behavior; voters conflate AI and trade; anchor for Extension A |&lt;br/&gt;| **Mutz (2021)** *POQ* 85(1): 101–22 | Trade rhetoric and misattribution of job loss; framing mechanism for Extension A |&lt;br/&gt;| **Naoi &amp;amp; Kume (2015)** *CPS* 48(10): 1293–1317 | Worker-vs.-consumer identity; price benefits activate consumer identity — core motivation for Extension C's prior-trade-attitudes split |&lt;br/&gt;| **Baker (2003, 2005)** *World Politics* / *AJPS* | Consumption-based theory of trade preferences; baseline theory for Extension C |&lt;br/&gt;| **Di Tella &amp;amp; Rodrik (2020)** *Economic Journal* 130(628): 1008–30 | Labor shock exposure and demand for trade protection via survey; misattribution mechanism for Extension A |&lt;br/&gt;| **Walter (2021)** | Politicization of globalization and activation of latent grievances — theoretical rationale for Extension C's median split on prior trade attitudes |&lt;br/&gt;| **Magistro et al. (2024)** *PSRM* 12(4): 783–98 | Authors' prior paper on automation (not generative AI); established price sensitivity finding; this paper is the direct extension to the AI/offshoring comparison |&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Purple — Data and methods&lt;/p&gt;&lt;p&gt;- **Design novelty (p. 355):** Bi-national simultaneous conjoint (US + Canada, N=6,056, YouGov) randomizing the *source* of the economic shock (AI vs. offshoring) within otherwise identical conjoint tables. No prior study directly compares these two frames with matched-country samples.&lt;/p&gt;&lt;p&gt;- **MM vs. AMCE choice (p. 357–358):** The decision to report MMs as main results (rather than AMCEs) is non-obvious. MMs capture absolute support levels and are robust to reference-category choice; AMCEs capture relative effects of attribute changes. This distinction maps directly onto Extension B's OLS-vs.-ordered-logit question — OLS recovers marginal effects (AMCE-like), ordered logit recovers latent-scale effects (closer to MM logic).&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Green — Thought starters for extensions&lt;/p&gt;&lt;p&gt;- **Extension A:** &quot;Once we compute slopes (the changes in support divided by the changes in jobs), respondents are most responsive to customer service jobs.&quot; (p. 358) — The paper notes job-type heterogeneity in responsiveness but never interacts job type with the AI/offshoring treatment frame. That gap is Extension A. Students should compute: (AI MM − Offshoring MM) separately for DS jobs vs. factory jobs, then test equality.&lt;/p&gt;&lt;p&gt;- **Extension A:** Authors flag &quot;higher-order interactions&quot; (frame × economic conditions) as future work they couldn't pursue due to power concerns (fn. 14, p. 359). Extension A is exactly this. N=6,056 × 4 tasks gives adequate power for a two-way frame × job-type interaction.&lt;/p&gt;&lt;p&gt;- **Extension B:** The SI robustness figures (E1–E4) already model the attention-filter check and country split. Extension B students should treat these as the template for their specification grid: (attention filter) × (weights) × (OLS vs. ologit) = 8 cells.&lt;/p&gt;&lt;p&gt;- **Extension C:** &quot;Parties tend to activate and make salient attitudes to which people are already disposed&quot; (Bonikowski 2017, cited p. 354). Prior trade attitudes (tables_policygr_5) are the latent disposition; the offshoring/AI frame is the activation mechanism. Median split on tables_policygr_5 → estimate MMs by treat_offshoring within each group → test whether the AI-preference gap is larger among pro-traders.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to the capstone — bottom line&lt;/p&gt;&lt;p&gt;1. **Figure 1 is the replication target.** The cregg::cj() call with estimate=&quot;mm&quot; and by=~treat_offshoring exactly reproduces it. reference_code/main.R lines ~133–165 have the working code.&lt;/p&gt;&lt;p&gt;2. **Extension A has a clean theoretical gap to fill.** The paper reports job-type differences in responsiveness (slope heterogeneity) but never interacts treatment frame with job type. This is a 10-line addition to the replication code.&lt;/p&gt;&lt;p&gt;3. **Extension B is scaffolded in the paper's own SI.** The attention-filter and country robustness checks are already done (Figures E1–E4, B1). Students are extending a completed sensitivity analysis into a full specification curve — the paper gives them the first two cells for free.&lt;/p&gt;&lt;p&gt;4. **Extension C has explicit theoretical grounding in the paper.** The &quot;latent attitudes activation&quot; framing (Walter 2021; Bonikowski 2017) cited on p. 354 is the exact mechanism. tables_policygr_5 (trade liberalization support) is in the dataset and has not been used as a moderator anywhere in the paper or appendix.&lt;/p&gt;&lt;p&gt;5. **The null on framing slopes (Red-5) is the most important result to understand before running extensions.** If AI and offshoring frames produce identical *slopes* but different *intercepts*, then Extensions A and C should be framed as asking whether the intercept gap varies by job type or prior attitude — not whether the responsiveness pattern differs.&lt;/p&gt;&lt;p&gt;6. **The price-sensitivity finding is robust and surprising.** Students should address it in their Discussion — their extensions will either confirm it (price sensitivity holds within subgroups/job types) or reveal heterogeneity the main paper missed.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;Generated: 2026-04-29&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_1285">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/1285/Magistro et al. - 2026 - Attitudes toward artificial intelligence (AI) and globalization Common microfoundations and politic.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/ajps.12959</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-03-30 14:31:35</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/product/identifier/S1047198700013589/type/journal_article">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1047-1987,%201476-4989"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hainmueller</foaf:surname>
+                        <foaf:givenName>Jens</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hopkins</foaf:surname>
+                        <foaf:givenName>Daniel J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Yamamoto</foaf:surname>
+                        <foaf:givenName>Teppei</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2156"/>
+        <link:link rdf:resource="#item_2018"/>
+        <dc:title>Causal Inference in Conjoint Analysis: Understanding Multidimensional Choices via Stated Preference Experiments</dc:title>
+        <dcterms:abstract>Survey experiments are a core tool for causal inference. Yet, the design of classical survey experiments prevents them from identifying which components of a multidimensional treatment are influential. Here, we show how
+              conjoint analysis
+              , an experimental design yet to be widely applied in political science, enables researchers to estimate the causal effects of multiple treatment components and assess several causal hypotheses simultaneously. In conjoint analysis, respondents score a set of alternatives, where each has randomly varied attributes. Here, we undertake a formal identification analysis to integrate conjoint analysis with the potential outcomes framework for causal inference. We propose a new causal estimand and show that it can be nonparametrically identified and easily estimated from conjoint data using a fully randomized design. The analysis enables us to propose diagnostic checks for the identification assumptions. We then demonstrate the value of these techniques through empirical applications to voter decision making and attitudes toward immigrants.</dcterms:abstract>
+        <dc:date>2014</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Causal Inference in Conjoint Analysis</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/product/identifier/S1047198700013589/type/journal_article</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:45:00</dcterms:dateSubmitted>
+        <dc:rights>https://www.cambridge.org/core/terms</dc:rights>
+        <bib:pages>1-30</bib:pages>
+        <z:citationKey>hainmuellerCausalInferenceConjoint2014</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1047-1987,%201476-4989">
+        <prism:volume>22</prism:volume>
+        <dc:title>Political Analysis</dc:title>
+        <dc:identifier>DOI 10.1093/pan/mpt024</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Polit. anal.</dcterms:alternative>
+        <dc:identifier>ISSN 1047-1987, 1476-4989</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2156">
+        <rdf:value>&lt;h1&gt;Synthesis: Hainmueller, Hopkins &amp;amp; Yamamoto (2014)&lt;/h1&gt;&lt;p&gt;Hainmueller, Jens, Daniel J. Hopkins, and Teppei Yamamoto. 2014. &quot;Causal Inference in Conjoint Analysis: Understanding Multidimensional Choices via Stated Preference Experiments.&quot; Political Analysis 22(1): 1–30. https://doi.org/10.1093/pan/mpt024&lt;/p&gt;&lt;p&gt;One-line claim: Conjoint analysis — in which respondents evaluate profiles with randomly varied attributes — enables nonparametric identification and estimation of the average marginal component effect (AMCE) of each attribute on preferences, allowing researchers to simultaneously test multiple causal hypotheses about multidimensional choices.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;1. (p. 2) Standard survey experiments identify only the catch-all effect of a composite treatment; they cannot decompose which components drive observed effects — the core problem conjoint solves.&lt;/p&gt;&lt;p&gt;2. (p. 3) The AMCE is formally defined and shown to be nonparametrically identified under three assumptions (stability/no carryover, no profile-order effects, and randomization of profiles) that are either guaranteed by design or partially testable.&lt;/p&gt;&lt;p&gt;3. (p. 28) In the conclusion: conjoint experiments separately identify component-specific causal effects by randomly manipulating multiple attributes simultaneously, estimated by simple OLS with clustered SEs — no special software required.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;1. (p. 20) In the immigration conjoint, education and English fluency dominate preferences: immigrants with a B.A. are 0.18 percentage points more likely to be preferred for admission than those with no formal education (SE = 0.02).&lt;/p&gt;&lt;p&gt;2. (p. 20) Country-of-origin effects are typically small and statistically insignificant once other attributes are controlled — only Sudan, Somalia, and Iraq reduce admission probability relative to India. Challenges single-attribute designs that found large country-of-origin effects.&lt;/p&gt;&lt;p&gt;3. (p. 22) The strongest single AMCE is the penalty for immigrants with no plans to look for work — larger than any country-of-origin effect. Suggests labor-market integration signals dominate cultural cues when evaluated simultaneously.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- Scheve, K., and M. Slaughter. 2001. &quot;Labor Market Competition and Individual Preferences over Immigration Policy.&quot; Review of Economics and Statistics 83(1): 133–45. [Labor market competition / factor-proportions model of immigration attitudes — essential precursor for economic threat framing in globalization backlash research.]&lt;/p&gt;&lt;p&gt;- Citrin, J., D. P. Green, C. Muste, and C. Wong. 1997. &quot;Public Opinion toward Immigration Reform: The Role of Economic Motivations.&quot; Journal of Politics 59(3): 858–81. [Economic vs. cultural threat models of immigration opinion; used here to frame the multi-hypothesis structure of the conjoint.]&lt;/p&gt;&lt;p&gt;- Brader, T., N. Valentino, and E. Suhay. 2008. &quot;Is It Immigration or the Immigrants? The Emotional Influence of Groups on Public Opinion and Political Action.&quot; American Journal of Political Science 52(4): 959–78. [Canonical example of the aliasing problem: ethnicity, name, and country bundled together; used in this paper as the motivating design failure.]&lt;/p&gt;&lt;p&gt;- Hainmueller, J., and M. J. Hiscox. 2010. &quot;Attitudes toward Highly Skilled and Low-Skilled Immigration: Evidence from a Survey Experiment.&quot; American Political Science Review 104(1): 61–84. [Direct precursor — skills-based immigration experiment; used here to show limits of single-attribute designs even when clean.]&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Purple — Data and methods&lt;/p&gt;&lt;p&gt;- The AMCE estimand itself (p. 11): a formally novel causal quantity — the marginal effect of one attribute averaged over the joint randomization distribution of all co-attributes — integrated into the potential outcomes framework. Nonparametrically identified from conjoint data without behavioral modeling assumptions. This is the paper's core methodological contribution.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;1. (p. 12) The AMCE is defined with respect to a chosen distribution of co-attributes; the authors suggest using the real-world distribution to improve external validity. For a job-loss conjoint, this means anchoring attribute frequencies to actual CZ-level automation exposure or trade-shock intensity distributions, rather than uniform random.&lt;/p&gt;&lt;p&gt;2. (p. 13) Conditional AMCEs by respondent characteristics are nonparametrically identified. Directly adaptable: split by respondent CZ's automation-exposure quartile, trade-shock tercile, or union status to test whether economically vulnerable respondents weight job-loss cause (automation vs. trade vs. offshoring) differently.&lt;/p&gt;&lt;p&gt;3. (p. 25) Too few attributes cause aliasing — respondents use the included attribute as a proxy for omitted correlated ones. For a job-loss conjoint, cause-of-job-loss (automation, trade, domestic competition) must be a standalone attribute, not left implicit, or all other attribute effects will be confounded.&lt;/p&gt;&lt;p&gt;4. (p. 27) Conjoint reduces social desirability bias because respondents can find multiple justifications for any choice. Useful for globalization/trade backlash research where nativist or protectionist responses may be suppressed in direct-question formats.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- This paper is the methodological foundation for any conjoint experiment on job-loss attitudes. The AMCE framework is the right estimand when testing whether cause-of-job-loss (automation vs. trade) has independent effects on support for redistribution, trade restrictions, or political candidates.&lt;/p&gt;&lt;p&gt;- The immigration experiment is a direct design template: attributes map onto job-loss scenario attributes (cause, worker characteristics, industry, region, retraining availability), and the AMCE approach allows simultaneous estimation of all attribute effects on stated policy preferences.&lt;/p&gt;&lt;p&gt;- The finding that country-of-origin effects disappear once skills/employment plans are included is an object lesson for job-loss research: media framing effects may similarly wash out once respondents are given full economic context — worth testing with a conjoint that varies cause, industry sector, and wage level simultaneously.&lt;/p&gt;&lt;p&gt;- Conditional AMCEs by ethnocentrism (Fig. 4) provide a direct model for splitting by CZ automation exposure: does the treatment effect of &quot;automation&quot; (vs. &quot;trade&quot;) on policy attitudes differ for respondents in high-exposure vs. low-exposure labor markets?&lt;/p&gt;&lt;p&gt;- The diagnostic battery (carryover, profile-order, attribute-order, atypical profiles) is a checklist to build into any job-loss conjoint pre-analysis plan.&lt;/p&gt;&lt;p&gt;- Social desirability reduction is particularly relevant for automation backlash research: respondents may hesitate to endorse protectionist or anti-automation policies directly but can do so indirectly through profile choices.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2018">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2018/Hainmueller et al. - 2014 - Causal Inference in Conjoint Analysis Understanding Multidimensional Choices via Stated Preference.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/product/identifier/S1047198719000305/type/journal_article">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>28</prism:volume>
+                <dc:title>Political Analysis</dc:title>
+                <dc:identifier>DOI 10.1017/pan.2019.30</dc:identifier>
+                <prism:number>2</prism:number>
+                <dcterms:alternative>Polit. Anal.</dcterms:alternative>
+                <dc:identifier>ISSN 1047-1987, 1476-4989</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Leeper</foaf:surname>
+                        <foaf:givenName>Thomas J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hobolt</foaf:surname>
+                        <foaf:givenName>Sara B.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Tilley</foaf:surname>
+                        <foaf:givenName>James</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2087"/>
+        <link:link rdf:resource="#item_2003"/>
+        <dc:title>Measuring Subgroup Preferences in Conjoint Experiments</dc:title>
+        <dcterms:abstract>Conjoint analysis is a common tool for studying political preferences. The method disentangles patterns in respondents’ favorability toward complex, multidimensional objects, such as candidates or policies. Most conjoints rely upon a fully randomized design to generate average marginal component effects (AMCEs). They measure the degree to which a given value of a conjoint profile feature increases, or decreases, respondents’ support for the overall profile relative to a baseline, averaging across all respondents and other features. While the AMCE has a clear causal interpretation (about the
+              effect
+              of features), most published conjoint analyses also use AMCEs to describe
+              levels
+              of favorability. This often means comparing AMCEs among respondent subgroups. We show that using conditional AMCEs to describe the degree of subgroup agreement can be misleading as regression interactions are sensitive to the reference category used in the analysis. This leads to inferences about subgroup differences in preferences that have arbitrary sign, size, and significance. We demonstrate the problem using examples drawn from published articles and provide suggestions for improved reporting and interpretation using marginal means and an omnibus F-test. Given the accelerating use of these designs in political science, we offer advice for best practice in analysis and presentation of results.</dcterms:abstract>
+        <dc:date>04/2020</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/product/identifier/S1047198719000305/type/journal_article</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:45:14</dcterms:dateSubmitted>
+        <dc:rights>https://www.cambridge.org/core/terms</dc:rights>
+        <bib:pages>207-221</bib:pages>
+        <z:citationKey>leeperMeasuringSubgroupPreferences2020</z:citationKey>
+    </bib:Article>
+    <bib:Memo rdf:about="#item_2087">
+        <rdf:value>&lt;h1&gt;Synthesis — Leeper, Hobolt &amp;amp; Tilley (2020)&lt;/h1&gt;&lt;p&gt;Leeper, Thomas J., Sara B. Hobolt, and James Tilley. 2020. &quot;Measuring Subgroup Preferences in Conjoint Experiments.&quot; Political Analysis 28(2): 207–221. https://doi.org/10.1017/pan.2019.30&lt;/p&gt;&lt;p&gt;One-line claim: Conditional AMCEs are invalid for comparing preferences across respondent subgroups because they are arbitrarily sensitive to reference category choice; marginal means and omnibus F-tests should be used instead.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;1. (p. 4) The core problem: &quot;We show that a difference in two (or more) subgroups' favorability toward a conjoint feature — like a difference in willingness to support a particular type of immigrant between high and low ethnocentrism respondents — is only rarely reflected in the difference-in-AMCEs.&quot;&lt;/p&gt;&lt;p&gt;2. (p. 4) Headline danger: &quot;Reference category choices can make similar preferences look dissimilar and dissimilar preferences look similar.&quot;&lt;/p&gt;&lt;p&gt;3. (p. 13) Formal mechanism: The difference-in-AMCEs equals the difference in preferences only when the reference-category means are identical across subgroups (β2 ≡ β0) — a condition the standard AMCE design never verifies and cannot guarantee.&lt;/p&gt;&lt;p&gt;4. (p. 22) Core prescription: &quot;We suggest that conjoint analyses should report not only average marginal component effects (AMCEs) but also descriptive quantities about levels of favorability... Marginal means contain all of the information provided by AMCEs and more.&quot;&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;1. (p. 15–16) Teele et al. replication: The difference-in-AMCEs for Democrat vs. Republican preferences over female candidates (0.089) doubles the true preference difference (0.045) because it adds the reference-category (male) difference on top of the female-candidate difference.&lt;/p&gt;&lt;p&gt;2. (p. 16) Bechtel &amp; Scheve reanalysis: With the same data, different reference category choices can produce differences-in-AMCEs that are large positive, small positive, negligible, small negative, or large negative — a complete reversal of inference direction.&lt;/p&gt;&lt;p&gt;3. (p. 21) Omnibus F-test catches published errors: Bechtel &amp; Scheve's claim that four countries &quot;largely agree&quot; is rejected by a nested model comparison (F(54, 67982)=3.72, p≤0.00), demonstrating the practical stakes of using the wrong method.&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- **Hainmueller, Hopkins &amp; Yamamoto (2014)** — Political Analysis 22:1–30. The foundational conjoint paper introducing the AMCE and the randomized design. Essential baseline for any conjoint study.&lt;br/&gt;- **Bansak, Hainmueller &amp; Hangartner (2016)** — Science 354(6309):217–222. Asylum-seeker attitudes conjoint across European countries with subgroup analysis by left-right ideology and income — directly relevant to globalization-backlash work.&lt;br/&gt;- **Gallego &amp; Marx (2017)** — Journal of European Public Policy 24(7):1027–1047. Labor market reform preferences via conjoint — close analogue for automation/trade policy conjoint designs.&lt;br/&gt;- **Egami &amp; Imai (2018)** — JASA forthcoming. Formal treatment of causal interaction in factorial/conjoint experiments; the companion piece to read alongside Leeper et al. for subgroup analysis.&lt;br/&gt;- **Ballard-Rosa, Martin &amp; Scheve (2016)** — JOP 79(1):1–16. Tax policy conjoint with rich subgroup comparisons by demographics and political orientation — template for exposure-based subgroup splits.&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;None warranted. The paper's contribution is methodological/statistical (showing a property of regression with interactions), not a novel data source or genuinely novel estimator. The cregg R package is an implementation of existing quantities (marginal means, F-tests), not a novel method.&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;1. **Causal vs. descriptive distinction** (p. 5): Any conjoint on automation/trade attitudes will be used descriptively (&quot;workers in high-automation CZs prefer X policy&quot;). That descriptive use demands marginal means, not AMCEs, especially for comparisons across exposure groups.&lt;/p&gt;&lt;p&gt;2. **Three-part toolkit** (p. 17): When comparing high-automation vs. low-automation workers in a conjoint, use (a) conditional marginal means per subgroup, (b) differences in MMs to estimate preference gaps, and (c) omnibus F-test for overall heterogeneity across all policy features.&lt;/p&gt;&lt;p&gt;3. **cregg R package** (p. 23): Implements all of the above. Plan to use `cj()` with `by =` argument for subgroup MMs and `cj_anova()` for omnibus tests in the automation conjoint analysis.&lt;/p&gt;&lt;p&gt;4. **Reference category diagnostic** (p. 4, 9–10): Before reporting any subgroup AMCE comparison, run the sensitivity check — try multiple reference categories and verify that the direction and significance of subgroup differences are stable. If unstable, switch to MMs.&lt;/p&gt;&lt;p&gt;5. **Design implication**: If the conjoint includes features like &quot;policy covers workers displaced by automation&quot; vs. &quot;policy covers workers displaced by trade,&quot; and you split by actual CZ automation exposure, the subgroup comparison must use MMs. Conditional AMCEs will be confounded by how exposed vs. unexposed workers rate the reference policy feature.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- **Conjoint design validity check**: Any conjoint study comparing worker subgroups (e.g., high-automation CZ vs. low, manufacturing vs. services) MUST use marginal means for subgroup comparisons, not conditional AMCEs. This is a non-optional methodological requirement per Leeper et al.&lt;br/&gt;- **Subgroup split variables**: Standard splits in the literature (education, left-right ideology, income) are all susceptible to the reference category problem; the paper's examples directly parallel the types of subgroup analyses common in trade/automation attitudes research.&lt;br/&gt;- **Null results threat**: Published findings that automation-exposed vs. unexposed workers &quot;have similar preferences&quot; toward compensation policies may be artifacts of reference category choice — worth checking in existing conjoint studies on redistribution/trade.&lt;br/&gt;- **Pre-registration implication**: Pre-registering the use of marginal means (not AMCEs) as the primary estimand for subgroup comparisons is now a best-practice requirement that reviewers will look for in any conjoint paper.&lt;br/&gt;- **F-test for globalization backlash heterogeneity**: An omnibus F-test across all conjoint features is the right way to test whether automation-exposed workers differ *overall* from non-exposed workers in their policy preferences — more credible than cherry-picking feature-level comparisons.&lt;br/&gt;- **Gallego &amp; Marx as a template**: Their labor market reform conjoint with left-right subgroups is the closest published analogue; checking whether they report MMs will indicate whether the paper is methodologically compliant by Leeper et al. standards.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2003">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2003/Leeper et al. - 2020 - Measuring Subgroup Preferences in Conjoint Experiments.pdf"/>
+        <dc:title>Accepted Version</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://researchonline.lse.ac.uk/id/eprint/100944/1/Measuring_Subgroup_Preferences_in_Conjoint_Experiments.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:45:15</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.annualreviews.org/doi/10.1146/annurev-polisci-051120-104535">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1094-2939,%201545-1577"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Gallego</foaf:surname>
+                        <foaf:givenName>Aina</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kurer</foaf:surname>
+                        <foaf:givenName>Thomas</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2154"/>
+        <link:link rdf:resource="#item_2005"/>
+        <dc:title>Automation, Digitalization, and Artificial Intelligence in the Workplace: Implications for Political Behavior</dc:title>
+        <dcterms:abstract>New technologies have been a key driver of labor market change in recent decades. There are renewed concerns that technological developments in areas such as robotics and artificial intelligence will destroy jobs and create political upheaval. This article reviews the vibrant debate about the economic consequences of recent technological change and then discusses research about how digitalization may affect political participation, vote choice, and policy preferences. It is increasingly well established that routine workers have been the main losers of recent technological change and disproportionately support populist parties. However, at the same time, digitalization also creates a large group of economic winners who support the political status quo. The mechanisms connecting technology-related workplace risks to political behavior and policy demands are less well understood. Voters may fail to fully comprehend the relative importance of different causes of structural economic change and misattribute blame to other factors. We conclude with a list of pressing research questions.</dcterms:abstract>
+        <dc:date>2022-05-12</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Automation, Digitalization, and Artificial Intelligence in the Workplace</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.annualreviews.org/doi/10.1146/annurev-polisci-051120-104535</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:45:24</dcterms:dateSubmitted>
+        <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+        <bib:pages>463-484</bib:pages>
+        <z:citationKey>gallegoAutomationDigitalizationArtificial2022a</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1094-2939,%201545-1577">
+        <prism:volume>25</prism:volume>
+        <dc:title>Annual Review of Political Science</dc:title>
+        <dc:identifier>DOI 10.1146/annurev-polisci-051120-104535</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Annu. Rev. Polit. Sci.</dcterms:alternative>
+        <dc:identifier>ISSN 1094-2939, 1545-1577</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2154">
+        <rdf:value>&lt;h1&gt;Synthesis: Gallego &amp;amp; Kurer (2022) — Automation, Digitalization, and AI in the Workplace&lt;/h1&gt;&lt;p&gt;**Gallego, Aina, and Thomas Kurer. 2022. &quot;Automation, Digitalization, and Artificial Intelligence in the Workplace: Implications for Political Behavior.&quot; *Annual Review of Political Science* 25: 463–484.**&lt;/p&gt;&lt;p&gt;**One-line claim:** Routine workers who lose out to technological change turn toward the populist radical right, but the overall backlash is smaller than expected because a large, politically conservative group of technology winners counterbalances losers — and losers misattribute their decline to trade and immigration rather than technology, driven by psychological biases and strategic elite framing.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;- &quot;The most consistent finding of the literature is that those who lose out to technological innovation turn against the political status quo in general and toward the populist radical right in particular.&quot; (p.464)&lt;br/&gt;- &quot;the presence of an important but somewhat neglected group of 'ordinary winners' leads us to conclude that technological change might result in less electoral backlash than commonly assumed. Yet, it may be an important force in political realignments.&quot; (p.464)&lt;br/&gt;- Workers may misattribute decline to technology due to: (a) complexity/low visibility of tech change, (b) psychological bias toward in-group/out-group framing, and (c) strategic mobilization by political entrepreneurs who downplay technology. (p.464)&lt;br/&gt;- &quot;While disentangling the effects of automation and globalization is difficult, most existing studies attribute the bulk of the decline in U.S. manufacturing employment to the former rather than the latter. Yet we do not see populists campaign against technology or automation.&quot; (Rodrik 2018, quoted p.475)&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;- Routine workers are &quot;middle class&quot; voters with political resources — they have both the motive and means to carry dissatisfaction into the political arena. (p.471)&lt;br/&gt;- Authors' own panel study (UK + ICT investment data): ordinary winners of technological change are &quot;clear-cut supporters of the political status quo,&quot; especially when center-right is in power. (p.472)&lt;br/&gt;- At-risk workers do not demand active labor market policies or education spending — the policies economists recommend go unsupported by their intended beneficiaries (Busemeyer &amp; Sahm 2021; Kurer &amp; Häusermann 2022). (p.474)&lt;br/&gt;- Gingrich (2019): compensation policies (early retirement, in-kind spending) do not prevent the turn to populist parties among high-RTI workers — compensating workers is not effective at preventing protest voting. (p.471)&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- **Acemoglu &amp; Restrepo (2020)** — shift-share robot exposure at the commuting zone level; foundational identification strategy for CZ-level automation research.&lt;br/&gt;- **Frey et al. (2018)** — robotization at local labor market level increased Trump support in 2016; key paper linking CZ automation to voting outcomes.&lt;br/&gt;- **Wu (2021a,b)** — automation risk workers are more likely to oppose trade and immigration but not to demand tech-related spending; direct survey evidence of misattribution.&lt;br/&gt;- **Rodrik &amp; di Tella (2020)** — experimental study: citizens exposed to stories of tech-displaced workers become more supportive of protectionism; highly relevant to conjoint design.&lt;br/&gt;- **Kurer &amp; Häusermann (2022)** — subjective automation risk measure (&quot;how likely is your job to be automated in the next 10 years&quot;); useful instrument for survey design.&lt;br/&gt;- **Kaihovaara &amp; Im (2020)** — European workers in high-RTI occupations more likely to support trade protectionism and immigration restrictions.&lt;br/&gt;- **Colantone &amp; Stanig (2019)** — trade exposure and economic nationalism/populism; key reference for globalization backlash literature.&lt;br/&gt;- **Anelli et al. (2021)** — counterfactual individual automation exposure measure (pre-automation occupation probabilities × regional robotization); increases radical right support across 13 W. European countries.&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;- **Anelli et al. (2021)** measure of individual automation vulnerability: combines pre-automation probability of working in a given occupation with Frey &amp; Osborne automation risk scores and regional robot adoption pace. This captures both direct displacement and indirect displacement (labor market entrants blocked from manufacturing), going beyond RTI or current-job exposure measures. (p.471)&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;- **Conjoint design for attributional asymmetry:** The three-way causal comparison (technology vs. trade vs. immigration) is directly testable. A conjoint could randomize the stated cause of a worker's job loss and measure downstream policy demands and blame attribution. This paper provides the theoretical grounding for why automation should generate weaker policy-specific demand than trade/immigration.&lt;br/&gt;- **Elite framing conjoint arm:** Parties cue misattribution by making certain explanations cognitively available. A conjoint or survey experiment could randomize the elite frame (politician blaming tech vs. blaming trade) and measure effects on respondent attribution and policy preference.&lt;br/&gt;- **Shock visibility as a treatment:** The visibility/gradualism distinction (sudden factory closure vs. gradual automation) could be operationalized as a vignette dimension in a conjoint — does sudden vs. gradual job loss description change policy demand or blame attribution?&lt;br/&gt;- **CZ-level automation research:** Clustering of automation costs in specific communities is the key mechanism linking aggregate technology change to local political reactions. This paper endorses shift-share designs at the CZ level (Acemoglu &amp; Restrepo 2020; Frey et al. 2018) — must build automation exposure variable at CZ level using IFR robot data.&lt;br/&gt;- **Winners as a moderating group:** The &quot;ordinary winners&quot; argument suggests that aggregate effects on vote shares will be smaller than individual-level studies imply. A CZ-level design should account for the winner/loser composition of the local labor market, not just the exposure to routine job loss.&lt;br/&gt;- **Subjective vs. objective automation risk:** Kurer &amp; Häusermann's subjective measure could supplement RTI in a survey conjoint; useful for checking whether workers who feel at risk react differently to job-loss vignettes by cause.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- **Conjoint instrument:** This paper provides the theoretical core of a vignette conjoint: randomize cause of job loss (automation vs. trade/offshoring vs. immigration) and measure policy demand, blame attribution, and voting intention. The misattribution hypothesis predicts that automation will generate weaker policy-specific demand (retraining, UBI) but stronger demand for protectionism/immigration restriction relative to trade/immigration vignettes.&lt;br/&gt;- **Mechanism heterogeneity:** The three misattribution channels (psychological, political-entrepreneurial, and visibility/shock) can each be operationalized as conjoint dimensions — testing which channel is most behaviorally consequential is a contribution.&lt;br/&gt;- **CZ-level design:** Confirms that shift-share robot exposure at CZ level (Acemoglu &amp; Restrepo 2020) is the workhorse identification strategy. Frey et al. (2018) and Anelli et al. (2021) are the key prior papers to engage.&lt;br/&gt;- **Winners must be modeled:** Any CZ-level design should incorporate local labor market composition (routine vs. nonroutine job growth) — not just automation losers — to avoid overstating the backlash effect.&lt;br/&gt;- **Why globalization backlash is partly an automation story:** The misattribution mechanism is the key link between this paper and globalization backlash literature. Rising anti-trade attitudes in deindustrialized communities may partly reflect automation anxiety being redirected toward trade policy — this paper gives the mechanism, Rodrik &amp; di Tella (2020) give the experimental evidence.&lt;br/&gt;- **Policy demand gap:** At-risk workers do not demand the policies designed to help them (Busemeyer &amp; Sahm 2021; Kurer &amp; Häusermann 2022). This is itself a testable implication in a conjoint — vary whether the respondent is told about a policy designed &quot;specifically for automation&quot; vs. generic redistribution.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>automation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint-design</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>political-economy</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2005">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2005/Gallego and Kurer - 2022 - Automation, Digitalization, and Artificial Intelligence in the Workplace Implications for Political.pdf"/>
+        <dc:title>Full Text</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.annualreviews.org/doi/pdf/10.1146/annurev-polisci-051120-104535</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:45:28</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://journals.sagepub.com/doi/10.1177/0010414015574879">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0010-4140,%201552-3829"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Naoi</foaf:surname>
+                        <foaf:givenName>Megumi</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kume</foaf:surname>
+                        <foaf:givenName>Ikuo</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2153"/>
+        <link:link rdf:resource="#item_2013"/>
+        <dc:title>Workers or Consumers? A Survey Experiment on the Duality of Citizens’ Interests in the Politics of Trade</dc:title>
+        <dcterms:abstract>What determines the attitude of citizens toward international trade in advanced industrialized nations? The question raises an intriguing paradox for low-income citizens in developed economies. Increasing imports pose the most severe threat to job security for low-income citizens, who, on the other hand, reap the greatest benefits from cheaper imports as consumers. This article considers the role of dual identities that citizens have as both income-earners and consumers, and investigates how attitudes toward trade differ depending on which aspect of respondents’ lives—that is, work versus consumption—is activated. The results of an originally designed survey experiment conducted in Japan during the recession suggest that the activation of a consumer perspective is associated with much higher support for free trade. In particular, those respondents who have lower levels of job security are the ones who, with consumer-priming, increase their support for foreign imports.</dcterms:abstract>
+        <dc:date>09/2015</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Workers or Consumers?</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.sagepub.com/doi/10.1177/0010414015574879</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:46:20</dcterms:dateSubmitted>
+        <bib:pages>1293-1317</bib:pages>
+        <z:citationKey>naoiWorkersConsumersSurvey2015</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0010-4140,%201552-3829">
+        <prism:volume>48</prism:volume>
+        <dc:title>Comparative Political Studies</dc:title>
+        <dc:identifier>DOI 10.1177/0010414015574879</dc:identifier>
+        <prism:number>10</prism:number>
+        <dcterms:alternative>Comparative Political Studies</dcterms:alternative>
+        <dc:identifier>ISSN 0010-4140, 1552-3829</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2153">
+        <rdf:value>&lt;h1&gt;Synthesis — Naoi &amp;amp; Kume (2015)&lt;/h1&gt;&lt;p&gt;Naoi, Megumi, and Ikuo Kume. 2015. &quot;Workers or Consumers? A Survey Experiment on the Duality of Citizens' Interests in the Politics of Trade.&quot; Comparative Political Studies 48(10): 1293–1317.&lt;/p&gt;&lt;p&gt;One-line claim: Citizens hold dual worker/consumer identities that produce conflicting trade preferences, and experimentally activating the consumer identity can substantially raise support for free trade — especially among low-income citizens facing the highest job-loss risk from imports.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Red — Key points&lt;br/&gt;- Core mechanism (p.1294): Consumer identity activation mobilizes higher support for free trade precisely among low-income citizens who face the greatest threat of job loss — the &quot;torn between the duality of interests&quot; argument.&lt;br/&gt;- Headline finding (p.1303): Consumer priming raised pro-trade responses by 9.5pp and lowered opposition by 13pp, significant at 1%.&lt;br/&gt;- Reversed H-O prediction (p.1304): Consumer priming reverses Heckscher-Ohlin patterns — low-income respondents (default protectionists) showed the largest pro-trade increase (+12pp) under consumer priming.&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;br/&gt;- Asymmetric priming (p.1303): Producer priming had only weak effects (-3.8pp, sig. at 5%); respondents were already saturated with protectionist discourse. Consumer framing is the novel counterfactual lever.&lt;br/&gt;- Shopping-habits heterogeneity (p.1305): &quot;Cheap Shoppers&quot; (no luxury brand ownership) increased pro-trade support by 12.5pp vs. only 6pp for &quot;Luxury Shoppers,&quot; validating the Engel's Law mechanism.&lt;br/&gt;- Partisan mediation (p.1307): DPJ supporters (exposed to &quot;quality of life&quot; campaign messaging) increased trade support by 12pp with consumer priming; LDP supporters showed no effect. Elite framing gates identity activation.&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;br/&gt;- Autor, Dorn &amp; Hanson (2013) — &quot;The China Syndrome&quot; — cited on pp.1294, 1299. Core reference for CZ-level import competition and employment decline.&lt;br/&gt;- Hiscox (2006) — Framing experiment (US); cited p.1294. Parallel design; found job-threat framing raises protectionism but consumer-benefit framing did not mobilize support (opposite to Japan). Contrast case.&lt;br/&gt;- Mansfield &amp; Mutz (2009) — Sociotropic trade attitudes; cited p.1296. The paper explicitly contrasts its self-interest mechanism against M&amp;M's out-group/sociotropic argument — key theoretical fork for conjoint design.&lt;br/&gt;- Margalit (2013) — Social policy preferences from the Great Recession; cited p.1300. Individual-level job loss → policy attitude shifts. Directly relevant to automation/backlash project.&lt;br/&gt;- Baker (2005, 2009) — Consumer tastes and trade policy beliefs; cited p.1295. Foundational for the consumption-side identification strategy.&lt;br/&gt;- Scheve &amp; Slaughter (2001) — Globalization and perceptions of American workers; cited p.1294. Standard H-O baseline for trade attitude models.&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;br/&gt;- Visual image priming design (p.1300): Photos of workplaces vs. retail stores prime producer/consumer identity without explicit trade framing or valence. This is a genuinely novel manipulation that separates identity salience from argument supply — most prior work used text-based framing. N=1,200, blocked randomization on gender/age/income/prefecture, Yahoo! Japan panel (December 2008).&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;br/&gt;- Dual-identity conjoint attribute (p.1294): A conjoint experiment on trade/automation could vary whether scenarios are described in worker terms (job loss, sector displacement) vs. consumer terms (price effects, import availability). The paper shows these frames produce 13–22pp swings in the same low-income respondents.&lt;br/&gt;- Heterogeneous effects by job security (p.1304/1306): In CZ-level automation research, residents of high-robot-exposure CZs may be simultaneously the most threatened workers AND the most price-sensitive consumers. This dual exposure could suppress or amplify observed backlash — worth testing as an interaction in observational data.&lt;br/&gt;- Consumer identity as backlash moderator (p.1306): &quot;Citizens whose job security was most vulnerable had the most to gain as consumers.&quot; A conjoint or survey experiment on automation attitudes could include a consumer-priming arm to test whether the backlash among displaced workers is attenuated by activating consumer identity.&lt;br/&gt;- Elite messaging experiment (p.1307–1309): Partisan context conditions priming effects. In US automation research, Republican vs. Democratic messaging about trade/robots may similarly gate whether affected workers respond with backlash or acceptance — testable with a vignette crossed with partisan cue.&lt;br/&gt;- Generalizability bounds (p.1309): The paper argues consumer priming works when (a) welfare programs are small and (b) consumer prices are high — conditions that describe the US (small welfare, though food prices moderate). Engage with Hiscox (2006) null result as the US-context contrast case.&lt;br/&gt;- Operationalizing &quot;cheap shopper&quot; in CZ data (p.1305): The Cheap Shopper proxy (no luxury brand ownership) could be approximated in survey data with questions about price sensitivity or store preference — adaptable as a heterogeneity dimension in an automation attitudes survey.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Relevance to automation/trade/voting project — bottom line&lt;br/&gt;- The worker/consumer duality is directly portable to automation research: automation-exposed workers are also consumers of cheaper goods enabled by the same technological/trade trends. Ignoring the consumption channel may overstate predicted backlash.&lt;br/&gt;- The priming design offers a blueprint for a conjoint manipulation arm: randomly assign whether automation vignettes emphasize job displacement or consumer price effects, then test HTE by income/job security.&lt;br/&gt;- The paper's mechanism (identity activation rather than information provision) suggests that backlash against automation may be malleable through framing, not just facts — relevant for both positive models of opinion formation and for studying elite discourse effects.&lt;br/&gt;- Partisan mediation finding is important for a voting/backlash project: the effect of automation exposure on anti-trade or anti-globalization voting may be conditional on the partisan messaging environment, not just economic conditions.&lt;br/&gt;- The null result for producer priming (people already think in worker terms by default) has a direct implication: surveys that only ask about job effects of automation will systematically overstate protectionist sentiment relative to a fuller dual-interest measure.&lt;br/&gt;- Hiscox (2006) US contrast case is essential reading alongside this paper — it bounds the conditions under which consumer identity suppresses backlash, and the US context may be closer to the null-consumer-priming case than to Japan.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>automation-project</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>dual-identity</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>survey-experiment</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>trade-attitudes</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2013">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2013/ComparativePoliticalStudies-2015-Naoi-1293-317.pdf"/>
+        <dc:title>ComparativePoliticalStudies-2015-Naoi-1293-317</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://academic.oup.com/poq/article/85/1/101/6310441">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0033-362X,%201537-5331"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mutz</foaf:surname>
+                        <foaf:givenName>Diana C</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2089"/>
+        <link:link rdf:resource="#item_2017"/>
+        <dc:title>(Mis)Attributing the Causes of American Job Loss</dc:title>
+        <dcterms:abstract>What difference does it make if people attribute the loss of manufacturing jobs to trade as opposed to automation? Attributions of responsibility for social problems help shape mass opinion. In this study I use two experiments, including one nationally representative probability survey-experiment, to examine the consequences of attributing job loss to trade versus automation. Findings suggest that as of 2018, public discourse attributes manufacturing job loss in America primarily to trade. When I experimentally manipulate attributions of responsibility for job loss, I find important consequences for levels of mass support for international trade, the extent of negative emotions arising from job loss, and beliefs that trade restrictions and tariffs can bring back manufacturing jobs. Finally, job loss that is attributed to trade—even when it is a single job loss—also serves as a threat to the national ingroup, which triggers a heightened sense of national superiority among white Americans.</dcterms:abstract>
+        <dc:date>2021-08-04</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://academic.oup.com/poq/article/85/1/101/6310441</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:48:37</dcterms:dateSubmitted>
+        <dc:rights>https://academic.oup.com/journals/pages/open_access/funder_policies/chorus/standard_publication_model</dc:rights>
+        <bib:pages>101-122</bib:pages>
+        <z:citationKey>mutzMisAttributingCausesAmerican2021</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0033-362X,%201537-5331">
+        <prism:volume>85</prism:volume>
+        <dc:title>Public Opinion Quarterly</dc:title>
+        <dc:identifier>DOI 10.1093/poq/nfab003</dc:identifier>
+        <prism:number>1</prism:number>
+        <dc:identifier>ISSN 0033-362X, 1537-5331</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2089">
+        <rdf:value>&lt;h1&gt;Synthesis — Mutz 2021, (Mis)Attributing the Causes of American Job Loss&lt;/h1&gt;&lt;p&gt;Mutz, Diana C. 2021. &quot;(Mis)Attributing the Causes of American Job Loss: The Consequences of Getting It Wrong.&quot; Public Opinion Quarterly 85(1): 101–122. https://doi.org/10.1093/poq/nfab003&lt;/p&gt;&lt;p&gt;One-line claim: Attributing manufacturing job loss to trade (vs. automation) makes people angrier, more anti-trade, more convinced tariffs will restore jobs, and more willing to assert American superiority over Chinese people — because trade attribution activates outgroup threat in a way automation does not.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;- &quot;misattributed blame for job loss may have important consequences for mass opinion&quot; (p. 101/abstract) — the paper's central problem statement.&lt;br/&gt;- &quot;Both automation and international trade policy are external phenomena that are beyond the individual's control. So why should it matter which is blamed for job loss?&quot; (p. 104) — the puzzle the study answers.&lt;br/&gt;- National experiment headline effects: emotions 11% lower, trade support 6% higher when automation-attributed; assertions of American superiority 6% higher when trade-attributed; belief jobs could return 6% higher (all p &lt; 0.01). (p. 113)&lt;br/&gt;- &quot;Job loss due to trade threatens people's ingroups in a way that job loss due to automation does not.&quot; (p. 118) — the mechanism in one sentence.&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;- Control condition comparison: job loss attributed to trade produced 9% stronger negative emotions vs. no-attribution control; automation condition produced no such effect — isolating the attribution as the active ingredient, not job loss itself. (p. 113–115)&lt;br/&gt;- H5 supported: education moderates the nationalism effect — less-educated respondents (strong national identity) showed a 9% difference in American Superiority by attribution condition. (p. 116)&lt;br/&gt;- Reciprocal causation insight: prior literature treats national superiority as a cause of trade opposition; Mutz shows trade threat also produces nationalism, suggesting a mutually reinforcing cycle. (p. 112)&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- Acemoglu, Autor, Dorn, Hanson &amp; Price (2016), J Labor Economics — canonical estimates on automation vs. trade as sources of manufacturing job loss. Cited for the &quot;85 percent automation&quot; claim.&lt;br/&gt;- Mutz &amp; Kim (2017), International Organization — ingroup favoritism as the key driver of trade preferences; foundational for this paper's theoretical framework.&lt;br/&gt;- DiTella &amp; Rodrik (2019), Economic Journal — online survey experiments on how labor market shocks increase demand for trade protection. Very close in design to conjoint work.&lt;br/&gt;- Scheve &amp; Slaughter (2001); Mansfield &amp; Mutz (2009) — foundational trade preferences literature; basis for the economic self-interest baseline.&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;- Nexis-Uni corpus (2000–2019, Major US Newspapers, bulk download): documents that trade-linked job loss articles outnumber automation-linked by more than 8:1. Genuinely novel contextual evidence motivating why the experimental manipulation is realistic. (p. 102)&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;- The 3-condition (unattributed / trade / automation) within-vignette design is directly adaptable as a conjoint attribute: &quot;Reason job was eliminated: [trade with China / automation / not stated].&quot; Interact with worker demographics and respondent education to estimate heterogeneous attribution effects.&lt;br/&gt;- The identifiable victim paradigm (NYT worker profile) outperforms statistical framing in generating emotional response; in a conjoint, specificity of profile (named, with biography) may amplify attribute-level effects relative to abstract typologies.&lt;br/&gt;- Attribution cues are a &quot;low counter-argument&quot; persuasion pathway: framing an attribute as automation (rather than trade) raised trade support 6% even in the most anti-trade subgroup. This is a possible mechanism to exploit or test in a conjoint on policy attitudes.&lt;br/&gt;- CZ-level implication: Mutz's mechanism predicts that in high-trade-exposure CZs, the nationalism/xenophobia channel should operate alongside — and perhaps independent of — economic hardship. Heterogeneous effects by CZ racial composition and national identity proxies are testable.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- **Conjoint attribute design**: &quot;Cause of job displacement&quot; (trade/automation/unspecified) is a validated experimental attribute with known effect sizes (~6–11 pp). Combine with worker industry, wage level, and respondent education.&lt;br/&gt;- **Mechanism for globalization backlash**: The outgroup-threat pathway (trade attribution → ingroup defensiveness → nationalism) is distinct from economic self-interest. Your conjoint can test whether respondents' policy support responds more to framing than to factual exposure levels.&lt;br/&gt;- **Heterogeneous treatment effects**: Less-educated respondents are most reactive; CZ automation exposure may proxy for whether the local discourse frame is trade or technology — a natural moderator in observational CZ-level work.&lt;br/&gt;- **DiTella &amp; Rodrik 2019**: This reference is the closest precursor to a conjoint-style labor shock experiment; read it before finalizing your design.&lt;br/&gt;- **Nationalism as outcome, not just input**: If your survey includes measures of national identity or ethnocentrism, Mutz's reciprocal model predicts these should be elevated in high-trade-exposure areas — testable as additional dependent variables.&lt;br/&gt;- **Media framing as confounder**: The Nexis-Uni result (trade &gt;&gt; automation in coverage) means observational variation in political attitudes may partly reflect media attribution frames, not just actual exposure. Worth noting as a confound in CZ-level identification.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2017">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2017/Mutz - 2021 - (Mis)Attributing the Causes of American Job Loss.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://academic.oup.com/ej/article/130/628/1008/5714081">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0013-0133,%201468-0297"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Di Tella</foaf:surname>
+                        <foaf:givenName>Rafael</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Rodrik</foaf:surname>
+                        <foaf:givenName>Dani</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2186"/>
+        <link:link rdf:resource="#item_2021"/>
+        <dc:title>Labour Market Shocks and the Demand for Trade Protection: Evidence from Online Surveys</dc:title>
+        <dcterms:abstract>Abstract
+            We study preferences for government action in response to layoffs resulting from different types of labour-market shocks. We consider: technological change, a demand shift, bad management and three kinds of international outsourcing. Support for government intervention rises sharply in response to shocks and is heavily biased towards trade protection. Trade shocks generate more demand for protectionism and, among trade shocks, outsourcing to a developing country elicits greater demand for protectionism. The ‘bad management’ shock is the only scenario that induces a desired increase in compensatory transfers. Trump supporters are more protectionist than Clinton supporters, but preferences seem easy to manipulate: Clinton supporters primed with trade shocks are as protectionist as baseline Trump voters. Highlighting labour abuses in the exporting country increases the demand for trade protection by Clinton supporters but not Trump supporters.</dcterms:abstract>
+        <dc:date>2020-05-01</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Labour Market Shocks and the Demand for Trade Protection</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://academic.oup.com/ej/article/130/628/1008/5714081</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:51:15</dcterms:dateSubmitted>
+        <dc:rights>https://academic.oup.com/journals/pages/open_access/funder_policies/chorus/standard_publication_model</dc:rights>
+        <bib:pages>1008-1030</bib:pages>
+        <z:citationKey>ditellaLabourMarketShocks2020a</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0013-0133,%201468-0297">
+        <prism:volume>130</prism:volume>
+        <dc:title>The Economic Journal</dc:title>
+        <dc:identifier>DOI 10.1093/ej/ueaa006</dc:identifier>
+        <prism:number>628</prism:number>
+        <dc:identifier>ISSN 0013-0133, 1468-0297</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2186">
+        <rdf:value>&lt;h1&gt;Synthesis — Di Tella &amp;amp; Rodrik (2020) Labour Market Shocks and Trade Protection&lt;/h1&gt;&lt;p&gt;**Di Tella, Rafael and Dani Rodrik. &quot;Labour Market Shocks and the Demand for Trade Protection: Evidence from Online Surveys.&quot; *The Economic Journal* 130, no. 628 (May 2020): 1008–1030. https://doi.org/10.1093/ej/ueaa006**&lt;/p&gt;&lt;p&gt;**One-line claim:** When exposed to vignettes about factory closures, Americans demand trade protection far more than compensatory transfers regardless of whether jobs were lost to trade or technology — and the protectionist response is 2–3x larger for trade shocks, especially trade with developing countries, while a simple narrative can transform Clinton voters into Trump-baseline-level protectionists.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;1. **Protectionist bias across all shocks (p. 1009):** &quot;Support for government intervention rises sharply in response to shocks and is heavily biased towards trade protection. Trade shocks generate more demand for protectionism and, among trade shocks, outsourcing to a developing country elicits greater demand for protectionism.&quot;&lt;/p&gt;&lt;p&gt;2. **Quantitative magnitude (p. 1009):** &quot;The changes in the desired government response are heavily biased towards trade protection rather than financial assistance. The increase in the demand for government transfers, relative to the control scenario, is small (of 10% or less). Meanwhile the demand for trade protection rises by a magnitude that ranges between 20 and 200%.&quot;&lt;/p&gt;&lt;p&gt;3. **Causal attribution as the mechanism (p. 1010):** &quot;People do not treat different types of job loss uniformly. They distinguish among labour market shocks according to what produces them; the elasticity of the response depends on the operative mechanism. Non-trade shocks such as technology and demand shocks do increase the demand for protection, but trade shocks elicit a much more protectionist response by a factor between two and three.&quot;&lt;/p&gt;&lt;p&gt;4. **Narrative priming collapses partisan gap (p. 1011):** &quot;Clinton supporters primed with trade shocks are as protectionist as baseline Trump voters. This finding attests to the power of even relatively simple vignettes to shape preferences over public policy. It is suggestive of the ease with which political campaigns can manipulate policy attitudes by supplying appropriate narrative frames.&quot;&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting evidence&lt;/p&gt;&lt;p&gt;- **Bad management exception (p. 1010):** &quot;An important exception is the case of job losses caused by management failures. In this case, it is the demand for compensatory transfers that goes up without much of a rise in the demand for protection.&quot; — Moral deservingness filters policy instrument choice.&lt;/p&gt;&lt;p&gt;- **Country identity drives protectionism, not labour standards text (p. 1010):** &quot;Simply changing the name of the country to which production is outsourced, from France to Cambodia, increases the demand for import protection by six percentage points (which is more than half the baseline level of demand for trade protection).&quot;&lt;/p&gt;&lt;p&gt;- **Trump 3x more elastic to trade shocks (p. 1026):** &quot;When primed with unemployment caused by a trade shock, Trump supporters increase their preference for protectionism by 33 percentage points on average, while Clinton supporters increase their preference for protectionism only by nine percentage points on average.&quot;&lt;/p&gt;&lt;p&gt;- **Education moderates only at post-graduate level (p. 1028):** &quot;The trade shocks push up the demand for trade protection by roughly 20 percentage points for less- and medium-educated groups. For the most educated groups, the increase in the demand for trade protection is only eight percentage points, and the change is not statistically different from zero.&quot;&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- **Autor, Dorn, Hanson &amp; Majlesi (2016)** — &quot;Importing Political Polarization?&quot; — electoral consequences of rising trade exposure; companion to this paper's demand-side work.&lt;br/&gt;- **Colantone &amp; Stanig (2017)** — trade origins of economic nationalism, voting behaviour in Western Europe.&lt;br/&gt;- **Guiso, Herrera, Morelli &amp; Sonno (2017)** — demand and supply of populism; CEPR DP11871.&lt;br/&gt;- **Acemoglu et al. (2016)** — China trade shock = only 10% of manufacturing job loss in 2000s; establishes the &quot;automation &gt; trade&quot; empirical baseline challenged by this paper's political findings.&lt;br/&gt;- **Scheve &amp; Slaughter (2001); Mayda &amp; Rodrik (2005)** — foundational work on individual trade-policy preferences; important baseline for conjoint design.&lt;br/&gt;- **Kuziemko et al. (2015)** — mTurk experiments on redistribution preferences; direct methodological comparator for online vignette/conjoint designs.&lt;br/&gt;- **Grossman &amp; Helpman (1994)** — &quot;Protection for Sale&quot; — material-interest model that this paper empirically challenges.&lt;br/&gt;- **Rodrik (2014)** — &quot;When Ideas Trump Interests&quot; — theoretical backdrop; ideas/narratives reshape policy preferences.&lt;br/&gt;- **DellaVigna &amp; Gentzkow (2010)** — persuasion rates framework; persuasion rate formula used to benchmark treatment effects.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;- **Novel 6-treatment vignette design (p. 1011):** Randomized newspaper-article vignettes holding labour-market outcome constant (plant closure, 900 jobs) while varying the causal mechanism across 6 arms (tech shock, demand shock, bad management, outsourcing to France, outsourcing to Cambodia, Cambodia + poor labour standards), then eliciting a three-way policy choice (nothing / transfers / protection). Genuinely novel in combining multiple non-trade and trade shock types with competing policy options in a single design. N = 5,685 US adults via mTurk, two waves June–July 2018.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;1. **Hold-outcome-constant vignette design (p. 1009):** &quot;we study how opinions about trade protectionism and compensatory financial transfers change when individuals are presented with six different types of shocks, all of which have the same effect on local labour markets.&quot; — A conjoint experiment could adopt this logic: fix job-loss magnitude, vary cause (automation / offshoring / demand decline) and worker/firm characteristics as conjoint attributes to measure preference weights.&lt;/p&gt;&lt;p&gt;2. **Single-word swap for automation (p. 1018):** &quot;T4 and T5 are identical except for a single word, which is the name of the country.&quot; — Replicate with &quot;a robot&quot; vs. &quot;a worker in Cambodia&quot; to isolate pure attribution effect. Would test whether automation triggers same protectionist bias or a different policy response (retraining vs. tariffs).&lt;/p&gt;&lt;p&gt;3. **Procedural fairness as the construct to operationalize (p. 1030):** &quot;It would be especially useful to unpack further the procedural fairness frames through which people evaluate different labour market shocks and policy options.&quot; — Conjoint attributes could vary cause, victim deservingness, and firm culpability to decompose fairness from material interest. Maps directly onto your research question about blame attribution in automation vs. trade job loss.&lt;/p&gt;&lt;p&gt;4. **Priming/framing effects benchmark (p. 1012):** &quot;worldviews can be shaped by priming — exposure to news stories with a particular slant.&quot; The 20% persuasion rate for trade-shock protectionism (high end of marketing literature) means framing effects are large enough to be detectable in conjoint samples; power calculations should account for this range.&lt;/p&gt;&lt;p&gt;5. **CZ-level heterogeneity extension:** Paper does not exploit geographic variation in trade/automation exposure. A natural extension: does local CZ-level automation or import penetration (Autor/Acemoglu measures) predict baseline protectionism or differential response elasticity to shock-type vignettes? Could be tested by merging respondent ZIP codes with CZ-level exposure measures.&lt;/p&gt;&lt;p&gt;6. **Partisan heterogeneity design implication:** Trump supporters are 3x more elastic to trade shock priming. In a conjoint, party ID should be a key moderator in the analysis plan, not just a covariate. A pre-registered interaction between party ID and shock-cause attribute could be the headline HTE.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- **Attribution matters more than outcomes:** This paper's core result — identical job losses generate radically different policy demands depending on perceived cause — is the micro-level mechanism underlying CZ-level evidence that trade shocks (but not automation) produce political backlash. Your conjoint can test this attribution logic directly at the individual level.&lt;/p&gt;&lt;p&gt;- **Automation gets less blame than trade:** Even a technology shock raises protectionist demand only 5–6pp vs. 14–20pp for trade shocks. This suggests automation may be politically &quot;safer&quot; for incumbents — worth testing whether this asymmetry extends to electoral accountability or policy support in a conjoint.&lt;/p&gt;&lt;p&gt;- **Developing-country trade is uniquely toxic:** The Cambodia vs. France swap (+6pp, p &lt; 0.01) shows that country identity, not just &quot;foreignness,&quot; drives protectionist demand. A conjoint could vary the trade partner (rich country / middle-income / low-wage country) as an attribute to estimate this premium precisely.&lt;/p&gt;&lt;p&gt;- **Narrative priming is powerful and partisan:** The result that Clinton voters become as protectionist as baseline Trump voters after a trade narrative has direct implications for conjoint framing: the order and labelling of attributes may matter more than in typical preference experiments. Randomize vignette order and pre-register robustness checks.&lt;/p&gt;&lt;p&gt;- **Policy instrument menu matters:** The finding that demand shifts to protection (not transfers) even for technology shocks suggests that if conjoint attributes include policy responses, framing &quot;retraining&quot; vs. &quot;tariffs&quot; as options may reveal whether automation uniquely activates a retraining preference that trade shocks do not.&lt;/p&gt;&lt;p&gt;- **mTurk validation:** The paper validates mTurk as a platform for trade-attitude experiments and shows it is broadly representative on key covariates (though younger and more educated). Useful precedent for your own conjoint sampling and any reviewer concerns about external validity.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>automation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>political-economy</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>protectionism</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>trade</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>vignette-experiment</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2021">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2021/Di Tella and Rodrik - 2020 - Labour Market Shocks and the Demand for Trade Protection Evidence from Online Surveys.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.cambridge.org/core/product/identifier/S2049847024000013/type/journal_article">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2049-8470,%202049-8489"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Magistro</foaf:surname>
+                        <foaf:givenName>Beatrice</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Loewen</foaf:surname>
+                        <foaf:givenName>Peter</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bonikowski</foaf:surname>
+                        <foaf:givenName>Bart</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Borwein</foaf:surname>
+                        <foaf:givenName>Sophie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lee-Whiting</foaf:surname>
+                        <foaf:givenName>Blake</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2135"/>
+        <link:link rdf:resource="#item_2027"/>
+        <dc:title>Attitudes toward automation and the demand for policies addressing job loss: the effects of information about trade-offs</dc:title>
+        <dcterms:abstract>Abstract
+            Does providing information about the costs and benefits of automation affect the perceived fairness of a firm's decision to automate or support for government policies addressing automation's labor market consequences? To answer these questions, we use data from vignette and conjoint experiments across four advanced economies (Australia, Canada, the UK, and the US). Our results show that despite people's relatively fixed policy preferences, their evaluation of the fairness of automation—and therefore potentially the issue's political salience—is sensitive to information about its trade-offs, especially information about price changes attributable to automated labor. This suggests that the political impact of automation may depend on how it is framed by the media and political actors.</dcterms:abstract>
+        <dc:date>10/2024</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Attitudes toward automation and the demand for policies addressing job loss</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/product/identifier/S2049847024000013/type/journal_article</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:54:48</dcterms:dateSubmitted>
+        <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+        <bib:pages>783-798</bib:pages>
+        <z:citationKey>magistroAttitudesAutomationDemand2024</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2049-8470,%202049-8489">
+        <prism:volume>12</prism:volume>
+        <dc:title>Political Science Research and Methods</dc:title>
+        <dc:identifier>DOI 10.1017/psrm.2024.1</dc:identifier>
+        <prism:number>4</prism:number>
+        <dcterms:alternative>PSRM</dcterms:alternative>
+        <dc:identifier>ISSN 2049-8470, 2049-8489</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2135">
+        <rdf:value>&lt;h1&gt;Synthesis — Magistro et al. (2024)&lt;/h1&gt;&lt;p&gt;Magistro, Beatrice, Peter Loewen, Bart Bonikowski, Sophie Borwein, and Blake Lee-Whiting. &quot;Attitudes toward Automation and the Demand for Policies Addressing Job Loss: The Effects of Information about Trade-offs.&quot; Political Science Research and Methods 12, no. 4 (2024): 783–798. https://doi.org/10.1017/psrm.2024.1&lt;/p&gt;&lt;p&gt;One-line claim: Information about automation's trade-offs — especially consumer price reductions — significantly raises perceptions of fairness toward firms that automate, but leaves policy preferences unchanged, suggesting that automation's political salience depends on how it is framed rather than on material exposure alone.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;- Core claim (p. 785): Despite relatively fixed policy preferences, fairness evaluations of automation are sensitive to trade-off information, especially price changes — the mechanism linking framing to political salience.&lt;br/&gt;- Headline conjoint result (p. 794): Price decreases of 20–50% drive the largest shifts in perceived fairness (mean 3.52 vs. 3.19 on a 5-point scale at 50% vs. 0% price drop); prices dominate all other conjoint attributes.&lt;br/&gt;- Key null result (p. 793): No treatment — costs-only, generic trade-off, or specific conjoint — moves any of the eight measured policy preferences; preferences are sticky regardless of information condition.&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;- Unexpected finding (p. 792): Vague trade-off framing (&quot;some jobs gained, some lost, prices could fall&quot;) raises fairness perceptions more than specific numeric trade-offs, because respondents optimistically fill in blanks when information is imprecise.&lt;br/&gt;- Loss asymmetry (p. 795): Respondents react to wage declines but not wage increases — consistent with prospect theory; losses loom larger than equivalent gains in automation attitudes.&lt;br/&gt;- Cross-study replication (p. 785): Retraining workers is the most popular policy response across all treatment groups; restricting skilled immigration and trade are the least popular — replicates Di Tella &amp; Rodrik (2020) and Gallego et al. (2023).&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- Anelli, Colantone &amp; Stanig (2019), IZA DP 12485: &quot;We were the robots&quot; — automation and voting in Western Europe. Core empirical baseline for automation-voting link.&lt;br/&gt;- Borwein, Bonikowski, Loewen et al. (2024a), West European Politics: Perceived automation threat, populism, and vote choice across 15 European democracies. Direction of vote depends on how technological threat is understood.&lt;br/&gt;- Rodrik (2018), JIBP: Populism and the economics of globalization — unfairness (not inequality) drives anti-globalization sentiment. Theoretical bridge between trade and automation backlash.&lt;br/&gt;- Di Tella &amp; Rodrik (2020), EJ: Labor market shock primes and demand for trade protection; trade effects stronger than automation effects on protectionism. Foundational comparison design for conjoint work.&lt;br/&gt;- Mutz (2021), POQ: Misattributed blame for job loss — automation often blamed on trade/immigration. Key for understanding displaced blame in automation/trade research.&lt;br/&gt;- Wu (2021), PSRM: &quot;Misattributed blame? Attitudes toward globalization in the age of automation.&quot; Directly tests automation-vs.-trade misattribution.&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;- Novel conjoint attribute (p. 786): First experimental study to include consumer price changes as an explicit cost/benefit of automation in a conjoint design — and prices turn out to be the most influential attribute. Standard labor-market attributes (employment, wages) are secondary.&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;- Framing treatment design: The costs-only vs. generic trade-off vs. specific conjoint structure is directly replicable for trade shocks. A conjoint on import competition could vary price effects for consumers alongside job displacement in affected industries — this paper shows price information will likely dominate.&lt;br/&gt;- Consumer price channel for CZ research: CZ-level automation exposure measures (Acemoglu &amp; Restrepo robots; Dorn-Hanson trade exposure) focus on labor-market outcomes. Adding a local consumer-price exposure measure (e.g., import price indices by product category, matched to CZ consumption baskets) could test whether the price channel modulates political responses to automation/trade.&lt;br/&gt;- Policy stickiness as a design consideration: If information treatments do not move policy preferences (only fairness perceptions), own conjoint dependent variables should include both fairness/legitimacy items and policy support items — and the former may be more sensitive.&lt;br/&gt;- Elite framing and salience: Automation is currently a low-salience issue. Own research could exploit variation in automation's media salience across CZs or over time as a moderator of political effects — the paper explicitly suggests persistent political messaging would amplify effects.&lt;br/&gt;- Prospect theory in conjoint attribute design: Build in asymmetry — test whether job loss attributes weigh more heavily than equal-sized job gain attributes in conjoint ratings of trade/automation policies.&lt;br/&gt;- Multi-country design template: Cint quota sample (~2000/country) across 4 liberal market economies provides a clean methodological template for a cross-national conjoint on automation and trade attitudes.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- The paper directly addresses conjoint experiment design for automation attitudes: the specific conjoint table structure (firm type × price change × high-skill employment × low-skill employment × wages) is adaptable for a trade-automation comparison conjoint.&lt;br/&gt;- The price-dominance finding is the most important result for CZ-level research: standard automation-exposure measures ignore the consumer side; adding a local price-impact measure to CZ regressions could explain why automation's political effects are weaker and more heterogeneous than trade's.&lt;br/&gt;- Policy stickiness (null treatment effects on policy preferences) is a caution for own conjoint DV selection — fairness/legitimacy perceptions may be the better outcome variable if testing framing effects rather than information effects on policy demand.&lt;br/&gt;- The misattribution literature (Mutz, Wu) cited here is essential context: workers may attribute automation-driven job loss to trade or immigration, which means automation-exposure effects in observational CZ regressions could be partly capturing trade/immigration blame, not just automation threat per se.&lt;br/&gt;- The vague-vs.-specific framing paradox has implications for how survey vignettes in own conjoint describe trade shocks: keeping descriptions qualitatively vague may produce larger attitude effects than providing precise import penetration statistics.&lt;br/&gt;- Borwein et al. (2024a) — a companion paper by the same team on automation threat and populist voting across 15 European democracies — is the closest existing study to a CZ-style analysis of automation and voting and should be read alongside this paper.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>automation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>framing</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>political-economy</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>trade</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2027">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2027/Magistro et al. - 2024 - Attitudes toward automation and the demand for policies addressing job loss the effects of informat.pdf"/>
+        <dc:title>Full Text</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.cambridge.org/core/services/aop-cambridge-core/content/view/FEC158539610F2B1D81D6F182280BE76/S2049847024000013a.pdf/div-class-title-attitudes-toward-automation-and-the-demand-for-policies-addressing-job-loss-the-effects-of-information-about-trade-offs-div.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:54:49</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.annualreviews.org/doi/10.1146/annurev-polisci-041719-102405">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>24</prism:volume>
+                <dc:title>Annual Review of Political Science</dc:title>
+                <dc:identifier>DOI 10.1146/annurev-polisci-041719-102405</dc:identifier>
+                <prism:number>1</prism:number>
+                <dcterms:alternative>Annu. Rev. Polit. Sci.</dcterms:alternative>
+                <dc:identifier>ISSN 1094-2939, 1545-1577</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Walter</foaf:surname>
+                        <foaf:givenName>Stefanie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2189"/>
+        <link:link rdf:resource="#item_2030"/>
+        <link:link rdf:resource="#item_2029"/>
+        <dc:title>The Backlash Against Globalization</dc:title>
+        <dcterms:abstract>In recent years, the world has seen a rising backlash against globalization. This article reviews the nature, causes, and consequences of the globalization backlash. It shows that, contrary to a popular narrative, the backlash is not associated with a large swing in public opinion against globalization but is rather a result of its politicization. The increasing influence of globalization-skeptic actors has resulted in more protectionist, isolationist, and nationalist policies, some of which fundamentally threaten pillars of the contemporary international order. Both material and nonmaterial causes drive the globalization backlash, and these causes interact and mediate each other. The consequences are shaped by the responses of societal actors, national governments, and international policy makers. These responses can either yield to and reinforce the global backlash or push back against it. Understanding these dynamics will be an important task for future research.</dcterms:abstract>
+        <dc:date>2021-05-11</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.annualreviews.org/doi/10.1146/annurev-polisci-041719-102405</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:56:35</dcterms:dateSubmitted>
+        <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+        <bib:pages>421-442</bib:pages>
+        <z:citationKey>walterBacklashGlobalization2021</z:citationKey>
+    </bib:Article>
+    <bib:Memo rdf:about="#item_2189">
+        <rdf:value>&lt;h1&gt;Synthesis — Walter 2021, The Backlash Against Globalization&lt;/h1&gt;&lt;p&gt;Walter, Stefanie. &quot;The Backlash Against Globalization.&quot; Annual Review of Political Science 24 (2021): 421–442. https://doi.org/10.1146/annurev-polisci-041719-102405&lt;/p&gt;&lt;p&gt;One-line claim: The globalization backlash is not a mass preference shift but a politicization of latent antiglobalization attitudes by elites and parties, producing electoral and policy consequences disproportionate to any actual change in public opinion.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;1. (p. 421/abstract) &quot;the backlash is not associated with a large swing in public opinion against globalization but is rather a result of its politicization. The increasing influence of globalization-skeptic actors has resulted in more protectionist, isolationist, and nationalist policies, some of which fundamentally threaten pillars of the contemporary international order.&quot;&lt;/p&gt;&lt;p&gt;2. (p. 425) &quot;Although voters' attitudes about globalization have not changed much, they increasingly vote for candidates, parties, or proposals that oppose globalization. What explains this apparent paradox? An important part of the answer is the increasing politicization of issues related to globalization.&quot;&lt;/p&gt;&lt;p&gt;3. (p. 434/conclusion) &quot;the globalization backlash is not associated with a large swing in public opinion against globalization. Rather, existing antiglobalization attitudes have been politicized and become more politically consequential.&quot;&lt;/p&gt;&lt;p&gt;## Yellow — Important supporting&lt;/p&gt;&lt;p&gt;1. (p. 425) &quot;voters' support for political parties promoting liberal internationalist policies in the West has almost halved since the 1990s (Trubowitz &amp; Burgoon 2020). Moreover, the share of referendums decided against international cooperation has increased substantially since the 2000s, with every second referendum ending in favor of noncooperation in the 2010s (De Vries et al. 2021).&quot; — Behavioral shift without opinion shift is the core empirical puzzle.&lt;/p&gt;&lt;p&gt;2. (p. 431) &quot;several studies find that support for radical right parties and nationalist projects such as Brexit is driven by exposure to automation and the digital revolution (Colantone &amp; Stanig 2019, Frey et al. 2018, Im et al. 2019). In fact, the IMF (2019) concludes in a recent study that the effects of technology on local labor markets are much more pervasive and long-lasting than trade shocks.&quot; — Automation may outweigh trade in generating backlash.&lt;/p&gt;&lt;p&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;1. Colantone &amp; Stanig 2018a — China shock → radical right vote shares in Europe (CZ-level)&lt;br/&gt;2. Dippel et al. 2015 — trade competition and far-right in Germany (CZ-level)&lt;br/&gt;3. Dorn et al. 2020 — import competition and ideological polarization (US CZ-level)&lt;br/&gt;4. Feigenbaum &amp; Hall 2015 — trade and legislator protectionism (US CZ-level)&lt;br/&gt;5. Frey et al. 2018 — automation exposure and voting behavior&lt;br/&gt;6. Im et al. 2019 — digital revolution and backlash&lt;br/&gt;7. Rommel &amp; Walter 2018 — individual offshoring risk and populist voting (losers-don't-vote puzzle)&lt;br/&gt;8. Walter et al. 2018 — biased expectations in globalization referendums&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;[None. This is a review article with no original dataset or novel identification strategy. Walter assembles ISSP survey data and Comparative Manifesto Project data for descriptive figures, but these are workhorse secondary sources, not novel contributions.]&lt;/p&gt;&lt;p&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;1. CONJOINT FRAMING: Walter argues individuals are &quot;overly optimistic about the consequences&quot; of deglobalization (p. 430). A conjoint experiment could randomize the described consequences of trade restriction (jobs returned vs. consumer prices raised vs. retaliation) to test which frame drives support — directly operationalizing the &quot;expectations&quot; mechanism.&lt;/p&gt;&lt;p&gt;2. ELITE CUE RANDOMIZATION: &quot;political elites can strategically mobilize voters with globalization-skeptic attitudes by using antiglobalization messages&quot; (p. 433). A conjoint could vary whether the trade/automation policy is attributed to a left vs. right politician and use job-loss framing vs. sovereignty framing — testing which cue activates latent attitudes.&lt;/p&gt;&lt;p&gt;3. MEASUREMENT PROBLEM AS CONJOINT MOTIVATION: Walter notes that &quot;identifying individuals' objective, respondent-specific material interest is much more difficult&quot; in observational data (p. 432). Conjoint experiments solve exactly this — randomized exposure scenarios bypass endogenous selection into affected industries/regions.&lt;/p&gt;&lt;p&gt;4. OUTCOME SPLITTING: The welfare-state finding (p. 436) — strong-welfare-state countries experience backlash on sociocultural but not economic globalization — suggests splitting the dependent variable in CZ-level automation work between economic attitudes (trade, redistribution) and sociocultural attitudes (immigration, national identity).&lt;/p&gt;&lt;p&gt;5. POLITICIZATION AS MODERATOR: Since backlash is driven by politicization not preferences, local political context (presence of a strong anti-globalization party) could be a moderator in CZ-level automation regressions — testing whether the same trade/automation shock produces larger effects in politically contested districts.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- The central finding (politicization, not preference change) implies that the causal chain runs: structural shock → elite mobilization → voting change, not shock → attitude change → voting change. Any conjoint or CZ-level design should account for local political supply-side conditions, not just exposure.&lt;br/&gt;- Walter explicitly flags automation as potentially more consequential than trade for local labor markets (citing Frey et al. 2018, IMF 2019). This directly legitimizes an automation-centered CZ analysis as a complement to China-shock work.&lt;br/&gt;- The &quot;losers don't vote accordingly&quot; puzzle (Rommel &amp; Walter 2018; Colantone &amp; Stanig 2018a,b) means individual-level exposure measures will underperform in voting regressions — CZ-level aggregation or conjoint randomization are the better identification strategies.&lt;br/&gt;- Counterfactual expectations (Walter et al. 2018) are a mechanism conjoint experiments can directly test by varying the described outcome of automation-driven job loss (retraining available vs. permanent displacement vs. community decline).&lt;br/&gt;- The review distinguishes economic, political, and sociocultural globalization dimensions — worth keeping as separate outcomes in conjoint analysis rather than collapsing into a single &quot;globalization support&quot; scale.&lt;br/&gt;- The failure of compensation strategies even in generous welfare states (Denmark, Sweden) is a useful null result for the policy implications section of papers arguing automation → redistribution demand.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>automation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>globalization-backlash</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>political-economy</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>trade</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2030">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2030/annurev-polisci-041719-102405.pdf"/>
+        <dc:title>annurev-polisci-041719-102405</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_2029">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2029/Walter - 2021 - The Backlash Against Globalization.pdf"/>
+        <dc:title>Full Text</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.annualreviews.org/doi/pdf/10.1146/annurev-polisci-041719-102405</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:56:38</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.pnas.org/doi/10.1073/pnas.1416587112">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>112</prism:volume>
+                <dc:title>Proceedings of the National Academy of Sciences</dc:title>
+                <dc:identifier>DOI 10.1073/pnas.1416587112</dc:identifier>
+                <prism:number>8</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <foaf:name>Proceedings of the National Academy of Sciences</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hainmueller</foaf:surname>
+                        <foaf:givenName>Jens</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hangartner</foaf:surname>
+                        <foaf:givenName>Dominik</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Yamamoto</foaf:surname>
+                        <foaf:givenName>Teppei</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2088"/>
+        <link:link rdf:resource="#item_2032"/>
+        <dc:title>Validating vignette and conjoint survey experiments against real-world behavior</dc:title>
+        <dcterms:abstract>Survey experiments, like vignette and conjoint analyses, are widely used in the social sciences to elicit stated preferences and study how humans make multidimensional choices. However, there is a paucity of research on the external validity of these methods that examines whether the determinants that explain hypothetical choices made by survey respondents match the determinants that explain what subjects actually do when making similar choices in real-world situations. This study compares results from conjoint and vignette analyses on which immigrant attributes generate support for naturalization with closely corresponding behavioral data from a natural experiment in Switzerland, where some municipalities used referendums to decide on the citizenship applications of foreign residents. Using a representative sample from the same population and the official descriptions of applicant characteristics that voters received before each referendum as a behavioral benchmark, we find that the effects of the applicant attributes estimated from the survey experiments perform remarkably well in recovering the effects of the same attributes in the behavioral benchmark. We also find important differences in the relative performances of the different designs. Overall, the paired conjoint design, where respondents evaluate two immigrants side by side, comes closest to the behavioral benchmark; on average, its estimates are within 2% percentage points of the effects in the behavioral benchmark.</dcterms:abstract>
+        <dc:date>2015-02-24</dc:date>
+        <z:libraryCatalog>pnas.org (Atypon)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.pnas.org/doi/10.1073/pnas.1416587112</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:57:07</dcterms:dateSubmitted>
+        <bib:pages>2395-2400</bib:pages>
+        <z:citationKey>hainmuellerValidatingVignetteConjoint2015</z:citationKey>
+    </bib:Article>
+    <bib:Memo rdf:about="#item_2088">
+        <rdf:value>&lt;h1&gt;Synthesis — Hainmueller, Hangartner &amp;amp; Yamamoto (2015)&lt;/h1&gt;&lt;p&gt;Hainmueller, Jens, Dominik Hangartner, and Teppei Yamamoto. 2015. &quot;Validating Vignette and Conjoint Survey Experiments against Real-World Behavior.&quot; Proceedings of the National Academy of Sciences 112 (8): 2395–2400.&lt;/p&gt;&lt;p&gt;One-line claim: Conjoint and vignette survey experiments recover real-world behavioral attribute effects remarkably well — the paired conjoint design comes closest, with estimates within 2 percentage points of a behavioral benchmark — primarily because paired presentation reduces satisficing and increases respondent engagement.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Red — Key points&lt;/p&gt;&lt;p&gt;1. (p. 2395) Headline finding: the paired conjoint design, where respondents evaluate two immigrants side by side, comes closest to the behavioral benchmark; on average, its estimates are within 2 percentage points of the effects in the behavioral benchmark.&lt;/p&gt;&lt;p&gt;2. (p. 2399) Core mechanism: attribute effects decrease almost monotonically as designs become worse-performing, and in proportion to satisficing rates — nondifferentially accepting all applicants mechanically shrinks any attribute effect toward zero.&lt;/p&gt;&lt;p&gt;3. (p. 2400) Prescriptive conclusion: to maximize external validity, survey samples must match the target population and designs must motivate genuine engagement with the hypothetical choice task.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Yellow — Important supporting evidence&lt;/p&gt;&lt;p&gt;- (p. 2399) Satisficing rates by design: 56% (paired conjoint) → 63% (paired vignette) → 70–72% (single-profile designs) — directly explains the performance gradient.&lt;br/&gt;- (p. 2400) The single-vignette design — the most widely used in social science — is the weakest performer among main designs, despite most closely resembling the real-world format.&lt;br/&gt;- (p. 2398) Conjoint recovers relative attribute effects well but systematically underpredicts absolute rejection levels (~21% predicted vs. 37% observed) — marginal effects are reliable; absolute levels are not.&lt;br/&gt;- (p. 2400) Convenience (student) sample with identical design fared poorly — sample composition matters as much as design.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Orange — References to follow up&lt;/p&gt;&lt;p&gt;- Hainmueller, Hopkins &amp; Yamamoto (2014) &quot;Causal inference in conjoint analysis&quot; Polit Anal 22(1):1–30 — foundational AMCE methodology paper; must-read for own conjoint design.&lt;br/&gt;- Hainmueller &amp; Hangartner (2013) &quot;Who gets a Swiss passport?&quot; APSR 107(1):159–187 — the behavioral benchmark study; natural experiment on immigrant attribute effects.&lt;br/&gt;- Bertrand &amp; Mullainathan (2001) &quot;Do people mean what they say?&quot; AER 91(2):67–72 — canonical paper on gap between stated and revealed preferences; directly relevant to conjoint on globalization attitudes.&lt;br/&gt;- Krosnick, Judd &amp; Wittenbrink (2014) Handbook of Attitudes — satisficing and acquiescence response bias; foundational for understanding why design affects data quality.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Purple — Data &amp; methods&lt;/p&gt;&lt;p&gt;- First external validation of vignette and conjoint designs against a behavioral benchmark in social science. The natural experiment (Swiss naturalization referendums with secret ballots, exogenous variation in applicant attributes, known information environment) is an unusually clean real-world benchmark — most prior work only compared aggregate market shares, not attribute-level causal effects.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Green — Thought starters&lt;/p&gt;&lt;p&gt;1. Use paired conjoint (not single-profile) for own automation/trade attitudes experiment. The 60% longer deliberation time with no increase in reported burden means better data quality at no cost in respondent experience.&lt;/p&gt;&lt;p&gt;2. Don't optimize for face similarity to real-world policy formats (e.g., mimicking a layoff notice or TAA application). Engagement eclipses superficial resemblance — prioritize side-by-side comparison that forces differentiation.&lt;/p&gt;&lt;p&gt;3. Generalizability warrant: this validation used a hot-button, socially sensitive issue (immigration, origin-based discrimination) with a 10-year gap between survey and behavioral data and still held up. This supports confidence in using conjoint for automation/globalization backlash — also sensitive, also politically charged.&lt;/p&gt;&lt;p&gt;4. Sample from trade-exposed commuting zones (CZs) using probability methods, not MTurk/opt-in panels. The student-sample failure is a direct warning: a representative sample of the target population (e.g., workers in high-automation-exposure CZs) is essential for the estimates to correspond to real-world behavior.&lt;/p&gt;&lt;p&gt;5. The absolute-level caveat is important: conjoint will reliably tell you which attributes of a trade/automation shock (sector, cause, duration, policy response) matter more or less, but will not accurately predict the unconditional fraction of workers who support redistribution or retraining — interpret AMCEs, not predicted probabilities as population shares.&lt;/p&gt;&lt;p&gt;6. When comparing conjoint designs for own pilot, consider running both paired conjoint and paired vignette as a within-pilot comparison — they tie on the Bonferroni-corrected significance metric while differing in format, which can inform the final instrument.&lt;/p&gt;&lt;p&gt;---&lt;br/&gt;## Relevance to automation/trade/voting project — bottom line&lt;/p&gt;&lt;p&gt;- **Conjoint design validation**: This paper is the key methodological warrant for using a paired conjoint to study trade/automation job-loss attitudes. Cite it whenever defending conjoint external validity.&lt;br/&gt;- **Design choice**: Use paired conjoint (not single-profile vignette) to minimize satisficing. This is the clearest design recommendation in the literature.&lt;br/&gt;- **Social desirability robustness**: Even on a sensitive issue (immigration origin discrimination), conjoint recovered structural effects — provides confidence for politically charged automation/globalization attitudes.&lt;br/&gt;- **Sample design**: Probability sample of the relevant target population (trade-exposed workers, not MTurk) is essential; this paper provides the empirical basis for that requirement.&lt;br/&gt;- **Interpretation discipline**: AMCEs (attribute-level effects) are reliable; absolute acceptance/rejection levels are not — be careful when converting AMCE estimates to policy-relevant magnitudes.&lt;br/&gt;- **Benchmark idea**: The Swiss referendum natural experiment suggests a research design opportunity — if any real-world policy vote or revealed-preference data exist on trade/automation (e.g., union votes, TAA take-up by automation exposure), they could serve as a behavioral benchmark for a similar validation exercise.&lt;/p&gt;&lt;p&gt;[generation date: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>external-validity</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>survey-methods</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2032">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2032/Hainmueller et al. - 2015 - Validating vignette and conjoint survey experiments against real-world behavior.pdf"/>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.pnas.org/doi/pdf/10.1073/pnas.1416587112</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 14:57:08</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.journals.uchicago.edu/doi/10.1086/737849">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0022-3816,%201468-2508"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Chaudoin</foaf:surname>
+                        <foaf:givenName>Stephen</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mangini</foaf:surname>
+                        <foaf:givenName>Michael-David</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_2207"/>
+        <link:link rdf:resource="#item_2152"/>
+        <dc:title>Robots, Foreigners, and Foreign Robots: Policy Responses to Automation and Trade</dc:title>
+        <dc:date>2025-07-29</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Robots, Foreigners, and Foreign Robots</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.uchicago.edu/doi/10.1086/737849</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2026-04-29 17:50:35</dcterms:dateSubmitted>
+        <bib:pages>737849</bib:pages>
+        <z:citationKey>chaudoinRobotsForeignersForeign2025</z:citationKey>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0022-3816,%201468-2508">
+        <dc:title>The Journal of Politics</dc:title>
+        <dc:identifier>DOI 10.1086/737849</dc:identifier>
+        <dcterms:alternative>The Journal of Politics</dcterms:alternative>
+        <dc:identifier>ISSN 0022-3816, 1468-2508</dc:identifier>
+    </bib:Journal>
+    <bib:Memo rdf:about="#item_2207">
+        <rdf:value>&lt;h1&gt;Synthesis: Chaudoin &amp;amp; Mangini (2025) — Robots, Foreigners, and Foreign Robots&lt;/h1&gt;&lt;p&gt;**Chaudoin, Stephen, and Michael-David Mangini. 2025. &quot;Robots, Foreigners, and Foreign Robots: Policy Responses to Automation and Trade.&quot; *Journal of Politics*. https://doi.org/10.1086/737849.**&lt;/p&gt;&lt;p&gt;**One-line claim:** The perceived domestic vs. foreign origin of an economic shock — not the shock's distributional consequences — determines whether citizens prefer backpedaling policies (tariffs, automation regulations) or redistributive transfers, because economic nationalism makes regulation of foreign-origin shocks intrinsically attractive and regulation of domestic-origin shocks intrinsically costly.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Red — Key Points&lt;/p&gt;&lt;p&gt;- **Abstract/p.1:** &quot;Most importantly, 'making automation foreign' by emphasizing foreign-origin technology re-weights responses towards greater support for regulations and away from redistribution.&quot; — The paper's most novel result: foreignness framing of automation triggers the same regulatory demand as globalization.&lt;/p&gt;&lt;p&gt;- **p.3:** &quot;Put simply, the perceived origin of economic dislocation – domestic versus foreign – affects how much weight citizens place on backpedaling policies versus redistribution in their preferred response.&quot; — The central mechanism; the entire formal model and experimental design pivot on this.&lt;/p&gt;&lt;p&gt;- **p.5:** &quot;Our research suggests that citizens will demand regulations as the perceived 'foreignness' of technology increases.&quot; — Forward-looking implication: China's rise in robotics and AI could shift US automation politics from redistribution toward direct regulation.&lt;/p&gt;&lt;p&gt;- **p.30 (Discussion):** &quot;Our paper sheds light on why globalization, not automation, triggered political reactions, and why that reaction de-emphasized redistribution. Economic nationalism, which values exports over imports, makes citizens prefer tariffs for globalization and redistribution for automation.&quot; — Headline answer to the book-end puzzle opened in the introduction.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Yellow — Important Supporting Evidence&lt;/p&gt;&lt;p&gt;- **p.7 (Lit Review):** &quot;Di Tella and Rodrik (2020) and Naoi (2020) survey US and Japanese respondents, respectively. They find that prompts about globalization shocks raise support for protectionism, but *decrease* support for compensation.&quot; — Prior finding the model explains: nationalism substitutes backpedaling for redistribution.&lt;/p&gt;&lt;p&gt;- **p.24 (Exp. 1 Results):** &quot;Consistent with the first prediction, foreign shocks caused respondents to place greater relative weight on backpedaling, substituting away from transfers. Going from foreign labor to domestic automation shocks increases the weight on transfers.&quot; — Experiment 1 confirms Prediction 1 across the 2×2 design.&lt;/p&gt;&lt;p&gt;- **p.28 (Exp. 2 Results):** &quot;The foreign reliance and relative gains treatments have the strongest effects. The within-country treatment also increases the weight respondents place on regulation, but we cannot reject the null of no effect for that particular treatment in some specifications.&quot; — Security and relative-gains aspects of nationalism drive regulation demand; racialized within-country concerns are the weakest channel.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Orange — References to Follow Up&lt;/p&gt;&lt;p&gt;- **Wu (2022)** &quot;Misattributed Blame? Attitudes Toward Globalization in the Age of Automation.&quot; *Political Science Research Methods* 10(3): 470–87. — Core prior on blame misattribution: automation-exposed workers oppose globalization more. C&amp;M's paper explains *why* this misattribution is politically effective.&lt;/p&gt;&lt;p&gt;- **Wu (2023)** &quot;'Restrict Foreigners, Not Robots': Partisan Responses to Automation Threat.&quot; *Economics &amp; Politics* 35(2): 505–28. — Finds automation prompts raise tariff support even more than China-offshoring prompts. Directly addressed by C&amp;M's foreignness mechanism.&lt;/p&gt;&lt;p&gt;- **Kuo et al. (2024)** &quot;Automation Versus Openness: Support for Policies to Address Job Threats.&quot; *Journal of Public Policy* 44(1): 1–23. — Finds automation risk does not raise ex post redistribution support — the puzzle C&amp;M explain.&lt;/p&gt;&lt;p&gt;- **Gallego &amp; Kurer (2022)** &quot;Automation, Digitalization, and Artificial Intelligence in the Workplace: Implications for Political Behavior.&quot; *Annual Review of Political Science* 25: 463–484. — Survey of the politics-of-automation literature; useful entry point and cites non-redistribution finding.&lt;/p&gt;&lt;p&gt;- **Di Tella &amp; Rodrik (2020)** &quot;Labour Market Shocks and the Demand for Trade Protection.&quot; *Economic Journal* 130(628): 1008–30. — Key experiment: globalization primes crowd out redistribution. Methodological template.&lt;/p&gt;&lt;p&gt;- **Baccini, Ciobanu &amp; Pelc (2023)** &quot;Why Different Economic Shocks Have Different Political Effects.&quot; — Compares racial perceptions of globalization vs. automation harms; directly relevant for heterogeneous treatment effects in a conjoint design.&lt;/p&gt;&lt;p&gt;- **Carnegie &amp; Gaikwad (2022)** &quot;Public Opinion on Geopolitics and Trade.&quot; *World Politics.* — Documents adversary-aversion in trade preferences; relevant to geopolitical framing as a conjoint attribute.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Purple — Data &amp; Methods&lt;/p&gt;&lt;p&gt;- **p.9 (Sec. 2.1):** Original data on US automation technology trade deficit using COMTRADE and Harmonized System tariff classification rulings (Mangini 2023): the deficit grew 1472% from ~$180M (1990) to $2.8B (2020), outpacing the overall trade deficit (1015% growth). This is novel empirical context establishing that &quot;foreign robots&quot; is a real and growing phenomenon, not just a hypothetical. Source: Mangini (2023) *Economics &amp; Politics* 35(3): 773–805.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Green — Thought Starters&lt;/p&gt;&lt;p&gt;1. **2×2 shock-type × shock-origin vignette design** (p.20): The news-article vignette crossing automation/labor × domestic/foreign is a clean template replicable in a conjoint. Adding shock origin (domestic US firm vs. Chinese firm vs. German firm) as a conjoint attribute could directly replicate and extend C&amp;M's key result in a multi-attribute setting, while allowing heterogeneous effects by economic nationalism score.&lt;/p&gt;&lt;p&gt;2. **Policy bundles as substitutes — relative DV construction** (p.19): C&amp;M measure *differences* (backpedaling minus transfers), not levels. For a conjoint or CZ-level study, this implies the dependent variable of interest is the *ratio* of support for direct regulation vs. redistribution, not their independent levels. This is an important design constraint.&lt;/p&gt;&lt;p&gt;3. **Embedded liberalism and economic nationalism interaction** (p.6): C&amp;M show that nationalism crowds out redistribution demand even when redistribution would financially help the nationalist. In a CZ-level design, interacting local automation exposure with a county-level economic nationalism index (e.g., Trump vote share, Mutz-style out-group anxiety) could test whether high-nationalism CZs show weaker redistribution demand despite equal automation exposure.&lt;/p&gt;&lt;p&gt;4. **Foreignness as a treatment dimension for AI/white-collar automation** (p.30): C&amp;M note the same logic applies beyond manufacturing — &quot;a politician courting pharmacists displaced by automation... could emphasize the foreignness of imported machinery.&quot; A conjoint could vary whether the AI tool displacing a worker is described as domestically vs. foreign-developed, testing if the foreignness mechanism generalizes to high-skill/white-collar workers.&lt;/p&gt;&lt;p&gt;5. **Security-reliance vs. relative-gains channels** (p.28): The two strongest sub-treatments in Exp. 2 are *foreign reliance* (dependency/sovereignty risk) and *relative gains* (trading partner benefits more). These map onto distinct conjoint attributes — framing job loss as &quot;making us dependent on China&quot; vs. &quot;China gains more than we lose&quot; — and could be tested as separate attribute levels.&lt;/p&gt;&lt;p&gt;6. **Pre-treatment economic nationalism moderator** (p.28): C&amp;M show that the foreignness treatment effect is near zero for respondents who view imports favorably (pre-treatment &quot;imports good&quot; &gt; 60 on 0–100 scale). This suggests economic nationalism/import attitudes should be a pre-treatment covariate (or a blocking variable) in any conjoint design building on this paper.&lt;/p&gt;&lt;p&gt;---&lt;/p&gt;&lt;p&gt;## Relevance to Automation/Trade/Voting Project — Bottom Line&lt;/p&gt;&lt;p&gt;- **Core puzzle this resolves:** Why does automation exposure not generate the same political backlash as trade exposure? C&amp;M's answer — economic nationalism makes backpedaling against domestic-origin shocks unattractive — directly informs your project's framing of why CZ-level automation exposure may not translate into conventional protectionist or anti-incumbent voting.&lt;/p&gt;&lt;p&gt;- **Conjoint design implication:** Add &quot;origin of the technology&quot; (domestic US firm / European firm / Chinese firm) as an attribute in any conjoint on automation job loss. The paper predicts this single attribute will shift responses from redistribution to regulation, which is a testable, novel finding for your design.&lt;/p&gt;&lt;p&gt;- **Dependent variable construction:** Use *relative* support (regulation minus redistribution) rather than independent measures of each policy. C&amp;M demonstrate that absolute levels are noisy and context-dependent; the ratio is theoretically motivated and more robust.&lt;/p&gt;&lt;p&gt;- **Heterogeneous effects:** Interact automation exposure with economic nationalism scores. C&amp;M predict the foreignness effect is driven by reliance and relative-gains concerns, not racial identity — so measures of import aversion or security concern (rather than just partisan ID) are the right moderators.&lt;/p&gt;&lt;p&gt;- **Embedded liberalism connection:** The model predicts that as US automation becomes more associated with foreign firms (China's tech rise), the embedded liberalism bargain — accept dislocation in exchange for a safety net — will erode further. This is a macro prediction testable with cross-national panel data on welfare preferences and automation import exposure.&lt;/p&gt;&lt;p&gt;- **EU comparison:** C&amp;M predict EU members (technology importers) regulate automation more readily because doing so does not harm domestic competitiveness. A cross-national conjoint comparing US and EU respondents on the same foreignness treatment would be a natural extension.&lt;/p&gt;&lt;p&gt;[Generated: 2026-04-29]&lt;/p&gt;</rdf:value>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>automation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>conjoint</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>economic-nationalism</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>political-economy</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>synthesis</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>trade</rdf:value></z:AutomaticTag>
+        </dc:subject>
+    </bib:Memo>
+    <z:Attachment rdf:about="#item_2152">
+        <z:itemType>attachment</z:itemType>
+        <z:path rdf:resource="files/2152/Chaudoin and Mangini - 2025 - Robots, Foreigners, and Foreign Robots Policy Responses to Automation and Trade.pdf"/>
+        <dc:title>PDF</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+</rdf:RDF>

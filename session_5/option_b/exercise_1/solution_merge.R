@@ -5,8 +5,8 @@ library(dplyr)
 library(readr)
 
 # ── Load data ────────────────────────────────────────────────────
-survey <- read_csv("session_5/option_b/data/swiss_franc_survey.csv")
-demog  <- read_csv("session_5/option_b/data/respondent_demographics.csv")
+survey <- read_csv("option_b/data/swiss_franc_survey.csv")
+demog  <- read_csv("option_b/data/respondent_demographics.csv")
 
 cat("Survey shape:", dim(survey), "\n")
 cat("Demographics shape:", dim(demog), "\n")
@@ -58,5 +58,5 @@ cat("Respondents with income_quintile = 0:",
     sum(merged$income_quintile == 0, na.rm = TRUE), "\n")
 
 # ── Save ─────────────────────────────────────────────────────────
-write_csv(merged, "session_5/option_b/output/merged_survey.csv")
-cat("\nSaved merged data to session_5/option_b/output/merged_survey.csv\n")
+write_csv(merged, "option_b/output/merged_survey.csv")
+cat("\nSaved merged data to option_b/output/merged_survey.csv\n")

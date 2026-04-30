@@ -1,0 +1,15 @@
+# Sensitive local files
+.env
+*.pem
+*.key
+*.secret
+
+# Data locations that should stay out of model context if students add them
+data/raw/
+data/restricted/
+data/*/administrative/
+
+# Zotero import seed: students import this into Zotero.
+# PDFs in zotero/pdfs/ intentionally ship for student reading.
+# Claude should query Zotero instead of mining the BibTeX directly.
+zotero/*.bib
