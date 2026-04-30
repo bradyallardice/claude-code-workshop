@@ -5,13 +5,13 @@ clear all
 set more off
 
 * ── Load survey data ─────────────────────────────────────────────
-import delimited "session_5/option_b/data/swiss_franc_survey.csv", clear varnames(1)
+import delimited "option_b/data/swiss_franc_survey.csv", clear varnames(1)
 di "Survey observations: " _N
 tempfile survey_tmp
 save `survey_tmp'
 
 * ── Load demographics data ───────────────────────────────────────
-import delimited "session_5/option_b/data/respondent_demographics.csv", clear varnames(1)
+import delimited "option_b/data/respondent_demographics.csv", clear varnames(1)
 di "Demographics observations: " _N
 tempfile demog_tmp
 save `demog_tmp'
@@ -52,5 +52,5 @@ count if income_quintile == 0
 di "Respondents with income_quintile = 0: " r(N)
 
 * ── Save ─────────────────────────────────────────────────────────
-export delimited using "session_5/option_b/output/merged_survey.csv", replace
-di _n "Saved merged data to session_5/option_b/output/merged_survey.csv"
+export delimited using "option_b/output/merged_survey.csv", replace
+di _n "Saved merged data to option_b/output/merged_survey.csv"

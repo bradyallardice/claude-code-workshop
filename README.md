@@ -32,8 +32,8 @@ python -c "import pandas; import numpy; import statsmodels; import matplotlib; p
 | 1 | Introduction to Claude Code | `session_1/` |
 | 2 | CLAUDE.md & Plan Mode | `session_2/` |
 | 3 | Data Cleaning & Merging Pipelines | `session_3/` |
-| 4 | Statistical Analysis & Visualization | `session_4/` |
-| 5 | Debugging & Testing | `session_5/` |
+| 4 | Skills, Zotero, GitHub Collaboration, and Debugging Materials | `session_4/` |
+| 5 | Subagents, Hooks, and Capstone | `session_5/` |
 | 6 | Git & Version Control with AI | (this repo itself) |
 
 ## License

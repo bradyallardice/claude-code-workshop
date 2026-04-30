@@ -219,6 +219,14 @@ for i, (spec, *_mid, n) in enumerate(specs, start=1):
     rows.append({"row_type": "n", "display_order": i, "spec": spec,
                  "value_num": n})
 
+# years rows (required by the skill — temporal coverage of the sample)
+years_min = pd.to_datetime(df["interview_date"]).dt.year.min()
+years_max = pd.to_datetime(df["interview_date"]).dt.year.max()
+years_str = f"{years_min}" if years_min == years_max else f"{years_min}–{years_max}"
+for i, (spec, *_rest) in enumerate(specs, start=1):
+    rows.append({"row_type": "years", "display_order": i, "spec": spec,
+                 "value_str": years_str})
+
 # note row
 rows.append({
     "row_type": "note", "display_order": 1,

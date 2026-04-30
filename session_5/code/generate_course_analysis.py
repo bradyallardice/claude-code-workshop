@@ -72,8 +72,8 @@ for rate in attrition_rates:
     n_completed = int(n_completed * (1 - rate))
 
 # Save raw data
-df.to_csv('session_5/data/course_participants.csv', index=False)
-satisfaction_df.to_csv('session_5/data/satisfaction.csv', index=False)
+df.to_csv('data/course_participants.csv', index=False)
+satisfaction_df.to_csv('data/satisfaction.csv', index=False)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 2. SUMMARY STATISTICS TABLE
@@ -118,7 +118,7 @@ summary_df = create_summary_stats_table(df)
 latex_summary = summary_df.to_latex(index=False, escape=False)
 # Keep booktabs format (toprule, midrule, bottomrule) for academic style
 
-with open('session_5/paper/tables/summary_stats.tex', 'w') as f:
+with open('paper/tables/summary_stats.tex', 'w') as f:
     f.write(latex_summary)
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -201,7 +201,7 @@ R$^2$ & ''' + f'{r_squared:.4f}' + r''' & \\
 \textit{Note:} ''' + r'''Dependent variable is post-course earnings in USD. Standard errors in parentheses.''' + '\n' + \
 r'''Significance levels: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$.'''
 
-with open('session_5/paper/tables/regression_earnings.tex', 'w') as f:
+with open('paper/tables/regression_earnings.tex', 'w') as f:
     f.write(latex_table)
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -223,7 +223,7 @@ ax.set_ylim([0, 160])
 for i, v in enumerate(n_students):
     ax.text(i, v + 3, str(v), ha='center', fontweight='bold')
 plt.tight_layout()
-plt.savefig('session_5/paper/figures/enrollment.png', dpi=300, bbox_inches='tight')
+plt.savefig('paper/figures/enrollment.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 # Figure 2: Satisfaction over time
@@ -241,7 +241,7 @@ ax.set_title('Student Satisfaction Over Course', fontsize=14, fontweight='bold')
 ax.set_ylim([5, 10])
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('session_5/paper/figures/satisfaction.png', dpi=300, bbox_inches='tight')
+plt.savefig('paper/figures/satisfaction.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 # Figure 3: Attrition rate by session
@@ -255,7 +255,7 @@ ax.set_ylim([0, 20])
 for i, v in enumerate(attrition):
     ax.text(i, v + 0.5, f'{v}%', ha='center', fontweight='bold')
 plt.tight_layout()
-plt.savefig('session_5/paper/figures/attrition.png', dpi=300, bbox_inches='tight')
+plt.savefig('paper/figures/attrition.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 # Figure 4: Effect of course attendance on earnings
@@ -282,7 +282,7 @@ for i, mean in enumerate(means, 1):
     ax.plot(i, mean, marker='D', markersize=8, color='red', zorder=3)
 
 plt.tight_layout()
-plt.savefig('session_5/paper/figures/earnings_effect.png', dpi=300, bbox_inches='tight')
+plt.savefig('paper/figures/earnings_effect.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -342,14 +342,14 @@ def table_to_png(df, filename, title="", academic=True):
 
 # Create PNG versions of tables by compiling the actual LaTeX files with pdflatex
 latex_table_to_png(
-    'session_5/paper/tables/summary_stats.tex',
-    'session_5/paper/figures/summary_stats_table.png',
+    'paper/tables/summary_stats.tex',
+    'paper/figures/summary_stats_table.png',
     title='Summary Statistics'
 )
 
 latex_table_to_png(
-    'session_5/paper/tables/regression_earnings.tex',
-    'session_5/paper/figures/regression_results_table.png',
+    'paper/tables/regression_earnings.tex',
+    'paper/figures/regression_results_table.png',
     title='Regression Results: Effect on Earnings'
 )
 
@@ -362,13 +362,13 @@ print(f"\nGenerated:")
 print(f"  • {len(df)} total participants ({len(df[df['attended']==1])} attended, {len(df[df['attended']==0])} waitlist)")
 print(f"  • {n_completed} students completed the course")
 print(f"\nLaTeX tables:")
-print(f"  • session_5/paper/tables/summary_stats.tex")
-print(f"  • session_5/paper/tables/regression_earnings.tex")
+print(f"  • paper/tables/summary_stats.tex")
+print(f"  • paper/tables/regression_earnings.tex")
 print(f"\nFigures:")
-print(f"  • 4 data visualization PNGs in session_5/paper/figures/")
-print(f"  • 2 academic-style table PNGs in session_5/paper/figures/")
+print(f"  • 4 data visualization PNGs in paper/figures/")
+print(f"  • 2 academic-style table PNGs in paper/figures/")
 print(f"\nData files:")
-print(f"  • session_5/data/course_participants.csv")
-print(f"  • session_5/data/satisfaction.csv")
+print(f"  • data/course_participants.csv")
+print(f"  • data/satisfaction.csv")
 print(f"\nRegression: Course attendance effect = ${coef_attended:.2f} (p = {p_attended:.4f})")
 print(f"R-squared: {r_squared:.4f}")

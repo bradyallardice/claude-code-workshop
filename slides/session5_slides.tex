@@ -1,4 +1,4 @@
-% Session 5: Multi-Agent Teams, Hooks, and Final Project
+% Session 5: Subagents, Hooks, and Final Project
 % Beamer Presentation --- Claude Code for Academic Researchers
 \documentclass[aspectratio=169, 11pt]{beamer}
 
@@ -40,8 +40,8 @@
 }
 
 % ── Metadata ──────────────────────────────────────────────────────
-\title{Session 5: Multi-Agent Teams, Hooks, and Final Project}
-\subtitle{Specialized agents, event-driven automation, and an end-to-end research artifact}
+\title{Session 5: Subagents, Hooks, and Final Project}
+\subtitle{Spawning focused agents, event-driven automation, and an end-to-end research artifact}
 \author{Brady Allardice}
 \date{}
 \institute{UPF \& IBEI}
@@ -55,37 +55,1124 @@
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  MULTI-AGENT TEAMS
+%  START-OF-SESSION RITUAL
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}[fragile]{Building a Team of Specialized Agents}
-  \textbf{Named subagents you define once and invoke on demand.} Each has its own scope, system prompt, and tool allowlist --- like a team of focused collaborators.
+\begin{frame}[fragile]{Start-of-Session Ritual: Session Folder}
+  \textbf{First, pull the course repo and copy today's working folder.}
+
+  \vspace{0.3em}
+  {\small Replace \texttt{[my\_workspace]} with wherever you keep your local course files.}
 
   \vspace{0.4em}
-  \textbf{Define one:} a markdown file at \texttt{\textasciitilde/.claude/agents/<name>.md} (user-level) or \texttt{.claude/agents/<name>.md} (project-level).
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Pull the latest course repo.
+cd ~/claude-code-workshop && git pull
 
-  \vspace{0.2em}
+# 2. Copy today's session folder into your workspace.
+cp -r session_5/ [my_workspace]/session_5/
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  {\small\textbf{Don't have the course repo yet?}\\
+  \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
+
+  \vspace{0.4em}
+  {\small If \texttt{git pull} fights back, use the Session 4 recovery: \texttt{git stash -u}; \texttt{git branch backup-s5}; \texttt{git fetch origin}; \texttt{git reset -{}-hard origin/student}; \texttt{git stash pop}.}
+\end{frame}
+
+\begin{frame}[fragile]{Start-of-Session Ritual: Slides}
+  \textbf{Now copy the slides. Choose exactly one option.}
+
+  \vspace{0.7em}
+  \textbf{Option A: you already have \texttt{[my\_workspace]/slides/}}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cp slides/session5_slides.pdf [my_workspace]/slides/
+  \end{lstlisting}
+
+  \vspace{0.7em}
+  \textbf{Option B: you do not have a \texttt{slides/} folder yet}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cp -r slides/ [my_workspace]/slides/
+  \end{lstlisting}
+
+  \vspace{0.7em}
+  \alert{Do not run both.} Then open today's workspace:
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cd [my_workspace]/session_5 && code .
+  \end{lstlisting}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  ROADMAP
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Today: Agents, Hooks, and a Paper}
+  \textbf{Three parts.}
+
+  \vspace{0.7em}
+  \begin{enumerate}
+    \item \textbf{Agents.} Subagents, named specialists, and multi-agent orchestration --- when to spawn one, how to define your own, how they compose.
+
+    \vspace{0.5em}
+    \item \textbf{Hooks.} Shell (terminal) commands that run automatically on events (file writes, tool use, session start) --- enforcement that doesn't depend on Claude remembering.
+
+    \vspace{0.5em}
+    \item \textbf{Putting it together.} Start from an unfamiliar paper, use a Zotero library to write the literature review, then build a short replication + extension note.
+    
+    \vspace{0.5em}
+    \item \textbf{And Beyond.} A few notes additional Claude Code capabilities.
+  \end{enumerate}
+
+  \vspace{0.8em}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  SUBAGENTS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Subagents}
+  \centering
+  \vspace{2em}
+  {\Large A focused agent spawned for a bounded job ---\\[0.3em]
+  the right tool for the parallelizable, scoped work\\[0.3em]
+  that already shows up in your pipeline.}
+
+  \vspace{2em}
+  Concrete patterns, then named teams.
+\end{frame}
+
+\begin{frame}{What a Subagent Is}
+  \textbf{Claude Code can spawn another Claude Code instance inside your current session --- a subagent.}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item It has its own context window
+    \item It gets a scoped task and a scoped tool set
+    \item It returns a summary to your main conversation --- not its raw trace
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{What that buys you:}
+  \begin{enumerate}
+    \item \textbf{Parallelism} --- run three searches at once instead of one after the other
+    \item \textbf{Context hygiene} --- a big messy exploration stays out of your main context budget
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{Think of it as}
+    Delegating a bounded sub-task to a focused colleague who returns a clean, structured answer --- so your main conversation stays on the high-level work.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Where Subagents Shine}
+  \textbf{Reach for a subagent when the subtask is:}
+  \begin{itemize}
+    \item \textbf{Parallelizable} --- independent work that doesn't need to be sequenced
+    \item \textbf{Bounded} --- clear inputs, clear outputs, no back-and-forth
+    \item \textbf{Independently verifiable} --- you can check the result without reading the full trace
+  \end{itemize}
+
+  \vspace{0.7em}
+  \textbf{Concrete research use cases:}
+  \begin{itemize}
+    \item \textbf{Multi-database literature searches} --- one agent per database, all running in parallel
+    \item \textbf{Coding many documents} against a fixed rubric
+    \item \textbf{Parallel robustness checks} across independent specifications
+    \item \textbf{Running the same sanity-check} script over many datasets
+    \item \textbf{Exploring a codebase} --- send a subagent to map out the files, keep the summary in your main context
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How to Trigger a Subagent}
+  \textbf{You don't have to set anything up --- just ask.}
+
+  \vspace{0.6em}
+  Claude Code ships with a general-purpose subagent built in. To spawn one, describe the work in plain English:
+  \begin{itemize}
+    \item \textit{``Send a subagent to map the directory structure''}
+    \item \textit{``Use a subagent to find every place we set the random seed''}
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{For parallelism, say so explicitly.}
+  \begin{itemize}
+    \item \textit{``Spawn three agents \textbf{in parallel} to search Zotero, Google Scholar, and Connected Papers''}
+    \item ``In parallel'' / ``at the same time'' / ``concurrently'' all signal that the agents should run in one batch rather than sequentially
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{No setup required}
+    The general-purpose agent ships with Claude Code. Defining your own named agent (later this session) is for when you want to reuse a scoped role across many sessions.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Using a Generic Subagent in Practice}
+  \textbf{Worked example: one subagent, one bounded local task.}
+
+  \vspace{0.3em}
+  \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
----
-name: lit-search
-description: Use for multi-database literature searches on a topic.
-tools: [mcp__zotero__*, WebSearch, WebFetch]
-model: sonnet
----
-You are a literature search specialist. Return a structured
-bibliography with the key claim from each paper.
+Spawn a subagent to read the slides for sessions 1-4
+and return a deduplicated list of every unique terminal
+command I'll need across the course.
+
+Output as: command | what it does | first session
+it appears in.
   \end{lstlisting}
 
   \vspace{0.2em}
-  \textbf{Activate it:}
+  \textbf{What Claude does:}
   \begin{itemize}\small
-    \item Claude reads every agent's \texttt{description} at startup and spawns one when a task matches
-    \item Or invoke it explicitly: \emph{``use the \texttt{lit-search} agent to\ldots''}
-    \item Spawn several in a single message --- they run in parallel
+    \item Spawns one general-purpose subagent and hands it the four \texttt{.tex} files
+    \item The subagent does the reading, extraction, and dedup in its own context
+    \item You get back the table; the slide text never lands in your main conversation
   \end{itemize}
 
   \vspace{0.2em}
-  \alert{\small Permissions work as usual: any tools the agent uses need to be allowed in \texttt{.claude/settings.json}.}
+\end{frame}
+
+\begin{frame}{Using Subagents Well}
+  \textbf{Three habits that make subagents pay off:}
+  \begin{enumerate}
+    \item \textbf{Brief them like a contractor.} Concrete deliverable, all the context they need up front --- they don't see your conversation history.
+    \item \textbf{Ask for structured output} (bullet list, table, JSON). You'll be consuming the result; make it easy to read and verify.
+    \item \textbf{Verify independently.} You get a summary, not the full trace. Spot-check the way you would a student's work.
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{The payoff}
+    A literature sweep, robustness battery, or repo survey that would have taken an hour finishes in minutes --- and doesn't eat into your main conversation's context. That's what makes them worth reaching for.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  NAMED / SPECIALIZED SUBAGENTS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What a Predefined Subagent Looks Like}
+  \textbf{A small markdown file --- author it once, Claude spawns it many times.}
+
+  \vspace{0.4em}
+  \textbf{Where it lives:} \texttt{\textasciitilde/.claude/agents/<name>.md} (user-level) or \texttt{.claude/agents/<name>.md} (project-level).
+
+  \vspace{0.5em}
+  \textbf{What you specify} (metadata + body):
+  \begin{itemize}
+    \item \textbf{Identity} --- \texttt{name} and a one-line \texttt{description}. The description is what Claude reads to decide when to spawn this agent.
+    \item \textbf{Tool allowlist} --- exactly which tools it can use (e.g.\ \texttt{Read} only, no \texttt{Bash}).
+    \item \textbf{Model} --- Opus, Sonnet, or Haiku.
+    \item \textbf{System prompt} --- the body of the file: role, disposition, expected output format.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \alert{\small Plain text --- metadata sits between two \texttt{-{}-{}-} lines at the top of the file; the system prompt is everything below.}
+\end{frame}
+
+\begin{frame}[fragile]{Building a Specialized Agent}
+  \textbf{Worked example: turn ``audit my regression script'' into a reusable role.}
+
+  \vspace{0.4em}
+  \textbf{Walking through the four fields:}
+  \begin{enumerate}\small
+    \item \textbf{Name + description.} What it does, plus the one-line trigger Claude reads to decide when to spawn it.\\
+    \emph{``Audit a regression script for silent issues.''}
+    \item \textbf{Tool allowlist.} \texttt{Read}, \texttt{Grep}, \texttt{Glob} --- read-only. A critic that can fix code is no longer a critic.
+    \item \textbf{Model.} \texttt{haiku} --- fast and cheap, fine for systematic pattern-matching.
+    \item \textbf{System prompt.} Disposition + output contract: \emph{``You're a skeptical reviewer. Flag invalidating issues. Return: line, issue, why. Don't propose fixes.''}
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/spec-critic.md}.
+
+  \vspace{0.3em}
+  \textbf{Now in any session:}
+  \begin{itemize}\small
+    \item Claude auto-spawns it when a task matches the \texttt{description}
+    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{solution\_estimate.py}''}
+    \item Role is enforced --- if it suggests a fix, it broke its own contract
+  \end{itemize}
+
+  \vspace{0.2em}
+  \alert{\small Permissions still apply: tools the agent uses must be allowed in \texttt{.claude/settings.json}.}
+\end{frame}
+
+\begin{frame}{Why Define a Named Subagent at All?}
+  \centering
+  \vspace{2em}
+  {\Large If skills are reusable, why not just spawn\\[0.3em]
+  ad-hoc subagents that pick up the right skill?}
+
+\end{frame}
+
+\begin{frame}{Why Define a Named Subagent at All?}
+  \begin{block}{The framing}
+    \textbf{Skills are knowledge. Subagents are roles.}\\
+    A role bundles a disposition, a tool scope, and an invocation contract --- and then draws on skills to execute.
+  \end{block}
+
+  \vspace{0.3em}
+  \textbf{Three things a role gives you that a skill can't:}
+  \begin{enumerate}
+    \item \textbf{Tool scope --- enforced.} A code-review subagent has read-only access, no bash. Skills are advisory; tool scopes aren't.
+    \item \textbf{Identity, not advice.} The system prompt frames the whole disposition --- ``find problems, don't fix them.'' Subagents \textit{are} the disposition.
+    \item \textbf{A stable invocation contract.} Delegate code review $\to$ get a structured critique. Ad-hoc means re-specifying the contract each time.
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \alert{\small Pre-define a subagent when the \textbf{role} is the reusable unit, not just the know-how.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  MULTI-AGENT WORKFLOWS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Multi-Agent Workflows}
+  \centering
+  \vspace{2em}
+  {\Large When one specialist isn't enough.\\[0.3em]
+  Compose subagents into pipelines, fan-outs,\\[0.3em]
+  and critic-builder loops.}
+
+  \vspace{2em}
+  Three patterns, one worked example.
+\end{frame}
+
+\begin{frame}{Three Composition Patterns}
+  \textbf{Most multi-agent workflows are one of three shapes.}
+
+  \vspace{0.7em}
+  \begin{enumerate}
+    \item \textbf{Fan-out / map-reduce.} N inputs, one specialist per input, merge at the end.\\
+    \emph{Example:} code 50 interview transcripts against the same rubric --- one agent per transcript, then synthesize.
+
+    \vspace{0.5em}
+    \item \textbf{Pipeline.} Each stage's output is the next stage's input. Named and generic agents can mix.\\
+    \emph{Example:} \texttt{spec-critic} flags issues $\to$ generic agent drafts fixes $\to$ \texttt{spec-critic} re-audits.
+
+    \vspace{0.5em}
+    \item \textbf{Critic-builder loop.} One agent produces, another reviews, the producer revises.\\
+    \emph{Example:} a paragraph drafter $\leftrightarrow$ a paragraph-reviewer, two or three rounds.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{A Pipeline in Practice}
+  \textbf{Worked example: hardening a regression script in three stages.}
+
+  \vspace{0.3em}
+  \textbf{Your prompt to Claude:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Run this pipeline on solution_estimate.py:
+  1. Use spec-critic to list every silent issue.
+  2. Spawn a subagent to draft minimal-diff fixes
+     for each issue.
+  3. Re-run spec-critic on the patched script.
+Return: original issues | proposed fixes | residual issues.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{What makes this work:}
+  \begin{itemize}\small
+    \item Each stage has a stable input/output contract --- so they compose
+    \item Two \texttt{spec-critic} calls share a role but run in fresh contexts --- consistent without state
+    \item Your main conversation only sees the final summary; intermediate traces stay isolated
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{One Agent or Many?}
+  \textbf{Default to one agent. A team has to earn its keep.}
+
+  \vspace{0.5em}
+  \textbf{Stick with one agent when:}
+  \begin{itemize}\small
+    \item The task is bounded enough to fit one context window
+    \item One disposition is enough --- no producer/critic split
+    \item You're still exploring --- you don't yet know the right stages
+    \item Orchestration overhead would dominate the actual work
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Reach for a team when:}
+  \begin{itemize}\small
+    \item The work has naturally distinct roles (writer + reviewer; auditor + fixer)
+    \item Independent verification is the point --- a separate set of eyes
+    \item You'll run the workflow many times --- the setup cost amortizes
+    \item N independent inputs need the same treatment in parallel
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{block}{The test}
+    Each extra agent is a stage that can drift. Add one only if it does something the previous one demonstrably can't.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  HOOKS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Hooks}
+  \centering
+  \vspace{2em}
+  {\Large Shell (terminal) commands the harness runs automatically\\[0.3em]
+  on events --- file writes, tool calls, session start.\\[0.3em]
+  Enforcement that doesn't depend on Claude remembering.}
+
+  \vspace{2em}
+  Concept, one example, when to reach for one.
+\end{frame}
+
+\begin{frame}{What a Hook Is}
+  \textbf{A hook is a shell command wired to a Claude Code event.} Configured in \texttt{.claude/settings.json}; run by the harness, not by Claude.
+
+  \vspace{0.5em}
+  \textbf{Common events:}
+  \begin{itemize}\small
+    \item \textbf{PreToolUse} --- before a tool runs (can block it)
+    \item \textbf{PostToolUse} --- after a tool runs
+    \item \textbf{SessionStart} --- at the start of a session
+    \item \textbf{UserPromptSubmit} --- when you submit a prompt
+    \item \textbf{Stop} --- when Claude finishes responding
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{What this buys you:}
+  \begin{itemize}\small
+    \item \textbf{Enforcement, not advice.} The hook runs whether Claude remembers it or not.
+    \item \textbf{Auditability.} Log every tool use, every edit, every Bash call.
+    \item \textbf{Automation.} Format on save, refresh derived files, notify on completion.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Worked Example: A Research Audit Log}
+  \textbf{Goal: every Bash command Claude runs gets logged with a timestamp --- automatically, every session.}
+
+  \vspace{0.4em}
+  \textbf{Add to \texttt{.claude/settings.json}:}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{
+        "type": "command",
+        "command": "echo \"$(date '+%F %T') $CLAUDE_TOOL_INPUT\" >> ~/research_log.txt"
+      }]
+    }]
+  }
+}
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{What happens:} Before every \texttt{Bash} call, the harness runs the command above and appends a timestamped line to your research log. Claude can't bypass it --- the harness, not the model, runs hooks.
+\end{frame}
+
+\begin{frame}[fragile]{Installing a Pre-Built Hook: \texttt{claude-ignore}}
+  \textbf{Many useful hooks already exist --- you don't have to write your own.}
+
+  \vspace{0.3em}
+  \textbf{What \texttt{claude-ignore} does:}
+  \begin{itemize}\small
+    \item A \texttt{PreToolUse} hook on \texttt{Read} that blocks files matched by a \texttt{.claudeignore} (gitignore-syntax patterns; comments and blank lines are ignored)
+    \item Walks up from the current directory to root, merging every \texttt{.claudeignore} it finds --- different rules at different folder levels
+    \item On a match, exits with code 2: hard block. Claude sees the failure and can't bypass it
+    \item Use for \texttt{.env}, \texttt{*.secret}, raw data --- anything you don't want in the model's context
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{Install + initialize:}
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+npm install -g claudeignore
+cd [my_workspace]/my_project && claude-ignore init
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  \texttt{init} creates a \texttt{.claudeignore} and wires the hook into \texttt{.claude/settings.json}.
+
+  \vspace{0.2em}
+  \alert{\small Source: \texttt{github.com/li-zhixin/claude-ignore}. Requires Node.js (npm).}
+\end{frame}
+
+\begin{frame}{Hook, Skill, or Agent?}
+  \textbf{Three layers of automation, three different things.}
+
+  \vspace{0.5em}
+  \begin{block}{The framing}
+    \textbf{Skills are knowledge. Subagents are roles. Hooks are guarantees.}
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{Reach for a:}
+  \begin{itemize}\small
+    \item \textbf{Skill} when Claude needs to know \textit{how} to do X.
+    \item \textbf{Subagent} when you want a delegated worker with a scoped role.
+    \item \textbf{Hook} when something must happen regardless of what Claude remembers.
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{\small Hooks are the only one of the three the harness enforces. Skills are advice; subagents have agency; hooks are mechanical.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  CAPSTONE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Capstone}
+  \centering
+  \vspace{0.3em}
+  {\Large Create a full research note\\[0.25em]
+  in a team of two.}
+
+  \vspace{0.5em}
+  {\small\textbf{All collaboration happens in GitHub:} branches, pull requests, review, and merge.}
+
+  \vspace{0.5em}
+  {\large Steps: read the assigned paper,\\[0.25em]
+  write a short literature review,\\[0.25em]
+  replicate one published figure,\\[0.25em]
+  run one small extension.}
+
+  \vspace{0.5em}
+  {\scriptsize\textbf{Assigned paper:} Magistro, Borwein, Alvarez, Bonikowski, and Loewen (2026),\\
+  ``Attitudes Toward Artificial Intelligence (AI) and Globalization:\\
+  Common Microfoundations and Political Implications,'' \emph{AJPS}.}
+
+  \vspace{0.5em}
+  {\small\alert{Use Claude Code as a research assistant, not as a vending machine: learn the paper, direct the task, inspect the code, verify the output, and interpret the result.}}
+\end{frame}
+
+\begin{frame}{Capstone Flow}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{itemize}\scriptsize
+        \item \textbf{Step 1: Team repo.} Split into pairs, copy the template, use PRs.
+        \item \textbf{Step 2: Zotero.} Import the library; keep Claude out of local BibTeX.
+        \item \textbf{Step 3: Orient yourself.} Read the article, notes, and codebook.
+        \item \textbf{Step 4: Literature review.} Search Zotero, draft, verify claims.
+        \item \textbf{Step 5: Validate data.} Check structure before analysis.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.49\textwidth}
+      \begin{itemize}\scriptsize
+        \item \textbf{Step 6: Replicate Figure 1.} Prompt, plan, code, inspect, commit.
+        \item \textbf{Step 7: Extension + note.} Run one extension and finish the paper.
+        \item \textbf{Step 8: Reflect.} Fill in \texttt{AI\_WORKFLOW\_REFLECTION.md}.
+        \item \textbf{Step 9: Transfer.} Decide what becomes a prompt, skill, agent, or hook.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.4em}
+  \alert{\small The deliverable is not just the PDF. It is the PDF plus evidence that you stayed in control of the workflow.}
+\end{frame}
+
+\begin{frame}{Step 0: What Is Provided}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Course infrastructure}
+    \begin{itemize}\small
+      \item A template repo with data, starter scripts, paper skeleton, and README
+      \item The paper, instructor notes, \texttt{zotero/capstone\_library.bib}, and attached PDFs
+      \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
+      \item General skills: data validation, robustness, tables, references, prose review
+      \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Your work}
+    \begin{itemize}\small
+      \item Read the paper and instructor notes
+      \item Write the literature review from the Zotero library
+      \item Write the replication instruction yourself
+      \item Decide what Claude may infer and what you must specify
+      \item Read the code and check the output
+      \item Interpret the extension
+      \item Turn it into a 2--3 page research note on GitHub
+      \item Explain which AI workflow pieces would transfer to your own work
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.7em}
+\end{frame}
+
+\begin{frame}{Step 1: Orient Yourself with the Paper}
+  \textbf{Start with the assigned paper and my notes.}
+
+  \vspace{0.3em}
+  {\small
+  \textbf{Assigned paper PDF:} \nolinkurl{zotero/pdfs/magistro_et_al_2026_ai_globalization.pdf}\\
+  \textbf{Other PDFs in \texttt{zotero/pdfs/}:} supporting readings for the literature review.\\
+  \textbf{Data PDF:} \nolinkurl{data/Codebook_AJPS.pdf} is the variable codebook.
+  }
+
+  \vspace{0.4em}
+  Use the paper, the Zotero library, and the provided synthesis notes. Your first task is to map:
+  \begin{itemize}\small
+    \item What is the paper's research question?
+    \item What is the paper's core contribution?
+    \item What treatment, attributes, and outcome are being analyzed?
+    \item What does Figure 1 estimate, and why is it central?
+    \item What does the assigned extension change or add?
+    \item Which literatures does the paper claim to speak to?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
+\end{frame}
+
+\begin{frame}{Step 2: Start in the Capstone Folder}
+  \textbf{Everything you need is already in this course repo.}
+
+  \vspace{0.6em}
+  First:
+  \begin{enumerate}\small
+    \item Split into \textbf{two-person teams}.
+    \item Open the course repo on your machine.
+    \item Go to \texttt{capstone-template/}.
+    \item Read \texttt{README.md}.
+    \item Decide who will be the \textbf{repo owner}.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  The repo owner's first job is to create a clean team repo on \texttt{github.com}.
+
+  \vspace{0.6em}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2a: Create an Empty GitHub Repo}
+  \textbf{The owner creates the team repo on \texttt{github.com}.}
+
+  \vspace{0.4em}
+  In GitHub:
+  \begin{enumerate}\small
+    \item Click \textbf{New repository}.
+    \item Name it \texttt{capstone-<lastname>-<lastname>}.
+    \item Leave it empty: no README, no \texttt{.gitignore}, no license.
+    \item Click \textbf{Create repository}.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  Then clone that empty repo somewhere outside the course repo:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+cd ~/Desktop
+git clone https://github.com/<owner>/<team-repo>.git
+cd <team-repo>
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \alert{\small Git may warn that you cloned an empty repo. That is expected.}
+\end{frame}
+
+\begin{frame}[fragile,shrink=8]{Step 2b: Copy in the Capstone Files}
+  \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
+
+  \vspace{0.4em}
+  From inside the empty team repo:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+rsync -av --exclude='.git' \
+  /path/to/AIAgentsCourse/capstone-template/ ./
+
+ls
+ls -a
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  You should see \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}.
+
+  \vspace{0.5em}
+  Commit and push:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git status
+git add .
+git commit -m "Add capstone starter files"
+git push -u origin main
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then the owner adds their partner as a collaborator. The partner clones the new team repo.
+
+  \vspace{0.3em}
+  \alert{\small \texttt{capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2c: Branch and Review}
+  \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+# Partner A
+git checkout -b lit/<name>
+
+# Partner B
+git checkout -b analysis/<name>
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{Assign two ownership lanes before touching files:}
+  \begin{itemize}\small
+    \item \textbf{Partner A: paper + literature lane} --- paper notes, Zotero search, literature review draft, claim checking
+    \item \textbf{Partner B: data + analysis lane} --- data validation, Figure 1 script, extension script, output checks
+    \item \textbf{Both: reciprocal review} --- each person reviews the other's PR before merging into the team branch
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Open PRs into your team repo's \texttt{main}. Your partner reviews before merge. If GitHub allows it, turn on branch protection: require one approval.}
+\end{frame}
+
+\begin{frame}{Step 3: Zotero}
+  \textbf{The literature review uses a prebuilt Zotero library.}
+
+  \vspace{0.4em}
+  The seed file is \texttt{zotero/capstone\_library.bib}. Its attached PDFs ship in \texttt{zotero/pdfs/}.
+
+  \vspace{0.5em}
+  The workflow:
+  \begin{enumerate}\small
+    \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
+    \item Confirm Zotero imported the PDF attachments and the MCP can find the papers.
+    \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
+    \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \begin{block}{Why}
+    A local \texttt{.bib} file lets Claude pattern-match citations without understanding the literature. Zotero forces the workflow closer to the thing you would do in a real project: search, inspect, cite, and verify.
+  \end{block}
+
+  \vspace{0.3em}
+  \alert{\small The PDFs are for students to read. The BibTeX seed is for Zotero import; \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
+\end{frame}
+
+\begin{frame}{Step 4: Write the Literature Review}
+  \textbf{The synthesis notes are already in your Zotero library. Use them.}
+
+  \vspace{0.5em}
+  A useful first prompt:
+  \begin{quote}\small
+    Read the synthesis notes attached to each paper in the Zotero library.
+    Across all notes, identify the three or four recurring mechanisms that
+    connect automation and trade shocks to political preferences. Then draft
+    2--3 paragraphs that position the capstone paper relative to those
+    mechanisms. Every sentence must be traceable to a specific note.
+  \end{quote}
+
+  \vspace{0.4em}
+  Then:
+  \begin{itemize}\small
+    \item Check that every citation supports the sentence attached to it.
+    \item Add any connections the model missed that you saw in the highlights.
+    \item Cut anything that doesn't directly motivate the capstone's design.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Step 5: Validate the Data}
+  \textbf{Before replication or extension code, audit the analysis dataset.}
+
+  \vspace{0.4em}
+  Run this from the team repo root:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+use spec-validator on data/clean_AJPS.csv
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  Then decide what each warning means:
+  \begin{itemize}\small
+    \item Are treatment, task, and respondent counts plausible?
+    \item Are missing values expected or analysis-changing?
+    \item Is the outcome scale coded the way the paper describes?
+    \item Does the data support the reshape needed for Figure 1?
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Validation is not asking Claude if the data is fine. It is deciding whether the data structure matches the design.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 6: Replicate Figure 1}
+  \textbf{Before Claude writes code, write the instruction yourself.}
+
+  \vspace{0.4em}
+  It should specify:
+  \begin{itemize}\small
+    \item \textbf{Input:} \texttt{data/clean\_AJPS.csv}
+    \item \textbf{Reshape:} one respondent-task per row
+    \item \textbf{Estimand:} marginal means by AI vs. Offshoring treatment
+    \item \textbf{Visual target:} four stacked panels matching Figure 1
+    \item \textbf{Output:} \texttt{paper/figures/figure1\_replication.png}
+    \item \textbf{Checks:} row counts, task counts, treatment counts before save
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+Ask Claude for a plan first. If the plan chooses a join,
+changes the sample, or skips verification, reject it.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Step 7: Run the Extension and Finish the Note}
+  \textbf{Now run the assigned extension and turn the work into a research note.}
+
+  \vspace{0.4em}
+  Use one starter file, depending on your language:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+starter/extend_TEMPLATE.R
+starter/extend_TEMPLATE.py
+starter/extend_TEMPLATE.do
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then:
+  \begin{itemize}\small
+    \item Fill in the assigned extension from \texttt{CLAUDE.md}.
+    \item Save figures to \texttt{paper/figures/} and tables to \texttt{paper/tables/}.
+    \item Edit \texttt{paper/paper.tex}: intro, design, results, discussion.
+    \item Use reviewer agents before merging: \texttt{note-reviewer}, \texttt{results-trace-auditor}, and \texttt{pr-referee}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Step 8: Reflect on the Workflow}
+  \textbf{The capstone uses course-provided infrastructure. Your own research will not.}
+
+  \vspace{0.6em}
+  In \texttt{AI\_WORKFLOW\_REFLECTION.md}, answer:
+
+  \vspace{0.4em}
+  \begin{itemize}\small
+    \item What did you delegate to Claude?
+    \item What did you personally verify?
+    \item What did you refuse to let Claude decide?
+    \item What would belong in \texttt{CLAUDE.md} for your own paper?
+    \item What repeated convention would become a skill?
+    \item What reviewer role would become a subagent?
+    \item What safety rule would become a hook?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{What I am looking for}
+    Not ``I used all the tools.'' I want to see that you can choose the right layer for the next project.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Step 9: Why Figure 1 Is Not a Skill}
+  \textbf{Inside this capstone, reproducing Figure 1 happens once.}
+
+  \vspace{0.6em}
+  It is project-specific: one paper, one dataset, one reference figure, one visual target.
+
+  \vspace{0.8em}
+  \textbf{So it should not be an installed skill.} The transferable move is not ``run my Figure 1 skill.'' The transferable move is:
+
+  \vspace{0.5em}
+  \begin{enumerate}\small
+    \item Read the reference code
+    \item State the reshape target and estimand
+    \item Specify what the output should look like
+    \item Tell Claude what checks to print before saving
+    \item Review the plan, the code, and the final figure
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{The routing lesson}
+    Some work is one-off for this project but still teaches a reusable pattern for your own research.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  POWER-USER FEATURES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Beyond the Terminal}
+  \textbf{Four power-user features worth knowing about.}
+
+  \vspace{0.7em}
+  \begin{enumerate}
+    \item \textbf{Claude Code in the cloud.} Run Claude on Anthropic's machines, not yours.
+    \item \textbf{Teleport and remote control.} Move a session between laptop and phone --- two slides, because it is the most useful and the least obvious.
+    \item \textbf{Scheduled and recurring tasks.} \texttt{/loop} and \texttt{/schedule}.
+    \item \textbf{Customizing your environment.} Status line, colors, keybindings, voice, output styles.
+  \end{enumerate}
+
+  \vspace{0.7em}
+  \alert{None of these are required for research work. They are optional comforts that compound once you use Claude every day.}
+
+  \vspace{0.5em}
+  {\small Source: \href{https://support.claude.com/en/articles/14554000-claude-code-power-user-tips}{support.claude.com --- Claude Code power-user tips}.}
+\end{frame}
+
+% ── Cloud version of Claude Code ──────────────────────────────────
+
+\begin{frame}[fragile]{Claude Code in the Cloud}
+  \textbf{What it is.} The same Claude Code, but running on an Anthropic-hosted sandbox instead of your laptop. You launch it from the Claude app or \texttt{claude.ai/code}, point it at a GitHub repo you've connected, and it works there.
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.}
+  \begin{itemize}\small
+    \item Long jobs (replications, sweeps, paper rebuilds) keep running with the lid closed.
+    \item Several sessions in parallel without burning your local CPU or stepping on your worktrees.
+    \item It is how you dispatch work from a phone or browser when you don't have a terminal.
+    \item \textbf{Cowork} is the variant that can also reach into your Desktop app to act on local context (files, Slack, calendar) when you authorize it.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# At claude.ai/code, open the "Code" tab, pick the repo, and prompt:
+"On a new branch, rerun the full extension grid in session_5/
+ and open a PR with the updated tables and figures."
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small \alert{Trade-off.} Cloud sessions are great for repo-shaped work. Anything that depends on your local files, your local data, or unpushed commits stays on your machine.}
+\end{frame}
+
+% ── Teleport / remote control ─ slide 1 of 2 ─────────────────────
+
+\begin{frame}{Teleport and Remote Control: What They Are}
+  \textbf{Two ways to keep \emph{one} session continuous across devices.}
+
+  \vspace{0.7em}
+  \begin{itemize}
+    \item \textbf{Teleport.} A handoff. Your current Claude Code session --- conversation, plan, todos, working directory --- moves to another device (terminal, desktop app, web, or phone). The original session ends; the new one picks up exactly where it left off.
+
+    \vspace{0.4em}
+    \item \textbf{Remote control.} A pairing. The session keeps running where it started (usually your laptop), and your phone becomes a remote that can read the output and send prompts. The work still happens on the laptop.
+  \end{itemize}
+
+  \vspace{0.7em}
+  \textbf{Why it is useful for a researcher.}
+  \begin{itemize}\small
+    \item You start a long agent run at your desk and want to monitor it on the train without restarting context.
+    \item You think of a follow-up prompt while away from the laptop and want it queued, not forgotten.
+    \item You don't want three half-finished sessions across three devices --- just one canonical thread.
+  \end{itemize}
+\end{frame}
+
+% ── Teleport / remote control ─ slide 2 of 2 ─────────────────────
+
+\begin{frame}[fragile]{Teleport and Remote Control: How to Use Them}
+  \textbf{Two short flows.}
+
+  \vspace{0.4em}
+  \textbf{Flow 1 --- Teleport (hand the session off).}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# At your desk, mid-session:
+/teleport
+# Pick the destination device (phone / web / desktop app)
+# from the prompt. The session continues there;
+# this terminal session ends.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \textbf{Flow 2 --- Remote control (drive from your phone).}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Laptop, before walking away:
+/remote-control
+# Pair your phone (one-time, via the Claude mobile app).
+# Now the laptop keeps running the agent;
+# the phone shows output and can send prompts.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  {\small \alert{Rule of thumb.} Teleport when you are leaving the laptop behind. Remote-control when the laptop is the right machine for the work but you want the phone as a window.}
+
+  \vspace{0.2em}
+  {\small \textbf{Caveat.} Neither moves uncommitted local files. Sessions that rely on a working tree only travel cleanly if the relevant work is committed or pushed.}
+\end{frame}
+
+% ── Scheduled and recurring ───────────────────────────────────────
+
+\begin{frame}[fragile]{Scheduled and Recurring Tasks}
+  \textbf{What it is.} Two ways to make Claude run on a clock instead of on your keystroke.
+  \begin{itemize}\small
+    \item \texttt{/loop} --- repeat a prompt or slash command locally, on an interval, for up to a few days.
+    \item \texttt{/schedule} --- create a cloud-side cron job that runs even when your machine is off.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \textbf{Why it is useful for research.}
+  \begin{itemize}\small
+    \item Re-run a robustness battery every time results change.
+    \item Sweep your Zotero feed for new papers and append a digest to a notes file.
+    \item Babysit PRs and CI without sitting in front of the terminal.
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Every 30 minutes, recheck open PRs and address review comments
+/loop 30m /babysit-prs
+
+# Cloud cron: every Monday 9am, summarize new Zotero items into NOTES.md
+/schedule
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small Use sparingly. A loop that runs an unverified workflow is a loop that produces unverified output on a schedule.}
+\end{frame}
+
+% ── Customizing environment ───────────────────────────────────────
+
+\begin{frame}[fragile]{Customizing Your Environment}
+  \textbf{What it is.} Small quality-of-life knobs in the CLI and Desktop app.
+  \begin{itemize}\small
+    \item \texttt{/config} --- theme, model, output style (e.g.\ ``Explanatory'' or ``Learning'').
+    \item \texttt{/statusline} --- show model, working directory, context usage at a glance.
+    \item \texttt{/color}, \texttt{/keybindings} --- distinguish parallel sessions, rebind keys.
+    \item \texttt{/terminal-setup} --- enable \texttt{Shift+Enter} for newlines.
+    \item \texttt{/voice} --- dictate prompts instead of typing.
+  \end{itemize}
+
+  \vspace{0.4em}
+  \textbf{Why it is useful.} Friction compounds. If two sessions look identical and you paste the wrong thing into the wrong worktree, the cost is real.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# Two parallel worktrees, visually distinct
+# Terminal A:
+/color blue
+# Terminal B:
+/color red
+
+# Switch to a verbose, teaching-style mode while learning a new tool
+/config   # then pick output style "Explanatory"
+  \end{lstlisting}
+\end{frame}
+
+% ── Closing ───────────────────────────────────────────────────────
+
+\begin{frame}{Pick One, Not All}
+  \textbf{Don't try to adopt all of these in the same week.}
+
+  \vspace{0.6em}
+  A reasonable order for a researcher:
+  \begin{enumerate}\small
+    \item \textbf{Status line and colors} first --- cheap, prevents real mistakes across worktrees.
+    \item \textbf{Cloud Claude Code} when you have a job that genuinely doesn't fit on your laptop, or when you want to dispatch work from a phone.
+    \item \textbf{Teleport / remote control} the first time you find yourself wishing you could keep the agent working while you're away.
+    \item \textbf{\texttt{/loop} and \texttt{/schedule}} only once a workflow is verified --- never to discover whether it works.
+  \end{enumerate}
+
+  \vspace{0.7em}
+  \alert{The best power-user setup is the smallest one that removes a friction you actually feel.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WEB SCRAPING AND THE CLAUDE API
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Web Scraping with Claude Code}
+  \textbf{Claude Code can write and run scraping scripts in your session.}
+
+  \vspace{0.5em}
+  A typical workflow:
+  \begin{enumerate}\small
+    \item Describe the target page and what you want to extract.
+    \item Claude writes a script (Python with \texttt{requests} + \texttt{BeautifulSoup}, or \texttt{playwright} for dynamic pages).
+    \item You inspect the output before saving anything.
+    \item Claude adjusts selectors if the structure doesn't match.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{What it handles well:}
+  \begin{itemize}\small
+    \item Static HTML pages --- legislative records, committee lists, government databases
+    \item Paginated tables where the pattern repeats
+    \item Light dynamic content with \texttt{playwright} or \texttt{selenium}
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Always check the site's \texttt{robots.txt} and terms of service before scraping. Pause between requests. Don't hammer public servers.}
+\end{frame}
+
+\begin{frame}[fragile]{Scraping: A Worked Prompt}
+  \textbf{Example: scrape a table of legislative votes.}
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+The page at [URL] has a table of roll-call votes. Each row has:
+  legislator name, party, constituency, and vote (Y/N/Abstain).
+The table spans multiple pages (next-page button at bottom).
+
+Write a Python script that:
+  1. Fetches each page with a 1-second pause between requests
+  2. Parses the table using BeautifulSoup
+  3. Saves the combined result to data/votes_raw.csv
+  4. Prints row count and NA counts before saving
+
+Do not run it yet - show me the plan first.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small Then: review the plan, approve, run, inspect the CSV, and commit. Same workflow as replication.}
+\end{frame}
+
+\begin{frame}{The Claude API}
+  \textbf{When Claude Code is not the right tool.}
+
+  \vspace{0.5em}
+  Claude Code is an interactive assistant. The \textbf{Claude API} (via the Anthropic Python or TypeScript SDK) is for when you need to:
+  \begin{itemize}\small
+    \item Run the same prompt over \textbf{thousands of observations} --- coding open-ended survey responses, classifying documents at scale
+    \item Embed Claude in a \textbf{pipeline} --- a script that processes each row and writes results to a dataframe
+    \item Control \textbf{exact model, temperature, and token budget} for reproducibility
+    \item Build a \textbf{custom tool} that wraps Claude for a specific recurring task
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The distinction}
+    Claude Code is for you-and-Claude working together. The API is for Claude working at scale, without you in the loop for each item.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Claude API: A Minimal Research Example}
+  \textbf{Coding 500 open-ended survey responses.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+import anthropic, pandas as pd
+
+client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+df = pd.read_csv("data/survey_responses.csv")
+
+def code_response(text):
+    msg = client.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=64,
+        messages=[{"role": "user", "content":
+            f"Classify this response as Positive, Negative, or Neutral.\n"
+            f"Response: {text}\nLabel:"}]
+    )
+    return msg.content[0].text.strip()
+
+df["label"] = df["open_ended"].apply(code_response)
+df.to_csv("data/survey_coded.csv", index=False)
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small\alert{In practice: add prompt caching (\texttt{cache\_control}) for the system prompt, validate a random sample of labels, and log the model version and date for reproducibility.}}
+\end{frame}
+
+\begin{frame}{API vs.\ Claude Code: When to Use Which}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Use Claude Code when:}
+    \begin{itemize}\small
+      \item You are exploring, iterating, or debugging
+      \item The task requires your judgment at each step
+      \item You want to write a scraper, plan an analysis, or review output interactively
+      \item One-off or low-volume tasks
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Use the API when:}
+    \begin{itemize}\small
+      \item You have a fixed prompt and many inputs
+      \item You need the results in a dataframe or database
+      \item Reproducibility requires logging exact model and parameters
+      \item You are building a tool others will run without Claude Code installed
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.8em}
+  \alert{\small The API is not more powerful than Claude Code --- it is differently suited. Most research workflows use both: Claude Code to design the prompt and test it, the API to run it at scale.}
 \end{frame}
 
 \end{document}

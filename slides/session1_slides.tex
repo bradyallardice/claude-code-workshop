@@ -1292,6 +1292,39 @@ data/raw/ssn_crosswalk.csv
 %  CLAUDE.MD  [30:00–40:00]
 % ══════════════════════════════════════════════════════════════════
 
+\begin{frame}{Where Claude Looks for Context}
+  Claude Code reads instructions from \textbf{several levels} when it starts a session. Anything it finds is loaded into the context window before your first message.
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \textbf{User level} --- \texttt{\textasciitilde/.claude/CLAUDE.md}\\
+      {\small Applies to \textit{every} project on your machine. Personal preferences, defaults, things you want Claude to know about you regardless of what you are working on.}
+    \item \textbf{Project level} --- \texttt{CLAUDE.md} in the project root\\
+      {\small Checked into git, shared with collaborators. Project conventions, data structure, constraints.}
+    \item \textbf{Subfolder level} --- \texttt{CLAUDE.md} inside a subdirectory\\
+      {\small Loaded when Claude works in that subtree. Useful for scoped rules (e.g.\ a \texttt{cleaning/} folder with its own conventions).}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{How Claude Reads the Hierarchy}
+  When Claude Code starts, it walks from the user level down to your working directory and loads \textbf{every applicable CLAUDE.md} it finds. They are concatenated into context, with more specific (deeper) files appearing later --- so they take precedence when guidance conflicts.
+
+  \vspace{0.8em}
+  \begin{alertblock}{This hierarchy is everywhere}
+    The same user $\rightarrow$ project $\rightarrow$ subfolder pattern shows up across the power-user sessions:
+    \begin{itemize}
+      \item \textbf{Skills} --- defined at the user or project level, loaded on demand
+      \item \textbf{Hooks} --- configured per user or per project
+      \item \textbf{MCP servers \& permissions} --- scoped per user or per project
+      \item \textbf{Subagents} --- registered at the user or project level
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{0.4em}
+  \textbf{Learn the hierarchy once} and it tells you where every other piece of configuration belongs.
+\end{frame}
+
 \begin{frame}{CLAUDE.md: Your Lab Notebook for the Agent}
   \begin{columns}[c]
     \begin{column}{0.45\textwidth}
@@ -1299,10 +1332,10 @@ data/raw/ssn_crosswalk.csv
       {\tiny Credit: u/rishabhsonker}
     \end{column}
     \begin{column}{0.52\textwidth}
-      A plain text file in your project directory that Claude Code reads \textbf{automatically at the start of every conversation}.
+      Plain text files at the \textbf{user}, \textbf{project}, or \textbf{subfolder} level that Claude Code reads \textbf{automatically at the start of every conversation}.
 
       \vspace{0.5em}
-      It encodes your conventions, definitions, and constraints so you do not have to repeat them each time.
+      They encode your conventions, definitions, and constraints so you do not have to repeat them each time.
 
       \vspace{0.5em}
       \textbf{The single most effective way to prevent errors before they happen.}
@@ -1314,7 +1347,7 @@ data/raw/ssn_crosswalk.csv
 \end{frame}
 
 \begin{frame}{What Belongs in CLAUDE.md}
-  \textbf{Include:}
+  \textbf{In the \textit{project-level} CLAUDE.md, include:}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \begin{itemize}
@@ -1332,10 +1365,12 @@ data/raw/ssn_crosswalk.csv
     \end{column}
   \end{columns}
 
-  \vspace{0.8em}
+  \vspace{0.4em}
+  {\footnotesize Keep \textit{user-level} CLAUDE.md for things that apply across projects; use a \textit{subfolder} CLAUDE.md only when a directory needs its own rules.}
+
+  \vspace{0.4em}
   \begin{block}{How it interacts with the context window}
-    CLAUDE.md is loaded into the context window before your first message.\\
-    It is always ``visible,'' but it takes up space, so keep it focused and concise.
+    Every applicable CLAUDE.md is loaded before your first message and stays ``visible''---but it takes up space, so keep each one focused and concise.
   \end{block}
 \end{frame}
 

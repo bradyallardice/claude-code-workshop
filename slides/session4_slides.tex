@@ -1,4 +1,4 @@
-% Session 4: Advanced Claude Code --- Skills, MCPs, Subagents
+% Session 4: Advanced Claude Code --- Skills and MCPs
 % Beamer Presentation --- Claude Code for Academic Researchers
 \documentclass[aspectratio=169, 11pt]{beamer}
 
@@ -41,7 +41,7 @@
 
 % ── Metadata ──────────────────────────────────────────────────────
 \title{Session 4: Advanced Claude Code}
-\subtitle{Skills, MCPs, and Subagents}
+\subtitle{Skills and MCPs}
 \author{Brady Allardice}
 \date{}
 \institute{UPF \& IBEI}
@@ -76,7 +76,6 @@
     \item Migrate to a cleaner repo workflow (a structural fix, not an agent fix)
     \item Learn to route a wish --- is it a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
     \item Connect two MCPs (Zotero, GitHub) in practice
-    \item See when to reach for a \textbf{subagent} --- and when not to
   \end{enumerate}
 
   \vspace{0.5em}
@@ -290,6 +289,22 @@ cd ~/my_workspace/session_4 && code .
   {\small If you had in-progress work inside the course repo, copy it into \texttt{\textasciitilde/my\_workspace/} too.}
 \end{frame}
 
+\begin{frame}[fragile]{If \texttt{git pull} Fights Back}
+  If you committed work inside the repo, \texttt{git pull} will complain. Run this recovery in the course repo, then continue with Steps 2--3:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git stash -u                      # save uncommitted edits
+git branch backup-prework         # save any local commits
+git fetch origin
+git reset --hard origin/student   # match the server
+git stash pop                     # skip if stash was empty
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small Your old commits live on \texttt{backup-prework}. If that name exists, add a suffix: \texttt{backup-prework-2}.}
+\end{frame}
+
 % ══════════════════════════════════════════════════════════════════
 %  PART 2: SKILLS (CENTERPIECE)
 % ══════════════════════════════════════════════════════════════════
@@ -377,6 +392,35 @@ description: Use when generating a
 \end{frame}
 
 % ---- 2b: The architecture ---------------------------------------
+
+\begin{frame}[fragile]{Where Skills Live: The Hierarchy, Again}
+  Remember the user $\rightarrow$ project $\rightarrow$ subfolder hierarchy from CLAUDE.md in Session 1? \textbf{Skills follow the same pattern.}
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{User level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+~/.claude/skills/latex-tables/
+  SKILL.md
+\end{lstlisting}
+    {\small Available in \emph{every} project. For things stable \emph{about you}.}
+
+    \column{0.48\textwidth}
+    \textbf{Project level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+your-project/.claude/skills/
+  paper-style/
+    SKILL.md
+\end{lstlisting}
+    {\small Loaded only in this project. Checked into git, shared with collaborators.}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{block}{The same hierarchy keeps showing up}
+    \textbf{Hooks}, \textbf{MCP servers and permissions}, and \textbf{subagents} all live at either the user or project level too. The decision is always the same: \emph{is this stable about me, or specific to this project?}
+  \end{block}
+\end{frame}
 
 \begin{frame}{Before You Build a Skill, Ask Where It Belongs}
   \textbf{Three things look alike but are different tools:}
@@ -1184,77 +1228,6 @@ commit it on a branch, open a PR, and merge it.
   Most MCPs fail question 2. The two today pass all three --- \textit{for me}. Your answers may differ.
 \end{frame}
 
-% ══════════════════════════════════════════════════════════════════
-%  PART 4: SUBAGENTS
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Part 4: Subagents}
-  \centering
-  \vspace{2em}
-  {\Large A focused agent spawned for a bounded job ---\\[0.3em]
-  the right tool for the parallelizable, scoped work\\[0.3em]
-  that already shows up in your pipeline.}
-
-  \vspace{2em}
-  Ten minutes. Concrete patterns.
-\end{frame}
-
-\begin{frame}{What a Subagent Is}
-  \textbf{Claude Code can spawn another Claude Code instance inside your current session --- a subagent.}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item It has its own context window
-    \item It gets a scoped task and a scoped tool set
-    \item It returns a summary to your main conversation --- not its raw trace
-  \end{itemize}
-
-  \vspace{0.8em}
-  \textbf{What that buys you:}
-  \begin{enumerate}
-    \item \textbf{Parallelism} --- run three searches at once instead of one after the other
-    \item \textbf{Context hygiene} --- a big messy exploration stays out of your main context budget
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \begin{block}{Think of it as}
-    Delegating a bounded sub-task to a focused colleague who returns a clean, structured answer --- so your main conversation stays on the high-level work.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Where Subagents Shine}
-  \textbf{Reach for a subagent when the subtask is:}
-  \begin{itemize}
-    \item \textbf{Parallelizable} --- independent work that doesn't need to be sequenced
-    \item \textbf{Bounded} --- clear inputs, clear outputs, no back-and-forth
-    \item \textbf{Independently verifiable} --- you can check the result without reading the full trace
-  \end{itemize}
-
-  \vspace{0.7em}
-  \textbf{Concrete research use cases:}
-  \begin{itemize}
-    \item \textbf{Multi-database literature searches} --- one agent per database, all running in parallel
-    \item \textbf{Coding many documents} against a fixed rubric
-    \item \textbf{Parallel robustness checks} across independent specifications
-    \item \textbf{Running the same sanity-check} script over many datasets
-    \item \textbf{Exploring a codebase} --- send a subagent to map out the files, keep the summary in your main context
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Using Subagents Well}
-  \textbf{Three habits that make subagents pay off:}
-  \begin{enumerate}
-    \item \textbf{Brief them like a contractor.} Concrete deliverable, all the context they need up front --- they don't see your conversation history.
-    \item \textbf{Ask for structured output} (bullet list, table, JSON). You'll be consuming the result; make it easy to read and verify.
-    \item \textbf{Verify independently.} You get a summary, not the full trace. Spot-check the way you would a student's work.
-  \end{enumerate}
-
-  \vspace{0.8em}
-  \begin{block}{The payoff}
-    A literature sweep, robustness battery, or repo survey that would have taken an hour finishes in minutes --- and doesn't eat into your main conversation's context. That's what makes them worth reaching for.
-  \end{block}
-\end{frame}
-
 \begin{frame}{Coming Next Session}
   \centering
   \vspace{1.5em}
@@ -1262,13 +1235,13 @@ commit it on a branch, open a PR, and merge it.
 
   \vspace{1.2em}
   \begin{flushleft}
-  \hspace{2em}\textbf{1. Multi-agent teams} --- named subagents you define once and invoke on demand, each with its own scope, tools, and system prompt.
+  \hspace{2em}\textbf{1. Subagents} --- a focused Claude spawned for a bounded job: parallelism plus context hygiene, then scaled up into named, reusable specialists.
 
   \vspace{0.6em}
   \hspace{2em}\textbf{2. Hooks} --- shell commands that run automatically on events (file writes, session start, tool use), for enforcement that doesn't depend on Claude remembering.
 
   \vspace{0.6em}
-  \hspace{2em}\textbf{3. The final project} --- an end-to-end research artifact built with everything from Sessions 1--4, plus what you learn in Session 5.
+  \hspace{2em}\textbf{3. The final project} --- two-person teams create an empty GitHub repo, copy in \texttt{session\_5/capstone-template/}, read the paper, use Zotero, then write a short replication + extension note.
   \end{flushleft}
 \end{frame}
 
@@ -1285,32 +1258,30 @@ commit it on a branch, open a PR, and merge it.
 
     \vspace{0.3em}
     \item \textbf{Two MCPs on your map.} Zotero (friction) and GitHub (capability). The two-reason rule to evaluate others.
-
-    \vspace{0.3em}
-    \item \textbf{A practical view of subagents.} What they are, where they pay off, and the three habits that make them count --- with specialized teams coming next session.
   \end{enumerate}
 
   \vspace{0.6em}
   \begin{block}{The thread running through}
-    Agents solve symptoms well. Your job is to notice when the structure is wrong, when the skill is ceremony, when the MCP is novelty, and when the subagent is overkill.
+    Agents solve symptoms well. Your job is to notice when the structure is wrong, when the skill is ceremony, and when the MCP is novelty.
   \end{block}
 \end{frame}
 
-\begin{frame}{Next Session + Prework}
-  \textbf{Session 5: Multi-Agent Teams, Hooks, and the Final Project.}
+\begin{frame}[shrink=10]{Next Session + Prework}
+  \textbf{Session 5: Subagents, Hooks, and the Final Project.}
 
   \vspace{0.6em}
   \begin{itemize}
-    \item \textbf{Multi-agent teams} --- define a team of specialized subagents and orchestrate them
+    \item \textbf{Subagents} --- when to spawn one, then how to define named, reusable specialists with their own scope and tools
     \item \textbf{Hooks} --- automatic shell commands on events (file writes, tool calls, session start)
-    \item \textbf{Final project} --- an end-to-end research artifact using everything from Sessions 1--5
+    \item \textbf{Final project} --- two-person teams create an empty GitHub repo, copy in \texttt{session\_5/capstone-template/}, then do paper familiarization, Zotero-backed literature review, replication, extension, and reflection
   \end{itemize}
 
   \vspace{0.8em}
   \textbf{Before next session:}
   \begin{enumerate}
-    \item \textbf{Point your Zotero MCP at your own library} and run today's lit-review prompt on a real topic from your research
-    \item \textbf{Run the routing test} on one thing you wished Claude already knew --- is it a skill, project context, or MCP?
+    \item \textbf{Check GitHub:} make sure you can create a repo, add a collaborator, and push a branch
+    \item \textbf{Check Zotero:} Session 5 imports \texttt{zotero/capstone\_library.bib} with PDFs from \texttt{zotero/pdfs/}
+    \item \textbf{Run the routing test} on one thing you wished Claude already knew --- is it a skill, project context, MCP, hook, subagent, or just a one-off prompt?
     \item \textbf{Try one thing from today} on your actual research: a skill, an MCP, or just the new repo workflow
   \end{enumerate}
 

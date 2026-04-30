@@ -7,6 +7,10 @@ session_1/data/full/ipums/*_raw.csv.gz
 # macOS
 .DS_Store
 
+# Python
+__pycache__/
+*.pyc
+
 # LaTeX build artifacts
 *.aux
 *.fdb_latexmk
