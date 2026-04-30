@@ -58,19 +58,19 @@
 %  START-OF-SESSION RITUAL
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}[fragile]{Start-of-Session Ritual}
-  \textbf{Same three steps as last session, with today's folder.}
+\begin{frame}[fragile]{Start-of-Session Ritual: Session Folder}
+  \textbf{First, pull the course repo and copy today's working folder.}
+
+  \vspace{0.3em}
+  {\small Replace \texttt{[my\_workspace]} with wherever you keep your local course files.}
 
   \vspace{0.4em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-# 1. Pull the latest course repo
+# 1. Pull the latest course repo.
 cd ~/claude-code-workshop && git pull
 
-# 2. Copy today's session folder into your workspace
-cp -r session_5/ ~/my_workspace/session_5/
-
-# 3. Open your copy in VS Code and work there
-cd ~/my_workspace/session_5 && code .
+# 2. Copy today's session folder into your workspace.
+cp -r session_5/ [my_workspace]/session_5/
   \end{lstlisting}
 
   \vspace{0.4em}
@@ -78,10 +78,29 @@ cd ~/my_workspace/session_5 && code .
   \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
 
   \vspace{0.4em}
-  \textbf{Five minutes, together, live.} Everyone in a clean state before we move on.
+  {\small If \texttt{git pull} fights back, use the Session 4 recovery: \texttt{git stash -u}; \texttt{git branch backup-s5}; \texttt{git fetch origin}; \texttt{git reset -{}-hard origin/student}; \texttt{git stash pop}.}
+\end{frame}
 
-  \vspace{0.2em}
-  {\small If \texttt{git pull} fights back, use the recovery from Session 4: \texttt{git stash -u}, \texttt{git branch backup-s5}, \texttt{git fetch origin}, \texttt{git reset -{}-hard origin/student}, \texttt{git stash pop}.}
+\begin{frame}[fragile]{Start-of-Session Ritual: Slides}
+  \textbf{Now copy the slides. Choose exactly one option.}
+
+  \vspace{0.7em}
+  \textbf{Option A: you already have \texttt{[my\_workspace]/slides/}}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cp slides/session5_slides.pdf [my_workspace]/slides/
+  \end{lstlisting}
+
+  \vspace{0.7em}
+  \textbf{Option B: you do not have a \texttt{slides/} folder yet}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cp -r slides/ [my_workspace]/slides/
+  \end{lstlisting}
+
+  \vspace{0.7em}
+  \alert{Do not run both.} Then open today's workspace:
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+cd [my_workspace]/session_5 && code .
+  \end{lstlisting}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -96,14 +115,16 @@ cd ~/my_workspace/session_5 && code .
     \item \textbf{Agents.} Subagents, named specialists, and multi-agent orchestration --- when to spawn one, how to define your own, how they compose.
 
     \vspace{0.5em}
-    \item \textbf{Hooks.} Shell commands that run automatically on events (file writes, tool use, session start) --- enforcement that doesn't depend on Claude remembering.
+    \item \textbf{Hooks.} Shell (terminal) commands that run automatically on events (file writes, tool use, session start) --- enforcement that doesn't depend on Claude remembering.
 
     \vspace{0.5em}
     \item \textbf{Putting it together.} Start from an unfamiliar paper, use a Zotero library to write the literature review, then build a short replication + extension note.
+    
+    \vspace{0.5em}
+    \item \textbf{And Beyond.} A few notes additional Claude Code capabilities.
   \end{enumerate}
 
   \vspace{0.8em}
-  \alert{The capstone is not a test of whether a prepared AI can finish a template. It is a test of whether you can learn the paper, direct the workflow, verify the output, and route the work.}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -268,7 +289,7 @@ it appears in.
   \textbf{Now in any session:}
   \begin{itemize}\small
     \item Claude auto-spawns it when a task matches the \texttt{description}
-    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{option\_b/exercise\_1/solution\_estimate.py}''}
+    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{solution\_estimate.py}''}
     \item Role is enforced --- if it suggests a fix, it broke its own contract
   \end{itemize}
 
@@ -277,17 +298,14 @@ it appears in.
 \end{frame}
 
 \begin{frame}{Why Define a Named Subagent at All?}
-  \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
-
-  \vspace{1.5em}
   \centering
-  {\large\itshape Think about it for a moment \ldots}
+  \vspace{2em}
+  {\Large If skills are reusable, why not just spawn\\[0.3em]
+  ad-hoc subagents that pick up the right skill?}
+
 \end{frame}
 
 \begin{frame}{Why Define a Named Subagent at All?}
-  \textbf{If skills are reusable, why not just spawn ad-hoc subagents that pick up the right skill?}
-
-  \vspace{0.4em}
   \begin{block}{The framing}
     \textbf{Skills are knowledge. Subagents are roles.}\\
     A role bundles a disposition, a tool scope, and an invocation contract --- and then draws on skills to execute.
@@ -344,7 +362,7 @@ it appears in.
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Run this pipeline on option_b/exercise_1/solution_estimate.py:
+Run this pipeline on solution_estimate.py:
   1. Use spec-critic to list every silent issue.
   2. Spawn a subagent to draft minimal-diff fixes
      for each issue.
@@ -396,7 +414,7 @@ Return: original issues | proposed fixes | residual issues.
 \begin{frame}{Hooks}
   \centering
   \vspace{2em}
-  {\Large Shell commands the harness runs automatically\\[0.3em]
+  {\Large Shell (terminal) commands the harness runs automatically\\[0.3em]
   on events --- file writes, tool calls, session start.\\[0.3em]
   Enforcement that doesn't depend on Claude remembering.}
 
@@ -463,9 +481,9 @@ Return: original issues | proposed fixes | residual issues.
 
   \vspace{0.3em}
   \textbf{Install + initialize:}
-  \begin{lstlisting}[basicstyle=\ttfamily\small]
+\begin{lstlisting}[basicstyle=\ttfamily\small]
 npm install -g claudeignore
-cd ~/my_workspace/my_project && claude-ignore init
+cd [my_workspace]/my_project && claude-ignore init
   \end{lstlisting}
 
   \vspace{0.2em}
@@ -501,187 +519,55 @@ cd ~/my_workspace/my_project && claude-ignore init
 
 \begin{frame}{Capstone}
   \centering
-  \vspace{1.2em}
-  {\Large Read an unfamiliar paper,\\[0.35em]
-  write a short literature review,\\[0.35em]
-  replicate one published figure,\\[0.35em]
+  \vspace{0.3em}
+  {\Large Create a full research note\\[0.25em]
+  in a team of two.}
+
+  \vspace{0.5em}
+  {\small\textbf{All collaboration happens in GitHub:} branches, pull requests, review, and merge.}
+
+  \vspace{0.5em}
+  {\large Steps: read the assigned paper,\\[0.25em]
+  write a short literature review,\\[0.25em]
+  replicate one published figure,\\[0.25em]
   run one small extension.}
 
-  \vspace{0.8em}
+  \vspace{0.5em}
   {\scriptsize\textbf{Assigned paper:} Magistro, Borwein, Alvarez, Bonikowski, and Loewen (2026),\\
   ``Attitudes Toward Artificial Intelligence (AI) and Globalization:\\
   Common Microfoundations and Political Implications,'' \emph{AJPS}.}
 
-  \vspace{0.8em}
-  \begin{block}{The point}
-    Use Claude Code as a research assistant, not as a vending machine. You learn the paper, direct the task, inspect the code, verify the output, and decide what the result means.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Orient Yourself with the Paper}
-  \textbf{Start with the assigned paper and my notes.}
-
   \vspace{0.5em}
-  Use \texttt{zotero/pdfs/} for the paper PDFs and the provided instructor notes for the quick synthesis. Your first task is to map:
-  \begin{itemize}\small
-    \item What is the paper's research question?
-    \item What is the paper's core contribution?
-    \item What treatment, attributes, and outcome are being analyzed?
-    \item What does Figure 1 estimate, and why is it central?
-    \item What does the assigned extension change or add?
-    \item Which literatures does the paper claim to speak to?
-  \end{itemize}
-
-  \vspace{0.5em}
-  \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
+  {\small\alert{Use Claude Code as a research assistant, not as a vending machine: learn the paper, direct the task, inspect the code, verify the output, and interpret the result.}}
 \end{frame}
 
-\begin{frame}{Step 1: Start in the Capstone Folder}
-  \textbf{Everything you need is already in this course repo.}
+\begin{frame}{Capstone Flow}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \begin{itemize}\scriptsize
+        \item \textbf{Step 1: Team repo.} Split into pairs, copy the template, use PRs.
+        \item \textbf{Step 2: Zotero.} Import the library; keep Claude out of local BibTeX.
+        \item \textbf{Step 3: Orient yourself.} Read the article, notes, and codebook.
+        \item \textbf{Step 4: Literature review.} Search Zotero, draft, verify claims.
+        \item \textbf{Step 5: Validate data.} Check structure before analysis.
+      \end{itemize}
+    \end{column}
 
-  \vspace{0.6em}
-  First:
-  \begin{enumerate}\small
-    \item Open the course repo on your machine.
-    \item Go to \texttt{session\_5/capstone-template/}.
-    \item Read \texttt{README.md}.
-    \item Decide who will be the \textbf{repo owner}.
-  \end{enumerate}
-
-  \vspace{0.6em}
-  The repo owner's first job is to create a clean team repo on \texttt{github.com}.
-
-  \vspace{0.6em}
-  \alert{\small Do not use the old collaboration-practice repo for the capstone. It was for learning the loop. The capstone starts from \texttt{session\_5/capstone-template/}.}
-\end{frame}
-
-\begin{frame}[fragile]{Step 1a: Create an Empty GitHub Repo}
-  \textbf{The owner creates the team repo on \texttt{github.com}.}
+    \begin{column}{0.49\textwidth}
+      \begin{itemize}\scriptsize
+        \item \textbf{Step 6: Replicate Figure 1.} Prompt, plan, code, inspect, commit.
+        \item \textbf{Step 7: Extension + note.} Run one extension and finish the paper.
+        \item \textbf{Step 8: Reflect.} Fill in \texttt{AI\_WORKFLOW\_REFLECTION.md}.
+        \item \textbf{Step 9: Transfer.} Decide what becomes a prompt, skill, agent, or hook.
+      \end{itemize}
+    \end{column}
+  \end{columns}
 
   \vspace{0.4em}
-  In GitHub:
-  \begin{enumerate}\small
-    \item Click \textbf{New repository}.
-    \item Name it \texttt{capstone-<lastname>-<lastname>}.
-    \item Leave it empty: no README, no \texttt{.gitignore}, no license.
-    \item Click \textbf{Create repository}.
-  \end{enumerate}
-
-  \vspace{0.5em}
-  Then clone that empty repo somewhere outside the course repo:
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-cd ~/Desktop
-git clone https://github.com/<owner>/<team-repo>.git
-cd <team-repo>
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  \alert{\small Git may warn that you cloned an empty repo. That is expected.}
+  \alert{\small The deliverable is not just the PDF. It is the PDF plus evidence that you stayed in control of the workflow.}
 \end{frame}
 
-\begin{frame}[fragile,shrink=8]{Step 1b: Copy in the Capstone Files}
-  \textbf{Copy \texttt{session\_5/capstone-template/} into the empty team repo.}
-
-  \vspace{0.4em}
-  From inside the empty team repo:
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-rsync -av --exclude='.git' \
-  /path/to/course-repo/session_5/capstone-template/ ./
-
-ls
-ls -a
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  You should see \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}.
-
-  \vspace{0.5em}
-  Commit and push:
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-git status
-git add .
-git commit -m "Add capstone starter files"
-git push -u origin main
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  Then the owner adds their partner as a collaborator. The partner clones the new team repo.
-
-  \vspace{0.3em}
-  \alert{\small \texttt{session\_5/capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
-\end{frame}
-
-\begin{frame}[fragile]{Step 1c: Branch and Review}
-  \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
-
-  \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-# Partner A
-git checkout -b lit/<name>
-
-# Partner B
-git checkout -b analysis/<name>
-  \end{lstlisting}
-
-  \vspace{0.4em}
-  \textbf{Assign two ownership lanes before touching files:}
-  \begin{itemize}\small
-    \item \textbf{Partner A: paper + literature lane} --- paper notes, Zotero search, literature review draft, claim checking
-    \item \textbf{Partner B: data + analysis lane} --- data validation, Figure 1 script, extension script, output checks
-    \item \textbf{Both: reciprocal review} --- each person reviews the other's PR before merging into the team branch
-  \end{itemize}
-
-  \vspace{0.4em}
-  \alert{\small Open PRs into your team repo's \texttt{main}. Your partner reviews before merge. If GitHub allows it, turn on branch protection: require one approval.}
-\end{frame}
-
-\begin{frame}{Step 2: Zotero, Not Local BibTeX}
-  \textbf{The literature review uses a prebuilt Zotero library.}
-
-  \vspace{0.4em}
-  The seed file is \texttt{zotero/capstone\_library.bib}. Its attached PDFs ship in \texttt{zotero/pdfs/}.
-
-  \vspace{0.5em}
-  The workflow:
-  \begin{enumerate}\small
-    \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
-    \item Confirm Zotero imported the PDF attachments and the MCP can find the papers.
-    \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
-    \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
-  \end{enumerate}
-
-  \vspace{0.6em}
-  \begin{block}{Why}
-    A local \texttt{.bib} file lets Claude pattern-match citations without understanding the literature. Zotero forces the workflow closer to the thing you would do in a real project: search, inspect, cite, and verify.
-  \end{block}
-
-  \vspace{0.3em}
-  \alert{\small The PDFs are for students to read. The BibTeX seed is for Zotero import; \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
-\end{frame}
-
-\begin{frame}{Step 3: Write the Literature Review}
-  \textbf{The synthesis notes are already in your Zotero library. Use them.}
-
-  \vspace{0.5em}
-  A useful first prompt:
-  \begin{quote}\small
-    Read the synthesis notes attached to each paper in the Zotero library.
-    Across all notes, identify the three or four recurring mechanisms that
-    connect automation and trade shocks to political preferences. Then draft
-    2--3 paragraphs that position the capstone paper relative to those
-    mechanisms. Every sentence must be traceable to a specific note.
-  \end{quote}
-
-  \vspace{0.4em}
-  Then:
-  \begin{itemize}\small
-    \item Check that every citation supports the sentence attached to it.
-    \item Add any connections the model missed that you saw in the highlights.
-    \item Cut anything that doesn't directly motivate the capstone's design.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{What Is Provided}
+\begin{frame}{Step 0: What Is Provided}
   \begin{columns}[T]
     \column{0.48\textwidth}
     \textbf{Course infrastructure}
@@ -710,31 +596,199 @@ git checkout -b analysis/<name>
   \alert{\small The safety rails are prebuilt. The analytical direction is not.}
 \end{frame}
 
-\begin{frame}{Why Figure 1 Is Not a Skill}
-  \textbf{Inside this capstone, reproducing Figure 1 happens once.}
+\begin{frame}{Step 1: Orient Yourself with the Paper}
+  \textbf{Start with the assigned paper and my notes.}
 
-  \vspace{0.6em}
-  It is project-specific: one paper, one dataset, one reference figure, one visual target.
+  \vspace{0.3em}
+  {\small
+  \textbf{Assigned paper PDF:} \nolinkurl{zotero/pdfs/magistro_et_al_2026_ai_globalization.pdf}\\
+  \textbf{Other PDFs in \texttt{zotero/pdfs/}:} supporting readings for the literature review.\\
+  \textbf{Data PDF:} \nolinkurl{data/Codebook_AJPS.pdf} is the variable codebook.
+  }
 
-  \vspace{0.8em}
-  \textbf{So it should not be an installed skill.} The transferable move is not ``run my Figure 1 skill.'' The transferable move is:
+  \vspace{0.4em}
+  Use the paper, the Zotero library, and the provided synthesis notes. Your first task is to map:
+  \begin{itemize}\small
+    \item What is the paper's research question?
+    \item What is the paper's core contribution?
+    \item What treatment, attributes, and outcome are being analyzed?
+    \item What does Figure 1 estimate, and why is it central?
+    \item What does the assigned extension change or add?
+    \item Which literatures does the paper claim to speak to?
+  \end{itemize}
 
   \vspace{0.5em}
+  \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
+\end{frame}
+
+\begin{frame}{Step 2: Start in the Capstone Folder}
+  \textbf{Everything you need is already in this course repo.}
+
+  \vspace{0.6em}
+  First:
   \begin{enumerate}\small
-    \item Read the reference code
-    \item State the reshape target and estimand
-    \item Specify what the output should look like
-    \item Tell Claude what checks to print before saving
-    \item Review the plan, the code, and the final figure
+    \item Split into \textbf{two-person teams}.
+    \item Open the course repo on your machine.
+    \item Go to \texttt{capstone-template/}.
+    \item Read \texttt{README.md}.
+    \item Decide who will be the \textbf{repo owner}.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  The repo owner's first job is to create a clean team repo on \texttt{github.com}.
+
+  \vspace{0.6em}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2a: Create an Empty GitHub Repo}
+  \textbf{The owner creates the team repo on \texttt{github.com}.}
+
+  \vspace{0.4em}
+  In GitHub:
+  \begin{enumerate}\small
+    \item Click \textbf{New repository}.
+    \item Name it \texttt{capstone-<lastname>-<lastname>}.
+    \item Leave it empty: no README, no \texttt{.gitignore}, no license.
+    \item Click \textbf{Create repository}.
   \end{enumerate}
 
   \vspace{0.5em}
-  \begin{block}{The routing lesson}
-    Some work is one-off for this project but still teaches a reusable pattern for your own research.
-  \end{block}
+  Then clone that empty repo somewhere outside the course repo:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+cd ~/Desktop
+git clone https://github.com/<owner>/<team-repo>.git
+cd <team-repo>
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \alert{\small Git may warn that you cloned an empty repo. That is expected.}
 \end{frame}
 
-\begin{frame}[fragile]{Your Replication Prompt}
+\begin{frame}[fragile,shrink=8]{Step 2b: Copy in the Capstone Files}
+  \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
+
+  \vspace{0.4em}
+  From inside the empty team repo:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+rsync -av --exclude='.git' \
+  /path/to/AIAgentsCourse/capstone-template/ ./
+
+ls
+ls -a
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  You should see \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}.
+
+  \vspace{0.5em}
+  Commit and push:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git status
+git add .
+git commit -m "Add capstone starter files"
+git push -u origin main
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then the owner adds their partner as a collaborator. The partner clones the new team repo.
+
+  \vspace{0.3em}
+  \alert{\small \texttt{capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2c: Branch and Review}
+  \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+# Partner A
+git checkout -b lit/<name>
+
+# Partner B
+git checkout -b analysis/<name>
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{Assign two ownership lanes before touching files:}
+  \begin{itemize}\small
+    \item \textbf{Partner A: paper + literature lane} --- paper notes, Zotero search, literature review draft, claim checking
+    \item \textbf{Partner B: data + analysis lane} --- data validation, Figure 1 script, extension script, output checks
+    \item \textbf{Both: reciprocal review} --- each person reviews the other's PR before merging into the team branch
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Open PRs into your team repo's \texttt{main}. Your partner reviews before merge. If GitHub allows it, turn on branch protection: require one approval.}
+\end{frame}
+
+\begin{frame}{Step 3: Zotero}
+  \textbf{The literature review uses a prebuilt Zotero library.}
+
+  \vspace{0.4em}
+  The seed file is \texttt{zotero/capstone\_library.bib}. Its attached PDFs ship in \texttt{zotero/pdfs/}.
+
+  \vspace{0.5em}
+  The workflow:
+  \begin{enumerate}\small
+    \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
+    \item Confirm Zotero imported the PDF attachments and the MCP can find the papers.
+    \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
+    \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
+  \end{enumerate}
+
+  \vspace{0.6em}
+  \begin{block}{Why}
+    A local \texttt{.bib} file lets Claude pattern-match citations without understanding the literature. Zotero forces the workflow closer to the thing you would do in a real project: search, inspect, cite, and verify.
+  \end{block}
+
+  \vspace{0.3em}
+  \alert{\small The PDFs are for students to read. The BibTeX seed is for Zotero import; \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
+\end{frame}
+
+\begin{frame}{Step 4: Write the Literature Review}
+  \textbf{The synthesis notes are already in your Zotero library. Use them.}
+
+  \vspace{0.5em}
+  A useful first prompt:
+  \begin{quote}\small
+    Read the synthesis notes attached to each paper in the Zotero library.
+    Across all notes, identify the three or four recurring mechanisms that
+    connect automation and trade shocks to political preferences. Then draft
+    2--3 paragraphs that position the capstone paper relative to those
+    mechanisms. Every sentence must be traceable to a specific note.
+  \end{quote}
+
+  \vspace{0.4em}
+  Then:
+  \begin{itemize}\small
+    \item Check that every citation supports the sentence attached to it.
+    \item Add any connections the model missed that you saw in the highlights.
+    \item Cut anything that doesn't directly motivate the capstone's design.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Step 5: Validate the Data}
+  \textbf{Before replication or extension code, audit the analysis dataset.}
+
+  \vspace{0.4em}
+  Run this from the team repo root:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+use spec-validator on data/clean_AJPS.csv
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  Then decide what each warning means:
+  \begin{itemize}\small
+    \item Are treatment, task, and respondent counts plausible?
+    \item Are missing values expected or analysis-changing?
+    \item Is the outcome scale coded the way the paper describes?
+    \item Does the data support the reshape needed for Figure 1?
+  \end{itemize}
+
+  \vspace{0.4em}
+  \alert{\small Validation is not asking Claude if the data is fine. It is deciding whether the data structure matches the design.}
+\end{frame}
+
+\begin{frame}[fragile]{Step 6: Replicate Figure 1}
   \textbf{Before Claude writes code, write the instruction yourself.}
 
   \vspace{0.4em}
@@ -755,23 +809,28 @@ changes the sample, or skips verification, reject it.
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Capstone Flow}
-  \begin{enumerate}
-    \item \textbf{Create the team repo.} Copy \texttt{github\_collaboration\_practice} into a fresh two-person repo.
-    \item \textbf{Set the citation boundary.} Import \texttt{zotero/capstone\_library.bib}; use Zotero, not local BibTeX.
-    \item \textbf{Understand the paper.} Read the article and instructor notes.
-    \item \textbf{Write the literature review.} Use Zotero search, then verify the claims.
-    \item \textbf{Validate the data.} Use \texttt{spec-validator}; decide what any warning means.
-    \item \textbf{Replicate Figure 1.} Prompt, plan, code, run, inspect, commit.
-    \item \textbf{Run the extension and finish the note.} Verify sample, estimand, prose, and tables.
-    \item \textbf{Reflect.} Fill in \texttt{AI\_WORKFLOW\_REFLECTION.md}.
-  \end{enumerate}
+\begin{frame}[fragile]{Step 7: Run the Extension and Finish the Note}
+  \textbf{Now run the assigned extension and turn the work into a research note.}
 
-  \vspace{0.6em}
-  \alert{\small The deliverable is not just the PDF. It is the PDF plus evidence that you stayed in control of the workflow.}
+  \vspace{0.4em}
+  Use one starter file, depending on your language:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+starter/extend_TEMPLATE.R
+starter/extend_TEMPLATE.py
+starter/extend_TEMPLATE.do
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  Then:
+  \begin{itemize}\small
+    \item Fill in the assigned extension from \texttt{CLAUDE.md}.
+    \item Save figures to \texttt{paper/figures/} and tables to \texttt{paper/tables/}.
+    \item Edit \texttt{paper/paper.tex}: intro, design, results, discussion.
+    \item Use reviewer agents before merging: \texttt{note-reviewer}, \texttt{results-trace-auditor}, and \texttt{pr-referee}.
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{The Reflection Is the Transfer}
+\begin{frame}{Step 8: Reflect on the Workflow}
   \textbf{The capstone uses course-provided infrastructure. Your own research will not.}
 
   \vspace{0.6em}
@@ -791,6 +850,30 @@ changes the sample, or skips verification, reject it.
   \vspace{0.5em}
   \begin{block}{What I am looking for}
     Not ``I used all the tools.'' I want to see that you can choose the right layer for the next project.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Step 9: Why Figure 1 Is Not a Skill}
+  \textbf{Inside this capstone, reproducing Figure 1 happens once.}
+
+  \vspace{0.6em}
+  It is project-specific: one paper, one dataset, one reference figure, one visual target.
+
+  \vspace{0.8em}
+  \textbf{So it should not be an installed skill.} The transferable move is not ``run my Figure 1 skill.'' The transferable move is:
+
+  \vspace{0.5em}
+  \begin{enumerate}\small
+    \item Read the reference code
+    \item State the reshape target and estimand
+    \item Specify what the output should look like
+    \item Tell Claude what checks to print before saving
+    \item Review the plan, the code, and the final figure
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{The routing lesson}
+    Some work is one-off for this project but still teaches a reusable pattern for your own research.
   \end{block}
 \end{frame}
 
@@ -833,9 +916,8 @@ changes the sample, or skips verification, reject it.
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 # At claude.ai/code, open the "Code" tab, pick the repo, and prompt:
-"On a new branch, run the assigned capstone extension in
- session_5/capstone-template/ and open a PR with the
- updated tables and figures."
+"On a new branch, rerun the full extension grid in session_5/
+ and open a PR with the updated tables and figures."
   \end{lstlisting}
 
   \vspace{0.2em}

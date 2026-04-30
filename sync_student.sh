@@ -94,6 +94,7 @@ git rm --quiet session_4/option_b/output/merged_survey.csv 2>/dev/null || true
 # Session 5 capstone: keep student-facing materials, remove instructor-only notes.
 git rm --quiet session_5/capstone-template/INSTRUCTOR.md 2>/dev/null || true
 git rm --quiet session_5/session5_slides.tex 2>/dev/null || true
+git rm --quiet session_5/session5_slides.pdf 2>/dev/null || true
 
 # Remove slide source files and images (keep only PDFs)
 git rm -r --quiet slides/img/ 2>/dev/null || true
