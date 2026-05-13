@@ -28,9 +28,9 @@ The full loop — pandas/R/Stata code written, run, error read, fixed, re-run �
 
 Two angles on the same skill. First, code review — agents are unusually good at catching silent errors in pandas merges, off-by-one slicing, miscoded missing values, and the dropped observations you didn't notice. Second, cross-document consistency — numbers in the abstract matching numbers in Table 1, variable definitions matching the codebook, claims in the conclusion matching what the regressions actually show. The agent reads across files in a way a co-author skimming the PDF can't.
 
-## 7. Research decision log and codebook
+## 7. Project documentation and upkeep
 
-The highest-leverage habit on this list, and the one most users do not realize is possible. As the project evolves, the agent can maintain a README, codebook, and decision log — every variable construction, sample restriction, and specification choice recorded the moment it is made, with the reasoning attached. Reconstructing those decisions a year later from memory during the R&R is the part of empirical work that ages researchers fastest, and with an agent it is optional.
+The highest-leverage habit on this list, and the one most users do not realize is possible. As the project evolves, the agent maintains a README, codebook, and decision log — every variable construction, sample restriction, and specification choice recorded the moment it is made, with the reasoning attached. The same agent keeps the artifacts tidy: cleaning duplicates from the .bib, archiving stale notebooks, flagging dead code, normalizing file names. Reconstructing all of this a year later from memory during the R&R is the part of empirical work that ages researchers fastest, and with an agent it is optional.
 
 ## 8. LaTeX and figure tooling
 
