@@ -36,9 +36,9 @@ The highest-leverage habit on this list, and the one most users do not realize i
 
 LaTeX has a learning curve measured in years and a long tail of obscure failure modes — table formatting to journal specs, Beamer, tikz, the compile error at 4am the morning of submission. Agents are fluent in both and do not tire of debugging it. The same goes for figures: ggplot, matplotlib, and the surprising fraction of writing time most academics lose to legend placement, axis labels, and color schemes, most of which now goes away.
 
-## 9. Bibliography hygiene
+## 9. Project upkeep
 
-A .bib file accumulates trash over a project: duplicate entries, inconsistent capitalization, missing page numbers, "anonymous (1999)" placeholders from when you could not find the author. The agent can clean the file, cross-check against Crossref or Zotero, normalize formatting, and re-run pdflatex to confirm nothing breaks. Most useful before a submission, after a long project, or when you inherit a co-author's half-built .bib.
+Decision logs record *why* you made empirical choices; project upkeep keeps the *artifacts* tidy. As a project ages, the .bib accumulates duplicates and broken entries, /scratch fills with notebooks no one will rerun, the README drifts from what the code actually does, and the folder layout that made sense at the start no longer does. An agent can periodically do all of this: clean the .bib and cross-check against Crossref or Zotero, archive stale notebooks, flag dead code paths, normalize file names, update the README. Useful before a submission, after a long project, or whenever the project starts to feel untidy in a way you can't quite name.
 
 ## 10. Teaching materials
 
