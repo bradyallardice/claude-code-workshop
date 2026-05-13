@@ -2,7 +2,7 @@
 
 Concrete uses of AI coding agents — Claude Code, Cursor, and similar — in academic research. For grad students, postdocs, and faculty; each item is something the workshop demonstrates on real artifacts: code, manuscripts, .bib files, slide decks.
 
-What separates an agent from a chatbot is the working environment. Claude Code and its peers sit inside your project folder and can read every file in it — manuscript, data, codebook, .bib, slides, replication code, prior emails — at once. They can edit those files, run code, and inspect the result. The ten uses below are instances of the same underlying capability: one collaborator with your whole project loaded that can act, not just suggest. Working in ten separate chat windows loses most of this.
+Two things separate an agent from a chatbot. First, *context*: it sits inside your project folder and reads every file in it — manuscript, data, codebook, .bib, slides, replication code, prior emails — simultaneously, not the few snippets you would paste into a chat window. Second, *action*: it edits files, writes new ones, runs code, reads the output, and iterates. The ten uses below are instances of the same underlying capability — one collaborator with your whole project loaded that can do things, not just suggest them. Working in ten separate chat windows loses most of this.
 
 ## 1. Literature triage and synthesis
 
