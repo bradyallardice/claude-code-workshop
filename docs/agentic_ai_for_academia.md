@@ -32,9 +32,9 @@ Two angles on the same skill. First, code review — agents are unusually good a
 
 The highest-leverage habit on this list, and the one most users do not realize is possible. As the project evolves, the agent maintains a README, codebook, and decision log — every variable construction, sample restriction, and specification choice recorded the moment it is made, with the reasoning attached. The same agent keeps the artifacts tidy: cleaning duplicates from the .bib, archiving stale notebooks, flagging dead code, normalizing file names. Reconstructing all of this a year later from memory during the R&R is the part of empirical work that ages researchers fastest, and with an agent it is optional.
 
-## 8. LaTeX and figure tooling
+## 8. Manuscript writing and production
 
-LaTeX has a learning curve measured in years and a long tail of obscure failure modes — table formatting to journal specs, Beamer, tikz, the compile error at 4am the morning of submission. Agents are fluent in both and do not tire of debugging it. The same goes for figures: ggplot, matplotlib, and the surprising fraction of writing time most academics lose to legend placement, axis labels, and color schemes, most of which now goes away.
+The agent has the whole manuscript open — .tex source, tables, figures, .bib, data, codebook — and can write across them. This means prose drafted from the project rather than from thin air: the abstract built from the actual numbers in your tables, the methods section written against the variable definitions in your codebook, the response letter pointing to the specific edits you made. The same agent handles production: LaTeX table formatting to journal specs, Beamer, tikz, the 4am compile error the morning of submission, and the surprising fraction of writing time most academics lose to ggplot/matplotlib legend placement, axis labels, and color schemes, most of which now goes away.
 
 ## 9. Custom skills, subagents, and memory
 
