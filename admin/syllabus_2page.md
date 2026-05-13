@@ -5,7 +5,6 @@
 **Instructor:** Brady Allardice (PhD Candidate, UPF / IBEI)
 **Contact:** brady.allardice@upf.edu
 **Format:** Five 2-hour sessions, hands-on
-**Repository:** github.com/bradyallardice/claude-code-workshop
 
 ---
 
