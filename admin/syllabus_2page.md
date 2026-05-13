@@ -44,6 +44,6 @@ No grades. Two tracks for the capstone: (a) a guided replication of a provided p
 
 ## Selected resources
 
-- *Ten Ways to Use Agentic AI in Academic Research* — course notes (docs/agentic_ai_for_academia.pdf)
+- *Ten Ways to Use Agentic AI in Academic Research* — course notes (distributed)
 - Anthropic Claude Code documentation
-- Course repository: github.com/bradyallardice/claude-code-workshop
+- Course repository and exercise materials distributed at enrollment
