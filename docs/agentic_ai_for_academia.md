@@ -36,9 +36,9 @@ The highest-leverage habit on this list, and the one most users do not realize i
 
 LaTeX has a learning curve measured in years and a long tail of obscure failure modes — table formatting to journal specs, Beamer, tikz, the compile error at 4am the morning of submission. Agents are fluent in both and do not tire of debugging it. The same goes for figures: ggplot, matplotlib, and the surprising fraction of writing time most academics lose to legend placement, axis labels, and color schemes, most of which now goes away.
 
-## 9. Project upkeep
+## 9. Custom skills, subagents, and memory
 
-Decision logs record *why* you made empirical choices; project upkeep keeps the *artifacts* tidy. As a project ages, the .bib accumulates duplicates and broken entries, /scratch fills with notebooks no one will rerun, the README drifts from what the code actually does, and the folder layout that made sense at the start no longer does. An agent can periodically do all of this: clean the .bib and cross-check against Crossref or Zotero, archive stale notebooks, flag dead code paths, normalize file names, update the README. Useful before a submission, after a long project, or whenever the project starts to feel untidy in a way you can't quite name.
+Out of the box, an agent knows nothing about your project, your conventions, or the workflows you keep repeating. The compounding payoff comes from building the scaffolding: CLAUDE.md files that encode your project's conventions, persistent memory notes about who you are and how you work, custom skills (knowledge: how to audit an abstract, format a regression table, validate a specification before estimation), and subagents (roles: a referee, a copyeditor, a methodologist). After a few months of this, the agent is no longer a generic helper but a customized team that knows your projects and your preferences.
 
 ## 10. Teaching materials
 
