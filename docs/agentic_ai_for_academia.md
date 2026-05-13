@@ -1,43 +1,45 @@
 # Ten Ways to Use Agentic AI in Academic Research
 
-Short, standalone blurbs describing concrete uses for AI coding agents (Claude Code, Cursor, and similar) in academic work: the kinds of tasks covered in the workshop.
+Concrete uses of AI coding agents — Claude Code, Cursor, and similar — in academic research. For grad students, postdocs, and faculty; each item is something the workshop demonstrates on real artifacts: code, manuscripts, .bib files, slide decks.
+
+What separates an agent from a chatbot is the working environment. Claude Code and its peers sit inside your project folder and can read every file in it — manuscript, data, codebook, .bib, slides, replication code, prior emails — at once. They can edit those files, run code, and inspect the result. The ten uses below are instances of the same underlying capability: one collaborator with your whole project loaded that can act, not just suggest. Working in ten separate chat windows loses most of this.
 
 ## 1. Literature triage and synthesis
 
-Upload a stack of PDFs and ask an agent to summarize each, extract the core claim and method, and compare them against your own thesis. Agents are especially useful for the "is this paper actually relevant to me?" triage that eats hours of reading time, and for building a first-pass map of an unfamiliar literature before you dive in yourself. The point is not to replace close reading of the papers that matter, but to cut the pile of "maybe relevant" papers down to the ones that truly are.
+Drop a stack of PDFs on the agent and ask it to extract each paper's core claim, method, and relevance to your project. The point is not to replace close reading; it's to drain the "maybe relevant" pile down to the papers you actually need to read, and to build a first-pass map of an unfamiliar literature before you commit to a deep dive. Useful for lit reviews, grant background sections, and the moment you realize you should have been reading some adjacent literature two years ago.
 
-## 2. Writing empirical code
+## 2. Learning new methods or unfamiliar literatures
 
-From data cleaning to model specifications, agents can write, run, and debug pandas, R, and Stata code. The productivity gain is largest for tedious-but-mechanical work: reshaping panels, merging messy datasets, producing descriptive statistics, and iterating on figure aesthetics until they are submission-ready. A task that used to mean an afternoon of StackOverflow becomes a five-minute conversation, which frees you to spend time on the parts of the analysis that actually require judgment.
+When a statistical technique, archival approach, or body of scholarship outside your field becomes relevant, an agent will walk you through it with a worked example on your own data, point to canonical references, and flag the likely critics. Especially valuable for solo researchers, people between institutions, and anyone whose nearest peer group doesn't happen to cover the method they need this month. Best for the questions you'd never ask a colleague because they're too basic, or you've already asked twice.
 
-## 3. Replication checks
+## 3. Data wrangling and harmonization
 
-Point an agent at an author's replication package and ask whether the tables and figures actually reproduce. This is invaluable both as a referee — catching silent errors before publication — and as a student learning a new method, because you get to see exactly how a published result was built from raw data to final table. It's also a humbling exercise on your own work: run it on your own replication package before you submit.
+Fuzzy-matching author names across datasets, OCR'ing scanned tables, deduping records, reconciling country codes between WDI and Penn World Table, assembling a panel from twenty messy raw files. The agent does not just produce plausible-looking code — it runs the merge, inspects what comes out, and iterates until the output passes the sanity checks you specify. This is where the productivity gap with the old StackOverflow workflow is largest.
 
-## 4. Specification and robustness checks
+## 4. Scrapers, APIs, and data pipelines
 
-Before you run an analysis — quantitative or qualitative — ask the agent to audit your setup: how you handled missing data, how your sample is defined, how your variables or codes are constructed, whether your unit of analysis matches the claim you want to make. Once you have results, have it stress-test them against alternative samples, recodings, and modeling choices. This catches silent errors far more reliably than self-review and produces findings you can defend with confidence at a seminar or in a referee report.
+Pulling from Census, FRED, OpenAlex, Crossref, archival catalogs, or .gov sites that ship data as ugly HTML tables. The agent writes the request, parses the response, looks at what came back, and adjusts when the schema is not what the docs promised. For projects that need periodic refresh, it can also schedule the pipeline and diff successive runs so you notice when an upstream source quietly changes.
 
-## 5. Drafting and editing prose
+## 5. Writing, editing, and running empirical code
 
-Abstracts, introductions, response-to-referee letters, grant narratives, cover letters, job-talk intros. Agents are strong at tightening flabby prose without changing your argument, reorganizing sections for flow, and flipping register between technical and lay audiences, which is useful for the same paper being pitched to a field journal, a general audience, and a funder. Used well, an agent is a patient editor who will read your eighth draft at 11pm without complaint.
+The full loop — pandas/R/Stata code written, run, error read, fixed, re-run — without you mediating every step. Most useful for the tedious-but-mechanical parts: reshaping panels, recoding values, building descriptives, formatting tables, and the matplotlib legend that refuses to stay where you put it. The difference from a chat-window workflow is that the agent does not stop at "here's what to try"; it tries, watches the output, and adjusts.
 
-## 6. Red-teaming your own paper
+## 6. Verifying consistency and catching errors
 
-Ask the agent to write a skeptical referee report on your draft before you submit it. Have it stress-test your identification strategy, hunt for alternative explanations, and flag the claims your evidence doesn't actually support. This surfaces weaknesses while you still have time to fix them, rather than learning about them six months later from Reviewer 2. It works equally well on a grant proposal, a job-market paper, or a chapter draft.
+Two angles on the same skill. First, code review — agents are unusually good at catching silent errors in pandas merges, off-by-one slicing, miscoded missing values, and the dropped observations you didn't notice. Second, cross-document consistency — numbers in the abstract matching numbers in Table 1, variable definitions matching the codebook, claims in the conclusion matching what the regressions actually show. The agent reads across files in a way a co-author skimming the PDF can't.
 
-## 7. Teaching materials
+## 7. Research decision log and codebook
 
-Lecture slides, problem sets, exam questions, TA guides, syllabi. Agents can adapt the same content across difficulty levels (undergrad to PhD), generate fresh variants of problems to discourage copying from prior-year solution sets, and draft worked solutions you can edit. This is especially valuable when you are preparing a new course where you are building everything from scratch, and the marginal slide or problem is the difference between a polished class and a rough one.
+The highest-leverage habit on this list, and the one most users do not realize is possible. As the project evolves, the agent can maintain a README, codebook, and decision log — every variable construction, sample restriction, and specification choice recorded the moment it is made, with the reasoning attached. Reconstructing those decisions a year later from memory during the R&R is the part of empirical work that ages researchers fastest, and with an agent it is optional.
 
 ## 8. LaTeX and figure tooling
 
-Regression tables formatted to journal specs, Beamer slide layouts, BibTeX cleanup, tikz diagrams, and debugging the obscure compile errors that appear the morning a submission is due. LaTeX has a steep learning curve and a long tail of weird failure modes; agents are fluent in both and save hours of StackOverflow. The same holds for matplotlib, ggplot, and the unreasonable amount of time academics spend wrestling legends and axis labels.
+LaTeX has a learning curve measured in years and a long tail of obscure failure modes — table formatting to journal specs, Beamer, tikz, the compile error at 4am the morning of submission. Agents are fluent in both and do not tire of debugging it. The same goes for figures: ggplot, matplotlib, and the surprising fraction of writing time most academics lose to legend placement, axis labels, and color schemes, most of which now goes away.
 
-## 9. Research decision logging and replication documentation
+## 9. Bibliography hygiene
 
-As the project evolves, an agent can automatically maintain a README, codebook, and decision log capturing every variable construction, sample restriction, and specification choice *when it's made* — not reconstructed from memory months later during revision. This is the single highest-leverage habit for minimizing the pain of R&Rs and making your work genuinely replicable. Your future self, and anyone who inherits the project, will thank you.
+A .bib file accumulates trash over a project: duplicate entries, inconsistent capitalization, missing page numbers, "anonymous (1999)" placeholders from when you could not find the author. The agent can clean the file, cross-check against Crossref or Zotero, normalize formatting, and re-run pdflatex to confirm nothing breaks. Most useful before a submission, after a long project, or when you inherit a co-author's half-built .bib.
 
-## 10. Learning new methods or unfamiliar literatures
+## 10. Teaching materials
 
-When you need to come up to speed on something new — a statistical technique, an archival approach, a theoretical framework, a body of scholarship outside your field — an agent can explain it, walk through a worked example, point you to the canonical references, and critique your planned application. It is the academic equivalent of having a patient senior colleague on call, and it is especially valuable for solo researchers, people between institutions, or anyone whose local peer group doesn't happen to cover the method they need this week.
+Slides, problem sets, exam questions, TA guides, syllabi. The most concrete payoff: variants of the same problem so students cannot copy last year's solution set. Beyond that, agents adapt the same content across difficulty levels (PhD methods → MA methods → undergrad), draft worked solutions you can edit, and produce the marginal slide or worked example that turns a rough class into a polished one — especially when you are building a course from scratch.
