@@ -251,6 +251,45 @@ Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the followi
   \item Zotero desktop opens, your library has at least 10--20 items, and you have saved your API key and userID somewhere safe
 \end{itemize}
 
+\section*{Optional: Make VS Code Feel Like RStudio}
+If you primarily work in R and would rather not give up the RStudio layout (script editor, console, environment, plots, help), VS Code can be configured to look and behave very similarly. \textbf{This is entirely optional} --- the workshop does not depend on it, and Claude Code works identically either way. Skip this section if you do not use R or are happy with the default VS Code layout.
+
+\subsection*{Install the R packages VS Code needs}
+Open R (in Terminal/PowerShell type \texttt{R}, or open the R GUI) and run:
+\cmd{install.packages(c("languageserver", "httpgd", "jsonlite", "rlang"))}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item \textbf{languageserver} powers code completion, hover help, and go-to-definition
+  \item \textbf{httpgd} drives the inline plot viewer (the equivalent of RStudio's Plots pane)
+\end{itemize}
+
+\subsection*{Install Radian (a better R console)}
+Radian is a drop-in replacement for R's default console with syntax highlighting, multi-line editing, and command history. It is what makes the VS Code R terminal feel like RStudio's. Install it via Python (you already have Python from Step 3):
+\cmd{pip install -U radian}
+\plat{Mac:} If \texttt{pip} is not found, use \texttt{pip3 install -U radian}.
+
+Find where Radian was installed --- in the same terminal, run \texttt{which radian} (Mac) or \texttt{where radian} (Windows) and copy the path.
+
+\subsection*{Install the extra VS Code extension}
+Open VS Code, go to Extensions (Cmd+Shift+X / Ctrl+Shift+X), and install:
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item \textbf{R Debugger} (by RDebugger) --- step-through debugging for R scripts
+\end{itemize}
+\textit{The main R extension is already installed from Step 1.}
+
+\subsection*{Configure VS Code settings}
+Open the Settings JSON file: press Cmd+Shift+P (Mac) / Ctrl+Shift+P (Windows), type \texttt{Preferences: Open User Settings (JSON)}, and add the following entries inside the outer braces (paste the path from the Radian step into \texttt{r.rterm.mac} or \texttt{r.rterm.windows}):
+\cmd{"r.rterm.mac": "/usr/local/bin/radian",\\"r.rterm.windows": "C:\textbackslash\textbackslash Users\textbackslash\textbackslash YOU\textbackslash\textbackslash AppData\textbackslash\textbackslash Local\textbackslash\textbackslash Programs\textbackslash\textbackslash Python\textbackslash\textbackslash Python312\textbackslash\textbackslash Scripts\textbackslash\textbackslash radian.exe",\\"r.bracketedPaste": true,\\"r.alwaysUseActiveTerminal": true,\\"r.plot.useHttpgd": true,\\"r.sessionWatcher": true}
+
+\subsection*{Open the RStudio-style layout}
+Open any \texttt{.R} script in VS Code. With the script focused, press Cmd+Shift+P / Ctrl+Shift+P and run \textbf{R: Create R terminal} --- a Radian console appears at the bottom. Then open the R Workspace sidebar by clicking the R icon in the activity bar on the left (it appears once you open an \texttt{.R} file). You now have:
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Script editor (top) --- like RStudio's source pane
+  \item R console (bottom) --- like RStudio's console
+  \item R Workspace sidebar (left) --- like RStudio's environment + history
+  \item Plot viewer (opens on first \texttt{plot()} call via httpgd) --- like RStudio's plots pane
+\end{itemize}
+Use Cmd+Enter (Mac) / Ctrl+Enter (Windows) to send a line from the script to the console, exactly as in RStudio.
+
 \section*{Troubleshooting}
 
 \textbf{``command not found'' for any tool:} Close your terminal completely and open a new one. If it still fails, the tool was not added to your PATH during installation. Email me with a screenshot of the error.
