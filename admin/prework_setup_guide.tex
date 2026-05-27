@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{titling}
+
+\definecolor{headingblue}{RGB}{40,85,140}
+\definecolor{alertred}{RGB}{180,40,40}
+\definecolor{codegray}{RGB}{240,240,240}
+
+\sectionfont{\color{headingblue}\normalsize\bfseries}
+\subsectionfont{\color{headingblue}\small\bfseries}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=headingblue,
+  linkcolor=headingblue
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\newcommand{\cmd}[1]{\par\vspace{0.2em}\colorbox{codegray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\ttfamily\small #1}}\par\vspace{0.2em}}
+\newcommand{\alert}[1]{{\color{alertred}\textbf{\rule[-0.2ex]{0.8ex}{2ex}\ #1}}}
+\newcommand{\plat}[1]{{\color{headingblue}\textbf{#1}}}
+
+\title{\vspace{-2em}\Huge\bfseries Claude Code for Academic Researchers\\[0.3em]\Large\mdseries\itshape Pre-Workshop Setup Guide}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-2em}
+\begin{center}
+Instructor: Brady Allardice --- \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu}
+\end{center}
+
+\hrule
+\vspace{0.8em}
+
+Please complete \textbf{all eight steps} below before the workshop. The entire process takes 30--50 minutes (plus the large \LaTeX{} download in Step 7, which you can run in the background the day before). If you get stuck on any step for more than 10 minutes, stop and email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu} --- don't try to debug it yourself. Once you are done, run the verification commands at the end and \textbf{send me a screenshot} of the output.
+
+\section*{What You Need Before Starting}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item A laptop (Mac or Windows) that you can install software on
+  \item An internet connection
+  \item A Claude Pro (\$20/month) or Claude Max (\$100/month) subscription --- sign up at \textbf{claude.ai}
+\end{itemize}
+
+\alert{The free Claude plan does NOT include Claude Code. You need at least a Pro subscription.}
+
+\section*{Step 1: Install VS Code}
+VS Code is the editor we will use throughout the workshop. It is free. If you already have it installed, make sure it is up to date (version 1.98 or newer).
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://code.visualstudio.com}
+  \item Download the version for your operating system (Mac or Windows)
+  \item Install it and open it once to confirm it launches
+\end{itemize}
+
+\textbf{Install the following VS Code extensions} (click the Extensions icon in the left sidebar, or press Cmd+Shift+X on Mac / Ctrl+Shift+X on Windows, and search for each):
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item \textbf{Python} (by Microsoft) --- language support for Python
+  \item \textbf{R} (by REditorSupport) --- language support for R
+  \item \textbf{Claude Code} (by Anthropic) --- the official Claude Code extension
+\end{itemize}
+
+\textit{The Claude Code extension is the primary way you will interact with Claude Code during the workshop. It provides a chat panel inside VS Code where you can issue instructions and see file changes in real time.}
+
+\section*{Step 2: Install Git and Create a GitHub Account}
+Git is version control software that tracks changes to your files. We use it throughout the workshop, and Claude Code on Windows requires it to function. GitHub is a platform for hosting Git repositories.
+
+\subsection*{Install Git}
+
+\plat{Mac:} Open the Terminal app (search for ``Terminal'' in Spotlight) and type:
+\cmd{git -\/-version}
+If Git is installed, you will see a version number. If not, your Mac will prompt you to install the Xcode Command Line Tools. Follow the prompt and wait for it to finish.
+
+\plat{Windows:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://git-scm.com/downloads/win}
+  \item Download and run the installer
+  \item Use the default settings throughout the installer --- do not change anything unless you know what you are doing
+  \item When it asks about the default editor, you can select VS Code if you like
+\end{itemize}
+
+\subsection*{Create a GitHub account (if you don't have one)}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://github.com} and sign up for a free account
+\end{itemize}
+
+\subsection*{Connect Git to GitHub}
+Open a terminal (Mac: Terminal app; Windows: open VS Code and use the integrated terminal via Ctrl+\`{}) and run:
+\cmd{git config -\/-global user.name "Your Name"\\git config -\/-global user.email "your.email@example.com"}
+\textit{Use the same email address you used to sign up for GitHub.}
+
+\section*{Step 3: Install Python and Required Packages}
+The workshop exercises use Python. Even if you normally work in R or Stata, you will need Python installed because Claude Code will write and execute Python scripts during the exercises.
+
+\subsection*{Install Python}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.python.org/downloads/}
+  \item Download Python 3.11 or 3.12 (either is fine)
+\end{itemize}
+
+\plat{Windows --- important:}
+
+\alert{During installation, check the box that says "Add Python to PATH." If you miss this, nothing will work.}
+
+\plat{Mac:} The installer is straightforward. Run it and follow the defaults.
+
+\subsection*{Install required Python packages}
+After Python is installed, \textbf{close and reopen your terminal}, then run:
+\cmd{pip install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+If you get an error saying \texttt{pip} is not found:
+
+\plat{Mac:}
+\cmd{pip3 install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+
+\plat{Windows:}
+\cmd{py -m pip install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+
+\textit{If you already have Python installed via Anaconda, that is fine --- you likely already have these packages. You can skip this step but please verify by running the verification commands at the end.}
+
+\section*{Step 4: Install R (if you don't already have it)}
+If you already have R installed, skip this step. If you are an R user but only have RStudio, you still need R itself installed so that the VS Code R extension and Claude Code can find it.
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://cran.r-project.org}
+  \item Download and install R for your operating system
+  \item You do not need RStudio for this workshop, but you can keep it if you have it
+\end{itemize}
+
+\section*{Step 5: Install Claude Code (Command Line)}
+In addition to the VS Code extension you installed in Step 1, we also need the Claude Code command-line tool. The extension and the CLI are two interfaces to the same underlying tool --- we will explain the relationship in the workshop. You will primarily use the extension, but understanding the CLI is important.
+
+\plat{Mac:} Open the Terminal app and run:
+\cmd{curl -fsSL https://claude.ai/install.sh | bash}
+Close and reopen your terminal after installation.
+
+\plat{Windows:} Open PowerShell (search for ``PowerShell'' in the Start menu) and run:
+\cmd{irm https://claude.ai/install.ps1 | iex}
+Close and reopen PowerShell after installation.
+
+\textit{Do NOT run PowerShell as Administrator. Claude Code on Windows uses Git Bash internally, which is why Step 2 must be completed first.}
+
+\subsection*{Authenticate Claude Code}
+After installing, open a new terminal and type:
+\cmd{claude}
+This will open your browser and ask you to sign in with your Claude account. Follow the prompts, then return to the terminal. You should see the Claude Code welcome screen.
+
+Type \texttt{/exit} to close Claude Code for now.
+
+\section*{Step 6: Authenticate the VS Code Extension}
+Open VS Code. Click the Claude Code icon in the left sidebar (the spark icon). It will prompt you to sign in. Follow the browser prompts --- this uses the same account as Step 5.
+
+Once authenticated, you should see a chat panel where you can type a message to Claude. Type something simple like ``Hello'' to confirm it responds.
+
+\section*{Step 7: Install a TeX Distribution and the LaTeX Workshop Extension}
+In Session 3 we will write and compile a \LaTeX{} paper directly inside VS Code, so Claude Code can edit, compile, and version-control your paper alongside your code and data. To do that you need two things: a \TeX{} distribution (the actual compiler) and the \textbf{LaTeX Workshop} extension in VS Code (the editor integration).
+
+\alert{This is the largest download in the setup (2--4 GB) and can take 30--60 minutes. Do it the day before the workshop, not the morning of.}
+
+\subsection*{Install a TeX distribution}
+
+\plat{Mac --- MacTeX:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.tug.org/mactex/}
+  \item Download \textbf{MacTeX.pkg} (roughly 4 GB)
+  \item Run the installer and follow the defaults
+\end{itemize}
+If you want a smaller install, \textbf{BasicTeX} (roughly 100 MB) works for this workshop --- download it from the same page, then after installation run in Terminal:
+\cmd{sudo tlmgr update -\/-self\\sudo tlmgr install latexmk collection-fontsrecommended}
+
+\plat{Windows --- TeX Live:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.tug.org/texlive/windows.html}
+  \item Download \textbf{install-tl-windows.exe} and run it
+  \item Use the default ``full scheme'' installation (roughly 2--4 hours to download; you can leave it running in the background)
+\end{itemize}
+If you are short on time or disk space, use the \textbf{MiKTeX} distribution instead (\textbf{https://miktex.org/download}) --- it is smaller and installs missing packages on demand.
+
+\subsection*{Install the LaTeX Workshop VS Code extension}
+Open VS Code, click the Extensions icon (or press Cmd+Shift+X / Ctrl+Shift+X), search for \textbf{LaTeX Workshop} (by James Yu), and install it.
+
+\subsection*{Verify it works}
+Open a terminal and run:
+\cmd{pdflatex -\/-version}
+You should see a version number starting with \texttt{pdfTeX 3.x}. If the command is not found, close and reopen your terminal first. On Windows, you may need to log out and back in for the PATH to update.
+
+\section*{Step 8: Set Up Zotero}
+In Session 4 we connect Claude Code to your Zotero library so it can search your references, pull metadata, and generate \texttt{.bib} entries for your \LaTeX{} document. To do that you need a Zotero account, the desktop app, a small library to search, and an API key.
+
+\subsection*{Create a Zotero account and install the desktop app}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.zotero.org/user/register} and create a free account
+  \item Download Zotero from \textbf{https://www.zotero.org/download/} (Mac or Windows) and install it
+  \item Open Zotero, sign in via \texttt{Edit > Settings > Sync} (Windows) or \texttt{Zotero > Settings > Sync} (Mac)
+\end{itemize}
+
+\subsection*{Populate your library}
+For the Session 4 exercise to be useful, you need at least \textbf{10--20 references} in your Zotero library on a topic you care about (your own research, a literature you're starting to read, anything). If your library is empty:
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Install the \textbf{Zotero Connector} browser extension from \textbf{https://www.zotero.org/download/}
+  \item Use it to grab 10--20 papers from Google Scholar, a journal page, or a syllabus
+\end{itemize}
+
+\subsection*{Generate a Zotero API key}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item Go to \textbf{https://www.zotero.org/settings/keys} (sign in if prompted)
+  \item Click \textbf{Create new private key}
+  \item Give it a name like \texttt{Claude Code MCP}
+  \item Check \textbf{Allow library access} and \textbf{Allow notes access}; leave write permissions \textbf{enabled} (we will use the MCP to create annotations and notes)
+  \item Click \textbf{Save Key} and \textbf{copy the key somewhere safe} --- you will not be able to see it again
+  \item On the same page, note your \textbf{userID} (the number shown at the top, e.g. \texttt{userID: 1234567})
+\end{itemize}
+
+\textit{We will plug the API key and userID into the Zotero MCP configuration during Session 4 --- you do not need to install the MCP server in advance.}
+
+\section*{Verification: Confirm Everything Works}
+Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the following commands. \textbf{Take a screenshot} of the full output and send it to me.
+
+\cmd{git -\/-version}
+\textit{Expected: something like \texttt{git version 2.x.x}}
+
+\cmd{python -\/-version}
+\textit{Expected: \texttt{Python 3.11.x} or \texttt{3.12.x} (Mac users: try \texttt{python3 -\/-version} if this fails)}
+
+\cmd{python -c "import pandas; import numpy; import statsmodels; print('All packages OK')"}
+\textit{Expected: \texttt{All packages OK} (Mac users: try \texttt{python3} instead of \texttt{python})}
+
+\cmd{claude -\/-version}
+\textit{Expected: a version number like \texttt{claude-code 1.x.x}}
+
+\cmd{R -\/-version}
+\textit{Expected: \texttt{R version 4.x.x} (skip this if you are not an R user)}
+
+\cmd{pdflatex -\/-version}
+\textit{Expected: \texttt{pdfTeX 3.x} followed by a TeX Live or MiKTeX version line}
+
+\textbf{Also confirm:}
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item VS Code opens and the Python, R, Claude Code, and LaTeX Workshop extensions are visible in the Extensions sidebar
+  \item The Claude Code extension panel responds when you type a message
+  \item You have a GitHub account
+\end{itemize}
+
+\section*{Troubleshooting}
+
+\textbf{``command not found'' for any tool:} Close your terminal completely and open a new one. If it still fails, the tool was not added to your PATH during installation. Email me with a screenshot of the error.
+
+\textbf{Claude Code authentication fails:} Make sure you have an active Claude Pro or Max subscription at claude.ai. The free plan does not include Claude Code.
+
+\textbf{Python packages fail to install:} Try running the pip command with \texttt{-\/-user} at the end, e.g.\ \texttt{pip install pandas -\/-user}. If you are on a managed or institutional machine, you may need to use a virtual environment --- email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu} and I will help.
+
+\textbf{Windows: Git not recognized after installing:} Make sure you closed and reopened your terminal after installation. If it still fails, the Git installer may not have added Git to your PATH --- reinstall and ensure ``Git from the command line'' is selected.
+
+\textbf{Windows: Claude Code install fails:} Make sure Git for Windows is installed first (Step 2). Claude Code on Windows requires Git Bash internally.
+
+\textbf{LaTeX: \texttt{pdflatex} not found after installing:} On Mac, log out and log back in --- MacTeX updates PATH via a login item. On Windows, restart your computer after the TeX Live installer finishes.
+
+\textbf{LaTeX: installer is taking hours:} That is normal --- TeX Live's full scheme is several gigabytes. Let it run in the background. If it seems stuck, switch to MiKTeX (Windows) or BasicTeX (Mac).
+
+\textbf{Anything else:} Email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu}. Do not spend more than 10 minutes troubleshooting on your own. I would much rather help you before the workshop than lose time during it.
+
+\end{document}
