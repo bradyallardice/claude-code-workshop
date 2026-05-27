@@ -294,6 +294,8 @@ Use Cmd+Enter (Mac) / Ctrl+Enter (Windows) to send a line from the script to the
 
 \textbf{``command not found'' for any tool:} Close your terminal completely and open a new one. If it still fails, the tool was not added to your PATH during installation. Email me with a screenshot of the error.
 
+\textbf{``command not found'' or ``zsh: bad pattern: \#'' after pasting from this PDF:} If you copy a multi-line block (anything with a \texttt{\#} comment, a blank line, or a line break) and paste it into the terminal, the shell will try to run each line as a separate command and choke on the comment or stray characters. \textbf{Paste one line at a time}, or strip the \texttt{\#} comments before pasting. Copying from a PDF can also turn straight quotes (\texttt{"}) into curly quotes (\texttt{\textquotedblleft\textquotedblright}), which the shell does not understand --- if a command with quotes fails, retype the quotes manually in the terminal.
+
 \textbf{Claude Code authentication fails:} Make sure you have an active Claude Pro or Max subscription at claude.ai. The free plan does not include Claude Code.
 
 \textbf{Python packages fail to install:} Try running the pip command with \texttt{-\/-user} at the end, e.g.\ \texttt{pip install pandas -\/-user}. If you are on a managed or institutional machine, you may need to use a virtual environment --- email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu} and I will help.
