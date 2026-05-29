@@ -2,61 +2,40 @@
 
 ## Start-of-session ritual
 
-From now on, work on a **copy** of each session folder, not inside the shared
-course repo. The shared repo stays read-only for you: I can push new material
-anytime without breaking your work, and you can edit, break, and redo without
-worrying about the shared state. No merge conflicts.
+Same as session 1: work on a **copy** of the session folder, not inside the
+shared course repo. The shared repo stays read-only for you, so I can push new
+material without breaking your work and you can edit, break, and redo freely.
 
-Replace `[my_workspace]` with wherever you keep your local course files.
+Replace `~/my_workspace` with wherever you keep your local course files.
 
-Do this at the start of every session.
-
-### 1. Get or update the course repo
-
-If you don't have the course repo yet, clone it:
-
-```bash
-git clone https://github.com/bradyallardice/claude-code-workshop.git
-```
-
-If you already have it, pull the latest:
+### 1. Update the course repo
 
 ```bash
 cd ~/claude-code-workshop && git pull
 ```
 
+Don't have the course repo yet?
+
+```bash
+git clone https://github.com/bradyallardice/claude-code-workshop.git
+```
+
 ### 2. Copy today's session folder into your workspace
 
 ```bash
-cp -r session_2/ [my_workspace]/session_2/
+cp -r session_2/ ~/my_workspace/session_2/
 ```
 
-### 3. Copy the slides (choose exactly one)
-
-Option A — you already have `[my_workspace]/slides/`, copy just today's PDF:
+### 3. Open your copy in VS Code and work there
 
 ```bash
-cp slides/session2_slides.pdf [my_workspace]/slides/
-```
-
-Option B — you do not have a `slides/` folder yet, copy the whole folder:
-
-```bash
-cp -r slides/ [my_workspace]/slides/
-```
-
-Do not run both Option A and Option B.
-
-### 4. Open your copy in VS Code and work there
-
-```bash
-cd [my_workspace]/session_2 && code .
+cd ~/my_workspace/session_2 && code .
 ```
 
 ### If `git pull` fights back
 
 If you committed work inside the course repo, `git pull` will complain. Run this
-recovery in the course repo, then continue with steps 2–4:
+recovery in the course repo, then continue with steps 2–3:
 
 ```bash
 git stash -u                      # save uncommitted edits
