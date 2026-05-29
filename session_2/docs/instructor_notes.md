@@ -29,10 +29,10 @@ Starts after 10-minute break.
 - This is the mental model shift for Stata/R users. Emphasize: no persistent session, no data loaded in memory. Scripts and files are the interface.
 - Context window: keep it conceptual. "It forgets things when the conversation gets long." The consistency problem slide is the main point. You'll cover management strategies in Module 3.
 
-### Permissions + .claudeignore (5 min)
+### Permissions + protecting sensitive files (5 min)
 - Walk through the risk-level table. It's a useful reference — tell them they can come back to it.
-- .claudeignore: emphasize the "do this before your first session" point. If anyone has IRB data, this matters.
-- Don't spend long on the setup slide for .claudeignore — it's straightforward.
+- Protecting sensitive files: for now the rule is "keep restricted/IRB data out of the folder you run Claude in." If anyone has IRB data, this matters.
+- Do NOT introduce `.claudeignore` here — it's deferred to Session 4 (where we show it's unreliable) and Session 5 (the enforcing hook). The slide forward-references that.
 
 ### Three Execution Modes (7 min)
 - This is conceptually the most important block in Module 2. Take your time.
