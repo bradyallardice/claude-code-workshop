@@ -698,6 +698,29 @@ claude
   \end{columns}
 \end{frame}
 
+% ── Where Claude Code Runs: Surfaces ─────────────────────────────
+\begin{frame}{Same Claude Code, Different Front Doors}
+  \small
+  Claude Code is \textbf{one agent}. You can reach it from several places, and it behaves the same in all of them:
+
+  \vspace{0.4em}
+  \begin{tabular}{@{}p{0.27\textwidth} p{0.66\textwidth}@{}}
+    \toprule
+    \textbf{Where} & \textbf{What it is / when to use it} \\
+    \midrule
+    \textbf{Terminal (CLI)} & The core experience. Run \lstinline{claude} in any project folder. Full agent, full control --- what we use in this course. \\[0.3em]
+    \textbf{VS Code / JetBrains} & The same agent inside your editor. Inline diffs, click-to-open file references, your code and Claude side by side. \\[0.3em]
+    \textbf{Desktop app} & Claude Code in its own window (Mac/Windows) instead of a terminal. \\[0.3em]
+    \textbf{Web (claude.ai/code)} & Claude Code in the browser for cloud sessions --- nothing to install. \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Not the same as the Claude app}
+    The \textbf{Claude app} (claude.ai or the desktop chat) is a conversational assistant: you paste text in and copy answers out. It can't see your project, run your code, or edit files in place. \textbf{Claude Code} acts directly in your repo --- reading files, editing them, and running commands for you.
+  \end{alertblock}
+\end{frame}
+
 \begin{frame}{Why VS Code?}
   \small
   \begin{columns}[T]
