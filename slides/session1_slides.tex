@@ -1098,45 +1098,22 @@ claude
   \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Protecting Sensitive Files}
+\begin{frame}{Protecting Sensitive Files}
   ``Always allow reads'' assumes there is nothing sensitive to read.\\
-  If your project has restricted data or IRB-protected files, you need to hide them.
+  If your project has restricted data or IRB-protected files, you need to keep them away from Claude Code.
 
   \vspace{0.5em}
-  \textbf{How:} Create a plain text file called \texttt{.claudeignore} in your project folder.\\
-  Each line is a pattern. Any file matching a pattern becomes \textbf{invisible} to Claude Code. It cannot read, search, or reference it.
+  \textbf{For now, the reliable rule is simple:}
+  \begin{itemize}
+    \item Don't keep restricted or identifiable data inside the folder you run Claude Code in.
+    \item Point Claude at a working copy with the sensitive files or columns removed, or keep that data in a separate location entirely.
+    \item When in doubt, don't let it read the file --- review before you approve.
+  \end{itemize}
 
-  \vspace{0.5em}
-  \textbf{Example \texttt{.claudeignore}:}
-  \begin{lstlisting}
-# Everything in the restricted folder
-data/restricted/
-
-# Any file whose name starts with "identifiable_"
-data/raw/identifiable_*
-
-# A specific file
-data/raw/ssn_crosswalk.csv
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}{Setting Up .claudeignore}
-  \begin{enumerate}
-    \item Open your project folder in VS Code
-    \item Create a new file named exactly \texttt{.claudeignore}\\
-      {\small (note the dot at the start, which makes it a hidden file)}
-    \item Add one pattern per line:
-      \begin{itemize}
-        \item A folder name ending in \texttt{/} hides everything inside it
-        \item A \texttt{*} matches any characters (e.g., \texttt{*.pem} hides all \texttt{.pem} files)
-        \item Lines starting with \texttt{\#} are comments
-      \end{itemize}
-    \item Save the file. Claude Code reads it automatically
-  \end{enumerate}
-
-  \vspace{0.8em}
-  \alert{Do this \textbf{before} your first Claude Code session.}\\
-  If Claude Code has already read a file in the current conversation, adding it to \texttt{.claudeignore} later does not undo that.
+  \vspace{0.6em}
+  \begin{block}{Coming in Session 4}
+    There are dedicated guardrails --- ignore rules and permission denies --- for hiding files from Claude. We'll set them up properly, and see where the naive version quietly fails, once you have a real project.
+  \end{block}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
