@@ -170,22 +170,49 @@
 %  GET THE CODE
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}[fragile]{Get the Course Code}
-  Open your terminal and run:
-
-  \vspace{0.5em}
-\begin{lstlisting}
-git clone https://github.com/bradyallardice/claude-code-workshop.git
-\end{lstlisting}
-
-  \vspace{0.5em}
-  This downloads the course repository to your computer. Then open the folder in VS Code:
+\begin{frame}[fragile]{How We'll Work: Your Own Workspace}
+  The course materials live in one shared repo, organized as self-contained session folders:
 
   \vspace{0.3em}
-  \textbf{File $\rightarrow$ Open Folder $\rightarrow$} select \texttt{claude-code-workshop}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+claude-code-workshop/
+  session_1/     <- today's materials live here
+  session_2/
+  session_3/
+  ...
+  \end{lstlisting}
 
-  \vspace{0.8em}
-  \textbf{Already cloned it?} Just run \lstinline{git pull} from inside the folder to get the latest version.
+  \vspace{0.4em}
+  \textbf{The workflow, every session:} copy that session's folder out of the repo into your own workspace, and work there. The shared repo stays read-only for you.
+
+  \vspace{0.4em}
+  \begin{block}{Why}
+    I can push new material anytime without breaking your work. You can edit, break, delete, and redo without worrying about the shared state. No merge conflicts.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{The Start-of-Session Ritual}
+  \textbf{Do this at the start of every session.} Today is the first time:
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Get the course repo (first time: clone it)
+git clone https://github.com/bradyallardice/claude-code-workshop.git
+cd claude-code-workshop
+
+# 2. Make your workspace and copy today's folder into it
+mkdir -p ~/my_workspace
+cp -r session_1/ ~/my_workspace/session_1/
+
+# 3. Open your copy in VS Code and work there
+cd ~/my_workspace/session_1 && code .
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small \textbf{Already have the repo from pre-work?} Run \texttt{git pull} inside it instead of cloning, then continue with Steps 2--3.}
+
+  \vspace{0.3em}
+  \textbf{We do it together now, live.} Everyone ends up in the same clean state before we move on.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
