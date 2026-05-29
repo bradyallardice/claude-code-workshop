@@ -81,6 +81,46 @@
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
+%  START-OF-SESSION RITUAL
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile]{Start-of-Session Ritual}
+  \textbf{Same as sessions 1 and 2:} work on a copy, not inside the shared repo. Do this now:
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Update the course repo
+cd ~/claude-code-workshop && git pull
+
+# 2. Copy today's session folder into your workspace
+cp -r session_3/ ~/my_workspace/session_3/
+
+# 3. Open your copy in VS Code and work there
+cd ~/my_workspace/session_3 && code .
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small \textbf{Don't have the course repo yet?} \\
+  \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
+\end{frame}
+
+\begin{frame}[fragile]{If \texttt{git pull} Fights Back}
+  If you committed work inside the repo, \texttt{git pull} will complain. Run this recovery in the course repo, then continue with Steps 2--3:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git stash -u                      # save uncommitted edits
+git branch backup-prework         # save any local commits
+git fetch origin
+git reset --hard origin/student   # match the server
+git stash pop                     # skip if stash was empty
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small Your old commits live on \texttt{backup-prework}. If that name exists, add a suffix: \texttt{backup-prework-2}.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
 %  FINDING YOUR AUTOMATION OPPORTUNITY
 % ══════════════════════════════════════════════════════════════════
 
