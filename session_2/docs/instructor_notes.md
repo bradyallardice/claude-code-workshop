@@ -10,7 +10,7 @@ Starts after 10-minute break.
 | Clock   | Block                                          | Minutes |
 |---------|-------------------------------------------------|---------|
 | 1:05    | File-Based Workflows + Context Window           | 6       |
-| 1:11    | Permissions + .claudeignore                     | 5       |
+| 1:11    | Permissions + protecting sensitive files        | 5       |
 | 1:16    | Three Execution Modes (Plan / Default / Auto)   | 7       |
 | 1:23    | Live Demo: Plan Mode vs Auto-Accept             | 5       |
 | 1:28    | Choosing a Model + Cost Management              | 5       |
