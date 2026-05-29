@@ -546,11 +546,9 @@ __pycache__/
   Then add: \texttt{data/raw/}, \texttt{*.csv.gz}, any large files.
 \end{frame}
 
-\begin{frame}[fragile]{\texttt{.gitignore} vs \texttt{.claudeignore}}
-  \begin{columns}
-    \column{0.48\textwidth}
-    \textbf{\texttt{.gitignore}}
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+\begin{frame}[fragile]{A Typical \texttt{.gitignore}}
+  \textbf{\texttt{.gitignore}}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
 # Folders
 data/raw/
 data/*/administrative/
@@ -563,28 +561,10 @@ output/
 # Large Data Files
 data_merged.csv
 copy_of_internet.csv
-output/
 
 # Python cache (auto-generated, don't need)
 __pycache__/
-    \end{lstlisting}
-
-    \column{0.48\textwidth}
-    \textbf{\texttt{.claudeignore}}
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
-# Sensitive files
-.env
-.DS_Store
-NUCLEAR_CODES_DO_NOT_SHARE.txt
-list_of_my_biggest_fears.docx
-
-# Large files you dont want claude to waste time reading (bloats history, wastes context)
-*.csv.gz
-
-# Cache (auto-generated, eats token budget)
-__pycache__/
-    \end{lstlisting}
-  \end{columns}
+  \end{lstlisting}
 
   \vspace{0.15em}
   {\small \textbf{Wildcards:} \texttt{*} matches any characters.
