@@ -867,6 +867,49 @@ which python
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
+%  TERMINAL EXAMPLE: A STATA .do FILE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile]{Detour: Claude Code in the Terminal}
+  We'll live in VS Code for this course. But the terminal CLI is always there --- and it's the natural fit for tools \emph{without} an editor integration, like \textbf{Stata}.
+
+  \vspace{0.5em}
+  Say you inherited a legacy \texttt{analysis.do} and want to understand and modernize it. Open a terminal in that folder and launch Claude Code:
+
+  \vspace{0.3em}
+\begin{lstlisting}
+cd ~/my_workspace/session_1/stata_demo
+claude
+\end{lstlisting}
+
+  \vspace{0.3em}
+  No editor, no setup --- just you, the folder, and the agent. Same Claude Code you use in VS Code.
+\end{frame}
+
+\begin{frame}[fragile]{Terminal Example: A Stata \texttt{.do} File}
+  Once Claude Code is running, ask in plain language:
+
+  \vspace{0.3em}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+> Read analysis.do and explain what each block does.
+  Then port it to a documented Python script using
+  pandas and statsmodels. Flag anything Stata-specific
+  that needs a decision from me before it translates.
+\end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{What Claude does:}
+  \begin{itemize}
+    \item Reads \texttt{analysis.do} and walks you through the regressions
+    \item Writes \texttt{analysis.py}, matching the model and output
+    \item Flags judgment calls --- e.g.\ \texttt{xtset} panel structure, robust vs.\ clustered SEs --- instead of guessing
+  \end{itemize}
+
+  \vspace{0.3em}
+  \alert{You still decide. The terminal is just a faster door for a one-off job.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
 %  EXERCISE  [37:00–47:00]
 % ══════════════════════════════════════════════════════════════════
 
