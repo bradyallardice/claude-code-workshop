@@ -7,67 +7,31 @@ course repo. The shared repo stays read-only for you: I can push new material
 anytime without breaking your work, and you can edit, break, and redo without
 worrying about the shared state. No merge conflicts.
 
-Replace `[my_workspace]` with wherever you keep your local course files.
+Replace `~/my_workspace` with wherever you keep your local course files.
 
-Do this at the start of every session.
+Today is the first time — do this together, live:
 
-### 1. Get or update the course repo
-
-If you don't have the course repo yet, clone it:
+### 1. Get the course repo (first time: clone it)
 
 ```bash
 git clone https://github.com/bradyallardice/claude-code-workshop.git
+cd claude-code-workshop
 ```
 
-If you already have it, pull the latest:
+Already have the repo from pre-work? Run `git pull` inside it instead of cloning.
+
+### 2. Make your workspace and copy today's folder into it
 
 ```bash
-cd ~/claude-code-workshop && git pull
+mkdir -p ~/my_workspace
+cp -r session_1/ ~/my_workspace/session_1/
 ```
 
-### 2. Copy today's session folder into your workspace
+### 3. Open your copy in VS Code and work there
 
 ```bash
-cp -r session_1/ [my_workspace]/session_1/
+cd ~/my_workspace/session_1 && code .
 ```
-
-### 3. Copy the slides (choose exactly one)
-
-Option A — you already have `[my_workspace]/slides/`, copy just today's PDF:
-
-```bash
-cp slides/session1_slides.pdf [my_workspace]/slides/
-```
-
-Option B — you do not have a `slides/` folder yet, copy the whole folder:
-
-```bash
-cp -r slides/ [my_workspace]/slides/
-```
-
-Do not run both Option A and Option B.
-
-### 4. Open your copy in VS Code and work there
-
-```bash
-cd [my_workspace]/session_1 && code .
-```
-
-### If `git pull` fights back
-
-If you committed work inside the course repo, `git pull` will complain. Run this
-recovery in the course repo, then continue with steps 2–4:
-
-```bash
-git stash -u                      # save uncommitted edits
-git branch backup-prework         # save any local commits
-git fetch origin
-git reset --hard origin/student   # match the server
-git stash pop                     # skip if stash was empty
-```
-
-Your old commits live on `backup-prework`. If that name already exists, add a
-suffix: `backup-prework-2`.
 
 ---
 
