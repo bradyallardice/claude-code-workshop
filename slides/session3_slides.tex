@@ -629,14 +629,9 @@ __pycache__/
   Now, in your chosen project directory:
 
   \begin{enumerate}
-    \item {\small \textbf{Create a \texttt{.claudeignore}} FIRST:} In VS Code (File → New File → name it .claudeignore) or terminal (\texttt{echo ".env" > .claudeignore}). Add \texttt{.env} and any other sensitive files.
+    \item {\small \textbf{Create a \texttt{.gitignore}} FIRST:} In VS Code (File → New File → name it .gitignore) or terminal (\texttt{echo ".env" > .gitignore}). Ask Claude Code to help. Include \texttt{.env}, large data files, regenerated output, and system files.
 
-    {\small \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Exclude it immediately.}
-
-    \vspace{0.08em}
-    \item {\small \textbf{Create a \texttt{.gitignore}} now:} Ask Claude Code to help. Include large data files, regenerated output, and system files.
-
-    {\small Note: \texttt{.claudeignore} uses the same syntax.}
+    {\small \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Make sure it is in \texttt{.gitignore} so it is never committed.}
 
     \vspace{0.08em}
     \item {\small \textbf{Initialize git:}} \texttt{git init} then \texttt{git add -A \&\& git commit -m "Initial commit"}
