@@ -787,14 +787,24 @@ claude
 \begin{frame}{VS Code Runs Your Code Too}
   VS Code isn't just an editor --- with the right extensions, it executes your scripts directly:
 
-  \vspace{0.5em}
-  \begin{itemize}
-    \item \textbf{Python} (\texttt{.py}, \texttt{.ipynb}) --- run line-by-line with Shift+Enter, or run the whole file
-    \item \textbf{R} (\texttt{.R}, \texttt{.Rmd}) --- same workflow as RStudio, same interactive console
-    \item \textbf{Stata} (\texttt{.do}) --- run do-files via the Stata extension, results in the integrated terminal
-  \end{itemize}
+  \vspace{0.4em}
+  \begin{columns}[T]
+    \begin{column}{0.54\textwidth}
+      \begin{itemize}
+        \item \textbf{Python} (\texttt{.py}, \texttt{.ipynb}) --- run line-by-line with Shift+Enter, or run the whole file
+        \item \textbf{R} (\texttt{.R}, \texttt{.Rmd}) --- same workflow as RStudio, same interactive console
+        \item \textbf{Stata} (\texttt{.do}) --- run do-files via the Stata extension, results in the integrated terminal
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \includegraphics[width=\textwidth]{img/stata_extention.png}
 
-  \vspace{0.5em}
+      \vspace{0.2em}
+      {\footnotesize\textit{The Stata extension for VS Code.}}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.4em}
   One editor, one window: Claude writes the code, and you run it without leaving the screen.
 \end{frame}
 
