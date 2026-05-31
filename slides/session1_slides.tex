@@ -721,6 +721,28 @@ claude
   \end{alertblock}
 \end{frame}
 
+% ── Terminal Example: Editing a Document ─────────────────────────
+\begin{frame}[fragile]{Terminal Example: Editing a Document}
+  The terminal isn't just for code. Open Claude Code in any folder and ask it to edit a document --- notes, a README, a draft.
+
+  \vspace{0.4em}
+\begin{lstlisting}
+cd ~/my_workspace/session_1
+claude
+\end{lstlisting}
+
+  \vspace{0.3em}
+  Then ask, in plain language:
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+> Open notes.md and tighten the Summary section
+  to three bullet points. Keep my wording where
+  you can, and don't touch the other sections.
+\end{lstlisting}
+
+  \vspace{0.3em}
+  Claude reads the file, shows a \textbf{proposed diff}, and waits for you to \textbf{approve, reject, or ask for changes} --- the same review loop you'll use everywhere.
+\end{frame}
+
 \begin{frame}{Why VS Code?}
   \small
   \begin{columns}[T]
