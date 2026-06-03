@@ -180,7 +180,7 @@ L <- c(L, "\\end{table}")
 latex_output <- paste(L, collapse = "\n")
 
 # Save LaTeX table
-writeLines(latex_output, "session_3/output/robustness_table.tex")
+cat(latex_output, file = "session_3/output/robustness_table.tex")
 
 cat("\n\nLaTeX table saved to session_3/output/robustness_table.tex\n")
 cat("\n", latex_output, "\n", sep = "")

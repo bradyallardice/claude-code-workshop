@@ -123,7 +123,7 @@ for (var in names(summary_vars)) {
 }
 summary_latex <- paste0(summary_latex, "\\bottomrule\n\\end{tabular}\n")
 
-writeLines(summary_latex, "session_3/output/summary_stats.tex")
+cat(summary_latex, file = "session_3/output/summary_stats.tex")
 cat("\nSaved: session_3/output/summary_stats.tex\n")
 
 # -- Export main regression table ------------------------------------
@@ -186,5 +186,5 @@ main_latex <- paste0(main_latex,
   "\\multicolumn{3}{l}{\\scriptsize $^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$.} \\\\\n",
   "\\end{tabular}\n")
 
-writeLines(main_latex, "session_3/output/main_table.tex")
+cat(main_latex, file = "session_3/output/main_table.tex")
 cat("Saved: session_3/output/main_table.tex\n")
