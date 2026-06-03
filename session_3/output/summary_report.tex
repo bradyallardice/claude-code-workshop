@@ -71,36 +71,45 @@ announcement before partially stabilizing over the remainder of 2015.}
 
 \section{Data and Methods}
 
-\subsection{Data sources and merge}
+\subsection{Data and linkage}
 
-Two datasets underlie the analysis. The first, \texttt{swiss\_franc\_survey.csv},
-is a survey of 2{,}044 Polish adults fielded 7--21 October 2015, including the
-randomized treatment, the intervention-support outcome, FX-loan status, basic
-demographics, and survey weights. The second,
-\texttt{respondent\_demographics.csv}, supplies household income quintile and
+The analysis draws on two files. The survey itself,
+\texttt{swiss\_franc\_survey.csv}, records responses from 2{,}044 Polish adults
+interviewed between 7 and 21 October 2015, and contains the randomized
+information treatment, the intervention-support outcome, each respondent's
+FX-loan status, a standard set of demographics, and survey weights. A companion
+file, \texttt{respondent\_demographics.csv}, adds two attitudinal and
+socioeconomic measures collected separately: household income quintile and
 left--right ideological self-placement.
 
-The demographics file contains 2{,}994 rows --- 1{,}994 genuine respondents plus
-roughly 1{,}000 identifiers that match no one in the survey --- and 50 genuine
-survey respondents are absent from it. Only a \textbf{left join} (survey~$\leftarrow$~demographics) preserves the analytic frame: it returns exactly
-2{,}044 rows, assigning missing demographics to the 50 unmatched respondents
-while discarding the spurious identifiers. Inner, right, and outer joins each
-distort the sample. We verified the merge by confirming the 2{,}044-row count,
-the absence of duplicate respondent IDs, and the expected treatment-arm counts
-(Control 480, Info 549, History 520, Hungary 495).
+Linking the two requires care. The demographics file holds 2{,}994 records, of
+which only 1{,}994 correspond to actual survey respondents; the remaining
+thousand are identifiers that match no one, and a further 50 genuine respondents
+never appear in it at all. We therefore retain the survey as the master frame and
+attach demographics through a left join, which yields exactly the intended
+2{,}044 rows, leaves demographics missing for the 50 unmatched respondents, and
+silently drops the spurious identifiers. The alternative join types each
+compromise the sample, either by discarding genuine respondents or by importing
+phantom ones. To confirm the linkage behaved as intended, we checked the final
+row count, verified that respondent identifiers remained unique, and reproduced
+the expected treatment-arm sizes (480 control, 549 information, 520 history, and
+495 Hungary).
 
-\subsection{Variables and sample}
+\subsection{Measures and analytic sample}
 
-The outcome \texttt{supports\_intervention} is a binary indicator equal to one if
-the respondent favors ``some'' or ``big'' government intervention; 8 respondents
-with a ``don't know'' or missing response are excluded, leaving 2{,}036 with a
-valid outcome. The treatment is the four-arm randomized framing (control,
-factual information, historical context, Hungary comparison), with the
-\emph{control} group as the reference category. FX exposure distinguishes
-current borrowers (69), past borrowers (55), and those who never held an FX loan
-(1{,}918). Following the codebook, an income quintile of 0 (``no income'') is
-treated as a valid category rather than missing. Table~\ref{tab:summary}
-reports descriptive statistics for the merged analytic sample.
+The dependent variable, \texttt{supports\_intervention}, takes the value one for
+respondents who favor either ``some'' or ``big'' government intervention and zero
+otherwise; the 8 respondents who answered ``don't know'' or left the item blank
+are set aside, leaving 2{,}036 with a usable outcome. The key independent
+variable is the randomly assigned framing, which took one of four forms ---
+control, factual information, historical context, or a comparison with Hungary's
+policy response --- with the control condition serving as the reference category
+throughout. We distinguish three levels of personal exposure to the shock:
+respondents currently repaying an FX loan (69), those who held one in the past
+(55), and those who never did (1{,}918). Consistent with the codebook, an income
+quintile of zero denotes ``no income'' and is retained as a substantive category
+rather than coded as missing. Table~\ref{tab:summary} summarizes the merged
+sample.
 
 \begin{table}[H]
 \centering
@@ -109,22 +118,36 @@ reports descriptive statistics for the merged analytic sample.
 \input{summary_stats.tex}
 \end{table}
 
-Income and ideology are substantially missing by design --- roughly a quarter of
-demographic records lack each --- as documented in the source file
-(Table~\ref{tab:demosummary}) and detailed in the appendix. This missingness is
-the central methodological issue for the analysis below.
+Income and ideology are missing for roughly a quarter of records by construction
+(Table~\ref{tab:demosummary} and the appendix). Because these two controls are
+the only ones with appreciable missingness, they govern how the analytic sample
+contracts as the specification grows --- a point that proves decisive for
+interpreting the results.
 
-\subsection{Estimation}
+\subsection{Estimation strategy}
 
-We estimate logistic regressions of \texttt{supports\_intervention} on the
-treatment indicators, applying survey weights. The baseline model includes the
-treatment arms only; subsequent specifications add FX-exposure indicators,
-demographic controls (age, gender, education, urban--rural settlement), and the
-income and ideology controls. We track the analytic $N$ at every step, because
-adding the partially missing demographic controls mechanically reduces the
-sample through listwise deletion. Robustness specifications vary the use of
-survey weights, the control set, the treatment parameterization (separate arms
-versus a pooled ``any information'' dummy), and the sample (full versus urban
+We model the binary outcome with weighted logistic regression. Writing
+$p_i = \Pr(\texttt{supports\_intervention}_i = 1)$, the baseline specification is
+\begin{equation}
+\operatorname{logit}(p_i)
+  = \beta_0
+  + \beta_1 \,\text{Info}_i
+  + \beta_2 \,\text{History}_i
+  + \beta_3 \,\text{Hungary}_i ,
+\label{eq:base}
+\end{equation}
+where each treatment indicator is measured against the omitted control group, so
+the coefficients recover the causal effect of each framing relative to receiving
+no information. We then build outward from Equation~\eqref{eq:base} in stages,
+adding FX-exposure indicators, the core demographic controls (age, gender,
+education, and urban--rural settlement), and finally the income and ideology
+measures. Because the model is fit by listwise deletion, we record the analytic
+$N$ at every stage so that any change in the estimates can be attributed to the
+covariates or to the shrinking sample rather than conflated between the two. The
+robustness battery then perturbs the baseline along four dimensions: the presence
+of survey weights, the breadth of the control set, the treatment
+parameterization (the three arms separately versus a single ``any information''
+indicator), and the estimation sample (all respondents versus urban dwellers
 only).
 
 \section{Results}
