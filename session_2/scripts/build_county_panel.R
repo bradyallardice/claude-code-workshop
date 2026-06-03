@@ -191,7 +191,12 @@ load_ipums_county <- function(year) {
 
   agg$year <- year
   cat(sprintf("  -> %d counties with identified FIPS\n", nrow(agg)))
-  agg
+
+  # Match the Python column order (race columns after wages)
+  agg %>% select(county_fips, population, mean_age, share_age_18_34,
+                 share_age_65_plus, share_college, share_no_hs,
+                 median_wage, mean_wage, share_white, share_black,
+                 share_hispanic, year)
 }
 
 
