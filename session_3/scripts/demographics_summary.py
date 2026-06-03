@@ -303,7 +303,7 @@ if __name__ == "__main__":
     ideology_freq = frequency_table(df["left_right"], LEFT_RIGHT_ORDER)
     write_frequency_tex(
         ideology_freq,
-        var_label="Left–right",
+        var_label="Left--right",
         caption="Respondent left--right ideology distribution",
         path=f"{OUTPUT_DIR}/demographics_ideology_table.tex",
         category_formatter=lambda c: f"{int(c):+d}".replace("+0", "0"),
