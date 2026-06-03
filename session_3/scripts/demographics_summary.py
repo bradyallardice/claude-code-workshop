@@ -105,8 +105,8 @@ def plot_income_distribution(df, output_dir=OUTPUT_DIR):
     ax.set_axisbelow(True)
     ax.annotate(
         f"Missing: {n_missing:,} respondents",
-        xy=(0.99, 0.97), xycoords="axes fraction",
-        ha="right", va="top", fontsize=9, color=ACCENT,
+        xy=(0.01, 0.97), xycoords="axes fraction",
+        ha="left", va="top", fontsize=9, color=ACCENT,
     )
 
     plt.tight_layout()
