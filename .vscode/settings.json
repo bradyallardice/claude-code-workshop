@@ -1,0 +1,8 @@
+{
+  // Stata MCP extension (DeepEcon.stata-mcp)
+  // StataNow MP lives in a non-standard folder, so point the extension at it explicitly.
+  "stata-vscode.stataPath": "/Applications/StataNow",
+  "stata-vscode.stataEdition": "mp",
+  "stata-vscode.autoStartServer": true,
+  "stata-vscode.autoDisplayGraphs": true
+}

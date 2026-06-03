@@ -1,0 +1,887 @@
+% Session 2: Research Pipelines — From Data to Results
+% Beamer Presentation — Claude Code for Academic Researchers
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ── Theme and Colors ──────────────────────────────────────────────
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Custom colors
+\definecolor{anthropic}{RGB}{50, 50, 80}
+\definecolor{accent}{RGB}{180, 90, 40}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+
+\setbeamercolor{structure}{fg=anthropic}
+\setbeamercolor{frametitle}{bg=anthropic, fg=white}
+\setbeamercolor{title}{bg=anthropic, fg=white}
+\setbeamercolor{block title}{bg=anthropic, fg=white}
+\setbeamercolor{block body}{bg=lightgray}
+\setbeamercolor{alerted text}{fg=accent}
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+
+% ── Packages ──────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{fontenc}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  framerule=0pt,
+  breaklines=true,
+  columns=fullflexible,
+  literate={_}{\_}1,
+}
+
+% ── Metadata ──────────────────────────────────────────────────────
+\title{Session 2: Research Pipelines}
+\subtitle{From Data to Results}
+\author{Brady Allardice}
+\date{}
+\institute{UPF \& IBEI}
+
+% ══════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 1: THE CORE WORKFLOW
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Where We Are}
+  \textbf{Session 1:} What Claude Code can do. How it works. CLAUDE.md and plan mode.
+
+  \vspace{1em}
+  \textbf{Session 2:} How to use it on a real research task --- and stay in control.
+
+  \vspace{1em}
+  Today you will:
+  \begin{enumerate}
+    \item Merge two datasets with explicit instructions
+    \item Estimate a model and verify the output
+    \item Generate robustness checks
+    \item Produce a \LaTeX{} results table
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{The methods are straightforward. The skill is the workflow.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  START-OF-SESSION RITUAL
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile]{Start-of-Session Ritual}
+  \textbf{Same as session 1:} work on a copy, not inside the shared repo. Do this now:
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Update the course repo
+cd ~/claude-code-workshop && git pull
+
+# 2. Copy today's session folder into your workspace
+cp -r session_2/ ~/my_workspace/session_2/
+
+# 3. Open your copy in VS Code and work there
+cd ~/my_workspace/session_2 && code .
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small \textbf{Don't have the course repo yet?} \\
+  \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
+\end{frame}
+
+\begin{frame}[fragile]{If \texttt{git pull} Fights Back}
+  If you committed work inside the repo, \texttt{git pull} will complain. Run this recovery in the course repo, then continue with Steps 2--3:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git stash -u                      # save uncommitted edits
+git branch backup-prework         # save any local commits
+git fetch origin
+git reset --hard origin/student   # match the server
+git stash pop                     # skip if stash was empty
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small Your old commits live on \texttt{backup-prework}. If that name exists, add a suffix: \texttt{backup-prework-2}.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  STRATEGIES FOR WORKING WITHIN THE CONTEXT WINDOW
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Strategies for Working Within the Context Window}
+  Recall from Session 1: Claude Code can only ``see'' a limited amount of text at once.\\
+  Errors compound when it loses track of earlier decisions.
+
+  \vspace{0.5em}
+  \textbf{Five strategies to work within this constraint:}
+  \begin{enumerate}
+    \item Keep tasks focused
+    \item Maintain project documentation
+    \item Summarize work between conversations
+    \item Validate iteratively
+    \item Write token-aware prompts
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{What Happens When the Context Window Fills Up}
+  \begin{columns}
+    \column{0.7\textwidth}
+    As a conversation grows, Claude Code eventually runs out of room.\\
+    When this happens, it \textbf{auto-compacts}: it summarizes older parts of the conversation to free up space.
+
+    \vspace{0.5em}
+    \textbf{What auto-compacting does:}
+    \begin{itemize}
+      \item Replaces earlier messages with a compressed summary
+      \item Keeps recent messages and tool results intact
+      \item Happens automatically. You will see a notice in the chat
+    \end{itemize}
+
+    \vspace{0.5em}
+    \textbf{The risk:} Details from early in the conversation (variable definitions, decisions you discussed, constraints you mentioned) may be lost or simplified in the summary.
+
+    \vspace{0.5em}
+    \textbf{You can also compact manually:}\\
+    Type \texttt{/compact} to force a summary and free up context space.
+
+    \vspace{0.5em}
+    \alert{This is why CLAUDE.md matters:} it survives compacting because it is reloaded from disk, not from conversation history.
+
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{img/github.png}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Strategy 1: Keep Tasks Focused}
+  \centering
+  {\large \textbf{One topic, one conversation.}}
+
+  \vspace{1em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Avoid:}
+      \begin{itemize}
+        \item ``Clean the data, build the panel, run the regressions, and make tables''
+        \item Long conversations that drift across topics
+        \item Asking Claude Code to hold your entire project in its head
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Instead:}
+      \begin{itemize}
+        \item ``Clean and reshape the raw census file''
+        \item Start a new conversation for each distinct task
+        \item Let each conversation do one thing well
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Why}
+    A focused task fits comfortably in the context window. A sprawling task forces Claude Code to forget earlier steps, and that is where silent errors enter.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Strategy 2: Maintain Project Documentation}
+  Claude Code reads certain files \textbf{automatically} every time it starts.
+
+  \vspace{0.5em}
+  \textbf{Keep these up to date:}
+  \begin{itemize}
+    \item \texttt{CLAUDE.md}: conventions, constraints, variable definitions
+    \item \texttt{README.md}: project structure, what each directory contains
+    \item Directory-level \texttt{CLAUDE.md} files for subfolders with specific rules
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The Payoff}
+    Good documentation means Claude Code starts every conversation already knowing your conventions, without you spending tokens re-explaining them.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Strategy 3: Summarize Work Between Conversations}
+  When you finish a conversation, the context is gone. The next conversation starts fresh.
+
+  \vspace{0.8em}
+  \textbf{Before ending a conversation:}
+  \begin{enumerate}
+    \item Ask Claude Code to summarize what it did and what remains
+    \item Save that summary (in a file, a commit message, or your notes)
+    \item Paste the summary into the \textit{next} conversation as context
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}
+Summarize what we did in this session: what files
+were changed, what decisions were made, and what
+still needs to be done.
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \alert{Think of it like a handoff memo between research assistants.}\\
+  The next ``assistant'' knows nothing unless you brief it.
+\end{frame}
+
+\begin{frame}{Strategy 4: Validate Iteratively}
+  \begin{alertblock}{The Compounding Error Problem}
+    If step 1 is wrong and you do not catch it, steps 2--5 build on that mistake. By the time you check the final output, the error is buried.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  \textbf{Check each step before moving to the next:}
+  \begin{enumerate}
+    \item Clean the data $\rightarrow$ \textit{verify row counts and distributions}
+    \item Construct variables $\rightarrow$ \textit{spot-check values against known cases}
+    \item Run the merge $\rightarrow$ \textit{confirm pre- and post-merge row counts}
+  \end{enumerate}
+
+  \vspace{0.5em}
+  Slower per step, but \textbf{much faster overall} because you never have to unwind a chain of errors you didn't catch.
+\end{frame}
+
+\begin{frame}{Strategy 5: Token-Aware Prompting}
+  Every word in your prompt costs tokens. Make them count.
+
+  \vspace{0.5em}
+  \textbf{A good prompt tells Claude Code three things:}
+  \begin{enumerate}
+    \item \textbf{What files matter:} ``Read \texttt{data/raw/census.csv} and \texttt{scripts/clean.py}''
+    \item \textbf{What the goal is:} ``Create a county-year panel with one row per county per decade''
+    \item \textbf{What constraints apply:} ``Keep all 3,143 counties; do not drop rows with missing population''
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Vague:}\\
+      {\small ``Clean up the data and make it ready for analysis''}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Specific:}\\
+      {\small ``Read \texttt{census.csv}, drop rows where \texttt{year < 1950}, and save as \texttt{panel\_clean.csv}''}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{block}{The Rule}
+    Be specific about \textit{inputs}, \textit{outputs}, and \textit{constraints}. Be brief about everything else. Context is finite; spend it on what matters.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  THE CORE WORKFLOW
+% ══════════════════════════════════════════════════════════════════
+
+% ── Core Workflow ──────────────────────────────────────────────────
+\begin{frame}{The Core Workflow}
+  \begin{tabular}{clll}
+    & \textbf{Step} & \textbf{Who} & \textbf{If something is wrong} \\[0.2em]
+    \toprule
+    1. & Describe & You & Rethink before sending \\[0.3em]
+    2. & Review plan & You \textcolor{accent}{\textbf{*}} & Reject, re-instruct \\[0.3em]
+    3. & Generate \& validate & Claude Code + You & Read the code, validate, re-instruct \\[0.3em]
+    4. & Save or re-instruct & You & Keep the result (git in Session 3) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \textcolor{accent}{\textbf{*}} = checkpoint where you can catch a problem before anything gets saved.
+
+  \vspace{0.3em}
+  Validation is not a separate step --- it happens \textbf{continuously} throughout steps 1--3.
+
+  \vspace{0.3em}
+  \begin{block}{The pattern}
+    When something goes wrong, go back to \textbf{whichever step actually fixes the problem}: a bad plan means rewriting the instruction (step 1), not just re-running the same one. Diagnose first, then go back to the right step.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Step 1: Describe --- Write It Down First}
+  \textbf{Before you type anything into Claude Code, write down your instruction.}\\
+  If you cannot state the task precisely on paper, Claude Code cannot execute it precisely in code.
+
+  \vspace{0.5em}
+  \textbf{A good instruction specifies three things:}
+  \begin{enumerate}
+    \item \textbf{Inputs:} ``Read \texttt{data/survey.csv} and \texttt{data/demographics.csv}''
+    \item \textbf{Goal:} ``Left-join demographics onto the survey by respondent ID''
+    \item \textbf{Constraints:} ``Output must have exactly 2,044 rows. Do not drop respondents.''
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Vague:}\\
+      {\small ``Merge the datasets and run a regression''}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Specific:}\\
+      {\small ``Left-join demographics onto the survey by respondent\_id. Use control as the reference. Run a weighted logistic regression.''}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \alert{Be specific about inputs, outputs, and constraints. Be brief about everything else.}
+\end{frame}
+
+\begin{frame}{Step 2: Review the Plan}
+  In plan mode, Claude Code proposes an approach before acting.
+
+  \vspace{0.5em}
+  \textbf{What to look for:}
+  \begin{itemize}
+    \item Does it read the right files?
+    \item Does the merge/analysis strategy match what you specified?
+    \item Does it handle edge cases (missing data, extra rows, reference categories)?
+    \item Does it make any \textit{analytical decisions} you did not ask for?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{alertblock}{The key question}
+    Is there anything in this plan that I did not explicitly ask for?\\
+    If yes: reject or modify before it runs.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  \textbf{You do not always need plan mode.} For simple tasks --- summary statistics, reformatting, boilerplate --- steps 1--3 collapse into one. But when uncertain, \textit{use it}.
+\end{frame}
+
+\begin{frame}[fragile]{Step 3: Generate and Validate}
+  Claude Code writes and runs the code. Your job is not done.
+
+  \vspace{0.5em}
+  \textbf{Read what Claude Code produced:}
+  \begin{itemize}
+    \item Does the script do what the plan said it would?
+    \item Are variable names and file paths correct?
+    \item Did it make any choices the plan did not mention?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Common surprises at this stage:}
+  \begin{itemize}
+    \item Silently dropping rows with missing values
+    \item Choosing a default reference category you did not specify
+    \item Using unweighted estimation when you asked for weighted
+    \item Adding ``helpful'' data cleaning steps you did not request
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{block}{The habit}
+    Read the code, not just the output. Output can look correct even when the code is wrong.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  VALIDATION STRATEGIES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Validation Strategy 1: Read the Code}
+  Claude Code is not deterministic --- the same prompt can produce different code each time.\\
+  But \textbf{code itself is deterministic.} If you read the code and understand what it does, you can be confident in the results, the same way you would be with code you wrote yourself.
+
+  \vspace{0.8em}
+  \textbf{This is the most fundamental verification:}
+  \begin{itemize}
+    \item Read the script Claude Code produced, line by line
+    \item Confirm it does what you asked --- not more, not less
+    \item If you understand the code and it is correct, the output is correct
+  \end{itemize}
+
+  \vspace{0.8em}
+  \begin{block}{The principle}
+    You are not trusting Claude Code. You are trusting \textit{the code} --- the same way you trust code you wrote yourself. The difference is who typed it, not whether it works.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Validation Strategy 2: Check Known Properties}
+  Before you look at results, ask: \textit{what do I already know must be true?}
+
+  \vspace{0.5em}
+  \textbf{Examples:}
+  \begin{itemize}
+    \item A left join should not change the number of rows in the left table
+    \item Adding a control variable should not change the sample size (unless it has missing values)
+    \item A share variable must be between 0 and 1
+    \item Treatment groups should sum to the total sample
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Ask Claude Code to assert these explicitly:}
+  \begin{itemize}
+    \item ``Assert the merged output has exactly 2,044 rows''
+    \item ``Print the number of observations used in each regression''
+    \item ``Verify no duplicate respondent IDs''
+  \end{itemize}
+
+  \vspace{0.5em}
+  If the assertion fails, you catch the error immediately --- not three steps later.
+
+  \vspace{0.5em}
+  \textbf{In VS Code:} When working directly in the editor, you see the \texttt{git diff} before you accept the change. This shows exactly what Claude Code changed.
+\end{frame}
+
+\begin{frame}{Validation Strategy 3: Write Down Expectations First}
+  \begin{block}{The Pre-Registration Analogy}
+    Just as you pre-register hypotheses before seeing results, write down what a correct transformation should produce \textit{before} you run it.
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{Before a merge or transformation, state:}
+  \begin{itemize}
+    \item Expected output dimensions (rows $\times$ columns)
+    \item Which columns should appear and their types
+    \item How missing values should be handled
+    \item A specific row you can trace through by hand
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Then compare the actual result to your expectations.}\\
+  Discrepancies are either a bug or a misunderstanding --- both worth catching early.
+\end{frame}
+
+\begin{frame}[fragile]{Validation Strategy 4: Unit Tests Against Known Values}
+  Pick a handful of observations and compute the correct answer by hand.\\
+  Then verify the code reproduces them.
+
+  \vspace{0.5em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}
+Write a test that verifies:
+- Respondent 9 (interviewed 2015-10-07) has
+  treatment = "history" and fx_status = "none"
+- The control group has exactly 480 respondents
+- The weighted proportion supporting intervention
+  is approximately 0.486
+  \end{lstlisting}
+
+  \vspace{0.5em}
+  \textbf{Why this works:}
+  \begin{itemize}
+    \item Forces you to engage with the data at the observation level
+    \item Catches silent recoding, wrong joins, and off-by-one errors
+    \item Tests survive across refactors --- rerun them after every change
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Validation Strategy 5: Replicate Before You Extend}
+  \textbf{Building on someone else's work?}\\
+  Have Claude Code reproduce their results first.
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item Give Claude Code the original paper's code or description
+    \item Ask it to replicate a key table or figure
+    \item Compare output to the published result
+    \item Only after replication succeeds, begin your extension
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Why}
+    If you cannot reproduce the baseline, anything you build on top of it is uninterpretable. Replication is not a detour; it is the foundation.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Validation Strategy 6: Use a Second Agent as a Critic}
+  Use a \textit{second} Claude Code conversation as a reviewer.
+
+  \vspace{0.5em}
+  \textbf{How:}
+  \begin{enumerate}
+    \item Agent 1 writes the code
+    \item Open a new conversation (Agent 2) and ask it to review:\\
+      {\small ``Read the analysis script and identify any bugs, silent data loss, or decisions that could change the results.''}
+    \item Agent 2 has fresh context and no attachment to the code
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{Why this is powerful:}
+  \begin{itemize}
+    \item The writing agent has blind spots --- it wrote the code and ``believes'' it is correct
+    \item A fresh agent reads the code like a skeptical reviewer
+    \item Catches issues you would miss because you watched it being built
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{Treat your agents like co-authors who check each other's work, not a single assistant you trust unconditionally.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  STEP 5 AND CONTEXT WINDOW
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Step 4: Save or Re-instruct}
+  \textbf{If the output passes verification:} keep it. Claude Code saves its changes to your files after each step, so the results are already on disk.
+
+  \vspace{0.5em}
+  \textbf{If something is wrong:} identify the specific error and re-instruct. Do not ask Claude Code to ``fix it'' --- tell it \textit{what} to fix and \textit{how}.
+
+  \vspace{0.5em}
+  In Session 3 we will learn \textbf{git} --- a tool that lets you snapshot your project before each change and revert if anything goes wrong. For now, know that the save step exists and that there is a better way to manage it coming soon.
+
+  \vspace{0.5em}
+  \begin{block}{The full cycle}
+    Describe $\rightarrow$ Review plan $\rightarrow$ Generate \& validate $\rightarrow$ Save or re-instruct\\[0.3em]
+    Repeat for each task in your analysis. One cycle per task, not one cycle for the whole project.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHAT TO DELEGATE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What to Delegate, What to Verify, What to Keep}
+  \begin{columns}[T]
+    \begin{column}{0.32\textwidth}
+      {\color{green!50!black}\textbf{Delegate freely}}\\[0.3em]
+      {\small
+      Boilerplate \& docs\\
+      File management\textsuperscript{\dag}\\
+      Reformatting code}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      {\color{accent}\textbf{Delegate + verify}}\\[0.3em]
+      {\small
+      Data loading \& cleaning\\
+      Data merges\\
+      Variable construction\\
+      Summary statistics\\
+      Robustness variants\\
+      Visualization\\
+      \LaTeX{} tables}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      {\color{red!70!black}\textbf{Do not delegate}}\\[0.3em]
+      {\small
+      Choosing specifications\\
+      Interpreting results\\
+      Identification strategy\\
+      Sample selection\\
+      Causal claims}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  {\scriptsize \textsuperscript{\dag} Be careful with file management --- Claude Code can delete files. Always review before approving.}
+
+  \vspace{0.5em}
+  The test: \textit{If a referee questioned this choice, who would need to answer --- you or the RA?}
+
+  \vspace{0.5em}
+  Today's exercise focuses on the middle column: tasks where Claude Code is productive but where you must verify every output.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  EXERCISE SETUP
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Today's Data: The Swiss Franc Shock}
+  \textbf{Background:} In January 2015, the Swiss National Bank removed its currency peg.
+  The Swiss franc surged against the Polish zloty. Polish households with CHF-denominated
+  mortgages saw their payments spike overnight.
+
+  \vspace{0.5em}
+  \textbf{The survey:} 2,044 Polish adults, interviewed October 2015. Respondents were
+  randomly assigned to receive different information about the crisis before being asked
+  whether the government should intervene to help affected borrowers.
+
+  \vspace{0.5em}
+  \textbf{Your files:}
+  \begin{itemize}
+    \item \texttt{swiss\_franc\_survey.csv} --- 2,044 respondents, 11 variables
+    \item \texttt{respondent\_demographics.csv} --- income and ideology data (more rows than the survey)
+    \item \texttt{codebook.md} --- variable descriptions
+  \end{itemize}
+
+  \vspace{0.3em}
+  {\scriptsize Source: Ahlquist, Copelovitch, and Walter, ``The Political Consequences of External Economic Shocks: Evidence from Poland,'' \textit{American Journal of Political Science} (2020).}
+\end{frame}
+
+\begin{frame}{The Research Question}
+  \centering
+  \vspace{1em}
+  {\Large Does providing information about the Swiss franc crisis}\\[0.3em]
+  {\Large increase support for government intervention}\\[0.3em]
+  {\Large to help affected borrowers?}
+
+  \vspace{1.5em}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \textbf{Treatment (randomized):}
+      \begin{itemize}
+        \item Control (no info)
+        \item Factual information
+        \item Historical context
+        \item Hungary's policy response
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \textbf{Outcome:}
+      \begin{itemize}
+        \item Supports government intervention (binary)
+      \end{itemize}
+      \vspace{0.5em}
+      \textbf{Moderator:}
+      \begin{itemize}
+        \item FX loan exposure status
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{1em}
+  The methods are straightforward. The skill is staying in control of the workflow.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  EXERCISE PART 1: MERGE AND EXPLORE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Exercise Part 1: Merge and Explore (30 min)}
+  \textbf{Use plan mode for every step. Review every plan before approving.}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item \textbf{Merge} the demographics data into the survey.
+    \begin{itemize}
+      \item The demographics file has more rows than the survey
+      \item \alert{You decide the join type.} Do not let Claude Code choose.
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Explore} the merged data: summary statistics, treatment group sizes, outcome distribution.
+    \begin{itemize}
+      \item \alert{Before you look at results: write down what you expect to see.}
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Verify} the merge.
+    \begin{itemize}
+      \item What should you check? Write down your verification checks \textit{before} running them.
+      \item Then run them.
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Part 1 Debrief: What Did You Verify?}
+  \textbf{What did you check?}
+
+  \vspace{1.5em}
+  \pause
+  \textbf{You should have verified:}
+  \begin{itemize}
+    \item Row count: exactly 2,044 rows (no rows gained or lost)
+    \item Join type: only a left join gives the correct result
+    \item No duplicate respondent IDs in the output
+    \item Treatment groups: 480 / 549 / 520 / 495
+    \item Proportion supporting intervention: $\sim$0.479 (unweighted)
+    \item FX exposure: 1,918 / 69 / 55
+  \end{itemize}
+
+  \vspace{0.5em}
+  Did your numbers match? Did Claude Code choose the right join type?
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  EXERCISE PART 2: SPECIFY AND ESTIMATE
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Exercise Part 2: Specify and Estimate (30 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \textbf{Base model:} Logistic regression of \texttt{supports\_intervention} on \texttt{treatment}.
+    \begin{itemize}
+      \item Use survey weights
+      \item What should the reference category be? Tell Claude Code explicitly.
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Add FX exposure.} Did the sample size change? Why or why not?
+
+    \vspace{0.3em}
+    \item \textbf{Add demographic controls:} age, female, education, urban/rural, income, left-right.
+    \begin{itemize}
+      \item \alert{Before running: predict how many observations you will have.}
+      \item Then check. Were you right?
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Add an interaction} between treatment and FX exposure.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Part 2 Debrief: What Happened to Your Sample?}
+  \textbf{How many observations did you have in each model?}
+
+  \vspace{1em}
+  \pause
+  \begin{alertblock}{The Missing Data Trap}
+    Adding control variables can silently change your sample.
+  \end{alertblock}
+
+  \vspace{0.3em}
+  \begin{tabular}{lrl}
+    \toprule
+    \textbf{Specification} & \textbf{N} & \textbf{What happened} \\
+    \midrule
+    Treatment only & 2,036 & Full sample (8 missing outcome) \\
+    + FX exposure & 2,035 & 2 missing FX status \\
+    + age, female, education, urban/rural & 2,035 & No additional missingness \\
+    + income quintile & $\sim$1,473 & \color{red!70!black}{565 missing income} \\
+    + left-right scale & $\sim$1,499 & \color{red!70!black}{542 missing left-right} \\
+    + both & $\sim$1,151 & \color{red!70!black}{44\% of sample dropped} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  \textbf{Did Claude Code mention this when it added the controls?}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  EXERCISE PART 3: ROBUSTNESS AND LATEX
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Exercise Part 3: Robustness and Output (30 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{7}
+    \item \textbf{Generate robustness checks} from your base model:
+    \begin{itemize}
+      \item With and without survey weights
+      \item Different control sets (track how N changes each time!)
+      \item Collapse three treatment arms into ``any information'' vs.\ control
+      \item Restrict to complete cases so N is constant across specs
+    \end{itemize}
+
+    \vspace{0.5em}
+    \item \textbf{Format as \LaTeX.} Ask Claude Code to produce a publication-style
+    regression table with all specifications side by side. Compile to PDF.
+
+    \vspace{0.5em}
+    \item \textbf{Commit.} Save all scripts, output, and the \LaTeX{} table.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{The Robustness Workflow}
+  \centering
+  {\large You specify the core analysis.\\
+  Claude Code generates the variations.\\
+  You verify each one.}
+
+  \vspace{1.5em}
+  \textbf{Claude Code never chooses what robustness checks to run.}
+
+  \vspace{1em}
+  \textbf{For each specification, check:}
+  \begin{itemize}
+    \item Does it use the right sample? (What is N?)
+    \item Does the code match what you asked for?
+    \item Are the coefficients in a plausible range?
+    \item Do the signs on control variables make sense?
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{\LaTeX{} Tables: Bringing Results Into Your Paper}
+  Until now, your results are printed to the console or saved as CSVs.\\
+  In your actual workflow, they need to end up in a paper.
+
+  \vspace{0.8em}
+  \textbf{Why this matters:}
+  \begin{itemize}
+    \item Claude Code can write \LaTeX{} tables directly from regression output
+    \item The table lives in your project directory, under version control
+    \item When you update the analysis, Claude Code updates the table
+    \item No manual reformatting, no copy-paste errors
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Today:} generate 5 tables instead of one table. In Session 3, we bring the full paper into VS Code.
+
+  \vspace{0.5em}
+  \begin{block}{The bigger idea}
+    The more of your research that lives inside the project directory, the more Claude Code
+    can operate on. Code, data, output, tables --- and eventually the paper itself.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHAT TO WATCH FOR
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What to Watch For During the Exercise}
+  This exercise is designed to surface moments where Claude Code makes choices for you.
+
+  \vspace{0.8em}
+  \begin{itemize}
+    \item \textbf{The merge:} Did Claude Code pick the right join type? Did it mention the extra rows?
+    \item \textbf{Reference categories:} Did it set treatment to ``control'' or pick alphabetically?
+    \item \textbf{Missing data:} When you added controls, how many observations did you lose? Did Claude Code mention this?
+    \item \textbf{Survey weights:} Did it use them unless you told it to?
+    \item \textbf{Income = 0:} ``No income'' is coded as 0. How did Claude Code treat it?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \alert{These are the moments where your judgment matters.}\\
+  The workflow is: notice the decision, direct Claude Code explicitly, then verify the output.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  DEBRIEF
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Debrief}
+  \textbf{Discussion questions:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item Did your merge lose any observations? How did you handle weekends?
+    \item How many observations did you lose when you added controls?\\Did Claude Code tell you?
+    \item How many of your robustness specifications were correct on the first try?
+    \item What did you catch in the plan that you would have missed in the output?
+  \end{enumerate}
+
+  \vspace{1em}
+  \begin{block}{Key takeaway}
+    The assertions and the plan review are not extra work --- they are the workflow. The 30 seconds it takes to read a plan or check a sample size can save hours of debugging downstream.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Next Session}
+  \textbf{Session 3: Code Auditing, Git, and \LaTeX{} in VS Code}
+
+  \vspace{1em}
+  \begin{itemize}
+    \item Claude Code reads and critiques \textit{your} code instead of writing it
+    \item Git as your safety net: commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ revert
+    \item Bringing your paper into the project: \LaTeX{} in VS Code
+  \end{itemize}
+
+  \vspace{1em}
+  \textbf{Before next session:}
+  \begin{itemize}
+    \item Try the core workflow on something from your own research
+    \item Note where Claude Code made a decision you did not ask for
+    \item Install the \LaTeX{} Workshop extension in VS Code (instructions in setup guide)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  ~
+\end{frame}
+
+\end{document}

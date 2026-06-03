@@ -103,10 +103,11 @@ def aggregate_to_county(df):
     )
 
     # Education among adults 25+ only
-    adults = df[df["AGE"] >= 25]
+    adults = df[df["AGE"] >= 25].copy()
+    adults["college"] = (adults["EDUC"] >= COLLEGE_EDUC_MIN).astype(float)
     educ = (
         adults.groupby("county_fips")
-        .apply(lambda g: pd.Series({"pct_college": wgt_share(g, (g["EDUC"] >= COLLEGE_EDUC_MIN).rename("college"))}))
+        .apply(lambda g: pd.Series({"pct_college": wgt_share(g, "college")}))
         .reset_index()
     )
 
