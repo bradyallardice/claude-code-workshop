@@ -114,7 +114,8 @@ def coef_str(model, param_substr):
             se = model.bse[key]
             p = model.pvalues[key]
             stars = "***" if p < 0.01 else "**" if p < 0.05 else "*" if p < 0.1 else ""
-            return f"${coef:.3f}{stars}$", f"$({se:.3f})$"
+            star_str = f"^{{{stars}}}" if stars else ""
+            return f"${coef:.3f}{star_str}$", f"$({se:.3f})$"
     return "", ""
 
 
