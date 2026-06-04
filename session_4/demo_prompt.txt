@@ -1,1 +1,0 @@
-I've got session_4/scripts/base_regression.py fitting these logits. Extend it to also write a long-format CSV for the `latex-regression-table` skill, reporting the `treatment[Hungary]` coefficient across three specs: (1) pooled weighted, (2) weighted with fx_status controls, (3) unweighted pooled. Save the CSV to session_4/demo_output/tab_main.csv. Then render it.
