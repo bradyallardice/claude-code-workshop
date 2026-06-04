@@ -1235,6 +1235,68 @@ commit it on a branch, open a PR, and merge it.
   Most MCPs fail question 2. The two today pass all three --- \textit{for me}. Your answers may differ.
 \end{frame}
 
+% ---- Working with coauthors: Overleaf bridge --------------------
+
+\begin{frame}{If Your Coauthors Are on Overleaf}
+  Moving your paper into VS Code does not mean abandoning your coauthors.
+
+  \vspace{0.8em}
+  \textbf{Overleaf supports git sync.} You can connect your Overleaf project to a git remote and push/pull like any other repository.
+
+  \vspace{0.8em}
+  \textbf{The setup:}
+  \begin{enumerate}
+    \item Enable git sync on your Overleaf project (requires a paid plan)
+    \item Clone the Overleaf remote to your local machine
+    \item Open the \texttt{.tex} files in VS Code and work with Claude Code as normal
+    \item Push your changes back to Overleaf when ready; coauthors see them immediately
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{Result}
+    You get Claude Code and version control. Your coauthors get Overleaf.\\
+    Nobody has to change their entire workflow at once.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Hybrid Workflow}
+  \textbf{You (VS Code + Claude Code):}
+  \begin{itemize}
+    \item Edit \texttt{.tex} locally, ask Claude Code to update tables, fix references, rewrite paragraphs
+    \item Commit changes to git --- every edit is tracked and reversible
+    \item Push to Overleaf when a section is ready for coauthor review
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Your coauthors (Overleaf):}
+  \begin{itemize}
+    \item Review and comment in the Overleaf interface as usual
+    \item Make edits directly in Overleaf
+    \item Their changes are commits you can pull locally
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Caveat:} merge conflicts are possible if you and a coauthor edit the same lines simultaneously --- the same risk as any shared git repo. Pull before you push.
+\end{frame}
+
+\begin{frame}{What Claude Code Can Do Across the Collaboration}
+  Once your \texttt{.tex} file is local, Claude Code can operate on the whole project together:
+
+  \vspace{0.8em}
+  \begin{itemize}
+    \item \textbf{Consistency checks:} does the methods section match the regression code?
+    \item \textbf{Table updates:} rerun the analysis, regenerate the \LaTeX{} table, commit in one step
+    \item \textbf{Revision responses:} paste a referee comment, ask Claude Code to find the relevant code and text
+    \item \textbf{Version history:} every Claude Code edit is a commit --- you can show coauthors exactly what changed and why
+  \end{itemize}
+
+  \vspace{0.8em}
+  \begin{block}{The Payoff}
+    Your coauthors do not need to change anything.\\
+    You gain a workflow where your paper, code, and data are always in sync.
+  \end{block}
+\end{frame}
+
 \begin{frame}{Coming Next Session}
   \centering
   \vspace{1.5em}
