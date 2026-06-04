@@ -215,6 +215,31 @@ cd ~/my_workspace/session_4 && code .
   \begin{alertblock}{If it says it can't find the path or rejects \texttt{\textasciitilde}}
     {\small \textbf{Type these by hand --- don't paste from the slides.} Pasting can turn \texttt{\textasciitilde} and \texttt{\_} into look-alikes the shell rejects, and \texttt{mkdir} (step~2) is what creates \texttt{\textasciitilde/my\_workspace}. No spaces in the names.}
   \end{alertblock}
+
+  \vspace{0.2em}
+  \centerline{\small \textbf{On Windows? Use the PowerShell version on the next slide.}}
+\end{frame}
+
+\begin{frame}[fragile]{The Three-Step Ritual --- Windows (PowerShell)}
+  \textbf{PowerShell isn't bash:} \texttt{\&\&}, \texttt{cp -r}, and \texttt{mkdir -p} don't work. Use these instead:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+# 1. Pull the latest course repo
+cd ~\claude-code-workshop
+git pull
+
+# 2. Make your workspace (first time only), then copy the folder in
+mkdir ~\my_workspace -Force
+Copy-Item -Recurse session_4 ~\my_workspace\session_4
+
+# 3. Open your copy in VS Code and work there
+cd ~\my_workspace\session_4
+code .
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\small \textbf{One command per line} --- Windows PowerShell 5.1 doesn't support \texttt{\&\&}. The \texttt{git} commands are identical to macOS, so the recovery steps on the next slide work unchanged.}
 \end{frame}
 
 \begin{frame}[fragile]{If \texttt{git pull} Fights Back}
