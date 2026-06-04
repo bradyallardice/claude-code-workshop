@@ -199,7 +199,8 @@ claude-code-workshop/
 # 1. Pull the latest course repo
 cd ~/claude-code-workshop && git pull
 
-# 2. Copy today's session folder into your workspace
+# 2. Make your workspace (first time only), then copy today's folder in
+mkdir -p ~/my_workspace
 cp -r session_4/ ~/my_workspace/session_4/
 
 # 3. Open your copy in VS Code and work there
@@ -210,11 +211,10 @@ cd ~/my_workspace/session_4 && code .
   {\small\textbf{If you don't already have the course repo} (you should): \\
   \texttt{git clone https://github.com/bradyallardice/claude-code-workshop.git}}
 
-  \vspace{0.4em}
-  \textbf{You know the drill.} A quick minute so everyone's in the same clean state before we move on.
-
   \vspace{0.3em}
-  {\small If you had in-progress work inside the course repo, copy it into \texttt{\textasciitilde/my\_workspace/} too.}
+  \begin{alertblock}{If it says it can't find the path or rejects \texttt{\textasciitilde}}
+    {\small \textbf{Type the commands by hand --- don't paste from these slides.} Pasting can turn \texttt{\textasciitilde} (home) and \texttt{\_} into look-alike characters the shell rejects. Step~2's \texttt{mkdir} creates \texttt{\textasciitilde/my\_workspace} so the copy has somewhere to land. \textbf{No spaces} in \texttt{session\_4} or \texttt{my\_workspace}.}
+  \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]{If \texttt{git pull} Fights Back}
