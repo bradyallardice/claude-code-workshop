@@ -1199,21 +1199,21 @@ commit it on a branch, open a PR, and merge it.
 \begin{frame}{MCP as Helper, Not Substitute}
   \textbf{Did you notice what just happened?} One prompt. One merge into \texttt{main}. No second pair of eyes.
 
-  \vspace{0.4em}
+  \vspace{0.3em}
   \begin{alertblock}{The risk the MCP unlocks}
-    The GitHub MCP can approve and merge PRs autonomously. If you say ``handle the PR,'' Claude can push to \texttt{main} with no human review --- fine for a playful class story, dangerous on a real research repo.
+    The GitHub MCP can approve and merge PRs autonomously. Say ``handle the PR'' and Claude can push to \texttt{main} with no human review --- fine for a playful class story, dangerous on a real research repo.
   \end{alertblock}
 
-  \vspace{0.4em}
+  \vspace{0.3em}
   \textbf{How to stay safe:}
   \begin{itemize}\small
-    \item \textbf{Turn on branch protection} --- a GitHub setting (Repo $\rightarrow$ Settings $\rightarrow$ Branches) that refuses to merge a PR unless it has at least one approval from \emph{someone other than the author}. The MCP has to obey it, same as the web UI.
+    \item \textbf{Turn on branch protection} --- a GitHub setting (Repo $\rightarrow$ Settings $\rightarrow$ Branches) that won't merge a PR without an approval from \emph{someone other than the author}. The MCP has to obey it too.
     \item \textbf{Scope what you let Claude do.} ``Open a PR'' is fine; ``merge it'' should make you pause.
     \item \textbf{Watch the tool-call log} when the MCP acts on branches.
   \end{itemize}
 
-  \vspace{0.2em}
-  \alert{\small The exercise \emph{asked for} two humans --- that was a convention, not a GitHub rule. By default, anyone with write access (including Claude via the MCP) can merge a PR alone. The branch-protection setting is what actually makes human review mandatory.}
+  \vspace{0.3em}
+  \alert{\small Asking for two humans was a \emph{convention}, not a GitHub rule --- branch protection is what makes review mandatory.}
 \end{frame}
 
 \begin{frame}{MCPs: The Meta-Lesson, Again}
