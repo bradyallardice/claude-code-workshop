@@ -100,7 +100,19 @@ Open a terminal (Mac: Terminal app; Windows: open VS Code and use the integrated
 \cmd{git config -\/-global user.name "Your Name"\\git config -\/-global user.email "your.email@example.com"}
 \textit{Use the same email address you used to sign up for GitHub.}
 
-\section*{Step 3: Install Python and Required Packages}
+\section*{Step 3: Clone the Course Repository}
+All the exercises, demo data, and slides live in a single GitHub repository. Cloning it now gives you a local copy to work from during the workshop, and means you can pull updates before each session.
+
+Open a terminal (Mac: Terminal; Windows: open VS Code and use the integrated terminal via Ctrl+\`{}) and run:
+\cmd{cd \textasciitilde{} \&\& git clone https://github.com/bradyallardice/claude-code-workshop.git}
+
+This creates a \texttt{claude-code-workshop/} folder in your home directory. Confirm it worked:
+\cmd{cd \textasciitilde/claude-code-workshop \&\& git status}
+\textit{Expected: \texttt{On branch main} and \texttt{nothing to commit, working tree clean}.}
+
+\textit{You can clone it somewhere other than your home folder if you prefer (e.g.\ Documents) --- just remember where you put it. Before each session, run \texttt{git pull} from inside the folder to get the latest material.}
+
+\section*{Step 4: Install Python and Required Packages}
 The workshop exercises use Python. Even if you normally work in R or Stata, you will need Python installed because Claude Code will write and execute Python scripts during the exercises.
 
 \subsection*{Install Python}
