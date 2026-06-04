@@ -256,422 +256,6 @@ git stash pop                     # skip if stash was empty
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  PART 2: SKILLS (CENTERPIECE)
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Part 2: Skills}
-  \centering
-  \vspace{0.5em}
-  \includegraphics[width=0.55\textwidth,trim=0 300 0 300,clip]{img/claude_skills.png}
-
-  \vspace{0.8em}
-  {\Large A \textbf{skill} is a reusable instruction bundle\\[0.3em]
-  Claude loads on demand when a task matches.}
-
-  \vspace{0.8em}
-  {\Large It codifies a \emph{convention} ---\\[0.3em]
-  how \emph{you} do a thing correctly ---\\[0.3em]
-  so you don't re-explain it every session.}
-
-\end{frame}
-
-% ---- 2-prelude: What skills do, concretely ----------------------
-
-\begin{frame}{What a Skill Actually Does}
-  \textbf{Skills from my setup, and when each one fires:}
-
-  \vspace{0.6em}
-  \begin{itemize}
-    \item \texttt{latex-regression-table} --- I ask for a results table. It writes a canonical CSV, renders a booktabs \texttt{.tex}, and compiles a PNG. One house style across the whole paper.
-
-    \item \texttt{abstract-structure-audit} --- I paste a draft abstract. It checks whether the four standard moves (puzzle, approach, findings, contribution) are present, vague, or missing.
-
-    \item \texttt{paragraph-structure-audit} --- I share a paragraph. It flags multiple claims per paragraph, smuggled assumptions, and weak transitions.
-
-    \item \texttt{robustness-checks} --- I run a regression. It proposes a structured battery (alternative SEs, subsamples, IV, event study) and executes it.
-  \end{itemize}
-
-  \vspace{0.6em}
-  \alert{Each one is a recurring workflow done the same way every time.}
-\end{frame}
-
-% ---- 2a: How a skill works --------------------------------------
-
-\begin{frame}[fragile]{How a Skill Works}
-  \textbf{A skill is a folder with a \texttt{SKILL.md} file in it.}
-
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \column{0.52\textwidth}
-    \textbf{What you set up:}
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
-~/.claude/skills/latex-tables/
-  SKILL.md       <- required
-  template.tex   <- optional
-  examples/      <- optional
-    \end{lstlisting}
-
-    \textbf{\texttt{SKILL.md}} starts with frontmatter:
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
----
-name: latex-tables
-description: Use when generating a
-  regression or summary-stats table.
----
-
-# Instructions Claude follows
-...
-    \end{lstlisting}
-
-    \column{0.46\textwidth}
-    \textbf{How Claude uses it:}
-
-    \vspace{0.3em}
-    \begin{enumerate}\footnotesize
-      \item At session start, Claude sees every skill's \texttt{name} + \texttt{description} --- nothing more
-      \item \textbf{Two ways to invoke:} auto-call on a description match, or you call it yourself (\texttt{/latex-tables})
-      \item The full \texttt{SKILL.md} body loads into context on demand
-      \item Claude follows those instructions
-    \end{enumerate}
-
-    \vspace{0.2em}
-    \begin{block}{\footnotesize The key idea}
-      \footnotesize The \texttt{description} is the auto-call trigger. Write it so Claude can tell \emph{when} this skill applies.
-    \end{block}
-  \end{columns}
-\end{frame}
-
-% ---- Live demo: crowdsource a skill ------------------------------
-
-\begin{frame}{Live Demo: What Could Be a Skill?}
-  \begin{alertblock}{Over to you}
-    Think about your own research workflow. \textbf{What is something you do over and over the same way?} Shout one out --- we'll turn it into a skill, live.
-  \end{alertblock}
-
-  \vspace{0.5em}
-  \textbf{What makes a good candidate:}
-  \begin{itemize}
-    \item You do it \textbf{repeatedly}, and roughly the \textbf{same way} each time
-    \item There's a \textbf{house style} or rule you keep re-explaining to Claude
-    \item You can describe \textbf{when} it applies in one sentence
-  \end{itemize}
-
-  \vspace{0.4em}
-  {\small Examples to prime the room: formatting a table to your journal's spec, renaming survey variables to a convention, structuring a referee response, building a balance table, cleaning a messy export the same way every wave.}
-
-  \vspace{0.4em}
-  \begin{block}{The plan}
-    \footnotesize Pick one. We write the \texttt{description} together, sketch the \texttt{SKILL.md} body, and watch Claude invoke it.
-  \end{block}
-\end{frame}
-
-% ---- 2b: The architecture ---------------------------------------
-
-\begin{frame}[fragile]{Where Skills Live: The Hierarchy, Again}
-  Remember the user $\rightarrow$ project $\rightarrow$ subfolder hierarchy from CLAUDE.md in Session 1? \textbf{Skills follow the same pattern.}
-
-  \vspace{0.6em}
-  \begin{columns}[T]
-    \column{0.48\textwidth}
-    \textbf{User level}
-\begin{lstlisting}[basicstyle=\ttfamily\tiny]
-~/.claude/skills/latex-tables/
-  SKILL.md
-\end{lstlisting}
-    {\small Available in \emph{every} project. For things stable \emph{about you}.}
-
-    \column{0.48\textwidth}
-    \textbf{Project level}
-\begin{lstlisting}[basicstyle=\ttfamily\tiny]
-your-project/.claude/skills/
-  paper-style/
-    SKILL.md
-\end{lstlisting}
-    {\small Loaded only in this project. Checked into git, shared with collaborators.}
-  \end{columns}
-
-  \vspace{0.6em}
-  \begin{block}{The same hierarchy keeps showing up}
-    \textbf{Hooks}, \textbf{MCP servers and permissions}, and \textbf{subagents} all live at either the user or project level too. The decision is always the same: \emph{is this stable about me, or specific to this project?}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Before You Build a Skill, Ask Where It Belongs}
-  \textbf{Three things look alike but are different tools:}
-
-  \vspace{0.8em}
-  \begin{enumerate}
-    \item \textbf{Skills} --- reusable instruction bundles, loaded on demand
-    \item \textbf{Project context} --- a CLAUDE.md inside your paper's directory
-    \item \textbf{MCPs} --- connections to external systems
-  \end{enumerate}
-
-  \vspace{1em}
-  \textbf{Most wishes of the form \emph{``I wish Claude knew X''} route to one of these three.}
-
-  \vspace{0.4em}
-  Knowing which one saves you from building a skill that should have been something else. It also tells you when a skill is \emph{too narrow} a tool for the job.
-\end{frame}
-
-\begin{frame}{The Routing Rule}
-  \centering
-  \vspace{1em}
-  {\Large
-    \textbf{Skills} $\rightarrow$ what's stable \emph{about you}\\[0.7em]
-    \textbf{Projects} $\rightarrow$ what's stable \emph{within a paper}\\[0.7em]
-    \textbf{MCPs} $\rightarrow$ what's \emph{live}
-  }
-
-  \vspace{1.8em}
-  \begin{block}{}
-    If X changes when the project changes, it's not a skill.\\[0.2em]
-    If X is alive in an external system, it's not a skill either.
-  \end{block}
-\end{frame}
-
-\begin{frame}{The Rule, Applied}
-  \small
-  \begin{tabular}{@{}p{6.8cm} p{5.8cm}@{}}
-    \toprule
-    \textbf{What you want Claude to know} & \textbf{Where it belongs} \\
-    \midrule
-    Your \LaTeX{} table conventions & Skill (stable about you) \\[0.3em]
-    The variables \& specs of your current paper & Project context (within a paper) \\[0.3em]
-    Your Zotero library & MCP (live external state) \\[0.3em]
-    Your writing voice & Skill (stable about you) \\[0.3em]
-    What your current paper argues & Project context (within a paper) \\
-    \bottomrule
-  \end{tabular}
-
-  \vspace{0.8em}
-  \begin{block}{Why this matters}
-    Skills are a narrower tool than most people assume. That's a feature --- narrower tools are easier to use well.
-  \end{block}
-\end{frame}
-
-% ---- 2c: Two clusters -------------------------------------------
-
-\begin{frame}{Within Skills: Two Different Jobs}
-  \begin{columns}[T]
-    \column{0.48\textwidth}
-    \textbf{Verification skills}
-
-    \vspace{0.3em}
-    Fire \emph{during or after} work to check it.
-
-    \vspace{0.3em}
-    \textit{Examples:} LLM-mistake checker, sanity-check validator, replication auditor.
-
-    \vspace{0.3em}
-    \textbf{Earn keep by:} catching real problems, even if used infrequently.
-
-    \column{0.48\textwidth}
-    \textbf{Production skills}
-
-    \vspace{0.3em}
-    Fire \emph{during the making} of something to shape it.
-
-    \vspace{0.3em}
-    \textit{Examples:} \LaTeX{} table skill, writing-style skill.
-
-    \vspace{0.3em}
-    \textbf{Earn keep by:} frequency --- every table, every document.
-  \end{columns}
-
-  \vspace{0.8em}
-  \begin{alertblock}{Why the distinction matters}
-    ``Is this worth it?'' has a different answer for each. Verification skills need to catch high-cost errors. Production skills need to fire often.
-  \end{alertblock}
-\end{frame}
-
-% ---- 2d: The heuristic ------------------------------------------
-
-\begin{frame}{The Heuristic}
-  \centering
-  \vspace{1em}
-  {\Large Skills are for \textbf{conventions}\\[0.4em]
-  you hold about how to do\\[0.4em]
-  a thing correctly.}
-
-  \vspace{1.2em}
-  \small
-  Conventions about table formatting. About sanity-checking data.\\[0.1em]
-  About responding to reviewers. About engaging with the literature.
-
-  \vspace{0.8em}
-  \normalsize
-  \alert{If what you want to codify isn't a convention, it's probably not a skill.}
-\end{frame}
-
-% ---- 2e: Worked examples ----------------------------------------
-
-\begin{frame}{Skills I Actually Use}
-  \textbf{Two skills I reach for regularly:}
-
-  \vspace{0.6em}
-  \textbf{1. \LaTeX{} tables.} Encodes my house style for regression tables: significance notation, SE labels, table-notes format, journal overrides. Fires every time I generate a table. Saves \textasciitilde{}15 min per table and keeps formatting consistent across a paper. On version three.
-
-  \vspace{0.7em}
-  \textbf{2. Paragraph-structure audit.} One claim per paragraph, mis-cited claims, smuggled assumptions, weak transitions. Fires when I'm editing my own drafts --- catches the kind of sloppiness I stop seeing after four re-reads.
-
-  \vspace{0.8em}
-  \begin{block}{What they have in common}
-    Each codifies a \emph{convention} I already hold. Each fires at a predictable moment --- generating a table, reviewing a draft. Each has been revised through actual use.
-  \end{block}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \vspace{3em}
-  {\Huge Demo}
-
-  \vspace{1em}
-  {\Large The \LaTeX{} tables skill, applied live.}
-\end{frame}
-
-% ---- 2f: The skills I don't use ---------------------------------
-
-\begin{frame}{Finding Good Use Cases Is Hard}
-  \textbf{Two skills I built but barely use:}
-
-  \vspace{0.3em}
-  \begin{itemize}
-    \item \texttt{auto-commit} --- commits after every file edit
-    \item \texttt{spec-validator} --- pre-estimation data and spec checks
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{What they have in common:} each sounded useful in the abstract. Each was built on an idea of how research \emph{should} go. Each got replaced by a one-off prompt the first time I actually needed the job done.
-
-  \vspace{0.4em}
-  The specificity can also work against you --- a tightly scoped skill only fires when the exact shape of the task matches, and it's easy to build one whose niche never actually shows up.
-
-  \vspace{0.5em}
-  \begin{alertblock}{Strong recommendation}
-    Do not go build five skills this weekend. You will not use most of them.\\[0.3em]
-    Instead: \textbf{build one.} Try it on your current work. Tweak it where it fires wrong. Let it earn its place in your workflow. \emph{Then} add another.
-  \end{alertblock}
-\end{frame}
-
-% ---- 2f2: How to build one that works ---------------------------
-
-\begin{frame}{How to Build One That Works}
-  \textbf{What separates a skill that fires right from one that sits unused:}
-
-  \vspace{0.3em}
-  \begin{itemize}
-    \item \textbf{Write the description for the trigger, not the reader.} Claude decides whether to auto-call on the description alone. Name the task, the keywords, and what the skill does \emph{not} handle.
-
-    \item \textbf{Keep it narrow.} One genre of table, one kind of audit, one workflow. Broad skills fire at the wrong moment, or never.
-
-    \item \textbf{Encode your convention, not generic knowledge.} The \texttt{SKILL.md} should capture the judgment calls \emph{you} make. Claude already knows boilerplate.
-
-    \item \textbf{Ship a reference example.} An \texttt{examples/} folder with a real working artifact gives Claude something concrete to pattern-match on.
-
-    \item \textbf{Revise after the first real use.} Version one fires wrong somewhere. Fix the trigger or the instructions, retry.
-  \end{itemize}
-\end{frame}
-
-% ---- 2f3: Worked example ----------------------------------------
-
-\begin{frame}[fragile]{Let's Build One: \texttt{tex-reference-audit}}
-  \textbf{The need:} before submission, I want to know every \texttt{\textbackslash cite}, \texttt{\textbackslash ref}, and \texttt{\textbackslash label} in the manuscript actually resolves.
-
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \column{0.50\textwidth}
-    \textbf{What it checks:}
-    \begin{itemize}\footnotesize
-      \item Every \texttt{\textbackslash cite\{key\}} resolves to a \texttt{.bib} entry
-      \item Every \texttt{.bib} entry has required fields (author, year, title, journal, pages\ldots)
-      \item Every \texttt{\textbackslash ref\{label\}} points to an existing \texttt{\textbackslash label}
-      \item Every \texttt{\textbackslash label} is actually referenced (no orphans)
-      \item Figures use \texttt{fig:}, tables use \texttt{tab:}
-    \end{itemize}
-
-    \column{0.48\textwidth}
-    \textbf{The description} --- copy, paste, build live:
-    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
----
-name: tex-reference-audit
-description: Use when reviewing
-  or finalizing a LaTeX manuscript.
-  Audits \cite against the .bib
-  file, \ref/\label pairs for
-  figures and tables, flags
-  missing fields, duplicates, and
-  orphans. Trigger: "check refs,"
-  "audit citations," "review
-  LaTeX."
----
-    \end{lstlisting}
-
-    \footnotesize No script --- the body is just instructions Claude follows to parse, check, and report.
-  \end{columns}
-\end{frame}
-
-% ---- 2g: Hands-on -----------------------------------------------
-
-\begin{frame}{Exercise: Build a Skill (25 min)}
-  \textbf{Working solo. Each of you walks out with one skill installed and tested.}
-
-  \vspace{0.5em}
-  \begin{enumerate}
-    \item \textbf{Pick a convention (3 min).} Something you actually did in the last two weeks --- a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
-
-    \vspace{0.2em}
-    \item \textbf{Route it (2 min).} Confirm with your neighbor: is this \emph{really} a skill? Not project context, not an MCP. If a skill, is it \textbf{verification} or \textbf{production}?
-
-    \vspace{0.2em}
-    \item \textbf{Write \texttt{SKILL.md} (10 min).} A clear \texttt{name}, a \texttt{description} that tells Claude \emph{when} to fire, and the instructions for when it does.
-
-    \vspace{0.2em}
-    \item \textbf{Install (1 min).} Save to \texttt{\textasciitilde/.claude/skills/<your-skill>/SKILL.md}.
-
-    \vspace{0.2em}
-    \item \textbf{Try it (9 min).} Open a \emph{fresh} Claude Code session. Ask for a task that should trigger it. If it doesn't fire, the \texttt{description} is wrong --- fix and retry.
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile]{Deliverable}
-  \textbf{A working skill, installed and fired at least once.}
-
-  \vspace{0.5em}
-  \textbf{What you leave with:}
-  \begin{itemize}
-    \item A folder at \texttt{\textasciitilde/.claude/skills/<your-skill>/} with a real \texttt{SKILL.md}
-    \item One transcript where Claude triggered the skill on a real task
-    \item One concrete thing you'd change now that you've seen it run
-  \end{itemize}
-
-  \vspace{0.5em}
-  Two or three people share: \emph{What is it? Did it trigger on the first try? What surprised you?}
-
-  \vspace{0.5em}
-  \begin{alertblock}{The goal}
-    You leave having built one thing, seen it fire, and learned where the \texttt{description} is too vague or too narrow. That is the empirical loop. Everything else is speculation about skills you haven't tried.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Skills: The Arc}
-  \textbf{You now have everything you need to make skills work for you:}
-
-  \vspace{0.4em}
-  \begin{enumerate}
-    \item A \textbf{routing rule} to spot a real candidate --- stable-about-you, not within-a-paper, not live
-    \item A \textbf{typology} --- verification vs.\ production --- to predict when and how often it'll fire
-    \item A \textbf{heuristic} --- skills codify the conventions you already hold
-    \item An \textbf{empirical loop} --- build, fire, refine, which you just ran end-to-end
-    \item \textbf{One skill already installed} on your machine
-  \end{enumerate}
-
-  \vspace{0.8em}
-  \begin{block}{The durable takeaway}
-    Every convention you hold about how to do a thing correctly is a candidate skill waiting to be written down. The ones that earn their place will compound across every project you work on --- and you now know how to tell the good candidates from the noise.
-  \end{block}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
 %  PART 3: MCPS
 % ══════════════════════════════════════════════════════════════════
 
@@ -709,32 +293,6 @@ description: Use when reviewing
   \begin{block}{The framing}
     MCPs turn Claude Code from a tool that operates on your \emph{files} into a tool that operates on your \emph{workflow}.
   \end{block}
-\end{frame}
-
-% ---- Skill + MCP composition (bridge concept) -------------------
-
-\begin{frame}{Where Skills and MCPs Compose}
-  \textbf{The paragraph-structure skill is the first one you've seen that invokes an MCP.}
-
-  \vspace{0.5em}
-  \textbf{Alone:}
-  \begin{itemize}
-    \item \emph{Skill only:} ``This claim needs a citation. Figure one out.''
-    \item \emph{MCP only:} ``Here's your Zotero library.'' But nothing knows when to search.
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Composed:}
-  \begin{itemize}
-    \item The skill knows \emph{when} a claim is mis-cited or uncited
-    \item The MCP returns actual papers from your library that would support it
-    \item The MCP constrains the skill to real papers --- no hallucinated citations
-  \end{itemize}
-
-  \vspace{0.4em}
-  \begin{alertblock}{The pattern}
-    A skill knows \emph{when} to act; an MCP provides \emph{live data}. Together, they do what neither can alone.
-  \end{alertblock}
 \end{frame}
 
 \begin{frame}{The Two-Reason Rule}
@@ -1294,6 +852,448 @@ commit it on a branch, open a PR, and merge it.
   \begin{block}{The Payoff}
     Your coauthors do not need to change anything.\\
     You gain a workflow where your paper, code, and data are always in sync.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PART 2: SKILLS (CENTERPIECE)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Part 2: Skills}
+  \centering
+  \vspace{0.5em}
+  \includegraphics[width=0.55\textwidth,trim=0 300 0 300,clip]{img/claude_skills.png}
+
+  \vspace{0.8em}
+  {\Large A \textbf{skill} is a reusable instruction bundle\\[0.3em]
+  Claude loads on demand when a task matches.}
+
+  \vspace{0.8em}
+  {\Large It codifies a \emph{convention} ---\\[0.3em]
+  how \emph{you} do a thing correctly ---\\[0.3em]
+  so you don't re-explain it every session.}
+
+\end{frame}
+
+% ---- 2-prelude: What skills do, concretely ----------------------
+
+\begin{frame}{What a Skill Actually Does}
+  \textbf{Skills from my setup, and when each one fires:}
+
+  \vspace{0.6em}
+  \begin{itemize}
+    \item \texttt{latex-regression-table} --- I ask for a results table. It writes a canonical CSV, renders a booktabs \texttt{.tex}, and compiles a PNG. One house style across the whole paper.
+
+    \item \texttt{abstract-structure-audit} --- I paste a draft abstract. It checks whether the four standard moves (puzzle, approach, findings, contribution) are present, vague, or missing.
+
+    \item \texttt{paragraph-structure-audit} --- I share a paragraph. It flags multiple claims per paragraph, smuggled assumptions, and weak transitions.
+
+    \item \texttt{robustness-checks} --- I run a regression. It proposes a structured battery (alternative SEs, subsamples, IV, event study) and executes it.
+  \end{itemize}
+
+  \vspace{0.6em}
+  \alert{Each one is a recurring workflow done the same way every time.}
+\end{frame}
+
+% ---- 2a: How a skill works --------------------------------------
+
+\begin{frame}[fragile]{How a Skill Works}
+  \textbf{A skill is a folder with a \texttt{SKILL.md} file in it.}
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+    \textbf{What you set up:}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+~/.claude/skills/latex-tables/
+  SKILL.md       <- required
+  template.tex   <- optional
+  examples/      <- optional
+    \end{lstlisting}
+
+    \textbf{\texttt{SKILL.md}} starts with frontmatter:
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+---
+name: latex-tables
+description: Use when generating a
+  regression or summary-stats table.
+---
+
+# Instructions Claude follows
+...
+    \end{lstlisting}
+
+    \column{0.46\textwidth}
+    \textbf{How Claude uses it:}
+
+    \vspace{0.3em}
+    \begin{enumerate}\footnotesize
+      \item At session start, Claude sees every skill's \texttt{name} + \texttt{description} --- nothing more
+      \item \textbf{Two ways to invoke:} auto-call on a description match, or you call it yourself (\texttt{/latex-tables})
+      \item The full \texttt{SKILL.md} body loads into context on demand
+      \item Claude follows those instructions
+    \end{enumerate}
+
+    \vspace{0.2em}
+    \begin{block}{\footnotesize The key idea}
+      \footnotesize The \texttt{description} is the auto-call trigger. Write it so Claude can tell \emph{when} this skill applies.
+    \end{block}
+  \end{columns}
+\end{frame}
+
+% ---- Live demo: crowdsource a skill ------------------------------
+
+\begin{frame}{Live Demo: What Could Be a Skill?}
+  \begin{alertblock}{Over to you}
+    Think about your own research workflow. \textbf{What is something you do over and over the same way?} Shout one out --- we'll turn it into a skill, live.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  \textbf{What makes a good candidate:}
+  \begin{itemize}
+    \item You do it \textbf{repeatedly}, and roughly the \textbf{same way} each time
+    \item There's a \textbf{house style} or rule you keep re-explaining to Claude
+    \item You can describe \textbf{when} it applies in one sentence
+  \end{itemize}
+
+  \vspace{0.4em}
+  {\small Examples to prime the room: formatting a table to your journal's spec, renaming survey variables to a convention, structuring a referee response, building a balance table, cleaning a messy export the same way every wave.}
+
+  \vspace{0.4em}
+  \begin{block}{The plan}
+    \footnotesize Pick one. We write the \texttt{description} together, sketch the \texttt{SKILL.md} body, and watch Claude invoke it.
+  \end{block}
+\end{frame}
+
+% ---- 2b: The architecture ---------------------------------------
+
+\begin{frame}[fragile]{Where Skills Live: The Hierarchy, Again}
+  Remember the user $\rightarrow$ project $\rightarrow$ subfolder hierarchy from CLAUDE.md in Session 1? \textbf{Skills follow the same pattern.}
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{User level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+~/.claude/skills/latex-tables/
+  SKILL.md
+\end{lstlisting}
+    {\small Available in \emph{every} project. For things stable \emph{about you}.}
+
+    \column{0.48\textwidth}
+    \textbf{Project level}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+your-project/.claude/skills/
+  paper-style/
+    SKILL.md
+\end{lstlisting}
+    {\small Loaded only in this project. Checked into git, shared with collaborators.}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{block}{The same hierarchy keeps showing up}
+    \textbf{Hooks}, \textbf{MCP servers and permissions}, and \textbf{subagents} all live at either the user or project level too. The decision is always the same: \emph{is this stable about me, or specific to this project?}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Before You Build a Skill, Ask Where It Belongs}
+  \textbf{Three things look alike but are different tools:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item \textbf{Skills} --- reusable instruction bundles, loaded on demand
+    \item \textbf{Project context} --- a CLAUDE.md inside your paper's directory
+    \item \textbf{MCPs} --- connections to external systems
+  \end{enumerate}
+
+  \vspace{1em}
+  \textbf{Most wishes of the form \emph{``I wish Claude knew X''} route to one of these three.}
+
+  \vspace{0.4em}
+  Knowing which one saves you from building a skill that should have been something else. It also tells you when a skill is \emph{too narrow} a tool for the job.
+\end{frame}
+
+\begin{frame}{The Routing Rule}
+  \centering
+  \vspace{1em}
+  {\Large
+    \textbf{Skills} $\rightarrow$ what's stable \emph{about you}\\[0.7em]
+    \textbf{Projects} $\rightarrow$ what's stable \emph{within a paper}\\[0.7em]
+    \textbf{MCPs} $\rightarrow$ what's \emph{live}
+  }
+
+  \vspace{1.8em}
+  \begin{block}{}
+    If X changes when the project changes, it's not a skill.\\[0.2em]
+    If X is alive in an external system, it's not a skill either.
+  \end{block}
+\end{frame}
+
+\begin{frame}{The Rule, Applied}
+  \small
+  \begin{tabular}{@{}p{6.8cm} p{5.8cm}@{}}
+    \toprule
+    \textbf{What you want Claude to know} & \textbf{Where it belongs} \\
+    \midrule
+    Your \LaTeX{} table conventions & Skill (stable about you) \\[0.3em]
+    The variables \& specs of your current paper & Project context (within a paper) \\[0.3em]
+    Your Zotero library & MCP (live external state) \\[0.3em]
+    Your writing voice & Skill (stable about you) \\[0.3em]
+    What your current paper argues & Project context (within a paper) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \begin{block}{Why this matters}
+    Skills are a narrower tool than most people assume. That's a feature --- narrower tools are easier to use well.
+  \end{block}
+\end{frame}
+
+% ---- 2c: Two clusters -------------------------------------------
+
+\begin{frame}{Within Skills: Two Different Jobs}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Verification skills}
+
+    \vspace{0.3em}
+    Fire \emph{during or after} work to check it.
+
+    \vspace{0.3em}
+    \textit{Examples:} LLM-mistake checker, sanity-check validator, replication auditor.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} catching real problems, even if used infrequently.
+
+    \column{0.48\textwidth}
+    \textbf{Production skills}
+
+    \vspace{0.3em}
+    Fire \emph{during the making} of something to shape it.
+
+    \vspace{0.3em}
+    \textit{Examples:} \LaTeX{} table skill, writing-style skill.
+
+    \vspace{0.3em}
+    \textbf{Earn keep by:} frequency --- every table, every document.
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Why the distinction matters}
+    ``Is this worth it?'' has a different answer for each. Verification skills need to catch high-cost errors. Production skills need to fire often.
+  \end{alertblock}
+\end{frame}
+
+% ---- 2d: The heuristic ------------------------------------------
+
+\begin{frame}{The Heuristic}
+  \centering
+  \vspace{1em}
+  {\Large Skills are for \textbf{conventions}\\[0.4em]
+  you hold about how to do\\[0.4em]
+  a thing correctly.}
+
+  \vspace{1.2em}
+  \small
+  Conventions about table formatting. About sanity-checking data.\\[0.1em]
+  About responding to reviewers. About engaging with the literature.
+
+  \vspace{0.8em}
+  \normalsize
+  \alert{If what you want to codify isn't a convention, it's probably not a skill.}
+\end{frame}
+
+% ---- 2e: Worked examples ----------------------------------------
+
+\begin{frame}{Skills I Actually Use}
+  \textbf{Two skills I reach for regularly:}
+
+  \vspace{0.6em}
+  \textbf{1. \LaTeX{} tables.} Encodes my house style for regression tables: significance notation, SE labels, table-notes format, journal overrides. Fires every time I generate a table. Saves \textasciitilde{}15 min per table and keeps formatting consistent across a paper. On version three.
+
+  \vspace{0.7em}
+  \textbf{2. Paragraph-structure audit.} One claim per paragraph, mis-cited claims, smuggled assumptions, weak transitions. Fires when I'm editing my own drafts --- catches the kind of sloppiness I stop seeing after four re-reads.
+
+  \vspace{0.8em}
+  \begin{block}{What they have in common}
+    Each codifies a \emph{convention} I already hold. Each fires at a predictable moment --- generating a table, reviewing a draft. Each has been revised through actual use.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \vspace{3em}
+  {\Huge Demo}
+
+  \vspace{1em}
+  {\Large The \LaTeX{} tables skill, applied live.}
+\end{frame}
+
+% ---- 2f: The skills I don't use ---------------------------------
+
+\begin{frame}{Finding Good Use Cases Is Hard}
+  \textbf{Two skills I built but barely use:}
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \texttt{auto-commit} --- commits after every file edit
+    \item \texttt{spec-validator} --- pre-estimation data and spec checks
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{What they have in common:} each sounded useful in the abstract. Each was built on an idea of how research \emph{should} go. Each got replaced by a one-off prompt the first time I actually needed the job done.
+
+  \vspace{0.4em}
+  The specificity can also work against you --- a tightly scoped skill only fires when the exact shape of the task matches, and it's easy to build one whose niche never actually shows up.
+
+  \vspace{0.5em}
+  \begin{alertblock}{Strong recommendation}
+    Do not go build five skills this weekend. You will not use most of them.\\[0.3em]
+    Instead: \textbf{build one.} Try it on your current work. Tweak it where it fires wrong. Let it earn its place in your workflow. \emph{Then} add another.
+  \end{alertblock}
+\end{frame}
+
+% ---- 2f2: How to build one that works ---------------------------
+
+\begin{frame}{How to Build One That Works}
+  \textbf{What separates a skill that fires right from one that sits unused:}
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item \textbf{Write the description for the trigger, not the reader.} Claude decides whether to auto-call on the description alone. Name the task, the keywords, and what the skill does \emph{not} handle.
+
+    \item \textbf{Keep it narrow.} One genre of table, one kind of audit, one workflow. Broad skills fire at the wrong moment, or never.
+
+    \item \textbf{Encode your convention, not generic knowledge.} The \texttt{SKILL.md} should capture the judgment calls \emph{you} make. Claude already knows boilerplate.
+
+    \item \textbf{Ship a reference example.} An \texttt{examples/} folder with a real working artifact gives Claude something concrete to pattern-match on.
+
+    \item \textbf{Revise after the first real use.} Version one fires wrong somewhere. Fix the trigger or the instructions, retry.
+  \end{itemize}
+\end{frame}
+
+% ---- 2f3: Worked example ----------------------------------------
+
+\begin{frame}[fragile]{Let's Build One: \texttt{tex-reference-audit}}
+  \textbf{The need:} before submission, I want to know every \texttt{\textbackslash cite}, \texttt{\textbackslash ref}, and \texttt{\textbackslash label} in the manuscript actually resolves.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.50\textwidth}
+    \textbf{What it checks:}
+    \begin{itemize}\footnotesize
+      \item Every \texttt{\textbackslash cite\{key\}} resolves to a \texttt{.bib} entry
+      \item Every \texttt{.bib} entry has required fields (author, year, title, journal, pages\ldots)
+      \item Every \texttt{\textbackslash ref\{label\}} points to an existing \texttt{\textbackslash label}
+      \item Every \texttt{\textbackslash label} is actually referenced (no orphans)
+      \item Figures use \texttt{fig:}, tables use \texttt{tab:}
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{The description} --- copy, paste, build live:
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+---
+name: tex-reference-audit
+description: Use when reviewing
+  or finalizing a LaTeX manuscript.
+  Audits \cite against the .bib
+  file, \ref/\label pairs for
+  figures and tables, flags
+  missing fields, duplicates, and
+  orphans. Trigger: "check refs,"
+  "audit citations," "review
+  LaTeX."
+---
+    \end{lstlisting}
+
+    \footnotesize No script --- the body is just instructions Claude follows to parse, check, and report.
+  \end{columns}
+\end{frame}
+
+% ---- 2g: Hands-on -----------------------------------------------
+
+\begin{frame}{Exercise: Build a Skill (25 min)}
+  \textbf{Working solo. Each of you walks out with one skill installed and tested.}
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item \textbf{Pick a convention (3 min).} Something you actually did in the last two weeks --- a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
+
+    \vspace{0.2em}
+    \item \textbf{Route it (2 min).} Confirm with your neighbor: is this \emph{really} a skill? Not project context, not an MCP. If a skill, is it \textbf{verification} or \textbf{production}?
+
+    \vspace{0.2em}
+    \item \textbf{Write \texttt{SKILL.md} (10 min).} A clear \texttt{name}, a \texttt{description} that tells Claude \emph{when} to fire, and the instructions for when it does.
+
+    \vspace{0.2em}
+    \item \textbf{Install (1 min).} Save to \texttt{\textasciitilde/.claude/skills/<your-skill>/SKILL.md}.
+
+    \vspace{0.2em}
+    \item \textbf{Try it (9 min).} Open a \emph{fresh} Claude Code session. Ask for a task that should trigger it. If it doesn't fire, the \texttt{description} is wrong --- fix and retry.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Deliverable}
+  \textbf{A working skill, installed and fired at least once.}
+
+  \vspace{0.5em}
+  \textbf{What you leave with:}
+  \begin{itemize}
+    \item A folder at \texttt{\textasciitilde/.claude/skills/<your-skill>/} with a real \texttt{SKILL.md}
+    \item One transcript where Claude triggered the skill on a real task
+    \item One concrete thing you'd change now that you've seen it run
+  \end{itemize}
+
+  \vspace{0.5em}
+  Two or three people share: \emph{What is it? Did it trigger on the first try? What surprised you?}
+
+  \vspace{0.5em}
+  \begin{alertblock}{The goal}
+    You leave having built one thing, seen it fire, and learned where the \texttt{description} is too vague or too narrow. That is the empirical loop. Everything else is speculation about skills you haven't tried.
+  \end{alertblock}
+\end{frame}
+
+% ---- Skill + MCP composition (bridge concept) -------------------
+
+\begin{frame}{Where Skills and MCPs Compose}
+  \textbf{The paragraph-structure skill is the first one you've seen that invokes an MCP.}
+
+  \vspace{0.5em}
+  \textbf{Alone:}
+  \begin{itemize}
+    \item \emph{Skill only:} ``This claim needs a citation. Figure one out.''
+    \item \emph{MCP only:} ``Here's your Zotero library.'' But nothing knows when to search.
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Composed:}
+  \begin{itemize}
+    \item The skill knows \emph{when} a claim is mis-cited or uncited
+    \item The MCP returns actual papers from your library that would support it
+    \item The MCP constrains the skill to real papers --- no hallucinated citations
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{alertblock}{The pattern}
+    A skill knows \emph{when} to act; an MCP provides \emph{live data}. Together, they do what neither can alone.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Skills: The Arc}
+  \textbf{You now have everything you need to make skills work for you:}
+
+  \vspace{0.4em}
+  \begin{enumerate}
+    \item A \textbf{routing rule} to spot a real candidate --- stable-about-you, not within-a-paper, not live
+    \item A \textbf{typology} --- verification vs.\ production --- to predict when and how often it'll fire
+    \item A \textbf{heuristic} --- skills codify the conventions you already hold
+    \item An \textbf{empirical loop} --- build, fire, refine, which you just ran end-to-end
+    \item \textbf{One skill already installed} on your machine
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \begin{block}{The durable takeaway}
+    Every convention you hold about how to do a thing correctly is a candidate skill waiting to be written down. The ones that earn their place will compound across every project you work on --- and you now know how to tell the good candidates from the noise.
   \end{block}
 \end{frame}
 
