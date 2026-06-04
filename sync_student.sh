@@ -44,82 +44,82 @@ fi
 # `|| true` so we can continue past the non-zero exit when conflicts exist.
 git merge teacher --no-ff --no-commit -X theirs || true
 
-# Remove teacher-only files. --ignore-unmatch keeps the script quiet for paths
-# that aren't present, and `git rm` on a file that's in an unmerged state from
-# the merge above resolves the conflict by choosing "delete."
+# Remove teacher-only files. -f forces removal even when the merge re-added or
+# modified the file (-X theirs leaves it staged, not unmerged); --ignore-unmatch
+# stays quiet for paths that aren't present. Either way the file ends up deleted.
 
 # Admin folder (lesson plans, syllabus — instructor only)
-git rm -r --quiet --ignore-unmatch admin/
+git rm -f -r --quiet --ignore-unmatch admin/
 
 # Remove this sync script itself
-git rm --quiet --ignore-unmatch sync_student.sh
+git rm -f --quiet --ignore-unmatch sync_student.sh
 
 # Session 1: output and full data
-git rm -r --quiet --ignore-unmatch session_1/output/
-git rm -r --quiet --ignore-unmatch session_1/data/full/
+git rm -f -r --quiet --ignore-unmatch session_1/output/
+git rm -f -r --quiet --ignore-unmatch session_1/data/full/
 
 # Remove docs: instructor notes, answer keys, correct prompts, decisions
-git ls-files 'session_*/docs/instructor_notes.md' | sort -u | xargs -r git rm --quiet --ignore-unmatch
-git ls-files 'session_*/docs/instructor_answer_key.md' | sort -u | xargs -r git rm --quiet --ignore-unmatch
-git rm --quiet --ignore-unmatch session_1/docs/demo_prompt_correct.md
-git rm --quiet --ignore-unmatch session_1/docs/decisions.md
+git ls-files 'session_*/docs/instructor_notes.md' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
+git ls-files 'session_*/docs/instructor_answer_key.md' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
+git rm -f --quiet --ignore-unmatch session_1/docs/demo_prompt_correct.md
+git rm -f --quiet --ignore-unmatch session_1/docs/decisions.md
 
 # Remove solution scripts
-git ls-files 'session_*/scripts/solution_*.py' | sort -u | xargs -r git rm --quiet --ignore-unmatch
+git ls-files 'session_*/scripts/solution_*.py' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
 
 # Remove teacher-only scripts
-git rm --quiet --ignore-unmatch session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py
-git rm --quiet --ignore-unmatch session_2/scripts/build_county_panel.py
-git rm --quiet --ignore-unmatch session_4/scripts/base_regression.py
-git rm --quiet --ignore-unmatch session_4/scripts/buggy_script.py
-git rm --quiet --ignore-unmatch session_8/scripts/api_template.py
+git rm -f --quiet --ignore-unmatch session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py
+git rm -f --quiet --ignore-unmatch session_2/scripts/build_county_panel.py
+git rm -f --quiet --ignore-unmatch session_4/scripts/base_regression.py
+git rm -f --quiet --ignore-unmatch session_4/scripts/buggy_script.py
+git rm -f --quiet --ignore-unmatch session_8/scripts/api_template.py
 
 # Remove pre-computed output students should generate themselves
-git rm --quiet --ignore-unmatch session_3/output/merged_survey.csv
-git rm --quiet --ignore-unmatch session_3/output/robustness_table.png
-git rm --quiet --ignore-unmatch session_3/output/robustness_table.tex
-git rm --quiet --ignore-unmatch session_3/output/fx_rate_figure.png
-git rm --quiet --ignore-unmatch session_3/output/main_table.tex
-git rm --quiet --ignore-unmatch session_3/output/summary_stats.tex
+git rm -f --quiet --ignore-unmatch session_3/output/merged_survey.csv
+git rm -f --quiet --ignore-unmatch session_3/output/robustness_table.png
+git rm -f --quiet --ignore-unmatch session_3/output/robustness_table.tex
+git rm -f --quiet --ignore-unmatch session_3/output/fx_rate_figure.png
+git rm -f --quiet --ignore-unmatch session_3/output/main_table.tex
+git rm -f --quiet --ignore-unmatch session_3/output/summary_stats.tex
 
 # Remove teacher-only figure generation script
-git rm --quiet --ignore-unmatch session_3/scripts/generate_fx_figure.py
+git rm -f --quiet --ignore-unmatch session_3/scripts/generate_fx_figure.py
 
 # Session 4: remove instructor-only demo code, data, and docs
-git rm -r --quiet --ignore-unmatch session_4/code/
-git rm --quiet --ignore-unmatch session_4/data/course_participants.csv
-git rm --quiet --ignore-unmatch session_4/data/satisfaction.csv
-git rm --quiet --ignore-unmatch session_4/docs/methods_paragraph.md
-git rm --quiet --ignore-unmatch session_4/docs/instructor_notes_debugging.md
-git rm --quiet --ignore-unmatch session_4/github_collaboration_practice/INSTRUCTOR.md
+git rm -f -r --quiet --ignore-unmatch session_4/code/
+git rm -f --quiet --ignore-unmatch session_4/data/course_participants.csv
+git rm -f --quiet --ignore-unmatch session_4/data/satisfaction.csv
+git rm -f --quiet --ignore-unmatch session_4/docs/methods_paragraph.md
+git rm -f --quiet --ignore-unmatch session_4/docs/instructor_notes_debugging.md
+git rm -f --quiet --ignore-unmatch session_4/github_collaboration_practice/INSTRUCTOR.md
 
 # Session 4 Option B: remove the instructor demo folder and reference paper
-git rm -r --quiet --ignore-unmatch session_4/option_b/exercise_2/demo/
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.tex
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.pdf
+git rm -f -r --quiet --ignore-unmatch session_4/option_b/exercise_2/demo/
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.pdf
 
 # Session 4 Option B Exercise 2: students generate these themselves in Exercise 1
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/summary_stats.tex
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/main_table.tex
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/robustness_table.tex
-git rm --quiet --ignore-unmatch session_4/option_b/exercise_2/figures/fx_rate_figure.png
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/summary_stats.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/main_table.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/robustness_table.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/figures/fx_rate_figure.png
 
 # Session 4 Option B output: students generate merged_survey.csv themselves
-git rm --quiet --ignore-unmatch session_4/option_b/output/merged_survey.csv
+git rm -f --quiet --ignore-unmatch session_4/option_b/output/merged_survey.csv
 
 # Session 5 capstone: keep student-facing materials, remove instructor-only notes.
-git rm --quiet --ignore-unmatch session_5/capstone-template/INSTRUCTOR.md
-git rm --quiet --ignore-unmatch session_5/session5_slides.tex
-git rm --quiet --ignore-unmatch session_5/session5_slides.pdf
+git rm -f --quiet --ignore-unmatch session_5/capstone-template/INSTRUCTOR.md
+git rm -f --quiet --ignore-unmatch session_5/session5_slides.tex
+git rm -f --quiet --ignore-unmatch session_5/session5_slides.pdf
 
 # Remove slide source files and images (keep only PDFs)
-git rm -r --quiet --ignore-unmatch slides/img/
-git ls-files slides/ | grep -v '\.pdf$' | sort -u | xargs -r git rm --quiet --ignore-unmatch
+git rm -f -r --quiet --ignore-unmatch slides/img/
+git ls-files slides/ | grep -v '\.pdf$' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
 
 # Remove old module-numbered slide PDFs (superseded by session-numbered slides)
-git rm --quiet --ignore-unmatch slides/module1_slides.pdf
-git rm --quiet --ignore-unmatch slides/module2_slides.pdf
-git rm --quiet --ignore-unmatch slides/module3_slides.pdf
+git rm -f --quiet --ignore-unmatch slides/module1_slides.pdf
+git rm -f --quiet --ignore-unmatch slides/module2_slides.pdf
+git rm -f --quiet --ignore-unmatch slides/module3_slides.pdf
 
 # If anything is still unmerged after the rm pass, bail loudly so a human can resolve
 if git ls-files --unmerged | grep -q .; then
