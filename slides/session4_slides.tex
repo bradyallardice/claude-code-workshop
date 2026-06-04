@@ -74,8 +74,8 @@
   Today you will:
   \begin{enumerate}
     \item Run the usual workspace ritual --- routine since session 1, quick recap below
-    \item Learn to route a wish --- is it a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
     \item Connect two MCPs (Zotero, GitHub) in practice
+    \item Build a skill --- and learn to route a wish: is it a \textbf{skill}, \textbf{project context}, or \textbf{MCP}?
   \end{enumerate}
 
   \vspace{0.5em}
@@ -256,17 +256,17 @@ git stash pop                     # skip if stash was empty
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  PART 3: MCPS
+%  PART 2: MCPS
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Part 3: MCPs}
+\begin{frame}{Part 2: MCPs}
   \centering
   \vspace{2em}
   {\Large Connecting Claude Code\\[0.3em]
   to systems outside your project.}
 
   \vspace{1.5em}
-  {\small From the routing rule: \emph{MCPs are for what's live.}\\
+  {\small An MCP is for what's \emph{live} --- a system that changes outside your project.\\
   Here are two live things worth connecting.}
 
   \vspace{1.5em}
@@ -313,121 +313,6 @@ git stash pop                     # skip if stash was empty
 
   \vspace{0.4em}
   Callback to the meta-lesson: MCPs are easy to accumulate. Ask what each one earns.
-\end{frame}
-
-% ---- 3b: Zotero --------------------------------------------------
-
-\begin{frame}{The Friction Case: Zotero}
-  \textbf{Drafting with citations normally looks like:}
-
-  \vspace{0.3em}
-  \begin{enumerate}
-    \item Write a sentence that needs a citation
-    \item Stop. Open Zotero. Search. Find the paper. Copy the cite key.
-    \item Come back to the editor. Paste. Context-switch back into drafting.
-    \item Repeat ten times per paragraph.
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \textbf{With the Zotero MCP:} ``Find me the Smith 2019 paper on voter ID, add it to refs.bib, and cite it here.'' Claude Code does the search, the BibTeX export, the \texttt{\textbackslash cite\{\}} insertion --- without you leaving the \texttt{.tex} file.
-
-  \vspace{0.5em}
-  \begin{block}{Why it earns its keep}
-    \textbf{Reduce friction at a boundary.} You could already do all of this manually. The MCP just removes the tool-switch.
-  \end{block}
-\end{frame}
-
-\begin{frame}{What the Zotero MCP Can Do}
-  \textbf{The Zotero MCP exposes around two dozen tools. They fall into two buckets:}
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \column{0.48\textwidth}
-    \textbf{Read from your library}
-    \begin{itemize}\small
-      \item \textbf{Search:} keyword, semantic (natural language), by tag, advanced filters
-      \item \textbf{Browse:} collections, recent items, saved searches, RSS feeds
-      \item \textbf{Pull metadata:} title, authors, abstract, BibTeX fields
-      \item \textbf{Pull full text} of attached PDFs
-      \item \textbf{Read} your existing notes and annotations
-    \end{itemize}
-
-    \column{0.48\textwidth}
-    \textbf{Write back to your library}
-    \begin{itemize}\small
-      \item \textbf{Add papers} by DOI, URL, or local PDF (auto-fetches metadata + open-access PDFs)
-      \item \textbf{Create notes} attached to items
-      \item \textbf{Create and organize collections}
-      \item \textbf{Update item metadata} --- tags, titles, abstracts
-    \end{itemize}
-
-    \vspace{0.6em}
-    \begin{block}{\small What this unlocks}
-      \small Claude can read the \emph{actual full text} of papers in your library --- not just the title --- so it can reason about what's \emph{in} the paper, not just whether the citation exists.
-    \end{block}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Zotero MCP: Live Demo}
-  \textbf{A single prompt:}
-
-  \vspace{0.3em}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Find all papers in my claude_code_zotero collection
-on local economic voting, and for each give me the
-abstract and any notes I have on it.
-  \end{lstlisting}
-
-  \vspace{0.4em}
-  \textbf{What you'll see in the tool-call log:}
-  \begin{enumerate}
-    \item \texttt{zotero\_get\_collection\_items("claude\_code\_zotero")} --- lists the collection
-    \item \texttt{zotero\_semantic\_search("local economic voting")} --- filters to the topic
-    \item \texttt{zotero\_get\_item\_metadata(...)} --- pulls title, authors, abstract
-    \item \texttt{zotero\_get\_notes(...)} --- pulls my existing notes on each item
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \alert{Watch the tool calls, not just the output. Seeing which tools fire tells you what the MCP actually does.}
-\end{frame}
-
-\begin{frame}{Exercise: Mini Literature Review (15 min)}
-  \textbf{You installed the Zotero MCP as Session 4 prework and pointed it at the shared group library \texttt{claude\_code\_zotero} --- nine papers on economic voting.}
-
-  \vspace{0.5em}
-  \textbf{Your task.} Draft a \textbf{five-sentence literature review} on \emph{one} of:
-  \begin{itemize}\small
-    \item How economic conditions shape vote choice
-    \item Whether voters punish incumbents for bad economies
-    \item Whether voters respond to the \emph{local} economy versus the national one
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Rules:}
-  \begin{itemize}\small
-    \item Every sentence cites at least one paper from \texttt{claude\_code\_zotero}
-    \item Only use cite keys that \emph{actually exist} in the collection --- no hallucinations
-    \item Claude does the searching, full-text reading, and drafting
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{What to Watch For}
-  \textbf{While the model works, watch the tool calls:}
-
-  \vspace{0.4em}
-  \begin{itemize}
-    \item Did it run \texttt{zotero\_semantic\_search}, or skip search and guess?
-    \item Did it actually pull \texttt{zotero\_get\_item\_fulltext}, or cite from titles alone?
-    \item Do the claims in your sentences match what the papers actually say?
-  \end{itemize}
-
-  \vspace{0.6em}
-  \textbf{After drafting, spot-check one citation.} Open the paper in Zotero. Does the sentence you wrote accurately represent what the paper argues?
-
-  \vspace{0.6em}
-  \begin{alertblock}{The real lesson}
-    An MCP gives Claude \emph{access}. It does not give Claude \emph{judgment}. The failure mode to expect: a plausible sentence citing a paper that says something adjacent --- but not quite that. \textbf{You still read.}
-  \end{alertblock}
 \end{frame}
 
 % ---- 3c: GitHub + pair exercise ----------------------------------
@@ -855,11 +740,126 @@ commit it on a branch, open a PR, and merge it.
   \end{block}
 \end{frame}
 
+% ---- 3b: Zotero --------------------------------------------------
+
+\begin{frame}{The Friction Case: Zotero}
+  \textbf{Drafting with citations normally looks like:}
+
+  \vspace{0.3em}
+  \begin{enumerate}
+    \item Write a sentence that needs a citation
+    \item Stop. Open Zotero. Search. Find the paper. Copy the cite key.
+    \item Come back to the editor. Paste. Context-switch back into drafting.
+    \item Repeat ten times per paragraph.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \textbf{With the Zotero MCP:} ``Find me the Smith 2019 paper on voter ID, add it to refs.bib, and cite it here.'' Claude Code does the search, the BibTeX export, the \texttt{\textbackslash cite\{\}} insertion --- without you leaving the \texttt{.tex} file.
+
+  \vspace{0.5em}
+  \begin{block}{Why it earns its keep}
+    \textbf{Reduce friction at a boundary.} You could already do all of this manually. The MCP just removes the tool-switch.
+  \end{block}
+\end{frame}
+
+\begin{frame}{What the Zotero MCP Can Do}
+  \textbf{The Zotero MCP exposes around two dozen tools. They fall into two buckets:}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Read from your library}
+    \begin{itemize}\small
+      \item \textbf{Search:} keyword, semantic (natural language), by tag, advanced filters
+      \item \textbf{Browse:} collections, recent items, saved searches, RSS feeds
+      \item \textbf{Pull metadata:} title, authors, abstract, BibTeX fields
+      \item \textbf{Pull full text} of attached PDFs
+      \item \textbf{Read} your existing notes and annotations
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Write back to your library}
+    \begin{itemize}\small
+      \item \textbf{Add papers} by DOI, URL, or local PDF (auto-fetches metadata + open-access PDFs)
+      \item \textbf{Create notes} attached to items
+      \item \textbf{Create and organize collections}
+      \item \textbf{Update item metadata} --- tags, titles, abstracts
+    \end{itemize}
+
+    \vspace{0.6em}
+    \begin{block}{\small What this unlocks}
+      \small Claude can read the \emph{actual full text} of papers in your library --- not just the title --- so it can reason about what's \emph{in} the paper, not just whether the citation exists.
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Zotero MCP: Live Demo}
+  \textbf{A single prompt:}
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Find all papers in my claude_code_zotero collection
+on local economic voting, and for each give me the
+abstract and any notes I have on it.
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \textbf{What you'll see in the tool-call log:}
+  \begin{enumerate}
+    \item \texttt{zotero\_get\_collection\_items("claude\_code\_zotero")} --- lists the collection
+    \item \texttt{zotero\_semantic\_search("local economic voting")} --- filters to the topic
+    \item \texttt{zotero\_get\_item\_metadata(...)} --- pulls title, authors, abstract
+    \item \texttt{zotero\_get\_notes(...)} --- pulls my existing notes on each item
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Watch the tool calls, not just the output. Seeing which tools fire tells you what the MCP actually does.}
+\end{frame}
+
+\begin{frame}{Exercise: Mini Literature Review (15 min)}
+  \textbf{You installed the Zotero MCP as Session 4 prework and pointed it at the shared group library \texttt{claude\_code\_zotero} --- nine papers on economic voting.}
+
+  \vspace{0.5em}
+  \textbf{Your task.} Draft a \textbf{five-sentence literature review} on \emph{one} of:
+  \begin{itemize}\small
+    \item How economic conditions shape vote choice
+    \item Whether voters punish incumbents for bad economies
+    \item Whether voters respond to the \emph{local} economy versus the national one
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Rules:}
+  \begin{itemize}\small
+    \item Every sentence cites at least one paper from \texttt{claude\_code\_zotero}
+    \item Only use cite keys that \emph{actually exist} in the collection --- no hallucinations
+    \item Claude does the searching, full-text reading, and drafting
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What to Watch For}
+  \textbf{While the model works, watch the tool calls:}
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Did it run \texttt{zotero\_semantic\_search}, or skip search and guess?
+    \item Did it actually pull \texttt{zotero\_get\_item\_fulltext}, or cite from titles alone?
+    \item Do the claims in your sentences match what the papers actually say?
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{After drafting, spot-check one citation.} Open the paper in Zotero. Does the sentence you wrote accurately represent what the paper argues?
+
+  \vspace{0.6em}
+  \begin{alertblock}{The real lesson}
+    An MCP gives Claude \emph{access}. It does not give Claude \emph{judgment}. The failure mode to expect: a plausible sentence citing a paper that says something adjacent --- but not quite that. \textbf{You still read.}
+  \end{alertblock}
+\end{frame}
+
 % ══════════════════════════════════════════════════════════════════
-%  PART 2: SKILLS (CENTERPIECE)
+%  PART 3: SKILLS (CENTERPIECE)
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Part 2: Skills}
+\begin{frame}{Part 3: Skills}
   \centering
   \vspace{0.5em}
   \includegraphics[width=0.55\textwidth,trim=0 300 0 300,clip]{img/claude_skills.png}
