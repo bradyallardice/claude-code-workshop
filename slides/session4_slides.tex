@@ -990,6 +990,39 @@ git push -u origin my-branch-name
   \alert{\small On a collaborative repo, every PR has an assigned reviewer. They have to click approve \emph{and} merge --- nothing reaches \texttt{main} until they do.}
 \end{frame}
 
+\begin{frame}[fragile]{Push vs.\ Pull Request: Two Different Moves}
+  \textbf{These get conflated constantly, but they do different jobs.}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{\texttt{git push}}
+    \begin{itemize}\small
+      \item Uploads your local commits to \emph{your branch} on GitHub
+      \item Pure sync --- mechanical, instant, no review
+      \item Touches only your branch; \texttt{main} is untouched
+      \item You do it \emph{many} times as you work
+    \end{itemize}
+
+    \column{0.48\textwidth}
+    \textbf{Pull request (PR)}
+    \begin{itemize}\small
+      \item Proposes merging your branch \emph{into} \texttt{main}
+      \item A request --- reviewed, discussed, then merged
+      \item The \emph{merge} is what actually changes \texttt{main}
+      \item One per chunk of work; push again and it updates
+    \end{itemize}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{block}{The one-liner}
+    \textbf{Push} sends your commits to your branch. \textbf{A PR} asks to fold that branch into \texttt{main}. Push moves code \emph{to the server}; only a \emph{merged} PR moves it \emph{into the shared version}.
+  \end{block}
+
+  \vspace{0.2em}
+  \alert{\small You can push a hundred times and \texttt{main} never changes --- it changes only when a PR is merged.}
+\end{frame}
+
 \begin{frame}{Collaboration, Live}
   \textbf{Time to see the whole loop on a real repo.} I'll walk through branches, commits, push, PR, review, and merge --- on \texttt{github.com/bradyallardice/github\_collaboration\_practice}.
 
