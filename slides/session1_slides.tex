@@ -1364,6 +1364,93 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
+%  THINKING AND EFFORT
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Thinking vs.\ Not Thinking}
+  Beyond \emph{which} model, you control \emph{how hard} it works before it answers.
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Not thinking (default)}\\[0.3em]
+      {\small The model responds directly. Fast and cheap.}
+      \begin{itemize}
+        \item Reformatting, renaming
+        \item Simple, well-specified edits
+        \item Quick factual questions
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Thinking (extended reasoning)}\\[0.3em]
+      {\small The model reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
+      \begin{itemize}
+        \item Debugging stubborn errors
+        \item Specification decisions
+        \item Planning a multi-step change
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{alertblock}{When in doubt}
+    If the task involves a \textbf{judgment call} or Claude got it wrong once already, turn thinking on. For mechanical work, leave it off.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Dialing the Effort}
+  \textbf{Trigger thinking with plain words.} Adding a thinking cue to your prompt tells Claude how much reasoning budget to spend --- more words, more thinking:
+
+  \vspace{0.4em}
+  \begin{center}
+  \small
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{What you type} & \textbf{Effect} \\
+    \midrule
+    (nothing)        & Answers directly \\
+    ``\texttt{think}''        & A little reasoning first \\
+    ``\texttt{think hard}''   & More careful reasoning \\
+    ``\texttt{ultrathink}''   & Maximum reasoning budget \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.5em}
+  \textbf{Effort, on Opus.} Opus also has an \textbf{effort} setting (low / medium / high) you can set with \texttt{/model}. Higher effort = more thorough, slower, costlier. Think of it as the same knob, set once for the session rather than per-prompt.
+
+  \vspace{0.4em}
+  \alert{Thinking is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  GETTING FILES IN
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Getting Files In: Drag and Drop}
+  You don't have to describe a file in words --- you can hand it straight to Claude.
+
+  \vspace{0.6em}
+  \textbf{Drag into the chat panel} (in VS Code) to add something as context:
+  \begin{itemize}
+    \item A \textbf{data file} (\texttt{.csv}, \texttt{.xlsx}) so Claude can see the columns
+    \item A \textbf{figure or PDF} --- a paper, a table, a chart to reproduce
+    \item A \textbf{screenshot} of an error message or a plot that looks wrong
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Two ways to do it}
+    \begin{itemize}
+      \item \textbf{Drag} a file from the VS Code Explorer (or your Finder/desktop) onto the chat box
+      \item \textbf{Paste} an image directly with \texttt{Cmd+V} / \texttt{Ctrl+V} --- great for screenshots
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{0.3em}
+  {\small A screenshot of a broken plot plus ``why does this look wrong?'' is often faster than describing it.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
 %  COST MANAGEMENT
 % ══════════════════════════════════════════════════════════════════
 
