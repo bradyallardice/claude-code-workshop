@@ -355,7 +355,6 @@ code .
   \vspace{0.5em}
   \textbf{This course teaches you to capture the value while managing the risk.}
 \end{frame}
-
 % ══════════════════════════════════════════════════════════════════
 %  THE CODING PARADIGM SPECTRUM  [10:00–16:00]
 % ══════════════════════════════════════════════════════════════════
@@ -486,169 +485,6 @@ code .
 
   \vspace{0.3em}
   These principles apply to Claude Code, Cursor, Codex, Windsurf, or whatever comes next.
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  WHAT IT CAN AND CANNOT DO  [16:00–19:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{What Claude Code Can Do for Academic Research}
-  \footnotesize
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{Data Work}
-      \begin{itemize}
-        \item Clean, reshape, and merge datasets
-        \item Construct variables from raw data
-        \item Build panel datasets across sources
-        \item Handle missing data, recoding, harmonization
-      \end{itemize}
-
-      \vspace{0.5em}
-      \textbf{Analysis}
-      \begin{itemize}
-        \item Exploratory data analysis and summary statistics
-        \item Generate robustness checks and specification variants
-        \item Create publication-quality visualizations
-        \item Synthesize results across specifications
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{Writing and Review}
-      \begin{itemize}
-        \item Draft methods sections, data descriptions, results summaries
-        \item Audit existing scripts for silent errors
-        \item Review code against your methods section
-        \item Write documentation, READMEs, replication packages
-      \end{itemize}
-
-      \vspace{0.5em}
-      \textbf{Research Infrastructure}
-      \begin{itemize}
-        \item Process text corpora at scale (NLP, classification)
-        \item Web scraping and API data collection
-        \item Crosswalk and linkage construction
-        \item Refactor and optimize slow pipelines
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{A Tool Built for Software Engineers}
-  Claude Code was designed for professional developers. Their world is different from ours.
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{Software Engineering}
-      \begin{itemize}
-        \item ``Works'' = \textbf{runs correctly}. Clear success criteria: tests pass, feature ships, users are happy
-        \item Code is the product
-        \item Errors are caught by automated tests
-        \item Speed and iteration are paramount
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{Academic Research}
-      \begin{itemize}
-        \item ``Works'' = \textbf{???}. Code that runs without errors can produce completely wrong results. Output that looks plausible can be based on the wrong sample, wrong specification, or wrong variable
-        \item Code is the \textit{instrument}; the paper is the product
-        \item Errors are caught by \textit{you}, or by Reviewer 2
-        \item Correctness matters more than speed
-      \end{itemize}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.5em}
-  The defaults, instincts, and shortcuts built into these tools reflect engineering priorities.\\
-  \textbf{Using them well for research means overriding some of those defaults.}
-\end{frame}
-
-\begin{frame}{Do You Own It?}
-  \begin{block}{}
-    Pick any result your code produced. Without looking at the code:\\
-    what got dropped, what got merged, and why?
-  \end{block}
-
-  \vspace{0.3em}
-  If you can't answer that in 30 seconds, you don't own it.
-
-  \vspace{0.5em}
-  \textbf{Before you delegate:}
-  \begin{itemize}
-    \item What would wrong look like? Can I describe a specific failure mode before I run this?
-  \end{itemize}
-
-  \vspace{0.3em}
-  \textbf{After you delegate:}
-  \begin{itemize}
-    \item Can I describe what this code does without reading it?
-    \item Can I state what decisions shaped the output and why?
-  \end{itemize}
-
-  \vspace{0.5em}
-  You didn't write it. That's fine.\\
-  But every decision in it is yours. \textbf{Can you justify it as if you chose it yourself?}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  WHY VERIFICATION MATTERS  [19:00–23:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Why Verification Matters}
-  {\large What happens when you skip verification:}
-
-  \vspace{0.8em}
-  \begin{enumerate}
-    \item \textbf{Silent observation loss:} A merge silently drops 300 observations.\\
-      The code looks clean. The error is invisible without checking row counts.
-
-      \vspace{0.5em}
-    \item \textbf{Invalid transformation:} A log transformation applied to a variable containing zeros.\\
-      No error raised, wrong results.
-
-      \vspace{0.5em}
-    \item \textbf{Incorrect panel operations:} A lagged variable computed without sorting by time within panels.
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \alert{These are the kinds of errors that end up in published work.}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  THE CONTROL PRINCIPLE  [23:00–25:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{The Control Principle}
-  \begin{alertblock}{You Are the PI. Claude Code Is the RA.}
-    The question is not ``can Claude Code do this'' but\\
-    ``what is the best way to get this done reliably.''
-  \end{alertblock}
-
-  \vspace{1em}
-  \centering
-  \textbf{If you cannot verify a result, you should not delegate the task.}
-
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  WHY PYTHON  [25:00–27:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Why Python}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \item Claude Code is substantially better at Python than Stata or R
-        \item The principles (task decomposition, verification, control) transfer to any language
-        \item Python is increasingly where the tools and ecosystem are for computational research
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \vspace{0.3em}
-      \includegraphics[width=\textwidth]{img/python_vs_r.png}
-    \end{column}
-  \end{columns}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -979,6 +815,170 @@ claude
   \vspace{0.3em}
   \alert{You still decide. The terminal is just a faster door for a one-off job.}
 \end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHAT IT CAN AND CANNOT DO  [16:00–19:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What Claude Code Can Do for Academic Research}
+  \footnotesize
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Data Work}
+      \begin{itemize}
+        \item Clean, reshape, and merge datasets
+        \item Construct variables from raw data
+        \item Build panel datasets across sources
+        \item Handle missing data, recoding, harmonization
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Analysis}
+      \begin{itemize}
+        \item Exploratory data analysis and summary statistics
+        \item Generate robustness checks and specification variants
+        \item Create publication-quality visualizations
+        \item Synthesize results across specifications
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Writing and Review}
+      \begin{itemize}
+        \item Draft methods sections, data descriptions, results summaries
+        \item Audit existing scripts for silent errors
+        \item Review code against your methods section
+        \item Write documentation, READMEs, replication packages
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Research Infrastructure}
+      \begin{itemize}
+        \item Process text corpora at scale (NLP, classification)
+        \item Web scraping and API data collection
+        \item Crosswalk and linkage construction
+        \item Refactor and optimize slow pipelines
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{A Tool Built for Software Engineers}
+  Claude Code was designed for professional developers. Their world is different from ours.
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Software Engineering}
+      \begin{itemize}
+        \item ``Works'' = \textbf{runs correctly}. Clear success criteria: tests pass, feature ships, users are happy
+        \item Code is the product
+        \item Errors are caught by automated tests
+        \item Speed and iteration are paramount
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Academic Research}
+      \begin{itemize}
+        \item ``Works'' = \textbf{???}. Code that runs without errors can produce completely wrong results. Output that looks plausible can be based on the wrong sample, wrong specification, or wrong variable
+        \item Code is the \textit{instrument}; the paper is the product
+        \item Errors are caught by \textit{you}, or by Reviewer 2
+        \item Correctness matters more than speed
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  The defaults, instincts, and shortcuts built into these tools reflect engineering priorities.\\
+  \textbf{Using them well for research means overriding some of those defaults.}
+\end{frame}
+
+\begin{frame}{Do You Own It?}
+  \begin{block}{}
+    Pick any result your code produced. Without looking at the code:\\
+    what got dropped, what got merged, and why?
+  \end{block}
+
+  \vspace{0.3em}
+  If you can't answer that in 30 seconds, you don't own it.
+
+  \vspace{0.5em}
+  \textbf{Before you delegate:}
+  \begin{itemize}
+    \item What would wrong look like? Can I describe a specific failure mode before I run this?
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{After you delegate:}
+  \begin{itemize}
+    \item Can I describe what this code does without reading it?
+    \item Can I state what decisions shaped the output and why?
+  \end{itemize}
+
+  \vspace{0.5em}
+  You didn't write it. That's fine.\\
+  But every decision in it is yours. \textbf{Can you justify it as if you chose it yourself?}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHY VERIFICATION MATTERS  [19:00–23:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Why Verification Matters}
+  {\large What happens when you skip verification:}
+
+  \vspace{0.8em}
+  \begin{enumerate}
+    \item \textbf{Silent observation loss:} A merge silently drops 300 observations.\\
+      The code looks clean. The error is invisible without checking row counts.
+
+      \vspace{0.5em}
+    \item \textbf{Invalid transformation:} A log transformation applied to a variable containing zeros.\\
+      No error raised, wrong results.
+
+      \vspace{0.5em}
+    \item \textbf{Incorrect panel operations:} A lagged variable computed without sorting by time within panels.
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{These are the kinds of errors that end up in published work.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  THE CONTROL PRINCIPLE  [23:00–25:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Control Principle}
+  \begin{alertblock}{You Are the PI. Claude Code Is the RA.}
+    The question is not ``can Claude Code do this'' but\\
+    ``what is the best way to get this done reliably.''
+  \end{alertblock}
+
+  \vspace{1em}
+  \centering
+  \textbf{If you cannot verify a result, you should not delegate the task.}
+
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  WHY PYTHON  [25:00–27:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Why Python}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Claude Code is substantially better at Python than Stata or R
+        \item The principles (task decomposition, verification, control) transfer to any language
+        \item Python is increasingly where the tools and ecosystem are for computational research
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/python_vs_r.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 
 % ══════════════════════════════════════════════════════════════════
 %  EXERCISE  [37:00–47:00]
