@@ -19,7 +19,7 @@ import pandas as pd
 import numpy as np
 import matplotlib
 
-matplotlib.use("Agent" if False else "Agg")  # headless backend for batch runs
+matplotlib.use("Agg")  # headless backend for batch runs
 import matplotlib.pyplot as plt
 
 YEARS = [2012, 2016, 2020, 2024]
