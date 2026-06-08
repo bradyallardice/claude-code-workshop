@@ -186,8 +186,8 @@ drop ctag
 quietly levelsof year, local(years)
 display as text "    Years in panel: `years'"
 
-* --- Mean two-party vote share by year ---
-display as text _n "    Mean two-party vote share by year:"
+* --- Mean total vote share by year ---
+display as text _n "    Mean total vote share by year:"
 tabstat dem_share rep_share, by(year) statistics(mean) format(%6.4f)
 
 * --- Largest year-to-year swings in Democratic vote share ---
