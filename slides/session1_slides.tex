@@ -1151,17 +1151,16 @@ claude
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 {
   "permissions": {
-    "deny": ["Read(/**)", "Write(/**)" ],
-    "allow": ["Read(./...)", "Write(./...)", "Read(~/.claude/...)"]
+    "allow": ["Read(/**)", "Edit(/**)", "Read(~/.claude/**)"]
   }
 }
   \end{lstlisting}
 
   \textbf{What this does:}
   \begin{itemize}
-    \item Blocks reads and writes \textit{outside} the project directory.
-    \item Allows full access \textit{within} the project.
+    \item Allows reads and edits \textit{within} the project directory.
     \item Allows Claude to load your user-level config (\texttt{\textasciitilde/.claude/}).
+    \item Anything outside the project \textit{prompts for permission} rather than being silently allowed.
   \end{itemize}
 \end{frame}
 
