@@ -5,7 +5,8 @@
 * PURPOSE
 *   Reads raw county-level presidential returns (countypres_sample.csv),
 *   keeps the two major parties' TOTAL vote counts, reshapes to one row
-*   per county-year, computes two-party vote shares, and saves the panel
+*   per county-year, computes total vote shares (each party's votes as a
+*   fraction of total turnout), and saves the panel
 *   to session_1/output/county_panel_stata.dta. It then runs a short
 *   exploratory pass (county count, mean shares by year, largest swings).
 *
