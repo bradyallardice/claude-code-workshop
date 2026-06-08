@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(//Users/**)",
+      "Edit(//Users/**)"
+    ],
+    "allow": [
+      "Read(/)",
+      "Edit(/)",
+      "Read(~/.claude/**)"
+    ]
+  }
+}
