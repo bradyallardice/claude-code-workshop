@@ -11,26 +11,46 @@ Replace `~/my_workspace` with wherever you keep your local course files.
 
 Today is the first time — do this together, live:
 
-### 1. Get the course repo (first time: clone it)
+### 1. Get the course repo
 
+**Already cloned (returning students)?**
+
+Mac/Linux:
 ```bash
-git clone https://github.com/bradyallardice/claude-code-workshop.git
-cd claude-code-workshop
+cd ~/claude-code-workshop && git pull
+```
+Windows (PowerShell):
+```powershell
+cd ~\claude-code-workshop; git pull
 ```
 
-Already have the repo from pre-work? Run `git pull` inside it instead of cloning.
+**First time?**
+```bash
+git clone https://github.com/bradyallardice/claude-code-workshop.git
+```
 
 ### 2. Make your workspace and copy today's folder into it
 
+Mac/Linux:
 ```bash
 mkdir -p ~/my_workspace
 cp -r session_1/ ~/my_workspace/session_1/
 ```
+Windows (PowerShell):
+```powershell
+New-Item -ItemType Directory -Force ~\my_workspace
+Copy-Item -Recurse session_1 ~\my_workspace\session_1
+```
 
 ### 3. Open your copy in VS Code and work there
 
+Mac/Linux:
 ```bash
 cd ~/my_workspace/session_1 && code .
+```
+Windows (PowerShell):
+```powershell
+cd ~\my_workspace\session_1; code .
 ```
 
 ---
