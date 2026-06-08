@@ -138,15 +138,21 @@ drop _both_missing
 replace dem_votes = 0 if missing(dem_votes)
 replace rep_votes = 0 if missing(rep_votes)
 
-gen dem_share = dem_votes / (dem_votes + rep_votes)
-gen rep_share = rep_votes / (dem_votes + rep_votes)
-gen turnout   = totalvotes
+gen turnout = totalvotes
 
-* Verify the shares are well-behaved: in [0,1] and summing to 1.
-assert dem_share >= 0 & dem_share <= 1
-assert rep_share >= 0 & rep_share <= 1
-assert abs(dem_share + rep_share - 1) < 1e-6
-display as text "    Vote shares in [0,1] and dem_share + rep_share = 1 (verified)."
+* Total vote shares: each party's votes as a fraction of ALL votes cast
+* (the denominator is total turnout, not just the two-party total). Because
+* third parties and write-ins are in the denominator, dem_share + rep_share
+* need not equal 1.
+gen dem_share = dem_votes / turnout
+gen rep_share = rep_votes / turnout
+
+* Verify the shares are well-behaved: in [0,1] and their sum does not
+* exceed 1 (the remainder is third-party / other / write-in votes).
+assert dem_share >= 0 & dem_share <= 1 if !missing(dem_share)
+assert rep_share >= 0 & rep_share <= 1 if !missing(rep_share)
+assert dem_share + rep_share <= 1 + 1e-6 if !missing(dem_share, rep_share)
+display as text "    Total vote shares in [0,1] and dem_share + rep_share <= 1 (verified)."
 
 * Turnout should be at least the two-party vote count.
 assert turnout >= dem_votes + rep_votes if !missing(turnout)
