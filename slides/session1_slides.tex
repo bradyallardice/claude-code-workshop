@@ -1145,6 +1145,30 @@ claude
   \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]{Working in \texttt{/sandbox} Mode}
+  In this course we will always launch Claude Code with the \texttt{/sandbox} flag:
+
+  \vspace{0.5em}
+  \begin{center}
+    \texttt{claude --sandbox}
+  \end{center}
+
+  \vspace{0.5em}
+  \textbf{What \texttt{/sandbox} does:}
+  \begin{itemize}
+    \item Restricts Claude to your project directory --- it cannot read files elsewhere on your machine.
+    \item Allows read access to your user-level Claude config (\texttt{\textasciitilde/.claude/}) so settings still load.
+    \item Does \textit{not} limit what Claude can do inside the project --- it can still run code, write files, and install packages.
+  \end{itemize}
+
+  \vspace{0.6em}
+  \textbf{Why it matters for research:}
+  \begin{itemize}
+    \item Prevents accidental access to data in \textit{other} projects on your machine.
+    \item Makes the boundary explicit: Claude works here, not everywhere.
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Protecting Sensitive Files}
   ``Always allow reads'' assumes there is nothing sensitive to read.\\
   If your project has restricted data or IRB-protected files, you need to keep them away from Claude Code.
