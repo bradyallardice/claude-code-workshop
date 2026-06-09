@@ -106,11 +106,11 @@ def main():
     print("="*70)
     df_model3_candidate = df_model2[
         df_model2['age'].notna() &
-        df_model3_candidate['female'].notna() &
-        df_model3_candidate['ed_level'].notna() &
-        df_model3_candidate['urban_rural'].notna() &
-        df_model3_candidate['income_quintile'].notna() &
-        df_model3_candidate['left_right'].notna()
+        df_model2['female'].notna() &
+        df_model2['ed_level'].notna() &
+        df_model2['urban_rural'].notna() &
+        df_model2['income_quintile'].notna() &
+        df_model2['left_right'].notna()
     ].copy()
 
     predicted_n = len(df_model3_candidate)
