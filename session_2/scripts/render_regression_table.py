@@ -143,12 +143,15 @@ def render_latex(csv_path, tex_path):
     note_df = df[df['row_type'] == 'note']
     if len(note_df) > 0:
         note_text = note_df['value_str'].values[0]
+        lines.append(r"\end{tabular}")
         lines.append("")
-        lines.append(r"\vspace{0.5em}")
-        lines.append(r"\\ \\")
+        lines.append(r"\vspace{1em}")
+        lines.append("")
         lines.append(r"\small")
         lines.append(note_text)
-        lines.append(r"\\\\ \textsuperscript{***} $p<0.001$, \textsuperscript{**} $p<0.01$, \textsuperscript{*} $p<0.05$, \textsuperscript{+} $p<0.1$")
+        lines.append("")
+        lines.append(r"\noindent \textsuperscript{***} $p<0.001$, \textsuperscript{**} $p<0.01$, \textsuperscript{*} $p<0.05$, \textsuperscript{+} $p<0.1$")
+        return
 
     # Write LaTeX file
     tex_content = "\n".join(lines)
