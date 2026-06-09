@@ -156,6 +156,7 @@ def render_latex(csv_path, tex_path):
     # Wrap in minimal document for standalone compilation
     full_tex = r"""\documentclass{article}
 \usepackage{booktabs}
+\usepackage{makecell}
 \usepackage{geometry}
 \geometry{margin=1in}
 
