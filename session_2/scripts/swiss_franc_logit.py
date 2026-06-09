@@ -293,6 +293,9 @@ def main():
     ).fit(disp=0)
     model_summary(model4, "Model 4: Treatment × FX Status Interaction", len(df_model3_candidate))
 
+    # Run robustness checks
+    robustness_checks(df_model3_candidate)
+
     print("\n" + "="*70)
     print("Analysis complete.")
     print("="*70)
