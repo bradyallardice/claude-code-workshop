@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 def format_coef(coef, se, pvalue):
-    """Format coefficient with stars and SE below."""
+    """Format coefficient with stars and SE below using makecell."""
     if pd.isna(coef) or pd.isna(se):
         return ""
 
@@ -27,8 +27,8 @@ def format_coef(coef, se, pvalue):
 
     coef_str = f"{coef:.3f}{stars}"
     se_str = f"({se:.3f})"
-    # Use \newline for within-cell line breaks in tabular with booktabs
-    return f"{coef_str}\\newline {se_str}"
+    # Use makecell syntax for stacked cells
+    return r"\makecell{" + coef_str + r"\\ " + se_str + "}"
 
 
 def render_latex(csv_path, tex_path):
