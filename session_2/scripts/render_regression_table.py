@@ -27,7 +27,8 @@ def format_coef(coef, se, pvalue):
 
     coef_str = f"{coef:.3f}{stars}"
     se_str = f"({se:.3f})"
-    return f"{coef_str} \\\\ {se_str}"
+    # Use \newline for within-cell line breaks in tabular with booktabs
+    return f"{coef_str}\\newline {se_str}"
 
 
 def render_latex(csv_path, tex_path):
