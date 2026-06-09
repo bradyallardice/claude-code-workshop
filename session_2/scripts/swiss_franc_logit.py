@@ -122,8 +122,8 @@ def main():
     print("MODEL 3: Treatment + FX Status + Demographics (weighted)")
     print("="*70)
     model3 = logit(
-        'supports_intervention ~ C(treatment, Treatment(ref="cntrl")) + '
-        'C(fx_status, Treatment(ref="none")) + '
+        'supports_intervention ~ C(treatment) + '
+        'C(fx_status) + '
         'age + C(female) + C(ed_level) + C(urban_rural) + '
         'C(income_quintile) + left_right',
         data=df_model3_candidate,
