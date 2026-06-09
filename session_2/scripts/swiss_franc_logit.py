@@ -82,7 +82,7 @@ def main():
     print("MODEL 1: Treatment only (weighted)")
     print("="*70)
     model1 = logit(
-        'supports_intervention ~ C(treatment, Treatment(ref="cntrl"))',
+        'supports_intervention ~ C(treatment)',
         data=df,
         weights=df['survey_weight']
     ).fit(disp=0)
