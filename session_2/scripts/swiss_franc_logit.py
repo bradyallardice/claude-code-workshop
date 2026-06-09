@@ -94,7 +94,7 @@ def main():
     print("="*70)
     df_model2 = df[df['fx_status'].notna()].copy()
     model2 = logit(
-        'supports_intervention ~ C(treatment, Treatment(ref="cntrl")) + C(fx_status, Treatment(ref="none"))',
+        'supports_intervention ~ C(treatment) + C(fx_status)',
         data=df_model2,
         weights=df_model2['survey_weight']
     ).fit(disp=0)
