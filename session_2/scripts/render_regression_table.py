@@ -93,11 +93,16 @@ def render_latex(csv_path, tex_path):
 
                 cells.append(cell)
 
-            row_str = " & ".join(cells) + r" \\"
+            # Format row properly - cells should be on separate lines
+            row_str = cells[0]  # row label
+            for cell in cells[1:]:
+                row_str += " & " + cell
+            row_str += r" \\"
             lines.append(row_str)
 
-        # Add spacing after DV group
-        lines.append(r"\addlinespace")
+        # Add spacing after DV group (except for last)
+        if dv != dvs[-1]:
+            lines.append(r"\addlinespace")
 
     # Remove last addlinespace
     if lines[-1] == r"\addlinespace":
