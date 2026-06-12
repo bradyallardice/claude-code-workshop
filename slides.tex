@@ -1,0 +1,89 @@
+% !TeX root = slides.tex
+% ─────────────────────────────────────────────────────────────────────
+% UPF beamer slides — blank deck.
+% Fill in the three metadata fields (title, author, institute), then add
+% \begin{frame}...\end{frame} blocks for your content. Do NOT change the
+% theme/color/footline block above the metadata unless you mean to: it
+% encodes the three house requirements (UPF red, name+affiliation at the
+% bottom, default font).
+% ─────────────────────────────────────────────────────────────────────
+\documentclass[aspectratio=169,12pt]{beamer}
+
+% ── UPF house theme (do not edit) ────────────────────────────────────
+\definecolor{upfred}{HTML}{C8102E}     % UPF institutional red
+
+\usetheme{Madrid}
+\usecolortheme[named=upfred]{structure}
+
+% No font package is loaded on purpose: beamer's default (Computer Modern
+% sans) is "the standard font". Do not add fontspec/helvet/times/etc.
+
+\setbeamertemplate{navigation symbols}{}
+
+% Footline: name + affiliation always bottom-left, frame number bottom-right.
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\usebeamerfont{author in head/foot}%
+      \insertshortauthor\;\textbar\;\insertshortinstitute
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.5ex,dp=1ex,right]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamercolor{frametitle}{fg=upfred,bg=white}
+\setbeamercolor{block title}{bg=upfred,fg=white}
+\setbeamercolor{block body}{bg=upfred!5,fg=black}
+\setbeamercolor{itemize item}{fg=upfred}
+\setbeamercolor{itemize subitem}{fg=upfred!70}
+\setbeamertemplate{itemize item}{\raise1pt\hbox{\small$\bullet$}}
+\setbeamertemplate{itemize subitem}{\raise1pt\hbox{\scriptsize$\bullet$}}
+
+% ── Packages ─────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{adjustbox}
+
+% ── Metadata (FILL THESE IN) ─────────────────────────────────────────
+% \author[<short>]{<full>}: the short form is what shows in the footline.
+% \institute[<short>]{<full>}: the short form is the affiliation in the footline.
+\title[Short Title]{Full Presentation Title}
+\author[Brady Allardice]{Brady Allardice}
+\institute[Universitat Pompeu Fabra]{Universitat Pompeu Fabra}
+\date{\today}
+
+% ═════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title slide (footline suppressed; affiliation shown under name) ───
+{
+\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+\vspace{1.2cm}
+\begin{center}
+  {\Large\bfseries\color{upfred} \inserttitle}\\[10pt]
+  {\normalsize \insertauthor}\\[4pt]
+  {\small\color{gray} \insertinstitute}\\[16pt]
+  % Optional logos — uncomment and point at your image files:
+  % \includegraphics[height=1.4cm]{upflogo.png}\\[14pt]
+  {\small\color{gray} \insertdate}
+\end{center}
+\end{frame}
+}
+
+% ── Content slides ───────────────────────────────────────────────────
+% Add your frames here, e.g.:
+%
+% \begin{frame}{Frame Title}
+%   Content goes here.
+% \end{frame}
+
+\end{document}
