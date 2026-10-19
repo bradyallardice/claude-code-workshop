@@ -1607,6 +1607,47 @@ claude
   \textbf{Learn the hierarchy once} and it tells you where every other piece of configuration belongs.
 \end{frame}
 
+\begin{frame}{Everything Claude Reads Before You Type}
+  \footnotesize
+  \begin{columns}[T]
+    \begin{column}{0.32\textwidth}
+      \textbf{Loaded in full at startup}
+      \begin{itemize}
+        \item \texttt{CLAUDE.md}: user (\texttt{\textasciitilde/.claude/}), project root, and any parent folders
+        \item \texttt{CLAUDE.local.md}: your private, gitignored notes
+        \item \textbf{Imports}: files pulled in with \texttt{@path/to/file} inside a CLAUDE.md
+        \item \texttt{.claude/rules/}: rule files with no \texttt{paths:} filter
+        \item \textbf{Memory}: the start of \texttt{MEMORY.md} (first 200 lines)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \textbf{Only a name and description}
+      \begin{itemize}
+        \item \textbf{Skills}: one-line description each; the full \texttt{SKILL.md} loads only when used
+        \item \textbf{Subagents}: name and description, so Claude knows when to delegate
+        \item \textbf{MCP servers}: tool names only; full tool definitions load when needed
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \textbf{On demand, when relevant}
+      \begin{itemize}
+        \item Subfolder \texttt{CLAUDE.md}: when Claude touches a file in that folder
+        \item Rules with a \texttt{paths:} filter: when a matching file is touched
+        \item Memory topic files: when Claude opens them
+        \item Full skill text: when a skill is invoked
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \textbf{Also always there:} Claude's built-in system prompt, your output style, and a snapshot of the working directory and git status.
+
+  \vspace{0.3em}
+  \begin{alertblock}{See it for yourself}
+    Type \texttt{/context} to see what is loaded and how much room it takes. Type \texttt{/memory} to open the memory and CLAUDE.md files.
+  \end{alertblock}
+\end{frame}
+
 \begin{frame}{CLAUDE.md: Your Lab Notebook for the Agent}
   \begin{columns}[c]
     \begin{column}{0.45\textwidth}
