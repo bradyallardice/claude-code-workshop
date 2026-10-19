@@ -1447,14 +1447,14 @@ claude
 %  THINKING AND EFFORT
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Thinking vs.\ Not Thinking}
-  Beyond \emph{which} model, you control \emph{how hard} it works before it answers.
+\begin{frame}{Thinking: How Hard It Works Before Answering}
+  Beyond \emph{which} model, you control \emph{how hard} it works before it answers. Current models decide how much to think on their own, and \textbf{effort} is the dial you use to steer that.
 
   \vspace{0.6em}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
-      \textbf{Not thinking (default)}\\[0.3em]
-      {\small The model responds directly. Fast and cheap.}
+      \textbf{Lower effort}\\[0.3em]
+      {\small Responds quickly with little reasoning. Fast and cheap.}
       \begin{itemize}
         \item Reformatting, renaming
         \item Simple, well-specified edits
@@ -1462,8 +1462,8 @@ claude
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \textbf{Thinking (extended reasoning)}\\[0.3em]
-      {\small The model reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
+      \textbf{Higher effort}\\[0.3em]
+      {\small Reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
       \begin{itemize}
         \item Debugging stubborn errors
         \item Specification decisions
@@ -1474,37 +1474,25 @@ claude
 
   \vspace{0.6em}
   \begin{alertblock}{When in doubt}
-    If the task involves a \textbf{judgment call} or Claude got it wrong once already, turn thinking on. For mechanical work, leave it off.
+    If the task involves a \textbf{judgment call} or Claude got it wrong once already, raise the effort. For mechanical work, keep it low.
   \end{alertblock}
 \end{frame}
 
 \begin{frame}{Dialing the Effort}
-  \textbf{Trigger thinking with plain words.} Adding a thinking cue to your prompt tells Claude how much reasoning budget to spend --- more words, more thinking:
-
-  \vspace{0.4em}
+  \textbf{The effort setting.} Set it with \texttt{/effort} (a slider) or from the slider in \texttt{/model}. From least to most thorough:
   \begin{center}
-  \small
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    \textbf{What you type} & \textbf{Effect} \\
-    \midrule
-    (nothing)        & Answers directly \\
-    ``\texttt{think}''        & A little reasoning first \\
-    ``\texttt{think hard}''   & More careful reasoning \\
-    ``\texttt{ultrathink}''   & Maximum reasoning budget \\
-    \bottomrule
-  \end{tabular}
+    \small\texttt{low} \,$\to$\, \texttt{medium} \,$\to$\, \texttt{high} \,$\to$\, \texttt{xhigh} \,$\to$\, \texttt{max}
   \end{center}
+  Higher effort = more thorough, slower, costlier. It is set once and stays for the session. Not every model offers \texttt{xhigh}, and \texttt{/effort auto} clears your choice.
+
+  \vspace{0.6em}
+  \textbf{One-off boost.} Put the word \texttt{ultrathink} in a single prompt to get deeper reasoning for \emph{that turn only}. Your session effort does not change. Older cues like ``think'' and ``think hard'' are no longer special; Claude reads them as ordinary words.
+
+  \vspace{0.6em}
+  \textbf{\texttt{ultracode} is not a level.} It is a separate toggle (\texttt{/effort ultracode}) that makes Claude orchestrate many agents on one task. It can consume a large amount of tokens, and you will not need it in this course.
 
   \vspace{0.5em}
-  \textbf{The effort setting.} Both \textbf{Sonnet} and \textbf{Opus} have an \textbf{effort} setting you can pick with \texttt{/model}, from least to most thorough:
-  \begin{center}
-    \small\texttt{low} \,$\to$\, \texttt{medium} \,$\to$\, \texttt{high} \,$\to$\, \texttt{extra high} \,$\to$\, \texttt{max} \,$\to$\, \texttt{ultracode}
-  \end{center}
-  Higher effort = more thorough, slower, costlier. Think of it as the same knob, set once for the session rather than per-prompt.
-
-  \vspace{0.4em}
-  \alert{Thinking is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
+  \alert{Effort is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
