@@ -286,7 +286,7 @@ code .
 \end{frame}
 
 \begin{frame}{Live Demo: The Task}
-  \textbf{Goal:} Build a county-year panel joining election results with demographics, and visualize the outputs.
+  \textbf{Goal:} Link the election and demographic data, run a regression, and write up the results in a \LaTeX{} document.
 
   \vspace{0.5em}
   This requires:
@@ -295,12 +295,43 @@ code .
     \item Aggregate 15M person-level records to county-level means using survey weights
     \item Harmonize FIPS codes across datasets (different formats)
     \item Merge on county $\times$ year and validate the join
-    \item Create visualizations of trends over time
+    \item Run a regression relating election outcomes to county demographics
+    \item Produce the regression output (a table)
+    \item Summarize the results in a \LaTeX{} document
   \end{enumerate}
 
   \vspace{0.5em}
-  In Stata or R, this takes 30--45 minutes of careful coding.
+  In Stata or R, this takes well over an hour of careful coding.
 
+\end{frame}
+
+\begin{frame}{Live Demo: Same Task, Two Ways}
+  We will do this task twice, slowly, so you can see exactly what changes.
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Part 1: In a chat (Claude or ChatGPT)}
+        \begin{itemize}
+          \item Same task, in the web chat
+          \item What does it give back?
+          \item What are you left to do by hand?
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Part 2: In Claude Code}
+        \begin{itemize}
+          \item First: \textbf{where the data lives} on disk
+          \item Then: \textbf{the exact prompt} I type
+          \item Then: watch Claude Code work
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \textbf{Watch for:} where did the data go, who ran the code, and how would you check the answer?
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
