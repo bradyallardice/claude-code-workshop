@@ -1613,36 +1613,36 @@ claude
     \begin{column}{0.32\textwidth}
       \textbf{Loaded in full at startup}
       \begin{itemize}
-        \item \texttt{CLAUDE.md}: user (\texttt{\textasciitilde/.claude/}), project root, and any parent folders
-        \item \texttt{CLAUDE.local.md}: your private, gitignored notes
-        \item \textbf{Imports}: files pulled in with \texttt{@path/to/file} inside a CLAUDE.md
-        \item \texttt{.claude/rules/}: rule files with no \texttt{paths:} filter
-        \item \textbf{Memory}: the start of \texttt{MEMORY.md} (first 200 lines)
+        \item \texttt{CLAUDE.md}: user, project root, and parent folders
+        \item \texttt{CLAUDE.local.md}: private notes
+        \item \textbf{Imports}: files pulled in with \texttt{@file}
+        \item \texttt{.claude/rules/} files (no \texttt{paths:} filter)
+        \item \textbf{Memory}: first 200 lines of \texttt{MEMORY.md}
       \end{itemize}
     \end{column}
     \begin{column}{0.32\textwidth}
       \textbf{Only a name and description}
       \begin{itemize}
-        \item \textbf{Skills}: one-line description each; the full \texttt{SKILL.md} loads only when used
-        \item \textbf{Subagents}: name and description, so Claude knows when to delegate
-        \item \textbf{MCP servers}: tool names only; full tool definitions load when needed
+        \item \textbf{Skills}: description only; full text loads when used
+        \item \textbf{Subagents}: name and description
+        \item \textbf{MCP servers}: tool names only
       \end{itemize}
     \end{column}
     \begin{column}{0.32\textwidth}
       \textbf{On demand, when relevant}
       \begin{itemize}
-        \item Subfolder \texttt{CLAUDE.md}: when Claude touches a file in that folder
-        \item Rules with a \texttt{paths:} filter: when a matching file is touched
-        \item Memory topic files: when Claude opens them
-        \item Full skill text: when a skill is invoked
+        \item Subfolder \texttt{CLAUDE.md}: when Claude works in that folder
+        \item Rules with a \texttt{paths:} filter
+        \item Memory topic files
+        \item Full skill text and MCP tool definitions
       \end{itemize}
     \end{column}
   \end{columns}
 
-  \vspace{0.5em}
+  \vspace{0.2em}
   \textbf{Also always there:} Claude's built-in system prompt, your output style, and a snapshot of the working directory and git status.
 
-  \vspace{0.3em}
+  \vspace{0.1em}
   \begin{alertblock}{See it for yourself}
     Type \texttt{/context} to see what is loaded and how much room it takes. Type \texttt{/memory} to open the memory and CLAUDE.md files.
   \end{alertblock}
@@ -1716,6 +1716,44 @@ Effect of historical migration on county-level outcomes.
 - Do not choose model specifications
 - Do not interpret coefficients
 \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Exercise: Build a CLAUDE.md for Your Own Project}
+  \small
+  \textbf{Use one of your own projects.} Do this in a fresh window so the project folder is the working directory.
+
+  \vspace{0.3em}
+  \begin{enumerate}
+    \item \textbf{Open a new VS Code window:} \texttt{Cmd+Shift+N} (Mac) or \texttt{Ctrl+Shift+N} (Windows), or File $\rightarrow$ New Window
+    \item \textbf{Open your project folder:} File $\rightarrow$ Open Folder, and pick the \textbf{project root}
+    \item \textbf{Launch Claude Code} in that window (run \texttt{claude} in the terminal, or open the Claude panel)
+    \item \textbf{Create \texttt{CLAUDE.md} at the project root}, with one of two routes:
+  \end{enumerate}
+
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Route A: Manually}
+        \begin{itemize}
+          \item Right-click the empty space in the Explorer $\rightarrow$ New File
+          \item Name it exactly \texttt{CLAUDE.md}
+          \item Write the research question, the data, and the constraints, as in the example
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Route B: With Claude}
+        \begin{itemize}
+          \item Type \texttt{/init} and Claude reads your folder and drafts one
+          \item Or ask in plain words: ``Read this project and draft a CLAUDE.md with the research question, data, and constraints''
+          \item \textbf{Read the draft and edit it.} It is your rules
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.3em}
+  \alert{Check it worked:} restart Claude Code, then type \texttt{/memory} to see the file listed, or ask ``What do you know about this project?''
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
