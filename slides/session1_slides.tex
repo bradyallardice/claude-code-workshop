@@ -1361,27 +1361,29 @@ claude
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Choosing a Model}
-  Claude Code lets you switch between three model tiers.\\
-  Each trades off \textbf{quality}, \textbf{speed}, \textbf{cost}, and \textbf{context window size}.
+  Claude Code lets you switch between model tiers.\\
+  Each trades off \textbf{quality}, \textbf{speed}, and \textbf{cost}.
 
   \vspace{0.5em}
   \begin{center}
   \small
   \begin{tabular}{@{}llll@{}}
     \toprule
-    & \textbf{Haiku 4.5} & \textbf{Sonnet 4.6} & \textbf{Opus 4.6} \\
+    & \textbf{Haiku} & \textbf{Sonnet} & \textbf{Opus} \\
     \midrule
-    Context window & 200k tokens & 200k tokens & 200k--1M tokens \\
-    Speed          & Fastest     & Fast        & Slowest \\
-    Cost           & Lowest      & Moderate    & Highest \\
-    Reasoning      & Basic       & Strong      & Strongest \\
+    Speed     & Fastest & Fast     & Slowest \\
+    Cost      & Lowest  & Moderate & Highest \\
+    Reasoning & Basic   & Strong   & Strongest \\
     \bottomrule
   \end{tabular}
   \end{center}
 
   \vspace{0.3em}
+  {\small A newer top tier, \textbf{Fable}, sits above Opus where it is available to you.}
+
+  \vspace{0.3em}
   \textbf{To switch models in Claude Code:}\\
-  Type \texttt{/model} and select, or press \texttt{Shift+Tab} to toggle.
+  Type \texttt{/model} and select, or press \texttt{Option+P} (Mac) / \texttt{Alt+P} (Windows, Linux).
 \end{frame}
 
 \begin{frame}{When to Use Each Model}
