@@ -940,28 +940,46 @@ Not covered:       identification, construct validity
 %  EXERCISE PART 1: MERGE AND EXPLORE
 % ══════════════════════════════════════════════════════════════════
 
+\begin{frame}{Warm-Up: Install the Verification Protocol (10 min)}
+  \begin{enumerate}
+    \item \textbf{Add the protocol to your project.} Copy \texttt{docs/verification\_protocol.md} into a file named \texttt{CLAUDE.md} in your \texttt{session\_2} folder. If you already have one, append it.
+
+    \vspace{0.4em}
+    \item \textbf{Check that Claude Code sees it.} Start Claude Code in the folder and ask: \textit{``What verification rules apply in this project?''}
+
+    \vspace{0.4em}
+    \item \textbf{Write a requirements-to-tests matrix by hand,} without Claude Code. For the merge you are about to do: three rows of requirement, test, and passing condition.
+  \end{enumerate}
+
+  \vspace{0.8em}
+  \alert{You write the expectations. Claude Code writes the tests.}
+\end{frame}
+
 \begin{frame}{Exercise Part 1: Merge and Explore (30 min)}
   \textbf{Use plan mode for every step. Review every plan before approving.}
 
-  \vspace{0.8em}
+  \vspace{0.5em}
   \begin{enumerate}
     \item \textbf{Merge} the demographics data into the survey.
     \begin{itemize}
-      \item The demographics file has more rows than the survey
+      \small
       \item \alert{You decide the join type.} Do not let Claude Code choose.
+      \item Tests first: Claude Code writes the tests from your matrix, and you read them before it writes the merge
     \end{itemize}
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Explore} the merged data: summary statistics, treatment group sizes, outcome distribution.
     \begin{itemize}
+      \small
       \item \alert{Before you look at results: write down what you expect to see.}
     \end{itemize}
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Verify} the merge.
     \begin{itemize}
-      \item What should you check? Write down your verification checks \textit{before} running them.
-      \item Then run them.
+      \small
+      \item Run the tests. Trace three respondents: typical, missing outcome, absent from the demographics file
+      \item Test the tests: run them on a \textit{copy} of the demographics file with one \texttt{respondent\_id} duplicated. They should fail.
     \end{itemize}
   \end{enumerate}
 \end{frame}
