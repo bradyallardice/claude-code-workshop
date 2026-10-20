@@ -1078,12 +1078,18 @@ Not covered:       identification, construct validity
       \item Restrict to complete cases so N is constant across specs
     \end{itemize}
 
-    \vspace{0.5em}
-    \item \textbf{Format as \LaTeX.} Ask Claude Code to produce a publication-style
-    regression table with all specifications side by side. Compile to PDF.
+    \vspace{0.3em}
+    \item \textbf{Format as \LaTeX.} Produce a publication-style regression table with all specifications side by side, and compile to PDF.
+    \begin{itemize}
+      \small
+      \item Output manifest test: every specification appears in the table, each with its N
+    \end{itemize}
 
-    \vspace{0.5em}
-    \item \textbf{Commit.} Save all scripts, output, and the \LaTeX{} table.
+    \vspace{0.3em}
+    \item \textbf{Audit report.} Ask Claude Code for \texttt{output/audit\_report.md} in the format from the slide: tests run, requirement to test, not tested, numerical checks, choices needing your call, not covered.
+
+    \vspace{0.3em}
+    \item \textbf{Commit.} Save all scripts, tests, output, and the \LaTeX{} table.
   \end{enumerate}
 \end{frame}
 
