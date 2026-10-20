@@ -181,7 +181,7 @@ If you get an error saying \texttt{pip} is not found:
 \plat{Windows:}
 \cmd{py -m pip install pandas numpy statsmodels scipy linearmodels matplotlib seaborn scikit-learn openpyxl}
 
-\textit{If you already have Python installed via Anaconda, that is fine --- you likely already have most of these packages (Anaconda does not always include \texttt{linearmodels}, so run \texttt{pip install linearmodels} if the verification command at the end complains). You can skip the rest of this step but please verify by running the verification commands at the end.}
+\textit{If you already have Python installed via Anaconda, that is fine --- you likely already have most of these packages (Anaconda does not always include \texttt{linearmodels}; if the verification command at the end complains about it, install it with \texttt{pip}, as above). You can skip the rest of this step but please verify by running the verification commands at the end.}
 
 \textit{Installing these packages globally, as above, is the baseline for this workshop. In Session 1 I will show you how to put them in a virtual environment (a separate, self-contained set of packages for one project), which you can do then if you prefer.}
 
@@ -346,7 +346,7 @@ Then confirm it installed:
 \subsection*{9e. Add the Zotero MCP to Claude Code}
 
 Run (substituting your real values from Step 9c):
-\cmd{claude mcp add -\/-scope user zotero -e ZOTERO\_LOCAL=true -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp serve}
+\cmd{\footnotesize claude mcp add -\/-scope user zotero -e ZOTERO\_LOCAL=true -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp serve}
 
 Then verify:
 \cmd{claude mcp list}
