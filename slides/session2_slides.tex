@@ -545,14 +545,13 @@ still needs to be done.
 \end{frame}
 
 \begin{frame}[fragile]{Independent Tests}
-  \textbf{No step is ``done'' until verification tests exist, have run, and have passed.}\\
-  But a test only helps if it can fail for a reason the code cannot also fail for.
+  \textbf{A test only helps if it can fail for a reason the code cannot also fail for.}
 
-  \vspace{0.4em}
+  \vspace{0.3em}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \textbf{\color{green!50!black} Independent:}\\
-      {\small Expected values come from somewhere other than the code under test: computed by hand from the raw file, computed by a different method, or taken from a published result.}
+      {\small Expected values come from outside the code under test: computed by hand from the raw file, by a different method, or from a published result.}
     \end{column}
     \begin{column}{0.48\textwidth}
       \textbf{\color{red!70!black} Not independent:}\\
@@ -560,11 +559,11 @@ still needs to be done.
     \end{column}
   \end{columns}
 
-  \vspace{0.4em}
+  \vspace{0.3em}
   \textbf{Example prompt:}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Before you tell me this step is done, write and run tests
-that check these values, which I computed from the raw file:
+Write and run tests for these values, which I computed
+from the raw file:
 - Respondent 9 has treatment = "cntrl", fx_status = "none"
 - The control group has exactly 480 respondents
 - The weighted share supporting intervention, among
