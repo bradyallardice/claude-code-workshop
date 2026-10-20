@@ -565,28 +565,82 @@ regression sample. State whether each is in the sample.
   Discrepancies are either a bug or a misunderstanding --- both worth catching early.
 \end{frame}
 
-\begin{frame}[fragile]{Validation Strategy 4: Unit Tests Against Known Values}
-  Pick a handful of observations and compute the correct answer by hand.\\
-  Then verify the code reproduces them.
+\begin{frame}[fragile]{Validation Strategy 4: Independent Verification Tests}
+  \textbf{No step is ``done'' until verification tests exist, have run, and have passed.}\\
+  But a test only helps if it can fail for a reason the code cannot also fail for.
 
-  \vspace{0.5em}
+  \vspace{0.4em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Independent:}\\
+      {\small Expected values come from somewhere other than the code under test: computed by hand from the raw file, computed by a different method, or taken from a published result.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Not independent:}\\
+      {\small Running the pipeline and pasting its output in as the ``expected'' value. The test can only confirm that the code agrees with itself.}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.4em}
   \textbf{Example prompt:}
-  \begin{lstlisting}
-Write a test that verifies:
-- Respondent 9 (interviewed 2015-10-07) has
-  treatment = "history" and fx_status = "none"
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Before you tell me this step is done, write and run tests
+that check these values, which I computed from the raw file:
+- Respondent 9 has treatment = "cntrl", fx_status = "none"
 - The control group has exactly 480 respondents
-- The weighted proportion supporting intervention
-  is approximately 0.486
+- The weighted share supporting intervention, among
+  non-missing responses, is approximately 0.486
+Do not take expected values from the analysis script.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Validation Strategy 4 (cont.): Kinds of Tests and What They Catch}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}p{0.15\textwidth}p{0.30\textwidth}p{0.25\textwidth}p{0.22\textwidth}@{}}
+    \toprule
+    \textbf{Test} & \textbf{Example} & \textbf{Catches} & \textbf{Blind to} \\
+    \midrule
+    Assertions & \texttt{n\_rows == 2044}; no duplicate IDs; shares between 0 and 1 & Joins that add or drop rows, duplicates, impossible values & Wrong but plausible values \\
+    Spot checks & Respondent 9 is \texttt{cntrl}; control group has 480 & Silent recoding, wrong merge key, off-by-one errors & Records you did not pick \\
+    Independent recomputation & Recompute the weighted share straight from the raw CSV & Errors in weighting, aggregation, or estimation logic & A data bug both routes share \\
+    Reconciliation & Rows in $-$ rows dropped (by reason) = rows out; arm sizes sum to N & Silent listwise deletion, N drifting across specifications & The wrong rows kept in the right number \\
+    Planted answer & Simulate data with a known treatment effect; the code should recover it & Specification errors: reference category, weights, interactions & Problems in the real data \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  \normalsize
+  \begin{block}{No single test is enough}
+    Each type has a blind spot. Combine them: merges need assertions, reconciliation, and spot checks; estimation needs independent recomputation and planted answers.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Validation Strategy 4 (cont.): Make It a Rule in CLAUDE.md}
+  Do not rely on remembering to ask. Add this to your \texttt{CLAUDE.md} so it applies to every conversation:
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+## Verification (required before reporting any step complete)
+- Before saying a step is done, write and run verification
+  tests for it.
+- Tests must be independent of the code they check. Get expected
+  values from the raw files, from a different method, or from
+  values I give you. Never paste the pipeline's own output in
+  as the expected value.
+- Every set of tests must include (1) a reconciliation of row
+  counts (rows in - rows dropped, by reason = rows out) and
+  (2) a trace of at least 3 sample records from the raw file
+  to the final output.
+- Show me the test output. If a test fails, report the step as
+  failed, not complete.
+- If you cannot write an independent test for something, say so.
   \end{lstlisting}
 
-  \vspace{0.5em}
-  \textbf{Why this works:}
-  \begin{itemize}
-    \item Forces you to engage with the data at the observation level
-    \item Catches silent recoding, wrong joins, and off-by-one errors
-    \item Tests survive across refactors --- rerun them after every change
-  \end{itemize}
+  \vspace{0.3em}
+  \begin{alertblock}{CLAUDE.md is an instruction, not an enforcement mechanism}
+    Read the test output, and read the tests: check that the expected values really come from outside the code.
+  \end{alertblock}
 \end{frame}
 
 \begin{frame}{Validation Strategy 5: Replicate Before You Extend}
