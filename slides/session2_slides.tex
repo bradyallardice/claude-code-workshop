@@ -470,10 +470,30 @@ still needs to be done.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  VALIDATION STRATEGIES
+%  VERIFICATION
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Validation Strategy 1: Read the Code}
+\begin{frame}{Verification: Code Can Run and Still Be Wrong}
+  Claude Code can write code that runs, prints a plausible-looking table, and is still \textbf{scientifically wrong}.
+
+  \vspace{0.4em}
+  \textbf{None of these raises an error:}
+  \begin{itemize}
+    \small
+    \item A merge that duplicates rows when keys repeat
+    \item A regression that silently drops every row with a missing control
+    \item Standard errors clustered at the wrong level
+    \item A reference category chosen alphabetically instead of by design
+  \end{itemize}
+
+  \vspace{0.4em}
+  \begin{block}{Two different questions}
+    \textbf{Software tests} ask: does the code run and behave as intended?\\
+    \textbf{Research tests} ask: are the numbers right?
+  \end{block}
+\end{frame}
+
+\begin{frame}{Read the Code}
   Claude Code is not deterministic --- the same prompt can produce different code each time.\\
   But \textbf{code itself is deterministic.} If you read the code and understand what it does, you can be confident in the results, the same way you would be with code you wrote yourself.
 
@@ -487,85 +507,45 @@ still needs to be done.
 
   \vspace{0.8em}
   \begin{block}{The principle}
-    You are not trusting Claude Code. You are trusting \textit{the code} --- the same way you trust code you wrote yourself. The difference is who typed it, not whether it works.
+    You are not trusting Claude Code. You are trusting \textit{the code}. Reading does not scale to every number, which is why we also write tests.
   \end{block}
 \end{frame}
 
-\begin{frame}{Validation Strategy 2: Check Known Properties}
-  Before you look at results, ask: \textit{what do I already know must be true?}
-
-  \vspace{0.5em}
-  \textbf{Examples:}
-  \begin{itemize}
-    \item A left join should not change the number of rows in the left table
-    \item Adding a control variable should not change the sample size (unless it has missing values)
-    \item A share variable must be between 0 and 1
-    \item Treatment groups should sum to the total sample
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Ask Claude Code to assert these explicitly:}
-  \begin{itemize}
-    \item ``Assert the merged output has exactly 2,044 rows''
-    \item ``Print the number of observations used in each regression''
-    \item ``Verify no duplicate respondent IDs''
-  \end{itemize}
-
-  \vspace{0.5em}
-  If the assertion fails, you catch the error immediately --- not three steps later.
-
-  \vspace{0.5em}
-  \textbf{In VS Code:} When working directly in the editor, you see the \texttt{git diff} before you accept the change. This shows exactly what Claude Code changed.
+\begin{frame}{Layer 1: Software Tests Check That the Code Works}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}L{0.19\textwidth}L{0.30\textwidth}L{0.41\textwidth}@{}}
+    \toprule
+    \textbf{Test} & \textbf{It asks} & \textbf{Example from today's data} \\
+    \midrule
+    Smoke & Does the project run at all? & Packages import; both CSV files load \\
+    Unit & Does one function behave correctly? & The recode returns 1 for ``some'' or ``big'' and 0 for ``none'' \\
+    Integration & Do the pieces fit together? & The cleaned data has every column the model script uses \\
+    End-to-end & Does the whole pipeline run? & Raw data to final table from a single command \\
+    Regression (software sense) & Did a change alter verified results? & After refactoring, N and coefficients are unchanged \\
+    Edge-case and negative & Do unusual or bad inputs fail loudly? & A duplicate ID stops the merge instead of multiplying rows \\
+    \bottomrule
+  \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Validation Strategy 2 (cont.): Trace Samples End to End}
-  Aggregate checks can pass while individual records are wrong.\\
-  \textbf{Follow specific records through every stage of the pipeline.}
-
-  \vspace{0.3em}
-  \centering
-  Raw file $\rightarrow$ Merged $\rightarrow$ Recoded $\rightarrow$ Estimation sample $\rightarrow$ Table
-  \raggedright
-
-  \vspace{0.3em}
-  \begin{itemize}
-    \item Choose 3--5 respondents \textit{on purpose}: typical, missing value, no match in file 2
-    \item Print each one's values at every stage, side by side
-    \item Tie every number in the final table (N, coefficients) to the rows behind it
-  \end{itemize}
-
-  \vspace{0.3em}
-  \textbf{Example prompt:}
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Pick one typical respondent, one with a missing outcome, and
-one absent from respondent_demographics.csv. Show each one's
-row in the raw, merged, and regression data.
-  \end{lstlisting}
-
-  \vspace{0.3em}
-  {\small \textbf{Catches:} silent recoding, rows lost in merges, the wrong variable in the model.}
+\begin{frame}{Layer 2: Research Tests Check That the Results Are Right}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}L{0.19\textwidth}L{0.30\textwidth}L{0.41\textwidth}@{}}
+    \toprule
+    \textbf{Test} & \textbf{It asks} & \textbf{Example from today's data} \\
+    \midrule
+    Data integrity & Are keys, types, and ranges valid? & \texttt{respondent\_id} is unique; age is between 18 and 85 \\
+    Merge integrity & Did the join keep and match what it should? & 2,044 rows in and out; unmatched respondents are counted \\
+    Sample accounting & Where did every row go? & N for each model, with a reason for every drop \\
+    Variable construction & Does each variable match its definition? & \texttt{supports\_intervention} is 1 exactly when the answer is ``some'' or ``big'' \\
+    Estimation specification & Is the model the one you intended? & Control is the reference arm; survey weights are used \\
+    Independent numerical check & Does a separate calculation agree? & A weighted share recomputed straight from the raw CSV \\
+    \bottomrule
+  \end{tabular}
 \end{frame}
 
-\begin{frame}{Validation Strategy 3: Write Down Expectations First}
-  \begin{block}{The Pre-Registration Analogy}
-    Just as you pre-register hypotheses before seeing results, write down what a correct transformation should produce \textit{before} you run it.
-  \end{block}
-
-  \vspace{0.5em}
-  \textbf{Before a merge or transformation, state:}
-  \begin{itemize}
-    \item Expected output dimensions (rows $\times$ columns)
-    \item Which columns should appear and their types
-    \item How missing values should be handled
-    \item A specific row you can trace through by hand
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Then compare the actual result to your expectations.}\\
-  Discrepancies are either a bug or a misunderstanding --- both worth catching early.
-\end{frame}
-
-\begin{frame}[fragile]{Validation Strategy 4: Independent Verification Tests}
+\begin{frame}[fragile]{Independent Tests}
   \textbf{No step is ``done'' until verification tests exist, have run, and have passed.}\\
   But a test only helps if it can fail for a reason the code cannot also fail for.
 
@@ -594,89 +574,249 @@ Do not take expected values from the analysis script.
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Validation Strategy 4 (cont.): Kinds of Tests and What They Catch}
-  \footnotesize
-  \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}L{0.14\textwidth}L{0.29\textwidth}L{0.26\textwidth}L{0.21\textwidth}@{}}
-    \toprule
-    \textbf{Test} & \textbf{Example} & \textbf{Catches} & \textbf{Blind to} \\
-    \midrule
-    Assertions & \texttt{n\_rows == 2044}; no duplicate IDs; shares between 0 and 1 & Joins that add or drop rows, duplicates, impossible values & Wrong but plausible values \\
-    Spot checks & Respondent 9 is \texttt{cntrl}; control group has 480 & Silent recoding, wrong merge key, off-by-one errors & Records you did not pick \\
-    Independent recomputation & Recompute the weighted share straight from the raw CSV & Errors in weighting, aggregation, or estimation logic & A data bug both routes share \\
-    Reconciliation & Rows in $-$ rows dropped (by reason) = rows out; arm sizes sum to N & Silent listwise deletion, N drifting across specifications & The wrong rows kept in the right number \\
-    Planted answer & Simulate data with a known treatment effect; the code should recover it & Specification errors: reference category, weights, interactions & Problems in the real data \\
-    \bottomrule
-  \end{tabular}
+\begin{frame}{Write Down Expectations First, Then Assert Them}
+  \begin{block}{The Pre-Registration Analogy}
+    Just as you pre-register hypotheses before seeing results, write down what a correct transformation should produce \textit{before} you run it.
+  \end{block}
 
-  \vspace{0.4em}
-  \small
-  \alert{No single test is enough.} Each type has a blind spot.\\
-  Merges: assertions, reconciliation, spot checks. Estimation: recomputation, planted answers.
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Before a merge or transformation, state:}
+      \begin{itemize}
+        \small
+        \item Expected rows $\times$ columns
+        \item Which columns, and their types
+        \item How missing values are handled
+        \item A row you can trace by hand
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Then assert what must be true:}
+      \begin{itemize}
+        \small
+        \item A left join keeps every row of the left table
+        \item A new control changes N only through missing values
+        \item A share lies between 0 and 1
+        \item Treatment arms sum to the total sample
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  A mismatch is either a bug or a misunderstanding. Both are worth catching before the next step builds on them.
 \end{frame}
 
-\begin{frame}[fragile]{Validation Strategy 4 (cont.): Make It a Rule in CLAUDE.md}
-  Do not rely on remembering to ask. Add this to your \texttt{CLAUDE.md}:
+\begin{frame}[fragile]{Trace Samples End to End}
+  Aggregate checks can pass while individual records are wrong.\\
+  \textbf{Follow specific records through every stage of the pipeline.}
 
-  \vspace{0.2em}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-## Verification (required before reporting a step complete)
-- Before saying a step is done, write and run tests for it.
-- Tests must be independent of the code they check: take
-  expected values from the raw files, a different method,
-  or values I give you. Never paste the pipeline's own
-  output in as the expected value.
-- Include (1) a row-count reconciliation (rows in - rows
-  dropped, by reason = rows out) and (2) a trace of at
-  least 3 sample records from raw file to final output.
-- Show me the test output. If a test fails, report the
-  step as failed, not complete.
-- If you cannot write an independent test, say so.
+  \vspace{0.3em}
+  \centering
+  Raw file $\rightarrow$ Merged $\rightarrow$ Recoded $\rightarrow$ Estimation sample $\rightarrow$ Table
+  \raggedright
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item Choose 3--5 respondents \textit{on purpose}: typical, missing value, no match in file 2
+    \item Print each one's values at every stage, side by side
+    \item Tie every number in the final table (N, coefficients) to the rows behind it
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Pick one typical respondent, one with a missing outcome, and
+one absent from respondent_demographics.csv. Show each one's
+row in the raw, merged, and regression data.
   \end{lstlisting}
 
-  \vspace{0.2em}
-  {\small \alert{CLAUDE.md is an instruction, not an enforcement mechanism.} Read the tests too: check that expected values really come from outside the code.}
+  \vspace{0.3em}
+  {\small \textbf{Catches:} silent recoding, rows lost in merges, the wrong variable in the model.}
 \end{frame}
 
-\begin{frame}{Validation Strategy 5: Replicate Before You Extend}
-  \textbf{Building on someone else's work?}\\
-  Have Claude Code reproduce their results first.
+\begin{frame}{The Test-First Cycle}
+  \textbf{Repeat for every component:} merge, variables, model, table.
 
   \vspace{0.5em}
   \begin{enumerate}
-    \item Give Claude Code the original paper's code or description
-    \item Ask it to replicate a key table or figure
-    \item Compare output to the published result
-    \item Only after replication succeeds, begin your extension
+    \item \textbf{You state the expectations:} files, keys, row counts, edge cases
+    \item \textbf{Claude Code writes the tests first.} You read them before any analysis code exists
+    \item \textbf{It implements the component} and runs the tests
+    \item \textbf{Failures are investigated, not patched:} fix the code, not the expected value
+    \item \textbf{Re-run the earlier tests} before moving to the next component
   \end{enumerate}
 
+  \vspace{0.8em}
+  \begin{block}{Why tests first}
+    Tests written after the code tend to encode what the code does. Tests written first encode what \textit{you} expect. The test suite then grows with the project instead of being bolted on at the end.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Test the Tests}
+  \textbf{A test that cannot fail is not a test.} Inject a known error and confirm the check catches it.
+
   \vspace{0.5em}
-  \begin{alertblock}{Why}
-    If you cannot reproduce the baseline, anything you build on top of it is uninterpretable. Replication is not a detour; it is the foundation.
+  \textbf{Fault injection} (always on a copy, never the raw data):
+  \begin{itemize}
+    \item Duplicate one \texttt{respondent\_id} in a copy of the demographics file: the row-count and key tests should fail
+    \item Change one treatment label in a copy: the spot check should fail
+  \end{itemize}
+
+  \vspace{0.3em}
+  \textbf{Planted answer:} simulate outcomes with a known treatment effect. The estimator should recover it within a stated tolerance.
+
+  \vspace{0.5em}
+  \textbf{Example prompt:}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Copy respondent_demographics.csv with one respondent_id
+duplicated. Run the merge tests on the copy and show me
+which tests fail.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Passing Is Not the Goal}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Claude Code must never make a test pass by:}
+      \begin{itemize}
+        \small
+        \item Editing expected values to match the output
+        \item Deleting or loosening assertions
+        \item Suppressing warnings
+        \item Changing the specification: join type, reference category, sample, weights
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Not every check is pass/fail:}
+      \begin{itemize}
+        \small
+        \item \textbf{Hard failure} (duplicate keys): stop
+        \item \textbf{Warning} (missingness jumps from 4\% to 11\%): flag it for you
+        \item \textbf{Judgment} (is identification credible?): yours
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \begin{alertblock}{A failing test is information}
+    Claude Code should report it and ask. It should not make it disappear.
   \end{alertblock}
 \end{frame}
 
-\begin{frame}{Validation Strategy 6: Use a Second Agent as a Critic}
-  Use a \textit{second} Claude Code conversation as a reviewer.
+\begin{frame}{The Requirements-to-Tests Matrix}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}L{0.27\textwidth}L{0.21\textwidth}L{0.42\textwidth}@{}}
+    \toprule
+    \textbf{Requirement} & \textbf{Test} & \textbf{Passing condition} \\
+    \midrule
+    Merge keeps every respondent & Row-count and key test & 2,044 rows; \texttt{respondent\_id} unique \\
+    Outcome built as defined & Variable-construction test & \texttt{supports\_intervention} is 1 exactly for ``some'' or ``big'' \\
+    Control is the reference arm & Specification test & The omitted category is \texttt{cntrl} \\
+    Survey weights are used & Independent recomputation & Logistic of the base-model intercept equals the weighted control share from the raw CSV \\
+    N is explained for every model & Sample accounting & Rows in $-$ rows dropped (by reason) = N used \\
+    Every specification is reported & Output manifest & All specifications are in the table, each with its N \\
+    \bottomrule
+  \end{tabular}
 
   \vspace{0.5em}
-  \textbf{How:}
-  \begin{enumerate}
-    \item Agent 1 writes the code
-    \item Open a new conversation (Agent 2) and ask it to review:\\
-      {\small ``Read the analysis script and identify any bugs, silent data loss, or decisions that could change the results.''}
-    \item Agent 2 has fresh context and no attachment to the code
-  \end{enumerate}
+  \small
+  \alert{Write the matrix before the code.} A requirement with no test is unverified.
+\end{frame}
+
+\begin{frame}[fragile]{The Audit Report: Evidence, Not ``All Tests Passed''}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+## Audit report
+Tests run:         commands; passed / failed / skipped
+Requirements:      each requirement -> the test covering it
+Not tested:        anything without a test, and why
+Numerical checks:  our value vs. independent value
+Needs your call:   choices Claude proposed (join type,
+                   income = 0, dropped rows)
+Not covered:       identification, construct validity,
+                   specification
+  \end{lstlisting}
 
   \vspace{0.5em}
-  \textbf{Why this is powerful:}
-  \begin{itemize}
-    \item The writing agent has blind spots --- it wrote the code and ``believes'' it is correct
-    \item A fresh agent reads the code like a skeptical reviewer
-    \item Catches issues you would miss because you watched it being built
-  \end{itemize}
+  \begin{block}{What the report is for}
+    Not for Claude Code to declare the research correct. It documents what was exercised, against which expectation, and what remains uncertain. Passing tests do not show that a design is valid.
+  \end{block}
+\end{frame}
 
-  \vspace{0.5em}
+\begin{frame}[fragile]{Make It a Rule in CLAUDE.md (1/2)}
+  Do not rely on remembering to ask. Your protocol, part 1:
+
+  \vspace{0.2em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+## Verification protocol (required)
+
+### Before implementing a step
+- State the expected inputs, keys, and row counts.
+- Write the verification tests first and show them to me.
+- Ask me before settling any research-design choice
+  (join type, reference category, sample, weights).
+  Mark any choice you proposed yourself.
+
+### Tests must be independent of the code they check
+- Take expected values from the raw files, a different
+  method, or values I give you. Never paste the
+  pipeline's own output in as the expected value.
+- Every step gets a row-count reconciliation (rows in -
+  rows dropped, by reason = rows out), data-integrity
+  checks, and a trace of at least 3 records from the
+  raw file to the final output.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Make It a Rule in CLAUDE.md (2/2)}
+  Part 2 of the protocol:
+
+  \vspace{0.2em}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+### Never make a failing test pass by
+- Editing expected values, deleting or loosening
+  assertions, suppressing warnings, or changing the
+  specification. Report the failure instead.
+
+### Before saying a step is done
+- Run the tests and show me the output.
+- Report what passed, failed, and was skipped, and what
+  remains unverified or needs my judgment.
+- Passing tests do not show the research design is
+  valid. Say what the tests do not cover.
+- If you cannot write an independent test, say so.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small Copy the full text from \texttt{docs/verification\_protocol.md}. \alert{CLAUDE.md is an instruction, not an enforcement mechanism:} read the tests too.}
+\end{frame}
+
+\begin{frame}{Two More Safeguards}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Replicate before you extend}
+      \begin{enumerate}
+        \small
+        \item Give Claude Code the original code or description
+        \item Ask it to replicate a key table
+        \item Compare with the published result
+        \item Only then begin your extension
+      \end{enumerate}
+      {\small If you cannot reproduce the baseline, nothing built on it is interpretable.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Use a second agent as a critic}
+      \begin{enumerate}
+        \small
+        \item Agent 1 writes the code
+        \item Open a new conversation (Agent 2) and ask: ``Read the analysis script and identify any bugs, silent data loss, or decisions that could change the results.''
+      \end{enumerate}
+      {\small Agent 2 has fresh context and no attachment to the code.}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
   \alert{Treat your agents like co-authors who check each other's work, not a single assistant you trust unconditionally.}
 \end{frame}
 
