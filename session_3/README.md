@@ -1,4 +1,4 @@
-# Session 3: Data Cleaning & Merging Pipelines
+# Session 3: Git and LaTeX in VS Code
 
 ## Start-of-session ritual
 
@@ -69,6 +69,9 @@ suffix: `backup-prework-2`.
 ## Start here
 
 1. Open `slides/session3_slides.pdf`.
-2. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
-3. Exercise: `docs/exercise_prompt.md` (clean and merge the survey and
-   demographics data, then run the analysis).
+2. Exercise, Option A: use your own research project.
+3. Exercise, Option B: use the provided project in `option_b/`.
+   - `option_b/exercise_1/`: the merge, estimate, and robustness scripts you
+     will modify and run to generate outputs under git.
+   - `option_b/exercise_2/`: where those outputs land (`tables/`, `figures/`)
+     and where you build your LaTeX paper.

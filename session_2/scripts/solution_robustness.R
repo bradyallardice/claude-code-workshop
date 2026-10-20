@@ -2,7 +2,7 @@
 # Generates specification variants and outputs a publication-style LaTeX table.
 #
 # Run from the project root (AIAgentsCourse/):
-#   Rscript session_3/scripts/solution_robustness.R
+#   Rscript session_2/scripts/solution_robustness.R
 #
 # Note on weights: see solution_estimate.R -- glm() weights reproduce the
 # statsmodels freq_weights point estimates.
@@ -10,7 +10,7 @@
 library(readr)
 
 # -- Load merged data -------------------------------------------------
-df <- read_csv("session_3/output/merged_survey.csv", show_col_types = FALSE)
+df <- read_csv("session_2/output/merged_survey.csv", show_col_types = FALSE)
 
 # Set reference categories (first level = reference)
 df$treatment <- factor(df$treatment,
@@ -180,7 +180,7 @@ L <- c(L, "\\end{table}")
 latex_output <- paste(L, collapse = "\n")
 
 # Save LaTeX table
-cat(latex_output, file = "session_3/output/robustness_table.tex")
+cat(latex_output, file = "session_2/output/robustness_table.tex")
 
-cat("\n\nLaTeX table saved to session_3/output/robustness_table.tex\n")
+cat("\n\nLaTeX table saved to session_2/output/robustness_table.tex\n")
 cat("\n", latex_output, "\n", sep = "")

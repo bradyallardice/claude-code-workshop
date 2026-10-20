@@ -2,15 +2,15 @@
 # Merges the survey data with the demographics file using a left join.
 #
 # Runnable interactively in VS Code / RStudio (send line by line) or via:
-#   Rscript session_3/scripts/solution_merge.R
+#   Rscript session_2/scripts/solution_merge.R
 # Assumes the working directory is the project root (AIAgentsCourse/).
 
 library(dplyr)
 library(readr)
 
 # -- Load data --------------------------------------------------------
-survey <- read_csv("session_3/data/swiss_franc_survey.csv", show_col_types = FALSE)
-demog  <- read_csv("session_3/data/respondent_demographics.csv", show_col_types = FALSE)
+survey <- read_csv("session_2/data/swiss_franc_survey.csv", show_col_types = FALSE)
+demog  <- read_csv("session_2/data/respondent_demographics.csv", show_col_types = FALSE)
 
 cat("Survey shape:", nrow(survey), "x", ncol(survey), "\n")
 cat("Demographics shape:", nrow(demog), "x", ncol(demog), "\n")
@@ -60,5 +60,5 @@ cat("Respondents with income_quintile = 0:",
     sum(merged$income_quintile == 0, na.rm = TRUE), "\n")
 
 # -- Save -------------------------------------------------------------
-write_csv(merged, "session_3/output/merged_survey.csv")
-cat("\nSaved merged data to session_3/output/merged_survey.csv\n")
+write_csv(merged, "session_2/output/merged_survey.csv")
+cat("\nSaved merged data to session_2/output/merged_survey.csv\n")

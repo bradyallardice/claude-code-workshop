@@ -3,7 +3,7 @@
 * addition of controls to demonstrate the missing data trap.
 *
 * Run from the project root (AIAgentsCourse/):
-*   do session_3/scripts/solution_estimate.do
+*   do session_2/scripts/solution_estimate.do
 *
 * Note on weights: the Python version uses statsmodels freq_weights. We use
 * Stata [iweight], which weights the likelihood the same way and so reproduces
@@ -14,7 +14,7 @@ clear all
 set more off
 
 * -- Load merged data ------------------------------------------------
-import delimited "session_3/output/merged_survey.csv", clear case(preserve)
+import delimited "session_2/output/merged_survey.csv", clear case(preserve)
 
 * -- Set reference categories explicitly -----------------------------
 * Numeric codes chosen so the lowest value is the reference category
@@ -98,7 +98,7 @@ gen byte fx_current = fx_status == "current"
 gen byte fx_past    = fx_status == "past"
 
 capture file close sf
-file open sf using "session_3/output/summary_stats.tex", write replace
+file open sf using "session_2/output/summary_stats.tex", write replace
 file write sf "\begin{tabular}{lrrrrr}" _n "\toprule" _n
 file write sf "Variable & N & Mean & SD & Min & Max \\" _n "\midrule" _n
 
@@ -115,7 +115,7 @@ foreach v of local svars {
 }
 file write sf "\bottomrule" _n "\end{tabular}" _n
 file close sf
-display _newline "Saved: session_3/output/summary_stats.tex"
+display _newline "Saved: session_2/output/summary_stats.tex"
 
 * -- Export main regression table ------------------------------------
 * Helper returns a coefficient string with stars in `cstr' and an SE
@@ -142,7 +142,7 @@ program define fmtcoef, rclass
 end
 
 capture file close mf
-file open mf using "session_3/output/main_table.tex", write replace
+file open mf using "session_2/output/main_table.tex", write replace
 file write mf "\begin{tabular}{lcc}" _n "\toprule" _n
 file write mf " & (1) & (2) \\" _n
 file write mf " & \textit{Baseline} & \textit{+ Controls} \\" _n "\midrule" _n
@@ -192,4 +192,4 @@ file write mf "\bottomrule" _n
 file write mf "\multicolumn{3}{l}{\scriptsize \$^{***}p<0.01\$; \$^{**}p<0.05\$; \$^{*}p<0.1\$.} \\" _n
 file write mf "\end{tabular}" _n
 file close mf
-display "Saved: session_3/output/main_table.tex"
+display "Saved: session_2/output/main_table.tex"

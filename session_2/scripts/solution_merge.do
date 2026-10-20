@@ -2,13 +2,13 @@
 * Merges the survey data with the demographics file using a left join.
 *
 * Run from the project root (AIAgentsCourse/):
-*   do session_3/scripts/solution_merge.do
+*   do session_2/scripts/solution_merge.do
 
 clear all
 set more off
 
 * -- Load demographics (the "using" side) and stash as a tempfile -----
-import delimited "session_3/data/respondent_demographics.csv", clear case(preserve)
+import delimited "session_2/data/respondent_demographics.csv", clear case(preserve)
 quietly count
 display "Demographics shape: " r(N) " rows"
 quietly duplicates report respondent_id
@@ -16,7 +16,7 @@ tempfile demog
 save "`demog'"
 
 * -- Load survey (the master) ----------------------------------------
-import delimited "session_3/data/swiss_franc_survey.csv", clear case(preserve)
+import delimited "session_2/data/swiss_franc_survey.csv", clear case(preserve)
 quietly count
 display "Survey shape: " r(N) " rows"
 
@@ -66,5 +66,5 @@ quietly count if income_quintile == 0
 display "Respondents with income_quintile = 0: " r(N)
 
 * -- Save ------------------------------------------------------------
-export delimited using "session_3/output/merged_survey.csv", replace
-display _newline "Saved merged data to session_3/output/merged_survey.csv"
+export delimited using "session_2/output/merged_survey.csv", replace
+display _newline "Saved merged data to session_2/output/merged_survey.csv"

@@ -3,7 +3,7 @@
 # addition of controls to demonstrate the missing data trap.
 #
 # Run from the project root (AIAgentsCourse/):
-#   Rscript session_3/scripts/solution_estimate.R
+#   Rscript session_2/scripts/solution_estimate.R
 #
 # Note on weights: the Python version uses statsmodels freq_weights. R's glm()
 # weights argument for a binomial family gives the same point estimates, so we
@@ -12,7 +12,7 @@
 library(readr)
 
 # -- Load merged data -------------------------------------------------
-df <- read_csv("session_3/output/merged_survey.csv", show_col_types = FALSE)
+df <- read_csv("session_2/output/merged_survey.csv", show_col_types = FALSE)
 
 # -- Set reference categories explicitly ------------------------------
 # The first factor level is the reference category in R.
@@ -123,8 +123,8 @@ for (var in names(summary_vars)) {
 }
 summary_latex <- paste0(summary_latex, "\\bottomrule\n\\end{tabular}\n")
 
-cat(summary_latex, file = "session_3/output/summary_stats.tex")
-cat("\nSaved: session_3/output/summary_stats.tex\n")
+cat(summary_latex, file = "session_2/output/summary_stats.tex")
+cat("\nSaved: session_2/output/summary_stats.tex\n")
 
 # -- Export main regression table ------------------------------------
 stars <- function(p) {
@@ -186,5 +186,5 @@ main_latex <- paste0(main_latex,
   "\\multicolumn{3}{l}{\\scriptsize $^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$.} \\\\\n",
   "\\end{tabular}\n")
 
-cat(main_latex, file = "session_3/output/main_table.tex")
-cat("Saved: session_3/output/main_table.tex\n")
+cat(main_latex, file = "session_2/output/main_table.tex")
+cat("Saved: session_2/output/main_table.tex\n")

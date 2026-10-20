@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # ── Load FX data ─────────────────────────────────────────────────
-df = pd.read_csv("session_3/data/PLN_CHF_EUR_FXdata.csv")
+df = pd.read_csv("session_3/option_b/data/PLN_CHF_EUR_FXdata.csv")
 df["date"] = pd.to_datetime(df["YYYY/MM/DD"])
 df = df.sort_values("date")
 

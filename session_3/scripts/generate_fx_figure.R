@@ -10,7 +10,7 @@ library(dplyr)
 library(ggplot2)
 
 # -- Load FX data -----------------------------------------------------
-df <- read_csv("session_3/data/PLN_CHF_EUR_FXdata.csv", show_col_types = FALSE)
+df <- read_csv("session_3/option_b/data/PLN_CHF_EUR_FXdata.csv", show_col_types = FALSE)
 df$date <- as.Date(df$`YYYY/MM/DD`, format = "%Y/%m/%d")
 df <- df %>% arrange(date)
 

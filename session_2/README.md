@@ -1,4 +1,4 @@
-# Session 2: CLAUDE.md & Plan Mode
+# Session 2: Research Pipelines
 
 ## Start-of-session ritual
 
@@ -69,4 +69,6 @@ suffix: `backup-prework-2`.
 ## Start here
 
 1. Open `slides/session2_slides.pdf`.
-2. Follow along with the CLAUDE.md and plan-mode demos.
+2. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
+3. Exercise: `docs/exercise_prompt.md` (merge the survey and demographics data,
+   estimate the models, run robustness checks, and produce a LaTeX table).

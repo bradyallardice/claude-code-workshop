@@ -2,7 +2,7 @@
 * Generates specification variants and outputs a publication-style LaTeX table.
 *
 * Run from the project root (AIAgentsCourse/):
-*   do session_3/scripts/solution_robustness.do
+*   do session_2/scripts/solution_robustness.do
 *
 * Note on weights: see solution_estimate.do -- [iweight] reproduces the
 * statsmodels freq_weights point estimates for non-integer survey weights.
@@ -11,7 +11,7 @@ clear all
 set more off
 
 * -- Load merged data ------------------------------------------------
-import delimited "session_3/output/merged_survey.csv", clear case(preserve)
+import delimited "session_2/output/merged_survey.csv", clear case(preserve)
 
 * Set reference categories (lowest numeric code = reference)
 gen byte treat_n = .
@@ -104,7 +104,7 @@ program define fmtcoef, rclass
 end
 
 capture file close tf
-file open tf using "session_3/output/robustness_table.tex", write replace
+file open tf using "session_2/output/robustness_table.tex", write replace
 file write tf "\begin{table}[htbp]" _n "\centering" _n
 file write tf "\caption{Logistic Regression: Support for Government Intervention}" _n
 file write tf "\label{tab:robustness}" _n "\small" _n
@@ -174,4 +174,4 @@ file write tf "\multicolumn{7}{l}{\scriptsize \$^{***}p<0.01\$; \$^{**}p<0.05\$;
 file write tf "\end{tabular}" _n "\end{table}" _n
 file close tf
 
-display _newline(2) "LaTeX table saved to session_3/output/robustness_table.tex"
+display _newline(2) "LaTeX table saved to session_2/output/robustness_table.tex"

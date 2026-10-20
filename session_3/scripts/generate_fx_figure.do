@@ -12,7 +12,7 @@ set more off
 * CSV columns: Jul.Day, YYYY/MM/DD, Wdy, CHF/EUR, CHF/PLN
 * "/" is illegal in Stata variable names, so the importer renames the
 * columns; we standardise them below.
-import delimited "session_3/data/PLN_CHF_EUR_FXdata.csv", clear varnames(1)
+import delimited "session_3/option_b/data/PLN_CHF_EUR_FXdata.csv", clear varnames(1)
 
 * Build a Stata daily date from the YYYY/MM/DD string column (v2).
 gen date = date(yyyymmdd, "YMD")
