@@ -246,7 +246,6 @@ code .
 
   \vspace{0.5em}
   \begin{enumerate}
-    \item Verify Node.js: \lstinline{node --version}
     \item Verify Claude Code: \lstinline{claude --version}
     \item Launch Claude Code: \lstinline{claude}
   \end{enumerate}
@@ -1720,13 +1719,12 @@ Effect of historical migration on county-level outcomes.
 
 \begin{frame}{Exercise: Build a CLAUDE.md for Your Own Project}
   \small
-  \textbf{Use one of your own projects.} Do this in a fresh window so the project folder is the working directory.
+  \textbf{Use one of your own projects,} in a fresh window so the project folder is the working directory.
 
-  \vspace{0.3em}
   \begin{enumerate}
-    \item \textbf{Open a new VS Code window:} \texttt{Cmd+Shift+N} (Mac) or \texttt{Ctrl+Shift+N} (Windows), or File $\rightarrow$ New Window
-    \item \textbf{Open your project folder:} File $\rightarrow$ Open Folder, and pick the \textbf{project root}
-    \item \textbf{Launch Claude Code} in that window (run \texttt{claude} in the terminal, or open the Claude panel)
+    \item \textbf{New VS Code window:} \texttt{Cmd/Ctrl+Shift+N}, or File $\rightarrow$ New Window
+    \item \textbf{Open your project root:} File $\rightarrow$ Open Folder
+    \item \textbf{Launch Claude Code} (\texttt{claude} in the terminal, or the Claude panel)
     \item \textbf{Create \texttt{CLAUDE.md} at the project root}, with one of two routes:
   \end{enumerate}
 
@@ -1734,19 +1732,18 @@ Effect of historical migration on county-level outcomes.
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \begin{block}{Route A: Manually}
-        \begin{itemize}
-          \item Right-click the empty space in the Explorer $\rightarrow$ New File
-          \item Name it exactly \texttt{CLAUDE.md}
-          \item Write the research question, the data, and the constraints, as in the example
+        \begin{itemize}\setlength{\itemsep}{0pt}
+          \item Explorer $\rightarrow$ New File, named exactly \texttt{CLAUDE.md}
+          \item Write the question, data, and constraints, as in the example
         \end{itemize}
       \end{block}
     \end{column}
     \begin{column}{0.48\textwidth}
       \begin{block}{Route B: With Claude}
-        \begin{itemize}
-          \item Type \texttt{/init} and Claude reads your folder and drafts one
-          \item Or ask in plain words: ``Read this project and draft a CLAUDE.md with the research question, data, and constraints''
-          \item \textbf{Read the draft and edit it.} It is your rules
+        \begin{itemize}\setlength{\itemsep}{0pt}
+          \item Type \texttt{/init}: Claude reads your folder and drafts one
+          \item Or ask in plain words for a draft with the question, data, and constraints
+          \item \textbf{Read and edit the draft}
         \end{itemize}
       \end{block}
     \end{column}
