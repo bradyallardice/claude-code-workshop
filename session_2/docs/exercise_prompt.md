@@ -60,6 +60,8 @@ For every model in steps 4-7, reconcile the sample size: rows in, minus rows dro
    - Collapsing the three treatment arms into a single "any information" dummy vs. control
    - Restricting to a subsample (e.g., urban respondents only)
 
-9. **Format as LaTeX.** Ask Claude Code to produce a publication-style LaTeX regression table with all specifications side by side. Compile to PDF.
+9. **Format as LaTeX.** Ask Claude Code to produce a publication-style LaTeX regression table with all specifications side by side. Compile to PDF. Add an output manifest test: every specification appears in the table, each with its N.
 
-10. **Save everything.** All scripts, output, and the LaTeX table should be in `session_2/output/`.
+10. **Audit report.** Ask Claude Code to write `session_2/output/audit_report.md` covering: the tests run (with passed, failed, and skipped counts), each requirement and the test that covers it, anything not tested, numerical checks (your value against the independent value), choices that need your judgment, and what the tests do not cover.
+
+11. **Save everything.** All scripts, tests, output, and the LaTeX table should be in `session_2/output/`.
