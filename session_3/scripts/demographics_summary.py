@@ -2,7 +2,7 @@
 Session 3 — Respondent demographics summary.
 
 Describes the demographics of survey respondents using ONLY
-session_3/data/respondent_demographics.csv (all 2,994 rows, not limited to the
+session_3/option_b/data/respondent_demographics.csv (all 2,994 rows, not limited to the
 2,044 survey respondents). The file has two demographic variables:
 
   - income_quintile : 0 = no income (valid, NOT missing); 1-5 = quintiles
@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
 # ── Paths and shared style ───────────────────────────────────────────
-DATA_PATH = "session_3/data/respondent_demographics.csv"
+DATA_PATH = "session_3/option_b/data/respondent_demographics.csv"
 OUTPUT_DIR = "session_3/output"
 
 PRIMARY = "#1f4e79"   # main bar / line color (matches generate_fx_figure.py)

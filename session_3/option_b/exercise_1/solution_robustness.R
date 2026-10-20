@@ -5,7 +5,7 @@ library(dplyr)
 library(readr)
 
 # ── Load merged data ─────────────────────────────────────────────
-df <- read_csv("session_4/option_b/output/merged_survey.csv")
+df <- read_csv("session_3/option_b/output/merged_survey.csv")
 
 # Reference categories
 df$treatment <- factor(df$treatment, levels = c("cntrl", "info", "history", "Hungary"))
@@ -123,5 +123,5 @@ latex <- c(latex,
   "\\end{table}"
 )
 
-writeLines(latex, "session_4/option_b/exercise_2/tables/robustness_table.tex")
-cat("\nLaTeX table saved to session_4/option_b/exercise_2/tables/robustness_table.tex\n")
+writeLines(latex, "session_3/option_b/exercise_2/tables/robustness_table.tex")
+cat("\nLaTeX table saved to session_3/option_b/exercise_2/tables/robustness_table.tex\n")
