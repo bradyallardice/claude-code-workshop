@@ -35,7 +35,7 @@ Use Claude Code in **plan mode** for each step below. Review every plan before a
 3. **Verify the merge.**
    - Run the tests.
    - Trace three respondents from the raw files to the merged data: one typical, one with a missing outcome, and one who is absent from the demographics file.
-   - Test the tests: make a **copy** of the demographics file with one `respondent_id` duplicated, run the merge tests on the copy, and confirm that they fail. Never edit the files in `data/`.
+   - Test the tests: make a **copy** of the demographics file with the row of one survey respondent duplicated, run the merge tests on the copy, and confirm that they fail. Never edit the files in `data/`.
 
 ## Part 2: Specify and Estimate (30 min)
 
