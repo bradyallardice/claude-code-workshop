@@ -15,15 +15,27 @@ Read the codebook in `session_2/docs/codebook.md` before you begin.
 
 The survey randomly assigned respondents to one of four conditions before asking about intervention support: a control group (no information), a factual information group, a historical context group, and a Hungary policy comparison group. Your task is to estimate the effect of these treatments on support for government intervention, considering whether the respondent's own exposure to foreign currency loans moderates this effect.
 
+## Warm-Up: Install the Verification Protocol (10 min)
+
+1. **Add the protocol to your project.** Copy `docs/verification_protocol.md` into a file named `CLAUDE.md` in your `session_2` folder. If you already have a `CLAUDE.md`, append it.
+
+2. **Check that Claude Code sees it.** Start Claude Code in the `session_2` folder and ask: "What verification rules apply in this project?" Its answer should describe the protocol.
+
+3. **Write a requirements-to-tests matrix by hand**, without Claude Code. For the merge you are about to do, write three rows: a requirement, the test that checks it, and the condition under which the test passes.
+
 ## Part 1: Merge and Explore (30 min)
 
 Use Claude Code in **plan mode** for each step below. Review every plan before approving.
 
 1. **Merge the demographics data into the survey.** The demographics file has more rows than the survey. You will need to decide what join type to use. The merged dataset should have exactly **2,044 rows**.
+   - Tests first: have Claude Code write the verification tests from your matrix, and read them before it writes the merge.
 
 2. **Explore the merged data.** Ask Claude Code to produce summary statistics and check the data. Before you look at the output, write down what you expect to see.
 
-3. **Verify the merge.** What should you check to confirm the merge worked correctly? Write down your verification checks before running them, then run them.
+3. **Verify the merge.**
+   - Run the tests.
+   - Trace three respondents from the raw files to the merged data: one typical, one with a missing outcome, and one who is absent from the demographics file.
+   - Test the tests: make a **copy** of the demographics file with one `respondent_id` duplicated, run the merge tests on the copy, and confirm that they fail. Never edit the files in `data/`.
 
 ## Part 2: Specify and Estimate (30 min)
 
