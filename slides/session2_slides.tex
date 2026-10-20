@@ -724,18 +724,16 @@ which tests fail.
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 ## Audit report
 Tests run:         commands; passed / failed / skipped
-Requirements:      each requirement -> the test covering it
+Requirements:      each requirement -> its test
 Not tested:        anything without a test, and why
 Numerical checks:  our value vs. independent value
-Needs your call:   choices Claude proposed (join type,
-                   income = 0, dropped rows)
-Not covered:       identification, construct validity,
-                   specification
+Needs your call:   choices Claude proposed
+Not covered:       identification, construct validity
   \end{lstlisting}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \begin{block}{What the report is for}
-    Not for Claude Code to declare the research correct. It documents what was exercised, against which expectation, and what remains uncertain. Passing tests do not show that a design is valid.
+    Not for Claude Code to declare the research correct. It documents what was exercised, against which expectation, and what remains uncertain.
   \end{block}
 \end{frame}
 
