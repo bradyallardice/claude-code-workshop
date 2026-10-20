@@ -1013,23 +1013,27 @@ Not covered:       identification, construct validity
     \setcounter{enumi}{3}
     \item \textbf{Base model:} Logistic regression of \texttt{supports\_intervention} on \texttt{treatment}.
     \begin{itemize}
-      \item Use survey weights
-      \item What should the reference category be? Tell Claude Code explicitly.
+      \small
+      \item Use survey weights. What should the reference category be? Tell Claude Code explicitly.
+      \item \alert{Independent check:} the logistic of the intercept should equal the weighted control-group share, computed straight from the raw CSV
     \end{itemize}
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Add FX exposure.} Did the sample size change? Why or why not?
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Add demographic controls:} age, female, education, urban/rural, income, left-right.
     \begin{itemize}
-      \item \alert{Before running: predict how many observations you will have.}
-      \item Then check. Were you right?
+      \small
+      \item \alert{Before running: predict how many observations you will have.} Then check.
     \end{itemize}
 
-    \vspace{0.3em}
+    \vspace{0.2em}
     \item \textbf{Add an interaction} between treatment and FX exposure.
   \end{enumerate}
+
+  \vspace{0.4em}
+  {\small \alert{For every model, reconcile N:} rows in $-$ rows dropped (by reason) = N used.}
 \end{frame}
 
 \begin{frame}{Part 2 Debrief: What Happened to Your Sample?}
