@@ -615,30 +615,26 @@ Do not take expected values from the analysis script.
 \end{frame}
 
 \begin{frame}[fragile]{Validation Strategy 4 (cont.): Make It a Rule in CLAUDE.md}
-  Do not rely on remembering to ask. Add this to your \texttt{CLAUDE.md} so it applies to every conversation:
+  Do not rely on remembering to ask. Add this to your \texttt{CLAUDE.md}:
 
-  \vspace{0.3em}
+  \vspace{0.2em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-## Verification (required before reporting any step complete)
-- Before saying a step is done, write and run verification
-  tests for it.
-- Tests must be independent of the code they check. Get expected
-  values from the raw files, from a different method, or from
-  values I give you. Never paste the pipeline's own output in
-  as the expected value.
-- Every set of tests must include (1) a reconciliation of row
-  counts (rows in - rows dropped, by reason = rows out) and
-  (2) a trace of at least 3 sample records from the raw file
-  to the final output.
-- Show me the test output. If a test fails, report the step as
-  failed, not complete.
-- If you cannot write an independent test for something, say so.
+## Verification (required before reporting a step complete)
+- Before saying a step is done, write and run tests for it.
+- Tests must be independent of the code they check: take
+  expected values from the raw files, a different method,
+  or values I give you. Never paste the pipeline's own
+  output in as the expected value.
+- Include (1) a row-count reconciliation (rows in - rows
+  dropped, by reason = rows out) and (2) a trace of at
+  least 3 sample records from raw file to final output.
+- Show me the test output. If a test fails, report the
+  step as failed, not complete.
+- If you cannot write an independent test, say so.
   \end{lstlisting}
 
-  \vspace{0.3em}
-  \begin{alertblock}{CLAUDE.md is an instruction, not an enforcement mechanism}
-    Read the test output, and read the tests: check that the expected values really come from outside the code.
-  \end{alertblock}
+  \vspace{0.2em}
+  {\small \alert{CLAUDE.md is an instruction, not an enforcement mechanism.} Read the tests too: check that expected values really come from outside the code.}
 \end{frame}
 
 \begin{frame}{Validation Strategy 5: Replicate Before You Extend}
