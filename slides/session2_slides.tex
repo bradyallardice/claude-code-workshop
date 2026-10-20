@@ -595,8 +595,9 @@ Do not take expected values from the analysis script.
 
 \begin{frame}{Validation Strategy 4 (cont.): Kinds of Tests and What They Catch}
   \footnotesize
-  \renewcommand{\arraystretch}{1.25}
-  \begin{tabular}{@{}p{0.15\textwidth}p{0.30\textwidth}p{0.25\textwidth}p{0.22\textwidth}@{}}
+  \renewcommand{\arraystretch}{1.1}
+  \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+  \begin{tabular}{@{}L{0.14\textwidth}L{0.31\textwidth}L{0.26\textwidth}L{0.22\textwidth}@{}}
     \toprule
     \textbf{Test} & \textbf{Example} & \textbf{Catches} & \textbf{Blind to} \\
     \midrule
