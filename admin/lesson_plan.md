@@ -45,12 +45,11 @@ Guided workshop, approximately 60-70% hands-on exercises with pair programming. 
 
 Participants must complete the following before the workshop:
 
-1. Install Node.js (LTS version) on their machine
-2. Install Claude Code via npm
-3. Authenticate with their Anthropic or Claude account
-4. Install VS Code with the Claude Code extension
-5. Install a TeX distribution (TeX Live or MacTeX) and the VS Code LaTeX Workshop extension
-6. Verify installation by running a basic command (instructions provided)
+1. Install Claude Code with the native installer (`curl -fsSL https://claude.ai/install.sh | bash` on Mac; `irm https://claude.ai/install.ps1 | iex` in PowerShell on Windows; no Node.js needed)
+2. Authenticate with their Anthropic or Claude account
+3. Install VS Code with the Claude Code extension
+4. Install a TeX distribution (TeX Live or MacTeX) and the VS Code LaTeX Workshop extension
+5. Verify installation by running a basic command (instructions provided)
 
 A detailed setup guide with troubleshooting steps will be distributed one week before the workshop. Participants who encounter issues are asked to contact the instructor at least 48 hours in advance.
 
@@ -137,7 +136,7 @@ Brief and honest: Claude Code is substantially better at Python than Stata or R.
 
 **[27:00-37:00] Setup and Troubleshooting**
 
-Walk through: open terminal, verify Node.js, confirm Claude Code is installed, authenticate. Participants who completed pre-work help neighbors. If more than 2-3 have issues, deploy pair programming. Do not let this exceed 12 minutes.
+Walk through: open terminal, confirm Claude Code is installed (`claude --version`), authenticate. Participants who completed pre-work help neighbors. If more than 2-3 have issues, deploy pair programming. Do not let this exceed 12 minutes.
 
 **[37:00-47:00] First Hands-On Exercise**
 

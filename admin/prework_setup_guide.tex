@@ -9,6 +9,7 @@
 \usepackage{enumitem}
 \usepackage{parskip}
 \usepackage{titling}
+\usepackage{amssymb} % provides \checkmark used in the MCP "Connected" text
 
 \definecolor{headingblue}{RGB}{40,85,140}
 \definecolor{alertred}{RGB}{180,40,40}
@@ -142,7 +143,7 @@ Open a terminal (Mac: Terminal; Windows: open VS Code and use the integrated ter
 
 This creates a \texttt{claude-code-workshop/} folder in your home directory. Confirm it worked:
 \cmd{cd \textasciitilde/claude-code-workshop \&\& git status}
-\textit{Expected: \texttt{On branch main} and \texttt{nothing to commit, working tree clean}.}
+\textit{Expected: \texttt{On branch student} and \texttt{nothing to commit, working tree clean}.}
 
 \textit{You can clone it somewhere other than your home folder if you prefer (e.g.\ Documents) --- just remember where you put it and substitute that path below.}
 
@@ -171,16 +172,18 @@ The workshop exercises use Python. Even if you normally work in R or Stata, you 
 
 \subsection*{Install required Python packages}
 After Python is installed, \textbf{close and reopen your terminal}, then run:
-\cmd{pip install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+\cmd{pip install pandas numpy statsmodels scipy linearmodels matplotlib seaborn scikit-learn openpyxl}
 If you get an error saying \texttt{pip} is not found:
 
 \plat{Mac:}
-\cmd{pip3 install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+\cmd{pip3 install pandas numpy statsmodels scipy linearmodels matplotlib seaborn scikit-learn openpyxl}
 
 \plat{Windows:}
-\cmd{py -m pip install pandas numpy statsmodels matplotlib seaborn scikit-learn openpyxl}
+\cmd{py -m pip install pandas numpy statsmodels scipy linearmodels matplotlib seaborn scikit-learn openpyxl}
 
-\textit{If you already have Python installed via Anaconda, that is fine --- you likely already have these packages. You can skip this step but please verify by running the verification commands at the end.}
+\textit{If you already have Python installed via Anaconda, that is fine --- you likely already have most of these packages (Anaconda does not always include \texttt{linearmodels}, so run \texttt{pip install linearmodels} if the verification command at the end complains). You can skip the rest of this step but please verify by running the verification commands at the end.}
+
+\textit{Installing these packages globally, as above, is the baseline for this workshop. In Session 1 I will show you how to put them in a virtual environment (a separate, self-contained set of packages for one project), which you can do then if you prefer.}
 
 \section*{Step 6: Install R (if you don't already have it)}
 If you already have R installed, skip this step. If you are an R user but only have RStudio, you still need R itself installed so that the VS Code R extension and Claude Code can find it.
@@ -189,6 +192,16 @@ If you already have R installed, skip this step. If you are an R user but only h
   \item Download and install R for your operating system
   \item You do not need RStudio for this workshop, but you can keep it if you have it
 \end{itemize}
+
+\subsection*{Optional (R users): install the R packages the scripts use}
+Open R (or the R terminal in VS Code) and run:
+\cmd{install.packages(c("readr", "dplyr", "tidyr", "ggplot2", "MASS"))}
+\textit{The Session 5 capstone installs its own additional packages, including \texttt{cregg} version 0.4.0, the first time you run \texttt{session\_5/capstone-template/reference\_code/appendix.R}, so you do not need to install those now.}
+
+\subsection*{Optional (Stata users): install two user-written packages}
+Stata itself requires your own licence, which I cannot provide. If you plan to run the Stata (\texttt{.do}) exercises, install two user-written packages once, by typing the following inside Stata:
+\cmd{ssc install estout\\ssc install outreg2}
+\textit{\texttt{outreg2} is used by \texttt{session\_1/stata\_demo/analysis.do}, and \texttt{estout} (which provides \texttt{esttab}) by \texttt{session\_4/option\_b/exercise\_1/solution\_robustness.do}.}
 
 \section*{Step 7: Install a TeX Distribution}
 In Session 3 we will write and compile a \LaTeX{} paper directly inside VS Code, so Claude Code can edit, compile, and version-control your paper alongside your code and data. You already installed the \textbf{LaTeX Workshop} extension in Step 1 (the editor integration); now you need a \TeX{} distribution (the actual compiler).
@@ -239,10 +252,11 @@ Paste it into a temporary scratch file you will delete after Step 8b.
 \subsection*{8b. Add the GitHub MCP to Claude Code}
 
 In your terminal, paste the command below, \textbf{but before pressing Enter, replace the literal text \texttt{YOUR\_PAT} with the token you just copied} (keep the word \texttt{Bearer} and the space before the token --- you are only replacing \texttt{YOUR\_PAT}, nothing else):
-\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
+\cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
 
 \textit{Example of what it should look like after substitution (with a fake token):}
-\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
+\cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
+\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local scope), so the server would vanish as soon as you open Claude Code in 	exttt{	extasciitilde/my\_workspace/session\_N}. 	exttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
 
 Then verify:
 \cmd{claude mcp list}
@@ -266,7 +280,7 @@ The Zotero MCP lets Claude Code search your Zotero library, pull BibTeX, and ins
   \item Open the desktop app and sign in
 \end{itemize}
 
-\textbf{Now import the practice library.} I have prepared a bundle of 10 papers (with PDFs and notes) for the in-class demo. After cloning the repo in Step 4, it lives at:
+\textbf{Now import the practice library.} I have prepared a bundle of 9 journal articles (with 10 PDF attachments --- one article has two PDFs) for the in-class demo. After cloning the repo in Step 4, it lives at:
 
 \cmd{\textasciitilde/claude-code-workshop/session\_4/docs/claude\_code\_zotero/}
 
@@ -281,7 +295,7 @@ That folder contains a \texttt{claude\_code\_zotero.rdf} file and a \texttt{file
   \item Click \textbf{Continue}
 \end{itemize}
 
-You should end up with a new collection called \texttt{claude\_code\_zotero} in the left sidebar containing 10 items, each with a PDF attached. \textbf{Confirm by clicking on the collection and verifying you see all 10 papers with attachment paperclip icons.}
+You should end up with a new collection called \texttt{claude\_code\_zotero} in the left sidebar containing 9 papers (top-level items), with 10 PDF attachments in total --- one paper has two PDFs. \textbf{Confirm by clicking on the collection and verifying you see 9 papers, each with an attachment paperclip icon, and that expanding them shows 10 PDFs in total.}
 
 \alert{Critical:} keep the \texttt{files/} folder \emph{next to} the \texttt{.rdf} on disk during import --- if you move just the .rdf or import it from elsewhere, Zotero will import the metadata but not the PDFs.
 
@@ -312,15 +326,17 @@ Zotero blocks other applications from connecting by default. Turn that off:
 
 Save both the key and your Library ID into a temporary scratch file.
 
-\subsection*{9d. Install the \texttt{zotero-mcp} package}
+\subsection*{9d. Install the \texttt{zotero-mcp-server} package}
 
 \plat{Mac:}
-\cmd{pip install zotero-mcp}
+\cmd{pip install zotero-mcp-server}
 If \texttt{pip} is not found, use:
-\cmd{pip3 install zotero-mcp}
+\cmd{pip3 install zotero-mcp-server}
 
 \plat{Windows:}
-\cmd{py -m pip install zotero-mcp}
+\cmd{py -m pip install zotero-mcp-server}
+
+Make sure you type \texttt{zotero-mcp-server} (not \texttt{zotero-mcp}) in the install command: a different, unrelated package on PyPI is called \texttt{zotero-mcp}. The package we use installs a command-line program called \texttt{zotero-mcp}.
 
 Then confirm it installed:
 \cmd{zotero-mcp -\/-help}
@@ -330,12 +346,14 @@ Then confirm it installed:
 \subsection*{9e. Add the Zotero MCP to Claude Code}
 
 Run (substituting your real values from Step 9c):
-\cmd{claude mcp add zotero -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp}
+\cmd{claude mcp add -\/-scope user zotero -e ZOTERO\_LOCAL=true -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp serve}
 
 Then verify:
 \cmd{claude mcp list}
 
 You should now see both \texttt{github} and \texttt{zotero} listed with \texttt{$\checkmark$ Connected}. \textbf{Delete the scratch file with your key and Library ID.}
+
+\texttt{ZOTERO\_LOCAL=true} tells the MCP to read from the Zotero desktop app (the setting you turned on in Step 9b), which is what gives Claude Code access to your PDFs. The API key and Library ID are used for the Zotero web API, which the MCP falls back to if the desktop app is not running. \textbf{The web API only sees the practice collection once the Zotero desktop app has finished syncing it to your online library}, so after the import, leave Zotero open until the sync icon at the top right stops spinning. As in Step 8, \texttt{-\/-scope user} is what makes the server available in every folder.
 
 \subsection*{9f. Confirm it works}
 
@@ -353,7 +371,7 @@ Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the followi
 \cmd{python -\/-version}
 \textit{Expected: \texttt{Python 3.11.x} or \texttt{3.12.x} (Mac users: try \texttt{python3 -\/-version} if this fails)}
 
-\cmd{python -c "import pandas; import numpy; import statsmodels; print('All packages OK')"}
+\cmd{python -c "import pandas; import numpy; import statsmodels; import scipy; import linearmodels; print('All packages OK')"}
 \textit{Expected: \texttt{All packages OK} (Mac users: try \texttt{python3} instead of \texttt{python})}
 
 \cmd{claude -\/-version}
@@ -377,7 +395,7 @@ Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the followi
   \item The Claude Code extension panel responds when you type a message
   \item You have a GitHub account and have emailed me your GitHub username
   \item The \texttt{claude-code-workshop/} folder exists and \texttt{git status} inside it reports a clean working tree
-  \item The \texttt{claude\_code\_zotero} collection in your Zotero app contains 10 items, each with a PDF attached
+  \item The \texttt{claude\_code\_zotero} collection in your Zotero app contains 9 papers with 10 PDF attachments in total (one paper has two PDFs)
   \item Asking Claude Code ``list 5 items from the claude\_code\_zotero collection'' returns titles
   \item Asking Claude Code ``list my five most recent GitHub repos'' returns repo names
 \end{itemize}
@@ -406,7 +424,9 @@ Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the followi
 
 \textbf{Zotero MCP shows ``Connected'' but returns empty results:} Your library is genuinely empty, or \texttt{ZOTERO\_LIBRARY\_TYPE} is wrong. If you set up a \emph{group} library instead of a personal one, change \texttt{user} to \texttt{group} in the env var.
 
-\textbf{\texttt{zotero-mcp: command not found} after \texttt{pip install}:} Close and reopen your terminal. If still failing, the install went to a directory not on your PATH --- email me with the output of \texttt{pip show zotero-mcp} and I will help.
+\textbf{\texttt{zotero-mcp: command not found} after \texttt{pip install}:} Close and reopen your terminal. If still failing, the install went to a directory not on your PATH --- email me with the output of \texttt{pip show zotero-mcp-server} and I will help.
+
+\textbf{\texttt{claude mcp list} shows \texttt{github} or \texttt{zotero} in one folder but not in another:} The server was registered with the default ``local'' scope, which only applies to the folder where you ran \texttt{claude mcp add}. Re-run the command with \texttt{-\/-scope user} (as shown above). If Claude Code says the server already exists, first remove the old entry with \texttt{claude mcp remove github} (or \texttt{claude mcp remove zotero}) and then run the \texttt{claude mcp add} command again.
 
 \textbf{You accidentally pasted a token into a chat or committed it to git:} Revoke it immediately (GitHub: \textbf{https://github.com/settings/tokens}; Zotero: \textbf{https://www.zotero.org/settings/keys}) and generate a new one. Tokens are easy to rotate; a leaked token in a public repo is not.
 

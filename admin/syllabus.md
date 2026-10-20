@@ -218,8 +218,7 @@ Self-contained handout distributed to all participants.
 
 Comfort with quantitative research and data analysis in any language. A laptop with the following installed (setup guide distributed one week before):
 
-- Node.js (LTS version)
-- Claude Code CLI (`npm install -g @anthropic-ai/claude-code`)
+- Claude Code CLI (native installer: `curl -fsSL https://claude.ai/install.sh | bash` on Mac; `irm https://claude.ai/install.ps1 | iex` in PowerShell on Windows; no Node.js needed)
 - Python 3.9+ with pandas, numpy, statsmodels, scipy, matplotlib
 - Git
 - VS Code with the Claude Code and LaTeX Workshop extensions

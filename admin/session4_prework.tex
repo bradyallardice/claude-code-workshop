@@ -112,10 +112,11 @@ Paste it into a temporary scratch file you will delete after Step 4b.
 \subsection*{4b. Add the GitHub MCP to Claude Code}
 
 In your terminal, paste the command below, \textbf{but before pressing Enter, replace the literal text \texttt{YOUR\_PAT} with the token you just copied} (keep the word \texttt{Bearer} and the space before the token --- you are only replacing \texttt{YOUR\_PAT}, nothing else):
-\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
+\cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer YOUR\_PAT"}
 
 \textit{Example of what it should look like after substitution (with a fake token):}
-\cmd{claude mcp add -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
+\cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
+\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local scope), so the server would vanish as soon as you open Claude Code in 	exttt{	extasciitilde/my\_workspace/session\_N}. 	exttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
 
 Then verify:
 \cmd{claude mcp list}
@@ -140,7 +141,7 @@ The Zotero MCP lets Claude Code search your Zotero library, pull BibTeX, and ins
   \item Open the desktop app and sign in
 \end{itemize}
 
-\textbf{Now import the practice library.} I have prepared a bundle of 10 papers (with PDFs and notes) for the in-class demo. It lives in the course repo at:
+\textbf{Now import the practice library.} I have prepared a bundle of 9 journal articles (with 10 PDF attachments --- one article has two PDFs) for the in-class demo. It lives in the course repo at:
 
 \cmd{session\_4/docs/claude\_code\_zotero/}
 
@@ -155,7 +156,7 @@ After running \texttt{git pull} from Step 1, that folder contains a \texttt{clau
   \item Click \textbf{Continue}
 \end{itemize}
 
-You should end up with a new collection called \texttt{claude\_code\_zotero} in the left sidebar containing 10 items, each with a PDF attached. \textbf{Confirm by clicking on the collection and verifying you see all 10 papers with attachment paperclip icons.}
+You should end up with a new collection called \texttt{claude\_code\_zotero} in the left sidebar containing 9 papers (top-level items), with 10 PDF attachments in total --- one paper has two PDFs. \textbf{Confirm by clicking on the collection and verifying you see 9 papers, each with an attachment paperclip icon, and that expanding them shows 10 PDFs in total.}
 
 \alert{Critical:} keep the \texttt{files/} folder \emph{next to} the \texttt{.rdf} on disk during import --- if you move just the .rdf or import it from elsewhere, Zotero will import the metadata but not the PDFs.
 
@@ -186,15 +187,17 @@ Zotero blocks other applications from connecting by default. Turn that off:
 
 Save both the key and your Library ID into a temporary scratch file.
 
-\subsection*{5d. Install the \texttt{zotero-mcp} package}
+\subsection*{5d. Install the \texttt{zotero-mcp-server} package}
 
 \plat{Mac:}
-\cmd{pip install zotero-mcp}
+\cmd{pip install zotero-mcp-server}
 If \texttt{pip} is not found, use:
-\cmd{pip3 install zotero-mcp}
+\cmd{pip3 install zotero-mcp-server}
 
 \plat{Windows:}
-\cmd{py -m pip install zotero-mcp}
+\cmd{py -m pip install zotero-mcp-server}
+
+Make sure you type \texttt{zotero-mcp-server} (not \texttt{zotero-mcp}) in the install command: a different, unrelated package on PyPI is called \texttt{zotero-mcp}. The package we use installs a command-line program called \texttt{zotero-mcp}.
 
 Then confirm it installed:
 \cmd{zotero-mcp -\/-help}
@@ -204,12 +207,14 @@ Then confirm it installed:
 \subsection*{5e. Add the Zotero MCP to Claude Code}
 
 Run (substituting your real values from Step 5c):
-\cmd{claude mcp add zotero -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp}
+\cmd{claude mcp add -\/-scope user zotero -e ZOTERO\_LOCAL=true -e ZOTERO\_LIBRARY\_ID=YOUR\_LIBRARY\_ID -e ZOTERO\_API\_KEY=YOUR\_API\_KEY -e ZOTERO\_LIBRARY\_TYPE=user -- zotero-mcp serve}
 
 Then verify:
 \cmd{claude mcp list}
 
 You should now see both \texttt{github} and \texttt{zotero} listed with \texttt{$\checkmark$ Connected}. \textbf{Delete the scratch file with your key and Library ID.}
+
+\texttt{ZOTERO\_LOCAL=true} tells the MCP to read from the Zotero desktop app (the setting you turned on in Step 5b), which is what gives Claude Code access to your PDFs. The API key and Library ID are used for the Zotero web API, which the MCP falls back to if the desktop app is not running. \textbf{The web API only sees the practice collection once the Zotero desktop app has finished syncing it to your online library}, so after the import, leave Zotero open until the sync icon at the top right stops spinning. As in Step 4, \texttt{-\/-scope user} is what makes the server available in every folder.
 
 \subsection*{5f. Confirm it works}
 
@@ -238,7 +243,7 @@ Open a terminal and run each of the following. \textbf{Take a screenshot of the 
 \textbf{Also confirm:}
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
   \item \texttt{git pull} on the course repo succeeds and you see a \texttt{session\_4/} folder with new content
-  \item The \texttt{claude\_code\_zotero} collection in your Zotero app contains 10 items, each with a PDF attached
+  \item The \texttt{claude\_code\_zotero} collection in your Zotero app contains 9 papers with 10 PDF attachments in total (one paper has two PDFs)
   \item Asking Claude Code ``list 5 items from the claude\_code\_zotero collection'' returns titles
   \item Asking Claude Code ``list my five most recent GitHub repos'' returns repo names
   \item You have emailed me your GitHub username
@@ -252,7 +257,9 @@ Open a terminal and run each of the following. \textbf{Take a screenshot of the 
 
 \textbf{Zotero MCP shows ``Connected'' but returns empty results:} Your library is genuinely empty, or \texttt{ZOTERO\_LIBRARY\_TYPE} is wrong. If you set up a \emph{group} library instead of a personal one, change \texttt{user} to \texttt{group} in the env var.
 
-\textbf{\texttt{zotero-mcp: command not found} after \texttt{pip install}:} Close and reopen your terminal. If still failing, the install went to a directory not on your PATH --- email me with the output of \texttt{pip show zotero-mcp} and I will help.
+\textbf{\texttt{zotero-mcp: command not found} after \texttt{pip install}:} Close and reopen your terminal. If still failing, the install went to a directory not on your PATH --- email me with the output of \texttt{pip show zotero-mcp-server} and I will help.
+
+\textbf{\texttt{claude mcp list} shows \texttt{github} or \texttt{zotero} in one folder but not in another:} The server was registered with the default ``local'' scope, which only applies to the folder where you ran \texttt{claude mcp add}. Re-run the command with \texttt{-\/-scope user} (as shown above). If Claude Code says the server already exists, first remove the old entry with \texttt{claude mcp remove github} (or \texttt{claude mcp remove zotero}) and then run the \texttt{claude mcp add} command again.
 
 \textbf{You accidentally pasted a token into a chat or committed it to git:} Revoke it immediately (GitHub: \textbf{https://github.com/settings/tokens}; Zotero: \textbf{https://www.zotero.org/settings/keys}) and generate a new one. Tokens are easy to rotate; a leaked token in a public repo is not.
 

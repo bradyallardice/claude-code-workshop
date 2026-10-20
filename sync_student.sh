@@ -54,6 +54,10 @@ git rm -f -r --quiet --ignore-unmatch admin/
 # Remove this sync script itself
 git rm -f --quiet --ignore-unmatch sync_student.sh
 
+# .vscode/settings.json is tracked but hardcodes the instructor's local Stata
+# path (/Applications/StataNow), which is wrong on students' machines.
+git rm -f --quiet --ignore-unmatch .vscode/settings.json
+
 # Session 1: output and full data
 git rm -f -r --quiet --ignore-unmatch session_1/output/
 git rm -f -r --quiet --ignore-unmatch session_1/data/full/
