@@ -520,30 +520,29 @@ still needs to be done.
   Aggregate checks can pass while individual records are wrong.\\
   \textbf{Pick specific records and follow each one through every stage of the pipeline.}
 
-  \vspace{0.5em}
+  \vspace{0.3em}
   \centering
   Raw file $\rightarrow$ Merged $\rightarrow$ Recoded $\rightarrow$ Estimation sample $\rightarrow$ Table
   \raggedright
 
-  \vspace{0.5em}
-  \textbf{How:}
+  \vspace{0.3em}
   \begin{itemize}
     \item Choose 3--5 respondents \textit{on purpose}: a typical one, one with a missing value, one with no match in the second file
     \item Print each one's values at every stage, side by side
     \item For every number in the final table (N, each coefficient), identify which rows produced it
   \end{itemize}
 
-  \vspace{0.3em}
+  \vspace{0.2em}
   \textbf{Example prompt:}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Pick one typical respondent, one with a missing outcome,
-and one absent from respondent_demographics.csv. Print each
-respondent's row from the raw file, the merged data, and the
-regression sample. State whether each is in the sample.
+Pick one typical respondent, one with a missing outcome, and
+one absent from respondent_demographics.csv. Print each one's
+row from the raw file, the merged data, and the regression
+sample, and state whether each is in the sample.
   \end{lstlisting}
 
-  \vspace{0.3em}
-  \textbf{What this catches:} silent recoding, rows lost in a merge or by listwise deletion, the wrong variable feeding the model, a table N that does not match the data.
+  \vspace{0.2em}
+  {\small \textbf{Catches:} silent recoding, rows lost in a merge or by listwise deletion, the wrong variable in the model, a table N that does not match the data.}
 \end{frame}
 
 \begin{frame}{Validation Strategy 3: Write Down Expectations First}
