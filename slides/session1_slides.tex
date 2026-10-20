@@ -609,26 +609,32 @@ claude
   \end{alertblock}
 \end{frame}
 
-% ── Terminal Example: Editing a Document ─────────────────────────
-\begin{frame}[fragile]{Terminal Example: Editing a Document}
-  The terminal isn't just for code. Open Claude Code in any folder and ask it to edit a document --- notes, a README, a draft.
+% ── Live Demo: Claude Code in VS Code on a Real Project ──────────
+\begin{frame}{Live Demo: What Claude Code Looks Like in Practice}
+  \textbf{I'll switch to VS Code and show you Claude Code working on a real project of mine:} \alert{AI Adoption Prediction}, a project on how well sociodemographics predict individual AI adoption across countries.
 
-  \vspace{0.4em}
-\begin{lstlisting}
-cd ~/my_workspace/session_1
-claude
-\end{lstlisting}
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{The project:}
+      \begin{itemize}
+        \item A normal research folder: \texttt{src/} (scripts), \texttt{data/}, \texttt{docs/}, \texttt{outputs/}, a README
+        \item Not a toy example prepared for the course
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to watch for:}
+      \begin{itemize}
+        \item Where Claude Code sits in the VS Code window
+        \item How it \textbf{reads} files in the project folder
+        \item How it \textbf{proposes edits} as a diff
+        \item How you \textbf{approve, reject, or redirect} each change
+      \end{itemize}
+    \end{column}
+  \end{columns}
 
-  \vspace{0.3em}
-  Then ask, in plain language:
-\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-> Open notes.md and tighten the Summary section
-  to three bullet points. Keep my wording where
-  you can, and don't touch the other sections.
-\end{lstlisting}
-
-  \vspace{0.3em}
-  Claude reads the file, shows a \textbf{proposed diff}, and waits for you to \textbf{approve, reject, or ask for changes} --- the same review loop you'll use everywhere.
+  \vspace{0.5em}
+  \alert{Nothing to follow along with here. Just watch; you'll do this yourself in the exercise.}
 \end{frame}
 
 \begin{frame}{Terminal vs.\ VS Code}
