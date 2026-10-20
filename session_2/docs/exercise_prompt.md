@@ -42,12 +42,15 @@ Use Claude Code in **plan mode** for each step below. Review every plan before a
 4. **Specify the base model.** Estimate a logistic regression of `supports_intervention` on `treatment`, using survey weights. Before running, decide:
    - What should the reference category for `treatment` be?
    - Tell Claude Code explicitly.
+   - Independent check: the logistic of the model's intercept should equal the weighted share of supporters in the control group. Compute that share directly from the raw CSV, without using the model code, and compare.
 
 5. **Add FX exposure.** Add `fx_status` to the model. Check: did the sample size change?
 
 6. **Add demographic controls.** Add `age`, `female`, `ed_level`, `urban_rural`, `income_quintile`, and `left_right` to the model. **Before running, predict how many observations you will have.** Then check.
 
 7. **Interact treatment with FX exposure.** Does the information treatment have a different effect on people who are directly affected by the shock?
+
+For every model in steps 4-7, reconcile the sample size: rows in, minus rows dropped (by reason), equals N used.
 
 ## Part 3: Robustness and Output (30 min)
 
