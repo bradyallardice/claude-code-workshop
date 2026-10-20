@@ -4,12 +4,17 @@ Workshop materials for learning how to use Claude Code as an AI-powered research
 
 ## Setup
 
+The full step-by-step instructions are in the Pre-Workshop Setup Guide distributed by the instructor. In summary:
+
 ### Prerequisites
 
-1. **Claude Code CLI** — Install via `npm install -g @anthropic-ai/claude-code`
-2. **Python 3.9+** — With `pandas`, `numpy`, `statsmodels`, `scipy`, and `matplotlib`
-3. **Git** — For cloning this repo and version control exercises
-4. **A text editor or IDE** — VS Code recommended (Claude Code has a VS Code extension)
+1. **Claude Code CLI** — Install with the native installer (no Node.js needed): `curl -fsSL https://claude.ai/install.sh | bash` on Mac, or `irm https://claude.ai/install.ps1 | iex` in PowerShell on Windows. Requires a Claude Pro or Max subscription.
+2. **Python 3.11 or 3.12** — With `pandas`, `numpy`, `statsmodels`, `scipy`, `linearmodels`, `matplotlib`, `seaborn`, `scikit-learn`, and `openpyxl`
+3. **Git** — For cloning this repo and version control exercises (required by Claude Code on Windows)
+4. **VS Code** — With the Python, R, Claude Code, and LaTeX Workshop extensions
+5. **A TeX distribution** — MacTeX/BasicTeX (Mac) or TeX Live/MiKTeX (Windows)
+6. **R** (optional, for R users) and **Stata** (optional, requires your own licence)
+7. **Node.js (LTS)** — Not needed at the start. Install it before Session 5, where the `claude-ignore` hook is installed with `npm`.
 
 ### Verify Your Setup
 
@@ -18,23 +23,28 @@ Workshop materials for learning how to use Claude Code as an AI-powered research
 git clone https://github.com/bradyallardice/claude-code-workshop.git
 cd claude-code-workshop
 
-# Verify Claude Code is installed
+# Verify Git and Claude Code are installed
+git --version
 claude --version
 
-# Verify Python dependencies
-python -c "import pandas; import numpy; import statsmodels; import matplotlib; print('All good!')"
+# Verify Python dependencies (on Mac, use python3 if python is not found)
+python -c "import pandas; import numpy; import statsmodels; import scipy; import linearmodels; import matplotlib; print('All good!')"
+
+# Verify a TeX distribution is installed
+pdflatex --version
 ```
 
-## Workshop Modules
+## Workshop Sessions
 
-| Module | Topic | Folder |
-|--------|-------|--------|
+| Session | Topic | Folder |
+|---------|-------|--------|
 | 1 | Introduction to Claude Code | `session_1/` |
-| 2 | CLAUDE.md & Plan Mode | `session_2/` |
-| 3 | Data Cleaning & Merging Pipelines | `session_3/` |
-| 4 | Skills, Zotero, GitHub Collaboration, and Debugging Materials | `session_4/` |
+| 2 | Research Pipelines | `session_2/` |
+| 3 | Git and LaTeX in VS Code | `session_3/` |
+| 4 | Skills, MCPs, and GitHub Collaboration | `session_4/` |
 | 5 | Subagents, Hooks, and Capstone | `session_5/` |
-| 6 | Git & Version Control with AI | (this repo itself) |
+
+`session_6/` through `session_9/` are empty placeholder folders reserved for later use; they are not used in the five-session format.
 
 ## License
 
