@@ -183,9 +183,9 @@ def test_estimator_recovers_planted_treatment_effects(scenario, true_effects):
         assert abs(estimate - true_value) < 0.07, (scenario, name, estimate, true_value)
 
     # The independent estimator must agree with the pipeline's estimator on the same simulated data
-    design = np.column_stack(
-        [np.ones(n)] + [(arm == a).astype(float) for a in ["info", "history", "Hungary"]]
-    )
+    names = ["Intercept", "info", "history", "Hungary"]
+    design = np.column_stack([np.ones(n)] + [(arm == a).astype(float) for a in names[1:]])
     beta, _ = helpers.weighted_logit_irls(design, outcome, weight)
-    pipeline_beta = [model.params[k] for k in model.params.index]  # Intercept, info, history, Hungary order
-    assert np.allclose(sorted(beta), sorted(pipeline_beta), atol=1e-6)
+    oracle_by_name = dict(zip(names, beta))
+    for pipeline_name, estimate in model.params.items():
+        assert abs(estimate - oracle_by_name[oracle_parameter_name(pipeline_name)]) < 1e-6, pipeline_name
