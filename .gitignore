@@ -10,6 +10,7 @@ session_1/data/full/ipums/*_raw.csv.gz
 # Python
 __pycache__/
 *.pyc
+.pytest_cache/
 
 # LaTeX build artifacts
 *.aux
