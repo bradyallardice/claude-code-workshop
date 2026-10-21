@@ -125,13 +125,15 @@ def test_every_coefficient_se_and_p_value_matches_independent_estimator(pipeline
 
 
 @pytest.mark.requirement("R4")
-@pytest.mark.parametrize("spec", list(helpers.ROBUSTNESS_ORACLE_SPECS))
+@pytest.mark.parametrize("spec", [s for s in helpers.ROBUSTNESS_ORACLE_SPECS if s != "(5)"])
 def test_robustness_treatment_effect_matches_independent_estimator(pipeline_run, oracle_merged, spec):
-    """The treatment coefficient and p-value in each robustness specification match the independent fit (4 d.p.)."""
+    """The info coefficient and p-value in each robustness specification match the independent fit (4 d.p.).
+
+    Specification (5) pools the arms into 'any_info', so the stdout table has no info row for it;
+    its coefficient is checked from the LaTeX table in test_07_output_tables.py.
+    """
     oracle = helpers.fit_oracle_spec(oracle_merged, **helpers.ROBUSTNESS_ORACLE_SPECS[spec])
     stdout = pipeline_run["runs"]["solution_robustness.py"].stdout
-    if spec == "(5)":
-        pytest.skip("pooled treatment has no 'info' row in the stdout table; checked in the LaTeX table tests")
     _, pipeline_coef, pipeline_p = helpers.parse_robustness_info_rows(stdout)[spec]
     helpers.assert_close_and_record(f"robustness {spec}: info coefficient", pipeline_coef, oracle.coefficients["info"], 6e-5)
     assert abs(pipeline_p - oracle.p_values["info"]) <= 6e-5
