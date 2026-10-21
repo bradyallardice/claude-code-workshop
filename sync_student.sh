@@ -71,6 +71,9 @@ git rm -f --quiet --ignore-unmatch session_1/docs/decisions.md
 # Remove solution scripts
 git ls-files 'session_*/scripts/solution_*' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
 
+# Remove the instructor verification suite (students write their own tests in the exercise)
+git rm -f -r --quiet --ignore-unmatch session_2/tests/
+
 # Remove teacher-only scripts
 git rm -f --quiet --ignore-unmatch session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py
 git rm -f --quiet --ignore-unmatch session_2/scripts/build_county_panel.py
