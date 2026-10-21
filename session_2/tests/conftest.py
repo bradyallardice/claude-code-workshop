@@ -54,6 +54,7 @@ NOT_TESTED = [
     "Manuscript-to-code traceability: there is no manuscript in this session.",
     "Performance and scaling: not relevant at 2,044 rows.",
     "Robustness to alternative specifications beyond the six in the table: that is a research design question.",
+    "Treatment x FX interaction model: only its sample size is checked, not its coefficients.",
 ]
 
 NOT_COVERED = [
