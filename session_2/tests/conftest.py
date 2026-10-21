@@ -239,5 +239,21 @@ def build_audit_report(config):
     lines += ["## Not covered", "",
               "Passing tests, complete output, and reproducibility do not show that the "
               "research design is valid. In particular:", ""] + [f"- {item}" for item in NOT_COVERED] + [""]
-    lines += [f"Python {sys.version.split()[0]}", ""]
+    lines += reproduction_evidence_lines()
     return "\n".join(lines)
+
+
+def reproduction_evidence_lines():
+    """Software versions and input hashes, so the run can be reproduced and compared later."""
+    import numpy
+    import pandas
+    import statsmodels
+
+    return [
+        "## Reproduction evidence", "",
+        f"- Python {sys.version.split()[0]}, pandas {pandas.__version__}, "
+        f"numpy {numpy.__version__}, statsmodels {statsmodels.__version__}",
+        f"- {helpers.SURVEY_CSV.name} SHA-256: {helpers.sha256_of_file(helpers.SURVEY_CSV)[:16]}...",
+        f"- {helpers.DEMOGRAPHICS_CSV.name} SHA-256: {helpers.sha256_of_file(helpers.DEMOGRAPHICS_CSV)[:16]}...",
+        "",
+    ]
