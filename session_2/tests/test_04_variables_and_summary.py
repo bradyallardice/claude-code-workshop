@@ -7,7 +7,6 @@ data actually contain?
 
 import re
 
-import numpy as np
 import pytest
 
 from conftest import read_output_text
