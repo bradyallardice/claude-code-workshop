@@ -39,10 +39,7 @@ def assert_cells_match_oracle(tex, row_label, oracle_fits, tolerance=0.0005 + 1e
     A cell must be blank exactly where the model does not contain the term. Where present, the
     coefficient and SE must match to the table's 3 decimals and the stars must match the oracle p-value.
     """
-    parameter = ROBUSTNESS_ROWS.get(row_label) or {
-        "Info treatment": "info", "History treatment": "history", "Hungary treatment": "Hungary",
-        "FX exposed (current)": "fx_current", "FX exposed (past)": "fx_past",
-    }[row_label]
+    parameter = ROBUSTNESS_ROWS[row_label]
     coefficient_cells = helpers.latex_row_cells(tex, row_label)
     coefficient_numbers = helpers.latex_row_numbers(tex, row_label)
     standard_error_numbers = helpers.latex_row_numbers(tex, row_label, line_offset=1)
