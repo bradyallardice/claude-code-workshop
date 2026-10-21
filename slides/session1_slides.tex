@@ -1117,6 +1117,109 @@ claude
   \end{alertblock}
 \end{frame}
 
+% ── Starting a Project in VS Code ────────────────────────────────
+\begin{frame}{Starting a New Project in VS Code}
+  VS Code has no ``New Project'' button. \textbf{A project is just a folder} you open.
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \begin{enumerate}
+        \item \textbf{Create an empty folder} in Finder / File Explorer (or use \textbf{New Folder} inside the Open Folder dialog)
+        \item \textbf{Open it:} File $\rightarrow$ Open Folder
+        \item \textbf{Trust the folder} when VS Code asks. The Claude Code extension does not work in Restricted Mode
+        \item \textbf{Build the structure} in the Explorer panel: right-click $\rightarrow$ New Folder / New File
+        \item \textbf{Open Claude Code} in that window
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \textbf{A typical research layout:}
+      \vspace{0.2em}
+
+      \texttt{my\_project/}\\
+      \texttt{\ \ README.md}\\
+      \texttt{\ \ src/}\ \ {\footnotesize scripts}\\
+      \texttt{\ \ data/}\\
+      \texttt{\ \ docs/}\\
+      \texttt{\ \ outputs/}
+
+      \vspace{0.4em}
+      {\footnotesize From a terminal, \texttt{code .} opens the current folder in VS Code.}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \alert{One project = one folder = one VS Code window.} Claude Code works on the folder you have open.
+\end{frame}
+
+% ── Opening Claude Code ──────────────────────────────────────────
+\begin{frame}{Opening Claude Code Inside the Project}
+  Once the folder is open, there are four ways in. They all open the same agent:
+
+  \vspace{0.5em}
+  \begin{tabular}{@{}p{0.30\textwidth} p{0.64\textwidth}@{}}
+    \toprule
+    \textbf{Where} & \textbf{Detail} \\
+    \midrule
+    \textbf{Editor toolbar} & Spark icon, top-right of the editor. Only appears when a file is open. \\[0.3em]
+    \textbf{Activity Bar} & Spark icon in the left sidebar. Opens your list of sessions. \\[0.3em]
+    \textbf{Status Bar} & ``Claude Code'' at the bottom right. Works even with no file open. \\[0.3em]
+    \textbf{Command Palette} & \texttt{Cmd/Ctrl+Shift+P}, then type ``Claude Code''. \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  If you cannot find the icon, you probably have no file open. Use the Status Bar or the Command Palette.
+\end{frame}
+
+% ── Multiple Claude Code Tabs ────────────────────────────────────
+\begin{frame}{Multiple Claude Code Tabs}
+  \small
+  You can run \textbf{several conversations at once}. Each one has \textbf{its own history and context}.
+
+  \vspace{0.4em}
+  \begin{columns}[T]
+    \begin{column}{0.50\textwidth}
+      \textbf{How to open another one}
+      \begin{itemize}
+        \item Command Palette $\rightarrow$ \textbf{Open in New Tab}\\
+          (\texttt{Cmd+Shift+Esc} on Mac, \texttt{Ctrl+Shift+Esc} on Windows)
+        \item Or \textbf{Open in New Window}, \textbf{Open in Side Bar}
+        \item You can drag the panel to the left sidebar, the right (secondary) sidebar, or the editor area
+      \end{itemize}
+
+      \vspace{0.3em}
+      \textbf{Finding old conversations}
+      \begin{itemize}
+        \item \textbf{Session history} button at the top of the panel: search by keyword or browse by time
+        \item Clicking one resumes it, or jumps to its tab if it is already open
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \textbf{A useful pattern}
+      \begin{itemize}
+        \item Main task in the sidebar
+        \item Side tasks in separate tabs (e.g.\ ``explain this script'' while the main one is busy)
+      \end{itemize}
+
+      \vspace{0.3em}
+      \textbf{Status dot on the Spark icon}
+      \begin{itemize}
+        \item \textbf{Blue:} a permission request is waiting
+        \item \textbf{Orange:} Claude finished while that tab was hidden
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.4em}
+  \begin{alertblock}{Give each tab a different job}
+    Two tabs editing the same file can step on each other. Split the work by file, and keep the same conversation open in only one place.
+  \end{alertblock}
+
+  \vspace{0.2em}
+  {\footnotesize\alert{I'll show this live in VS Code.}}
+\end{frame}
+
 % ══════════════════════════════════════════════════════════════════
 %  THE CONTEXT WINDOW  [8:00–12:00]
 % ══════════════════════════════════════════════════════════════════

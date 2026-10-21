@@ -2,7 +2,7 @@
 
 ## Tests run
 
-Command: `python3 -m pytest session_2/tests --audit-report session_2/tests/audit_report.md -q -p no:cacheprovider`
+Command: `python3 -m pytest session_2/tests --audit-report session_2/tests/audit_report.md -p no:cacheprovider`
 
 - passed: 126
 - failed: 0
