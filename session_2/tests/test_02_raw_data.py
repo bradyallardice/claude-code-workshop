@@ -6,11 +6,8 @@ Are keys unique, types and ranges valid, and the data consistent with its codebo
 the pipeline.
 """
 
-import numpy as np
 import pandas as pd
 import pytest
-
-import helpers
 
 
 @pytest.mark.requirement("R0")
