@@ -380,16 +380,26 @@ def parse_robustness_info_rows(stdout):
     return {key: (int(n), float(c), float(p)) for key, n, c, p in rows}
 
 
-def latex_row_numbers(tex, row_label, line_offset=0):
-    """Return the first number in each data cell of the LaTeX row starting with row_label.
+def latex_row_cells(tex, row_label, line_offset=0):
+    """Return the raw text of each data cell (everything after the first '&') of a LaTeX row.
 
-    line_offset=1 reads the line below (the standard-error row under a coefficient row).
+    The row is the line starting with row_label. line_offset=1 reads the line below it
+    (the standard-error row under a coefficient row).
     """
     lines = tex.splitlines()
     index = next(i for i, line in enumerate(lines) if line.lstrip().startswith(row_label))
-    cells = lines[index + line_offset].split("&")[1:]
+    return lines[index + line_offset].split("&")[1:]
+
+
+def latex_row_numbers(tex, row_label, line_offset=0):
+    """Return the first number in each data cell of a LaTeX row (None for an empty cell)."""
     numbers = []
-    for cell in cells:
+    for cell in latex_row_cells(tex, row_label, line_offset):
         match = re.search(r"-?\d+(?:\.\d+)?", cell)
         numbers.append(float(match.group()) if match else None)
     return numbers
+
+
+def stars_for_p_value(p_value):
+    """Significance stars by the convention printed in the table footnotes."""
+    return "***" if p_value < 0.01 else "**" if p_value < 0.05 else "*" if p_value < 0.1 else ""
