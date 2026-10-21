@@ -84,3 +84,32 @@ Key pattern: the info treatment increases support for intervention; the other tr
 | (4) | Full controls | 1,151 | +0.267 | 0.118 | **The trap**: N drops 44%, significance vanishes |
 | (5) | Pooled treatment | 2,035 | +0.218 | 0.042 | Weaker but significant with pooled arms |
 | (6) | Urban only | 1,208 | +0.326 | 0.051 | Subsample restriction, borderline |
+
+---
+
+## Verification Steps (Warm-Up, Steps 1, 3, 4, 9, 10)
+
+These are the checks added by the verification section. Values were computed directly from the files in `session_2/data/`.
+
+### Warm-up
+- After the student copies `docs/verification_protocol.md` into `CLAUDE.md`, asking "What verification rules apply in this project?" should return a description of the protocol. If Claude Code does not describe it, the file is in the wrong folder or has the wrong name.
+
+### Fault injection (Step 3)
+- The duplicated row must belong to a **survey respondent**. The demographics file contains 1,000 IDs that match no survey respondent, and duplicating one of those leaves a left join at 2,044 rows, so the tests correctly **pass**. Students who pick a non-survey ID will think their tests are broken.
+- Example: duplicating the demographics row for `respondent_id` 299 gives **2,045 rows** after a left join and a non-unique `respondent_id`. The row-count test and the key-uniqueness test should both fail.
+- Watch for: a student whose tests still pass after injecting the fault. Either the fault did not touch what the tests check, or the tests are not testing the merge output.
+
+### Independent check on the base model (Step 4)
+- Base model: weighted logistic regression of `supports_intervention` on `treatment`, reference category `cntrl`, N = 2,036.
+- logistic(intercept) = logistic(-0.219) = **0.4455**, which equals the weighted share of supporters in the control group among respondents with a non-missing outcome (**478** respondents), computed directly from the raw CSV.
+- The unweighted share is **0.4477** (and logistic of the unweighted intercept, -0.210, is also 0.4477). The two differ in the third decimal, so this check detects whether weights were applied.
+- The same identity holds for each other arm: logistic(intercept + arm coefficient) equals that arm's weighted share (info 0.5209, history 0.4761, Hungary 0.4939). It holds because the model is saturated in treatment.
+- It stops holding once controls are added. It is a check for the base model only.
+
+### Sample accounting (Steps 4-7)
+- The reconciliation for each model should reproduce the table in "The Missing Data Trap" above, with a reason for each drop.
+
+### Output manifest and audit report (Steps 9-10)
+- The manifest test should find every specification in the table, each with its N.
+- Things the audit report should flag as needing the student's judgment: the join type, the treatment of `income_quintile = 0`, and the 44% sample loss when both income and left-right are added.
+- Watch for: an audit report that says "all tests passed" with no "not tested" or "not covered" entries, tests whose expected values were copied from the script's own output, and expected values or assertions edited after a failure.
