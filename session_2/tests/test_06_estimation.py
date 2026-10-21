@@ -113,15 +113,18 @@ def test_every_coefficient_se_and_p_value_matches_independent_estimator(pipeline
     oracle = helpers.fit_oracle_spec(oracle_merged, **helpers.ESTIMATE_ORACLE_MODELS[model_label])
 
     assert {oracle_parameter_name(n) for n in pipeline} == set(oracle.coefficients)
-    largest_coef_gap = largest_se_gap = largest_p_gap = 0.0
+
+    # Record the headline number (the info treatment effect) so the audit report shows both values
+    info_name = "C(treatment, Treatment('cntrl'))[T.info]"
+    helpers.assert_close_and_record(
+        f"{model_label}: info coefficient", pipeline[info_name][0], oracle.coefficients["info"], 2e-6
+    )
+    # Then check every parameter's coefficient, standard error and p-value
     for name, (coef, se, _, p_value) in pipeline.items():
         key = oracle_parameter_name(name)
-        largest_coef_gap = max(largest_coef_gap, abs(coef - oracle.coefficients[key]))
-        largest_se_gap = max(largest_se_gap, abs(se - oracle.standard_errors[key]))
-        largest_p_gap = max(largest_p_gap, abs(p_value - oracle.p_values[key]))
-    helpers.assert_close_and_record(f"{model_label}: largest coefficient gap", largest_coef_gap, 0.0, 2e-6)
-    helpers.assert_close_and_record(f"{model_label}: largest standard-error gap", largest_se_gap, 0.0, 2e-6)
-    assert largest_p_gap <= 2e-6
+        assert abs(coef - oracle.coefficients[key]) <= 2e-6, (name, "coefficient", coef, oracle.coefficients[key])
+        assert abs(se - oracle.standard_errors[key]) <= 2e-6, (name, "SE", se, oracle.standard_errors[key])
+        assert abs(p_value - oracle.p_values[key]) <= 2e-6, (name, "p-value", p_value, oracle.p_values[key])
 
 
 @pytest.mark.requirement("R4")
