@@ -40,6 +40,7 @@ Command: `python3 -m pytest session_2/tests --audit-report session_2/tests/audit
 - Manuscript-to-code traceability: there is no manuscript in this session.
 - Performance and scaling: not relevant at 2,044 rows.
 - Robustness to alternative specifications beyond the six in the table: that is a research design question.
+- Treatment x FX interaction model: only its sample size is checked, not its coefficients.
 
 ## Numerical checks (pipeline value vs independent value)
 
@@ -49,18 +50,12 @@ Command: `python3 -m pytest session_2/tests --audit-report session_2/tests/audit
 | base-model intercept + info vs logit(weighted info share) | 0.083480 | 0.083480 | 1.9e-07 | 1e-05 |
 | base-model intercept + history vs logit(weighted history share) | -0.095658 | -0.095658 | 5.0e-07 | 1e-05 |
 | base-model intercept + Hungary vs logit(weighted Hungary share) | -0.024596 | -0.024596 | 4.6e-07 | 1e-05 |
-| Treatment only: largest coefficient gap | 0.000000 | 0.000000 | 4.6e-07 | 2e-06 |
-| Treatment only: largest standard-error gap | 0.000000 | 0.000000 | 4.7e-07 | 2e-06 |
-| + FX exposure: largest coefficient gap | 0.000000 | 0.000000 | 4.4e-07 | 2e-06 |
-| + FX exposure: largest standard-error gap | 0.000000 | 0.000000 | 4.8e-07 | 2e-06 |
-| + age, female, ed, urban: largest coefficient gap | 0.000000 | 0.000000 | 4.9e-07 | 2e-06 |
-| + age, female, ed, urban: largest standard-error gap | 0.000000 | 0.000000 | 3.7e-07 | 2e-06 |
-| + income_quintile: largest coefficient gap | 0.000000 | 0.000000 | 4.8e-07 | 2e-06 |
-| + income_quintile: largest standard-error gap | 0.000000 | 0.000000 | 5.0e-07 | 2e-06 |
-| + left_right: largest coefficient gap | 0.000000 | 0.000000 | 4.0e-07 | 2e-06 |
-| + left_right: largest standard-error gap | 0.000001 | 0.000000 | 5.1e-07 | 2e-06 |
-| + both income & LR: largest coefficient gap | 0.000000 | 0.000000 | 5.0e-07 | 2e-06 |
-| + both income & LR: largest standard-error gap | 0.000000 | 0.000000 | 4.8e-07 | 2e-06 |
+| Treatment only: info coefficient | 0.302206 | 0.302206 | 4.6e-07 | 2e-06 |
+| + FX exposure: info coefficient | 0.303755 | 0.303755 | 7.3e-08 | 2e-06 |
+| + age, female, ed, urban: info coefficient | 0.324333 | 0.324333 | 1.3e-07 | 2e-06 |
+| + income_quintile: info coefficient | 0.245924 | 0.245924 | 4.5e-07 | 2e-06 |
+| + left_right: info coefficient | 0.291469 | 0.291469 | 2.7e-07 | 2e-06 |
+| + both income & LR: info coefficient | 0.266587 | 0.266587 | 3.2e-07 | 2e-06 |
 | robustness (1): info coefficient | 0.302200 | 0.302206 | 5.5e-06 | 6e-05 |
 | robustness (2): info coefficient | 0.290300 | 0.290308 | 8.2e-06 | 6e-05 |
 | robustness (3): info coefficient | 0.324300 | 0.324333 | 3.3e-05 | 6e-05 |
@@ -83,4 +78,8 @@ Passing tests, complete output, and reproducibility do not show that the researc
 - Construct validity: whether `supports_intervention` measures support for intervention.
 - Whether the specification answers the research question.
 
-Python 3.8.16
+## Reproduction evidence
+
+- Python 3.8.16, pandas 1.5.3, numpy 1.24.4, statsmodels 0.14.1
+- swiss_franc_survey.csv SHA-256: 2829fcf338fb3ccd...
+- respondent_demographics.csv SHA-256: 4fe116f5c2e9737d...
