@@ -1174,50 +1174,60 @@ claude
 
 % ── Multiple Claude Code Tabs ────────────────────────────────────
 \begin{frame}{Multiple Claude Code Tabs}
-  \small
   You can run \textbf{several conversations at once}. Each one has \textbf{its own history and context}.
 
-  \vspace{0.4em}
+  \vspace{0.5em}
   \begin{columns}[T]
-    \begin{column}{0.50\textwidth}
+    \begin{column}{0.52\textwidth}
       \textbf{How to open another one}
       \begin{itemize}
-        \item Command Palette $\rightarrow$ \textbf{Open in New Tab}\\
-          (\texttt{Cmd+Shift+Esc} on Mac, \texttt{Ctrl+Shift+Esc} on Windows)
-        \item Or \textbf{Open in New Window}, \textbf{Open in Side Bar}
-        \item You can drag the panel to the left sidebar, the right (secondary) sidebar, or the editor area
-      \end{itemize}
-
-      \vspace{0.3em}
-      \textbf{Finding old conversations}
-      \begin{itemize}
-        \item \textbf{Session history} button at the top of the panel: search by keyword or browse by time
-        \item Clicking one resumes it, or jumps to its tab if it is already open
+        \item \textbf{Open in New Tab}: \texttt{Cmd+Shift+Esc} (Mac), \texttt{Ctrl+Shift+Esc} (Windows)
+        \item Also in the Command Palette: \textbf{Open in New Window}, \textbf{Open in Side Bar}
+        \item Drag the panel to either sidebar or the editor area
       \end{itemize}
     \end{column}
-    \begin{column}{0.46\textwidth}
+    \begin{column}{0.44\textwidth}
       \textbf{A useful pattern}
       \begin{itemize}
         \item Main task in the sidebar
-        \item Side tasks in separate tabs (e.g.\ ``explain this script'' while the main one is busy)
-      \end{itemize}
-
-      \vspace{0.3em}
-      \textbf{Status dot on the Spark icon}
-      \begin{itemize}
-        \item \textbf{Blue:} a permission request is waiting
-        \item \textbf{Orange:} Claude finished while that tab was hidden
+        \item Side tasks in separate tabs, e.g.\ ``explain this script'' while the main one is busy
       \end{itemize}
     \end{column}
   \end{columns}
 
-  \vspace{0.4em}
+  \vspace{0.6em}
   \begin{alertblock}{Give each tab a different job}
     Two tabs editing the same file can step on each other. Split the work by file, and keep the same conversation open in only one place.
   \end{alertblock}
 
-  \vspace{0.2em}
+  \vspace{0.3em}
   {\footnotesize\alert{I'll show this live in VS Code.}}
+\end{frame}
+
+% ── Keeping Track of Tabs ────────────────────────────────────────
+\begin{frame}{Keeping Track of Your Conversations}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Status dot on the Spark icon}
+      \begin{itemize}
+        \item \textbf{Blue:} a permission request is waiting for you
+        \item \textbf{Orange:} Claude finished while that tab was hidden
+      \end{itemize}
+      \vspace{0.3em}
+      So you can leave a long task running in one tab and still notice when it needs you.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Finding old conversations}
+      \begin{itemize}
+        \item \textbf{Session history} button at the top of the Claude Code panel
+        \item Search by keyword or browse by time
+        \item Clicking one resumes it, or jumps to its tab if it is already open
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \alert{A permission request that sits unseen in a hidden tab stalls that task.} Check the dot.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════

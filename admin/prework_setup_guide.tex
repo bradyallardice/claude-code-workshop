@@ -48,6 +48,8 @@ Instructor: Brady Allardice --- \href{mailto:brady.allardice@upf.edu}{brady.alla
 
 Please complete \textbf{all nine steps} below before the workshop. The whole process takes roughly \textbf{60--90 minutes of active work}, plus the large \LaTeX{} download in Step 7 (which you can run in the background the day before) and two MCP installs in Steps 8--9 that are fiddly enough that they are best done calmly at home rather than in the room. If you get stuck on any step for more than 10 minutes, stop and email me at \href{mailto:brady.allardice@upf.edu}{brady.allardice@upf.edu} --- don't try to debug it yourself. Once you are done, run the verification commands at the end and \textbf{send me a screenshot} of the output \emph{and} your GitHub username (Step 2).
 
+\textbf{This is also the Session 4 pre-work.} Session 4 introduces MCPs, the way Claude Code talks to systems outside your project, and uses two of them live: GitHub (for the collaborative writing exercise) and Zotero (for a citations demo). Steps 2d, 4, 8 and 9 are the parts Session 4 depends on, and the short Session 3 git re-read at the very end of this guide is part of it too. If you are joining the workshop at Session 4 with the rest of the setup already working, those are the steps to do, taking roughly 45--60 minutes.
+
 \section*{What You Need Before Starting}
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
   \item A laptop (Mac or Windows) that you can install software on
@@ -256,7 +258,7 @@ In your terminal, paste the command below, \textbf{but before pressing Enter, re
 
 \textit{Example of what it should look like after substitution (with a fake token):}
 \cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
-\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local scope), so the server would vanish as soon as you open Claude Code in 	exttt{	extasciitilde/my\_workspace/session\_N}. 	exttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
+\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local'' scope), so the server would vanish as soon as you open Claude Code in \texttt{\textasciitilde/my\_workspace/session\_N}. \texttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
 
 Then verify:
 \cmd{claude mcp list}

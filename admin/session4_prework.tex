@@ -117,7 +117,7 @@ In your terminal, paste the command below, \textbf{but before pressing Enter, re
 
 \textit{Example of what it should look like after substitution (with a fake token):}
 \cmd{claude mcp add -\/-scope user -\/-transport http github https://api.githubcopilot.com/mcp/ -H "Authorization: Bearer github\_pat\_11ABCDEFG0abc123XYZ..."}
-\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local scope), so the server would vanish as soon as you open Claude Code in 	exttt{	extasciitilde/my\_workspace/session\_N}. 	exttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
+\alert{Do not drop \texttt{-\/-scope user}.} By default, \texttt{claude mcp add} registers a server only for the folder you ran it in (``local'' scope), so the server would vanish as soon as you open Claude Code in \texttt{\textasciitilde/my\_workspace/session\_N}. \texttt{-\/-scope user} registers it for your whole user account, so it is available in every folder.
 
 Then verify:
 \cmd{claude mcp list}
