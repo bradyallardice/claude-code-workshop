@@ -123,18 +123,23 @@
 \end{frame}
 
 \begin{frame}{Core Framework}
-  \textbf{By the end of this course, you will be able to do two things:}
+  \textbf{By the end of this course, you will be able to do three things:}
 
   \vspace{0.6em}
   \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
+    \begin{column}{0.31\textwidth}
       \begin{alertblock}{1. Integrate}
-        Use Claude Code (or Codex, or whichever coding agent comes next) inside a \textbf{real academic workflow}: data, code, analysis, writing, and version control in one place.
+        \small Use Claude Code (or Codex, or whichever coding agent comes next) inside a \textbf{real academic workflow}: data, code, analysis, writing, and version control in one place.
       \end{alertblock}
     \end{column}
-    \begin{column}{0.48\textwidth}
+    \begin{column}{0.31\textwidth}
       \begin{alertblock}{2. Stay in charge}
-        Do it in a way that keeps \textbf{you in control} and keeps your work \textbf{accurate and verifiable}.
+        \small Do it in a way that keeps \textbf{you in control} and keeps your work \textbf{accurate and verifiable}.
+      \end{alertblock}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{alertblock}{3. Develop core AI skills}
+        \small Learn what determines the quality of what you get out: \textbf{how you instruct it, the context it has, and the model you choose}.
       \end{alertblock}
     \end{column}
   \end{columns}
@@ -517,48 +522,6 @@ code .
 
   \vspace{0.3em}
   These principles apply to Claude Code, Cursor, Codex, Windsurf, or whatever comes next.
-\end{frame}
-
-% --- The AI Skill Gap ---
-\begin{frame}{The AI Skill Gap}
-  \small
-  Two people can use the same tool on the same task and get very different results. \textbf{Output quality is not a property of the model alone.}
-
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \begin{column}{0.31\textwidth}
-      \begin{block}{1. Your skill}
-        \begin{itemize}
-          \item How precisely you specify the task
-          \item How you break a problem into steps
-          \item Whether you can \textbf{tell when the output is wrong}
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.31\textwidth}
-      \begin{block}{2. The context}
-        \begin{itemize}
-          \item Claude Code sees your repo; web chat only what you paste
-          \item What it is told about your project (\texttt{CLAUDE.md})
-          \item What has built up in the conversation
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.31\textwidth}
-      \begin{block}{3. The model}
-        \begin{itemize}
-          \item Which model you run
-          \item How much it is allowed to think before answering
-          \item Its limits and failure modes
-        \end{itemize}
-      \end{block}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.3em}
-  \begin{alertblock}{The takeaway}
-    A capable model does not guarantee a good result. Two of the three factors are \textbf{yours}, and the third is a choice you make. The tool will not close this gap for you; practice does.
-  \end{alertblock}
 \end{frame}
 
 % --- Claude Code vs. Claude Cowork ---
@@ -1145,27 +1108,347 @@ claude
   let us look at how it actually works.}
 
   \vspace{2em}
-  Context, modes, and the conventions that make it reliable.
+  The model, the context, and the skills that determine what you get out of them.
+\end{frame}
+
+% --- AI Skill Gap: the evidence ---
+\begin{frame}{AI Skill Gap}
+  \small
+  Using AI is not the same as using it well. Three sources point the same way.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Experiment (HBS/BCG)}
+        758 consultants, randomly assigned to GPT-4 or no AI.
+        \begin{itemize}
+          \item \textbf{Inside} the AI's frontier: 12\% more tasks, 25\% faster
+          \item \textbf{Outside} it: 19 points \emph{less} likely to be correct
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Firm survey (Cognizant)}
+        Trained vs.\ untrained workers reporting 20\%+ productivity gains:
+        \begin{itemize}
+          \item \textbf{64\%} of trained
+          \item \textbf{36\%} of untrained
+          \item Firms spend about 0.2\% of revenue on AI training
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Labor market (PwC)}
+        Wage premium on job postings requiring AI skills:
+        \begin{itemize}
+          \item 14\% globally in 2024
+          \item \textbf{62\%} in 2026
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{alertblock}{The takeaway}
+    Access to the tool is not the scarce input. Knowing where it works, where it fails, and how to direct it is.
+  \end{alertblock}
+
+  \vspace{0.2em}
+  {\tiny Only the HBS/BCG result is experimental. Cognizant is self-reported; the PwC premium is an average over job postings, not individual pay. Sources: Dell'Acqua et al.\ (2023, working paper); Cognizant, ``No skills, no payoff''; PwC Global AI Jobs Barometer (2024, 2026).}
+\end{frame}
+
+% --- The AI Skill Gap ---
+\begin{frame}{The AI Skill Gap}
+  \small
+  Two people can use the same tool on the same task and get very different results. \textbf{Output quality is not a property of the model alone.}
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.31\textwidth}
+      \begin{block}{1. The model}
+        \begin{itemize}
+          \item Which model you run
+          \item How much it is allowed to think before answering
+          \item Its limits and failure modes
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{2. The context}
+        \begin{itemize}
+          \item Claude Code sees your repo; web chat only what you paste
+          \item What it is told about your project (\texttt{CLAUDE.md})
+          \item What has built up in the conversation
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{3. Your skill}
+        \begin{itemize}
+          \item How precisely you specify the task
+          \item How you break a problem into steps
+          \item Whether you can \textbf{tell when the output is wrong}
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{alertblock}{The takeaway}
+    A capable model does not guarantee a good result. Two of the three factors are \textbf{yours}, and the third is a choice you make. The tool will not close this gap for you; practice does.
+  \end{alertblock}
+\end{frame}
+
+
+% ══════════════════════════════════════════════════════════════════
+%  CHOOSING A MODEL
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Choosing a Model}
+  Claude Code lets you switch between model tiers.\\
+  Each trades off \textbf{quality}, \textbf{speed}, and \textbf{cost}.
+
+  \vspace{0.5em}
+  \begin{center}
+  \small
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    & \textbf{Haiku} & \textbf{Sonnet} & \textbf{Opus} & \textbf{Fable} \\
+    \midrule
+    Speed     & Fastest & Fast     & Slower      & Slowest \\
+    Cost      & Lowest  & Moderate & High        & Highest \\
+    Reasoning & Basic   & Strong   & Very strong & Strongest \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.3em}
+  {\small Fable is the top tier, above Opus, where it is available to you.}
+
+  \vspace{0.3em}
+  \textbf{To switch models in Claude Code:}\\
+  Type \texttt{/model} and select, or press \texttt{Option+P} (Mac) / \texttt{Alt+P} (Windows, Linux).
+\end{frame}
+
+\begin{frame}{When to Use Each Model}
+  \begin{columns}[T]
+    \begin{column}{0.23\textwidth}
+      \textbf{Haiku}\\[0.3em]
+      {\small Fast, cheap, good enough for simple tasks.}
+      \begin{itemize}
+        \item Reformatting files
+        \item Renaming variables
+        \item Generating boilerplate
+        \item Quick questions about syntax
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.23\textwidth}
+      \textbf{Sonnet}\\[0.3em]
+      {\small The everyday workhorse for most research tasks.}
+      \begin{itemize}
+        \item Writing data cleaning scripts
+        \item Building panels and merges
+        \item Debugging code
+        \item Drafting documentation
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.23\textwidth}
+      \textbf{Opus}\\[0.3em]
+      {\small Strong reasoning; use when it matters.}
+      \begin{itemize}
+        \item Complex multi-file refactors
+        \item Subtle specification decisions
+        \item Reviewing analytical code
+        \item Large-context projects
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.23\textwidth}
+      \textbf{Fable}\\[0.3em]
+      {\small Top tier; for the hardest problems.}
+      \begin{itemize}
+        \item Tasks where Opus still gets it wrong
+        \item The most demanding reasoning and review
+        \item When cost is not the constraint
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Model Choice: The Research Perspective}
+  \begin{columns}[c]
+    \begin{column}{0.38\textwidth}
+      \includegraphics[width=\textwidth]{img/claude_models.png}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \begin{alertblock}{The Key Tradeoff}
+        Smarter models are slower and more expensive.\\
+        A wrong answer fast is worse than a right answer slow.
+      \end{alertblock}
+
+      \vspace{0.3em}
+      \textbf{Rules of thumb:}
+      \begin{itemize}
+        \item \textbf{Default to Sonnet}: best balance of quality and speed
+        \item \textbf{Upgrade to Opus} for careful reasoning or many files
+        \item \textbf{Fable} for the hardest problems, if you have it
+        \item \textbf{Drop to Haiku} for mechanical, easy-to-verify tasks
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  FROM INTERACTIVE TO FILE-BASED  [0:00–8:00]
+%  THINKING AND EFFORT
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{From Interactive to File-Based Workflows}
-  \textbf{What you do now} (Stata / R):
+\begin{frame}{Thinking: How Hard It Works Before Answering}
+  Beyond \emph{which} model, you control \emph{how hard} it works before it answers. Current models decide how much to think on their own, and \textbf{effort} is the dial you use to steer that.
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Lower effort}\\[0.3em]
+      {\small Responds quickly with little reasoning. Fast and cheap.}
+      \begin{itemize}
+        \item Reformatting, renaming
+        \item Simple, well-specified edits
+        \item Quick factual questions
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Higher effort}\\[0.3em]
+      {\small Reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
+      \begin{itemize}
+        \item Debugging stubborn errors
+        \item Specification decisions
+        \item Planning a multi-step change
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{alertblock}{When in doubt}
+    If the task involves a \textbf{judgment call} or Claude got it wrong once already, raise the effort. For mechanical work, keep it low.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Dialing the Effort}
+  \textbf{The effort setting.} Set it with \texttt{/effort} (a slider) or from the slider in \texttt{/model}. From least to most thorough:
+  \begin{center}
+    \small\texttt{low} \,$\to$\, \texttt{medium} \,$\to$\, \texttt{high} \,$\to$\, \texttt{xhigh} \,$\to$\, \texttt{max}
+  \end{center}
+  Higher effort = more thorough, slower, costlier. It is set once and stays for the session. Not every model offers \texttt{xhigh}, and \texttt{/effort auto} clears your choice.
+
+  \vspace{0.6em}
+  \textbf{One-off boost.} Put the word \texttt{ultrathink} in a single prompt to get deeper reasoning for \emph{that turn only}. Your session effort does not change. Older cues like ``think'' and ``think hard'' are no longer special; Claude reads them as ordinary words.
+
+  \vspace{0.6em}
+  \textbf{\texttt{ultracode} is not a level.} It is a separate toggle (\texttt{/effort ultracode}) that makes Claude orchestrate many agents on one task. It can consume a large amount of tokens, and you will not need it in this course.
+
+  \vspace{0.5em}
+  \alert{Effort is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  CONTEXT: WHAT IT IS AND WHY IT MATTERS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What Is Context?}
+  \small
+  \textbf{Context is everything Claude can see when it writes a response.} It works from nothing else.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{What is in it}
+        \begin{itemize}
+          \item Your instructions and the files it reads
+          \item Standing instructions loaded at the start
+          \item The conversation so far: its earlier answers and the code it ran
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{How you use it}
+        \begin{itemize}
+          \item State the task, the inputs, and the constraints
+          \item Point it to the right files, codebooks, and documentation
+          \item Write conventions down once (\texttt{CLAUDE.md})
+          \item Keep tasks focused
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{alertblock}{What is not in context does not exist for Claude}
+    It does not know your data, your field's conventions, or what you decided last week, unless that is written somewhere it can read.
+  \end{alertblock}
+
+\end{frame}
+
+\begin{frame}{More Context, Better Execution}
+  \textbf{The more relevant context Claude has, the better it executes the task.} That is why running it on your computer, with direct access to your files, is so valuable.
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Web chat}
+        \begin{itemize}
+          \item Sees only what you paste or upload
+          \item You decide what is relevant and copy it in
+          \item Guesses at the rest: column names, file layout, what the existing script does
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{alertblock}{Claude Code on your computer}
+        \begin{itemize}
+          \item Reads your data, scripts, codebooks, and \texttt{CLAUDE.md} directly
+          \item Runs the code and sees the real errors and output
+          \item Checks its work against the actual files
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  The advantage is not primarily a smarter model. It is \textbf{access to your project}.
+
+  \vspace{0.3em}
+  {\small More means \emph{relevant}. The context window is finite, which is the next slide.}
+\end{frame}
+
+
+% ══════════════════════════════════════════════════════════════════
+%  THE CONTEXT WINDOW  [8:00–12:00]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Context Window}
+  Claude Code can only ``see'' a limited amount of text at once.
+
+  \vspace{0.5em}
+  The context window includes:
   \begin{itemize}
-    \item Open a session, load data into memory
-    \item Run commands interactively, see results immediately
+    \item Your instructions
+    \item The files it reads
+    \item Its own responses
   \end{itemize}
 
   \vspace{0.8em}
-  \textbf{How Claude Code works}:
-  \begin{itemize}
-    \item Reads and writes \textbf{files on disk}
-    \item No persistent session with your data loaded
-    \item Reads your files $\rightarrow$ writes/modifies scripts $\rightarrow$ optionally runs them
-  \end{itemize}
+  \alert{When a conversation gets long or a project gets large, it loses earlier context.}
+\end{frame}
+
+\begin{frame}{Why the Context Window Matters}
+  \begin{block}{The Consistency Problem}
+    In a complex project with many files, Claude Code may change one file in a way that is \textbf{inconsistent} with another file it can no longer see.
+  \end{block}
+
+  \vspace{0.5em}
+  Errors compound when the agent loses track of earlier decisions.
+
+  \vspace{0.5em}
+  \textbf{We will cover strategies for managing this in Module 3.}
 \end{frame}
 
 \begin{frame}{Practical Implication}
@@ -1294,37 +1577,6 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  THE CONTEXT WINDOW  [8:00–12:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{The Context Window}
-  Claude Code can only ``see'' a limited amount of text at once.
-
-  \vspace{0.5em}
-  The context window includes:
-  \begin{itemize}
-    \item Your instructions
-    \item The files it reads
-    \item Its own responses
-  \end{itemize}
-
-  \vspace{0.8em}
-  \alert{When a conversation gets long or a project gets large, it loses earlier context.}
-\end{frame}
-
-\begin{frame}{Why the Context Window Matters}
-  \begin{block}{The Consistency Problem}
-    In a complex project with many files, Claude Code may change one file in a way that is \textbf{inconsistent} with another file it can no longer see.
-  \end{block}
-
-  \vspace{0.5em}
-  Errors compound when the agent loses track of earlier decisions.
-
-  \vspace{0.5em}
-  \textbf{We will cover strategies for managing this in Module 3.}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
 %  PERMISSIONS
 % ══════════════════════════════════════════════════════════════════
 
@@ -1419,260 +1671,6 @@ claude
   \begin{block}{Coming in Session 4}
     There are dedicated guardrails --- ignore rules and permission denies --- for hiding files from Claude. We'll set them up properly, and see where the naive version quietly fails, once you have a real project.
   \end{block}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  THE THREE EXECUTION MODES  [12:00–30:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{The Three Execution Modes}
-  \centering
-  {\large The most important configuration decision you will make.}
-
-  \vspace{1em}
-  \begin{tikzpicture}[
-    node distance=0.4cm,
-    every node/.style={draw, rounded corners, minimum width=10cm, minimum height=1cm, align=center, font=\small}
-  ]
-    \node[fill=green!15] (plan) at (0,2.8) {\textbf{Plan Mode}: Reviews approach with you \textit{before} acting};
-    \node[fill=yellow!15] (default) at (0,1.4) {\textbf{Default Mode}: Acts, but asks permission for ``significant'' steps};
-    \node[fill=red!10] (auto) at (0,0) {\textbf{Auto-Accept}: Executes everything without asking};
-  \end{tikzpicture}
-
-  \vspace{0.5em}
-  \small $\downarrow$ More autonomy, less oversight $\downarrow$
-\end{frame}
-
-\begin{frame}{Plan Mode \hfill \normalsize\textit{Recommended Default for Research}}
-  \textbf{How it works:}
-  \begin{itemize}
-    \item Claude Code analyzes your request
-    \item Proposes a detailed plan (files to read, changes to make, approach)
-    \item Waits for your explicit approval before acting
-    \item You review, approve, modify, or reject
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{When to use:}\\
-  Any task where the \textit{approach} matters, not just the output.\\
-  Data transformation, variable construction, merges, anything analytical.
-
-  \vspace{0.5em}
-  \begin{block}{Why It Matters}
-    The plan is your checkpoint. This is where you catch ``I am going to do an inner join'' \textit{before} it happens, not after 300 observations are gone.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Default Mode \hfill \normalsize\textit{Use With Caution}}
-  \textbf{How it works:}
-  \begin{itemize}
-    \item Claude Code executes steps autonomously
-    \item Pauses for actions \textit{it} considers significant
-    \item Uses its own judgment about when to ask
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{When to use:}\\
-  Routine tasks in established projects where you trust the general approach.
-
-  \vspace{0.8em}
-  \begin{alertblock}{The Risk for Academics}
-    Claude Code's judgment about what is ``significant'' may not match yours.\\
-    It might pause before writing a file but \textbf{not} before silently recoding a variable.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Auto-Accept Mode \hfill \normalsize\textit{Low-Risk Tasks Only}}
-  \textbf{How it works:}
-  \begin{itemize}
-    \item Executes everything without asking
-    \item Reads, writes, runs, and modifies freely
-    \item Stops only on errors
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{When to use:}
-  \begin{itemize}
-    \item File reformatting
-    \item Boilerplate generation
-    \item Documentation
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{When \alert{not} to use:}\\
-  Anything involving your data or analysis.\\
-  The speed gain is not worth the loss of checkpoints.
-\end{frame}
-
-\begin{frame}{The Key Insight on Modes}
-  \begin{alertblock}{Different Relationships with the Agent}
-    \textbf{Plan mode} = you \textbf{direct} the work\\
-    \textbf{Auto-accept} = you \textbf{review} the work after the fact
-  \end{alertblock}
-
-  \vspace{0.8em}
-  For published research, directing is almost always safer than reviewing after the fact.
-
-  \vspace{0.5em}
-  \textbf{Why:} Errors you \textit{prevent} at the planning stage are cheaper than errors you \textit{catch} in the output, or worse, errors you don't catch at all.
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  LIVE DEMO: PLAN vs AUTO-ACCEPT
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Live Demo: Plan Mode vs. Auto-Accept}
-  \centering
-  \vfill
-  Same task, two modes.
-
-  \vspace{0.5em}
-  Watch for:
-  \begin{itemize}
-    \item What does a plan look like?
-    \item How do you evaluate it?
-    \item What does the experience feel like in each mode?
-  \end{itemize}
-  \vfill
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  CHOOSING A MODEL
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Choosing a Model}
-  Claude Code lets you switch between model tiers.\\
-  Each trades off \textbf{quality}, \textbf{speed}, and \textbf{cost}.
-
-  \vspace{0.5em}
-  \begin{center}
-  \small
-  \begin{tabular}{@{}llll@{}}
-    \toprule
-    & \textbf{Haiku} & \textbf{Sonnet} & \textbf{Opus} \\
-    \midrule
-    Speed     & Fastest & Fast     & Slowest \\
-    Cost      & Lowest  & Moderate & Highest \\
-    Reasoning & Basic   & Strong   & Strongest \\
-    \bottomrule
-  \end{tabular}
-  \end{center}
-
-  \vspace{0.3em}
-  {\small A newer top tier, \textbf{Fable}, sits above Opus where it is available to you.}
-
-  \vspace{0.3em}
-  \textbf{To switch models in Claude Code:}\\
-  Type \texttt{/model} and select, or press \texttt{Option+P} (Mac) / \texttt{Alt+P} (Windows, Linux).
-\end{frame}
-
-\begin{frame}{When to Use Each Model}
-  \begin{columns}[T]
-    \begin{column}{0.32\textwidth}
-      \textbf{Haiku}\\[0.3em]
-      {\small Fast, cheap, good enough for simple tasks.}
-      \begin{itemize}
-        \item Reformatting files
-        \item Renaming variables
-        \item Generating boilerplate
-        \item Quick questions about syntax
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \textbf{Sonnet}\\[0.3em]
-      {\small The everyday workhorse for most research tasks.}
-      \begin{itemize}
-        \item Writing data cleaning scripts
-        \item Building panels and merges
-        \item Debugging code
-        \item Drafting documentation
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \textbf{Opus}\\[0.3em]
-      {\small Maximum reasoning power; use when it matters.}
-      \begin{itemize}
-        \item Complex multi-file refactors
-        \item Subtle specification decisions
-        \item Reviewing analytical code
-        \item Large-context projects
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Model Choice: The Research Perspective}
-  \begin{columns}[c]
-    \begin{column}{0.38\textwidth}
-      \includegraphics[width=\textwidth]{img/claude_models.png}
-    \end{column}
-    \begin{column}{0.58\textwidth}
-      \begin{alertblock}{The Key Tradeoff}
-        Smarter models are slower and more expensive.\\
-        A wrong answer fast is worse than a right answer slow.
-      \end{alertblock}
-
-      \vspace{0.3em}
-      \textbf{Rules of thumb:}
-      \begin{itemize}
-        \item \textbf{Default to Sonnet}: best balance of quality and speed
-        \item \textbf{Upgrade to Opus} for careful reasoning or many files
-        \item \textbf{Drop to Haiku} for mechanical, easy-to-verify tasks
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  THINKING AND EFFORT
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Thinking: How Hard It Works Before Answering}
-  Beyond \emph{which} model, you control \emph{how hard} it works before it answers. Current models decide how much to think on their own, and \textbf{effort} is the dial you use to steer that.
-
-  \vspace{0.6em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{Lower effort}\\[0.3em]
-      {\small Responds quickly with little reasoning. Fast and cheap.}
-      \begin{itemize}
-        \item Reformatting, renaming
-        \item Simple, well-specified edits
-        \item Quick factual questions
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{Higher effort}\\[0.3em]
-      {\small Reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
-      \begin{itemize}
-        \item Debugging stubborn errors
-        \item Specification decisions
-        \item Planning a multi-step change
-      \end{itemize}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.6em}
-  \begin{alertblock}{When in doubt}
-    If the task involves a \textbf{judgment call} or Claude got it wrong once already, raise the effort. For mechanical work, keep it low.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Dialing the Effort}
-  \textbf{The effort setting.} Set it with \texttt{/effort} (a slider) or from the slider in \texttt{/model}. From least to most thorough:
-  \begin{center}
-    \small\texttt{low} \,$\to$\, \texttt{medium} \,$\to$\, \texttt{high} \,$\to$\, \texttt{xhigh} \,$\to$\, \texttt{max}
-  \end{center}
-  Higher effort = more thorough, slower, costlier. It is set once and stays for the session. Not every model offers \texttt{xhigh}, and \texttt{/effort auto} clears your choice.
-
-  \vspace{0.6em}
-  \textbf{One-off boost.} Put the word \texttt{ultrathink} in a single prompt to get deeper reasoning for \emph{that turn only}. Your session effort does not change. Older cues like ``think'' and ``think hard'' are no longer special; Claude reads them as ordinary words.
-
-  \vspace{0.6em}
-  \textbf{\texttt{ultracode} is not a level.} It is a separate toggle (\texttt{/effort ultracode}) that makes Claude orchestrate many agents on one task. It can consume a large amount of tokens, and you will not need it in this course.
-
-  \vspace{0.5em}
-  \alert{Effort is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -2012,7 +2010,7 @@ Effect of historical migration on county-level outcomes.
   \begin{enumerate}
     \item Claude Code works with \textbf{files}, not interactive sessions
     \item The \textbf{context window} limits what it can hold, so keep tasks focused
-    \item \textbf{Plan mode} is the default for research work
+    \item What you get out depends on \textbf{your skill, the context, and the model}
     \item \textbf{CLAUDE.md} is your most powerful tool for preventing errors
     \item \textbf{Cost management} is a core skill, not an afterthought
   \end{enumerate}

@@ -62,7 +62,7 @@
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Where We Are}
-  \textbf{Session 1:} What Claude Code can do. How it works. CLAUDE.md and plan mode.
+  \textbf{Session 1:} What Claude Code can do. How it works: models, context, and the AI skill gap. CLAUDE.md.
 
   \vspace{1em}
   \textbf{Session 2:} How to use it on a real research task --- and stay in control.
@@ -419,6 +419,121 @@ still needs to be done.
 
   \vspace{0.5em}
   \alert{Be specific about inputs, outputs, and constraints. Be brief about everything else.}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  THE THREE EXECUTION MODES
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Three Execution Modes}
+  \centering
+  {\large The most important configuration decision you will make.}
+
+  \vspace{1em}
+  \begin{tikzpicture}[
+    node distance=0.4cm,
+    every node/.style={draw, rounded corners, minimum width=10cm, minimum height=1cm, align=center, font=\small}
+  ]
+    \node[fill=green!15] (plan) at (0,2.8) {\textbf{Plan Mode}: Reviews approach with you \textit{before} acting};
+    \node[fill=yellow!15] (default) at (0,1.4) {\textbf{Default Mode}: Acts, but asks permission for ``significant'' steps};
+    \node[fill=red!10] (auto) at (0,0) {\textbf{Auto-Accept}: Executes everything without asking};
+  \end{tikzpicture}
+
+  \vspace{0.5em}
+  \small $\downarrow$ More autonomy, less oversight $\downarrow$
+\end{frame}
+
+\begin{frame}{Plan Mode \hfill \normalsize\textit{Recommended Default for Research}}
+  \textbf{How it works:}
+  \begin{itemize}
+    \item Claude Code analyzes your request
+    \item Proposes a detailed plan (files to read, changes to make, approach)
+    \item Waits for your explicit approval before acting
+    \item You review, approve, modify, or reject
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{When to use:}\\
+  Any task where the \textit{approach} matters, not just the output.\\
+  Data transformation, variable construction, merges, anything analytical.
+
+  \vspace{0.5em}
+  \begin{block}{Why It Matters}
+    The plan is your checkpoint. This is where you catch ``I am going to do an inner join'' \textit{before} it happens, not after 300 observations are gone.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Default Mode \hfill \normalsize\textit{Use With Caution}}
+  \textbf{How it works:}
+  \begin{itemize}
+    \item Claude Code executes steps autonomously
+    \item Pauses for actions \textit{it} considers significant
+    \item Uses its own judgment about when to ask
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{When to use:}\\
+  Routine tasks in established projects where you trust the general approach.
+
+  \vspace{0.8em}
+  \begin{alertblock}{The Risk for Academics}
+    Claude Code's judgment about what is ``significant'' may not match yours.\\
+    It might pause before writing a file but \textbf{not} before silently recoding a variable.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Auto-Accept Mode \hfill \normalsize\textit{Low-Risk Tasks Only}}
+  \textbf{How it works:}
+  \begin{itemize}
+    \item Executes everything without asking
+    \item Reads, writes, runs, and modifies freely
+    \item Stops only on errors
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{When to use:}
+  \begin{itemize}
+    \item File reformatting
+    \item Boilerplate generation
+    \item Documentation
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{When \alert{not} to use:}\\
+  Anything involving your data or analysis.\\
+  The speed gain is not worth the loss of checkpoints.
+\end{frame}
+
+\begin{frame}{The Key Insight on Modes}
+  \begin{alertblock}{Different Relationships with the Agent}
+    \textbf{Plan mode} = you \textbf{direct} the work\\
+    \textbf{Auto-accept} = you \textbf{review} the work after the fact
+  \end{alertblock}
+
+  \vspace{0.8em}
+  For published research, directing is almost always safer than reviewing after the fact.
+
+  \vspace{0.5em}
+  \textbf{Why:} Errors you \textit{prevent} at the planning stage are cheaper than errors you \textit{catch} in the output, or worse, errors you don't catch at all.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  LIVE DEMO: PLAN vs AUTO-ACCEPT
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Live Demo: Plan Mode vs. Auto-Accept}
+  \centering
+  \vfill
+  Same task, two modes.
+
+  \vspace{0.5em}
+  Watch for:
+  \begin{itemize}
+    \item What does a plan look like?
+    \item How do you evaluate it?
+    \item What does the experience feel like in each mode?
+  \end{itemize}
+  \vfill
 \end{frame}
 
 \begin{frame}{Step 2: Review the Plan}
