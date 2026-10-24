@@ -54,6 +54,7 @@ git rm -f -r --quiet --ignore-unmatch admin/
 # Remove this sync script itself, and the script that builds the live-demo branch
 git rm -f --quiet --ignore-unmatch sync_student.sh
 git rm -f --quiet --ignore-unmatch make_demo_branch.sh
+git rm -f --quiet --ignore-unmatch start_demo.sh
 
 # .vscode/settings.json is tracked but hardcodes the instructor's local Stata
 # path (/Applications/StataNow), which is wrong on students' machines.
@@ -145,6 +146,7 @@ FORBIDDEN_PATHS=(
     admin
     sync_student.sh
     make_demo_branch.sh
+    start_demo.sh
     session_1/output
     session_1/data/full
     session_1/demo_chat_upload
