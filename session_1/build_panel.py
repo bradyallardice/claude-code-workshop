@@ -69,7 +69,7 @@ INCWAGE_NA = 999990
 
 
 def load_ipums(year):
-    return pd.read_csv(f"session_1/data/IPUMS/census_{year}_sample.csv.gz")
+    return pd.read_csv(f"session_1/data/ipums/census_{year}_sample.csv.gz")
 
 
 def aggregate_to_county(df):

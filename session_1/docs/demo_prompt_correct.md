@@ -15,3 +15,7 @@ Build a balanced county-year panel that merges election results with demographic
 6. Save two plots to `session_1/output/`:
    - Mean Democratic and Republican vote share over time
    - Mean demographic variables over time (one subplot per variable)
+
+7. Using the balanced panel, regress the Democratic two-party vote share on county demographics. Outcome: `dem_2p_share`. Regressors of interest: `white_share` and `hispanic_share`. Controls: `college_share`, `mean_wage` (in thousands of dollars), and `mean_age`. Estimate four specifications, all with standard errors clustered by county: (1) pooled OLS, regressors of interest only; (2) pooled OLS with controls; (3) county fixed effects with controls; (4) county and year fixed effects with controls. Print a side-by-side table (coefficients, clustered SEs, N, R-squared, FE indicators) and save it to `session_1/output/regression_results.txt`.
+
+8. Write a short LaTeX document at `session_1/output/results.tex` with three sections: Data (sources, sample, how the panel was built, number of counties and years), Method (the four specifications and the clustering choice), and Results (the regression table and a brief, plain-language reading that does not claim more than the design supports). Compile it to PDF with `pdflatex` and report any compilation errors.

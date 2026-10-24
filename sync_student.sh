@@ -51,8 +51,9 @@ git merge teacher --no-ff --no-commit -X theirs || true
 # Admin folder (lesson plans, syllabus — instructor only)
 git rm -f -r --quiet --ignore-unmatch admin/
 
-# Remove this sync script itself
+# Remove this sync script itself, and the script that builds the live-demo branch
 git rm -f --quiet --ignore-unmatch sync_student.sh
+git rm -f --quiet --ignore-unmatch make_demo_branch.sh
 
 # .vscode/settings.json is tracked but hardcodes the instructor's local Stata
 # path (/Applications/StataNow), which is wrong on students' machines.
@@ -67,6 +68,15 @@ git ls-files 'session_*/docs/instructor_notes.md' | sort -u | xargs -r git rm -f
 git ls-files 'session_*/docs/instructor_answer_key.md' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
 git rm -f --quiet --ignore-unmatch session_1/docs/demo_prompt_correct.md
 git rm -f --quiet --ignore-unmatch session_1/docs/decisions.md
+
+# Session 1 demo answers: finished panel-building and regression scripts, the
+# Stata-to-Python port, and the data copies prepared for the web-chat upload
+git rm -f --quiet --ignore-unmatch session_1/build_panel.py
+git rm -f --quiet --ignore-unmatch session_1/build_county_panel.py
+git rm -f --quiet --ignore-unmatch session_1/demo_county_panel.py
+git rm -f --quiet --ignore-unmatch session_1/regression_ethnicity.py
+git rm -f --quiet --ignore-unmatch session_1/stata_demo/analysis.py
+git rm -f -r --quiet --ignore-unmatch session_1/demo_chat_upload/
 
 # Remove solution scripts
 git ls-files 'session_*/scripts/solution_*' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
@@ -128,6 +138,35 @@ git ls-files slides/ | grep -v '\.pdf$' | sort -u | xargs -r git rm -f --quiet -
 git rm -f --quiet --ignore-unmatch slides/module1_slides.pdf
 git rm -f --quiet --ignore-unmatch slides/module2_slides.pdf
 git rm -f --quiet --ignore-unmatch slides/module3_slides.pdf
+
+# Guard: fail loudly if any known answer file is still in the student tree.
+# Add new teacher-only paths here whenever you add them to the rm pass above.
+FORBIDDEN_PATHS=(
+    admin
+    sync_student.sh
+    make_demo_branch.sh
+    session_1/output
+    session_1/data/full
+    session_1/demo_chat_upload
+    session_1/build_panel.py
+    session_1/build_county_panel.py
+    session_1/demo_county_panel.py
+    session_1/regression_ethnicity.py
+    session_1/stata_demo/analysis.py
+    session_1/docs/decisions.md
+    session_1/docs/demo_prompt_correct.md
+    session_1/docs/instructor_notes.md
+    session_1/scripts/build_county_panel.py
+    session_1/scripts/create_sample_data.py
+)
+LEAKS=$(git ls-files -- "${FORBIDDEN_PATHS[@]}")
+if [ -n "$LEAKS" ]; then
+    echo "Error: teacher-only files would be published to the student branch:"
+    echo "$LEAKS"
+    echo ""
+    echo "Abort with: git merge --abort && git checkout teacher"
+    exit 1
+fi
 
 # If anything is still unmerged after the rm pass, bail loudly so a human can resolve
 if git ls-files --unmerged | grep -q .; then

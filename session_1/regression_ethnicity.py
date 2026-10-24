@@ -15,16 +15,22 @@ import numpy as np
 from linearmodels import PooledOLS, PanelOLS
 
 OUTCOME = "dem_2p_share"
-ETHNICITY = ["pct_white_nonhisp", "pct_hispanic", "pct_black_nonhisp"]
-CONTROLS  = ["pct_college", "mean_incwage", "pct_age65plus"]
+# Column names follow the panel built by demo_county_panel.py (shares in [0, 1]).
+# mean_wage_k is mean_wage / 1000, so coefficients are per $1,000 and readable.
+ETHNICITY = ["white_share", "hispanic_share"]
+CONTROLS  = ["college_share", "mean_wage_k", "mean_age"]
 
 
 # ── Functions ─────────────────────────────────────────────────────────────────
 
 def load_panel():
     """Load county-year panel and set MultiIndex required by linearmodels."""
-    df = pd.read_csv("session_1/output/county_panel.csv")
+    df = pd.read_csv("session_1/output/county_panel.csv", dtype={"county_fips": str})
+    df["mean_wage_k"] = df["mean_wage"] / 1000
+    n_before = len(df)
     df = df.dropna(subset=[OUTCOME] + ETHNICITY + CONTROLS)
+    print(f"Loaded panel: {n_before} rows; {len(df)} after dropping missing values")
+    assert not df.duplicated(["county_fips", "year"]).any(), "duplicate county-years"
     df = df.set_index(["county_fips", "year"])
     return df
 

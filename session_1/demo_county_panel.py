@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 # --- Paths and constants (relative to project root) ---
 
 ELECTION_PATH = "session_1/data/election/countypres_sample.csv"
-IPUMS_TEMPLATE = "session_1/data/IPUMS/census_{year}_sample.csv.gz"
+IPUMS_TEMPLATE = "session_1/data/ipums/census_{year}_sample.csv.gz"
 OUTPUT_DIR = "session_1/output"
 
 YEARS = [2012, 2016, 2020, 2024]

@@ -114,14 +114,12 @@
     \midrule
     3 & Git and \LaTeX{} in VS Code: version control and the integrated research environment \\
     \midrule
-    4 & Advanced Claude Code: skills and MCPs (Zotero, GitHub) \\
-    \midrule
-    5 & Subagents, hooks, and the final project \\
+    4 & Advanced Claude Code: skills, MCPs (Zotero, GitHub), subagents, hooks, and the final project \\
     \bottomrule
   \end{tabular}
 
   \vspace{0.6em}
-  {\footnotesize 5 sessions $\times$ 2 hours \quad$\vert$\quad 60--70\% hands-on \quad$\vert$\quad Pair programming throughout}
+  {\footnotesize 4 sessions $\times$ 2 hours \quad$\vert$\quad 60--70\% hands-on \quad$\vert$\quad Pair programming throughout}
 \end{frame}
 
 \begin{frame}{Core Framework}
@@ -521,26 +519,71 @@ code .
   These principles apply to Claude Code, Cursor, Codex, Windsurf, or whatever comes next.
 \end{frame}
 
+% --- The AI Skill Gap ---
+\begin{frame}{The AI Skill Gap}
+  \small
+  Two people can use the same tool on the same task and get very different results. \textbf{Output quality is not a property of the model alone.}
+
+  \vspace{0.6em}
+  \begin{columns}[T]
+    \begin{column}{0.31\textwidth}
+      \begin{block}{1. Your skill}
+        \begin{itemize}
+          \item How precisely you specify the task
+          \item How you break a problem into steps
+          \item Whether you can \textbf{tell when the output is wrong}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{2. The context}
+        \begin{itemize}
+          \item What the agent can see: files, data, documentation
+          \item What it has been told about your project and conventions
+          \item What has accumulated in the conversation
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{3. The model}
+        \begin{itemize}
+          \item Which model you run
+          \item How much it is allowed to think before answering
+          \item Its limits and failure modes
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{alertblock}{The takeaway}
+    A capable model does not guarantee a good result. Two of the three factors are \textbf{yours}, and the third is a choice you make. The tool will not close this gap for you; practice does.
+  \end{alertblock}
+
+  \vspace{0.3em}
+  {\footnotesize We return to each factor later today: models and effort, context and \texttt{CLAUDE.md}, and verification.}
+\end{frame}
+
 % --- Claude Code vs. Claude Cowork ---
 \begin{frame}{Claude Code vs.\ Claude Cowork}
   \small
-  Anthropic offers two \textbf{agentic} products. Both act on files on your computer rather than just chatting; they differ in who they are built for and what they leave behind.
+  Two \textbf{agentic} products from Anthropic. Both act on your files rather than just chatting; they differ in audience and in what they leave behind.
 
   \vspace{0.4em}
   \begin{tabular}{@{}p{0.17\textwidth} p{0.38\textwidth} p{0.38\textwidth}@{}}
     \toprule
      & \textbf{Claude Code} & \textbf{Claude Cowork} \\
     \midrule
-    \textbf{Built for} & Software work: writing, running, and debugging code & General knowledge work: documents, spreadsheets, file organization, research tasks \\[0.3em]
+    \textbf{Built for} & Software work: writing, running, debugging code & General knowledge work: documents, spreadsheets, file organization \\[0.3em]
     \textbf{Interface} & Terminal, VS Code / JetBrains, desktop app, web & Claude desktop app; no code or terminal needed \\[0.3em]
     \textbf{Typical output} & Scripts, tests, and a project you can re-run & Finished files (reports, slides, tables) \\[0.3em]
-    \textbf{What you see} & Every command and edit, as code you can read and diff & Progress updates on the task, with less of the underlying machinery in view \\
+    \textbf{What you see} & Every command and edit, as code you can read and diff & Task progress, with less of the underlying machinery in view \\
     \bottomrule
   \end{tabular}
 
   \vspace{0.5em}
   \begin{alertblock}{Why this course uses Claude Code}
-    A research result is only as credible as the process that produced it. Claude Code leaves behind \textbf{scripts you can inspect, re-run, and version}, so every step from raw data to table is auditable. A finished file from a general-purpose agent does not give you that by default.
+    Claude Code leaves behind \textbf{scripts you can inspect, re-run, and version}, so every step from raw data to table is auditable. A finished file from a general-purpose agent does not give you that by default.
   \end{alertblock}
 \end{frame}
 
@@ -633,10 +676,10 @@ claude
 \end{frame}
 
 \begin{frame}{Terminal vs.\ VS Code}
-  \textbf{The terminal} is how you'd normally interact with Claude Code --- especially if you're working in \textbf{Stata}, where there isn't a tight editor integration.
+  \textbf{The terminal} is the original way to use Claude Code, and it still works anywhere.
 
   \vspace{0.6em}
-  But for this course, we'll be working in \textbf{VS Code}: the file you're editing, the code Claude is writing, and the conversation all live in one window.
+  But for this course, we'll be working in \textbf{VS Code}: the file you're editing, the code Claude is writing, and the conversation all live in one window. This holds for \textbf{Python, R, and Stata} alike, since VS Code has extensions for all three (next slides).
 \end{frame}
 
 \begin{frame}{Why VS Code?}
@@ -836,11 +879,11 @@ which python
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  TERMINAL EXAMPLE: A STATA .do FILE
+%  EXAMPLE: PORTING A STATA .do FILE
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}[fragile]{Detour: Claude Code in the Terminal}
-  We'll live in VS Code for this course. But the terminal CLI is always there --- and it's the natural fit for tools \emph{without} an editor integration, like \textbf{Stata}.
+  We'll live in VS Code for this course, including for Stata. But the terminal CLI is always there --- handy for a quick one-off job when you don't want to open an editor.
 
   \vspace{0.5em}
   Say you inherited a legacy \texttt{analysis.do} and want to understand and modernize it. Open a terminal in that folder and launch Claude Code:
@@ -852,10 +895,10 @@ claude
 \end{lstlisting}
 
   \vspace{0.3em}
-  No editor, no setup --- just you, the folder, and the agent. Same Claude Code you use in VS Code.
+  No editor, no setup --- just you, the folder, and the agent. Same Claude Code you use in VS Code. (In VS Code you would run the same prompt in the Claude Code panel and run the \texttt{.do} file with the Stata extension.)
 \end{frame}
 
-\begin{frame}[fragile]{Terminal Example: A Stata \texttt{.do} File}
+\begin{frame}[fragile]{Example: Porting a Stata \texttt{.do} File}
   Once Claude Code is running, ask in plain language:
 
   \vspace{0.3em}
@@ -875,7 +918,7 @@ claude
   \end{itemize}
 
   \vspace{0.3em}
-  \alert{You still decide. The terminal is just a faster door for a one-off job.}
+  \alert{You still decide. The terminal is just one door; the work is the same in VS Code.}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
