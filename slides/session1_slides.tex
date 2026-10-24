@@ -521,6 +521,29 @@ code .
   These principles apply to Claude Code, Cursor, Codex, Windsurf, or whatever comes next.
 \end{frame}
 
+% --- Claude Code vs. Claude Cowork ---
+\begin{frame}{Claude Code vs.\ Claude Cowork}
+  \small
+  Anthropic offers two \textbf{agentic} products. Both act on files on your computer rather than just chatting; they differ in who they are built for and what they leave behind.
+
+  \vspace{0.4em}
+  \begin{tabular}{@{}p{0.17\textwidth} p{0.38\textwidth} p{0.38\textwidth}@{}}
+    \toprule
+     & \textbf{Claude Code} & \textbf{Claude Cowork} \\
+    \midrule
+    \textbf{Built for} & Software work: writing, running, and debugging code & General knowledge work: documents, spreadsheets, file organization, research tasks \\[0.3em]
+    \textbf{Interface} & Terminal, VS Code / JetBrains, desktop app, web & Claude desktop app; no code or terminal needed \\[0.3em]
+    \textbf{Typical output} & Scripts, tests, and a project you can re-run & Finished files (reports, slides, tables) \\[0.3em]
+    \textbf{What you see} & Every command and edit, as code you can read and diff & Progress updates on the task, with less of the underlying machinery in view \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Why this course uses Claude Code}
+    A research result is only as credible as the process that produced it. Claude Code leaves behind \textbf{scripts you can inspect, re-run, and version}, so every step from raw data to table is auditable. A finished file from a general-purpose agent does not give you that by default.
+  \end{alertblock}
+\end{frame}
+
 % ══════════════════════════════════════════════════════════════════
 %  ORIENTATION: TERMINAL, VS CODE, FILE TYPES  [27:00–37:00]
 % ══════════════════════════════════════════════════════════════════
