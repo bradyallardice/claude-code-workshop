@@ -214,6 +214,44 @@ FORBIDDEN_PATHS=(
     session_4/option_b/exercise_2/paper.pdf
     session_4/option_b/output/merged_survey.csv
     session_4/data/climate_speeches/gold_codes.csv
+    session_2/output/tab_swiss_franc_logit.pdf
+    session_2/output/tab_swiss_franc_logit.aux
+    session_2/output/tab_swiss_franc_logit.log
+    session_2/output/merged_survey.csv
+    session_2/output/main_table.tex
+    session_2/output/summary_stats.tex
+    session_2/output/robustness_table.png
+    session_2/output/robustness_table.tex
+    session_2/tests
+    session_2/docs/instructor_answer_key.md
+    session_3/code
+    session_3/demo_run
+    session_3/docs/instructor_notes.md
+    session_3/data/course_participants.csv
+    session_3/data/satisfaction.csv
+    session_3/output/fx_rate_figure.png
+    session_3/option_b/exercise_1
+    session_3/option_b/exercise_2/demo
+    session_3/option_b/exercise_2/paper.tex
+    session_3/option_b/exercise_2/paper.pdf
+    session_3/option_b/exercise_2/tables/summary_stats.tex
+    session_3/option_b/exercise_2/tables/main_table.tex
+    session_3/option_b/exercise_2/tables/robustness_table.tex
+    session_3/option_b/exercise_2/figures/fx_rate_figure.png
+    session_3/option_b/output/merged_survey.csv
+    session_4/option_b/exercise_1
+    session_4/option_b/exercise_2/tables/summary_stats.tex
+    session_4/option_b/exercise_2/tables/main_table.tex
+    session_4/option_b/exercise_2/tables/robustness_table.tex
+    session_4/option_b/exercise_2/figures/fx_rate_figure.png
+    session_4/demo_output
+    session_4/docs/instructor_notes.md
+    session_4/docs/methods_paragraph.md
+    session_4/docs/instructor_notes_debugging.md
+    session_4/github_collaboration_practice/INSTRUCTOR.md
+    session_4/scripts/base_regression.py
+    session_4/scripts/buggy_script.py
+    session_8/scripts/api_template.py
 )
 LEAKS=$(git ls-files -- "${FORBIDDEN_PATHS[@]}")
 if [ -n "$LEAKS" ]; then
