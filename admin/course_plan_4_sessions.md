@@ -168,7 +168,7 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 | 4 | Prompt injection and data exposure frames | |
 | 4 | Fan-out / swarm frames | |
 | 4 | LLM-as-coder frames | |
-| 4 | **Hand-code the gold set** in `session_4/data/climate_speeches/gold_codes.csv` after finalizing `coding_scheme.md` (draft) | The corpus is built (see that folder's README). The gold codes must be human and made before class. A second coder on a subset gives the human–human agreement benchmark. |
+| 4 | Review `coding_scheme.md` (draft) | Corpus (63 passages) and Claude-generated reference codes are done in `session_4/data/climate_speeches/` (see its README). Agreement against Claude codes is inflated by same-model agreement; make that a debrief point. |
 | 4 | Referee subagent definition file and example run | |
 | 4 | Sharing-with-coauthors frame | |
 | 3, 4 | Back-matter index frames | |
