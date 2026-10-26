@@ -77,7 +77,7 @@ Do not open anything in scripts/, tests/, or output/.
 
 **Parts 2 and 3 are in Session 3.** Keep your `my_workspace/session_2` folder as it is: Session 3 continues the exercise in it.
 
-## Part 2: Specify and Estimate (30 min)
+## Part 2: Specify and Estimate (25 min)
 
 4. **Specify the base model.** Estimate a logistic regression of `supports_intervention` on `treatment`, using survey weights. Before running, decide:
    - What should the reference category for `treatment` be?
@@ -92,7 +92,7 @@ Do not open anything in scripts/, tests/, or output/.
 
 For every model in steps 4-7, reconcile the sample size: rows in, minus rows dropped (by reason), equals N used.
 
-## Part 3: Robustness and Output (30 min)
+## Part 3: Robustness and Output (25 min)
 
 8. **Generate robustness checks.** Using your base model from step 4, ask Claude Code to generate at least 4 specification variants:
    - With and without survey weights
