@@ -14,7 +14,7 @@ The corpus for the Session 4 exercise "LLMs as research coders": fan out agents 
 
 ## How the corpus was built
 
-Built by [`session_4/scripts/build_climate_corpus.py`](../../scripts/build_climate_corpus.py) from the GovInfo API (collection `CREC`, the daily Congressional Record).
+Built by [`session_4/scripts/build_climate_corpus.py`](../../scripts/build_climate_corpus.py) from GovInfo's daily Congressional Record (collection `CREC`). The list of Record days comes from the GovInfo API, and each day's package from govinfo.gov's public download path.
 
 1. **Frame.** All Record days issued from 2023-01-03 to 2025-01-03 (118th Congress).
 2. **Order.** Days are visited in a seeded random order (`SEED` in the script). Visiting stops once 60 passages are collected. Many Record days are pro forma recess sessions with no debate, so a fixed number of days yields few passages.
