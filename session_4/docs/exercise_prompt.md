@@ -58,20 +58,20 @@ data/climate_speeches/passages.csv. Spawn two subagents in
 parallel: one for the first 10 rows, one for the next 10.
 Give each subagent ONLY passage_id and passage_text for its
 batch, plus the scheme. Each writes a CSV with columns
-passage_id, code to session_4/output/batch_N.csv.
+passage_id, code to output/batch_N.csv.
 ```
 
 Check: do the files have the right columns? Do the codes match what the scheme allows? How much of your usage did two agents use? (Look at your usage display before and after.)
 
 ### Step 2: Fan out the rest (6 min)
 
-Same prompt for the remaining passages, in batches. When all batches are done, merge them to `session_4/output/agent_codes.csv` with columns `passage_id`, `code`. Confirm the merged file has 63 rows and no duplicate `passage_id`.
+Same prompt for the remaining passages, in batches. When all batches are done, merge them to `output/agent_codes.csv` with columns `passage_id`, `code`. Confirm the merged file has 63 rows and no duplicate `passage_id`.
 
 **Do not give the agents the `party` or `speaker_name` columns.** A coder who sees party can use it as a shortcut. Whether yours would have is something you can only know if you controlled what it saw.
 
 ### Step 3: Compare (6 min)
 
-The instructor will give you the reference codes (`gold_codes.csv`) now. Put the file in `session_4/data/climate_speeches/`. Then ask Claude Code for:
+The instructor will give you the reference codes (`gold_codes.csv`) now. Put the file in `data/climate_speeches/`. Then ask Claude Code for:
 
 - the raw agreement rate,
 - a confusion matrix (reference codes as rows, agent codes as columns),
@@ -84,7 +84,7 @@ Then read the disagreements one at a time. For each, decide: was the agent wrong
 Verify one number by hand (count the diagonal of the matrix, divide by 63), or run:
 
 ```
-python session_4/scripts/compare_to_reference.py
+python scripts/compare_to_reference.py
 ```
 
 and compare its output with what Claude Code reported.
