@@ -21,13 +21,11 @@ Learning the data is the part you never delegate. Write down what a correct merg
 
 | Minutes | Step |
 |---------|------|
-| 0–2 | Step 0: install the verification protocol |
-| 2–12 | Step 1: learn the data and write your expectations, **without Claude Code** |
-| 12–24 | Step 2: merge and explore in plan mode |
-| 24–29 | Step 3: verify the output against your expectations |
-| 29–35 | Debrief |
-
-0. **Install the verification protocol.** Copy `docs/verification_protocol.md` into a file named `CLAUDE.md` in your `session_2` folder. If you already have a `CLAUDE.md`, append it. Start Claude Code in the `session_2` folder and ask: "What verification rules apply in this project?" Its answer should describe the protocol.
+| 0–10 | Step 1: learn the data and write your expectations, **without Claude Code** |
+| 10–22 | Step 2: merge and explore in plan mode |
+| 22–27 | Step 3: verify the output against your expectations |
+| 27–31 | Debrief |
+| 31–35 | Step 4: write your own verification rules in `CLAUDE.md` |
 
 1. **Learn the data and write your expectations, without Claude Code.** Read `docs/codebook.md` and open both CSV files in `data/`. Then write `expectations.md` in your `session_2` folder, answering:
    - How many rows should the merged file have, and which key links the two files?
@@ -47,41 +45,15 @@ Learning the data is the part you never delegate. Write down what a correct merg
    - Run the tests. Trace three respondents from the raw files to the merged data: one typical, one with a missing outcome, and one who is absent from the demographics file.
    - Test the tests: make a **copy** of the demographics file with the row of one survey respondent duplicated, run the merge tests on the copy, and confirm that they fail. Never edit the files in `data/`.
 
+4. **Write your own verification rules.** Create `CLAUDE.md` in your `session_2` folder and write **3–5 rules in your own words**, each from something that happened in Part 1. For each rule write: the failure (what happened, or nearly happened), the rule (one specific instruction to Claude Code), and the check (how you would notice it was broken). Rules take effect in a new conversation. Keep the file: Session 3 builds on it.
+
 ### Debrief questions
 
 - Which of your expectations turned out to be wrong? Was the error yours, or Claude Code's?
 - What did you learn about the data that the codebook did not say outright?
 - Did Claude Code's tests check what you wrote, or something easier?
+- Where did Claude Code cut a corner you had not asked for? Which of your rules would have prevented it?
 
 ---
 
-**Parts 2 and 3 are in Session 3.** Keep your `my_workspace/session_2` folder as it is: Session 3 continues the exercise in it.
-
-## Part 2: Specify and Estimate (25 min)
-
-4. **Specify the base model.** Estimate a logistic regression of `supports_intervention` on `treatment`, using survey weights. Before running, decide:
-   - What should the reference category for `treatment` be?
-   - Tell Claude Code explicitly.
-   - Independent check: the logistic of the model's intercept should equal the weighted share of supporters in the control group. Compute that share directly from the raw CSV, without using the model code, and compare.
-
-5. **Add FX exposure.** Add `fx_status` to the model. Check: did the sample size change?
-
-6. **Add demographic controls.** Add `age`, `female`, `ed_level`, `urban_rural`, `income_quintile`, and `left_right` to the model. **Before running, predict how many observations you will have.** Then check.
-
-7. **Interact treatment with FX exposure.** Does the information treatment have a different effect on people who are directly affected by the shock?
-
-For every model in steps 4-7, reconcile the sample size: rows in, minus rows dropped (by reason), equals N used.
-
-## Part 3: Robustness and Output (25 min)
-
-8. **Generate robustness checks.** Using your base model from step 4, ask Claude Code to generate at least 4 specification variants:
-   - With and without survey weights
-   - With different sets of controls (tracking how N changes each time)
-   - Collapsing the three treatment arms into a single "any information" dummy vs. control
-   - Restricting to a subsample (e.g., urban respondents only)
-
-9. **Format as LaTeX.** Ask Claude Code to produce a publication-style LaTeX regression table with all specifications side by side. Compile to PDF. Add an output manifest test: every specification appears in the table, each with its N.
-
-10. **Audit report.** Ask Claude Code to write `session_2/output/audit_report.md` covering: the tests run (with passed, failed, and skipped counts), each requirement and the test that covers it, anything not tested, numerical checks (your value against the independent value), choices that need your judgment, and what the tests do not cover.
-
-11. **Save everything.** All scripts, tests, output, and the LaTeX table should be in `session_2/output/`.
+**Parts 2 and 3 are in Session 3.** Keep your `my_workspace/session_2` folder as it is: Session 3 continues the exercise in it. The instructions are in `session_3/docs/exercise_prompt.md`.
