@@ -126,6 +126,9 @@ if __name__ == "__main__":
     csv_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_CSV_PATH
     tex_path = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_TEX_PATH
     tex_text = render_table(load_results(csv_path))
+    tex_folder = os.path.dirname(tex_path)
+    if tex_folder:
+        os.makedirs(tex_folder, exist_ok=True)
     with open(tex_path, "w") as tex_file:
         tex_file.write(tex_text)
     print(f"LaTeX table written to {tex_path}")
