@@ -31,8 +31,11 @@ To rebuild, run `python session_4/scripts/build_climate_corpus.py` from the proj
 - **The sample is not representative of all climate talk in Congress.** It is a seeded random sample of days with a per-day cap, built for a teaching exercise, not for estimating prevalence.
 - **Party is visible in `passages.csv`.** If the exercise asks agents to code from the full row, party is available as a shortcut cue. Whether coders, human or LLM, lean on it is a possible debrief question. To remove it, give agents only `passage_id` and `passage_text`.
 
-## Gold codes: how to make them meaningful
+## About the reference codes
 
-The gold codes must be **human** codes, made **before** class and without LLM assistance. Codes produced or pre-filled by Claude would make the validation circular, because the exercise compares LLM coding with itself.
+`gold_codes.csv` was coded by Claude (Opus 5.5) from `coding_scheme.md`, passage by passage. This was a deliberate choice: the exercise demonstrates the validation *workflow*, not a validated measure.
 
-An LLM–human agreement rate is only interpretable next to human–human agreement on the same passages. If a second person codes at least a subset (e.g., 30 passages) independently, the debrief can compare LLM agreement against intercoder reliability, not against an implicit 100%.
+- **Agreement will look better than it is.** Participants' agents are also Claude, so part of their agreement with these codes is the same model agreeing with itself. Treat the agreement rate as a demonstration of how to compute and read one. In a real project, the reference set must come from human coders, ideally two, so that LLM–human agreement can be compared with human–human agreement.
+- **Hard cases are flagged.** 7 passages have notes starting "Hard case", where another code is defensible. These are where disagreement is expected and is the most useful debrief material.
+- **Party is a near-perfect proxy in this sample.** Every code 1 is a Democrat. Every code 2 is a Republican or an unattributed passage (Senate leader remarks, McConnell or Thune). An agent that sees the `party` column could score well by using it as a shortcut.
+- **Distribution:** 38 supports, 18 opposes, 5 no stance, 2 not climate.
