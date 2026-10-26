@@ -1,4 +1,4 @@
-# Session 2: Research Pipelines
+# Session 2: Context, Parallel Sessions, Plan Mode, and Verification
 
 ## Start-of-session ritual
 
@@ -69,6 +69,14 @@ suffix: `backup-prework-2`.
 ## Start here
 
 1. Open `slides/session2_slides.pdf`.
-2. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
-3. Exercise: `docs/exercise_prompt.md` (merge the survey and demographics data,
-   estimate the models, run robustness checks, and produce a LaTeX table).
+2. Demo, follow along: two Claude Code tabs at once in this folder (prompts on
+   the slides).
+3. Exercise 1, the county panel in plan mode: in your **`my_workspace/session_1`**
+   copy from last session, opened in a new VS Code window (instructions on the
+   slides).
+4. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
+5. Exercise 2: Part 1 of `docs/exercise_prompt.md`, the merge, with a builder tab
+   and a checker tab.
+
+**Keep this folder after today.** Parts 2 and 3 of the exercise (estimation,
+robustness, and a LaTeX table) are in Session 3, and continue here.
