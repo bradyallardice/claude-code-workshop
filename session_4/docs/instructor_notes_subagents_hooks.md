@@ -10,15 +10,15 @@ Deck: `slides/session5_slides.tex` ("Agents, Hooks, and a Paper"). This file was
 
 ## What the deck contains
 
-| Part | Frames | Student action | Needs |
-|---|---|---|---|
-| Ritual (2 frames) | 61-104 | Pull course repo, copy `session_4/` and slides | Course repo cloned |
-| Subagents (generic, named, patterns) | 134-408 | Mostly watch; two worked examples | Claude Code; a regression script |
-| Hooks (concept, audit-log example, `claude-ignore`) | 414-491 | Watch; optionally install `claude-ignore` | `jq`, Node.js and `npm` |
-| Capstone (Steps 0-9) | 515-815 | Self-guided, 2-3 hours | `session_4/capstone-template/`, Zotero + MCP |
-| Beyond the terminal, scraping, API | 826-end | Watch | Nothing runs |
+| Part | Student action | Needs |
+|---|---|---|
+| Ritual (2 frames) | Pull course repo, copy `session_4/` and slides | Course repo cloned |
+| Subagents: generic, named, composition patterns (about 17 frames) | Mostly watch; two worked examples | Claude Code; a regression script |
+| Hooks: concept, audit-log example, `claude-ignore` (5 frames) | Watch; optionally install `claude-ignore` | `jq`, Node.js and `npm` |
+| Capstone, Steps 0-9 (about 14 frames) | Self-guided, 2-3 hours | `session_4/capstone-template/`, Zotero + MCP |
+| Beyond the terminal, scraping, API (about 14 frames) | Watch | Nothing runs |
 
-No timings were ever written for this deck. The only clock is the Session 4 plan (block 32 subagents 14 min, block 38 hooks 5 min). Frame counts above are the only guide.
+No timings were ever written for this deck. The only clock is the Session 4 plan (block 32 subagents 14 min, block 38 hooks 5 min). The frame counts above are approximate and are the only guide.
 
 ---
 
