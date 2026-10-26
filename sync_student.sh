@@ -155,6 +155,18 @@ git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/robustne
 git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/figures/fx_rate_figure.png
 git rm -f --quiet --ignore-unmatch session_4/option_b/output/merged_survey.csv
 
+# Option B Exercise 1 folders hold only the Session 2 answers (merge, estimate,
+# robustness in Python/R/Stata); the scripts/solution_* glob above does not reach them
+git rm -f -r --quiet --ignore-unmatch session_3/option_b/exercise_1
+git rm -f -r --quiet --ignore-unmatch session_4/option_b/exercise_1
+
+# Session 3 live-demo working copy: files Claude writes here during the demo
+# (including a from-scratch course_paper.tex) must never reach students
+git rm -f -r --quiet --ignore-unmatch session_3/demo_run
+
+# Session 4 demo_output: finished regression tables (coefficients, SEs, N) from an old demo
+git rm -f -r --quiet --ignore-unmatch session_4/demo_output
+
 # Session 4 LLM-coding exercise: hand-coded gold labels are the answer key
 git rm -f --quiet --ignore-unmatch session_4/data/climate_speeches/gold_codes.csv
 
