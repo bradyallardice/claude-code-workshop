@@ -78,7 +78,7 @@ suffix: `backup-prework-2`.
    - **Results → paper** runs in `results_to_paper/` in this folder. It holds a
      paper skeleton (`paper.tex`), a results file, and a script that renders the
      results as a LaTeX table.
-3. `docs/verification_protocol.md` is a reference verification protocol. Open it at the end of Part 3, to compare with the `CLAUDE.md` rules you wrote yourself.
+3. `docs/verification_protocol.md` (in this `session_3` folder, not your `session_2` folder) is a reference verification protocol. Open it at the end of Part 3, to compare with the `CLAUDE.md` rules you wrote yourself.
 4. `paper/` is the finished course-analysis paper from the live demo, for
    reference. `option_b/` is older practice material that the course no longer
    uses.
