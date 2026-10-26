@@ -10,7 +10,7 @@
 
 ## Chapter prompts
 
-Find your chapter number in `PAIRS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete scene — feel free to riff, add detail, invent characters. Don't try to match what other pairs are writing.
+Find your name next to a chapter number in `CHAPTERS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete scene — feel free to riff, add detail, invent characters. Don't try to match what other pairs are writing.
 
 **Chapter 1.** The opening plenary speaker arrives 20 minutes late, takes the stage, says *"Before I begin, I need to tell you something important,"* and is immediately cut off by the hotel's fire drill.
 

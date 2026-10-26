@@ -10,7 +10,7 @@
 
 ## Chapter prompts
 
-Find your chapter number in `PAIRS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete scene — feel free to name professors, invent office layouts, add bystanders. Don't try to match what other pairs are writing.
+Find your name next to a chapter number in `CHAPTERS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete scene — feel free to name professors, invent office layouts, add bystanders. Don't try to match what other pairs are writing.
 
 **Chapter 1.** Monday morning. Professor Lin's stapler is gone. In its place is a small, neatly arranged pile of breadcrumbs. Professor Lin has not told anyone yet — she wants to see what happens next.
 
