@@ -81,7 +81,7 @@ The results are the same for everyone, so you can compare notes. They are not yo
 
 2. **Render the table into the paper.** Ask Claude Code to run the render script, then compile `paper.tex`. Open `tables/regression_table.tex` and `results/regression_results.csv` yourself: does the table say what the CSV says? Commit.
 
-3. **Write the results paragraph.** Ask Claude Code to write the paragraph for the Results section from the table. Run `git diff` and read it. Keep it (commit) or revert it (`git checkout -- .`). If you keep it, say what you changed or would change.
+3. **Write the results paragraph.** Ask Claude Code to write the paragraph for the Results section from the table. Commit first, so you have a save point. VS Code shows you the diff before it applies the change: read it, then accept or reject it. If you accept it, say what you changed or would change. (If you accept and regret it later, `git checkout -- .` takes you back to the commit.)
 
 4. **Cross-check every number.** In a **fresh conversation**, ask Claude Code to list every number in the results paragraph and the table cell it comes from, and to flag any claim the table does not support. Then answer for yourself: what can this check not catch?
 
@@ -90,5 +90,5 @@ The results are the same for everyone, so you can compare notes. They are not yo
 ### Debrief questions
 
 - Which sentences in the paragraph went beyond what the table can support?
-- Did the check find anything the diff reading missed, or the reverse?
-- What did you revert, and how did git make that cheap?
+- Did the check find anything you missed when you read the diff in VS Code, or the reverse?
+- What did you reject, and what did the commit make cheap?

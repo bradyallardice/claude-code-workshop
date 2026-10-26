@@ -647,6 +647,35 @@ Ctrl+Alt+V  Open PDF preview
   Add to VS Code settings: \texttt{"latex-workshop.latex.autoBuild.run": "onFileChange"}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  BLOCK 27: LIVE DEMO, BUILDING A PAPER (moved ahead of the Problems pane)  [0:47-0:55]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Live Demo: Building a Paper from Scratch}
+  \textbf{What I'm going to show you:}
+
+  \vspace{0.5em}
+  I have a folder with pre-generated outputs from a fake analysis of \textit{this course}:
+  \begin{itemize}
+    \item Summary statistics table (\texttt{.tex})
+    \item Regression results table (\texttt{.tex})
+    \item Four figures: enrollment, satisfaction, attrition, earnings effect
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Starting from nothing,} I'll use Claude Code to:
+  \begin{enumerate}
+    \item Create a blank \texttt{course\_paper.tex} file
+    \item Write methods and data sections describing the study
+    \item Pull in the pre-generated tables with \texttt{\textbackslash input\{...\}}
+    \item Embed the figures with \texttt{\textbackslash includegraphics\{...\}}
+    \item Compile to PDF and fix any errors that come up
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \alert{Watch how Claude Code reads the Problems pane and iterates without me copy-pasting errors.}
+\end{frame}
+
 \begin{frame}{\LaTeX{} Errors and the Problems Pane}
   When you compile, LaTeX Workshop checks for errors and syntax issues. They appear in the \textbf{Problems} pane at the bottom of VS Code.
 
@@ -1108,33 +1137,8 @@ __pycache__/
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 27: LIVE DEMO, THE FULL LOOP  [1:27-1:35]
+%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:35-2:00]
 % ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Live Demo: Building a Paper from Scratch}
-  \textbf{What I'm going to show you:}
-
-  \vspace{0.5em}
-  I have a folder with pre-generated outputs from a fake analysis of \textit{this course}:
-  \begin{itemize}
-    \item Summary statistics table (\texttt{.tex})
-    \item Regression results table (\texttt{.tex})
-    \item Four figures: enrollment, satisfaction, attrition, earnings effect
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Starting from nothing,} I'll use Claude Code to:
-  \begin{enumerate}
-    \item Create a blank \texttt{course\_paper.tex} file
-    \item Write methods and data sections describing the study
-    \item Pull in the pre-generated tables with \texttt{\textbackslash input\{...\}}
-    \item Embed the figures with \texttt{\textbackslash includegraphics\{...\}}
-    \item Compile to PDF and fix any errors that come up
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \alert{Watch how Claude Code reads the Problems pane and iterates without me copy-pasting errors.}
-\end{frame}
 
 \begin{frame}{Demo: The Full Loop}
   \centering
@@ -1160,10 +1164,6 @@ __pycache__/
   Everything is visible to Claude Code.}
 \end{frame}
 
-% ══════════════════════════════════════════════════════════════════
-%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:35-2:00]
-% ══════════════════════════════════════════════════════════════════
-
 \begin{frame}{Exercise: Results $\rightarrow$ Paper (25 min)}
   Open \texttt{my\_workspace/session\_3/results\_to\_paper} in a new VS Code window. It holds \texttt{paper.tex}, \texttt{results/regression\_results.csv}, and \texttt{scripts/render\_regression\_table.py}. Everyone starts from the same results.
 
@@ -1172,12 +1172,12 @@ __pycache__/
     \small
     \item \textbf{Git first.} \texttt{git init}, have Claude Code write a \texttt{.gitignore} for \LaTeX{} build files, then commit.
     \item \textbf{Render the table.} Have Claude Code run the render script and compile \texttt{paper.tex}. Open the CSV and the \texttt{.tex} fragment yourself and check that they agree. Commit.
-    \item \textbf{Results paragraph.} Have Claude Code write it from the table. Run \texttt{git diff} and read it. Keep it (commit) or revert it (\texttt{git checkout -- .}).
+    \item \textbf{Results paragraph.} Commit first. Have Claude Code write it from the table. VS Code shows the diff before applying it: read it, then accept or reject.
     \item \textbf{Cross-check.} Next slide.
   \end{enumerate}
 
   \vspace{0.3em}
-  \alert{\small Commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide. You should revert at least once.}
+  \alert{\small Commit $\rightarrow$ instruct $\rightarrow$ diff $\rightarrow$ decide. Reject at least one change.}
 \end{frame}
 
 \begin{frame}[fragile]{Exercise: Cross-Check Every Number}
@@ -1206,7 +1206,7 @@ the table supports it. Do not edit any file.
 \begin{frame}{Results $\rightarrow$ Paper: Debrief}
   \begin{enumerate}
     \item Which sentences in the paragraph went beyond what the table supports?
-    \item What did you revert, and what did git make cheap?
+    \item What did you reject, and what did the commit make cheap?
     \item Did the cross-check find something the diff did not, or the reverse?
   \end{enumerate}
 
@@ -1217,22 +1217,161 @@ the table supports it. Do not edit any file.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 29: WHEN IT GOES WRONG  [2:00-2:06]
+%  BLOCK 29: WHEN IT GOES WRONG  [2:00-2:08]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{When It Goes Wrong: Four Failure Patterns}
+\begin{frame}{When It Goes Wrong: Four Patterns}
+  These are normal, not rare. Recognize the pattern early, because the right response differs.
+
+  \vspace{0.4em}
   \small
-  \renewcommand{\arraystretch}{1.25}
-  \begin{tabular}{@{}L{0.2\textwidth}L{0.35\textwidth}L{0.38\textwidth}@{}}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{@{}L{0.2\textwidth}L{0.38\textwidth}L{0.35\textwidth}@{}}
     \toprule
     \textbf{Pattern} & \textbf{What you see} & \textbf{First response} \\
     \midrule
-    Looping & The same fix, tried again with small variations; the error does not change & Stop it. Ask what it has tried and why each attempt failed. Change the approach, not the wording \\
-    Confidently wrong & It reports success; the numbers or the code are wrong & Check against something it did not produce: an independent calculation, a test written first, a traced sample \\
-    Scope creep & It edits files or changes things you did not ask about & \texttt{git diff}, revert the extras, restate the boundary in the prompt or in \texttt{CLAUDE.md} \\
-    Coherence loss & Late in a long conversation it contradicts earlier decisions or drops conventions & Write the decisions to a file, start a new conversation, reload the file \\
+    Looping & The same fix again and again; the error does not change & Stop. Give it new information \\
+    Confidently wrong & Reports success; the numbers are wrong & Check against something it did not produce \\
+    Scope creep & Edits things you did not ask about & Read the diff; reject the extras \\
+    Coherence loss & Late on, it contradicts earlier decisions & Decisions into a file; new conversation \\
     \bottomrule
   \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Pattern 1: Looping}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{What it looks like}
+      \begin{itemize}
+        \small
+        \item The same error after every ``fix''
+        \item Two changes alternating: A, then B, then A
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Why}\\[0.2em]
+      {\small Each failed attempt anchors the next. No new information has come in.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to do}
+      \begin{itemize}
+        \small
+        \item Stop after the second repeat
+        \item Ask what it tried and why each failed
+        \item Give it something new: the log, the full error
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \textbf{Example:} a table will not compile, and a package is added, removed, and added again.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Stop. List what you tried and why each failed.
+Then read paper.log and tell me the first error.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Pattern 2: Confidently Wrong}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{What it looks like}
+      \begin{itemize}
+        \small
+        \item ``All tests pass'' but the numbers are off
+        \item Tests that agree with the code, because it wrote both
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Why}\\[0.2em]
+      {\small It reports what it meant to do, not what the code did.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to do}
+      \begin{itemize}
+        \small
+        \item Ask for evidence, not assurance
+        \item Check against something it did not produce
+        \item Read the tests
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \textbf{Example:} a weighted logit ignored its weights. The intercept check caught it: 0.4455 vs.\ 0.4477.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Show the weighted control share from the raw CSV
+next to the logistic of the intercept.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Pattern 3: Scope Creep}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{What it looks like}
+      \begin{itemize}
+        \small
+        \item The diff touches files you did not mention
+        \item A reference category or sample changed ``while it was there''
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Why}\\[0.2em]
+      {\small A broad request is read broadly.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to do}
+      \begin{itemize}
+        \small
+        \item Commit first
+        \item Read the diff; reject the extras
+        \item Narrow the prompt: change X, touch nothing else
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \textbf{Example:} ``add income'' also changes the reference category.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Change only the model formula in estimate.py.
+Do not edit any other file or line.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Pattern 4: Coherence Loss}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{What it looks like}
+      \begin{itemize}
+        \small
+        \item A decision from early on is forgotten (the join type)
+        \item A bug you already fixed comes back
+      \end{itemize}
+      \vspace{0.4em}
+      \textbf{Why}\\[0.2em]
+      {\small The context window is finite, and long conversations lose detail.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to do}
+      \begin{itemize}
+        \small
+        \item Move decisions into a file
+        \item One conversation per task
+        \item New conversation: read the file first, re-run the tests
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \textbf{Example:} at turn 40 it uses an inner join; you chose a left join at turn 3.
+
+  \vspace{0.3em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Read expectations.md. State the join type, reference
+arm, and sample rules in force before you continue.
+  \end{lstlisting}
 \end{frame}
 
 \begin{frame}{Correct, Restart, or Do It Yourself?}
@@ -1263,7 +1402,7 @@ the table supports it. Do not edit any file.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  CLOSE  [2:06]
+%  CLOSE  [2:08]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Next Session}
@@ -1271,15 +1410,14 @@ the table supports it. Do not edit any file.
 
   \vspace{1em}
   \begin{itemize}
+    \item Connecting tools (MCP) and building a skill
     \item Web search and literature scans, and why you check every citation
     \item Subagents: fan out work, use one as a verifier, and run a referee on a paper
-    \item Connecting tools (MCP) and building a skill
   \end{itemize}
 
   \vspace{1em}
   \textbf{Before next session:}
   \begin{itemize}
-    \item \alert{Install Node.js (LTS)} from \texttt{nodejs.org}. Check \texttt{node --version} and \texttt{npm --version}. Session 4 installs the \texttt{claude-ignore} hook with \texttt{npm}.
     \item Make git a habit on one real project: commit before every Claude Code instruction
     \item Think of a topic in your field you could run a literature search on
   \end{itemize}

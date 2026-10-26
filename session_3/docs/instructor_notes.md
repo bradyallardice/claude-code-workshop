@@ -16,14 +16,13 @@ carry the same block numbers and clock times. Student exercise text is in
 | 0:00 | — | Where we are, ritual (copy `session_3`, reopen `session_2`), check-in | 3 | 5 |
 | 0:05 | 23 | Verification extras: a bridge from Session 2's `expectations.md` to the matrix, how to build the matrix (sources, weak vs strong, format, example), how to read an audit report (questions, format, filled-in example), two more safeguards, delegate / verify / keep | 10 | 10 |
 | 0:15 | 24 | **Exercise Part 2:** reopen frame, extend expectations into a matrix, specify and estimate, debrief | 4 | 25 |
-| 0:40 | 25 | Robustness workflow, **LaTeX in VS Code (bridge + 6 frames, moved here from block 26)**, **Exercise Part 3**, what to watch for, debrief | 11 | 33 |
-| 1:13 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
-| 1:27 | 27 | Live demo: building a paper, the full loop | 2 | 8 |
-| 1:35 | 28 | **Exercise: results → paper**, cross-check, debrief | 3 | 25 |
-| 2:00 | 29 | When it goes wrong: four failure patterns; correct / restart / do it yourself | 2 | 6 |
-| 2:06 | — | Next Session | 1 | 1 |
+| 0:40 | 25, 27 | Robustness workflow, LaTeX in VS Code (bridge + setup + shortcuts), **live demo: building a paper (block 27, moved here)**, Problems pane and why it matters, **Exercise Part 3**, what to watch for, debrief | 12 | 41 |
+| 1:21 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
+| 1:35 | 28 | "Demo: The Full Loop" diagram, **exercise: results → paper**, cross-check, debrief | 4 | 25 |
+| 2:00 | 29 | When it goes wrong: overview, one slide per pattern (looping, confidently wrong, scope creep, coherence loss), correct / restart / do it yourself | 6 | 8 |
+| 2:08 | — | Next Session | 1 | 1 |
 
-**Total: 127 minutes on paper**, 5 over the plan. Block 23 now teaches how to build the matrix and read the audit report instead of just showing them (+5). If you need the time back, the cheapest cuts are the check-in, then the "Two More Safeguards" frame. The main flow is 52 frames (the footer counts only these). The back matter is 33 frames and is not counted.
+**Total: 129 minutes on paper**, 7 over the plan. Block 23 now teaches how to build the matrix and read the audit report instead of just showing them (+5). If you need the time back, the cheapest cuts are the check-in, then the "Two More Safeguards" frame. The main flow is 56 frames (the footer counts only these). The back matter is 33 frames and is not counted.
 By the queue rule, anything that does not fit moves to the start of Session 4.
 
 ---
@@ -66,7 +65,7 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 - **Step 10 closes the loop on `CLAUDE.md`.** Participants revise their own rules from a gap the audit report exposed, then compare with the reference protocol (`docs/verification_protocol.md`; back-matter block F). This is where the protocol is introduced: not as something to install, but as a comparison with rules they already wrote. If someone arrives without rules from Session 2, have them write two from the gaps in their audit report first.
 - **Part 3 builds on the matrix.** Each robustness variant gets a matrix row (what must change, what must stay). The audit report is built from the matrix: each row, its test, its result; rows with no test go under *Not tested*. A matrix that was never updated is the first thing to check if the report looks thin.
 - The "New to LaTeX?" button on the setup frame jumps to the back-matter basics and back. Use it only if someone asks.
-- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps their combined length unchanged: block 25 runs 0:40–1:13 and block 26 runs 1:13–1:27.
+- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps their combined length unchanged: block 25 runs 0:40–1:21 (including the demo) and block 26 runs 1:21–1:35.
 - Also in the Session 2 folder. The point of the exercise is N tracking across specifications. The reference table is in the answer key ("Robustness Table Reference").
 - Step 11 (commit) comes before the git frames, so participants who have not yet seen `git init` leave it for later. Say so.
 - The "What to Watch For" and "Debrief" frames close the Swiss franc exercise.
@@ -76,9 +75,10 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 - The Overleaf bridge uses Overleaf's own git remote. No GitHub is involved, so don't mention accounts or tokens.
 - GitHub is in the back matter (block B). Don't open it unless asked.
 
-### 27. Live demo: building a paper (8 min)
-- Pre-generated outputs for the fake course analysis are in `session_3/output/`; the finished paper is `session_3/paper/course_paper.tex`. The code that made the outputs is `session_3/code/generate_course_analysis.py`.
-- Start from an empty `course_paper.tex`, in a **new folder** so the finished paper isn't overwritten. Show Claude Code reading the Problems pane, not you pasting errors.
+### 27. Live demo: building a paper (8 min), taught inside block 25
+- **Position:** after the LaTeX Workshop shortcuts frame and before "LaTeX Errors and the Problems Pane" (slide 26). Participants watch Claude Code read the Problems pane before the pane is explained. Git has not been taught yet, so don't commit in the demo; the "Demo: The Full Loop" diagram (with the commit step) opens block 28 instead.
+- **Where the demo files are:** `session_3/paper/`. It holds `tables/` (`summary_stats.tex`, `regression_earnings.tex`), `figures/` (`enrollment.png`, `satisfaction.png`, `attrition.png`, `earnings_effect.png`, plus PNG renders of the two tables), and the **finished** `course_paper.tex` and `.pdf`. The data are `session_3/data/` and the code that made everything is `session_3/code/generate_course_analysis.py` (teacher-only). `session_3/output/` is older Swiss franc material, not the demo.
+- **Start from a clean folder so the finished paper doesn't give it away.** Before class: `mkdir session_3/demo_run && cp -r session_3/paper/tables session_3/paper/figures session_3/demo_run/`, then open `demo_run` in VS Code and have Claude Code create `course_paper.tex` from nothing. Show the finished `paper/course_paper.pdf` only as the fallback. Delete `demo_run` afterward (it is not covered by `sync_student.sh`).
 - If compile problems eat the time, narrate and show the finished PDF.
 
 ### 28. Exercise: results → paper (25 min)
@@ -111,15 +111,21 @@ History and Hungary coefficients are not significant in any column. Pseudo R² r
 - `git init` must run inside `results_to_paper/`. Check people are not committing in `my_workspace` (which would sweep both sessions' files into one repo).
 - The render script writes a fragment (`\input`-able). `paper.tex` already loads `makecell` and `booktabs`. If compilation fails, it is nearly always a missing package or a wrong working directory for the script (it expects to run from `results_to_paper/`).
 - The Session 2 copy of `render_regression_table.py` differs: it writes a standalone document and prints the outcome label on the first row only. Don't use it for this exercise.
-- Participants must revert at least once. If no one does, ask someone to ask Claude Code for a deliberately worse paragraph and revert it.
+- **No `git diff` in this exercise.** In VS Code, Claude Code shows the diff before applying a change and participants accept or reject it. The commit before each instruction is the safety net for anything they accept and regret (`git checkout -- .`). Participants should reject at least one change. If no one does, ask someone to request a deliberately worse paragraph and reject it.
 - The cross-check needs a fresh conversation, otherwise it re-reads its own reasoning. This is the fresh-session-as-independent-checker idea from Session 2's parallel-session frames.
 
-### 29. When it goes wrong (6 min)
-- Two frames. The first is a reference table, so read the four patterns aloud rather than every cell. The second leads to "recent commit makes every option cheap".
-- Tie "confidently wrong" back to the cross-check just done.
+### 29. When it goes wrong (8 min)
+- Six frames: an overview table, one slide for each of the four patterns, then correct / restart / do it yourself. About a minute each.
+- Every pattern slide has the same four parts: what it looks like, why it happens, what to do, and an example with a prompt to copy. Run them as recognition practice: read "what it looks like" and ask the room whether they have seen it, before showing the response.
+- **Tie each pattern to something they have just done:**
+  - *Looping:* a LaTeX compile error from Part 3. The fix is new information (the log), not another try.
+  - *Confidently wrong:* the weights example is real. In this course's own Session 2 scripts, a weighted logit silently ignored its weights (statsmodels' formula `logit()` accepts a `weights` argument and discards it). The independent check on the intercept would have caught it.
+  - *Scope creep:* the accept/reject diff in VS Code. Count the files and lines.
+  - *Coherence loss:* Session 2's context strategies (one conversation per task, decisions in files) and the row-count test in their matrix.
+- The last frame closes on "a recent commit makes every option cheap". Connect it to the commit before every instruction in the results-to-paper exercise.
 
 ### Close
-- Next Session frame: Node.js LTS is needed in Session 4 for `claude-ignore`. Say it out loud: it is the one prework item.
+- Next Session frame: no prework item any more. Node.js was only needed for the `claude-ignore` hook, which Session 4 no longer teaches.
 
 ---
 
