@@ -333,14 +333,24 @@ def write_gold_template(passages, path):
 def main():
     api_key = get_api_key()
     package_ids = list_crec_packages(api_key)
-    days = sample_days(package_ids, N_DAYS, SEED)
-    print(f"{len(package_ids)} Record days in {DATE_START}..{DATE_END}; sampled {len(days)}:")
-    print("  " + ", ".join(d.removeprefix("CREC-") for d in days))
+    print(f"{len(package_ids)} Record days in {DATE_START}..{DATE_END}")
 
-    all_rows = []
-    for package_id in days:
-        all_rows += extract_passages(fetch_day(package_id, api_key), package_id)
+    rows_by_day, days_visited = {}, []
+    for package_id in day_visit_order(package_ids, SEED):
+        if sum(len(r) for r in rows_by_day.values()) >= TARGET_PASSAGES:
+            break
+        if len(days_visited) >= MAX_DAYS:
+            print(f"WARNING: stopped after {MAX_DAYS} days without reaching the target.")
+            break
+        days_visited.append(package_id)
+        day_rows = extract_passages(fetch_day(package_id, api_key), package_id)
+        day_rows = cap_day_passages(day_rows, MAX_PASSAGES_PER_DAY, SEED)
+        print(f"  {package_id}: {len(day_rows)} passages kept")
+        if day_rows:
+            rows_by_day[package_id] = day_rows
 
+    # Days in date order so passage IDs run chronologically
+    all_rows = [row for day in sorted(rows_by_day) for row in rows_by_day[day]]
     passages = build_passage_table(all_rows)
     passages_path = os.path.join(OUTPUT_DIR, "passages.csv")
     passages.to_csv(passages_path, index=False)
