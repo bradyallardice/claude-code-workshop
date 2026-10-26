@@ -1,0 +1,36 @@
+row_type,display_order,spec,dv,dv_label,coef_type,coef,se,pvalue,value_num,value_str,fe_name
+spec_label,0,c1,NA,NA,NA,NA,NA,NA,NA,(1) Base,NA
+n,0,c1,NA,NA,NA,NA,NA,NA,2036.0,NA,NA
+r2,0,c1,NA,NA,NA,NA,NA,NA,0.0021711351793132216,NA,NA
+coefficient,0,c1,supports_intervention,Supports intervention,info,0.30220553926942195,0.12572392553956366,0.016229048439215837,NA,NA,NA
+coefficient,1,c1,supports_intervention,Supports intervention,history,0.12306822925026353,0.12806990838787252,0.336579465055295,NA,NA,NA
+coefficient,2,c1,supports_intervention,Supports intervention,hungary,0.19413019098907522,0.12950947365753707,0.13388266644457403,NA,NA,NA
+spec_label,1,c2,NA,NA,NA,NA,NA,NA,NA,(2) Unweighted,NA
+n,0,c2,NA,NA,NA,NA,NA,NA,2036.0,NA,NA
+r2,0,c2,NA,NA,NA,NA,NA,NA,0.00227716883660789,NA,NA
+coefficient,0,c2,supports_intervention,Supports intervention,info,0.290308236215351,0.12558594381054883,0.020798081529688307,NA,NA,NA
+coefficient,1,c2,supports_intervention,Supports intervention,history,0.04745415862669178,0.12741226482500795,0.7095609841567001,NA,NA,NA
+coefficient,2,c2,supports_intervention,Supports intervention,hungary,0.14490949477740525,0.12883890922553298,0.260701792385337,NA,NA,NA
+spec_label,2,c3,NA,NA,NA,NA,NA,NA,NA,(3) + Basic controls,NA
+n,0,c3,NA,NA,NA,NA,NA,NA,2035.0,NA,NA
+r2,0,c3,NA,NA,NA,NA,NA,NA,0.021213650452741817,NA,NA
+coefficient,0,c3,supports_intervention,Supports intervention,info,0.334724932847495,0.1286268562117753,0.00926023521424316,NA,NA,NA
+coefficient,1,c3,supports_intervention,Supports intervention,history,0.13607389986913015,0.13062032531898785,0.29752697622842506,NA,NA,NA
+coefficient,2,c3,supports_intervention,Supports intervention,hungary,0.19182838963968732,0.13188018691855155,0.14578954671284522,NA,NA,NA
+spec_label,3,c4,NA,NA,NA,NA,NA,NA,NA,(4) Full controls,NA
+n,0,c4,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
+r2,0,c4,NA,NA,NA,NA,NA,NA,0.02790313256103516,NA,NA
+coefficient,0,c4,supports_intervention,Supports intervention,info,0.2679892406372803,0.1740472854745328,0.12362139803525911,NA,NA,NA
+coefficient,1,c4,supports_intervention,Supports intervention,history,0.2528906175925813,0.17535684804841314,0.1492604818340162,NA,NA,NA
+coefficient,2,c4,supports_intervention,Supports intervention,hungary,0.21998304788969994,0.1769661486021957,0.21383842183636836,NA,NA,NA
+spec_label,4,c5,NA,NA,NA,NA,NA,NA,NA,(5) Any information,NA
+n,0,c5,NA,NA,NA,NA,NA,NA,2035.0,NA,NA
+r2,0,c5,NA,NA,NA,NA,NA,NA,0.020239222066515516,NA,NA
+coefficient,3,c5,supports_intervention,Supports intervention,any_info,0.22439615779335714,0.10827867800715246,0.03822864777816804,NA,NA,NA
+spec_label,5,c6,NA,NA,NA,NA,NA,NA,NA,(6) Urban only,NA
+n,0,c6,NA,NA,NA,NA,NA,NA,528.0,NA,NA
+r2,0,c6,NA,NA,NA,NA,NA,NA,0.05035045990366693,NA,NA
+coefficient,0,c6,supports_intervention,Supports intervention,info,0.2872049745328932,0.2573047298828807,0.264334147743261,NA,NA,NA
+coefficient,1,c6,supports_intervention,Supports intervention,history,0.2844436556561297,0.267012105791711,0.2867475469807449,NA,NA,NA
+coefficient,2,c6,supports_intervention,Supports intervention,hungary,0.06493732542434236,0.2679340649276227,0.808498838938901,NA,NA,NA
+note,0,NA,NA,NA,NA,NA,NA,NA,NA,"Logit coefficients (log-odds), robust (HC1) standard errors in parentheses. Reference arm: control. Columns (1), (3)--(6) use survey weights; column (2) does not. Columns (3)--(6) control for FX status, age, female, education, and urban/rural; column (4) adds income quintile and left-right, which restricts the sample to respondents with both. Column (6) keeps urban respondents only.",NA
