@@ -65,8 +65,10 @@ KEYWORD_PATTERN = re.compile(r"\bclimat\w*", re.IGNORECASE)
 API_BASE = "https://api.govinfo.gov"
 MODS_NS = {"m": "http://www.loc.gov/mods/v3"}
 
-# Turn markers that open a member's paragraph, e.g. "Mr. SMITH of Texas."
-MEMBER_MARKER = re.compile(r"^(Mr|Ms|Mrs|Miss)\. ([^.]+?)\.(\s|$)")
+# Turn markers that open a member's paragraph, e.g. "Mr. SMITH of Texas.",
+# "Mr. McGOVERN.". The name has no comma and contains a run of capitals, which
+# excludes forms of address that also open paragraphs ("Mr. Chairman, I rise").
+MEMBER_MARKER = re.compile(r"^(Mr|Ms|Mrs|Miss)\. ([^.,]*[A-Z]{2}[^.,]*?)\.(\s|$)")
 # Presiding-officer turn markers; paragraphs after these are not a member's speech
 PRESIDING_MARKER = re.compile(
     r"^The (PRESIDING OFFICER|SPEAKER pro tempore|SPEAKER|ACTING PRESIDENT pro "
