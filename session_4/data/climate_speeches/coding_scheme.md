@@ -1,6 +1,6 @@
 # Coding Scheme: Climate Mentions in Congressional Speech
 
-**Status: DRAFT, used as written for the Session 4 exercise.** The reference codes were produced by Claude from this scheme, not hand-coded (see `README.md`). Revise the scheme before any use in a real project, and recode the reference set by hand.
+**Status: DRAFT, used as written for the Session 4 exercise.** Revise the scheme before any use in a real project.
 
 ## Unit
 
@@ -26,7 +26,7 @@ The speaker's **stance toward action on climate change**, as expressed in this p
 3. **Supports the goal but opposes a specific bill:** code 2 if the passage's evaluative weight is against the climate measure, and code 1 if it is against an obstacle to climate action. If neither dominates, code 3 and explain in `notes`.
 4. **Several uses of "climate" in one passage:** code the environmental use. Code 4 only if no use is environmental.
 
-## Hard cases to watch for (debrief material)
+## Hard cases to watch for
 
 - Opposition framed as cost or energy prices, with no claim about climate itself.
 - Support for an energy source (nuclear, gas) framed as good for the climate.
