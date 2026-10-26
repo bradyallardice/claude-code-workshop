@@ -143,6 +143,9 @@ git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/robustne
 git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/figures/fx_rate_figure.png
 git rm -f --quiet --ignore-unmatch session_4/option_b/output/merged_survey.csv
 
+# Session 4 LLM-coding exercise: hand-coded gold labels are the answer key
+git rm -f --quiet --ignore-unmatch session_4/data/climate_speeches/gold_codes.csv
+
 # Remove slide source files and images (keep only PDFs)
 git rm -f -r --quiet --ignore-unmatch slides/img/
 git ls-files slides/ | grep -v '\.pdf$' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
