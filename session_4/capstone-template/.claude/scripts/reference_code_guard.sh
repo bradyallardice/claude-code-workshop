@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Find a Python that actually runs. On Windows, 'python3' is often a Microsoft
+# Store placeholder that exists on PATH but does nothing.
+PYTHON=""
+for candidate in python3 python py; do
+    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c "import sys" >/dev/null 2>&1; then
+        PYTHON="$candidate"
+        break
+    fi
+done
+if [ -z "$PYTHON" ]; then
+    echo "Hook ${0##*/} is NOT active: no working Python found (tried python3, python, py)." >&2
+    exit 1
+fi
+
 REPO_ROOT="${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null || pwd)}"
 HOOK_INPUT=$(cat 2>/dev/null || true)
 
-CHECK=$(HOOK_INPUT="$HOOK_INPUT" REPO_ROOT="$REPO_ROOT" python3 - <<'PY'
+CHECK=$(HOOK_INPUT="$HOOK_INPUT" REPO_ROOT="$REPO_ROOT" "$PYTHON" - <<'PY'
 import json
 import os
 from pathlib import Path

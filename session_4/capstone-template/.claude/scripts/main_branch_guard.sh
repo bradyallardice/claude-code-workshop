@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Find a Python that actually runs. On Windows, 'python3' is often a Microsoft
+# Store placeholder that exists on PATH but does nothing.
+PYTHON=""
+for candidate in python3 python py; do
+    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c "import sys" >/dev/null 2>&1; then
+        PYTHON="$candidate"
+        break
+    fi
+done
+if [ -z "$PYTHON" ]; then
+    echo "Hook ${0##*/} is NOT active: no working Python found (tried python3, python, py)." >&2
+    exit 1
+fi
+
 START_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 REPO_ROOT=$(git -C "$START_DIR" rev-parse --show-toplevel 2>/dev/null || true)
 [ -z "$REPO_ROOT" ] && exit 0
@@ -14,7 +28,7 @@ esac
 
 HOOK_INPUT=$(cat 2>/dev/null || true)
 
-CHECK=$(HOOK_INPUT="$HOOK_INPUT" python3 - <<'PY'
+CHECK=$(HOOK_INPUT="$HOOK_INPUT" REPO_ROOT="$REPO_ROOT" "$PYTHON" - <<'PY'
 import json
 import os
 from pathlib import Path
@@ -45,10 +59,20 @@ walk(data)
 allowed_setup_files = {"ROLES.md", "CLAUDE.md"}
 blocked = []
 
+root = Path(os.environ["REPO_ROOT"]).resolve()
+
 for raw_path in paths:
-    rel = str(Path(raw_path))
-    if rel.startswith("./"):
-        rel = rel[2:]
+    # Claude sends absolute paths; make them repo-relative before comparing.
+    path = Path(raw_path)
+    if path.is_absolute():
+        try:
+            rel = path.resolve().relative_to(root).as_posix()
+        except ValueError:
+            rel = path.as_posix()
+    else:
+        rel = path.as_posix()
+        if rel.startswith("./"):
+            rel = rel[2:]
     if rel and rel not in allowed_setup_files:
         blocked.append(f"edit target {rel}")
 
@@ -56,7 +80,7 @@ print("\n".join(blocked))
 PY
 )
 
-COMMIT_COMMAND=$(HOOK_INPUT="$HOOK_INPUT" python3 - <<'PY'
+COMMIT_COMMAND=$(HOOK_INPUT="$HOOK_INPUT" "$PYTHON" - <<'PY'
 import json
 import os
 

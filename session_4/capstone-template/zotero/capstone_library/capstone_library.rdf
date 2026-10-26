@@ -75,7 +75,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_1285">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1285/Magistro et al. - 2026 - Attitudes toward artificial intelligence (AI) and globalization Common microfoundations and politic.pdf"/>
+        <z:path rdf:resource="files/1285/Magistro_2026.pdf"/>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -144,7 +144,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2018">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2018/Hainmueller et al. - 2014 - Causal Inference in Conjoint Analysis Understanding Multidimensional Choices via Stated Preference.pdf"/>
+        <z:path rdf:resource="files/2018/Hainmueller_2014.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -208,7 +208,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2003">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2003/Leeper et al. - 2020 - Measuring Subgroup Preferences in Conjoint Experiments.pdf"/>
+        <z:path rdf:resource="files/2003/Leeper_2020.pdf"/>
         <dc:title>Accepted Version</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -283,7 +283,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2005">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2005/Gallego and Kurer - 2022 - Automation, Digitalization, and Artificial Intelligence in the Workplace Implications for Political.pdf"/>
+        <z:path rdf:resource="files/2005/Gallego_2022.pdf"/>
         <dc:title>Full Text</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -362,7 +362,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2013">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2013/ComparativePoliticalStudies-2015-Naoi-1293-317.pdf"/>
+        <z:path rdf:resource="files/2013/ComparativePoliticalStud_2015.pdf"/>
         <dc:title>ComparativePoliticalStudies-2015-Naoi-1293-317</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -408,7 +408,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2017">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2017/Mutz - 2021 - (Mis)Attributing the Causes of American Job Loss.pdf"/>
+        <z:path rdf:resource="files/2017/Mutz_2021.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -487,7 +487,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2021">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2021/Di Tella and Rodrik - 2020 - Labour Market Shocks and the Demand for Trade Protection Evidence from Online Surveys.pdf"/>
+        <z:path rdf:resource="files/2021/DiTella_2020.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -580,7 +580,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2027">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2027/Magistro et al. - 2024 - Attitudes toward automation and the demand for policies addressing job loss the effects of informat.pdf"/>
+        <z:path rdf:resource="files/2027/Magistro_2024.pdf"/>
         <dc:title>Full Text</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -664,7 +664,7 @@
     </z:Attachment>
     <z:Attachment rdf:about="#item_2029">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2029/Walter - 2021 - The Backlash Against Globalization.pdf"/>
+        <z:path rdf:resource="files/2029/Walter_2021.pdf"/>
         <dc:title>Full Text</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -746,7 +746,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2032">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2032/Hainmueller et al. - 2015 - Validating vignette and conjoint survey experiments against real-world behavior.pdf"/>
+        <z:path rdf:resource="files/2032/Hainmueller_2015.pdf"/>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -825,7 +825,7 @@
     </bib:Memo>
     <z:Attachment rdf:about="#item_2152">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/2152/Chaudoin and Mangini - 2025 - Robots, Foreigners, and Foreign Robots Policy Responses to Automation and Trade.pdf"/>
+        <z:path rdf:resource="files/2152/Chaudoin_2025.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>

@@ -1,0 +1,3 @@
+# Keep shell scripts LF on every OS. Git for Windows' own bash tolerates CRLF,
+# but macOS, Linux and WSL bash fail on it ("set: pipefail: invalid option name").
+*.sh text eol=lf

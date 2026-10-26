@@ -119,7 +119,9 @@ panel_with_base["abs_change"] = panel_with_base["change_from_2012"].abs()
 # Exclude 2012 itself
 changes = panel_with_base[panel_with_base["year"] != 2012].copy()
 # Largest absolute change per county (across any year)
-max_change = changes.loc[changes.groupby("county_fips")["abs_change"].idxmax()]
+# Counties with no 2012 result have no change to rank; they stay in the panel
+ranked = changes.dropna(subset=["abs_change"])
+max_change = ranked.loc[ranked.groupby("county_fips")["abs_change"].idxmax()]
 top_changes = max_change.nlargest(20, "abs_change")[
     ["county_fips", "county_name", "state", "year", "dem_share_2012", "dem_share", "change_from_2012"]
 ]

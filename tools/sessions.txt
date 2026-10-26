@@ -1,0 +1,11 @@
+# Which folders each class session needs. Read by tools/start_session.sh and
+# tools/start_session.ps1 AFTER they fetch the latest materials, so editing this
+# file and publishing is enough to change what students get.
+#
+# Format:  session | folders to copy into ~/my_workspace | slides PDF
+# Folders that already exist in the workspace are never overwritten, so a
+# session can list an earlier folder that students keep working in.
+1 | session_1 | slides/session1_slides.pdf
+2 | session_2 | slides/session2_slides.pdf
+3 | session_2 session_3 | slides/session3_slides.pdf
+4 | session_4 | slides/session4_slides.pdf

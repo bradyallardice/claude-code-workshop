@@ -52,13 +52,13 @@
     </bib:Journal>
     <z:Attachment rdf:about="#item_1609">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1609/American J Political Sci - 2025 - Becher - Global competition local unions and political representation Disentangling.pdf"/>
+        <z:path rdf:resource="files/1609/AmericanJPoliticalSci_2025.pdf"/>
         <dc:title>American J Political Sci - 2025 - Becher - Global competition local unions and political representation Disentangling</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
     <z:Attachment rdf:about="#item_1587">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1587/Baccini and Weymouth - 2021 - Gone For Good Deindustrialization, White Voter Backlash, and US Presidential Voting.pdf"/>
+        <z:path rdf:resource="files/1587/Baccini_2021.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -119,7 +119,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1352">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1352/Larsen et al. - 2019 - When Do Citizens Respond Politically to the Local Economy Evidence from Registry Data on Local Hous.pdf"/>
+        <z:path rdf:resource="files/1352/Larsen_2019.pdf"/>
         <dc:title>Submitted Version</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -174,7 +174,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1617">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1617/Benedictis-Kessner and Warshaw - 2020 - Accountability for the Local Economy at All Levels of Government in United States Elections.pdf"/>
+        <z:path rdf:resource="files/1617/BenedictisKessner_2020.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -216,7 +216,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1615">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1615/Bisgaard - 2015 - Bias Will Find a Way Economic Perceptions, Attributions of Blame, and Partisan-Motivated Reasoning.pdf"/>
+        <z:path rdf:resource="files/1615/Bisgaard_2015.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -270,7 +270,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1565">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1565/Alt et al. - 2016 - Credible Sources and Sophisticated Voters When Does New Information Induce Economic Voting.pdf"/>
+        <z:path rdf:resource="files/1565/Alt_2016.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -318,7 +318,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1714">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1714/Healy and Lenz - 2017 - Presidential Voting and the Local Economy Evidence from Two Population-Based Data Sets.pdf"/>
+        <z:path rdf:resource="files/1714/Healy_2017.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -385,7 +385,7 @@
     </bib:Journal>
     <z:Attachment rdf:about="#item_1510">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1510/Guntermann et al. - 2021 - The Impact of the Economy on Presidential Elections Throughout US History.pdf"/>
+        <z:path rdf:resource="files/1510/Guntermann_2021.pdf"/>
         <dc:title>Full Text PDF</dc:title>
         <dc:identifier>
             <dcterms:URI>
@@ -446,7 +446,7 @@
     </bib:Article>
     <z:Attachment rdf:about="#item_1881">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1881/Little et al. - 2022 - Motivated Reasoning and Democratic Accountability.pdf"/>
+        <z:path rdf:resource="files/1881/Little_2022.pdf"/>
         <dc:title>PDF</dc:title>
         <link:type>application/pdf</link:type>
     </z:Attachment>
@@ -500,7 +500,7 @@
     </bib:Journal>
     <z:Attachment rdf:about="#item_1771">
         <z:itemType>attachment</z:itemType>
-        <z:path rdf:resource="files/1771/Hicks et al. - 2016 - Inequality and Electoral Accountability Class-Biased Economic Voting in Comparative Perspective.pdf"/>
+        <z:path rdf:resource="files/1771/Hicks_2016.pdf"/>
         <dc:title>Submitted Version</dc:title>
         <dc:identifier>
             <dcterms:URI>

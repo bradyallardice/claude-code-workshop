@@ -1,0 +1,22 @@
+#!/bin/bash
+# Post-commit hook: sync student branch after commits on teacher.
+# Safer version: if the sync fails part-way, abort it and return to teacher, so
+# the working tree is never left on `student` with a merge open (where the next
+# auto-commit would land on the wrong branch).
+#
+# Install:  cp admin/class_of_32/post-commit.safer .git/hooks/post-commit && chmod +x .git/hooks/post-commit
+
+BRANCH=$(git branch --show-current)
+
+if [ "$BRANCH" = "teacher" ]; then
+    echo "Syncing student branch..."
+    if ! ./sync_student.sh; then
+        [ -f .git/MERGE_HEAD ] && git merge --abort
+        git checkout -q teacher
+        echo "" >&2
+        echo "!!! STUDENT SYNC FAILED and was rolled back. You are on teacher; student is unchanged." >&2
+        echo "!!! Fix sync_student.sh (see the error above), then run ./sync_student.sh by hand." >&2
+        exit 0
+    fi
+    git checkout -q teacher
+fi

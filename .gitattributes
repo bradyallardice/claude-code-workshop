@@ -1,0 +1,5 @@
+# Keep shell scripts LF on every OS. Git for Windows' own bash tolerates CRLF,
+# but macOS, Linux and WSL bash fail on it ("set: pipefail: invalid option
+# name"). Applies to tools/*.sh and the capstone hooks.
+*.sh text eol=lf
+*.ps1 text eol=crlf
