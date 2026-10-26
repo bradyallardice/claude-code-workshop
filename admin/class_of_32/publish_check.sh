@@ -56,8 +56,16 @@ for tex in $(git ls-tree --name-only teacher slides/ | grep '\.tex$'); do
     T_PDF="$(git log -1 --format=%ct teacher -- "$pdf")"
     [ "$T_PDF" -lt "$T_TEX" ] && STALE="$STALE $pdf"
 done
-if [ -z "$STALE" ]; then ok "Every slides PDF is at least as new as its .tex"
-else bad "Slides PDF older than its source:$STALE" "recompile those decks and commit the PDFs"; fi
+# Only decks listed in tools/sessions.txt reach students through start_session,
+# so only those block publishing; other stale decks are reported as warnings.
+LISTED="$(git show teacher:tools/sessions.txt 2>/dev/null | grep -v '^[[:space:]]*#' | awk -F'|' '{gsub(/ /, "", $3); print $3}')"
+STALE_LISTED=""; STALE_OTHER=""
+for pdf in $STALE; do
+    if echo "$LISTED" | grep -qx "${pdf%(missing)}"; then STALE_LISTED="$STALE_LISTED $pdf"; else STALE_OTHER="$STALE_OTHER $pdf"; fi
+done
+if [ -z "$STALE_LISTED" ]; then ok "Every slides PDF listed in tools/sessions.txt is at least as new as its .tex"
+else bad "Listed slides PDF older than its source:$STALE_LISTED" "recompile those decks and commit the PDFs"; fi
+[ -n "$STALE_OTHER" ] && warn "Not in tools/sessions.txt, but older than (or missing) their .tex:$STALE_OTHER"
 
 # 5. Manifest sanity, against what students will actually receive
 if git cat-file -e student:tools/sessions.txt 2>/dev/null; then
