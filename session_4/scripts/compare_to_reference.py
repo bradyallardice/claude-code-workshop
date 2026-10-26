@@ -6,15 +6,15 @@ Reads the agents' codes (passage_id, code) and the reference codes
 confusion matrix, and per-category agreement. Use it to check the numbers
 Claude Code gives you; do not treat it as the only computation.
 
-Run from the project root (AIAgentsCourse/ or your copy of session_4's parent).
+Run from inside the session_4 folder (the folder you open in VS Code).
 Interactive use: run the constants and function definitions, then call
 main() or the functions one at a time.
 """
 
 import pandas as pd
 
-AGENT_CODES_PATH = "session_4/output/agent_codes.csv"
-REFERENCE_CODES_PATH = "session_4/data/climate_speeches/gold_codes.csv"
+AGENT_CODES_PATH = "output/agent_codes.csv"
+REFERENCE_CODES_PATH = "data/climate_speeches/gold_codes.csv"
 VALID_CODES = [1, 2, 3, 4]
 CODE_LABELS = {1: "SUPPORTS_ACTION", 2: "OPPOSES_ACTION", 3: "NO_STANCE", 4: "NOT_CLIMATE"}
 
