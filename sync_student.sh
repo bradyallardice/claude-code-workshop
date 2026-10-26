@@ -102,6 +102,15 @@ git rm -f --quiet --ignore-unmatch session_2/output/robustness_table.tex
 git rm -f --quiet --ignore-unmatch session_3/output/fx_rate_figure.png
 git rm -f --quiet --ignore-unmatch session_2/output/main_table.tex
 git rm -f --quiet --ignore-unmatch session_2/output/summary_stats.tex
+# Part 2/3 answers: the finished regression table (all formats) and the script that built it
+git rm -f --quiet --ignore-unmatch session_2/output/tab_swiss_franc_logit.csv
+git rm -f --quiet --ignore-unmatch session_2/output/tab_swiss_franc_logit.tex
+git rm -f --quiet --ignore-unmatch session_2/output/tab_swiss_franc_logit.pdf
+git rm -f --quiet --ignore-unmatch session_2/output/tab_swiss_franc_logit.aux
+git rm -f --quiet --ignore-unmatch session_2/output/tab_swiss_franc_logit.log
+git rm -f --quiet --ignore-unmatch session_2/scripts/extract_regression_table.py
+git rm -f --quiet --ignore-unmatch session_2/scripts/render_regression_table.py
+git rm -f --quiet --ignore-unmatch session_2/scripts/swiss_franc_logit.py
 
 # Remove teacher-only figure generation script
 git ls-files 'session_*/scripts/generate_fx_figure.*' | sort -u | xargs -r git rm -f --quiet --ignore-unmatch
@@ -180,6 +189,10 @@ FORBIDDEN_PATHS=(
     session_2/scripts/build_county_panel.py
     session_2/scripts/build_county_panel.R
     session_2/scripts/build_county_panel.do
+    session_2/output/tab_swiss_franc_logit.csv
+    session_2/output/tab_swiss_franc_logit.tex
+    session_2/scripts/extract_regression_table.py
+    session_2/scripts/render_regression_table.py
     session_1/scripts/create_sample_data.py
     session_4/capstone-template/INSTRUCTOR.md
     session_4/capstone-template/zotero/synthesis.md

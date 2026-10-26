@@ -7,28 +7,28 @@ spec_label,4,rc2c,NA,NA,NA,NA,NA,NA,NA,RC2-C,NA
 spec_label,5,rc2d,NA,NA,NA,NA,NA,NA,NA,Model 3,NA
 spec_label,6,rc1_unw,NA,NA,NA,NA,NA,NA,NA,RC1 Unw.,NA
 spec_label,7,rc3,NA,NA,NA,NA,NA,NA,NA,RC3,NA
-coefficient,0,m1,intervention_support,Support for FX Intervention,treatment,0.29030823621535046,0.1255859438105489,0.020798081529688612,NA,NA,NA
-coefficient,0,m2,intervention_support,Support for FX Intervention,treatment,0.2871693593350144,0.12615517915553134,0.02282695783436356,NA,NA,NA
-coefficient,0,rc2a,intervention_support,Support for FX Intervention,treatment,0.19919785771785425,0.16576427158071802,0.22948227698900525,NA,NA,NA
-coefficient,0,rc2b,intervention_support,Support for FX Intervention,treatment,0.2021770661245182,0.16651654397745114,0.22468814710937257,NA,NA,NA
-coefficient,0,rc2c,intervention_support,Support for FX Intervention,treatment,0.21584297887044213,0.16804869159556235,0.19899945376551376,NA,NA,NA
-coefficient,0,rc2d,intervention_support,Support for FX Intervention,treatment,0.21931379467135437,0.16922163726450207,0.19497028769880065,NA,NA,NA
-coefficient,0,rc1_unw,intervention_support,Support for FX Intervention,treatment,0.21931379467135437,0.16922163726450207,0.19497028769880065,NA,NA,NA
-coefficient,0,rc3,intervention_support,Support for FX Intervention,treatment,0.16965392756484646,0.14041471188242663,0.22695699719965978,NA,NA,NA
-coefficient,1,m2,intervention_support,Support for FX Intervention,fx_current,1.0693939246935353,0.2737852491168376,9.38524723749089e-05,NA,NA,NA
+coefficient,0,m1,intervention_support,Support for FX Intervention,treatment,0.30220553926942195,0.1257239255359834,0.01622904843617727,NA,NA,NA
+coefficient,0,m2,intervention_support,Support for FX Intervention,treatment,0.30375492671477883,0.12634595694761047,0.016210017067686912,NA,NA,NA
+coefficient,0,rc2a,intervention_support,Support for FX Intervention,treatment,0.25287087006364906,0.16772550904544237,0.1316448823347227,NA,NA,NA
+coefficient,0,rc2b,intervention_support,Support for FX Intervention,treatment,0.25928616367735413,0.16861540743744402,0.12411291430097797,NA,NA,NA
+coefficient,0,rc2c,intervention_support,Support for FX Intervention,treatment,0.2716974172989461,0.17031860768009632,0.11066072744343367,NA,NA,NA
+coefficient,0,rc2d,intervention_support,Support for FX Intervention,treatment,0.2679892406372819,0.17146940235941607,0.11807651322388413,NA,NA,NA
+coefficient,0,rc1_unw,intervention_support,Support for FX Intervention,treatment,0.21931379467132353,0.169221631557503,0.19497027264078481,NA,NA,NA
+coefficient,0,rc3,intervention_support,Support for FX Intervention,treatment,0.24803861949959372,0.14400326380786088,0.08498778428542363,NA,NA,NA
+coefficient,1,m2,intervention_support,Support for FX Intervention,fx_current,1.1209480839971753,0.27808321590236407,5.554459853510273e-05,NA,NA,NA
 coefficient,1,rc2a,intervention_support,Support for FX Intervention,fx_current,NA,NA,NA,NA,NA,NA
-coefficient,1,rc2b,intervention_support,Support for FX Intervention,fx_current,0.9206746416805486,0.3347390176291522,0.005951797163768846,NA,NA,NA
-coefficient,1,rc2c,intervention_support,Support for FX Intervention,fx_current,1.062801203018616,0.34184083197367254,0.0018768816059583652,NA,NA,NA
-coefficient,1,rc2d,intervention_support,Support for FX Intervention,fx_current,1.1090418071055939,0.3432709941803648,0.0012344191979585992,NA,NA,NA
-coefficient,1,rc1_unw,intervention_support,Support for FX Intervention,fx_current,1.1090418071055939,0.3432709941803648,0.0012344191979585992,NA,NA,NA
-coefficient,1,rc3,intervention_support,Support for FX Intervention,fx_current,1.111930876273073,0.34331049802303115,0.001200130766912334,NA,NA,NA
-coefficient,2,rc2c,intervention_support,Support for FX Intervention,female,0.2902443189132379,0.12262811680194267,0.017939427256273174,NA,NA,NA
-coefficient,2,rc2d,intervention_support,Support for FX Intervention,female,0.25969712119976357,0.12365809670337341,0.03571808786218295,NA,NA,NA
-coefficient,2,rc1_unw,intervention_support,Support for FX Intervention,female,0.25969712119976357,0.12365809670337341,0.03571808786218295,NA,NA,NA
-coefficient,2,rc3,intervention_support,Support for FX Intervention,female,0.2575356592656022,0.12352231038377176,0.03707544287184785,NA,NA,NA
-coefficient,3,rc2d,intervention_support,Support for FX Intervention,income_q5,1.2125957898433966,1.1270400504100342,0.28196666417616834,NA,NA,NA
-coefficient,3,rc1_unw,intervention_support,Support for FX Intervention,income_q5,1.2125957898433966,1.1270400504100342,0.28196666417616834,NA,NA,NA
-coefficient,3,rc3,intervention_support,Support for FX Intervention,income_q5,1.2007927654534722,1.127316931085758,0.28679555926357136,NA,NA,NA
+coefficient,1,rc2b,intervention_support,Support for FX Intervention,fx_current,1.0211398122508553,0.34507452371246405,0.003084525392968682,NA,NA,NA
+coefficient,1,rc2c,intervention_support,Support for FX Intervention,fx_current,1.2083689577392485,0.35312119929455643,0.0006216994500458823,NA,NA,NA
+coefficient,1,rc2d,intervention_support,Support for FX Intervention,fx_current,1.2522148140246527,0.35388867595784007,0.0004024945756653502,NA,NA,NA
+coefficient,1,rc1_unw,intervention_support,Support for FX Intervention,fx_current,1.1090418071037116,0.34327079409952704,0.001234411065695113,NA,NA,NA
+coefficient,1,rc3,intervention_support,Support for FX Intervention,fx_current,1.2513194852094864,0.35376511030074964,0.0004044732335646778,NA,NA,NA
+coefficient,2,rc2c,intervention_support,Support for FX Intervention,female,0.21740792733650072,0.12372796848283885,0.0788931713190534,NA,NA,NA
+coefficient,2,rc2d,intervention_support,Support for FX Intervention,female,0.1900927822437273,0.12497728082922775,0.12825514260692036,NA,NA,NA
+coefficient,2,rc1_unw,intervention_support,Support for FX Intervention,female,0.2596971211997353,0.12365809252816472,0.03571808162615554,NA,NA,NA
+coefficient,2,rc3,intervention_support,Support for FX Intervention,female,0.19037447028499974,0.12490259907667925,0.12746289926198115,NA,NA,NA
+coefficient,3,rc2d,intervention_support,Support for FX Intervention,income_q5,1.5743221073837883,1.451949537598419,0.27823997942511136,NA,NA,NA
+coefficient,3,rc1_unw,intervention_support,Support for FX Intervention,income_q5,1.2125957898432194,1.1270397789544875,0.2819665482692849,NA,NA,NA
+coefficient,3,rc3,intervention_support,Support for FX Intervention,income_q5,1.5684801247746103,1.4517010399900754,0.2799449876335619,NA,NA,NA
 n,0,m1,NA,NA,NA,NA,NA,NA,2036.0,NA,NA
 n,0,m2,NA,NA,NA,NA,NA,NA,2035.0,NA,NA
 n,0,rc2a,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
@@ -37,12 +37,12 @@ n,0,rc2c,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
 n,0,rc2d,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
 n,0,rc1_unw,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
 n,0,rc3,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
-r2,0,m1,NA,NA,NA,NA,NA,NA,0.002277168994894496,NA,NA
-r2,0,m2,NA,NA,NA,NA,NA,NA,0.008637270135529618,NA,NA
-r2,0,rc2a,NA,NA,NA,NA,NA,NA,0.000924991614949966,NA,NA
-r2,0,rc2b,NA,NA,NA,NA,NA,NA,0.006653086443675682,NA,NA
-r2,0,rc2c,NA,NA,NA,NA,NA,NA,0.017428648849278083,NA,NA
-r2,0,rc2d,NA,NA,NA,NA,NA,NA,0.023358391788505628,NA,NA
-r2,0,rc1_unw,NA,NA,NA,NA,NA,NA,0.023358391788505628,NA,NA
-r2,0,rc3,NA,NA,NA,NA,NA,NA,0.02317247518748522,NA,NA
+r2,0,m1,NA,NA,NA,NA,NA,NA,0.0021711351793132216,NA,NA
+r2,0,m2,NA,NA,NA,NA,NA,NA,0.009395574056816791,NA,NA
+r2,0,rc2a,NA,NA,NA,NA,NA,NA,0.001799778730500523,NA,NA
+r2,0,rc2b,NA,NA,NA,NA,NA,NA,0.0090486454079175,NA,NA
+r2,0,rc2c,NA,NA,NA,NA,NA,NA,0.021762178679038846,NA,NA
+r2,0,rc2d,NA,NA,NA,NA,NA,NA,0.02790313256103527,NA,NA
+r2,0,rc1_unw,NA,NA,NA,NA,NA,NA,0.023358391675143975,NA,NA
+r2,0,rc3,NA,NA,NA,NA,NA,NA,0.027850644816195036,NA,NA
 note,0,NA,NA,NA,NA,NA,NA,NA,NA,"Models 1–2 use all respondents with non-missing outcome (N shown). RC2-A–C and RC3 use complete-case sample (N=1,151). RC1 Unw. is unweighted version of full controls model. All models use survey weights except RC1 Unw. FX Status current effect shown. Female, Income Q5, and other controls estimated on full control specifications only.",NA

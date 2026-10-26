@@ -10,9 +10,21 @@ Reference categories: treatment='cntrl', fx_status='none'
 
 import pandas as pd
 import numpy as np
-from statsmodels.formula.api import logit
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
 import warnings
 warnings.filterwarnings('ignore')
+
+
+def fit_logit(formula, data, weighted):
+    """Logit via GLM. statsmodels' formula logit() silently ignores a weights= argument,
+    so weighted fits use GLM with freq_weights (point estimates equal the survey-weighted
+    MLE; standard errors treat weights as frequency counts). Adds .prsquared (McFadden)."""
+    model = smf.glm(formula, data=data, family=sm.families.Binomial(),
+                    freq_weights=data['survey_weight'] if weighted else None, missing='drop')
+    result = model.fit()
+    result.prsquared = 1 - result.deviance / result.null_deviance
+    return result
 
 
 def load_and_merge():
@@ -89,11 +101,11 @@ def robustness_checks(df_complete):
         'C(income_quintile) + left_right'
     )
 
-    rc1_weighted = logit(base_formula, data=df_complete, weights=df_complete['survey_weight']).fit(disp=0)
+    rc1_weighted = fit_logit(base_formula, df_complete, weighted=True)
     print(f"\nWeighted (N = {len(df_complete)}):")
     print(rc1_weighted.summary())
 
-    rc1_unweighted = logit(base_formula, data=df_complete).fit(disp=0)
+    rc1_unweighted = fit_logit(base_formula, df_complete, weighted=False)
     print(f"\nUnweighted (N = {len(df_complete)}):")
     print(rc1_unweighted.summary())
 
@@ -105,11 +117,7 @@ def robustness_checks(df_complete):
     rc2_results = []
 
     # Minimal: treatment only
-    rc2_minimal = logit(
-        'supports_intervention ~ C(treatment)',
-        data=df_complete,
-        weights=df_complete['survey_weight']
-    ).fit(disp=0)
+    rc2_minimal = fit_logit('supports_intervention ~ C(treatment)', df_complete, weighted=True)
     model_summary(rc2_minimal, "RC2-A: Treatment only", len(df_complete))
     rc2_results.append({
         'spec': 'Minimal (treatment)',
@@ -118,11 +126,7 @@ def robustness_checks(df_complete):
     })
 
     # + FX status
-    rc2_fx = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status)',
-        data=df_complete,
-        weights=df_complete['survey_weight']
-    ).fit(disp=0)
+    rc2_fx = fit_logit('supports_intervention ~ C(treatment) + C(fx_status)', df_complete, weighted=True)
     model_summary(rc2_fx, "RC2-B: Treatment + FX Status", len(df_complete))
     rc2_results.append({
         'spec': '+ FX status',
@@ -131,12 +135,8 @@ def robustness_checks(df_complete):
     })
 
     # + Basic demographics
-    rc2_basicdemo = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status) + '
-        'age + C(female) + C(ed_level) + C(urban_rural)',
-        data=df_complete,
-        weights=df_complete['survey_weight']
-    ).fit(disp=0)
+    rc2_basicdemo = fit_logit('supports_intervention ~ C(treatment) + C(fx_status) + '
+        'age + C(female) + C(ed_level) + C(urban_rural)', df_complete, weighted=True)
     model_summary(rc2_basicdemo, "RC2-C: + Basic Demographics", len(df_complete))
     rc2_results.append({
         'spec': '+ Basic demographics',
@@ -145,7 +145,7 @@ def robustness_checks(df_complete):
     })
 
     # + Full controls (base model)
-    rc2_full = logit(base_formula, data=df_complete, weights=df_complete['survey_weight']).fit(disp=0)
+    rc2_full = fit_logit(base_formula, df_complete, weighted=True)
     model_summary(rc2_full, "RC2-D: + Full Controls (Base Model)", len(df_complete))
     rc2_results.append({
         'spec': '+ Full controls (base)',
@@ -168,7 +168,7 @@ def robustness_checks(df_complete):
         'C(income_quintile) + left_right'
     )
 
-    rc3 = logit(rc3_formula, data=df_collapsed, weights=df_collapsed['survey_weight']).fit(disp=0)
+    rc3 = fit_logit(rc3_formula, df_collapsed, weighted=True)
     model_summary(rc3, "RC3: Collapsed Treatment (Any Info)", len(df_collapsed))
 
     rc3_coef = rc3.params.get('any_info', np.nan)
@@ -213,10 +213,12 @@ def robustness_checks(df_complete):
     print("\n" + "—"*70)
     print("Key findings:")
     print(f"  • N constant at 1,151 across RC2-A through RC2-D (demonstrates complete cases)")
-    print(f"  • Treatment effect (info arm) varies from {0.2193:.4f} (full controls)")
-    print(f"    to {rc2_results_coefs[0]:.4f} (treatment only) on complete sample")
+    print(f"  • Treatment effect (info arm) is {rc2_results_coefs[-1]:.4f} with full controls")
+    print(f"    and {rc2_results_coefs[0]:.4f} with treatment only, on the complete sample")
     print(f"  • Collapsed 'any info' effect = {rc3_coef:.4f} (p = {rc3.pvalues.get('any_info', np.nan):.3f})")
-    print(f"  • Weighted and unweighted coefficients identical on complete cases")
+    info_weighted = rc1_weighted.params.get('C(treatment)[T.info]', np.nan)
+    info_unweighted = rc1_unweighted.params.get('C(treatment)[T.info]', np.nan)
+    print(f"  • Info coefficient, full controls: weighted {info_weighted:.4f}, unweighted {info_unweighted:.4f}")
 
 
 def main():
@@ -235,11 +237,7 @@ def main():
     print("\n" + "="*70)
     print("MODEL 1: Treatment only (weighted)")
     print("="*70)
-    model1 = logit(
-        'supports_intervention ~ C(treatment)',
-        data=df,
-        weights=df['survey_weight']
-    ).fit(disp=0)
+    model1 = fit_logit('supports_intervention ~ C(treatment)', df, weighted=True)
     model_summary(model1, "Model 1: Treatment", len(df) - df['supports_intervention'].isna().sum())
 
     # MODEL 2: Treatment + FX status
@@ -247,11 +245,7 @@ def main():
     print("MODEL 2: Treatment + FX Status (weighted)")
     print("="*70)
     df_model2 = df[df['fx_status'].notna()].copy()
-    model2 = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status)',
-        data=df_model2,
-        weights=df_model2['survey_weight']
-    ).fit(disp=0)
+    model2 = fit_logit('supports_intervention ~ C(treatment) + C(fx_status)', df_model2, weighted=True)
     model_summary(model2, "Model 2: Treatment + FX Status", len(df_model2))
 
     # MODEL 3: Add demographic controls (with N prediction)
@@ -275,14 +269,10 @@ def main():
     print("\n" + "="*70)
     print("MODEL 3: Treatment + FX Status + Demographics (weighted)")
     print("="*70)
-    model3 = logit(
-        'supports_intervention ~ C(treatment) + '
+    model3 = fit_logit('supports_intervention ~ C(treatment) + '
         'C(fx_status) + '
         'age + C(female) + C(ed_level) + C(urban_rural) + '
-        'C(income_quintile) + left_right',
-        data=df_model3_candidate,
-        weights=df_model3_candidate['survey_weight']
-    ).fit(disp=0)
+        'C(income_quintile) + left_right', df_model3_candidate, weighted=True)
     model_summary(model3, "Model 3: Full Demographic Controls", len(df_model3_candidate))
 
     actual_n = len(df_model3_candidate)
@@ -296,14 +286,10 @@ def main():
     print("\n" + "="*70)
     print("MODEL 4: Treatment × FX Status Interaction (weighted)")
     print("="*70)
-    model4 = logit(
-        'supports_intervention ~ C(treatment) * '
+    model4 = fit_logit('supports_intervention ~ C(treatment) * '
         'C(fx_status) + '
         'age + C(female) + C(ed_level) + C(urban_rural) + '
-        'C(income_quintile) + left_right',
-        data=df_model3_candidate,
-        weights=df_model3_candidate['survey_weight']
-    ).fit(disp=0)
+        'C(income_quintile) + left_right', df_model3_candidate, weighted=True)
     model_summary(model4, "Model 4: Treatment × FX Status Interaction", len(df_model3_candidate))
 
     # Run robustness checks

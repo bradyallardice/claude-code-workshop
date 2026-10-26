@@ -35,11 +35,11 @@ This is the most important teaching moment in the exercise.
 | Specification | Expected N | What happened |
 |--------------|-----------|---------------|
 | Base model: treatment only | **2,036** | Full sample (8 missing outcome) |
-| Add fx_status | **2,035** | 1 additional missing |
+| Add fx_status | **2,035** | 1 additional missing (2 lack FX status; 1 of them also lacks the outcome) |
 | Add age + female + ed_level + urban_rural | **2,035** | No additional missingness |
-| Add income_quintile | ~**1,473** | 565 missing income (525 original + ~40 from missing demographics) |
-| Add left_right | ~**1,499** | 542 missing left-right (504 original + ~38 from missing demographics) |
-| Add both income_quintile and left_right | ~**1,151** | 44% of sample dropped |
+| Add income_quintile | **1,473** | 562 missing income |
+| Add left_right (without income) | **1,499** | 536 missing left-right |
+| Add both income_quintile and left_right | **1,151** | 884 dropped, 43% of the 2,035 |
 
 **If Claude Code does not mention the sample size change when you add controls, that is the teaching moment.**
 
@@ -81,7 +81,7 @@ Key pattern: the info treatment increases support for intervention; the other tr
 | (1) | Base (weighted) | 2,036 | +0.302 | 0.016 | Baseline |
 | (2) | Base (unweighted) | 2,036 | +0.290 | 0.021 | Weighting changes coefficients slightly |
 | (3) | + Controls | 2,035 | +0.324 | 0.011 | Controls don't change story, same N |
-| (4) | Full controls | 1,151 | +0.267 | 0.118 | **The trap**: N drops 44%, significance vanishes |
+| (4) | Full controls | 1,151 | +0.267 | 0.118 | **The trap**: N drops 43%, significance vanishes |
 | (5) | Pooled treatment | 2,035 | +0.218 | 0.042 | Weaker but significant with pooled arms |
 | (6) | Urban only | 1,208 | +0.326 | 0.051 | Subsample restriction, borderline |
 

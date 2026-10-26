@@ -16,8 +16,8 @@ carry the same block numbers and clock times. Student exercise text is in
 | 0:00 | — | Where we are, ritual (copy `session_3`, reopen `session_2`), check-in | 3 | 5 |
 | 0:05 | 23 | Verification extras: requirements-to-tests matrix, audit report, two more safeguards, delegate / verify / keep | 4 | 5 |
 | 0:10 | 24 | **Exercise Part 2:** reopen frame, specify and estimate, debrief | 3 | 25 |
-| 0:35 | 25 | Robustness workflow, **Exercise Part 3**, what to watch for, debrief | 4 | 25 |
-| 1:00 | 26 | LaTeX in VS Code (bridge + 6 frames), git as the undo button (12), Overleaf bridge (2) | 21 | 22 |
+| 0:35 | 25 | Robustness workflow, **LaTeX in VS Code (bridge + 6 frames, moved here from block 26)**, **Exercise Part 3**, what to watch for, debrief | 11 | 33 |
+| 1:08 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
 | 1:22 | 27 | Live demo: building a paper, the full loop | 2 | 8 |
 | 1:30 | 28 | **Exercise: results → paper**, cross-check, debrief | 3 | 25 |
 | 1:55 | 29 | When it goes wrong: four failure patterns; correct / restart / do it yourself | 2 | 6 |
@@ -43,15 +43,15 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 - Expected values and the debrief table are in `session_2/docs/instructor_answer_key.md` ("The Missing Data Trap"). Exact figures: 2,036 → 2,035 → 2,035; income alone 1,473 (562 missing); left-right alone 1,499 (536 missing); both 1,151 (884 dropped, 43%).
 - Watch for: the base model run unweighted (the intercept check catches it: logistic of the intercept should be 0.4455, not 0.4477); `income_quintile == 0` treated as missing; no sample accounting.
 
-### 25. Robustness workflow and Part 3 (25 min)
+### 25. Robustness workflow, LaTeX in VS Code, and Part 3 (33 min)
+- The "New to LaTeX?" button on the setup frame jumps to the back-matter basics and back. Use it only if someone asks.
+- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps the session total unchanged: block 25 runs 0:35–1:08 and block 26 runs 1:08–1:22.
 - Also in the Session 2 folder. The point of the exercise is N tracking across specifications. The reference table is in the answer key ("Robustness Table Reference").
-- Step 11 (commit) happens after the git frames, so participants who have not yet seen `git init` leave it for later. Say so.
+- Step 11 (commit) comes before the git frames, so participants who have not yet seen `git init` leave it for later. Say so.
 - The "What to Watch For" and "Debrief" frames close the Swiss franc exercise.
 
-### 26. LaTeX in VS Code, git, Overleaf (22 min)
-- 21 frames in 22 minutes, so about a minute each. Fast frames: the LaTeX Workshop shortcuts, the `git add` and `git commit` frames. Slow down on "Your Undo Button" and "The Cycle".
-- The "New to LaTeX?" button on the setup frame jumps to the back-matter basics and back. Use it only if someone asks.
-- **Participants whose `setup_check.tex` did not compile will lose time here.** The prework added a compile step for this reason. Pair them with a neighbor.
+### 26. Git as the undo button, Overleaf bridge (14 min)
+- 14 frames in 14 minutes. Fast frames: the `git add` and `git commit` frames. Slow down on "Your Undo Button" and "The Cycle".
 - The Overleaf bridge uses Overleaf's own git remote. No GitHub is involved, so don't mention accounts or tokens.
 - GitHub is in the back matter (block B). Don't open it unless asked.
 
@@ -74,7 +74,7 @@ Participants work in `session_3/results_to_paper/`. Everyone has the same table,
 | (5) Any | pooled "any information" | 2,035 | 0.218 (0.107) | 0.042 |
 | (6) Urban | small or big urban only | 1,208 | 0.326 (0.167) | 0.051 |
 
-History and Hungary coefficients are not significant in any column. Pseudo R² runs from 0.002 to 0.026. Columns 1, 2, 4, 5 and 6 reproduce the Session 2 answer key's reference table; column 3's control set follows the key too.
+History and Hungary coefficients are not significant in any column. Pseudo R² runs from 0.002 to 0.026. All six columns reproduce the Session 2 answer key's reference table (ed_level, urban_rural and income_quintile enter linearly, as the key's numbers require).
 
 **Where Claude Code's paragraph typically over-reads the table** (these are the debrief material):
 - "Robust across specifications": columns 4 and 6 are not significant at 5%, and column 4 loses 43% of the sample. The point estimate barely moves (0.302 → 0.267); the standard error grows (0.126 → 0.170). The loss of significance comes mostly from the sample, not from the controls.
@@ -104,8 +104,8 @@ History and Hungary coefficients are not significant in any column. Pseudo R² r
 
 ## Time Buffers
 
-- **If running behind:** cut the check-in; compress the "Command N" git frames; in block 28, have participants stop after step 3 and run the cross-check as a demo.
-- **Boundary rule (plan principle 5):** don't start an exercise that cannot finish. If Part 3 (25 min) would not fit, pull block 26 forward and run Part 3 afterward.
+- **If running behind:** cut the check-in; compress the "Command N" git frames and the LaTeX shortcut frames; in block 28, have participants stop after step 3 and run the cross-check as a demo.
+- **Boundary rule (plan principle 5):** don't start an exercise that cannot finish. If Part 3 (25 min) would not fit, teach the git frames first and run Part 3 afterward; the LaTeX frames must still precede it.
 - **If running ahead:** the back-matter blocks. LaTeX basics (A) first, then GitHub vocabulary (B) if anyone coauthors through GitHub.
 
 ## Back-matter index

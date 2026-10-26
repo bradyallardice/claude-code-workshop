@@ -327,7 +327,7 @@ Not covered:       identification, construct validity
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 25: ROBUSTNESS WORKFLOW AND EXERCISE PART 3  [0:35-1:00]
+%  BLOCK 25: ROBUSTNESS WORKFLOW, LATEX IN VS CODE, EXERCISE PART 3  [0:35-1:08]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{The Robustness Workflow}
@@ -350,70 +350,8 @@ Not covered:       identification, construct validity
 
 \end{frame}
 
-\begin{frame}{Exercise Part 3: Robustness and Output (25 min)}
-  \begin{enumerate}
-    \setcounter{enumi}{7}
-    \item \textbf{Generate robustness checks} from your base model:
-    \begin{itemize}
-      \item With and without survey weights
-      \item Different control sets (track how N changes each time!)
-      \item Collapse three treatment arms into ``any information'' vs.\ control
-      \item Restrict to complete cases so N is constant across specs
-    \end{itemize}
-
-    \vspace{0.3em}
-    \item \textbf{Format as \LaTeX.} Produce a publication-style regression table with all specifications side by side, and compile to PDF.
-    \begin{itemize}
-      \small
-      \item Output manifest test: every specification appears in the table, each with its N
-    \end{itemize}
-
-    \vspace{0.3em}
-    \item \textbf{Audit report.} Ask Claude Code for \texttt{output/audit\_report.md}, in the format from the audit-report slide.
-
-    \vspace{0.3em}
-    \item \textbf{Commit.} Save all scripts, tests, output, and the \LaTeX{} table.
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{What to Watch For During the Exercise}
-  This exercise is designed to surface moments where Claude Code makes choices for you.
-
-  \vspace{0.5em}
-  \begin{itemize}
-    \small
-    \item \textbf{Reference categories:} Did it set treatment to ``control'' or pick alphabetically?
-    \item \textbf{Missing data:} When you added controls, how many observations did you lose? Did Claude Code mention this?
-    \item \textbf{Survey weights:} Did it use them unless you told it to?
-    \item \textbf{Income = 0:} ``No income'' is coded as 0. How did Claude Code treat it?
-    \item \textbf{Tests:} Did it copy the pipeline's own output in as an expected value, or edit one to get a pass?
-  \end{itemize}
-
-  \vspace{0.8em}
-  \alert{These are the moments where your judgment matters.}\\
-  The workflow is: notice the decision, direct Claude Code explicitly, then verify the output.
-\end{frame}
-
-\begin{frame}{Debrief}
-  \textbf{Discussion questions:}
-
-  \vspace{0.5em}
-  \begin{enumerate}
-    \small
-    \item How many observations did you lose when you added controls? Did Claude Code tell you?
-    \item How many of your robustness specifications were correct on the first try?
-    \item What did you catch in the plan that you would have missed in the output?
-    \item Did any test fail? Did Claude Code fix the code, or change the test?
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \begin{block}{Key takeaway}
-    The tests, the assertions, and the plan review are not extra work --- they are the workflow. The 30 seconds it takes to read a plan or check a sample size can save hours of debugging downstream.
-  \end{block}
-\end{frame}
-
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 26: LATEX IN VS CODE, GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:00-1:22]
+%  LATEX IN VS CODE (taught before Part 3 asks for a compiled table)  [0:36-0:43]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{\LaTeX{} Tables: Bringing Results Into Your Paper}
@@ -430,7 +368,7 @@ Not covered:       identification, construct validity
   \end{itemize}
 
   \vspace{0.8em}
-  \textbf{Next:} the paper that table goes into. We bring it into VS Code, next to the code and data.
+  \textbf{First:} how to write, compile, and debug \LaTeX{} inside VS Code, so you can build and read that table. Then the paper it goes into.
 
   \vspace{0.5em}
   \begin{block}{The bigger idea}
@@ -588,6 +526,72 @@ Ctrl+Alt+V  Open PDF preview
     Your \texttt{.tex} file is no longer separate from your research. It is part of your project, subject to the same verification and version control as your code.
   \end{block}
 \end{frame}
+
+\begin{frame}{Exercise Part 3: Robustness and Output (25 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{7}
+    \item \textbf{Generate robustness checks} from your base model:
+    \begin{itemize}
+      \item With and without survey weights
+      \item Different control sets (track how N changes each time!)
+      \item Collapse three treatment arms into ``any information'' vs.\ control
+      \item Restrict to complete cases so N is constant across specs
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Format as \LaTeX.} Produce a publication-style regression table with all specifications side by side, and compile to PDF.
+    \begin{itemize}
+      \small
+      \item Output manifest test: every specification appears in the table, each with its N
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Audit report.} Ask Claude Code for \texttt{output/audit\_report.md}, in the format from the audit-report slide.
+
+    \vspace{0.3em}
+    \item \textbf{Commit.} Save all scripts, tests, output, and the \LaTeX{} table.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{What to Watch For During the Exercise}
+  This exercise is designed to surface moments where Claude Code makes choices for you.
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \small
+    \item \textbf{Reference categories:} Did it set treatment to ``control'' or pick alphabetically?
+    \item \textbf{Missing data:} When you added controls, how many observations did you lose? Did Claude Code mention this?
+    \item \textbf{Survey weights:} Did it use them unless you told it to?
+    \item \textbf{Income = 0:} ``No income'' is coded as 0. How did Claude Code treat it?
+    \item \textbf{Tests:} Did it copy the pipeline's own output in as an expected value, or edit one to get a pass?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \alert{These are the moments where your judgment matters.}\\
+  The workflow is: notice the decision, direct Claude Code explicitly, then verify the output.
+\end{frame}
+
+\begin{frame}{Debrief}
+  \textbf{Discussion questions:}
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \small
+    \item How many observations did you lose when you added controls? Did Claude Code tell you?
+    \item How many of your robustness specifications were correct on the first try?
+    \item What did you catch in the plan that you would have missed in the output?
+    \item Did any test fail? Did Claude Code fix the code, or change the test?
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{Key takeaway}
+    The tests, the assertions, and the plan review are not extra work --- they are the workflow. The 30 seconds it takes to read a plan or check a sample size can save hours of debugging downstream.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  BLOCK 26: GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:08-1:22]
+% ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Why Git Matters for Agentic Coding}
   \textbf{The problem:} Claude Code modifies your files directly.
@@ -1178,7 +1182,7 @@ We use a survey of 2,044 Polish adults...
 \end{frame}
 
 \begin{frame}[label=github]{What Are Git and GitHub?}
-  \small
+  \footnotesize
   \begin{columns}
     \column{0.7\textwidth}
     \textbf{Git} is a tool that tracks every change to every file in a project.\\
@@ -1646,8 +1650,7 @@ copy_of_internet.csv
 __pycache__/
   \end{lstlisting}
 
-  \vspace{0.15em}
-  {\small \textbf{Wildcards:} \texttt{*} matches any characters.
+    {\footnotesize \textbf{Wildcards:} \texttt{*} matches any characters.
   \begin{itemize}
     \item \texttt{*.pyc} = all \texttt{.pyc} files (anywhere in project)
     \item \texttt{data.*.csv} = \texttt{data.raw.csv}, \texttt{data.clean.csv}, etc.
@@ -1655,8 +1658,7 @@ __pycache__/
   \end{itemize}
   \textbf{Folders} must end with \texttt{/} (e.g., \texttt{output/}, \texttt{\_\_pycache\_\_/})}
 
-  \vspace{0.1em}
-  {\tiny \textbf{Path scope:} \texttt{*} = any level  \textbar\  \texttt{**} = any depth  \textbar\  \texttt{data\_merged.csv} matches anywhere  \textbar\  \texttt{data/data\_merged.csv} matches only in \texttt{data/}.}
+    {\tiny \textbf{Path scope:} \texttt{*} = any level  \textbar\  \texttt{**} = any depth  \textbar\  \texttt{data\_merged.csv} matches anywhere  \textbar\  \texttt{data/data\_merged.csv} matches only in \texttt{data/}.}
 \end{frame}
 
 \begin{frame}{So Where Does the Data Go?}

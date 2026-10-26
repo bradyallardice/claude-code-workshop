@@ -5,9 +5,21 @@ for LaTeX regression table. Produces tab_swiss_franc_logit.csv ready for renderi
 
 import pandas as pd
 import numpy as np
-from statsmodels.formula.api import logit
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
 import warnings
 warnings.filterwarnings('ignore')
+
+
+def fit_logit(formula, data, weighted):
+    """Logit via GLM. statsmodels' formula logit() silently ignores a weights= argument,
+    so weighted fits use GLM with freq_weights (point estimates equal the survey-weighted
+    MLE; standard errors treat weights as frequency counts). Adds .prsquared (McFadden)."""
+    model = smf.glm(formula, data=data, family=sm.families.Binomial(),
+                    freq_weights=data['survey_weight'] if weighted else None, missing='drop')
+    result = model.fit()
+    result.prsquared = 1 - result.deviance / result.null_deviance
+    return result
 
 
 def load_and_merge():
@@ -68,45 +80,30 @@ def main():
     print("Fitting all models...")
 
     # Model 1: Treatment only (all data)
-    m1 = logit('supports_intervention ~ C(treatment)', data=df, weights=df['survey_weight']).fit(disp=0)
+    m1 = fit_logit('supports_intervention ~ C(treatment)', df, weighted=True)
 
     # Model 2: + FX status
-    m2 = logit('supports_intervention ~ C(treatment) + C(fx_status)', data=df_model2, weights=df_model2['survey_weight']).fit(disp=0)
+    m2 = fit_logit('supports_intervention ~ C(treatment) + C(fx_status)', df_model2, weighted=True)
 
     # RC2-A: Treatment only on complete cases
-    rc2a = logit('supports_intervention ~ C(treatment)', data=df_complete, weights=df_complete['survey_weight']).fit(disp=0)
+    rc2a = fit_logit('supports_intervention ~ C(treatment)', df_complete, weighted=True)
 
     # RC2-B: + FX status on complete cases
-    rc2b = logit('supports_intervention ~ C(treatment) + C(fx_status)', data=df_complete, weights=df_complete['survey_weight']).fit(disp=0)
+    rc2b = fit_logit('supports_intervention ~ C(treatment) + C(fx_status)', df_complete, weighted=True)
 
     # RC2-C: + Basic demo on complete cases
-    rc2c = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural)',
-        data=df_complete,
-        weights=df_complete['survey_weight']
-    ).fit(disp=0)
+    rc2c = fit_logit('supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural)', df_complete, weighted=True)
 
     # RC2-D: Full controls (main model)
-    rc2d = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right',
-        data=df_complete,
-        weights=df_complete['survey_weight']
-    ).fit(disp=0)
+    rc2d = fit_logit('supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right', df_complete, weighted=True)
 
     # RC1: Unweighted
-    rc1_unw = logit(
-        'supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right',
-        data=df_complete
-    ).fit(disp=0)
+    rc1_unw = fit_logit('supports_intervention ~ C(treatment) + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right', df_complete, weighted=False)
 
     # RC3: Collapsed treatment (any info)
     df_collapsed = df_complete.copy()
     df_collapsed['any_info'] = (df_collapsed['treatment'] != 'cntrl').astype(int)
-    rc3 = logit(
-        'supports_intervention ~ any_info + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right',
-        data=df_collapsed,
-        weights=df_collapsed['survey_weight']
-    ).fit(disp=0)
+    rc3 = fit_logit('supports_intervention ~ any_info + C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural) + C(income_quintile) + left_right', df_collapsed, weighted=True)
 
     # Build CSV rows
     rows = []
