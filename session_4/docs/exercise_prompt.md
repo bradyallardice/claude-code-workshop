@@ -126,7 +126,6 @@ and compare its output with what Claude Code reported.
 ### Debrief questions
 
 1. Which category had the lowest agreement? Which scheme rule explains it?
-2. Who wrote the reference codes? What does that do to your agreement rate?
-3. Would you report these codes in a paper? If not, what is the cheapest change that would make you willing?
+2. Would you report these codes in a paper? If not, what is the cheapest change that would make you willing?
 
 ---

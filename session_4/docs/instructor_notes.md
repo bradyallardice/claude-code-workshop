@@ -62,8 +62,8 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 - "Same model, different context": say this when presenting the verifier. A fresh agent removes the builder's context, not the model's blind spots.
 
 ### 33–34. LLMs as research coders (5 + 15 min)
-- **The reference codes are Claude-generated** (Opus 5.5; see `data/climate_speeches/README.md`). Agreement will look better than it is. This is a debrief point, and the slides say so.
-- **Reference-code facts (moved here from `data/climate_speeches/README.md`, which is student-facing and must not state them).** `gold_codes.csv` was coded by Claude (Opus 5.5) from `coding_scheme.md`, passage by passage. This was a deliberate choice: the exercise demonstrates the validation *workflow*, not a validated measure. Participants' agents are also Claude, so part of their agreement is the same model agreeing with itself; in a real project the reference set must come from human coders, ideally two. The slides ("What Agreement Does and Does Not Show") already tell participants it was written by Claude, so the debrief question "Who wrote the reference codes?" is not a surprise reveal; it asks what that does to the number.
+- **The reference codes are Claude-generated** (Opus 5.5; see `data/climate_speeches/README.md`). Agreement will look better than it is; the slide "What Agreement Does and Does Not Show" says so, and the final debrief question (would you report these codes?) picks it up.
+- **Reference-code facts (moved here from `data/climate_speeches/README.md`, which is student-facing and must not state them).** `gold_codes.csv` was coded by Claude (Opus 5.5) from `coding_scheme.md`, passage by passage. This was a deliberate choice: the exercise demonstrates the validation *workflow*, not a validated measure. Participants' agents are also Claude, so part of their agreement is the same model agreeing with itself; in a real project the reference set must come from human coders, ideally two.
 - **Expected shape of results.** Reference distribution is 38 supports, 18 opposes, 5 no stance, 2 not climate; 7 passages are flagged "Hard case" in `gold_codes.csv` notes. Disagreements should concentrate there. I have not run the fan-out, so I do not know the actual agreement. Run it once beforehand to know what to expect.
 - **Party shortcut.** Checked against `gold_codes.csv` and `passages.csv`: all 38 code-1 passages are Democrat; of the 18 code-2 passages, 14 are Republican and 4 have no party (`attribution` = `unattributed`, Senate leader remarks). Participants who give agents the full row can score well without reading. The exercise tells them to pass only `passage_id` and `passage_text`; look for people who did not.
 - **Usage limits.** 63 passages over about six agents is small, but fan-out is where $20-plan participants are likeliest to hit the limit. The two-batch test is there so they see the cost first.
@@ -99,7 +99,6 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 | F. Skill extras | old S4 | Added to the plan's list so no frame is deleted. |
 | G. Prompt injection | new | Moved out of block 30. Its example frame is illustrative, not a working attack. |
 | H. Data privacy, technical | new | The settings-level version of block 30's privacy frames: the four routes, deny rules, sandbox config, canary commands, env-var scrub, hooks, untrusted repositories (9 frames). Linked from the "Ways to Limit What Claude Can See" frame. |
-| I. Capstone | old S5 | Slides rewritten for a local git repo (steps 2, 2b). **`capstone-template/README.md`, `INSTRUCTOR.md` and `ROLES.md` still describe GitHub repos and pull requests**, so the slides and the README disagree until those are rewritten. |
 
 ---
 
