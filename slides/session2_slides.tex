@@ -1229,7 +1229,7 @@ copy and show me which tests fail.
     \end{column}
     \begin{column}{0.48\textwidth}
       \begin{block}{Checker (tab 2)}
-        A fresh tab that never sees the builder's conversation or code. Writes expectations and checks from the codebook and research question only.
+        A fresh tab that never sees the builder's conversation or code. Claude drafts the expectations and checks from the codebook and research question; \textbf{you review them}.
       \end{block}
     \end{column}
   \end{columns}
@@ -1272,7 +1272,7 @@ copy and show me which tests fail.
 
 \begin{frame}[fragile]{Role Card: Checker (Tab 2)}
   \footnotesize
-  \textbf{Open a fresh tab} (\texttt{Cmd+Shift+Esc} / \texttt{Ctrl+Shift+Esc}). Never paste anything from the builder's conversation into it. Send:
+  \textbf{Open a fresh tab} (\texttt{Cmd/Ctrl+Shift+Esc}). Never paste the builder's conversation into it. Send:
 
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 You are an independent checker. Another session is merging
@@ -1292,7 +1292,7 @@ Do not open anything in scripts/, tests/, or output/.
 
   \begin{enumerate}
     \setcounter{enumi}{2}
-    \item \textbf{Read \texttt{checks/expectations.md} yourself} and correct anything wrong. The expectations are yours.
+    \item \textbf{Review \texttt{checks/expectations.md}.} Claude drafted it to save time, since you don't know this data well yet. Reviewing it is your job: correct anything wrong before any check runs.
     \item When the builder has saved its output: \textit{``Run checks/check\_merge.py and report each result.''}
     \item \textbf{Test the checks:} \textit{``Copy the merged file with one row duplicated, run the checks on the copy, and show me which fail.''}
   \end{enumerate}

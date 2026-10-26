@@ -78,7 +78,7 @@ By the queue rule, whatever doesn't fit moves to the start of Session 3.
 ### 22. Exercise Part 1, two tabs (35 min)
 - Order matters: the builder installs `CLAUDE.md` **before** the checker tab opens, so the checker also loads the protocol.
 - The checker's prompt forbids `scripts/`, `tests/` and `output/` until it is told to run its checks. Watch for participants pasting builder output into the checker; that breaks the independence.
-- Checker step 3 (participants read and correct `expectations.md`) is where the human stays in charge of the expectations. Don't let them skip it. A common error to catch here: treating `income_quintile == 0` as missing.
+- Claude drafts the expectations **by design**: participants don't know this data well, and it saves time. Say so when you introduce the checker card. Their job is checker step 3, reviewing and correcting `expectations.md`, and that is where they stay in charge. Don't let them skip it. A common error to catch here: treating `income_quintile == 0` as missing.
 - Expected values and the disagreements worth surfacing are in the answer key ("Checker tab").
 - **Usage risk:** two tabs double token use. On the $20 plan this is one of the two points in the course where participants are most likely to hit the 5-hour limit. If someone hits it, pair them with a neighbor for the rest of the exercise.
 - Debrief (~8 min): start with "where did the tabs disagree?", then "which decisions had to be written into a file?" Then reveal the expected numbers (the second debrief frame has a `\pause`).

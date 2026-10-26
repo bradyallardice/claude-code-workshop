@@ -20,7 +20,7 @@ The survey randomly assigned respondents to one of four conditions before asking
 You run two Claude Code tabs in your `session_2` folder. Each has one role.
 
 - **Builder (tab 1)** installs the verification protocol, then merges and explores in plan mode. You direct it and make the design decisions.
-- **Checker (tab 2)** is a fresh tab that never sees the builder's conversation or code. It writes expectations and checks from the codebook and the research question only.
+- **Checker (tab 2)** is a fresh tab that never sees the builder's conversation or code. Claude drafts the expectations and checks from the codebook and the research question; **you review them**.
 
 The tabs share nothing except files. Anything one tab needs to know, put in a file.
 
@@ -63,7 +63,7 @@ Do not open anything in scripts/, tests/, or output/.
    Do not run it yet.
 ```
 
-3. **Read `checks/expectations.md` yourself** and correct anything wrong. The expectations are yours, not the checker's.
+3. **Review `checks/expectations.md`.** Claude drafted it to save time, since you don't know this data well yet. Reviewing it is your job: correct anything wrong before any check runs.
 4. When the builder has saved its output, tell the checker: "Run checks/check_merge.py and report each result."
 5. **Test the checks:** "Copy the merged file with one row duplicated, run the checks on the copy, and show me which fail." Never edit the files in `data/`.
 
