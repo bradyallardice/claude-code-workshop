@@ -824,22 +824,24 @@ peg was removed in data/PLN_CHF_EUR_FXdata.csv.
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Exercise: Build the County Panel From Scratch}
-  In Session 1 you explained and edited a pre-built script. Now \textbf{you} build it.
+  \small
+  Now \textbf{you} build it, in your \texttt{session\_1} copy: pairs, plan mode.
+
+  \vspace{0.1em}
+  {\footnotesize \alert{Where things are} (in \texttt{session\_1/data/}):\\
+  \textbf{Data:} \texttt{election/countypres\_sample.csv}; \texttt{ipums/census\_YYYY\_sample.csv.gz} (one per year)\\
+  \textbf{Codebooks:} \texttt{election/County Presidential Returns 2000-2024.md}; \texttt{ipums/Codebooks/census\_YYYY\_raw.xml}}
 
   \vspace{0.3em}
-  \textbf{Same data, fresh start,} in your \texttt{session\_1} copy. Work in pairs using plan mode.
-
-  \vspace{0.5em}
   \begin{enumerate}
     \item Write a short \texttt{CLAUDE.md} for the folder {\footnotesize (template: \texttt{references/CLAUDE\_template.md})}
     \item Switch Claude Code to \textbf{plan mode}
-    \item Ask Claude Code to build a county-year panel that merges election returns with IPUMS census demographics
+    \item Ask it to build a county-year panel that merges election returns with IPUMS census demographics
     \item \textbf{Before approving the plan}, you will need to:
       \begin{itemize}
-        \item Read the codebooks to understand variable codings\\
-          {\small (What does \texttt{EDUC $\geq$ 10} mean? What does \texttt{RACE == 1} code?)}
-        \item Decide how to define key variables\\
-          {\small (Two-party vote share? College = bachelor's or higher?)}
+        \footnotesize
+        \item Read the codebooks to understand variable codings (What does \texttt{EDUC $\geq$ 10} mean? What does \texttt{RACE == 1} code?)
+        \item Decide how to define key variables (Two-party vote share? College = bachelor's or higher?)
         \item Specify the merge: which keys, which join type, expected row counts
       \end{itemize}
     \item Review the plan, reject or revise as needed, then approve

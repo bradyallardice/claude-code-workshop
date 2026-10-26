@@ -113,6 +113,7 @@ The prompt is on the slide. It uses the exchange-rate file, not the survey (see 
 ### 17. Exercise: county panel in plan mode (25 min)
 - In the **`my_workspace/session_1`** copy, opened in a **new VS Code window** (File → New Window, then Open Folder). The data and codebooks are there from Session 1; the frame names the folder but not the new window.
 - Pairs, both at one computer. Steps: short CLAUDE.md (~3 min; template in `references/CLAUDE_template.md` of the course repo), plan mode, prompt, read codebooks and evaluate the plan (~7 min), approve/revise and run (~7 min), check output.
+- The slide says where things are, all under `session_1/data/`: `election/countypres_sample.csv` with its codebook `election/County Presidential Returns 2000-2024.md`, and `ipums/census_YYYY_sample.csv.gz` (2012, 2016, 2020, 2024) with the XML codebooks in `ipums/Codebooks/census_YYYY_raw.xml`. The XML codebooks are long: tell pairs to have Claude pull the codes they need (`EDUC`, `RACE`, `HISPAN`) rather than read them top to bottom.
 - Keep "Evaluating the Plan" on screen as a checklist.
 - If time is short, have pairs stop after the plan review. The learning is in the plan review, not the execution.
 - Circulate and look for: not reading codebooks, accepting default variable definitions, not checking the join type.
