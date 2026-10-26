@@ -56,11 +56,11 @@ You do not need a GitHub account. You work in a local git repository: branches, 
 
 ### 2a. Copy the template and put it under git
 
-Run these yourself in a terminal (not through Claude Code: the main-branch hook blocks Claude from committing the starter files on `main`). Start from the folder that contains `session_4/` (the course repo, or the workspace where you copied `session_4/`):
+Run these yourself in a terminal (not through Claude Code: the main-branch hook blocks Claude from committing the starter files on `main`). Replace `[my_workspace]` with wherever you keep your local course files. If you are inside your copied `session_4/` folder, which is where the start-of-session ritual leaves you:
 
 ```bash
-cp -r session_4/capstone-template ~/my_workspace/capstone
-cd ~/my_workspace/capstone
+cp -r capstone-template [my_workspace]/capstone
+cd [my_workspace]/capstone
 git init -b main
 git add .
 git commit -m "Add capstone starter files"
