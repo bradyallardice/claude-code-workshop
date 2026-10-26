@@ -213,8 +213,8 @@ cd [my_workspace]/session_4 && code .
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Spawn a subagent to read the slides for sessions 1-4
-and return a deduplicated list of every unique terminal
+Spawn a subagent to read the slide PDFs in slides/
+for sessions 1-4 and return a deduplicated list of every unique terminal
 command I'll need across the course.
 
 Output as: command | what it does | first session
@@ -224,7 +224,7 @@ it appears in.
   \vspace{0.2em}
   \textbf{What Claude does:}
   \begin{itemize}\small
-    \item Spawns one general-purpose subagent and hands it the four \texttt{.tex} files
+    \item Spawns one general-purpose subagent and hands it the four slide PDFs in \texttt{slides/}
     \item The subagent does the reading, extraction, and dedup in its own context
     \item You get back the table; the slide text never lands in your main conversation
   \end{itemize}
@@ -269,7 +269,7 @@ it appears in.
   \alert{\small Plain text --- metadata sits between two \texttt{-{}-{}-} lines at the top of the file; the system prompt is everything below.}
 \end{frame}
 
-\begin{frame}[fragile]{Building a Specialized Agent}
+\begin{frame}[fragile,shrink=6]{Building a Specialized Agent}
   \textbf{Worked example: turn ``audit my regression script'' into a reusable role.}
 
   \vspace{0.4em}
@@ -283,13 +283,13 @@ it appears in.
   \end{enumerate}
 
   \vspace{0.3em}
-  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/spec-critic.md}.
+  \textbf{Save as} \texttt{\textasciitilde/.claude/agents/spec-critic.md}. (The capstone template, later today, ships its own project-level \texttt{.claude/agents/spec-critic.md}: the same idea, already written.)
 
   \vspace{0.3em}
   \textbf{Now in any session:}
   \begin{itemize}\small
     \item Claude auto-spawns it when a task matches the \texttt{description}
-    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{solution\_estimate.py}''}
+    \item Or invoke explicitly: \emph{``use \texttt{spec-critic} on \texttt{<your regression script>}''}, e.g.\ the estimation script you wrote in Session 2
     \item Role is enforced --- if it suggests a fix, it broke its own contract
   \end{itemize}
 
@@ -362,7 +362,7 @@ it appears in.
   \vspace{0.3em}
   \textbf{Your prompt to Claude:}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-Run this pipeline on solution_estimate.py:
+Run this pipeline on <your regression script>:
   1. Use spec-critic to list every silent issue.
   2. Spawn a subagent to draft minimal-diff fixes
      for each issue.
@@ -449,22 +449,17 @@ Return: original issues | proposed fixes | residual issues.
 
   \vspace{0.4em}
   \textbf{Add to \texttt{.claude/settings.json}:}
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-{
-  "hooks": {
-    "PreToolUse": [{
-      "matcher": "Bash",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"$(date '+%F %T') $CLAUDE_TOOL_INPUT\" >> ~/research_log.txt"
-      }]
-    }]
-  }
-}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+{ "hooks": { "PreToolUse": [ { "matcher": "Bash",
+    "hooks": [ { "type": "command",
+      "command": "echo \"$(date '+%F %T')  $(jq -r '.tool_input.command')\" >> ~/research_log.txt" } ] } ] } }
   \end{lstlisting}
 
   \vspace{0.3em}
-  \textbf{What happens:} Before every \texttt{Bash} call, the harness runs the command above and appends a timestamped line to your research log. Claude can't bypass it --- the harness, not the model, runs hooks.
+  \textbf{What happens:} Before every \texttt{Bash} call, the harness hands the hook a JSON description of the call, the hook pulls out the command with \texttt{jq}, and appends a timestamped line to your research log. Claude can't bypass it --- the harness, not the model, runs hooks.
+
+  \vspace{0.3em}
+  {\small Needs \texttt{jq} installed. It records the \emph{command}, not what the command printed or changed.}
 \end{frame}
 
 \begin{frame}[fragile]{Installing a Pre-Built Hook: \texttt{claude-ignore}}
@@ -490,7 +485,7 @@ cd [my_workspace]/my_project && claude-ignore init
   \texttt{init} creates a \texttt{.claudeignore} and wires the hook into \texttt{.claude/settings.json}.
 
   \vspace{0.2em}
-  \alert{\small Source: \texttt{github.com/li-zhixin/claude-ignore}. Requires Node.js (npm).}
+  \alert{\small Source: \texttt{github.com/li-zhixin/claude-ignore}. Requires Node.js: if \texttt{npm} is not found, install Node first. Try it in a throwaway project folder.}
 \end{frame}
 
 \begin{frame}{Hook, Skill, or Agent?}
@@ -524,7 +519,7 @@ cd [my_workspace]/my_project && claude-ignore init
   in a team of two.}
 
   \vspace{0.5em}
-  {\small\textbf{All collaboration happens in GitHub:} branches, pull requests, review, and merge.}
+  {\small\textbf{Work in a local git repository:} branches, merges, and review by diff. No GitHub account needed.}
 
   \vspace{0.5em}
   {\large Steps: read the assigned paper,\\[0.25em]
@@ -545,9 +540,9 @@ cd [my_workspace]/my_project && claude-ignore init
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.49\textwidth}
       \begin{itemize}\scriptsize
-        \item \textbf{Step 1: Team repo.} Split into pairs, copy the template, use PRs.
-        \item \textbf{Step 2: Zotero.} Import the library; keep Claude out of local BibTeX.
-        \item \textbf{Step 3: Orient yourself.} Read the article, notes, and codebook.
+        \item \textbf{Step 1: Orient yourself.} Read the article, notes, and codebook.
+        \item \textbf{Step 2: Team repo.} Pair up, copy the template into a local git repo, use branches.
+        \item \textbf{Step 3: Zotero.} Import the library; keep Claude out of local BibTeX.
         \item \textbf{Step 4: Literature review.} Search Zotero, draft, verify claims.
         \item \textbf{Step 5: Validate data.} Check structure before analysis.
       \end{itemize}
@@ -573,7 +568,7 @@ cd [my_workspace]/my_project && claude-ignore init
     \textbf{Course infrastructure}
     \begin{itemize}\small
       \item A template repo with data, starter scripts, paper skeleton, and README
-      \item The paper, instructor notes, \texttt{zotero/capstone\_library.bib}, and attached PDFs
+      \item The paper, and a Zotero library (\texttt{capstone\_library.rdf}) with synthesis notes and PDFs attached
       \item Hooks that protect \texttt{reference\_code/}, \texttt{main}, and ignored files
       \item General skills: data validation, robustness, tables, references, prose review
       \item Reviewer subagents: code critic, results trace, PR referee, note reviewer
@@ -582,13 +577,13 @@ cd [my_workspace]/my_project && claude-ignore init
     \column{0.48\textwidth}
     \textbf{Your work}
     \begin{itemize}\small
-      \item Read the paper and instructor notes
+      \item Read the paper and the synthesis notes
       \item Write the literature review from the Zotero library
       \item Write the replication instruction yourself
       \item Decide what Claude may infer and what you must specify
       \item Read the code and check the output
       \item Interpret the extension
-      \item Turn it into a 2--3 page research note on GitHub
+      \item Turn it into a 2--3 page research note in your repo
       \item Explain which AI workflow pieces would transfer to your own work
     \end{itemize}
   \end{columns}
@@ -597,7 +592,7 @@ cd [my_workspace]/my_project && claude-ignore init
 \end{frame}
 
 \begin{frame}{Step 1: Orient Yourself with the Paper}
-  \textbf{Start with the assigned paper and my notes.}
+  \textbf{Start with the assigned paper and the synthesis notes.}
 
   \vspace{0.3em}
   {\small
@@ -607,7 +602,7 @@ cd [my_workspace]/my_project && claude-ignore init
   }
 
   \vspace{0.4em}
-  Use the paper, the Zotero library, and the provided synthesis notes. Your first task is to map:
+  Use the paper, the Zotero library, and the synthesis notes attached to its papers (you import them in Step 3). Your first task is to map:
   \begin{itemize}\small
     \item What is the paper's research question?
     \item What is the paper's core contribution?
@@ -621,118 +616,65 @@ cd [my_workspace]/my_project && claude-ignore init
   \alert{\small Goal: know what the figure and extension are supposed to teach before you ask Claude to write code.}
 \end{frame}
 
-\begin{frame}{Step 2: Start in the Capstone Folder}
-  \textbf{Everything you need is already in this course repo.}
-
-  \vspace{0.6em}
-  First:
-  \begin{enumerate}\small
-    \item Split into \textbf{two-person teams}.
-    \item Open the course repo on your machine.
-    \item Go to \texttt{capstone-template/}.
-    \item Read \texttt{README.md}.
-    \item Decide who will be the \textbf{repo owner}.
-  \end{enumerate}
-
-  \vspace{0.6em}
-  The repo owner's first job is to create a clean team repo on \texttt{github.com}.
-
-  \vspace{0.6em}
-\end{frame}
-
-\begin{frame}[fragile]{Step 2a: Create an Empty GitHub Repo}
-  \textbf{The owner creates the team repo on \texttt{github.com}.}
-
-  \vspace{0.4em}
-  In GitHub:
-  \begin{enumerate}\small
-    \item Click \textbf{New repository}.
-    \item Name it \texttt{capstone-<lastname>-<lastname>}.
-    \item Leave it empty: no README, no \texttt{.gitignore}, no license.
-    \item Click \textbf{Create repository}.
-  \end{enumerate}
-
-  \vspace{0.5em}
-  Then clone that empty repo somewhere outside the course repo:
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-cd ~/Desktop
-git clone https://github.com/<owner>/<team-repo>.git
-cd <team-repo>
-  \end{lstlisting}
+\begin{frame}[fragile]{Step 2: Make a Local Git Repository}
+  \textbf{Copy the template into a new folder and put it under git. No GitHub account is needed.}
 
   \vspace{0.3em}
-  \alert{\small Git may warn that you cloned an empty repo. That is expected.}
-\end{frame}
-
-\begin{frame}[fragile,shrink=8]{Step 2b: Copy in the Capstone Files}
-  \textbf{Copy \texttt{capstone-template/} into the empty team repo.}
-
-  \vspace{0.4em}
-  From inside the empty team repo:
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-rsync -av --exclude='.git' \
-  /path/to/AIAgentsCourse/capstone-template/ ./
-
-ls
-ls -a
-  \end{lstlisting}
+  {\small In a terminal, from \texttt{[my\_workspace]/session\_4} (where the ritual left you). Run these yourself, not through Claude Code: the main-branch hook blocks Claude from committing the starter files.}
 
   \vspace{0.3em}
-  You should see \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}.
-
-  \vspace{0.5em}
-  Commit and push:
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-git status
+cp -r capstone-template [my_workspace]/capstone
+cd [my_workspace]/capstone
+git init -b main
 git add .
 git commit -m "Add capstone starter files"
-git push -u origin main
   \end{lstlisting}
 
   \vspace{0.3em}
-  Then the owner adds their partner as a collaborator. The partner clones the new team repo.
+  \textbf{Check:} \texttt{ls -a} shows \texttt{README.md}, \texttt{CLAUDE.md}, \texttt{.claude/}, \texttt{starter/}, \texttt{paper/}, \texttt{data/}, and \texttt{zotero/}. \texttt{git log -{}-oneline} shows one commit.
 
   \vspace{0.3em}
-  \alert{\small \texttt{capstone-template/} is the source. Your team repo is the workspace. Your team repo's \texttt{main} is the final submission.}
+  {\small If \texttt{git init -b main} is rejected (git older than 2.28): \texttt{git init}, then \texttt{git symbolic-ref HEAD refs/heads/main}, before the first commit. Open the folder with \texttt{code .} and run everything from here.}
+
+  \vspace{0.3em}
+  \alert{\small \texttt{session\_4/capstone-template/} is the source; your copy is the workspace. Do not edit the template.}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2c: Branch and Review}
-  \textbf{Inside the team repo, work the same branch + PR loop from Session 4.}
+\begin{frame}[fragile]{Step 2b: Branch and Review}
+  \textbf{Working alone: one branch per lane. Working as a pair: each partner takes a lane and reviews the other's.}
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-# Partner A
-git checkout -b lit/<name>
-
-# Partner B
-git checkout -b analysis/<name>
+git switch -c lit/<name>        # paper + literature lane
+git switch -c analysis/<name>   # data + analysis lane
   \end{lstlisting}
 
-  \vspace{0.4em}
-  \textbf{Assign two ownership lanes before touching files:}
-  \begin{itemize}\small
-    \item \textbf{Partner A: paper + literature lane} --- paper notes, Zotero search, literature review draft, claim checking
-    \item \textbf{Partner B: data + analysis lane} --- data validation, Figure 1 script, extension script, output checks
-    \item \textbf{Both: reciprocal review} --- each person reviews the other's PR before merging into the team branch
-  \end{itemize}
+  \vspace{0.3em}
+  \textbf{Fill in \texttt{ROLES.md} first.} Then review before merging, from the branch you are merging:
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git diff main..HEAD             # read every changed line
+> Use the pr-referee subagent on this branch's diff
+git switch main && git merge lit/<name>
+  \end{lstlisting}
 
-  \vspace{0.4em}
-  \alert{\small Open PRs into your team repo's \texttt{main}. Your partner reviews before merge. If GitHub allows it, turn on branch protection: require one approval.}
+  \vspace{0.3em}
+  {\small For a pair on one machine, take turns; for two machines, exchange the repo folder or use any shared remote you already have (the README has an optional GitHub variant). \textbf{Always} read the diff before the merge. Commit to a branch, never directly to \texttt{main}.}
 \end{frame}
 
-\begin{frame}{Step 3: Zotero}
+\begin{frame}[shrink=6]{Step 3: Zotero}
   \textbf{The literature review uses a prebuilt Zotero library.}
 
   \vspace{0.4em}
-  The seed file is \texttt{zotero/capstone\_library.bib}. Its attached PDFs ship in \texttt{zotero/pdfs/}.
+  Import \texttt{zotero/capstone\_library/capstone\_library.rdf}. It carries the 11 papers, their PDFs, and the synthesis notes attached to each paper.
 
   \vspace{0.5em}
   The workflow:
   \begin{enumerate}\small
-    \item Import \texttt{zotero/capstone\_library.bib} into Zotero.
-    \item Confirm Zotero imported the PDF attachments and the MCP can find the papers.
-    \item Leave the seed file alone; it is blocked by \texttt{.claudeignore}.
-    \item Ask Claude to search Zotero, not to mine a local \texttt{.bib} file.
+    \item Zotero: \textbf{File $\rightarrow$ Import\ldots $\rightarrow$ A file}, choose the \texttt{.rdf}. Tick ``Place imported collections and items into new collection'' and ``Copy files to the Zotero storage folder''.
+    \item Keep the \texttt{files/} folder \emph{next to} the \texttt{.rdf} while importing, or the PDFs do not come in.
+    \item Confirm the notes and PDFs imported and the MCP can find the papers.
+    \item Ask Claude to search Zotero, not to read local library files.
   \end{enumerate}
 
   \vspace{0.6em}
@@ -741,7 +683,7 @@ git checkout -b analysis/<name>
   \end{block}
 
   \vspace{0.3em}
-  \alert{\small The PDFs are for students to read. The BibTeX seed is for Zotero import; \texttt{zotero/*.bib} is blocked by \texttt{.claudeignore} and the read guard.}
+  \alert{\small \texttt{zotero/capstone\_library.bib} is a citation-only copy: no notes, no PDFs. Do not import it as well. Both it and the \texttt{.rdf} are blocked by \texttt{.claudeignore} and the read guard.}
 \end{frame}
 
 \begin{frame}{Step 4: Write the Literature Review}
@@ -770,7 +712,7 @@ git checkout -b analysis/<name>
   \textbf{Before replication or extension code, audit the analysis dataset.}
 
   \vspace{0.4em}
-  Run this from the team repo root:
+  Run this from the capstone folder (the repo root):
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 use spec-validator on data/clean_AJPS.csv
   \end{lstlisting}

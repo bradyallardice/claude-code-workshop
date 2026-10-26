@@ -1,12 +1,21 @@
 # Capstone: Replication + Extension of Magistro et al. 2026
 
-You will work in a two-person team to read a published paper, use a provided Zotero library to write a short literature review, replicate Figure 1, run one small extension, and write a 2-3 page research note using Claude Code and GitHub.
+You will work in a two-person team (or alone, if you are working through it by yourself) to read a published paper, use a provided Zotero library to write a short literature review, replicate Figure 1, run one small extension, and write a 2-3 page research note using Claude Code and git.
 
 The goal is not to have Claude finish a template for you. The goal is to practice directing AI work, checking it, and deciding what should be a one-off prompt, project context, skill, subagent, or hook.
 
 **Time budget:** about 2-3 hours.
 
+The steps below use the same numbers as the capstone slides (Step 0 to Step 9).
+
 ---
+
+## Step 0 - What is provided
+
+- A template with data, starter scripts, a paper skeleton, and this README.
+- The assigned paper, a Zotero library with synthesis notes attached to each paper, and the PDFs.
+- Hooks that protect `reference_code/`, `main`, and ignored files.
+- General skills (data validation, robustness, tables, references, prose review) and reviewer subagents (code critic, results trace, PR referee, note reviewer).
 
 ## Assigned paper
 
@@ -14,139 +23,21 @@ Magistro, Beatrice, Sophie Borwein, R. Michael Alvarez, Bart Bonikowski, and Pet
 
 The paper studies whether people evaluate similar economic shocks differently when the cause is framed as AI automation versus offshoring. It uses a conjoint experiment with respondents in the United States and Canada.
 
-Start here:
+Where things are:
 
 - Assigned paper PDF: `zotero/pdfs/magistro_et_al_2026_ai_globalization.pdf`
-- Instructor synthesis notes: `zotero/synthesis.md`
-- Zotero import seed: `zotero/capstone_library.bib`
+- Variable codebook: `data/Codebook_AJPS.pdf`
+- Zotero library to import (with the synthesis notes and PDFs attached): `zotero/capstone_library/capstone_library.rdf`
 - Supporting literature PDFs: `zotero/pdfs/`
+- Citation-only BibTeX copy of the same references: `zotero/capstone_library.bib` (no notes; you do not need it if you import the `.rdf`)
 
-The BibTeX seed is included so you can import the collection into Zotero. Claude should query Zotero through the MCP instead of reading the local `.bib` file directly; `.claudeignore` blocks `zotero/*.bib` for that reason.
-
----
-
-## Team repo setup
-
-Each two-person team creates its own GitHub repo on `github.com`. Your team repo is the workspace. Your team repo's `main` branch is the final submission.
-
-Start by opening this folder and reading this README:
-
-From your copied Session 4 folder:
-
-```bash
-cd capstone-template
-code README.md
-```
-
-Or, from the course repo root:
-
-```bash
-cd session_4/capstone-template
-code README.md
-```
-
-Then set up a clean team repo.
-
-### 1. Pick a repo owner
-
-One partner is the repo owner. The owner creates the team repo on `github.com`:
-
-1. Sign in to `github.com`.
-2. Click **New repository**.
-3. Choose the owner's account as the repository owner.
-4. Name the repo, for example:
-
-```text
-capstone-garcia-chen
-```
-
-5. Choose the visibility your instructor asks for.
-6. Do not initialize it with a README, `.gitignore`, or license.
-7. Click **Create repository**.
-8. Copy the HTTPS URL GitHub shows for the empty repo.
-
-### 2. Owner clones the empty repo
-
-Clone the empty repo somewhere outside the course repo, for example on your Desktop:
-
-```bash
-cd ~/Desktop
-git clone https://github.com/<owner>/<team-repo>.git
-cd <team-repo>
-```
-
-Git may warn that you cloned an empty repository. That is expected.
-
-### 3. Owner copies the capstone files into the team repo
-
-From inside the empty team repo, copy the contents of the course repo's `session_4/capstone-template/` folder:
-
-```bash
-rsync -av --exclude='.git' /path/to/course-repo/session_4/capstone-template/ ./
-```
-
-Replace `/path/to/course-repo` with the location of your course repo or copied Session 4 folder. The trailing slash after `session_4/capstone-template/` matters: it copies the contents of the folder, including hidden files like `.claude/` and `.claudeignore`.
-
-Check that the files are in the right place:
-
-```bash
-ls
-ls -a
-```
-
-You should see files like `README.md`, `CLAUDE.md`, `.claude/`, `starter/`, `paper/`, `data/`, and `zotero/`.
-
-### 4. Owner commits and pushes the starter files
-
-```bash
-git status
-git add .
-git commit -m "Add capstone starter files"
-git push -u origin main
-```
-
-### 5. Owner adds partner
-
-On GitHub:
-
-```text
-Settings -> Collaborators -> Add people
-```
-
-The partner accepts the invitation and clones the new team repo:
-
-```bash
-git clone https://github.com/<owner>/<team-repo>.git
-cd <team-repo>
-code .
-```
-
-### 6. Fill in roles
-
-Edit `ROLES.md` before branching. Use two ownership lanes:
-
-- **Paper + literature lane:** paper orientation, Zotero search, literature review draft, citation checking.
-- **Data + analysis lane:** data validation, Figure 1 replication, extension script, output checking.
-
-Both partners review each other's pull requests before merging.
-
-### 7. Create branches
-
-```bash
-# Partner A
-git checkout -b lit/<name>
-
-# Partner B
-git checkout -b analysis/<name>
-```
-
-Open pull requests into your team repo's `main`. If GitHub allows it, protect `main` so it requires one approval and does not allow self-approval.
+The synthesis notes are the instructor's notes on each paper. They live **inside the Zotero library**, not as a separate file in this folder. You read them through Zotero (Step 3), and Claude reads them by querying Zotero through the MCP. The local `.rdf` and `.bib` files are blocked by `.claudeignore` so that Claude goes through Zotero instead of reading them directly.
 
 ---
 
-## Orient yourself with the paper
+## Step 1 - Orient yourself with the paper
 
-Before asking Claude to write analysis code, use the assigned paper, instructor notes, and Zotero library to answer:
+Before asking Claude to write analysis code, use the assigned paper, the synthesis notes, and the Zotero library to answer:
 
 - What is the paper's research question?
 - What is the core contribution?
@@ -155,34 +46,119 @@ Before asking Claude to write analysis code, use the assigned paper, instructor 
 - Why does the AI vs. offshoring comparison matter?
 - What literature does the paper build on?
 
-Your first Claude task should usually be search/synthesis, not code generation.
+Your first Claude task should usually be search/synthesis, not code generation. Open the most important PDFs and notes yourself, and check that every citation you use actually supports the sentence attached to it.
 
-A useful prompt:
+---
 
-```text
-Search the Zotero library for papers most relevant to this article's research question.
-Return a table with citation key, mechanism, empirical setting, and how it connects
-to Magistro et al. 2026. Do not write prose yet.
+## Step 2 - Make a local git repository
+
+You do not need a GitHub account. You work in a local git repository: branches, merges, and review by diff.
+
+### 2a. Copy the template and put it under git
+
+Run these yourself in a terminal (not through Claude Code: the main-branch hook blocks Claude from committing the starter files on `main`). Replace `[my_workspace]` with wherever you keep your local course files. If you are inside your copied `session_4/` folder, which is where the start-of-session ritual leaves you:
+
+```bash
+cp -r capstone-template [my_workspace]/capstone
+cd [my_workspace]/capstone
+git init -b main
+git add .
+git commit -m "Add capstone starter files"
 ```
 
-Then open the most important PDFs and instructor notes yourself. Check that every citation you use actually supports the sentence attached to it.
+(If you are in the course repo root instead, the first line is `cp -r session_4/capstone-template [my_workspace]/capstone`.) `session_4/capstone-template/` is the source; your copy is the workspace. Do not edit the template.
+
+If `git init -b main` is rejected (git older than 2.28), run `git init` and then `git symbolic-ref HEAD refs/heads/main` before the first commit. The slides, hooks, and commands below all assume the branch is called `main`.
+
+Check:
+
+```bash
+ls -a
+git log --oneline
+```
+
+You should see `README.md`, `CLAUDE.md`, `.claude/`, `starter/`, `paper/`, `data/`, and `zotero/`, and exactly one commit. Open the folder in VS Code with `code .` and run every script from this folder (the repo root).
+
+### 2b. Fill in roles and branch
+
+Edit `ROLES.md` before branching. Use two ownership lanes:
+
+- **Paper + literature lane:** paper orientation, Zotero search, literature review draft, citation checking.
+- **Data + analysis lane:** data validation, Figure 1 replication, extension script, output checking.
+
+Then create one branch per lane:
+
+```bash
+git switch -c lit/<name>        # paper + literature lane
+git switch -c analysis/<name>   # data + analysis lane
+```
+
+Working alone: do both lanes, one branch each. Working as a pair: each partner takes a lane and reviews the other's. Never commit directly to `main` after the setup commit; the main-branch hook will stop Claude if it tries.
+
+### 2c. Review before merging
+
+From the branch you are about to merge:
+
+```bash
+git diff main..HEAD             # read every changed line
+```
+
+Then ask Claude: `use the pr-referee subagent on this branch's diff`. When you are satisfied, merge it yourself:
+
+```bash
+git switch main
+git merge lit/<name>
+```
+
+A pair on one machine takes turns at the keyboard. A pair on two machines can exchange the repo folder, or use any shared remote you already have (see the optional GitHub variant below).
+
+### Optional: share the repo through GitHub
+
+Skip this unless your pair is on two machines and wants a shared remote. One partner (the owner):
+
+1. Creates an **empty** repo on `github.com` (no README, `.gitignore`, or license), e.g. `capstone-garcia-chen`.
+2. Adds it as a remote and pushes `main`:
+
+   ```bash
+   git remote add origin https://github.com/<owner>/<team-repo>.git
+   git push -u origin main
+   ```
+
+3. Adds the partner under Settings -> Collaborators. The partner clones the repo.
+
+Branches are then pushed with `git push -u origin <branch>`, and you can open a pull request into `main` instead of merging locally. The review rule is the same: the other partner reads the diff before anything merges.
 
 ---
 
-## Zotero workflow
+## Step 3 - Zotero
 
-1. Import `zotero/capstone_library.bib` into Zotero.
-2. Confirm the PDF attachments import from `zotero/pdfs/`.
-3. Confirm the Zotero MCP can find the papers.
-4. Ask Claude to search Zotero, not to mine the local `.bib` file.
+1. In Zotero: **File -> Import... -> A file (BibTeX, RIS, Zotero RDF, etc.)**, choose `zotero/capstone_library/capstone_library.rdf`.
+2. Check **"Place imported collections and items into new collection"** and **"Copy files to the Zotero storage folder"**.
+3. Keep the `files/` folder **next to** the `.rdf` while importing. If it is moved, Zotero imports the metadata but not the PDFs or the notes' attachments.
+4. Confirm that the 11 items and their PDFs imported, that each paper has a synthesis note, and that the Zotero MCP can find the papers.
+5. Ask Claude to search Zotero, not to mine a local file.
 
-The local `.bib` file is blocked by `.claudeignore`. The PDFs are intentionally included for student reading.
+Do not import `zotero/capstone_library.bib` as well: it holds the same references without notes or attachments and would create duplicates. It is only a plain-text copy of the citations.
 
 ---
 
-## Analysis workflow
+## Step 4 - Write the literature review
 
-### Step 1 - Validate the data
+The synthesis notes are already attached to each paper in your Zotero library. A useful first prompt:
+
+```text
+Read the synthesis notes attached to each paper in the Zotero library.
+Across all notes, identify the three or four recurring mechanisms that
+connect automation and trade shocks to political preferences. Then draft
+2-3 paragraphs that position the capstone paper relative to those
+mechanisms. Every sentence must be traceable to a specific note.
+```
+
+Then check that every citation supports the sentence attached to it, add connections the model missed, and cut anything that does not directly motivate the capstone's design.
+
+---
+
+## Step 5 - Validate the data
 
 Open `starter/replicate_fig1.R`, `starter/replicate_fig1.py`, or `starter/replicate_fig1.do`. Before running analysis code:
 
@@ -192,7 +168,9 @@ use spec-validator on data/clean_AJPS.csv
 
 Review any warnings. Decide whether they are real problems or expected features of the data.
 
-### Step 2 - Replicate Figure 1
+---
+
+## Step 6 - Replicate Figure 1
 
 Fill in the replication script. The goal is a marginal means plot by treatment condition (AI vs. Offshoring) that visually matches Figure 1 of the paper.
 
@@ -207,9 +185,11 @@ Before asking Claude to write code, write the instruction yourself. It should sp
 
 Ask Claude for a plan first. If the plan changes the sample, skips verification, or invents a shortcut, reject it.
 
-When done: commit, push, open a PR into `main`. Your partner reviews and merges.
+When done: commit on your branch, then review and merge as in Step 2c.
 
-### Step 3 - Run the extension
+---
+
+## Step 7 - Run the extension and write the note
 
 Fill in `starter/extend_TEMPLATE.R`, `starter/extend_TEMPLATE.py`, or `starter/extend_TEMPLATE.do`.
 
@@ -221,19 +201,17 @@ Your extension is one of:
 | B | **Robustness battery** - Vary attention-check filter, survey weights, estimator, and task fixed effects. Produce a robustness table or specification curve. |
 | C | **Prior trade attitudes as moderator** - Split by pre-treatment support for trade liberalization and test whether free-trade supporters respond differently to the AI vs. offshoring framing. |
 
-Your assigned extension is in `CLAUDE.md`.
+Your assigned extension goes in `CLAUDE.md` (on your first commit).
 
-Useful review prompt before opening the PR:
+Useful review prompt before merging:
 
 ```text
 spawn the spec-critic subagent on starter/extend_TEMPLATE.R
 ```
 
-You can also ask `pr-referee` to review the branch diff, but your partner is still the reviewer who decides whether to merge.
+You can also ask `pr-referee` to review the branch diff, but the reviewer who decides whether to merge is a person: your partner, or you, after reading the diff.
 
-### Step 4 - Write the research note
-
-Edit `paper/paper.tex`. Fill in:
+Then edit `paper/paper.tex`. Fill in:
 
 - Abstract: 3-4 sentences
 - Introduction: motivation, literature positioning, paper contribution, your extension
@@ -251,18 +229,18 @@ spawn the results-trace-auditor subagent on paper/paper.tex
 use tex-reference-audit on paper/paper.tex
 ```
 
-Revise, commit, push, and merge through PR review.
-
-### Step 5 - Compile
+Revise, commit, and merge after reading the diff. Then compile:
 
 ```bash
 cd paper
 latexmk -pdf paper.tex
 ```
 
-If `latexmk` is unavailable, ask the instructor for the fallback path.
+If `latexmk` is unavailable, use `pdflatex -interaction=nonstopmode paper.tex`, or Overleaf.
 
-### Step 6 - Reflect
+---
+
+## Step 8 - Reflect
 
 Fill in `AI_WORKFLOW_REFLECTION.md`. This is where you separate:
 
@@ -272,49 +250,45 @@ Fill in `AI_WORKFLOW_REFLECTION.md`. This is where you separate:
 - What reviewer role would become a subagent
 - What safety rule would become a hook
 
+## Step 9 - Transfer
+
+Figure 1 is deliberately not a skill. It is project-specific: one paper, one dataset, one visual target. The transferable move is the pattern: read the reference code, state the reshape target and estimand, specify the output, tell Claude which checks to print before saving, and review the plan, the code, and the final figure. Use your reflection to decide which of your own repeated conventions deserve a skill, a subagent, or a hook.
+
 ---
 
 ## Git reference card
 
 ```bash
 # Start a branch
-git checkout -b <branch>
+git switch -c <branch>
 
 # Commit work
 git status
 git add <files>
 git commit -m "brief description"
 
-# Push branch
-git push -u origin <branch>
+# Read what you are about to merge, then merge it
+git diff main..HEAD
+git switch main
+git merge <branch>
 
-# After your partner merges a PR
-git checkout main
-git pull origin main
+# See the history
+git log --oneline --graph --all
 ```
-
-Open a PR on GitHub:
-
-1. Click **Compare & pull request** after pushing.
-2. Base = `main`.
-3. Add your partner as reviewer.
-4. Wait for approval.
-5. Merge after approval.
-6. Both partners pull `main` after merge.
 
 If something breaks:
 
-- Push rejected: run `git pull --rebase origin main`, resolve issues, then push again.
-- PR opened against wrong base: edit the base branch in GitHub.
-- Merge conflict: resolve in VS Code or ask the instructor.
+- Claude says `main` is blocked: this is the main-branch hook. Switch to a `lit/<name>` or `analysis/<name>` branch.
+- Claude says `reference_code/` is read-only: expected. Copy the logic into `starter/`.
+- Merge conflict (typically in `paper/paper.tex`): resolve in VS Code, then `git add` and `git commit`.
 - Stuck for more than 2 minutes: ask Claude Code first, then flag the instructor.
 
 ---
 
 ## Deliverables
 
-Submit from your team repo's `main` branch:
+Submit from your repo's `main` branch:
 
 - `paper/paper.pdf` - 2-3 pages, including the replication figure and extension result.
 - `AI_WORKFLOW_REFLECTION.md` - completed by the team.
-- GitHub PR history showing both partners contributed and reviewed.
+- `git log --oneline --graph --all` output (or your pull request history, if you used GitHub) showing both lanes were worked on and reviewed.
