@@ -79,7 +79,7 @@ The results are the same for everyone, so you can compare notes. They are not yo
 
 1. **Set up git before anything else.** In the terminal, check that you are inside `results_to_paper/` (`pwd`), then run `git init`. If your `my_workspace` folder is itself inside a git repository (for example the cloned course repo), `git init` here creates a nested repository: move your copy out of the course repo first. Ask Claude Code to write a `.gitignore` for LaTeX build files (`*.aux`, `*.log`, `*.out`, `*.fdb_latexmk`, `*.fls`, `*.synctex.gz`) and for `.env` and `__pycache__/`. Then `git add -A && git commit -m "Paper skeleton"`.
 
-2. **Render the table into the paper.** Ask Claude Code to run the render script, then compile `paper.tex`. Open `tables/regression_table.tex` and `results/regression_results.csv` yourself: does the table say what the CSV says? Commit.
+2. **Render the table into the paper.** Ask Claude Code to run the render script (it creates `tables/regression_table.tex`; the `tables/` folder does not exist until it runs), then compile `paper.tex`. Open `tables/regression_table.tex` and `results/regression_results.csv` yourself: does the table say what the CSV says? Commit.
 
 3. **Write the results paragraph.** Ask Claude Code to write the paragraph for the Results section from the table. Commit first, so you have a save point. VS Code shows you the diff before it applies the change: read it, then accept or reject it. If you accept it, say what you changed or would change. (If you accept and regret it later, `git checkout -- .` takes you back to the commit.)
 
