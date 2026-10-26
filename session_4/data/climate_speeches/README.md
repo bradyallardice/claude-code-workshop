@@ -8,7 +8,7 @@ The corpus for the Session 4 exercise "LLMs as research coders": fan out agents 
 |---|---|---|
 | `passages.csv` | One row per climate-mentioning paragraph: text, speaker, party, state, chamber, date, section title, source URL | yes |
 | `coding_scheme.md` | Codes and decision rules (draft) | yes |
-| `gold_codes.csv` | Hand-coding sheet keyed by `passage_id`; blank until the instructor codes it | **no**, stripped by `sync_student.sh` |
+| `gold_codes.csv` | Reference codes keyed by `passage_id`, with notes on hard cases (Claude-generated; see below) | **no**, stripped by `sync_student.sh` |
 | `build_log.json` | Build parameters, days visited, counts | yes |
 | `raw/` | Cached speech text and speaker metadata per Record day, so rebuilds don't re-download | yes |
 
