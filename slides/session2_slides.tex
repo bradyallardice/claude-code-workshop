@@ -825,7 +825,7 @@ peg was removed in data/PLN_CHF_EUR_FXdata.csv.
 
 \begin{frame}{Exercise: Build the County Panel From Scratch}
   \small
-  Now \textbf{you} build it, in your \texttt{session\_1} copy: pairs, plan mode.
+  Now \textbf{you} build it, in your \texttt{session\_1} copy: pairs, plan mode. Open \texttt{my\_workspace/session\_1} in a \textbf{new VS Code window}.
 
   \vspace{0.1em}
   {\footnotesize \alert{Where things are} (in \texttt{session\_1/data/}):\\
@@ -834,7 +834,7 @@ peg was removed in data/PLN_CHF_EUR_FXdata.csv.
 
   \vspace{0.3em}
   \begin{enumerate}
-    \item Write a short \texttt{CLAUDE.md} for the folder {\footnotesize (template: \texttt{references/CLAUDE\_template.md})}
+    \item Write a short \texttt{CLAUDE.md} for the folder {\footnotesize (template: \texttt{references/CLAUDE\_template.md} in the course repo you cloned, not in your \texttt{session\_1} copy; copy it in and edit it)}
     \item Switch Claude Code to \textbf{plan mode}
     \item Ask it to build a county-year panel that merges election returns with IPUMS census demographics
     \item \textbf{Before approving the plan}, you will need to:
@@ -986,10 +986,10 @@ peg was removed in data/PLN_CHF_EUR_FXdata.csv.
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 Write and run tests for these values, which I computed
 from the raw file:
-- Respondent 9 has treatment = "cntrl", fx_status = "none"
-- The control group has exactly 480 respondents
+- Respondent <ID>: treatment = <value>, fx_status = <value>
+- The control group has exactly <N> respondents
 - The weighted share supporting intervention, among
-  non-missing responses, is approximately 0.486
+  non-missing responses, is approximately <share>
 Do not take expected values from the analysis script.
   \end{lstlisting}
 \end{frame}
@@ -1281,7 +1281,7 @@ copy and show me which tests fail.
     \item Which of your expectations turned out to be wrong? Was the error yours, or Claude Code's?
     \item What did you learn about the data that the codebook did not say outright?
     \item Did Claude Code's tests check what you wrote, or something easier?
-    \item Did the tests fail on the copy with a duplicated survey respondent?
+    \item Where did Claude Code cut a corner you had not asked for? Which of your rules would have prevented it?
   \end{itemize}
 
   \vspace{0.8em}

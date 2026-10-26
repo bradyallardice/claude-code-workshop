@@ -68,14 +68,13 @@ suffix: `backup-prework-2`.
 
 ## Start here
 
-1. Open `slides/session2_slides.pdf`.
+1. Open `slides/session2_slides.pdf` (in the course repo you cloned, not in your `session_2` copy).
 2. Demo, follow along: two Claude Code tabs at once in this folder (prompts on
    the slides).
 3. Exercise 1, the county panel in plan mode: in your **`my_workspace/session_1`**
    copy from last session, opened in a new VS Code window (instructions on the
    slides).
-4. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
-5. Exercise 2: Part 1 of `docs/exercise_prompt.md`. Learn the data and write
+4. Exercise 2: Part 1 of `docs/exercise_prompt.md`. Read `docs/codebook.md` to learn the Swiss franc shock data in `data/`, write
    your expectations in `expectations.md` (it's in this folder) first, then merge and verify against them.
 
 **Keep this folder after today.** Parts 2 and 3 of the exercise (estimation,

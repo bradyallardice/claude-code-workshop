@@ -2,12 +2,12 @@
 
 ## Setup
 
-You have two datasets in `session_2/data/`:
+Run everything from your `session_2` folder (the one you opened in VS Code). You have two datasets in `data/`:
 
 - `swiss_franc_survey.csv` — a survey of 2,044 Polish adults about government intervention after the 2015 Swiss franc shock
 - `respondent_demographics.csv` — additional demographic variables (income, ideology) for survey respondents
 
-Read the codebook in `session_2/docs/codebook.md` before you begin.
+Read the codebook in `docs/codebook.md` before you begin.
 
 ## Research Question
 
