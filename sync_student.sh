@@ -182,6 +182,7 @@ FORBIDDEN_PATHS=(
     session_4/option_b/exercise_2/paper.tex
     session_4/option_b/exercise_2/paper.pdf
     session_4/option_b/output/merged_survey.csv
+    session_4/data/climate_speeches/gold_codes.csv
 )
 LEAKS=$(git ls-files -- "${FORBIDDEN_PATHS[@]}")
 if [ -n "$LEAKS" ]; then
