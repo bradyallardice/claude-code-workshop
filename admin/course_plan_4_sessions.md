@@ -51,10 +51,10 @@ The intros block (15 min) assumes 8–10 participants, so a larger group shifts 
 |---|---|---|---|
 | — | Start-of-session ritual | 3 | 0:03 |
 | 14 | **Context strategies:** what happens when the window fills, keep tasks focused, what counts as one task, one conversation per task, multiple tabs, keeping track of conversations, maintaining project docs, starting a new project in VS Code, summarizing between conversations, validating iteratively, token-aware prompting. Demos included. **Parallel-session demo:** two read-only tasks in two tabs at once, then a collision round (both tabs write to the same output file), then a benefits/risks frame. | 25 | 0:28 |
-| 15 | Execution modes: plan / default / auto-accept | 5 | 0:33 |
-| 16 | Live demo: plan mode vs. auto-accept | 6 | 0:39 |
-| 17 | **Exercise:** build the county panel in plan mode, evaluate the plan, debrief | 25 | 1:04 |
-| 18 | The core workflow (describe → plan → generate → verify → save/re-instruct), code can run and still be wrong, read the code | 8 | 1:12 |
+| 15 | The core workflow (overview, Step 1: describe), then execution modes: plan / default / auto-accept | 7 | 0:35 |
+| 16 | Live demo: plan mode vs. auto-accept, then workflow Steps 2–4 (review the plan, generate and validate, save or re-instruct) | 9 | 0:44 |
+| 17 | **Exercise:** build the county panel in plan mode, evaluate the plan, debrief | 25 | 1:09 |
+| 18 | Code can run and still be wrong, read the code | 3 | 1:12 |
 | 19 | Verification: two layers of tests, independent tests, write expectations first, trace samples, test-first cycle, test the tests, passing is not the goal | 10 | 1:22 |
 | 20 | Make it a rule in CLAUDE.md (1/2, 2/2) | 2 | 1:24 |
 | 21 | The Swiss franc shock: data and research question | 3 | 1:27 |

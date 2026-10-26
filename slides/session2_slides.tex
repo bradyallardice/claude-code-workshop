@@ -128,21 +128,6 @@ code .
 %  BLOCK 14: CONTEXT STRATEGIES AND PARALLEL SESSIONS  [0:03–0:28]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Strategies for Working Within the Context Window}
-  Recall from Session 1: Claude Code can only ``see'' a limited amount of text at once.\\
-  Errors compound when it loses track of earlier decisions.
-
-  \vspace{0.5em}
-  \textbf{Five strategies to work within this constraint:}
-  \begin{enumerate}
-    \item Keep tasks focused
-    \item Maintain project documentation
-    \item Summarize work between conversations
-    \item Validate iteratively
-    \item Write token-aware prompts
-  \end{enumerate}
-\end{frame}
-
 \begin{frame}{What Happens When the Context Window Fills Up}
     As a conversation grows, Claude Code eventually runs out of room.\\
     When this happens, it \textbf{auto-compacts}: it summarizes older parts of the conversation to free up space.
@@ -164,6 +149,21 @@ code .
 
     \vspace{0.5em}
     \alert{This is why CLAUDE.md matters:} it survives compacting because it is reloaded from disk, not from conversation history.
+\end{frame}
+
+\begin{frame}{Strategies for Working Within the Context Window}
+  Recall from Session 1: Claude Code can only ``see'' a limited amount of text at once.\\
+  Errors compound when it loses track of earlier decisions.
+
+  \vspace{0.5em}
+  \textbf{Five strategies to work within this constraint:}
+  \begin{enumerate}
+    \item Keep tasks focused
+    \item Maintain project documentation
+    \item Summarize work between conversations
+    \item Validate iteratively
+    \item Write token-aware prompts
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Strategy 1: Keep Tasks Focused}
@@ -573,8 +573,59 @@ still needs to be done.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 15: THE THREE EXECUTION MODES  [0:28–0:33]
+%  BLOCK 15: THE CORE WORKFLOW (OVERVIEW, STEP 1), THEN THE EXECUTION MODES  [0:28–0:35]
 % ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Core Workflow}
+  \begin{tabular}{clll}
+    & \textbf{Step} & \textbf{Who} & \textbf{If something is wrong} \\[0.2em]
+    \toprule
+    1. & Describe & You & Rethink before sending \\[0.3em]
+    2. & Review plan & You \textcolor{accent}{\textbf{*}} & Reject, re-instruct \\[0.3em]
+    3. & Generate \& validate & Claude Code + You & Read the code, run the tests, re-instruct \\[0.3em]
+    4. & Save or re-instruct & You & Keep the result (git in Session 3) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \textcolor{accent}{\textbf{*}} = checkpoint where you can catch a problem before anything gets saved.
+
+  \vspace{0.3em}
+  Validation is not a separate step --- it happens \textbf{continuously} throughout steps 1--3.
+
+  \vspace{0.3em}
+  \begin{block}{The pattern}
+    When something goes wrong, go back to \textbf{whichever step actually fixes the problem}: a bad plan means rewriting the instruction (step 1), not just re-running the same one. Diagnose first, then go back to the right step.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Step 1: Describe --- Write It Down First}
+  \textbf{Before you type anything into Claude Code, write down your instruction.}\\
+  If you cannot state the task precisely on paper, Claude Code cannot execute it precisely in code.
+
+  \vspace{0.5em}
+  \textbf{A good instruction specifies three things:}
+  \begin{enumerate}
+    \item \textbf{Inputs:} ``Read \texttt{data/survey.csv} and \texttt{data/demographics.csv}''
+    \item \textbf{Goal:} ``Left-join demographics onto the survey by respondent ID''
+    \item \textbf{Constraints:} ``Output must have exactly 2,044 rows. Do not drop respondents.''
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Vague:}\\
+      {\small ``Merge the datasets and run a regression''}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Specific:}\\
+      {\small ``Left-join demographics onto the survey by respondent\_id. Use control as the reference. Run a weighted logistic regression.''}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \alert{Be specific about inputs, outputs, and constraints. Be brief about everything else.}
+\end{frame}
 
 \begin{frame}{The Three Execution Modes}
   \centering
@@ -669,7 +720,7 @@ still needs to be done.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 16: LIVE DEMO, PLAN MODE vs. AUTO-ACCEPT  [0:33–0:39]
+%  BLOCK 16: LIVE DEMO, PLAN MODE vs. AUTO-ACCEPT, THEN WORKFLOW STEPS 2–4  [0:35–0:44]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Live Demo: Plan Mode vs. Auto-Accept}
@@ -685,127 +736,6 @@ still needs to be done.
     \item What does the experience feel like in each mode?
   \end{itemize}
   \vfill
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  BLOCK 17: EXERCISE, BUILD THE COUNTY PANEL IN PLAN MODE  [0:39–1:04]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Exercise: Build the County Panel From Scratch}
-  In Session 1 you explained and edited a pre-built script. Now \textbf{you} build it.
-
-  \vspace{0.3em}
-  \textbf{Same data, fresh start,} in your \texttt{session\_1} copy. Work in pairs using plan mode.
-
-  \vspace{0.5em}
-  \begin{enumerate}
-    \item Write a short \texttt{CLAUDE.md} for the folder {\footnotesize (template: \texttt{references/CLAUDE\_template.md})}
-    \item Switch Claude Code to \textbf{plan mode}
-    \item Ask Claude Code to build a county-year panel that merges election returns with IPUMS census demographics
-    \item \textbf{Before approving the plan}, you will need to:
-      \begin{itemize}
-        \item Read the codebooks to understand variable codings\\
-          {\small (What does \texttt{EDUC $\geq$ 10} mean? What does \texttt{RACE == 1} code?)}
-        \item Decide how to define key variables\\
-          {\small (Two-party vote share? College = bachelor's or higher?)}
-        \item Specify the merge: which keys, which join type, expected row counts
-      \end{itemize}
-    \item Review the plan, reject or revise as needed, then approve
-    \item Run the script and verify the output
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Evaluating the Plan}
-  When Claude Code proposes its plan, ask yourself:
-
-  \vspace{0.5em}
-  \begin{itemize}
-    \item Is it reading the \textbf{codebooks} or just guessing at variable meanings?
-    \item How is it coding \texttt{EDUC}, \texttt{RACE}, \texttt{HISPAN}?\\
-      {\small Do those match \textit{your} definitions?}
-    \item What join type is it using? Inner, left, or outer?\\
-      {\small What happens to counties that appear in one dataset but not the other?}
-    \item Is it filtering \texttt{mode == "TOTAL"} for election data?
-    \item Does it handle \texttt{COUNTYFIP == 0} (unidentified counties)?
-  \end{itemize}
-
-  \vspace{0.5em}
-  \alert{This is where your domain knowledge matters.}\\
-  Claude Code can write the code, but you decide what the variables mean.
-\end{frame}
-
-\begin{frame}{Debrief}
-  \begin{itemize}
-    \item What variable coding decisions did you make? Did Claude Code's default match yours?
-    \item Did anyone reject or modify the plan? What did you change?
-    \item How did your panel compare to the starter script from Session 1?
-  \end{itemize}
-
-  \vspace{0.8em}
-  \begin{block}{The Lesson}
-    \textbf{Writing a CLAUDE.md} forces you to be explicit about conventions you have kept implicit.
-
-    \vspace{0.3em}
-    \textbf{Reviewing plans} forces you to think about approach \textit{before} you see output.
-
-    \vspace{0.3em}
-    \textbf{Domain knowledge} is key for preventing errors.
-  \end{block}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  BLOCK 18: THE CORE WORKFLOW  [1:04–1:12]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{The Core Workflow}
-  \begin{tabular}{clll}
-    & \textbf{Step} & \textbf{Who} & \textbf{If something is wrong} \\[0.2em]
-    \toprule
-    1. & Describe & You & Rethink before sending \\[0.3em]
-    2. & Review plan & You \textcolor{accent}{\textbf{*}} & Reject, re-instruct \\[0.3em]
-    3. & Generate \& validate & Claude Code + You & Read the code, run the tests, re-instruct \\[0.3em]
-    4. & Save or re-instruct & You & Keep the result (git in Session 3) \\
-    \bottomrule
-  \end{tabular}
-
-  \vspace{0.8em}
-  \textcolor{accent}{\textbf{*}} = checkpoint where you can catch a problem before anything gets saved.
-
-  \vspace{0.3em}
-  Validation is not a separate step --- it happens \textbf{continuously} throughout steps 1--3.
-
-  \vspace{0.3em}
-  \begin{block}{The pattern}
-    When something goes wrong, go back to \textbf{whichever step actually fixes the problem}: a bad plan means rewriting the instruction (step 1), not just re-running the same one. Diagnose first, then go back to the right step.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Step 1: Describe --- Write It Down First}
-  \textbf{Before you type anything into Claude Code, write down your instruction.}\\
-  If you cannot state the task precisely on paper, Claude Code cannot execute it precisely in code.
-
-  \vspace{0.5em}
-  \textbf{A good instruction specifies three things:}
-  \begin{enumerate}
-    \item \textbf{Inputs:} ``Read \texttt{data/survey.csv} and \texttt{data/demographics.csv}''
-    \item \textbf{Goal:} ``Left-join demographics onto the survey by respondent ID''
-    \item \textbf{Constraints:} ``Output must have exactly 2,044 rows. Do not drop respondents.''
-  \end{enumerate}
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{\color{red!70!black} Vague:}\\
-      {\small ``Merge the datasets and run a regression''}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{\color{green!50!black} Specific:}\\
-      {\small ``Left-join demographics onto the survey by respondent\_id. Use control as the reference. Run a weighted logistic regression.''}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.5em}
-  \alert{Be specific about inputs, outputs, and constraints. Be brief about everything else.}
 \end{frame}
 
 \begin{frame}{Step 2: Review the Plan}
@@ -871,6 +801,76 @@ still needs to be done.
     Repeat for each task in your analysis. One cycle per task, not one cycle for the whole project.
   \end{block}
 \end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  BLOCK 17: EXERCISE, BUILD THE COUNTY PANEL IN PLAN MODE  [0:44–1:09]
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Exercise: Build the County Panel From Scratch}
+  In Session 1 you explained and edited a pre-built script. Now \textbf{you} build it.
+
+  \vspace{0.3em}
+  \textbf{Same data, fresh start,} in your \texttt{session\_1} copy. Work in pairs using plan mode.
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \item Write a short \texttt{CLAUDE.md} for the folder {\footnotesize (template: \texttt{references/CLAUDE\_template.md})}
+    \item Switch Claude Code to \textbf{plan mode}
+    \item Ask Claude Code to build a county-year panel that merges election returns with IPUMS census demographics
+    \item \textbf{Before approving the plan}, you will need to:
+      \begin{itemize}
+        \item Read the codebooks to understand variable codings\\
+          {\small (What does \texttt{EDUC $\geq$ 10} mean? What does \texttt{RACE == 1} code?)}
+        \item Decide how to define key variables\\
+          {\small (Two-party vote share? College = bachelor's or higher?)}
+        \item Specify the merge: which keys, which join type, expected row counts
+      \end{itemize}
+    \item Review the plan, reject or revise as needed, then approve
+    \item Run the script and verify the output
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Evaluating the Plan}
+  When Claude Code proposes its plan, ask yourself:
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Is it reading the \textbf{codebooks} or just guessing at variable meanings?
+    \item How is it coding \texttt{EDUC}, \texttt{RACE}, \texttt{HISPAN}?\\
+      {\small Do those match \textit{your} definitions?}
+    \item What join type is it using? Inner, left, or outer?\\
+      {\small What happens to counties that appear in one dataset but not the other?}
+    \item Is it filtering \texttt{mode == "TOTAL"} for election data?
+    \item Does it handle \texttt{COUNTYFIP == 0} (unidentified counties)?
+  \end{itemize}
+
+  \vspace{0.5em}
+  \alert{This is where your domain knowledge matters.}\\
+  Claude Code can write the code, but you decide what the variables mean.
+\end{frame}
+
+\begin{frame}{Debrief}
+  \begin{itemize}
+    \item What variable coding decisions did you make? Did Claude Code's default match yours?
+    \item Did anyone reject or modify the plan? What did you change?
+    \item How did your panel compare to the starter script from Session 1?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \begin{block}{The Lesson}
+    \textbf{Writing a CLAUDE.md} forces you to be explicit about conventions you have kept implicit.
+
+    \vspace{0.3em}
+    \textbf{Reviewing plans} forces you to think about approach \textit{before} you see output.
+
+    \vspace{0.3em}
+    \textbf{Domain knowledge} is key for preventing errors.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  BLOCK 18: CODE CAN RUN AND STILL BE WRONG, READ THE CODE  [1:09–1:12]
+% ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Verification: Code Can Run and Still Be Wrong}
   Claude Code can write code that runs, prints a plausible-looking table, and is still \textbf{scientifically wrong}.
