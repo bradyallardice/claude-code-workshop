@@ -1,4 +1,4 @@
-# Session 3: Git and LaTeX in VS Code
+# Session 3: Verification Through to the Paper
 
 ## Start-of-session ritual
 
@@ -27,6 +27,9 @@ git clone https://github.com/bradyallardice/claude-code-workshop.git
 ```
 
 ### 2. Copy today's session folder into your workspace
+
+Keep your `session_2` copy as it is: Parts 2 and 3 of the Swiss franc exercise
+continue in it.
 
 Mac/Linux:
 ```bash
@@ -69,9 +72,12 @@ suffix: `backup-prework-2`.
 ## Start here
 
 1. Open `slides/session3_slides.pdf`.
-2. Exercise, Option A: use your own research project.
-3. Exercise, Option B: use the provided project in `option_b/`.
-   - `option_b/exercise_1/`: the merge, estimate, and robustness scripts you
-     will modify and run to generate outputs under git.
-   - `option_b/exercise_2/`: where those outputs land (`tables/`, `figures/`)
-     and where you build your LaTeX paper.
+2. Exercise instructions are in `docs/exercise_prompt.md`:
+   - **Part 2 (specify and estimate)** and **Part 3 (robustness and a LaTeX
+     table)** run in your `my_workspace/session_2` folder.
+   - **Results → paper** runs in `results_to_paper/` in this folder. It holds a
+     paper skeleton (`paper.tex`), a results file, and a script that renders the
+     results as a LaTeX table.
+3. `paper/` is the finished course-analysis paper from the live demo, for
+   reference. `option_b/` is older practice material that the course no longer
+   uses.
