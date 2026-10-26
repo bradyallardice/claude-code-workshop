@@ -38,13 +38,12 @@ pdflatex --version
 
 | Session | Topic | Folder |
 |---------|-------|--------|
-| 1 | Introduction to Claude Code | `session_1/` |
-| 2 | Research Pipelines | `session_2/` |
-| 3 | Git and LaTeX in VS Code | `session_3/` |
-| 4 | Skills, MCPs, and GitHub Collaboration | `session_4/` |
-| 5 | Subagents, Hooks, and Capstone | `session_5/` |
+| 1 | What Claude Code Is and How It Works | `session_1/` |
+| 2 | Context Strategies, Parallel Sessions, Plan Mode, Verification | `session_2/` |
+| 3 | Verification Through to the Paper: LaTeX and Git | `session_3/` |
+| 4 | Power Use: Web Search, Agent Swarms, Connected Tools, Skills | `session_4/` |
 
-`session_6/` through `session_9/` are empty placeholder folders reserved for later use; they are not used in the five-session format.
+`session_6/` through `session_9/` are empty placeholder folders reserved for later use; they are not used in the four-session format.
 
 ## License
 
