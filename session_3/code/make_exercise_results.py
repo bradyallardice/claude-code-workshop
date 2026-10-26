@@ -49,7 +49,7 @@ def fit_logit(formula, data, weighted):
     model = smf.glm(formula, data=data, family=sm.families.Binomial(),
                     freq_weights=data[weights] if weighted else None,
                     missing="drop")
-    result = model.fit(cov_type="HC1")
+    result = model.fit()
     pseudo_r2 = 1 - result.deviance / result.null_deviance
     return result, int(result.nobs), pseudo_r2
 
