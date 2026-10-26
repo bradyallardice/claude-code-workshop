@@ -31,8 +31,10 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 
 ## Before the session (things that are not automatic)
 
-1. **Reference codes.** `data/climate_speeches/gold_codes.csv` is stripped by `sync_student.sh` on purpose, so agents cannot read it. Participants need it at exercise step 3 (minute ~14 of block 34). Decide how you hand it out (a link, a message, a USB stick) and have it ready. Participants save it to `data/climate_speeches/`. The exercise assumes this release.
-2. **Install the agents for the demos.** Copy `agents/referee.md` and `agents/merge-checker.md` into `.claude/agents/` in the workspace you will demo from. The referee demo targets `session_3/paper/course_paper.tex`.
+1. **Reference codes.** `data/climate_speeches/gold_codes.csv` is stripped by `sync_student.sh` on purpose, so agents cannot read it. Participants need it at exercise step 3 (minute ~10 of block 34: steps 0-2 take 2 + 4 + 4 minutes). Decide how you hand it out (a link, a message, a USB stick) and have it ready. Participants save it to `data/climate_speeches/`. The exercise assumes this release.
+2. **Install the agents for the demos, each in the right workspace.** The two demos read different files, so they run from different folders (the slides say the same). `mkdir -p .claude/agents` first, since a fresh copy has no such folder.
+   - **Referee:** run from the Session 3 workspace (`~/my_workspace/session_3`, or the repo root `session_3/` if you demo from the clone), where the paper is `paper/course_paper.tex` (from the repo root: `session_3/paper/course_paper.tex`). `cp ../session_4/agents/referee.md .claude/agents/`.
+   - **Merge-checker:** run from the **Session 2** workspace. The agent reads `data/swiss_franc_survey.csv`, `data/respondent_demographics.csv`, `docs/codebook.md` and the merged file `output/merged_survey.csv`, none of which exist in `session_4/`. `output/merged_survey.csv` is removed on the student branch, so it exists only where the Session 2 merge was built (your teacher copy has it). `cp ../session_4/agents/merge-checker.md .claude/agents/`. Participants only see this demo; they do not need to run it.
 3. **Rehearse both demos once** and keep a fallback: `docs/referee_example_run.md` is a real run of the referee instructions on the Session 3 paper. For the checker demo, `session_2/docs/instructor_answer_key.md` ("Automated checker") has the expected values.
 4. **Workflow demo (block 32, two frames).** The frames explain what a workflow is and why it costs more. The plan leaves the **demo script and its token cost undecided**, and asks to confirm the Workflow tool exists on the setup participants will use. Nothing in `session_4/` runs a workflow yet. Decide before the session, or present the two frames as concept only.
 5. **Zotero demo (block 35).** Needs Zotero running with the Zotero MCP and the practice collection `claude_code_zotero` (`docs/claude_code_zotero/`). Participants do not need it installed.
@@ -59,16 +61,17 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 - **Checker demo** is the automated version of Session 2 Part 1. The frame is adapted from `slides/pending_session4_frames.tex` (now incorporated; kept for reference). Your own more automated version may supersede it.
 - "Same model, different context": say this when presenting the verifier. A fresh agent removes the builder's context, not the model's blind spots.
 
-### 33–34. LLMs as research coders (5 + 20 min)
+### 33–34. LLMs as research coders (5 + 15 min)
 - **The reference codes are Claude-generated** (Opus 5.5; see `data/climate_speeches/README.md`). Agreement will look better than it is. This is a debrief point, and the slides say so.
+- **Reference-code facts (moved here from `data/climate_speeches/README.md`, which is student-facing and must not state them).** `gold_codes.csv` was coded by Claude (Opus 5.5) from `coding_scheme.md`, passage by passage. This was a deliberate choice: the exercise demonstrates the validation *workflow*, not a validated measure. Participants' agents are also Claude, so part of their agreement is the same model agreeing with itself; in a real project the reference set must come from human coders, ideally two. The slides ("What Agreement Does and Does Not Show") already tell participants it was written by Claude, so the debrief question "Who wrote the reference codes?" is not a surprise reveal; it asks what that does to the number.
 - **Expected shape of results.** Reference distribution is 38 supports, 18 opposes, 5 no stance, 2 not climate; 7 passages are flagged "Hard case" in `gold_codes.csv` notes. Disagreements should concentrate there. I have not run the fan-out, so I do not know the actual agreement. Run it once beforehand to know what to expect.
-- **Party shortcut.** In this sample every code 1 is a Democrat and every code 2 a Republican or unattributed Senate leader. Participants who give agents the full row can score well without reading. The exercise tells them to pass only `passage_id` and `passage_text`; look for people who did not.
+- **Party shortcut.** Checked against `gold_codes.csv` and `passages.csv`: all 38 code-1 passages are Democrat; of the 18 code-2 passages, 14 are Republican and 4 have no party (`attribution` = `unattributed`, Senate leader remarks). Participants who give agents the full row can score well without reading. The exercise tells them to pass only `passage_id` and `passage_text`; look for people who did not.
 - **Usage limits.** 63 passages over about six agents is small, but fan-out is where $20-plan participants are likeliest to hit the limit. The two-batch test is there so they see the cost first.
 - `scripts/compare_to_reference.py` computes agreement, kappa, the confusion matrix and per-category agreement, and was tested on constructed inputs (self-comparison gives 1.0; six altered codes give 57/63). It is a check on Claude Code's numbers, not a replacement.
-- **Open item:** `coding_scheme.md` still said "DRAFT, to be finalized before the gold set is hand-coded". The gold set was Claude-coded, so the status line has been corrected. The scheme's content has not been revised.
+- **Open item:** `coding_scheme.md` still said "DRAFT, to be finalized before the gold set is hand-coded". The status line has been corrected and now says only that the scheme is a draft used as written; it no longer states who coded the reference set (that is in these notes and on the slides). The scheme's content has not been revised. Its "Hard cases to watch for" list is visible to students before the exercise.
 
 ### 35. MCP (8 min)
-- **The Zotero exercise is back in the main flow** (12 min, after the demo), overriding the plan's "Zotero is demo-only". **Every participant now needs Zotero, the Zotero MCP, and the practice collection** (`docs/claude_code_zotero/`) installed beforehand. `admin/session4_prework.tex` was meant to drop Zotero and has not been updated either way; it needs it back. Anyone without it can watch a neighbor or skip to the next block. The GitHub MCP demo is back matter E.
+- **The Zotero exercise is back in the main flow** (12 min, after the demo), overriding the plan's "Zotero is demo-only". **Every participant now needs Zotero, the Zotero MCP, and the practice collection** (`docs/claude_code_zotero/`) installed beforehand. `admin/session4_prework.tex` has been rewritten for the current deck: Zotero and workspace setup only, with the GitHub token, username and collaborator steps removed (the GitHub MCP is an instructor demo in back matter E). Its PDF was recompiled. The RDF import steps are also in `session_4/README.md` ("Before Exercise 1"). Anyone without it can watch a neighbor or skip to the next block. The GitHub MCP demo is back matter E.
 - "Where to Find MCPs" (second frame) lists `modelcontextprotocol.io`, the `modelcontextprotocol/servers` repository, the Claude apps' connector directory, GitHub search, and `claude mcp add` / `/mcp`. Written from memory; open each before class to confirm the names and URLs are current.
 - "Helper, not substitute" carries the block-30 connection: every MCP is also an access grant.
 
@@ -91,12 +94,22 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 | A. Replication package | new | Written from general knowledge of data-editor README templates. Not tested against a real submission. |
 | B. Research audit log hook; hook vs. skill vs. agent | old S5, example rewritten | Needs `jq`. |
 | C. Beyond the terminal | old S5 | Unedited. Claims about cloud, remote control and the API were not re-checked and may be out of date. |
-| D. Failure diagnosis | syllabus | **Needs transcripts.** `admin/failure_examples/` is empty. Frames work with participants' own failed sessions in the meantime. |
+| D. Failure diagnosis | syllabus | **Needs transcripts.** `admin/failure_examples/` is empty. Frames work with participants' own failed sessions in the meantime. Until transcripts exist, the exercise is only usable if participants bring a failed session of their own; do not teach it as a transcript exercise. |
 | E. GitHub MCP | old S4 | Instructor demo; builds on the Session 3 back matter. Needs a GitHub token. |
 | F. Skill extras | old S4 | Added to the plan's list so no frame is deleted. |
 | G. Prompt injection | new | Moved out of block 30. Its example frame is illustrative, not a working attack. |
 | H. Data privacy, technical | new | The settings-level version of block 30's privacy frames: the four routes, deny rules, sandbox config, canary commands, env-var scrub, hooks, untrusted repositories (9 frames). Linked from the "Ways to Limit What Claude Can See" frame. |
 | I. Capstone | old S5 | Slides rewritten for a local git repo (steps 2, 2b). **`capstone-template/README.md`, `INSTRUCTOR.md` and `ROLES.md` still describe GitHub repos and pull requests**, so the slides and the README disagree until those are rewritten. |
+
+---
+
+## Material in `session_4/` that no slide uses
+
+- **Debugging exercise.** `scripts/buggy_script.py` and `scripts/base_regression.py` are removed on the student branch and no slide or student-facing file refers to them. Only `demo_prompt.txt` (which tells the reader to extend `scripts/base_regression.py`) and `docs/instructor_notes_debugging.md` mention them. The deck has no debugging exercise.
+- **`demo_prompt.txt` and `demo_output/`** (finished regression tables) come from an earlier demo. They are not referenced by any slide or README and are not on the sync removal list, so students receive them.
+- **`docs/referee_example_run.md`** is the fallback for the referee demo and is on the student branch. It shows what the demo finds on the Session 3 paper.
+- **`option_b/`** has no instructions anywhere in the Session 4 materials.
+- **`github_collaboration_practice/`** is not on any slide. Its scaffold has 16 chapter files but the premises have prompts for chapters 1-8 only (see its `INSTRUCTOR.md`). Pre-assign chapters in `CHAPTERS.md` (there is no `PAIRS.md`).
 
 ---
 

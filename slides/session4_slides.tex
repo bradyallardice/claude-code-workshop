@@ -126,7 +126,7 @@ code .
   \end{columns}
 
   \vspace{0.2em}
-  {\small Today's exercises all run in \texttt{session\_4}. If \texttt{git pull} fails, use the recovery steps in the Session 3 back matter.}
+  {\small Today's exercises all run in \texttt{session\_4}. Also copy \texttt{slides/session4\_slides.pdf} into your workspace's \texttt{slides/} folder (see \texttt{session\_4/README.md}). If \texttt{git pull} fails, use the recovery steps in the Session 3 back matter.}
 \end{frame}
 
 
@@ -913,7 +913,7 @@ Write the result to lit_scan/papers.md.
   \vspace{0.3em}
   \begin{enumerate}
     \item \textbf{Scan (3 min).} Ask Claude Code to search and find 5--6 papers on your question, using the prompt pattern from the last slide. Output to \texttt{lit\_scan/papers.md}.
-    \item \textbf{Check (6 min).} For \emph{each} paper, fill in a row:
+    \item \textbf{Check (6 min).} For \emph{each} paper, fill in a row of \texttt{lit\_scan/check.md}:
   \end{enumerate}
 
   \vspace{0.2em}
@@ -1259,11 +1259,13 @@ minor concerns, numbers I could not match.
 \end{frame}
 
 \begin{frame}[fragile]{Referee Demo: The Session 3 Paper}
-  \textbf{Install, then invoke:}
+  \textbf{Install, then invoke} (from your Session 3 copy, which has the paper):
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-cp agents/referee.md .claude/agents/referee.md
+cd ~/my_workspace/session_3
+mkdir -p .claude/agents
+cp ../session_4/agents/referee.md .claude/agents/
 > Use the referee subagent on the Session 3 paper:
-  session_3/paper/course_paper.tex
+  paper/course_paper.tex
   \end{lstlisting}
 
   \vspace{0.3em}
@@ -1282,10 +1284,13 @@ cp agents/referee.md .claude/agents/referee.md
 \end{frame}
 
 \begin{frame}[fragile]{Second Example: The Part 1 Checks, Automated}
-  \textbf{In Session 2 you wrote expectations for the Swiss franc merge yourself and checked it by hand. The same check as a subagent} (\texttt{agents/merge-checker.md}):
+  \textbf{In Session 2 you wrote expectations for the Swiss franc merge yourself and checked it by hand. The same check as a subagent} (\texttt{agents/merge-checker.md}). Run it from your Session 2 copy, which has \texttt{data/}, \texttt{docs/codebook.md} and your \texttt{output/merged\_survey.csv}:
 
   \vspace{0.3em}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+cd ~/my_workspace/session_2
+mkdir -p .claude/agents
+cp ../session_4/agents/merge-checker.md .claude/agents/
 > Use merge-checker. Merged file: output/merged_survey.csv.
   Write checks/expectations.md from the codebook and raw
   data only. Do not run anything yet.
@@ -1388,7 +1393,7 @@ cp agents/referee.md .claude/agents/referee.md
   \begin{enumerate}
     \item \textbf{Test on two batches (4 min).} Ask Claude Code to code the first 10 passages with one subagent and the next 10 with another, in parallel. Give each agent \emph{only} \texttt{passage\_id} and \texttt{passage\_text}, plus the scheme. Check the output format and your usage.
     \item \textbf{Fan out the rest (4 min).} Same prompt for the remaining passages, in batches. Merge to \texttt{output/agent\_codes.csv} with columns \texttt{passage\_id}, \texttt{code}.
-    \item \textbf{Compare (4 min).} I will give you the reference codes now. Ask Claude Code for: agreement rate, a confusion matrix, and per-category agreement. Then \emph{read} the disagreements.
+    \item \textbf{Compare (4 min).} I will give you the reference codes now (save \texttt{gold\_codes.csv} in \texttt{data/climate\_speeches/}). Ask Claude Code for: agreement rate, a confusion matrix, and per-category agreement. Then \emph{read} the disagreements.
     \item \textbf{Check the computation (1 min).} Verify one number by hand, or run \texttt{scripts/compare\_to\_reference.py}.
   \end{enumerate}
 

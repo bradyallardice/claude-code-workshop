@@ -39,9 +39,9 @@ Settings → Collaborators → Add people. Send invites **48+ hours before class
 
 For a class of 8–15, this is manageable manually. If you want to scale it later, `gh api` scripts can do bulk invites.
 
-### 4. Fill in [PAIRS.md](PAIRS.md)
+### 4. Fill in [CHAPTERS.md](CHAPTERS.md)
 
-Pre-assign pairs and chapter numbers before class. Pair strategically (technical + less technical if you can). Push the filled-in `PAIRS.md` to the repo so students can see their assignment the moment they land on the page.
+Pre-assign chapter numbers before class by replacing the `TBD` entries with names (the student README and the premise files both point students to `CHAPTERS.md`; there is no `PAIRS.md`). If you run it in pairs, write both names in the same row. Pair strategically (technical + less technical if you can). Push the filled-in `CHAPTERS.md` to the repo so students can see their assignment the moment they land on the page.
 
 ### 5. Do a dry run
 
@@ -92,7 +92,7 @@ This produces `story.md` — the concatenation of all chapters. Read a few lines
 
 ## Flexing for headcount
 
-The scaffold ships with **8 chapter files** and each premise has **8 chapter outlines**. Use only as many as you have pairs:
+The scaffold ships with **16 chapter files** and `CHAPTERS.md` lists 16 rows, but each premise has only **8 chapter prompts** (chapters 1--8). Chapters 9--16 have no prompt in any premise, so assign only chapters 1--8 unless you write more prompts. Use only as many as you have writers:
 
 - 8 students → 4 pairs → use chapters 1–4
 - 10 students → 5 pairs → use chapters 1–5

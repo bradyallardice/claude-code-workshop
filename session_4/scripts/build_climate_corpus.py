@@ -18,8 +18,11 @@ each day visited, the script:
 
 Outputs (session_4/data/climate_speeches/):
   - passages.csv          one row per climate-mentioning paragraph (student-facing)
-  - gold_codes.csv        blank hand-coding sheet; written only if it does not
-                          already exist, so hand codes are never overwritten
+  - gold_codes.csv        blank reference-coding sheet (passage_id, gold_code,
+                          coder, notes); written only if it does not already
+                          exist, so existing reference codes are never
+                          overwritten. The course's reference codes are filled
+                          in already and are not distributed with the repo
   - build_log.json        parameters, sampled days, and counts
   - raw/                  cached text and speaker metadata per day, so reruns
                           do not spend API requests
@@ -330,9 +333,9 @@ def build_passage_table(all_rows):
 
 
 def write_gold_template(passages, path):
-    """Write the blank hand-coding sheet, unless one already exists.
+    """Write the blank reference-coding sheet, unless one already exists.
 
-    An existing sheet is never overwritten, because it may hold hand codes. If
+    An existing sheet is never overwritten, because it may hold reference codes. If
     its passage IDs no longer match the rebuilt passages, the codes would attach
     to the wrong text, so this fails loudly instead.
     """
@@ -341,7 +344,7 @@ def write_gold_template(passages, path):
         if existing_ids != passages["passage_id"].tolist():
             raise RuntimeError(
                 f"{path} does not match the rebuilt passages.csv. Move or delete it "
-                "deliberately (it may contain hand codes) and rerun."
+                "deliberately (it may contain reference codes) and rerun."
             )
         print(f"  {path} exists and matches; not overwritten.")
         return
