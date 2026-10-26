@@ -307,9 +307,20 @@ def build_passage_table(all_rows):
 
 
 def write_gold_template(passages, path):
-    """Write the blank hand-coding sheet, unless one already exists."""
+    """Write the blank hand-coding sheet, unless one already exists.
+
+    An existing sheet is never overwritten, because it may hold hand codes. If
+    its passage IDs no longer match the rebuilt passages, the codes would attach
+    to the wrong text, so this fails loudly instead.
+    """
     if os.path.exists(path):
-        print(f"  {path} exists; not overwritten (it may contain hand codes).")
+        existing_ids = pd.read_csv(path)["passage_id"].tolist()
+        if existing_ids != passages["passage_id"].tolist():
+            raise RuntimeError(
+                f"{path} does not match the rebuilt passages.csv. Move or delete it "
+                "deliberately (it may contain hand codes) and rerun."
+            )
+        print(f"  {path} exists and matches; not overwritten.")
         return
     template = passages[["passage_id"]].copy()
     template["gold_code"] = ""
