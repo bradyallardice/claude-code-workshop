@@ -8,9 +8,9 @@ that session_3/results_to_paper/scripts/render_regression_table.py reads.
 Why this file exists: session_2/output/tab_swiss_franc_logit.csv was produced with
 statsmodels' formula Logit(..., weights=...), which silently ignores `weights`, so
 its "weighted" columns are unweighted. Here the weighted models are fitted with
-GLM(Binomial, freq_weights=...) and robust (HC1) standard errors. Point estimates
-under freq_weights equal the survey-weighted MLE; the HC1 variance is the
-sandwich estimator. Base-model numbers are checked against
+GLM(Binomial, freq_weights=...) and model-based standard errors. Point estimates under freq_weights equal the
+survey-weighted MLE. The standard errors treat weights as frequency counts, as
+the answer key does; a design-based variance would differ. Base-model numbers are checked against
 session_2/docs/instructor_answer_key.md at the bottom of the run.
 
 Run from the project root: python session_3/code/make_exercise_results.py
@@ -25,9 +25,10 @@ SURVEY_PATH = "session_2/data/swiss_franc_survey.csv"
 DEMOGRAPHICS_PATH = "session_2/data/respondent_demographics.csv"
 OUTPUT_PATH = "session_3/results_to_paper/results/regression_results.csv"
 
-CONTROLS = ("C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural)"
-            " + C(income_quintile) + left_right")
-BASIC_CONTROLS = "C(fx_status) + age + C(female) + C(ed_level) + C(urban_rural)"
+# female is 0/1; ed_level, urban_rural, and income_quintile enter linearly (ordinal codes).
+# This coding reproduces the reference table in session_2/docs/instructor_answer_key.md.
+BASIC_CONTROLS = "C(fx_status) + age + female + ed_level + urban_rural"
+CONTROLS = BASIC_CONTROLS + " + income_quintile + left_right"
 
 
 def load_merged():
@@ -95,7 +96,7 @@ def main():
                                  coef=result.params[term], se=result.bse[term],
                                  pvalue=result.pvalues[term]))
     rows.append(dict(row_type="note", display_order=0, value_str=(
-        "Logit coefficients (log-odds), robust (HC1) standard errors in parentheses. "
+        "Logit coefficients (log-odds), model-based standard errors in parentheses. "
         "Reference arm: control. Columns (1), (3)--(6) use survey weights; column (2) does not. "
         "Columns (3)--(6) control for FX status, age, female, education, and urban/rural; "
         "column (4) adds income quintile and left-right, which restricts the sample to "
