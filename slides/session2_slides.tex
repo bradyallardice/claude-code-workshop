@@ -325,17 +325,15 @@ code .
   \vspace{0.2em}
   \textbf{Tab A: one narrow task}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Read docs/codebook.md and list the variables in
-data/swiss_franc_survey.csv with a one-line description
-of each. Do not modify any files.
+Read data/PLN_CHF_EUR_FXdata.csv and describe each column
+in one line. Do not modify any files.
   \end{lstlisting}
 
   \vspace{0.2em}
   \textbf{Tab B: a different narrow task, at the same time}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Read data/swiss_franc_survey.csv and report how many
-respondents are in each treatment group. Do not modify
-any files.
+Read data/PLN_CHF_EUR_FXdata.csv and report the first and
+last dates and the number of rows. Do not modify any files.
   \end{lstlisting}
 
   {\footnotesize Two independent, read-only tasks: each tab has its own clean context, and neither can disturb the other.}
@@ -349,12 +347,13 @@ any files.
   \vspace{0.4em}
   \textbf{Tab A}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Write the variable list you just made to output/data_notes.md.
+Write the column descriptions you just made to
+output/data_notes.md.
   \end{lstlisting}
 
   \textbf{Tab B}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-Write the treatment-group counts you just made to
+Write the dates and row count you just made to
 output/data_notes.md.
   \end{lstlisting}
 
@@ -558,18 +557,28 @@ still needs to be done.
   \end{block}
 \end{frame}
 
-\begin{frame}{Demo: A Good Prompt}
+\begin{frame}[fragile]{Demo: A Good Prompt}
   \begin{alertblock}{Live demo --- just watch}
-    I give Claude Code the same task twice: a vague prompt, then one that names the files, the goal, and the constraints.
+    The same task twice, each in a fresh conversation: a vague prompt, then one that names the files, the goal, and the constraints.
   \end{alertblock}
 
-  \vspace{0.8em}
-  \textbf{What to look for:}
-  \begin{itemize}
-    \item Which files does the prompt point Claude Code to?
-    \item What is the goal, stated in one sentence?
-    \item What constraints are spelled out?
-  \end{itemize}
+  \vspace{0.2em}
+  \textbf{Vague}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Clean up the exchange-rate data and get it ready for analysis.
+  \end{lstlisting}
+
+  \textbf{Specific}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Read data/PLN_CHF_EUR_FXdata.csv. Add a column post_peg: 1 if
+the date is on or after 2015-01-15 (the day the Swiss National
+Bank removed the peg), 0 before. Keep all 269 rows. Save the
+result to output/demo_fx_flagged.csv and do not modify the
+raw file.
+  \end{lstlisting}
+
+  \vspace{0.2em}
+  {\footnotesize \textbf{Look for:} which files? what goal, in one sentence? which constraints? And in the vague one: what did it decide that I never asked for?}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -723,19 +732,27 @@ still needs to be done.
 %  BLOCK 16: LIVE DEMO, PLAN MODE vs. AUTO-ACCEPT, THEN WORKFLOW STEPS 2–4  [0:35–0:44]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Live Demo: Plan Mode vs. Auto-Accept}
-  \centering
-  \vfill
-  Same task, two modes.
+\begin{frame}[fragile]{Live Demo: Plan Mode vs.\ Auto-Accept}
+  \textbf{Same prompt, two modes} (each in a fresh conversation):
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+Compare the average CHF/PLN rate before and after the
+peg was removed in data/PLN_CHF_EUR_FXdata.csv.
+  \end{lstlisting}
 
-  \vspace{0.5em}
-  Watch for:
+  \vspace{0.3em}
+  \textbf{Run it:}
+  \begin{enumerate}
+    \item \textbf{Plan mode:} read the plan, redirect it, approve
+    \item \textbf{Auto-accept:} the same prompt, no approval step
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \textbf{Watch for:}
   \begin{itemize}
-    \item What does a plan look like?
-    \item How do you evaluate it?
+    \item What does a plan look like, and what decisions does it list?
+    \item How do you evaluate it, and what do you change?
     \item What does the experience feel like in each mode?
   \end{itemize}
-  \vfill
 \end{frame}
 
 \begin{frame}{Step 2: Review the Plan}
