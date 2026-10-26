@@ -14,7 +14,7 @@ The full step-by-step instructions are in the Pre-Workshop Setup Guide distribut
 4. **VS Code** — With the Python, R, Claude Code, and LaTeX Workshop extensions
 5. **A TeX distribution** — MacTeX/BasicTeX (Mac) or TeX Live/MiKTeX (Windows)
 6. **R** (optional, for R users) and **Stata** (optional, requires your own licence)
-7. **Node.js (LTS)** — Not needed at the start. Install it before Session 5, where the `claude-ignore` hook is installed with `npm`.
+7. **Node.js (LTS)** — Not needed at the start. Install it before Session 4, where the `claude-ignore` hook is installed with `npm`.
 
 ### Verify Your Setup
 
