@@ -1,8 +1,11 @@
 """Build the climate-mentions corpus for the Session 4 LLM-coding exercise.
 
 Source: the daily Congressional Record (GovInfo collection CREC), 118th Congress.
-For a seeded random sample of Record days, the script:
-  1. downloads each day's package ZIP from the GovInfo API (one request per day),
+The script visits Record days in a seeded random order and stops once
+TARGET_PASSAGES passages are collected. A fixed number of days does not work:
+many Record days are pro forma sessions during recesses with no debate. For
+each day visited, the script:
+  1. downloads the day's package ZIP from the GovInfo API (one request per day),
   2. keeps speech granules -- granules with at least one member tagged
      role="SPEAKING" in the day's MODS metadata (this drops the Daily Digest,
      bill lists, and other non-speech sections),
