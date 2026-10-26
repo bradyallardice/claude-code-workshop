@@ -122,9 +122,17 @@ def list_crec_packages(api_key):
     return package_ids
 
 
-def sample_days(package_ids, n_days, seed):
-    """Draw a reproducible random sample of Record days, returned in date order."""
-    return sorted(random.Random(seed).sample(package_ids, n_days))
+def day_visit_order(package_ids, seed):
+    """Return all Record days in a reproducible random order."""
+    return random.Random(seed).sample(package_ids, len(package_ids))
+
+
+def cap_day_passages(day_rows, cap, seed):
+    """Keep at most `cap` of one day's passages, drawn at random, in document order."""
+    if len(day_rows) <= cap:
+        return day_rows
+    keep = sorted(random.Random(seed).sample(range(len(day_rows)), cap))
+    return [day_rows[i] for i in keep]
 
 
 # ── Parsing one day's package ───────────────────────────────────────────────
