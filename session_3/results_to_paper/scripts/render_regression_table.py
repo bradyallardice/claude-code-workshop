@@ -6,10 +6,9 @@ Output: tables/regression_table.tex, a tabular plus notes with NO document wrapp
         paper can pull it in with \\input{tables/regression_table.tex} inside its own
         table environment. Requires \\usepackage{booktabs} and \\usepackage{makecell}.
 
-Differs from session_2/scripts/render_regression_table.py in three ways: it writes a
-fragment instead of a standalone document, it labels each row with the coefficient name
-(the Session 2 version printed the outcome label on the first row and left the rest
-blank), and it takes its paths as arguments.
+The output is a fragment, not a standalone document, and each row is labelled with the
+coefficient name. The output folder is created if it is missing, and an existing output
+file is overwritten.
 
 Run from the session_3/results_to_paper folder:
     python scripts/render_regression_table.py
