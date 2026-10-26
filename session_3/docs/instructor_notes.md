@@ -78,7 +78,12 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 ### 27. Live demo: building a paper (8 min), taught inside block 25
 - **Position:** after the LaTeX Workshop shortcuts frame and before "LaTeX Errors and the Problems Pane" (slide 26). Participants watch Claude Code read the Problems pane before the pane is explained. Git has not been taught yet, so don't commit in the demo; the "Demo: The Full Loop" diagram (with the commit step) opens block 28 instead.
 - **Where the demo files are:** `session_3/paper/`. It holds `tables/` (`summary_stats.tex`, `regression_earnings.tex`), `figures/` (`enrollment.png`, `satisfaction.png`, `attrition.png`, `earnings_effect.png`, plus PNG renders of the two tables), and the **finished** `course_paper.tex` and `.pdf`. The data are `session_3/data/` and the code that made everything is `session_3/code/generate_course_analysis.py` (teacher-only). `session_3/output/` is older Swiss franc material, not the demo.
-- **Start from a clean folder so the finished paper doesn't give it away.** Before class: `mkdir session_3/demo_run && cp -r session_3/paper/tables session_3/paper/figures session_3/demo_run/`, then open `demo_run` in VS Code and have Claude Code create `course_paper.tex` from nothing. Show the finished `paper/course_paper.pdf` only as the fallback. Delete `demo_run` afterward (it is not covered by `sync_student.sh`).
+- **Start from a clean folder so Claude Code does not copy the finished paper.** Students do receive `paper/course_paper.tex` and `.pdf` (README: "for reference"); the point of `demo_run` is that Claude Code, which can read `paper/`, writes the paper from the tables and figures instead of reusing the finished one.
+- **Demo prep checklist (do before class):**
+  1. `mkdir session_3/demo_run && cp -r session_3/paper/tables session_3/paper/figures session_3/demo_run/`
+  2. Open `demo_run` itself in VS Code (not the repo root), so Claude Code cannot see `paper/`. Start a new conversation.
+  3. Prompt Claude Code to create `course_paper.tex` from nothing. Keep `paper/course_paper.pdf` open as the fallback if compilation eats the time.
+  4. **Delete `session_3/demo_run` afterward, before you commit or sync.** The auto-commit hook runs `git add -A` after every Edit/Write in the checkout and the post-commit hook runs the student sync, so files Claude Code writes in `demo_run` (including the from-scratch `course_paper.tex`) are committed, and nothing in `sync_student.sh` currently excludes `demo_run`. If you would rather not risk it, run the demo from a copy outside the repo (for example `~/claude_demo/demo_run`).
 - If compile problems eat the time, narrate and show the finished PDF.
 
 ### 28. Exercise: results → paper (25 min)
