@@ -87,7 +87,10 @@ git rm -f -r --quiet --ignore-unmatch session_2/tests/
 
 # Remove teacher-only scripts
 git rm -f --quiet --ignore-unmatch session_1/scripts/build_county_panel.py session_1/scripts/create_sample_data.py
+# All three languages: the county-panel exercise now runs in Session 2, so these are its answers
 git rm -f --quiet --ignore-unmatch session_2/scripts/build_county_panel.py
+git rm -f --quiet --ignore-unmatch session_2/scripts/build_county_panel.R
+git rm -f --quiet --ignore-unmatch session_2/scripts/build_county_panel.do
 git rm -f --quiet --ignore-unmatch session_4/scripts/base_regression.py
 git rm -f --quiet --ignore-unmatch session_4/scripts/buggy_script.py
 git rm -f --quiet --ignore-unmatch session_8/scripts/api_template.py
@@ -174,6 +177,9 @@ FORBIDDEN_PATHS=(
     session_1/docs/demo_prompt_correct.md
     session_1/docs/instructor_notes.md
     session_1/scripts/build_county_panel.py
+    session_2/scripts/build_county_panel.py
+    session_2/scripts/build_county_panel.R
+    session_2/scripts/build_county_panel.do
     session_1/scripts/create_sample_data.py
     session_4/capstone-template/INSTRUCTOR.md
     session_4/capstone-template/zotero/synthesis.md

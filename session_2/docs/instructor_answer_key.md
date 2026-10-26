@@ -87,13 +87,13 @@ Key pattern: the info treatment increases support for intervention; the other tr
 
 ---
 
-## Verification Steps (Warm-Up, Steps 1, 3, 4, 9, 10)
+## Verification Steps (Builder Step 0, Checker Tab, Steps 1, 3, 4, 9, 10)
 
 These are the checks added by the verification section. Values were computed directly from the files in `session_2/data/`.
 
 A runnable reference suite that checks all of these against the solution pipeline is in `session_2/tests/` (see its `README.md`). It is removed from the student branch by `sync_student.sh`.
 
-### Warm-up
+### Builder step 0 (was the warm-up)
 - After the student copies `docs/verification_protocol.md` into `CLAUDE.md`, asking "What verification rules apply in this project?" should return a description of the protocol. If Claude Code does not describe it, the file is in the wrong folder or has the wrong name.
 
 ### Checker tab (Part 1, two-tab version)
