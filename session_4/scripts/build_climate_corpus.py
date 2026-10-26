@@ -47,7 +47,11 @@ from datetime import datetime, timezone
 import pandas as pd
 # requests rather than urllib: requests verifies HTTPS with the certifi bundle,
 # which works on python.org macOS installs that lack system CA certificates.
-import requests
+try:
+    import requests
+except ImportError:
+    raise SystemExit("This script needs the 'requests' package, which is not part of the "
+                     "course setup. Install it with: python -m pip install requests")
 
 OUTPUT_DIR = os.path.join("session_4", "data", "climate_speeches")
 RAW_DIR = os.path.join(OUTPUT_DIR, "raw")

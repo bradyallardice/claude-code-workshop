@@ -2,6 +2,27 @@
 
 Workshop materials for learning how to use Claude Code as an AI-powered research assistant.
 
+## Start of every session: one command
+
+Copy the line for your computer, change the last number to today's session, and run it.
+
+**Mac** (Terminal):
+```bash
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 1
+```
+
+**Windows** (PowerShell, not as Administrator). It asks which session:
+```powershell
+irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
+```
+
+It updates your copy of the course materials to today's version, copies today's
+folders into `my_workspace` (never overwriting work you already have there), copies
+today's slides, and opens `my_workspace` in VS Code. Check that the
+**Materials version** in the READY box matches the one on the screen.
+
+If anything fails: `tools/TROUBLESHOOTING.md`, or raise your red sticky note.
+
 ## Setup
 
 The full step-by-step instructions are in the Pre-Workshop Setup Guide distributed by the instructor. In summary:
