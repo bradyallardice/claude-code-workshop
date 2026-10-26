@@ -349,6 +349,7 @@ code .
         \item Identified the join key
         \item Handled cleaning steps
         \item Wrote a complete script
+        \item Saved the new code to a file
       \end{itemize}
     \end{column}
     \begin{column}{0.48\textwidth}
@@ -710,6 +711,22 @@ claude
   \alert{Nothing to follow along with here. Just watch; you'll do this yourself in the exercise.}
 \end{frame}
 
+\begin{frame}{Why Python}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Claude Code is substantially better at Python than Stata or R
+        \item The principles (task decomposition, verification, control) transfer to any language
+        \item Python is increasingly where the tools and ecosystem are for computational research
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \vspace{0.3em}
+      \includegraphics[width=\textwidth]{img/python_vs_r.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 \begin{frame}{Python Files: \texttt{.py} vs.\ \texttt{.ipynb}}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
@@ -910,6 +927,22 @@ claude
   \end{columns}
 \end{frame}
 
+\begin{frame}{The RA Analogy}
+  \begin{block}{How to Think About Claude Code}
+    Claude Code is like a research assistant who is:
+    \begin{itemize}
+      \item Extremely fast
+      \item Has read a lot
+      \item Will \textbf{never} say ``I don't know how to do that''
+    \end{itemize}
+    \vspace{0.3em}
+    Instead, it will just do it wrong and hand it in.
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{This course teaches you to capture the value while managing the risk.}
+\end{frame}
+
 \begin{frame}{A Tool Built for Software Engineers}
   Claude Code was designed for professional developers. Their world is different from ours.
 
@@ -938,22 +971,6 @@ claude
   \vspace{0.5em}
   The defaults, instincts, and shortcuts built into these tools reflect engineering priorities.\\
   \textbf{Using them well for research means overriding some of those defaults.}
-\end{frame}
-
-\begin{frame}{The RA Analogy}
-  \begin{block}{How to Think About Claude Code}
-    Claude Code is like a research assistant who is:
-    \begin{itemize}
-      \item Extremely fast
-      \item Has read a lot
-      \item Will \textbf{never} say ``I don't know how to do that''
-    \end{itemize}
-    \vspace{0.3em}
-    Instead, it will just do it wrong and hand it in.
-  \end{block}
-
-  \vspace{0.5em}
-  \textbf{This course teaches you to capture the value while managing the risk.}
 \end{frame}
 
 \begin{frame}{Do You Own It?}
@@ -1022,27 +1039,6 @@ claude
   \textbf{If you cannot verify a result, you should not delegate the task.}
 
 \end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  WHY PYTHON  [25:00–27:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Why Python}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \item Claude Code is substantially better at Python than Stata or R
-        \item The principles (task decomposition, verification, control) transfer to any language
-        \item Python is increasingly where the tools and ecosystem are for computational research
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \vspace{0.3em}
-      \includegraphics[width=\textwidth]{img/python_vs_r.png}
-    \end{column}
-  \end{columns}
-\end{frame}
-
 
 % ══════════════════════════════════════════════════════════════════
 %  EXERCISE  [37:00–47:00]
@@ -1334,6 +1330,32 @@ claude
 
   \vspace{0.5em}
   \alert{Effort is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
+\end{frame}
+
+% --- How Claude Code Works: the loop ---
+\begin{frame}{How Claude Code Works: Step by Step}
+  \small
+  Every request runs through the same sequence.
+
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}r@{\hspace{0.8em}}l@{\hspace{0.8em}}l@{}}
+    \multicolumn{3}{@{}l}{\alert{\textbf{Once, before you type anything}}} \\
+    1 & \textbf{Load}    & \texttt{CLAUDE.md}, your settings, and the tools it may use \\[0.3em]
+    \multicolumn{3}{@{}l}{\alert{\textbf{The loop: repeats until the task is done}}} \\
+    2 & \textbf{Read}    & your prompt \\
+    3 & \textbf{Gather}  & open files and search the project for what is relevant \\
+    4 & \textbf{Reason}  & decide the next step (the effort setting controls how hard) \\
+    5 & \textbf{Act}     & edit a file or run a command, asking your permission where required \\
+    6 & \textbf{Observe} & read the output or error that comes back, then return to step 3 \\[0.3em]
+    \multicolumn{3}{@{}l}{\alert{\textbf{When it stops}}} \\
+    7 & \textbf{Report}  & what it did and what it found \\
+  \end{tabular}
+
+  \vspace{0.4em}
+  \begin{alertblock}{Everything lands in context}
+    Each file read, command run, and result is added to the context window, which is finite.
+  \end{alertblock}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
