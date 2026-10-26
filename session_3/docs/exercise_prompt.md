@@ -59,7 +59,7 @@ For every model, reconcile the sample size: rows in, minus rows dropped (by reas
 
 9. **Audit report**, `output/audit_report.md`, **built from your matrix.** Use the six sections from the slides: tests run (passed, failed, skipped), requirements (each matrix row, its test, its result), not tested, numerical checks (your value against the independent value, with a tolerance), needs your call, not covered. A matrix row with no test goes under *Not tested*. Then read it as an adversary: are its gaps as visible as its passes?
 
-10. **Revise your `CLAUDE.md`.** Pick one gap the audit report exposed (a row with no test, a judgment call nobody checked, something under *Not covered*) and write the rule that would have caught it, in your own words: the failure, the rule, how you would notice a violation. Then open `docs/verification_protocol.md`, a reference protocol, and compare. Which of your rules does it lack? Which of its rules do you lack, and which failure of yours would each have prevented?
+10. **Revise your `CLAUDE.md`.** Pick one gap the audit report exposed (a row with no test, a judgment call nobody checked, something under *Not covered*) and write the rule that would have caught it, in your own words: the failure, the rule, how you would notice a violation. Then open `verification_protocol.md`, a reference protocol, and compare. It is in the course repo's `session_3/docs/` folder, and in your `my_workspace/session_3/docs/` copy, not in your `session_2` folder. Which of your rules does it lack? Which of its rules do you lack, and which failure of yours would each have prevented?
 
 11. **Commit.** Save the scripts, tests, matrix, output, table, report, and `CLAUDE.md`. (If git is not set up yet, do it after the git frames: `git init`, then commit.)
 
@@ -77,9 +77,9 @@ Open `my_workspace/session_3/results_to_paper` in VS Code (File â†’ New Window â
 
 The results are the same for everyone, so you can compare notes. They are not your own Part 3 output.
 
-1. **Set up git before anything else.** In the terminal, `git init`. Ask Claude Code to write a `.gitignore` for LaTeX build files (`*.aux`, `*.log`, `*.out`, `*.fdb_latexmk`, `*.fls`, `*.synctex.gz`) and for `.env` and `__pycache__/`. Then `git add -A && git commit -m "Paper skeleton"`.
+1. **Set up git before anything else.** In the terminal, check that you are inside `results_to_paper/` (`pwd`), then run `git init`. If your `my_workspace` folder is itself inside a git repository (for example the cloned course repo), `git init` here creates a nested repository: move your copy out of the course repo first. Ask Claude Code to write a `.gitignore` for LaTeX build files (`*.aux`, `*.log`, `*.out`, `*.fdb_latexmk`, `*.fls`, `*.synctex.gz`) and for `.env` and `__pycache__/`. Then `git add -A && git commit -m "Paper skeleton"`.
 
-2. **Render the table into the paper.** Ask Claude Code to run the render script, then compile `paper.tex`. Open `tables/regression_table.tex` and `results/regression_results.csv` yourself: does the table say what the CSV says? Commit.
+2. **Render the table into the paper.** Ask Claude Code to run the render script (it creates `tables/regression_table.tex`; the `tables/` folder does not exist until it runs), then compile `paper.tex`. Open `tables/regression_table.tex` and `results/regression_results.csv` yourself: does the table say what the CSV says? Commit.
 
 3. **Write the results paragraph.** Ask Claude Code to write the paragraph for the Results section from the table. Commit first, so you have a save point. VS Code shows you the diff before it applies the change: read it, then accept or reject it. If you accept it, say what you changed or would change. (If you accept and regret it later, `git checkout -- .` takes you back to the commit.)
 

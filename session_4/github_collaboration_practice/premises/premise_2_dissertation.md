@@ -10,7 +10,7 @@
 
 ## Chapter prompts
 
-Find your chapter number in `PAIRS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete night — feel free to riff, add characters, invent committee members. Don't try to match what other pairs are writing.
+Find your name next to a chapter number in `CHAPTERS.md` and write ~5 minutes on the matching prompt. Each prompt is a concrete night — feel free to riff, add characters, invent committee members. Don't try to match what other pairs are writing.
 
 **Chapter 1.** Night 1. The student wakes up and the dissertation has gained 400 words. The citations are real. The argument is better than anything they've written. In the margin, a comment reads: *"this is cleaner, yes?"*
 

@@ -13,3 +13,7 @@ data/*/administrative/
 # PDFs in zotero/pdfs/ intentionally ship for student reading.
 # Claude should query Zotero instead of mining the BibTeX directly.
 zotero/*.bib
+
+# The Zotero RDF carries the synthesis notes. Claude reads them through the
+# Zotero MCP, not from this file.
+zotero/capstone_library/capstone_library.rdf
