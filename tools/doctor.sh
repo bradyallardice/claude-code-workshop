@@ -44,7 +44,7 @@ echo "Workshop doctor — $(date '+%Y-%m-%d %H:%M')  platform: $PLATFORM"
 section "1. Folders"
 # A space in the home path breaks unquoted paths in some tools and hooks.
 case "$HOME" in
-    *" "*) warn "Your home folder path contains a space: $HOME" "tell the instructor; hooks in Session 5 need quoted paths [F01]" ;;
+    *" "*) warn "Your home folder path contains a space: $HOME" "tell the instructor; hooks need quoted paths [F01]" ;;
     *) pass "Home folder path has no spaces" ;;
 esac
 
@@ -236,8 +236,8 @@ if [ "$QUICK" -eq 0 ] && have claude; then
 fi
 
 # ---------------------------------------------------------------------------
-section "9. Node.js (needed only in Session 5)"
-if have npm; then pass "npm $(npm --version 2>/dev/null)"; else echo "  ----  npm not found (install Node.js LTS before Session 5)"; fi
+section "9. Node.js (optional; needed only for the claude-ignore demo)"
+if have npm; then pass "npm $(npm --version 2>/dev/null)"; else echo "  ----  npm not found (install Node.js LTS if you want to try the claude-ignore demo)"; fi
 
 # ---------------------------------------------------------------------------
 printf "\n\033[1m==================== SUMMARY ====================\033[0m\n"

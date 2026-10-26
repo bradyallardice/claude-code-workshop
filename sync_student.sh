@@ -138,14 +138,13 @@ git rm -f --quiet --ignore-unmatch session_3/option_b/exercise_2/figures/fx_rate
 # Session 3 Option B output: students generate merged_survey.csv themselves
 git rm -f --quiet --ignore-unmatch session_3/option_b/output/merged_survey.csv
 
-# Session 4 capstone (moved from session_5): keep student-facing materials, remove instructor-only notes.
+# Session 4 capstone template (optional material): keep student-facing files, remove instructor-only notes.
 git rm -f --quiet --ignore-unmatch session_4/capstone-template/INSTRUCTOR.md
-git rm -f --quiet --ignore-unmatch session_4/capstone-template/zotero/synthesis.md
-# Old Session 5 instructor notes, renamed on the move into session_4; the
+# Instructor notes for the retired Session 5 deck, kept as reference; the
 # instructor_notes.md pattern above does not match this filename.
 git rm -f --quiet --ignore-unmatch session_4/docs/instructor_notes_subagents_hooks.md
 
-# Session 4 Option B (moved from session_5; same answer files as the Session 3 copy)
+# Session 4 Option B (same answer files as the Session 3 copy)
 git rm -f -r --quiet --ignore-unmatch session_4/option_b/exercise_2/demo/
 git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.tex
 git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.pdf
@@ -207,7 +206,6 @@ FORBIDDEN_PATHS=(
     session_2/scripts/render_regression_table.py
     session_1/scripts/create_sample_data.py
     session_4/capstone-template/INSTRUCTOR.md
-    session_4/capstone-template/zotero/synthesis.md
     session_4/docs/instructor_notes_subagents_hooks.md
     session_4/option_b/exercise_2/demo
     session_4/option_b/exercise_2/paper.tex

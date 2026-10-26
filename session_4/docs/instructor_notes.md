@@ -35,7 +35,7 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 2. **Install the agents for the demos, each in the right workspace.** The two demos read different files, so they run from different folders (the slides say the same). `mkdir -p .claude/agents` first, since a fresh copy has no such folder.
    - **Referee:** run from the Session 3 workspace (`~/my_workspace/session_3`, or the repo root `session_3/` if you demo from the clone), where the paper is `paper/course_paper.tex` (from the repo root: `session_3/paper/course_paper.tex`). `cp ../session_4/agents/referee.md .claude/agents/`.
    - **Merge-checker:** run from the **Session 2** workspace. The agent reads `data/swiss_franc_survey.csv`, `data/respondent_demographics.csv`, `docs/codebook.md` and the merged file `output/merged_survey.csv`, none of which exist in `session_4/`. `output/merged_survey.csv` is removed on the student branch, so it exists only where the Session 2 merge was built (your teacher copy has it). `cp ../session_4/agents/merge-checker.md .claude/agents/`. Participants only see this demo; they do not need to run it.
-3. **Rehearse both demos once** and keep a fallback: `docs/referee_example_run.md` is a real run of the referee instructions on the Session 3 paper. For the checker demo, `session_2/docs/instructor_answer_key.md` ("Automated checker") has the expected values.
+3. **Rehearse both demos once** and keep a fallback: `admin/fallbacks/referee_example_run.md` is a real run of the referee instructions on the Session 3 paper. For the checker demo, `session_2/docs/instructor_answer_key.md` ("Automated checker") has the expected values.
 4. **Workflow demo (block 32, two frames).** The frames explain what a workflow is and why it costs more. The plan leaves the **demo script and its token cost undecided**, and asks to confirm the Workflow tool exists on the setup participants will use. Nothing in `session_4/` runs a workflow yet. Decide before the session, or present the two frames as concept only.
 5. **Zotero demo (block 35).** Needs Zotero running with the Zotero MCP and the practice collection `claude_code_zotero` (`docs/claude_code_zotero/`). Participants do not need it installed.
 
@@ -57,7 +57,7 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 
 ### 32. Subagents and swarms (14 min)
 - Reused frames come from the old Session 5 deck. "Fan-Out" is new and is the template for exercise 34. "Token Cost" explains why block 34 starts with two batches.
-- **Referee demo.** The definition is `agents/referee.md`. The example run in `docs/referee_example_run.md` was produced by a general-purpose agent given the file's body, not by a registered `referee` agent, so the live output will differ. The report's strongest points are the design/estimator mismatch (abstract says pre–post, only a post-period regression is run) and the 150 vs. 94 attendance question. **I have not verified either against `course_paper.tex` line by line.** Check them before presenting them as correct.
+- **Referee demo.** The definition is `agents/referee.md`. The example run in `admin/fallbacks/referee_example_run.md` was produced by a general-purpose agent given the file's body, not by a registered `referee` agent, so the live output will differ. The report's strongest points are the design/estimator mismatch (abstract says pre–post, only a post-period regression is run) and the 150 vs. 94 attendance question. **I have not verified either against `course_paper.tex` line by line.** Check them before presenting them as correct.
 - **Checker demo** is the automated version of Session 2 Part 1. The frame is adapted from `slides/pending_session4_frames.tex` (now incorporated; kept for reference). Your own more automated version may supersede it.
 - "Same model, different context": say this when presenting the verifier. A fresh agent removes the builder's context, not the model's blind spots.
 
@@ -104,9 +104,8 @@ Deck: `slides/session4_slides.tex`. Structure and clock come from `admin/course_
 
 ## Material in `session_4/` that no slide uses
 
-- **Debugging exercise.** `scripts/buggy_script.py` and `scripts/base_regression.py` are removed on the student branch and no slide or student-facing file refers to them. Only `demo_prompt.txt` (which tells the reader to extend `scripts/base_regression.py`) and `docs/instructor_notes_debugging.md` mention them. The deck has no debugging exercise.
-- **`demo_prompt.txt` and `demo_output/`** (finished regression tables) come from an earlier demo. They are not referenced by any slide or README and are not on the sync removal list, so students receive them.
-- **`docs/referee_example_run.md`** is the fallback for the referee demo and is on the student branch. It shows what the demo finds on the Session 3 paper.
+- **Debugging exercise.** `scripts/buggy_script.py` and `scripts/base_regression.py` are removed on the student branch and no slide or student-facing file refers to them. Only `docs/instructor_notes_debugging.md` mentions them. The deck has no debugging exercise.
+- **`admin/fallbacks/referee_example_run.md`** is the fallback for the referee demo. It is teacher-side only (not under `session_4/`), so it is not on the student branch.
 - **`option_b/`** has no instructions anywhere in the Session 4 materials.
 - **`github_collaboration_practice/`** is not on any slide. Its scaffold has 16 chapter files but the premises have prompts for chapters 1-8 only (see its `INSTRUCTOR.md`). Pre-assign chapters in `CHAPTERS.md` (there is no `PAIRS.md`).
 

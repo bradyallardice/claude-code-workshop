@@ -44,5 +44,5 @@ Exercise 1 needs the practice library `docs/claude_code_zotero/` imported into Z
 | `data/climate_speeches/` | Corpus and coding scheme for the fan-out exercise |
 | `scripts/compare_to_reference.py` | Checks agreement between your agents' codes and the reference codes |
 | `agents/referee.md`, `agents/merge-checker.md` | Example subagent definitions shown in the session. Copy one to `.claude/agents/` to use it |
-| `capstone-template/` | Self-guided capstone (back matter I of the slides). Not part of the session |
+| `capstone-template/` | Optional self-guided capstone material. No slide covers it and it is not part of the session |
 | `option_b/`, `github_collaboration_practice/` | Optional extra material |

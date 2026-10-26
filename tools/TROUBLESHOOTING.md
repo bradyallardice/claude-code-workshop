@@ -17,7 +17,7 @@
 ## Setup problems (codes printed by the checker)
 
 ### F01 — Space in your folder path, or repo inside OneDrive / Dropbox / iCloud
-Some tools split paths at spaces, and sync clients lock files while git is writing them. Clone the course repo straight into your home folder (`~/claude-code-workshop`), not into Desktop or Documents when those are synced by OneDrive. If your Windows username itself has a space, tell the instructor; the Session 5 hooks have been patched for this, but it is worth knowing.
+Some tools split paths at spaces, and sync clients lock files while git is writing them. Clone the course repo straight into your home folder (`~/claude-code-workshop`), not into Desktop or Documents when those are synced by OneDrive. If your Windows username itself has a space, tell the instructor; the capstone template's hooks have been patched for this, but it is worth knowing.
 
 ### F02 — Course repo not found / wrong branch / out of date
 Run the start-of-session command from the top of https://github.com/bradyallardice/claude-code-workshop. It downloads the course repo if it is missing and moves it to today's published version whatever branch it is on.
@@ -118,7 +118,7 @@ The scripts' paths start from `my_workspace` itself (`session_1/data/...`), so V
 ### F17 — "Usage limit reached"
 Pro plans have a rolling 5-hour limit. Switch to your partner's laptop and keep going. To make your allowance last: `/model sonnet` (not Opus), `/clear` between unrelated tasks, and give one well-specified instruction rather than many small follow-ups.
 
-### F18 — Session 5 capstone: hook errors on Windows
+### F18 — Capstone template: hook errors on Windows
 Symptoms: `No such file or directory` mentioning only the first part of your folder path, or `python3: command not found` in hook output.
 - Folder path with a space (e.g. OneDrive): make sure your repo has the patched `.claude/settings.json`, where the hook commands quote `"$CLAUDE_PROJECT_DIR/..."`.
 - Python: make sure `py --version` or `python --version` works (see F07). The patched hooks find either.
@@ -127,7 +127,7 @@ Symptoms: `No such file or directory` mentioning only the first part of your fol
 ### F19 — Capstone README says `rsync` but you are on Windows
 From inside your empty team repo:
 ```bash
-cp -R /path/to/claude-code-workshop/session_5/capstone-template/. .                                   # Git Bash or Mac
+cp -R /path/to/claude-code-workshop/session_4/capstone-template/. .                                   # Git Bash or Mac
 ```
 ```powershell
 Copy-Item -Path "$HOME\claude-code-workshop\session_5\capstone-template\*" -Destination . -Recurse -Force   # PowerShell

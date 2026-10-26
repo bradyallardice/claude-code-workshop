@@ -1,3 +1,5 @@
+Session 5 is no longer taught; kept as reference.
+
 # Instructor Notes: Subagents, Hooks, and the Capstone (Session 5 deck)
 
 Deck: `slides/session5_slides.tex` ("Agents, Hooks, and a Paper"). This file was empty (0 bytes) and had been empty since before the `session_5/` to `session_4/` move; nothing earlier in git history existed to restore. It is written from what the slides actually require. It was not rehearsed.
