@@ -66,11 +66,11 @@ def main():
     # Columns of the table: (key, label, formula, data, weighted)
     specs = [
         ("c1", "(1) Base", outcome + "C(treatment)", df, True),
-        ("c2", "(2) Unweighted", outcome + "C(treatment)", df, False),
-        ("c3", "(3) + Basic controls", outcome + "C(treatment) + " + BASIC_CONTROLS, df, True),
-        ("c4", "(4) Full controls", outcome + "C(treatment) + " + CONTROLS, df, True),
-        ("c5", "(5) Any information", outcome + "any_info + " + BASIC_CONTROLS, df, True),
-        ("c6", "(6) Urban only", outcome + "C(treatment) + " + BASIC_CONTROLS,
+        ("c2", "(2) Unwtd.", outcome + "C(treatment)", df, False),
+        ("c3", "(3) Basic", outcome + "C(treatment) + " + BASIC_CONTROLS, df, True),
+        ("c4", "(4) Full", outcome + "C(treatment) + " + CONTROLS, df, True),
+        ("c5", "(5) Any", outcome + "any_info + " + BASIC_CONTROLS, df, True),
+        ("c6", "(6) Urban", outcome + "C(treatment) + " + BASIC_CONTROLS,
          df[df["urban_rural"] >= 2], True),
     ]
     coef_map = {
@@ -97,10 +97,11 @@ def main():
                                  pvalue=result.pvalues[term]))
     rows.append(dict(row_type="note", display_order=0, value_str=(
         "Logit coefficients (log-odds), model-based standard errors in parentheses. "
-        "Reference arm: control. Columns (1), (3)--(6) use survey weights; column (2) does not. "
-        "Columns (3)--(6) control for FX status, age, female, education, and urban/rural; "
+        "Reference arm: control. Columns (1) and (3)--(6) use survey weights; column (2) does not. "
+        "Columns (3)--(6) control for FX status, age, female, education, and settlement size; "
         "column (4) adds income quintile and left-right, which restricts the sample to "
-        "respondents with both. Column (6) keeps urban respondents only.")))
+        "respondents with both. Column (5) replaces the three arms with a single any-information "
+        "indicator. Column (6) keeps respondents in small or big urban areas only.")))
 
     columns = ["row_type", "display_order", "spec", "dv", "dv_label", "coef_type",
                "coef", "se", "pvalue", "value_num", "value_str", "fe_name"]

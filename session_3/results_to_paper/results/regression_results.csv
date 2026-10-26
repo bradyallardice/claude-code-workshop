@@ -5,32 +5,32 @@ r2,0,c1,NA,NA,NA,NA,NA,NA,0.0021711351793132216,NA,NA
 coefficient,0,c1,supports_intervention,Supports intervention,info,0.30220553926942195,0.1257239255359834,0.01622904843617727,NA,NA,NA
 coefficient,1,c1,supports_intervention,Supports intervention,history,0.12306822925026353,0.1280699083843549,0.3365794650420234,NA,NA,NA
 coefficient,2,c1,supports_intervention,Supports intervention,hungary,0.19413019098907522,0.12950947365406332,0.13388266643414307,NA,NA,NA
-spec_label,1,c2,NA,NA,NA,NA,NA,NA,NA,(2) Unweighted,NA
+spec_label,1,c2,NA,NA,NA,NA,NA,NA,NA,(2) Unwtd.,NA
 n,0,c2,NA,NA,NA,NA,NA,NA,2036.0,NA,NA
 r2,0,c2,NA,NA,NA,NA,NA,NA,0.00227716883660789,NA,NA
 coefficient,0,c2,supports_intervention,Supports intervention,info,0.290308236215351,0.1255859438079894,0.020798081527089896,NA,NA,NA
 coefficient,1,c2,supports_intervention,Supports intervention,history,0.04745415862669178,0.12741226482217452,0.7095609841505345,NA,NA,NA
 coefficient,2,c2,supports_intervention,Supports intervention,hungary,0.14490949477740525,0.12883890922304095,0.26070179237611557,NA,NA,NA
-spec_label,2,c3,NA,NA,NA,NA,NA,NA,NA,(3) + Basic controls,NA
+spec_label,2,c3,NA,NA,NA,NA,NA,NA,NA,(3) Basic,NA
 n,0,c3,NA,NA,NA,NA,NA,NA,2035.0,NA,NA
 r2,0,c3,NA,NA,NA,NA,NA,NA,0.019285814827923353,NA,NA
 coefficient,0,c3,supports_intervention,Supports intervention,info,0.32433286957088947,0.12741409221881597,0.0109120633272242,NA,NA,NA
 coefficient,1,c3,supports_intervention,Supports intervention,history,0.13333616497375908,0.1296567145107599,0.30377186370116793,NA,NA,NA
 coefficient,2,c3,supports_intervention,Supports intervention,hungary,0.18540983426490215,0.1314946954188214,0.15853448740341636,NA,NA,NA
-spec_label,3,c4,NA,NA,NA,NA,NA,NA,NA,(4) Full controls,NA
+spec_label,3,c4,NA,NA,NA,NA,NA,NA,NA,(4) Full,NA
 n,0,c4,NA,NA,NA,NA,NA,NA,1151.0,NA,NA
 r2,0,c4,NA,NA,NA,NA,NA,NA,0.022753557881979747,NA,NA
 coefficient,0,c4,supports_intervention,Supports intervention,info,0.2665873228377246,0.17036219044552242,0.11762352388894061,NA,NA,NA
 coefficient,1,c4,supports_intervention,Supports intervention,history,0.2611245341421763,0.17401956443496197,0.13347277021111953,NA,NA,NA
 coefficient,2,c4,supports_intervention,Supports intervention,hungary,0.22547181671954275,0.1759604699446769,0.20006104409666547,NA,NA,NA
-spec_label,4,c5,NA,NA,NA,NA,NA,NA,NA,(5) Any information,NA
+spec_label,4,c5,NA,NA,NA,NA,NA,NA,NA,(5) Any,NA
 n,0,c5,NA,NA,NA,NA,NA,NA,2035.0,NA,NA
 r2,0,c5,NA,NA,NA,NA,NA,NA,0.018375934764377266,NA,NA
 coefficient,3,c5,supports_intervention,Supports intervention,any_info,0.21764772550184625,0.10715694671595553,0.042243667422796484,NA,NA,NA
-spec_label,5,c6,NA,NA,NA,NA,NA,NA,NA,(6) Urban only,NA
+spec_label,5,c6,NA,NA,NA,NA,NA,NA,NA,(6) Urban,NA
 n,0,c6,NA,NA,NA,NA,NA,NA,1208.0,NA,NA
 r2,0,c6,NA,NA,NA,NA,NA,NA,0.026389887342040952,NA,NA
 coefficient,0,c6,supports_intervention,Supports intervention,info,0.325714616539273,0.16719681078636,0.05140406534606057,NA,NA,NA
 coefficient,1,c6,supports_intervention,Supports intervention,history,0.24231268014630594,0.1689193022668761,0.15143310499667534,NA,NA,NA
 coefficient,2,c6,supports_intervention,Supports intervention,hungary,0.22105913652237266,0.1690242962884515,0.19092276505004713,NA,NA,NA
-note,0,NA,NA,NA,NA,NA,NA,NA,NA,"Logit coefficients (log-odds), model-based standard errors in parentheses. Reference arm: control. Columns (1), (3)--(6) use survey weights; column (2) does not. Columns (3)--(6) control for FX status, age, female, education, and urban/rural; column (4) adds income quintile and left-right, which restricts the sample to respondents with both. Column (6) keeps urban respondents only.",NA
+note,0,NA,NA,NA,NA,NA,NA,NA,NA,"Logit coefficients (log-odds), model-based standard errors in parentheses. Reference arm: control. Columns (1) and (3)--(6) use survey weights; column (2) does not. Columns (3)--(6) control for FX status, age, female, education, and settlement size; column (4) adds income quintile and left-right, which restricts the sample to respondents with both. Column (5) replaces the three arms with a single any-information indicator. Column (6) keeps respondents in small or big urban areas only.",NA
