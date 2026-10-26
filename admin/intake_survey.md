@@ -18,7 +18,7 @@ Notation: **(one)** = choose one; **(all)** = select all that apply; **(text)** 
 
 ## Section 1. About you
 
-1. **Your name** (text)
+1. **Your name (optional)** (text, *optional*)
 2. **Institution and department** (text)
 3. **What is your current position?** (one) [+Other]
    Master's student · PhD student, years 1-2 · PhD student, year 3 or later · Postdoctoral researcher · Assistant professor / lecturer · Associate or full professor · Research assistant or research staff · Policy, NGO, or industry researcher
@@ -51,33 +51,27 @@ Notation: **(one)** = choose one; **(all)** = select all that apply; **(text)** 
     Free only · Individual paid ~20/month · Premium individual ~100-200/month · Team/education/enterprise via institution · Pay-as-you-go API · Not sure
 16. **Who pays for your paid AI tools?** (all) [+Other]
     I pay myself · University or department · Research grant · Employer outside a university · Not applicable: free tools only
-17. **Do you currently have a Claude plan or API account that works with Claude Code?** (one)
-    Yes · No, but I plan to get one before the course · No, and I'm not sure I can get one · Not sure
 
 ## Section 3. What you use AI for, and agentic AI
 
 *Section note defines agentic AI: tools that take actions on your computer (reading/editing files, running code) rather than only replying in chat. Examples: Claude Code, Cursor agent mode, OpenAI Codex, Gemini CLI.*
 
-18. **Which tasks do you currently use AI for?** (all) [+Other]
+17. **Which tasks do you currently use AI for?** (all) [+Other]
     Writing new code · Debugging or explaining code · Cleaning/reshaping/merging data · Translating code between languages · Explaining statistical methods · Feedback on research design · Finding literature · Summarizing papers · Brainstorming research ideas · Drafting text · Editing/proofreading · Translating text · LaTeX/tables/figures · Slides · Teaching · Emails and admin · I don't use AI for work
-19. **Describe the single most useful thing AI has done for your research so far.** (para, *optional*)
-20. **Describe a time AI gave you something wrong or unhelpful for your research. How did you notice?** (para, *optional*)
-21. **Which statement best describes your experience with agentic AI tools?** (one)
+18. **Describe the single most useful thing AI has done for your research so far.** (para, *optional*)
+19. **Describe a time AI gave you something wrong or unhelpful for your research. How did you notice?** (para, *optional*)
+20. **Which statement best describes your experience with agentic AI tools?** (one)
     Hadn't heard of them · Heard of them, never tried · Tried once or twice · Use occasionally · Use regularly as part of my workflow
-22. **If you have used an agentic tool, which one, and what did you use it for?** (para, *optional*)
-23. **What concerns, if any, do you have about using AI in your research?** (all, *optional*) [+Other]
+21. **If you have used an agentic tool, which one, and what did you use it for?** (para, *optional*)
+22. **What concerns, if any, do you have about using AI in your research?** (all, *optional*) [+Other]
     Errors I don't catch · Not understanding the code it wrote · Reproducibility · Confidential data sent to a provider · Academic integrity / disclosure / policies · Losing my own skills · Cost · Environmental impact · No particular concerns
-24. **Does your research use confidential or restricted-access data?** (one)
+23. **Does your research use confidential or restricted-access data?** (one)
     Yes · No · Not sure
 
 ## Section 4. What you want from the course
 
-25. **What do you want to get out of this course?** (para)
-26. **Is there a specific task in your own research that you would like to be able to do with AI by the end of the course?** (para)
-27. **Which course topics are you most interested in?** (all, max 5)
+24. **What do you want to get out of this course?** (para)
+25. **Is there a specific task in your own research that you would like to be able to do with AI by the end of the course?** (para)
+26. **Which course topics are you most interested in?** (all, max 5)
     Agentic AI vs. chatbots · Managing long sessions and context · Verifying AI output · Research pipelines · git · LaTeX in VS Code · GitHub collaboration · Custom skills · MCP (e.g., Zotero) · Subagents · Hooks and automation · Claude API
-28. **For the capstone, which track are you leaning toward?** (one)
-    Guided replication · Own project · Undecided
-29. **Have you completed the prework setup?** (one)
-    Yes, everything works · Partly · Not yet started
-30. **Anything else I should know?** (para, *optional*)
+27. **Anything else I should know?** (para, *optional*)

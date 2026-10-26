@@ -11,7 +11,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 # ── Load merged data ─────────────────────────────────────────────
-df = pd.read_csv("session_5/option_b/output/merged_survey.csv")
+df = pd.read_csv("session_4/option_b/output/merged_survey.csv")
 
 required_cols = ["supports_intervention", "treatment", "fx_status",
                  "age", "female", "ed_level", "urban_rural",
@@ -170,10 +170,10 @@ for var, label in summary_vars.items():
     )
 summary_latex += "\\bottomrule\n\\end{tabular}\n"
 
-os.makedirs("session_5/option_b/exercise_2/tables", exist_ok=True)
-with open("session_5/option_b/exercise_2/tables/summary_stats.tex", "w") as f:
+os.makedirs("session_4/option_b/exercise_2/tables", exist_ok=True)
+with open("session_4/option_b/exercise_2/tables/summary_stats.tex", "w") as f:
     f.write(summary_latex)
-print("\n✓ Saved: session_5/option_b/exercise_2/tables/summary_stats.tex")
+print("\n✓ Saved: session_4/option_b/exercise_2/tables/summary_stats.tex")
 
 # ── Export main regression table ─────────────────────────────────
 def stars(p):
@@ -225,6 +225,6 @@ main_latex += (
     "\\end{tabular}\n"
 )
 
-with open("session_5/option_b/exercise_2/tables/main_table.tex", "w") as f:
+with open("session_4/option_b/exercise_2/tables/main_table.tex", "w") as f:
     f.write(main_latex)
-print("✓ Saved: session_5/option_b/exercise_2/tables/main_table.tex")
+print("✓ Saved: session_4/option_b/exercise_2/tables/main_table.tex")

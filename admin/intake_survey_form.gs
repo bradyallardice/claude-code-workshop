@@ -103,7 +103,7 @@ function addSection(form, title, helpText) {
 function addAboutYouSection(form) {
   form.addSectionHeaderItem().setTitle('About you');
 
-  addShortText(form, 'Your name');
+  addShortText(form, 'Your name (optional)', { required: false });
 
   addShortText(form, 'Institution and department',
     { helpText: 'e.g., IBEI; UPF, Department of Political and Social Sciences' });
@@ -248,13 +248,6 @@ function addCurrentAiUseSection(form) {
     'My employer (outside a university)',
     'Not applicable: I only use free tools',
   ], { allowOther: true, helpText: 'Select all that apply.' });
-
-  addSingleChoice(form, 'Do you currently have a Claude plan or API account that works with Claude Code (Claude Pro, Max, Team/Enterprise, or Anthropic API credits)?', [
-    'Yes',
-    'No, but I plan to get one before the course',
-    'No, and I\'m not sure I can get one',
-    'Not sure',
-  ], { helpText: 'Claude Code requires one of these. This tells me whether access will be a problem for anyone.' });
 }
 
 /** Section 3: what they use AI for and their experience with agentic tools. */
@@ -347,18 +340,6 @@ function addCourseGoalsSection(form) {
       .requireSelectAtMost(5)
       .setHelpText('Please select at most five.')
       .build());
-
-  addSingleChoice(form, 'For the capstone, which track are you leaning toward?', [
-    'Guided replication of a provided paper',
-    'Integrating Claude Code into one stage of my own project',
-    'Undecided',
-  ]);
-
-  addSingleChoice(form, 'Have you completed the prework setup (Claude Code, Python, git, VS Code, LaTeX)?', [
-    'Yes, everything is installed and working',
-    'Partly: some things are installed or not working yet',
-    'Not yet started',
-  ]);
 
   addLongText(form, 'Anything else I should know (accessibility needs, scheduling constraints, questions)?',
     { required: false });

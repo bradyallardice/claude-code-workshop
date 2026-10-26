@@ -31,7 +31,7 @@ Each two-person team creates its own GitHub repo on `github.com`. Your team repo
 
 Start by opening this folder and reading this README:
 
-From your copied Session 5 folder:
+From your copied Session 4 folder:
 
 ```bash
 cd capstone-template
@@ -41,7 +41,7 @@ code README.md
 Or, from the course repo root:
 
 ```bash
-cd session_5/capstone-template
+cd session_4/capstone-template
 code README.md
 ```
 
@@ -79,13 +79,13 @@ Git may warn that you cloned an empty repository. That is expected.
 
 ### 3. Owner copies the capstone files into the team repo
 
-From inside the empty team repo, copy the contents of the course repo's `session_5/capstone-template/` folder:
+From inside the empty team repo, copy the contents of the course repo's `session_4/capstone-template/` folder:
 
 ```bash
-rsync -av --exclude='.git' /path/to/course-repo/session_5/capstone-template/ ./
+rsync -av --exclude='.git' /path/to/course-repo/session_4/capstone-template/ ./
 ```
 
-Replace `/path/to/course-repo` with the location of your course repo or copied Session 5 folder. The trailing slash after `session_5/capstone-template/` matters: it copies the contents of the folder, including hidden files like `.claude/` and `.claudeignore`.
+Replace `/path/to/course-repo` with the location of your course repo or copied Session 4 folder. The trailing slash after `session_4/capstone-template/` matters: it copies the contents of the folder, including hidden files like `.claude/` and `.claudeignore`.
 
 Check that the files are in the right place:
 
