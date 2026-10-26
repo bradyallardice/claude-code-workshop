@@ -140,7 +140,7 @@ The prompt is on the slide. It uses the exchange-rate file, not the survey (see 
 - Background, files, research question. Point out that the demographics file has more rows than the survey: the join type is theirs to decide.
 
 ### 22. Exercise Part 1: learn the data, merge, verify (35 min)
-- The core idea: **participants learn the data themselves.** Step 1 is done without Claude Code: the codebook, a look at the CSVs, then `expectations.md` written by hand. Enforce this. It is the part that never gets automated.
+- The core idea: **participants learn the data themselves.** Step 1 is done without Claude Code: the codebook, a look at the CSVs, then expectations written by hand in `session_2/expectations.md`, a nearly empty file that says only "Write down your expectations here." Enforce this. It is the part that never gets automated.
 - Everything step 1 asks can be answered from the codebook. A complete `expectations.md` is sketched in the answer key ("Step 1").
 - Step 2 has Claude Code write its tests from their file, so the expectations reach it through a file, not the chat.
 - Test the tests: the duplicated row must belong to a **survey respondent** (answer key, "Fault injection").

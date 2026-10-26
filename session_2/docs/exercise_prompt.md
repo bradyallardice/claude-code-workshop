@@ -27,7 +27,7 @@ Learning the data is the part you never delegate. Write down what a correct merg
 | 27–31 | Debrief |
 | 31–35 | Step 4: write your own verification rules in `CLAUDE.md` |
 
-1. **Learn the data and write your expectations, without Claude Code.** Read `docs/codebook.md` and open both CSV files in `data/`. Then write `expectations.md` in your `session_2` folder, answering:
+1. **Learn the data and write your expectations, without Claude Code.** Read `docs/codebook.md` and open both CSV files in `data/`. Then write your expectations in `expectations.md`, which is already in your `session_2` folder. Cover:
    - How many rows should the merged file have, and which key links the two files?
    - Which join type, and why? What happens to survey respondents with no demographics row?
    - Which variables have missing values, and how many do you expect?

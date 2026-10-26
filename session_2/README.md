@@ -76,7 +76,7 @@ suffix: `backup-prework-2`.
    slides).
 4. Read `docs/codebook.md` to understand the Swiss franc shock data in `data/`.
 5. Exercise 2: Part 1 of `docs/exercise_prompt.md`. Learn the data and write
-   your own expectations first, then merge and verify against them.
+   your expectations in `expectations.md` (it's in this folder) first, then merge and verify against them.
 
 **Keep this folder after today.** Parts 2 and 3 of the exercise (estimation,
 robustness, and a LaTeX table) are in Session 3, and continue here.
