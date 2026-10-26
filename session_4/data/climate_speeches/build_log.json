@@ -1,0 +1,72 @@
+{
+ "built_at": "2026-10-26T12:48:07+00:00",
+ "source": "GovInfo API, collection CREC",
+ "date_range": [
+  "2023-01-03",
+  "2025-01-03"
+ ],
+ "n_record_days_in_range": 413,
+ "seed": 20261026,
+ "target_passages": 60,
+ "max_passages_per_day": 15,
+ "days_visited_in_order": [
+  "CREC-2023-03-30",
+  "CREC-2024-12-27",
+  "CREC-2023-07-06",
+  "CREC-2024-08-09",
+  "CREC-2023-04-24",
+  "CREC-2024-02-23",
+  "CREC-2023-12-15",
+  "CREC-2024-04-11",
+  "CREC-2023-03-09",
+  "CREC-2023-01-05",
+  "CREC-2023-12-13",
+  "CREC-2024-05-10",
+  "CREC-2023-11-02",
+  "CREC-2023-10-16",
+  "CREC-2023-10-23",
+  "CREC-2023-06-06",
+  "CREC-2024-07-15",
+  "CREC-2024-06-05"
+ ],
+ "days_contributing": [
+  "CREC-2023-01-05",
+  "CREC-2023-03-09",
+  "CREC-2023-03-30",
+  "CREC-2023-06-06",
+  "CREC-2023-11-02",
+  "CREC-2023-12-13",
+  "CREC-2024-04-11",
+  "CREC-2024-05-10",
+  "CREC-2024-06-05",
+  "CREC-2024-07-15"
+ ],
+ "keyword_pattern": "\\bclimat\\w*",
+ "unit": "paragraph within a speech granule",
+ "counts": {
+  "passages": 63,
+  "granules": 26,
+  "by_day": {
+   "2023-01-05": 1,
+   "2023-03-09": 8,
+   "2023-03-30": 15,
+   "2023-06-06": 7,
+   "2023-11-02": 15,
+   "2023-12-13": 7,
+   "2024-04-11": 2,
+   "2024-05-10": 1,
+   "2024-06-05": 6,
+   "2024-07-15": 1
+  },
+  "by_attribution": {
+   "marker": 57,
+   "unattributed": 5,
+   "single_speaker": 1
+  },
+  "by_party": {
+   "D": 41,
+   "R": 17,
+   "none": 5
+  }
+ }
+}
