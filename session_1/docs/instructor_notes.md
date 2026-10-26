@@ -48,6 +48,12 @@ group shifts everything later.
 
 ### 3. Live demo (8 min)
 - Run sheet: `admin/session1_demo_instructions.md`. The demo prompt is in `session_1/docs/demo_prompt.md`; have it ready to paste.
+- **Prep checklist (day before / morning of):**
+  1. From the teacher repo root run `./start_demo.sh`. It rebuilds `~/claude_demo` (the clean workspace: only `session_1/data/`, the demo prompt, a demo `CLAUDE.md`) and opens it in VS Code. Run the demo there, never from the teacher checkout, because Claude Code launched from the teacher folder can read the finished scripts, `output/` and `decisions.md`.
+  2. Rehearse once, then run `./start_demo.sh` again so class starts from a clean folder (every rebuild wipes `~/claude_demo`).
+  3. At the start: VS Code title says `claude_demo`; start a **new** Claude Code session (not a resumed one; old teacher-folder sessions contain the answers); paste the prompt from `~/claude_demo/session_1/docs/demo_prompt.md`. Expect permission prompts.
+  4. Part 1 (web chat) uses the data copies in `session_1/demo_chat_upload/` (teacher repo; untracked in git, so it exists only on your machine). The 2020 uncompressed CSV there is about 32 MB and may exceed the chat tool's per-file limit; upload the `.gz` for that year instead.
+- **Timing risk:** the prompt asks for a merge, regressions, a LaTeX write-up and PDF compilation, which is more than 8 minutes of live work. Plan to narrate and show the finished output for the later steps.
 - Goal: wow factor. Show Claude Code reading two datasets, writing a merge script, and running it. Don't narrate every step; let them watch.
 - If the demo runs long (network lag, errors), narrate what's happening and move on. You can show the finished output.
 - What Just Happened: the key moment is that Claude Code made an analytical decision on its own (the "alert" slide). This sets up the course theme.
