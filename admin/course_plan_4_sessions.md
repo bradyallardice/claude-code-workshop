@@ -195,12 +195,11 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 
 ---
 
-## Open decision
+## Session folders (decided)
 
-**Session folder numbering.** Session 3 now uses the Swiss franc material in `session_2/`, and Session 4 draws on `session_4/` and `session_5/`.
+`session_5/` was merged into `session_4/` (capstone template, `option_b/`, old Session 5 instructor notes as `docs/instructor_notes_subagents_hooks.md`, README). `session_1/` to `session_3/` keep their numbers: Session 2's county-panel exercise uses the Session 1 workspace, and Session 3's Part 2 continues in the Session 2 workspace. `sync_student.sh` strips the moved teacher-only files.
 
-- **Renumbering** keeps the ritual ("copy `session_N/`") consistent with the session number. But hardcoded `session_N/` paths appear in 15 files for `session_1/`, 31 for `session_2/`, 19 for `session_3/`, and 4 each for `session_4/` and `session_5/` (counted across each folder and the slide sources).
-- **Keeping the names** avoids that work, but students would copy a folder whose number doesn't match the session.
+The slide files themselves (`slides/session5_slides.tex` etc.) are not yet renamed or merged; that happens with the deck restructuring.
 
 ## Risks
 
