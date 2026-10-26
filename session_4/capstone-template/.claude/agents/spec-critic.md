@@ -1,6 +1,6 @@
 ---
 name: spec-critic
-description: Audit capstone analysis scripts for silent data loss, specification drift, wrong reshape logic, missing checks, and unsupported analytical choices. Use before interpreting results or opening an analysis PR.
+description: Audit capstone analysis scripts for silent data loss, specification drift, wrong reshape logic, missing checks, and unsupported analytical choices. Use before interpreting results or merging an analysis branch.
 tools: Read, Grep, Glob
 model: haiku
 ---

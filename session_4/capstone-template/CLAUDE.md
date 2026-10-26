@@ -13,7 +13,7 @@ This is a group capstone for the AI-assisted research workflow workshop. You are
 - `paper/paper.tex` — your research note; edit this
 - `paper/refs.bib` — bibliography; add entries here
 - `paper/tables/` — LaTeX tables go here (populated by `latex-regression-table`)
-- `zotero/` — synthesis and annotated PDF provided by instructor
+- `zotero/` — `capstone_library/capstone_library.rdf` is the library you import into Zotero (it carries the instructor's synthesis notes and the PDFs as attachments); `pdfs/` holds the same PDFs for reading; `capstone_library.bib` is a citation-only copy. Read the notes through Zotero, not from these files
 
 ## Your extension assignment
 
@@ -34,7 +34,8 @@ Choose one of:
 - Data path: `data/clean_AJPS.csv`
 - `reference_code/` is read-only — copy and adapt, never edit in place
 - Figures save to `paper/figures/`, tables to `paper/tables/`
-- Work on `replication` or `extension`, not directly on `main`, after the setup commit
+- Work on your lane's branch (`lit/<name>` or `analysis/<name>`), not directly on `main`, after the setup commit
+- Review the diff (`git diff main..HEAD`) before merging a branch into `main`; run the merge yourself in a terminal
 
 ## Skills available
 
@@ -60,7 +61,7 @@ Use these named subagents when you need a separate reviewer role:
 |------|----------|
 | Audit analysis code before interpreting results | `spec-critic` |
 | Check that paper claims match figures/tables/scripts | `results-trace-auditor` |
-| Review the branch diff before opening or merging a PR | `pr-referee` |
+| Review the branch diff before it is merged (or before opening a PR, if you use GitHub) | `pr-referee` |
 | Consolidated prose review of the full note | `note-reviewer` |
 
 ## Hooks installed
