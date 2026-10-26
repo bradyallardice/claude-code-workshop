@@ -684,33 +684,6 @@ claude
   One editor, one window: Claude writes the code, and you run it without leaving the screen.
 \end{frame}
 
-% ── Live Demo: Claude Code in VS Code on a Real Project ──────────
-\begin{frame}{Live Demo: What Claude Code Looks Like in Practice}
-  \textbf{I'll switch to VS Code and show you Claude Code working on a real project of mine:} \alert{AI Adoption Prediction}, a project on how well sociodemographics predict individual AI adoption across countries.
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{The project:}
-      \begin{itemize}
-        \item Research folder: \texttt{src/} (scripts), \texttt{data/}, \texttt{docs/}, \texttt{outputs/}, a README
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{What to watch for:}
-      \begin{itemize}
-        \item Where Claude Code sits in the VS Code window
-        \item How it \textbf{reads} files in the project folder
-        \item How it \textbf{proposes edits} as a diff
-        \item How you \textbf{approve, reject, or redirect} each change
-      \end{itemize}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.5em}
-  \alert{Nothing to follow along with here. Just watch; you'll do this yourself in the exercise.}
-\end{frame}
-
 \begin{frame}{Why Python}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
@@ -1106,6 +1079,176 @@ claude
   The model, the context, and the skills that determine what you get out of them.
 \end{frame}
 
+% --- How Claude Code Works: the loop ---
+\begin{frame}{How Claude Code Works: Step by Step}
+  \small
+  Every request runs through the same sequence.
+
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}r@{\hspace{0.8em}}l@{\hspace{0.8em}}l@{}}
+    \multicolumn{3}{@{}l}{\alert{\textbf{Once, before you type anything}}} \\
+    1 & \textbf{Load}    & the standing instructions and settings it starts with, and the tools it may use \\[0.3em]
+    \multicolumn{3}{@{}l}{\alert{\textbf{The loop: repeats until the task is done}}} \\
+    2 & \textbf{Read}    & your prompt \\
+    3 & \textbf{Gather}  & open files and search the project for what is relevant \\
+    4 & \textbf{Reason}  & decide the next step \\
+    5 & \textbf{Act}     & edit a file or run a command, asking your permission where required \\
+    6 & \textbf{Observe} & read the output or error that comes back, then return to step 3 \\[0.3em]
+    \multicolumn{3}{@{}l}{\alert{\textbf{When it stops}}} \\
+    7 & \textbf{Report}  & what it did and what it found \\
+  \end{tabular}
+
+  \vspace{0.4em}
+  \begin{alertblock}{Everything lands in context}
+    Each file read, command run, and result is added to the context window, which is finite.
+  \end{alertblock}
+\end{frame}
+
+% ── Opening Claude Code ──────────────────────────────────────────
+\begin{frame}{Opening Claude Code Inside the Project}
+  With your project folder open in VS Code, there are four ways to open Claude Code. They all open the same agent:
+
+  \vspace{0.5em}
+  \begin{tabular}{@{}p{0.30\textwidth} p{0.64\textwidth}@{}}
+    \toprule
+    \textbf{Where} & \textbf{Detail} \\
+    \midrule
+    \textbf{Editor toolbar} & Spark icon, top-right of the editor. Only appears when a file is open. \\[0.3em]
+    \textbf{Activity Bar} & Spark icon in the left sidebar. Opens your list of sessions. \\[0.3em]
+    \textbf{Status Bar} & ``Claude Code'' at the bottom right. Works even with no file open. \\[0.3em]
+    \textbf{Command Palette} & \texttt{Cmd/Ctrl+Shift+P}, then type ``Claude Code''. \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  If you cannot find the icon, you probably have no file open. Use the Status Bar or the Command Palette.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  PERMISSIONS
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{When Claude Code Asks for Permission}
+  \begin{columns}[c]
+    \begin{column}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{img/claude_permissions.png}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      Before it acts (step 5 of the loop: running code, writing files), Claude Code asks you.
+
+      \vspace{0.5em}
+      \textbf{Your three options:}
+      \begin{enumerate}
+        \item \textbf{Yes}: allow this one time
+        \item \textbf{Yes, always allow}: allow this type of action for the rest of the session (no more prompts)
+        \item \textbf{No}: reject, and tell Claude Code what to do differently
+      \end{enumerate}
+
+      \vspace{0.5em}
+      \alert{``No'' is not a dead end.}\\
+      Use it to redirect: \textit{``No, use a left join instead''} or \textit{``No, don't overwrite that file, create a new one.''}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Common Actions and Risk Levels}
+  \scriptsize
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llll@{}}
+    \toprule
+    \textbf{Action} & \textbf{Example you'll see} & \textbf{What it does} & \textbf{Risk level} \\
+    \midrule
+    \texttt{Read}      & \texttt{Read scripts/clean.py}           & Looks at a file          & \color{green!50!black} Safe \\
+    \texttt{Glob}      & \texttt{Glob data/**/*.csv}              & Finds files by name      & \color{green!50!black} Safe \\
+    \texttt{Grep}      & \texttt{Grep "county\_fips"}             & Searches inside files    & \color{green!50!black} Safe \\
+    \texttt{Edit}      & \texttt{Edit clean.py line 42}           & Changes existing code    & \color{yellow!50!black} Review first \\
+    \texttt{Write}     & \texttt{Write scripts/merge.py}          & Creates a new file       & \color{yellow!50!black} Review first \\
+    \texttt{Bash}      & \texttt{python scripts/clean.py}         & Runs a command           & \color{red!70!black} Read before approving \\
+    \texttt{Bash}      & \texttt{pip install pandas}              & Installs a package       & \color{red!70!black} Read before approving \\
+    \texttt{Bash}      & \texttt{rm data/old\_panel.csv}          & Deletes a file           & \color{red!70!black} Read before approving \\
+    \texttt{Bash}      & \texttt{mv output.csv data/}             & Moves a file             & \color{red!70!black} Read before approving \\
+    \texttt{Bash}      & \texttt{git push}                        & Uploads to remote server & \color{red!70!black} Read before approving \\
+    \bottomrule
+  \end{tabular*}
+
+  \normalsize
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} Safe to ``always allow'':}\\
+      Reading and searching. Claude Code is just looking, not changing anything.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Always read before approving:}\\
+      Bash commands can do \textit{anything}: run code, delete files, install software. Check what it is actually running.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Restricting Claude to This Project}
+  File access is controlled via \texttt{.claude/settings.json} --- already configured in this course:
+
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+{
+  "permissions": {
+    "allow": ["Read(/**)", "Edit(/**)", "Read(~/.claude/**)"]
+  }
+}
+  \end{lstlisting}
+
+  \textbf{What this does:}
+  \begin{itemize}
+    \item Allows reads and edits \textit{within} the project directory.
+    \item Allows Claude to load your user-level config (\texttt{\textasciitilde/.claude/}).
+    \item Anything outside the project \textit{prompts for permission} rather than being silently allowed.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Protecting Sensitive Files}
+  ``Always allow reads'' assumes there is nothing sensitive to read.\\
+  If your project has restricted data or IRB-protected files, you need to keep them away from Claude Code.
+
+  \vspace{0.5em}
+  \textbf{For now, the reliable rule is simple:}
+  \begin{itemize}
+    \item Don't keep restricted or identifiable data inside the folder you run Claude Code in.
+    \item Point Claude at a working copy with the sensitive files or columns removed, or keep that data in a separate location entirely.
+    \item When in doubt, don't let it read the file --- review before you approve.
+  \end{itemize}
+
+  \vspace{0.6em}
+  \begin{block}{Coming in Session 4}
+    There are dedicated guardrails --- ignore rules and permission denies --- for hiding files from Claude. We'll set them up properly, and see where the naive version quietly fails, once you have a real project.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  GETTING FILES IN
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Getting Files In: Drag and Drop}
+  You don't have to describe a file in words --- you can hand it straight to Claude.
+
+  \vspace{0.6em}
+  \textbf{Hold \texttt{Shift} and drop into the chat panel} (in VS Code) to add something as context:
+  \begin{itemize}
+    \item A \textbf{data file} (\texttt{.csv}, \texttt{.xlsx}) so Claude can see the columns
+    \item A \textbf{figure or PDF} --- a paper, a table, a chart to reproduce
+    \item A \textbf{screenshot} of an error message or a plot that looks wrong
+  \end{itemize}
+
+  \vspace{0.5em}
+  \begin{alertblock}{Two ways to do it}
+    \begin{itemize}
+      \item \textbf{Shift+drag} a file from the VS Code Explorer (or your Finder/desktop) onto the chat box --- holding \texttt{Shift} is what drops it in as context instead of opening it
+      \item \textbf{Paste} an image directly with \texttt{Cmd+V} / \texttt{Ctrl+V} --- great for screenshots
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{0.3em}
+  {\small A screenshot of a broken plot plus ``why does this look wrong?'' is often faster than describing it.}
+\end{frame}
+
 % --- AI Skill Gap: the evidence ---
 \begin{frame}{AI Skill Gap}
   \small
@@ -1284,14 +1427,14 @@ claude
 %  THINKING AND EFFORT
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Thinking: How Hard It Works Before Answering}
-  Beyond \emph{which} model, you control \emph{how hard} it works before it answers. Current models decide how much to think on their own, and \textbf{effort} is the dial you use to steer that.
+\begin{frame}{Effort: How Hard It Works}
+  Beyond \emph{which} model, you control \emph{how hard} it works. \textbf{Effort} is the dial: it scales how much Claude reasons, reads, runs, and writes.
 
   \vspace{0.6em}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \textbf{Lower effort}\\[0.3em]
-      {\small Responds quickly with little reasoning. Fast and cheap.}
+      {\small Reasons little, makes fewer tool calls, answers tersely. Fast and cheap.}
       \begin{itemize}
         \item Reformatting, renaming
         \item Simple, well-specified edits
@@ -1300,7 +1443,7 @@ claude
     \end{column}
     \begin{column}{0.48\textwidth}
       \textbf{Higher effort}\\[0.3em]
-      {\small Reasons step-by-step \textit{before} acting. Slower, more tokens, fewer mistakes.}
+      {\small Reasons more, reads and checks more \textit{before} acting, explains in more detail. Slower, more tokens, fewer mistakes.}
       \begin{itemize}
         \item Debugging stubborn errors
         \item Specification decisions
@@ -1320,7 +1463,7 @@ claude
   \begin{center}
     \small\texttt{low} \,$\to$\, \texttt{medium} \,$\to$\, \texttt{high} \,$\to$\, \texttt{xhigh} \,$\to$\, \texttt{max}
   \end{center}
-  Higher effort = more thorough, slower, costlier. It is set once and stays for the session. Not every model offers \texttt{xhigh}, and \texttt{/effort auto} clears your choice.
+  Higher effort = more reasoning and tool calls: thorough, slower, costlier. It is set once and stays for the session. Not every model offers \texttt{xhigh}, and \texttt{/effort auto} clears your choice.
 
   \vspace{0.6em}
   \textbf{One-off boost.} Put the word \texttt{ultrathink} in a single prompt to get deeper reasoning for \emph{that turn only}. Your session effort does not change. Older cues like ``think'' and ``think hard'' are no longer special; Claude reads them as ordinary words.
@@ -1332,30 +1475,75 @@ claude
   \alert{Effort is not free.} It spends tokens and time --- reach for it when correctness matters, not by reflex.
 \end{frame}
 
-% --- How Claude Code Works: the loop ---
-\begin{frame}{How Claude Code Works: Step by Step}
+% --- Loop recap: where effort acts ---
+\begin{frame}{Where Effort Acts in the Loop}
   \small
-  Every request runs through the same sequence.
-
-  \vspace{0.4em}
   \renewcommand{\arraystretch}{1.15}
   \begin{tabular}{@{}r@{\hspace{0.8em}}l@{\hspace{0.8em}}l@{}}
-    \multicolumn{3}{@{}l}{\alert{\textbf{Once, before you type anything}}} \\
-    1 & \textbf{Load}    & \texttt{CLAUDE.md}, your settings, and the tools it may use \\[0.3em]
-    \multicolumn{3}{@{}l}{\alert{\textbf{The loop: repeats until the task is done}}} \\
-    2 & \textbf{Read}    & your prompt \\
-    3 & \textbf{Gather}  & open files and search the project for what is relevant \\
-    4 & \textbf{Reason}  & decide the next step (the effort setting controls how hard) \\
-    5 & \textbf{Act}     & edit a file or run a command, asking your permission where required \\
-    6 & \textbf{Observe} & read the output or error that comes back, then return to step 3 \\[0.3em]
-    \multicolumn{3}{@{}l}{\alert{\textbf{When it stops}}} \\
-    7 & \textbf{Report}  & what it did and what it found \\
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{Once, before you type anything}}} \\
+    \textcolor{black!45}{1} & \textcolor{black!45}{\textbf{Load}} & \textcolor{black!45}{the standing instructions and settings it starts with, and the tools it may use} \\[0.3em]
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{The loop: repeats until the task is done}}} \\
+    \textcolor{black!45}{2} & \textcolor{black!45}{\textbf{Read}} & \textcolor{black!45}{your prompt} \\
+    \alert{3} & \alert{\textbf{Gather}} & \alert{open files and search the project for what is relevant} \\
+    \alert{4} & \alert{\textbf{Reason}} & \alert{decide the next step: \textbf{the effort setting controls how hard}} \\
+    \alert{5} & \alert{\textbf{Act}} & \alert{edit a file or run a command, asking your permission where required} \\
+    \alert{6} & \alert{\textbf{Observe}} & \alert{read the output or error that comes back, then return to step 3} \\[0.3em]
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{When it stops}}} \\
+    \alert{7} & \alert{\textbf{Report}} & \alert{what it did and what it found} \\
   \end{tabular}
 
   \vspace{0.4em}
-  \begin{alertblock}{Everything lands in context}
-    Each file read, command run, and result is added to the context window, which is finite.
+  \begin{alertblock}{Effort acts across the loop, not only at step 4}
+    It scales how much Claude reasons (4), how many files it reads and commands it runs (3, 5, 6), and how detailed its report is (7). Lower effort means fewer tool calls and terser answers.
   \end{alertblock}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  COST MANAGEMENT
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Cost Management}
+  \begin{alertblock}{A Real Constraint}
+    On the \$20/month plan, you can burn through your allocation in 30--45 minutes of active use if you are not strategic.
+  \end{alertblock}
+
+  \vspace{0.5em}
+  \textbf{Principles:}
+  \begin{enumerate}
+    \item Not everything needs Claude Code. Small edits are faster by hand
+    \item A well-written CLAUDE.md reduces back-and-forth (= fewer tokens)
+    \item If Claude Code is spinning on a wrong approach, \textbf{intervene early}
+    \item Batch related tasks into one well-scoped request
+    \item Plan mode adds tokens but prevents costly wrong approaches
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Usage Limits and Model Cost}
+  \begin{columns}[c]
+    \begin{column}{0.45\textwidth}
+      \includegraphics[width=\textwidth]{img/usage_limits.png}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \textbf{How limits work:}
+      \begin{itemize}
+        \item Token allowance resets on a \textbf{5-hour rolling window}
+        \item A separate \textbf{weekly cap} limits total usage
+        \item When you hit either limit, Claude Code pauses until the window resets
+      \end{itemize}
+
+      \vspace{0.5em}
+      \textbf{Which models burn tokens fastest:}
+      \begin{itemize}
+        \item \textbf{Opus} uses $\sim$5$\times$ more tokens per task than Haiku
+        \item \textbf{Sonnet} is the middle ground
+        \item \textbf{Haiku} stretches your budget the furthest
+      \end{itemize}
+
+      \vspace{0.5em}
+      \alert{Match the model to the task.}\\
+      Don't use Opus to rename variables.
+    \end{column}
+  \end{columns}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -1470,291 +1658,6 @@ claude
     \end{itemize}
     Not interactive exploration.
   \end{alertblock}
-\end{frame}
-
-% ── Starting a Project in VS Code ────────────────────────────────
-\begin{frame}{Starting a New Project in VS Code}
-  VS Code has no ``New Project'' button. \textbf{A project is just a folder} you open.
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.56\textwidth}
-      \begin{enumerate}
-        \item \textbf{Create an empty folder} in Finder / File Explorer (or use \textbf{New Folder} inside the Open Folder dialog)
-        \item \textbf{Open it:} File $\rightarrow$ Open Folder
-        \item \textbf{Trust the folder} when VS Code asks. The Claude Code extension does not work in Restricted Mode
-        \item \textbf{Build the structure} in the Explorer panel: right-click $\rightarrow$ New Folder / New File
-        \item \textbf{Open Claude Code} in that window
-      \end{enumerate}
-    \end{column}
-    \begin{column}{0.40\textwidth}
-      \textbf{A typical research layout:}
-      \vspace{0.2em}
-
-      \texttt{my\_project/}\\
-      \texttt{\ \ README.md}\\
-      \texttt{\ \ src/}\ \ {\footnotesize scripts}\\
-      \texttt{\ \ data/}\\
-      \texttt{\ \ docs/}\\
-      \texttt{\ \ outputs/}
-
-      \vspace{0.4em}
-      {\footnotesize From a terminal, \texttt{code .} opens the current folder in VS Code.}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.5em}
-  \alert{One project = one folder = one VS Code window.} Claude Code works on the folder you have open.
-\end{frame}
-
-% ── Opening Claude Code ──────────────────────────────────────────
-\begin{frame}{Opening Claude Code Inside the Project}
-  Once the folder is open, there are four ways in. They all open the same agent:
-
-  \vspace{0.5em}
-  \begin{tabular}{@{}p{0.30\textwidth} p{0.64\textwidth}@{}}
-    \toprule
-    \textbf{Where} & \textbf{Detail} \\
-    \midrule
-    \textbf{Editor toolbar} & Spark icon, top-right of the editor. Only appears when a file is open. \\[0.3em]
-    \textbf{Activity Bar} & Spark icon in the left sidebar. Opens your list of sessions. \\[0.3em]
-    \textbf{Status Bar} & ``Claude Code'' at the bottom right. Works even with no file open. \\[0.3em]
-    \textbf{Command Palette} & \texttt{Cmd/Ctrl+Shift+P}, then type ``Claude Code''. \\
-    \bottomrule
-  \end{tabular}
-
-  \vspace{0.6em}
-  If you cannot find the icon, you probably have no file open. Use the Status Bar or the Command Palette.
-\end{frame}
-
-% ── Multiple Claude Code Tabs ────────────────────────────────────
-\begin{frame}{Multiple Claude Code Tabs}
-  You can run \textbf{several conversations at once}. Each one has \textbf{its own history and context}.
-
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.52\textwidth}
-      \textbf{How to open another one}
-      \begin{itemize}
-        \item \textbf{Open in New Tab}: \texttt{Cmd+Shift+Esc} (Mac), \texttt{Ctrl+Shift+Esc} (Windows)
-        \item Also in the Command Palette: \textbf{Open in New Window}, \textbf{Open in Side Bar}
-        \item Drag the panel to either sidebar or the editor area
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.44\textwidth}
-      \textbf{A useful pattern}
-      \begin{itemize}
-        \item Main task in the sidebar
-        \item Side tasks in separate tabs, e.g.\ ``explain this script'' while the main one is busy
-      \end{itemize}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.6em}
-  \begin{alertblock}{Give each tab a different job}
-    Two tabs editing the same file can step on each other. Split the work by file, and keep the same conversation open in only one place.
-  \end{alertblock}
-
-  \vspace{0.3em}
-  {\footnotesize\alert{I'll show this live in VS Code.}}
-\end{frame}
-
-% ── Keeping Track of Tabs ────────────────────────────────────────
-\begin{frame}{Keeping Track of Your Conversations}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{Status dot on the Spark icon}
-      \begin{itemize}
-        \item \textbf{Blue:} a permission request is waiting for you
-        \item \textbf{Orange:} Claude finished while that tab was hidden
-      \end{itemize}
-      \vspace{0.3em}
-      So you can leave a long task running in one tab and still notice when it needs you.
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{Finding old conversations}
-      \begin{itemize}
-        \item \textbf{Session history} button at the top of the Claude Code panel
-        \item Search by keyword or browse by time
-        \item Clicking one resumes it, or jumps to its tab if it is already open
-      \end{itemize}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.6em}
-  \alert{A permission request that sits unseen in a hidden tab stalls that task.} Check the dot.
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  PERMISSIONS
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{When Claude Code Asks for Permission}
-  \begin{columns}[c]
-    \begin{column}{0.4\textwidth}
-      \includegraphics[width=\textwidth]{img/claude_permissions.png}
-    \end{column}
-    \begin{column}{0.56\textwidth}
-      Before taking actions (running code, writing files), Claude Code asks you.
-
-      \vspace{0.5em}
-      \textbf{Your three options:}
-      \begin{enumerate}
-        \item \textbf{Yes}: allow this one time
-        \item \textbf{Yes, always allow}: allow this type of action for the rest of the session (no more prompts)
-        \item \textbf{No}: reject, and tell Claude Code what to do differently
-      \end{enumerate}
-
-      \vspace{0.5em}
-      \alert{``No'' is not a dead end.}\\
-      Use it to redirect: \textit{``No, use a left join instead''} or \textit{``No, don't overwrite that file, create a new one.''}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Common Actions and Risk Levels}
-  \scriptsize
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llll@{}}
-    \toprule
-    \textbf{Action} & \textbf{Example you'll see} & \textbf{What it does} & \textbf{Risk level} \\
-    \midrule
-    \texttt{Read}      & \texttt{Read scripts/clean.py}           & Looks at a file          & \color{green!50!black} Safe \\
-    \texttt{Glob}      & \texttt{Glob data/**/*.csv}              & Finds files by name      & \color{green!50!black} Safe \\
-    \texttt{Grep}      & \texttt{Grep "county\_fips"}             & Searches inside files    & \color{green!50!black} Safe \\
-    \texttt{Edit}      & \texttt{Edit clean.py line 42}           & Changes existing code    & \color{yellow!50!black} Review first \\
-    \texttt{Write}     & \texttt{Write scripts/merge.py}          & Creates a new file       & \color{yellow!50!black} Review first \\
-    \texttt{Bash}      & \texttt{python scripts/clean.py}         & Runs a command           & \color{red!70!black} Read before approving \\
-    \texttt{Bash}      & \texttt{pip install pandas}              & Installs a package       & \color{red!70!black} Read before approving \\
-    \texttt{Bash}      & \texttt{rm data/old\_panel.csv}          & Deletes a file           & \color{red!70!black} Read before approving \\
-    \texttt{Bash}      & \texttt{mv output.csv data/}             & Moves a file             & \color{red!70!black} Read before approving \\
-    \texttt{Bash}      & \texttt{git push}                        & Uploads to remote server & \color{red!70!black} Read before approving \\
-    \bottomrule
-  \end{tabular*}
-
-  \normalsize
-  \vspace{0.5em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \textbf{\color{green!50!black} Safe to ``always allow'':}\\
-      Reading and searching. Claude Code is just looking, not changing anything.
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{\color{red!70!black} Always read before approving:}\\
-      Bash commands can do \textit{anything}: run code, delete files, install software. Check what it is actually running.
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Restricting Claude to This Project}
-  File access is controlled via \texttt{.claude/settings.json} --- already configured in this course:
-
-  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
-{
-  "permissions": {
-    "allow": ["Read(/**)", "Edit(/**)", "Read(~/.claude/**)"]
-  }
-}
-  \end{lstlisting}
-
-  \textbf{What this does:}
-  \begin{itemize}
-    \item Allows reads and edits \textit{within} the project directory.
-    \item Allows Claude to load your user-level config (\texttt{\textasciitilde/.claude/}).
-    \item Anything outside the project \textit{prompts for permission} rather than being silently allowed.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Protecting Sensitive Files}
-  ``Always allow reads'' assumes there is nothing sensitive to read.\\
-  If your project has restricted data or IRB-protected files, you need to keep them away from Claude Code.
-
-  \vspace{0.5em}
-  \textbf{For now, the reliable rule is simple:}
-  \begin{itemize}
-    \item Don't keep restricted or identifiable data inside the folder you run Claude Code in.
-    \item Point Claude at a working copy with the sensitive files or columns removed, or keep that data in a separate location entirely.
-    \item When in doubt, don't let it read the file --- review before you approve.
-  \end{itemize}
-
-  \vspace{0.6em}
-  \begin{block}{Coming in Session 4}
-    There are dedicated guardrails --- ignore rules and permission denies --- for hiding files from Claude. We'll set them up properly, and see where the naive version quietly fails, once you have a real project.
-  \end{block}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  GETTING FILES IN
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Getting Files In: Drag and Drop}
-  You don't have to describe a file in words --- you can hand it straight to Claude.
-
-  \vspace{0.6em}
-  \textbf{Hold \texttt{Shift} and drop into the chat panel} (in VS Code) to add something as context:
-  \begin{itemize}
-    \item A \textbf{data file} (\texttt{.csv}, \texttt{.xlsx}) so Claude can see the columns
-    \item A \textbf{figure or PDF} --- a paper, a table, a chart to reproduce
-    \item A \textbf{screenshot} of an error message or a plot that looks wrong
-  \end{itemize}
-
-  \vspace{0.5em}
-  \begin{alertblock}{Two ways to do it}
-    \begin{itemize}
-      \item \textbf{Shift+drag} a file from the VS Code Explorer (or your Finder/desktop) onto the chat box --- holding \texttt{Shift} is what drops it in as context instead of opening it
-      \item \textbf{Paste} an image directly with \texttt{Cmd+V} / \texttt{Ctrl+V} --- great for screenshots
-    \end{itemize}
-  \end{alertblock}
-
-  \vspace{0.3em}
-  {\small A screenshot of a broken plot plus ``why does this look wrong?'' is often faster than describing it.}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  COST MANAGEMENT
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Cost Management}
-  \begin{alertblock}{A Real Constraint}
-    On the \$20/month plan, you can burn through your allocation in 30--45 minutes of active use if you are not strategic.
-  \end{alertblock}
-
-  \vspace{0.5em}
-  \textbf{Principles:}
-  \begin{enumerate}
-    \item Not everything needs Claude Code. Small edits are faster by hand
-    \item A well-written CLAUDE.md reduces back-and-forth (= fewer tokens)
-    \item If Claude Code is spinning on a wrong approach, \textbf{intervene early}
-    \item Batch related tasks into one well-scoped request
-    \item Plan mode adds tokens but prevents costly wrong approaches
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Usage Limits and Model Cost}
-  \begin{columns}[c]
-    \begin{column}{0.45\textwidth}
-      \includegraphics[width=\textwidth]{img/usage_limits.png}
-    \end{column}
-    \begin{column}{0.52\textwidth}
-      \textbf{How limits work:}
-      \begin{itemize}
-        \item Token allowance resets on a \textbf{5-hour rolling window}
-        \item A separate \textbf{weekly cap} limits total usage
-        \item When you hit either limit, Claude Code pauses until the window resets
-      \end{itemize}
-
-      \vspace{0.5em}
-      \textbf{Which models burn tokens fastest:}
-      \begin{itemize}
-        \item \textbf{Opus} uses $\sim$5$\times$ more tokens per task than Haiku
-        \item \textbf{Sonnet} is the middle ground
-        \item \textbf{Haiku} stretches your budget the furthest
-      \end{itemize}
-
-      \vspace{0.5em}
-      \alert{Match the model to the task.}\\
-      Don't use Opus to rename variables.
-    \end{column}
-  \end{columns}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
@@ -1903,6 +1806,32 @@ Effect of historical migration on county-level outcomes.
 - Do not choose model specifications
 - Do not interpret coefficients
 \end{lstlisting}
+\end{frame}
+
+% --- Loop recap: where CLAUDE.md acts ---
+\begin{frame}{Where CLAUDE.md Acts in the Loop}
+  \small
+  The same sequence as before, with one step highlighted.
+
+  \vspace{0.4em}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}r@{\hspace{0.8em}}l@{\hspace{0.8em}}l@{}}
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{Once, before you type anything}}} \\
+    \alert{1} & \alert{\textbf{Load}} & \alert{\texttt{CLAUDE.md}, your settings, and the tools it may use} \\[0.3em]
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{The loop: repeats until the task is done}}} \\
+    \textcolor{black!45}{2} & \textcolor{black!45}{\textbf{Read}} & \textcolor{black!45}{your prompt} \\
+    \textcolor{black!45}{3} & \textcolor{black!45}{\textbf{Gather}} & \textcolor{black!45}{open files and search the project for what is relevant} \\
+    \textcolor{black!45}{4} & \textcolor{black!45}{\textbf{Reason}} & \textcolor{black!45}{decide the next step} \\
+    \textcolor{black!45}{5} & \textcolor{black!45}{\textbf{Act}} & \textcolor{black!45}{edit a file or run a command, asking your permission where required} \\
+    \textcolor{black!45}{6} & \textcolor{black!45}{\textbf{Observe}} & \textcolor{black!45}{read the output or error that comes back, then return to step 3} \\[0.3em]
+    \multicolumn{3}{@{}l}{\textcolor{black!45}{\textbf{When it stops}}} \\
+    \textcolor{black!45}{7} & \textcolor{black!45}{\textbf{Report}} & \textcolor{black!45}{what it did and what it found} \\
+  \end{tabular}
+
+  \vspace{0.4em}
+  \begin{alertblock}{CLAUDE.md is loaded before your first message}
+    In context from step 1, so you need not repeat it in every prompt. Claude can still misread it.
+  \end{alertblock}
 \end{frame}
 
 \begin{frame}{Exercise: Build a CLAUDE.md for Your Own Project}

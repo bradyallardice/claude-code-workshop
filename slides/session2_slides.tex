@@ -212,6 +212,73 @@ git stash pop                     # skip if stash was empty
   \end{alertblock}
 \end{frame}
 
+\begin{frame}{What Counts as One Task?}
+  \small
+  A task is a unit of work with \textbf{one deliverable and one check}.
+
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{green!50!black} One task:}
+      \begin{itemize}
+        \item ``Reshape the census file to county-year''
+        \item ``Merge the survey onto the panel''
+        \item ``Run the baseline regression''
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{\color{red!70!black} Several tasks in disguise:}
+      \begin{itemize}
+        \item ``Clean the data and run the regressions''
+        \item ``Get the analysis working''
+        \item ``Fix the merge and rename variables''
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \textbf{Three tests for a single task:}
+  \begin{itemize}
+    \item You can state it in one sentence
+    \item It produces one output you can inspect: a cleaned file, a table, a figure
+    \item You know in advance how you will check that it is right
+  \end{itemize}
+
+  \vspace{0.3em}
+  \begin{alertblock}{The check is the boundary}
+    If you would want to inspect something halfway through (does the merge look right?), that point separates two tasks.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{One Conversation per Task}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Start a new conversation when}
+        \begin{itemize}
+          \item The task is finished and you have checked its output
+          \item You switch to a different dataset, file, or question
+          \item Claude contradicts an earlier decision or asks again for something you already said
+          \item You see the auto-compact notice
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{What carries over}
+        \begin{itemize}
+          \item \textbf{Does not:} anything said only in the chat, such as variable definitions, decisions, constraints
+          \item \textbf{Does:} files on disk: scripts, \texttt{CLAUDE.md}, your notes
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{alertblock}{A new conversation is not starting over}
+    The project is still on disk. Before you close a conversation, write down anything the next one needs.
+  \end{alertblock}
+\end{frame}
+
 \begin{frame}[fragile]{Demo: Keeping Tasks Focused}
   \begin{alertblock}{Live demo --- follow along on your own machine}
     Open the Session 2 project in VS Code and start Claude Code from the project folder.
@@ -234,6 +301,64 @@ any files.
   \end{lstlisting}
 \end{frame}
 
+% ── Multiple Claude Code Tabs ────────────────────────────────────
+\begin{frame}{Multiple Claude Code Tabs}
+  You can run \textbf{several conversations at once}. Each one has \textbf{its own history and context}.
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \textbf{How to open another one}
+      \begin{itemize}
+        \item \textbf{Open in New Tab}: \texttt{Cmd+Shift+Esc} (Mac), \texttt{Ctrl+Shift+Esc} (Windows)
+        \item Also in the Command Palette: \textbf{Open in New Window}, \textbf{Open in Side Bar}
+        \item Drag the panel to either sidebar or the editor area
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \textbf{A useful pattern}
+      \begin{itemize}
+        \item Main task in the sidebar
+        \item Side tasks in separate tabs, e.g.\ ``explain this script'' while the main one is busy
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \begin{alertblock}{Give each tab a different job}
+    Two tabs editing the same file can step on each other. Split the work by file, and keep the same conversation open in only one place.
+  \end{alertblock}
+
+  \vspace{0.3em}
+  {\footnotesize\alert{I'll show this live in VS Code.}}
+\end{frame}
+
+% ── Keeping Track of Tabs ────────────────────────────────────────
+\begin{frame}{Keeping Track of Your Conversations}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Status dot on the Spark icon}
+      \begin{itemize}
+        \item \textbf{Blue:} a permission request is waiting for you
+        \item \textbf{Orange:} Claude finished while that tab was hidden
+      \end{itemize}
+      \vspace{0.3em}
+      So you can leave a long task running in one tab and still notice when it needs you.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Finding old conversations}
+      \begin{itemize}
+        \item \textbf{Session history} button at the top of the Claude Code panel
+        \item Search by keyword or browse by time
+        \item Clicking one resumes it, or jumps to its tab if it is already open
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \alert{A permission request that sits unseen in a hidden tab stalls that task.} Check the dot.
+\end{frame}
+
 \begin{frame}{Strategy 2: Maintain Project Documentation}
   Claude Code reads certain files \textbf{automatically} every time it starts.
 
@@ -251,17 +376,66 @@ any files.
   \end{block}
 \end{frame}
 
-\begin{frame}{Demo: What a Well-Organized Project Looks Like}
-  \begin{alertblock}{Live demo}
-    A real research project directory, shown as an example of good project documentation.
-  \end{alertblock}
+% ── Live Demo: Claude Code in VS Code on a Real Project ──────────
+\begin{frame}{Live Demo: What Claude Code Looks Like in Practice}
+  \textbf{I'll switch to VS Code and show you Claude Code working on a real project of mine:} \alert{AI Adoption Prediction}, a project on how well sociodemographics predict individual AI adoption across countries.
 
-  \vspace{0.8em}
-  \textbf{What to look for:}
-  \begin{itemize}
-    \item How the folders are organized
-    \item What \texttt{CLAUDE.md} and \texttt{README.md} say, and what they leave out
-  \end{itemize}
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{The project:}
+      \begin{itemize}
+        \item Research folder: \texttt{src/} (scripts), \texttt{data/}, \texttt{docs/}, \texttt{outputs/}, a README
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{What to watch for:}
+      \begin{itemize}
+        \item Where Claude Code sits in the VS Code window
+        \item How it \textbf{reads} files in the project folder
+        \item How it \textbf{proposes edits} as a diff
+        \item How you \textbf{approve, reject, or redirect} each change
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \alert{Nothing to follow along with here. Just watch; you'll do this yourself in the exercise.}
+\end{frame}
+
+% ── Starting a Project in VS Code ────────────────────────────────
+\begin{frame}{Starting a New Project in VS Code}
+  VS Code has no ``New Project'' button. \textbf{A project is just a folder} you open.
+
+  \vspace{0.5em}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \begin{enumerate}
+        \item \textbf{Create an empty folder} in Finder / File Explorer (or use \textbf{New Folder} inside the Open Folder dialog)
+        \item \textbf{Open it:} File $\rightarrow$ Open Folder
+        \item \textbf{Trust the folder} when VS Code asks. The Claude Code extension does not work in Restricted Mode
+        \item \textbf{Build the structure} in the Explorer panel: right-click $\rightarrow$ New Folder / New File
+        \item \textbf{Open Claude Code} in that window
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \textbf{A typical research layout:}
+      \vspace{0.2em}
+
+      \texttt{my\_project/}\\
+      \texttt{\ \ README.md}\\
+      \texttt{\ \ src/}\ \ {\footnotesize scripts}\\
+      \texttt{\ \ data/}\\
+      \texttt{\ \ docs/}\\
+      \texttt{\ \ outputs/}
+
+      \vspace{0.4em}
+      {\footnotesize From a terminal, \texttt{code .} opens the current folder in VS Code.}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  \alert{One project = one folder = one VS Code window.} Claude Code works on the folder you have open.
 \end{frame}
 
 \begin{frame}[fragile]{Strategy 3: Summarize Work Between Conversations}
