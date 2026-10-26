@@ -25,6 +25,17 @@ Do not run both Option A and Option B.
 2. Open `../slides/session4_slides.pdf` from your local Session 4 folder. If you are in the course repo root, open `slides/session4_slides.pdf`.
 3. From inside your copy of `session_4`, open `docs/exercise_prompt.md`. It has all four exercises (Zotero literature review, build a skill, literature scan, fan-out coding).
 
+## Before Exercise 1: import the practice Zotero library
+
+Exercise 1 needs the practice library `docs/claude_code_zotero/` imported into Zotero as a collection named `claude_code_zotero`. Do this once, before the session (it is also in the pre-work). You need the Zotero desktop app and the Zotero MCP connected to Claude Code.
+
+1. In the Zotero desktop app, choose **File → Import…**.
+2. Choose **A file (BibTeX, RIS, Zotero RDF, etc.)** and click **Continue**.
+3. Select `claude_code_zotero.rdf` in `session_4/docs/claude_code_zotero/`. Keep the `files/` folder next to the `.rdf`: if the `.rdf` is imported from anywhere else, Zotero imports the metadata but not the PDFs.
+4. Check **Place imported collections and items into new collection** and **Copy files to the Zotero storage folder**, then click **Continue**.
+5. Check the result: a collection `claude_code_zotero` with 9 papers and 10 PDF attachments in total (one paper has two PDFs).
+6. Leave Zotero open until the sync icon stops spinning, so the library is also visible through the Zotero web API.
+
 ## What is in this folder
 
 | Path | Used for |
