@@ -6,7 +6,7 @@ Four exercises, in the order you do them in the session, all in your `session_4`
 
 ## Exercise 1: Mini Literature Review with Zotero (12 min)
 
-You have Zotero with the Zotero MCP connected, and the practice library (`docs/claude_code_zotero/`) imported as a collection named `claude_code_zotero`: nine papers on economic voting.
+You have Zotero with the Zotero MCP connected, and the practice library (`docs/claude_code_zotero/`) imported as a collection named `claude_code_zotero`: nine papers on economic voting. (Import steps are in `README.md`, "Before Exercise 1".)
 
 Draft a **five-sentence literature review** on one of:
 
