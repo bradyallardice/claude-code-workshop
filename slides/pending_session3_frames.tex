@@ -1,0 +1,297 @@
+% Frames cut from session2_slides.tex on 2026-10-26. They belong to Session 3 of
+% admin/course_plan_4_sessions.md (blocks 23-25). Not compiled on its own: move them
+% into the Session 3 deck, then delete this file. Frames are verbatim, grouped by
+% destination block.
+%
+% Edits still needed when they land in Session 3:
+%   - Titles: Part 2 says "(30 min)"; block 24 is 25 min. Part 3 says "(30 min)"; block 25
+%     (robustness workflow plus Part 3) is 25 min.
+%   - "Today's data" / "today" wording assumes the data were introduced in the same
+%     session; in Session 3 participants reopen their Session 2 folder.
+%   - "What to Watch For" and "Debrief" still ask about the merge (Part 1, now Session 2).
+%   - "Two More Safeguards" (second agent as critic) overlaps the Session 2 checker tab.
+
+% ══════════════════════════════════════════════════════════════════
+%  Block 23: verification extras
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Requirements-to-Tests Matrix}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}L{0.27\textwidth}L{0.21\textwidth}L{0.42\textwidth}@{}}
+    \toprule
+    \textbf{Requirement} & \textbf{Test} & \textbf{Passing condition} \\
+    \midrule
+    Merge keeps every respondent & Row-count and key test & 2,044 rows; \texttt{respondent\_id} unique \\
+    Outcome built as defined & Variable-construction test & \texttt{supports\_intervention} is 1 exactly for ``some'' or ``big'' \\
+    Control is the reference arm & Specification test & The omitted category is \texttt{cntrl} \\
+    Survey weights are used & Independent recomputation & Logistic of the base-model intercept equals the weighted control share from the raw CSV \\
+    N is explained for every model & Sample accounting & Rows in $-$ rows dropped (by reason) = N used \\
+    Every specification is reported & Output manifest & All specifications are in the table, each with its N \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  \small
+  \alert{Write the matrix before the code.} A requirement with no test is unverified.
+\end{frame}
+
+\begin{frame}[fragile]{The Audit Report: Evidence, Not ``All Tests Passed''}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+## Audit report
+Tests run:         commands; passed / failed / skipped
+Requirements:      each requirement -> its test
+Not tested:        anything without a test, and why
+Numerical checks:  our value vs. independent value
+Needs your call:   choices Claude proposed
+Not covered:       identification, construct validity
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  \begin{block}{What the report is for}
+    Not for Claude Code to declare the research correct. It documents what was exercised, against which expectation, and what remains uncertain.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Two More Safeguards}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Replicate before you extend}
+      \begin{enumerate}
+        \small
+        \item Give Claude Code the original code or description
+        \item Ask it to replicate a key table
+        \item Compare with the published result
+        \item Only then begin your extension
+      \end{enumerate}
+      {\small If you cannot reproduce the baseline, nothing built on it is interpretable.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Use a second agent as a critic}
+      \begin{enumerate}
+        \small
+        \item Agent 1 writes the code
+        \item Open a new conversation (Agent 2) and ask: ``Read the analysis script and identify any bugs, silent data loss, or decisions that could change the results.''
+      \end{enumerate}
+      {\small Agent 2 has fresh context and no attachment to the code.}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.8em}
+  \alert{Treat your agents like co-authors who check each other's work, not a single assistant you trust unconditionally.}
+\end{frame}
+
+\begin{frame}{What to Delegate, What to Verify, What to Keep}
+  \begin{columns}[T]
+    \begin{column}{0.32\textwidth}
+      {\color{green!50!black}\textbf{Delegate freely}}\\[0.3em]
+      {\small
+      Boilerplate \& docs\\
+      File management\textsuperscript{\dag}\\
+      Reformatting code}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      {\color{accent}\textbf{Delegate + verify}}\\[0.3em]
+      {\small
+      Data loading \& cleaning\\
+      Data merges\\
+      Variable construction\\
+      Summary statistics\\
+      Robustness variants\\
+      Visualization\\
+      \LaTeX{} tables}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      {\color{red!70!black}\textbf{Do not delegate}}\\[0.3em]
+      {\small
+      Choosing specifications\\
+      Interpreting results\\
+      Identification strategy\\
+      Sample selection\\
+      Causal claims}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.5em}
+  {\scriptsize \textsuperscript{\dag} Be careful with file management --- Claude Code can delete files. Always review before approving.}
+
+  \vspace{0.5em}
+  The test: \textit{If a referee questioned this choice, who would need to answer --- you or the RA?}
+
+  \vspace{0.5em}
+  Today's exercise focuses on the middle column: tasks where Claude Code is productive but where you must verify every output.
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  Block 24: Exercise Part 2
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{Exercise Part 2: Specify and Estimate (30 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item \textbf{Base model:} Logistic regression of \texttt{supports\_intervention} on \texttt{treatment}.
+    \begin{itemize}
+      \small
+      \item Use survey weights. What should the reference category be? Tell Claude Code explicitly.
+      \item \alert{Independent check:} the logistic of the intercept should equal the weighted control-group share, computed straight from the raw CSV
+    \end{itemize}
+
+    \vspace{0.2em}
+    \item \textbf{Add FX exposure.} Did the sample size change? Why or why not?
+
+    \vspace{0.2em}
+    \item \textbf{Add demographic controls:} age, female, education, urban/rural, income, left-right.
+    \begin{itemize}
+      \small
+      \item \alert{Before running: predict how many observations you will have.} Then check.
+    \end{itemize}
+
+    \vspace{0.2em}
+    \item \textbf{Add an interaction} between treatment and FX exposure.
+  \end{enumerate}
+
+  \vspace{0.4em}
+  {\small \alert{For every model, reconcile N:} rows in $-$ rows dropped (by reason) = N used.}
+\end{frame}
+
+\begin{frame}{Part 2 Debrief: What Happened to Your Sample?}
+  \textbf{How many observations did you have in each model?}
+
+  \vspace{1em}
+  \pause
+  \begin{alertblock}{The Missing Data Trap}
+    Adding control variables can silently change your sample.
+  \end{alertblock}
+
+  \vspace{0.3em}
+  \begin{tabular}{lrl}
+    \toprule
+    \textbf{Specification} & \textbf{N} & \textbf{What happened} \\
+    \midrule
+    Treatment only & 2,036 & Full sample (8 missing outcome) \\
+    + FX exposure & 2,035 & 2 missing FX status \\
+    + age, female, education, urban/rural & 2,035 & No additional missingness \\
+    + income quintile & $\sim$1,473 & \color{red!70!black}{565 missing income} \\
+    + left-right scale & $\sim$1,499 & \color{red!70!black}{542 missing left-right} \\
+    + both & $\sim$1,151 & \color{red!70!black}{44\% of sample dropped} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.5em}
+  \textbf{Did Claude Code mention this when it added the controls?}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  Block 25: robustness workflow, then Exercise Part 3 (plan order: workflow first)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{The Robustness Workflow}
+  \centering
+  {\large You specify the core analysis.\\
+  Claude Code generates the variations.\\
+  You verify each one.}
+
+  \vspace{1.5em}
+  \textbf{Claude Code never chooses what robustness checks to run.}
+
+  \vspace{1em}
+  \textbf{For each specification, check:}
+  \begin{itemize}
+    \item Does it use the right sample? (What is N?)
+    \item Does the code match what you asked for?
+    \item Are the coefficients in a plausible range?
+    \item Do the signs on control variables make sense?
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Exercise Part 3: Robustness and Output (30 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{7}
+    \item \textbf{Generate robustness checks} from your base model:
+    \begin{itemize}
+      \item With and without survey weights
+      \item Different control sets (track how N changes each time!)
+      \item Collapse three treatment arms into ``any information'' vs.\ control
+      \item Restrict to complete cases so N is constant across specs
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Format as \LaTeX.} Produce a publication-style regression table with all specifications side by side, and compile to PDF.
+    \begin{itemize}
+      \small
+      \item Output manifest test: every specification appears in the table, each with its N
+    \end{itemize}
+
+    \vspace{0.3em}
+    \item \textbf{Audit report.} Ask Claude Code for \texttt{output/audit\_report.md}, in the format from the audit-report slide.
+
+    \vspace{0.3em}
+    \item \textbf{Commit.} Save all scripts, tests, output, and the \LaTeX{} table.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{\LaTeX{} Tables: Bringing Results Into Your Paper}
+  Until now, your results are printed to the console or saved as CSVs.\\
+  In your actual workflow, they need to end up in a paper.
+
+  \vspace{0.8em}
+  \textbf{Why this matters:}
+  \begin{itemize}
+    \item Claude Code can write \LaTeX{} tables directly from regression output
+    \item The table lives in your project directory, under version control
+    \item When you update the analysis, Claude Code updates the table
+    \item No manual reformatting, no copy-paste errors
+  \end{itemize}
+
+  \vspace{0.8em}
+  \textbf{Today:} generate 5 tables instead of one table. In Session 3, we bring the full paper into VS Code.
+
+  \vspace{0.5em}
+  \begin{block}{The bigger idea}
+    The more of your research that lives inside the project directory, the more Claude Code
+    can operate on. Code, data, output, tables --- and eventually the paper itself.
+  \end{block}
+\end{frame}
+
+% ══════════════════════════════════════════════════════════════════
+%  End of the Swiss franc exercise (old Session 2 closing frames)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{What to Watch For During the Exercise}
+  This exercise is designed to surface moments where Claude Code makes choices for you.
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \small
+    \item \textbf{The merge:} Did Claude Code pick the right join type? Did it mention the extra rows?
+    \item \textbf{Reference categories:} Did it set treatment to ``control'' or pick alphabetically?
+    \item \textbf{Missing data:} When you added controls, how many observations did you lose? Did Claude Code mention this?
+    \item \textbf{Survey weights:} Did it use them unless you told it to?
+    \item \textbf{Income = 0:} ``No income'' is coded as 0. How did Claude Code treat it?
+    \item \textbf{Tests:} Did it copy the pipeline's own output in as an expected value, or edit one to get a pass?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \alert{These are the moments where your judgment matters.}\\
+  The workflow is: notice the decision, direct Claude Code explicitly, then verify the output.
+\end{frame}
+
+\begin{frame}{Debrief}
+  \textbf{Discussion questions:}
+
+  \vspace{0.5em}
+  \begin{enumerate}
+    \small
+    \item Did your merge lose any observations? How did you handle weekends?
+    \item How many observations did you lose when you added controls? Did Claude Code tell you?
+    \item How many of your robustness specifications were correct on the first try?
+    \item What did you catch in the plan that you would have missed in the output?
+    \item Did any test fail? Did Claude Code fix the code, or change the test?
+  \end{enumerate}
+
+  \vspace{0.5em}
+  \begin{block}{Key takeaway}
+    The tests, the assertions, and the plan review are not extra work --- they are the workflow. The 30 seconds it takes to read a plan or check a sample size can save hours of debugging downstream.
+  \end{block}
+\end{frame}

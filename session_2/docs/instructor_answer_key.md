@@ -96,7 +96,19 @@ A runnable reference suite that checks all of these against the solution pipelin
 ### Warm-up
 - After the student copies `docs/verification_protocol.md` into `CLAUDE.md`, asking "What verification rules apply in this project?" should return a description of the protocol. If Claude Code does not describe it, the file is in the wrong folder or has the wrong name.
 
-### Fault injection (Step 3)
+### Checker tab (Part 1, two-tab version)
+The checker works from `docs/codebook.md` and the raw files only. What a good `checks/expectations.md` contains, and where each item can come from:
+- **From the codebook:** 2,044 rows; `respondent_id` unique and covering 1–2044; all 11 survey columns present and unchanged; 8 missing `supports_intervention`, 2 missing `fx_status`; `income_quintile` 0 is a valid value, not missing; some respondents have no demographics row, so `income_quintile` and `left_right` have missing values.
+- **From the raw files, computed independently:** treatment groups 480 / 549 / 520 / 495; FX status 1,918 / 69 / 55 (+2 missing); 50 survey respondents without a demographics row.
+
+Disagreements worth surfacing in the debrief:
+- The builder used an inner join: 1,994 rows, and the checker's row-count check fails. This is the case the design exists to catch.
+- The checker expects columns or an output path the builder did not use. These are decisions that lived only in the builder's conversation.
+- The checker counts `income_quintile == 0` as missing, against the codebook. The participant should catch this when reading `expectations.md` (checker step 3).
+
+Checker fault injection (checker step 5) duplicates a row of the **merged** file, so it always gives 2,045 rows and a repeated `respondent_id`: the row-count and uniqueness checks should both fail. The survey-respondent subtlety below applies only to the older version, which duplicates a row in the demographics file and re-runs the merge.
+
+### Fault injection (Step 3; now checker step 5, see above)
 - The duplicated row must belong to a **survey respondent**. The demographics file contains 1,000 IDs that match no survey respondent, and duplicating one of those leaves a left join at 2,044 rows, so the tests correctly **pass**. Students who pick a non-survey ID will think their tests are broken.
 - Example: duplicating the demographics row for `respondent_id` 299 gives **2,045 rows** after a left join and a non-unique `respondent_id`. The row-count test and the key-uniqueness test should both fail.
 - Watch for: a student whose tests still pass after injecting the fault. Either the fault did not touch what the tests check, or the tests are not testing the merge output.
