@@ -11,6 +11,8 @@ Prepared 2026-10-26 from the teacher branch, the published student branch, and t
 
 ## 0. Update, 2026-10-26 afternoon: four sessions, prework already sent
 
+**Status at 14:43: published.** GitHub's `student` branch is `43b4e23`; the start command was run live from GitHub on macOS, Windows PowerShell 5.1, PowerShell 7 and Git Bash.
+
 Two facts changed the priorities below:
 
 - **The course is now four sessions** (`admin/course_plan_4_sessions.md`). GitHub collaboration and the capstone moved to back matter, so R5–R10 (git push credentials, GitHub MCP tokens, collaborator invites, story exercise, capstone hooks, `rsync`) now matter only if you use those back-matter blocks. Their fixes stay in the kit, tested, in case you do.
@@ -32,8 +34,9 @@ Two facts changed the priorities below:
 | R29 | **The Session 1 exercise script crashes on every pandas version** (3.1.0 and 1.5.3 tested). 31 of 472 counties have no 2012 row, so line 122 (`groupby(...)["abs_change"].idxmax()`) fails before either plot is saved, although the docstring says the script works. | **Kit:** fixed copy in `session_1/scripts/`; those 31 counties are left out of the "largest change" ranking only and stay in the panel and CSV. Runs under both pandas versions and produces all three outputs. |
 | R30 | **Windows path-length limit.** 21 Zotero PDFs in `session_4/` (the two Zotero library folders) have relative paths of 113–193 characters; nothing else in the materials exceeds 110. Under a OneDrive or Documents folder the full path passes 260, and on a laptop with Windows' default settings **git cannot write those files at all**: tested six ways of enabling `core.longpaths`, all fail. Windows students may already have a partially failed clone from the prework, which also blocks later updates. | **Kit:** `admin/class_of_32/shorten_long_paths.py` renames them to `<Author>_<Year>.pdf` and updates the two `.rdf` files (longest path afterwards: 109). Start scripts recover a damaged copy by cloning fresh beside it and keeping the old one. Libraries students already imported into Zotero are unaffected. |
 | R31 | **Several Pythons per machine.** On GitHub's Windows machine the `py` launcher picks Python 3.15 (no packages) while `python` is 3.12 (all packages). python.org's main download button now gives 3.15, which is new this month. | **Kit:** both checkers test every interpreter on PATH and name the one to use. |
-| R32 | `session_4/scripts/build_climate_corpus.py` (new) imports `requests`, which is not in the prework install list. It downloads from the GovInfo API, so it looks instructor-only. | If instructor-only, add it to `sync_student.sh`'s removal list; otherwise students need `pip install requests`. |
-| R28 | Confirmed: `session_4/option_b` merge and robustness scripts read `option_b/...` while estimate reads `session_4/option_b/...`; under the `my_workspace` layout the first two fail. | Not changed: the other session is renumbering these paths now. |
+| R32 | `session_4/scripts/build_climate_corpus.py` imports `requests`, which is not in the prework install list. Students use the shipped `passages.csv` and do not need to run it. | **Fixed** (d5290cc): clear message if `requests` is missing; the data README says rebuilding needs it. |
+| R33 | **Your Stata licence expired on 6 July 2026** (Stata reports "Your license has expired"). The Session 1 Stata demo (`session_1/stata_demo/`) and any live `.do` run will fail on your machine. | Renew before Session 1, or skip the live Stata run. |
+| R28 | `session_4/option_b` merge and robustness scripts read `option_b/...` while estimate read `session_4/option_b/...`, so the first two failed from `my_workspace`. | **Fixed** (commit d5290cc): all six (py, R, do) use `session_4/option_b/...`. Python and R pipelines run end to end; Stata untested (see R33). |
 
 **Found by the publish check on the real repo at 11:06:** `slides/session5_slides.pdf` is older than its `.tex` (edited during the restructure, not recompiled), and the local `student` branch is 53 commits ahead of GitHub, so today students would get the pre-restructure version.
 

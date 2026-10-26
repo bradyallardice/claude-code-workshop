@@ -10,37 +10,58 @@ Codebook: `session_2/docs/codebook.md`.
 
 ---
 
-## Part 2: Specify and Estimate (25 min) — in your `session_2` folder
+## Part 2: Matrix, Tests, and Estimation (25 min) — in your `session_2` folder
 
-Reopen your `my_workspace/session_2` folder in VS Code. Your `CLAUDE.md` (the verification protocol), your merge script, and `output/merged_survey.csv` from Session 2 Part 1 should be there. If your merge did not finish, ask Claude Code to finish it first and run its tests; everything below depends on it.
+Reopen your `my_workspace/session_2` folder in VS Code and start a new conversation. Your `CLAUDE.md` (your own verification rules from Session 2 step 4), your `expectations.md`, your merge script, and `output/merged_survey.csv` from Session 2 Part 1 should be there. If your merge did not finish, ask Claude Code to finish it and run its tests first; everything below depends on it.
 
-4. **Specify the base model.** Estimate a logistic regression of `supports_intervention` on `treatment`, using survey weights. Before running, decide:
-   - What should the reference category for `treatment` be? Tell Claude Code explicitly.
-   - Independent check: the logistic of the model's intercept should equal the weighted share of supporters in the control group. Compute that share directly from the raw CSV, without using the model code, and compare.
+### Step A: Audit your own expectations, then extend them (6 min)
 
-5. **Add FX exposure.** Add `fx_status` to the model. Check: did the sample size change?
+**1. Audit (3 min).** Open the `expectations.md` you wrote in Session 2. For each expectation, ask:
+- Where did it come from (codebook, design, raw data)?
+- What source other than the pipeline checks it?
+- What exact result counts as a pass?
 
-6. **Add demographic controls.** Add `age`, `female`, `ed_level`, `urban_rural`, `income_quintile`, and `left_right`. **Before running, predict how many observations you will have.** Then check.
+Mark each expectation that is **too vague to fail**, **reuses the code it checks**, or **rests on a judgment instead of a number**. Rewrite those.
 
-7. **Interact treatment with FX exposure.** Does the information treatment have a different effect on people who are directly affected by the shock?
+**2. Extend (3 min).** Turn it into `docs/requirements_matrix.md`, one row per requirement, five columns:
 
-For every model in steps 4–7, reconcile the sample size: rows in, minus rows dropped (by reason), equals N used.
+| Requirement | Source | Test | Independent truth | Passing condition |
+|---|---|---|---|---|
+
+Add **at least four rows for the model** (reference category, weights, outcome, sample). The requirements are yours: write them yourself. Two starter ideas: *the reference arm is control*, and *survey weights are used* (the logistic of the base-model intercept should equal the weighted control share, computed from the raw CSV). Then ask Claude Code to **review** your rows for the three weak patterns. It reviews; it does not write them.
+
+### Step B: Tests for the new rows (3 min)
+
+As in Session 2: ask Claude Code to write a test for each new row and show you the tests **before** it writes any model code. Run them. They should fail, because nothing has been estimated yet. Read each test: does its expected value come from the raw files, or from the pipeline it checks?
+
+### Step C: Specify and estimate (16 min)
+
+3. **Base model.** Logistic regression of `supports_intervention` on `treatment`, using survey weights. Tell Claude Code the reference category explicitly. Run your matrix tests.
+4. **Add FX exposure** (`fx_status`). Did the sample size change? Why?
+5. **Add demographic controls:** `age`, `female`, `ed_level`, `urban_rural`, `income_quintile`, `left_right`. **Predict your N before running.** Add a matrix row and a test for it, then run the model.
+6. *If time:* interact treatment with FX exposure.
+
+For every model, reconcile the sample size: rows in, minus rows dropped (by reason), equals N used. **If a test fails, fix the code or fix the row, and say which you did and why.**
 
 ---
 
-## Part 3: Robustness and Output (25 min) — in your `session_2` folder
+## Part 3: Robustness, Output, and the Audit Report (25 min) — in your `session_2` folder
 
-8. **Generate robustness checks.** From your base model, ask Claude Code for at least four variants:
+7. **Robustness variants** from your base model:
    - With and without survey weights
    - Different control sets (track how N changes each time)
    - The three treatment arms collapsed into "any information" vs. control
    - A subsample (for example, urban respondents only)
 
-9. **Format as LaTeX.** Produce a publication-style regression table with all specifications side by side, and compile it to PDF. Add an output-manifest test: every specification appears in the table, each with its N.
+   **Add a matrix row for each:** what must change, and what must stay the same? (The unweighted estimate should differ from the weighted one; the collapsed model has one treatment coefficient, not three.)
 
-10. **Audit report.** Ask Claude Code to write `output/audit_report.md`: tests run (passed, failed, skipped), each requirement and the test that covers it, anything not tested, numerical checks (your value against the independent value), choices that need your judgment, and what the tests do not cover.
+8. **LaTeX table.** All specifications side by side, compiled to PDF. Add an output-manifest test: every specification appears in the table, each with its N, and the table cells match the model output.
 
-11. **Commit.** Save the scripts, tests, output, and LaTeX table. (If you have not set up git yet, do it after the git frames: `git init`, then commit.)
+9. **Audit report**, `output/audit_report.md`, **built from your matrix.** Use the six sections from the slides: tests run (passed, failed, skipped), requirements (each matrix row, its test, its result), not tested, numerical checks (your value against the independent value, with a tolerance), needs your call, not covered. A matrix row with no test goes under *Not tested*. Then read it as an adversary: are its gaps as visible as its passes?
+
+10. **Revise your `CLAUDE.md`.** Pick one gap the audit report exposed (a row with no test, a judgment call nobody checked, something under *Not covered*) and write the rule that would have caught it, in your own words: the failure, the rule, how you would notice a violation. Then open `docs/verification_protocol.md`, a reference protocol, and compare. Which of your rules does it lack? Which of its rules do you lack, and which failure of yours would each have prevented?
+
+11. **Commit.** Save the scripts, tests, matrix, output, table, report, and `CLAUDE.md`. (If git is not set up yet, do it after the git frames: `git init`, then commit.)
 
 ---
 

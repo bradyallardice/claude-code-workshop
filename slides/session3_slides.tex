@@ -66,7 +66,7 @@
   \textbf{Session 1:} What Claude Code is and how it works.
 
   \vspace{0.5em}
-  \textbf{Session 2:} Staying in control: context, plan mode, and verification. You merged the Swiss franc data with a builder tab and an independent checker tab.
+  \textbf{Session 2:} Staying in control: context, plan mode, and verification. You learned the Swiss franc data, wrote your own expectations for the merge, had Claude Code write tests from them, and wrote your own \texttt{CLAUDE.md} rules.
 
   \vspace{0.5em}
   \textbf{Session 3:} From a verified dataset to a paper.
@@ -139,8 +139,103 @@ code .
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 23: VERIFICATION EXTRAS  [0:05-0:10]
+%  BLOCK 23: VERIFICATION EXTRAS  [0:05-0:15]
 % ══════════════════════════════════════════════════════════════════
+
+\begin{frame}{From Expectations to a Matrix}
+  \textbf{In Session 2} you wrote \texttt{expectations.md} for the merge, and Claude Code wrote tests from it. That was one component.
+
+  \vspace{0.4em}
+  \textbf{Today} the same discipline covers the whole analysis, with a record of it:
+
+  \vspace{0.4em}
+  \centering
+  \begin{tikzpicture}[
+    node distance=0.5cm and 0.9cm,
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3.4cm, minimum height=1.1cm, align=center, font=\small},
+    arr/.style={->, thick, color=accent}
+  ]
+    \node[box] (matrix) {\textbf{Matrix}\\expectations, extended\\to every step};
+    \node[box, right=of matrix] (code) {Code and tests};
+    \node[box, right=of code] (audit) {\textbf{Audit report}\\what was exercised,\\what was not};
+    \draw[arr] (matrix) -- (code);
+    \draw[arr] (code) -- (audit);
+  \end{tikzpicture}
+
+  \vspace{0.6em}
+  \raggedright
+  The matrix makes each expectation \emph{accountable}: where it came from, what independent source checks it, what exact result passes. The audit report is the matrix after the work, with the gaps showing.
+\end{frame}
+
+\begin{frame}{Building the Matrix: Where Requirements Come From}
+  Write it \textbf{before} the code, from sources independent of the code, as you did for the merge.
+
+  \vspace{0.4em}
+  \small
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.62\textwidth}@{}}
+    \toprule
+    \textbf{Source} & \textbf{What it gives you} \\
+    \midrule
+    Research question and design & Reference category, sample, weights, what the estimand is \\
+    Codebook and raw data & Keys, ranges, missing-value codes, valid-but-odd values (income $=0$) \\
+    Each pipeline step & What must be true after the merge, after each recode, after each model \\
+    The claim you will make & What must hold for the number in the paper to mean what the text says \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.3em}
+  \textbf{For each requirement, ask three things:}
+  \begin{enumerate}
+    \item What would a violation look like?
+    \item What source other than my code tells me the right answer?
+    \item What exact result counts as a pass?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{A Weak Row and a Strong Row}
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}L{0.17\textwidth}L{0.34\textwidth}L{0.42\textwidth}@{}}
+    \toprule
+     & \textbf{Weak} & \textbf{Strong} \\
+    \midrule
+    Requirement & ``The merge works'' & Every respondent appears once, with the right demographics attached \\
+    Test & Re-runs the merge code and compares with its own output & Counts rows and keys in the raw files, without the pipeline code \\
+    Passing condition & ``Looks reasonable'' & 2,044 rows; \texttt{respondent\_id} unique; the 50 respondents with no demographics row have missing income \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \begin{alertblock}{Three ways a row goes weak}
+    The requirement is too vague to fail. The test reuses the code it checks, so it passes by construction (Session 2's independence rule). The condition is a judgment, not a number.
+  \end{alertblock}
+
+  \vspace{0.3em}
+  \alert{\small Hold your own \texttt{expectations.md} up against these three.}
+\end{frame}
+
+\begin{frame}{The Matrix Format}
+  One row per requirement. Five columns:
+
+  \vspace{0.4em}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}L{0.17\textwidth}L{0.72\textwidth}@{}}
+    \toprule
+    \textbf{Column} & \textbf{What goes in it} \\
+    \midrule
+    Requirement & One sentence, in research terms, that can be true or false \\
+    Source & Where you got it: codebook, design, research question, raw data \\
+    Test & The check, and what it computes from \\
+    Independent truth & The value or fact the check compares against, obtained without the pipeline \\
+    Passing condition & An exact number, set, or tolerance \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  A row with an empty \textit{Independent truth} cell is a check that cannot catch the code's own mistakes. \alert{Next slide: a filled-in example.}
+\end{frame}
 
 \begin{frame}{The Requirements-to-Tests Matrix}
   \footnotesize
@@ -163,6 +258,26 @@ code .
   \alert{Write the matrix before the code.} A requirement with no test is unverified.
 \end{frame}
 
+\begin{frame}{Writing the Audit Report: What to Ask of Each Section}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}L{0.22\textwidth}L{0.68\textwidth}@{}}
+    \toprule
+    \textbf{Section} & \textbf{Ask} \\
+    \midrule
+    Tests run & Were any skipped? Does the count match what you expect? \\
+    Requirements & Does every matrix row have a test? Is any row missing? \\
+    Not tested & Is the list honest? What did Claude not check, and why? \\
+    Numerical checks & Was the independent value computed without the pipeline? Is the tolerance stated? \\
+    Needs your call & Which choices could a referee challenge? Did Claude make any silently? \\
+    Not covered & What can passing tests never show? (identification, construct validity) \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.6em}
+  \alert{Read it as an adversary: the report is only useful if its gaps are as visible as its passes.}
+\end{frame}
+
 \begin{frame}[fragile]{The Audit Report: Evidence, Not ``All Tests Passed''}
   \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 ## Audit report
@@ -178,6 +293,28 @@ Not covered:       identification, construct validity
   \begin{block}{What the report is for}
     Not for Claude Code to declare the research correct. It documents what was exercised, against which expectation, and what remains uncertain.
   \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{An Audit Report, Filled In (Swiss Franc Project)}
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize, columns=fixed, keepspaces=true]
+## Tests run        126 passed | 0 failed | 0 skipped | 5 known issues
+## Requirements     R1 Merge keeps every respondent ...... 7 tests, pass
+                    R3 Control is the reference arm ...... 2 tests, pass
+                    R5 N explained for every model ....... 15 tests, pass
+## Not tested       Stata and R versions; interaction coefficients (N only)
+## Numerical checks              pipeline    independent   tolerance
+  intercept vs logit(share)      -0.218726   -0.218726     1e-5
+  info coef, full controls        0.266587    0.266587     2e-6
+## Needs your call
+  - DK coded 0, not missing (230 respondents): the codebook's definition,
+    but a substantive choice.
+  - Income + left-right drops ~43% of respondents: the tests reconcile
+    the drop; they do not say complete cases are acceptable.
+## Not covered     identification; construct validity of the outcome
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small Notice what the report does: it names two judgment calls and what it cannot show, instead of declaring the work correct.}
 \end{frame}
 
 \begin{frame}{Two More Safeguards}
@@ -200,7 +337,7 @@ Not covered:       identification, construct validity
         \item Agent 1 writes the code
         \item Open a new conversation (Agent 2) and ask: ``Read the analysis script and identify any bugs, silent data loss, or decisions that could change the results.''
       \end{enumerate}
-      {\small This is a critic: it reads the code. Session 2's checker was stricter, because it never saw the code at all and worked from the codebook.}
+      {\small A fresh session is an independent reviewer (Session 2). This one reads the code; a stricter version would work from the codebook alone and never see it.}
     \end{column}
   \end{columns}
 
@@ -250,7 +387,7 @@ Not covered:       identification, construct validity
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 24: EXERCISE PART 2  [0:10-0:35]
+%  BLOCK 24: EXERCISE PART 2  [0:15-0:40]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Before You Start: Reopen Your Session 2 Folder}
@@ -259,7 +396,7 @@ Not covered:       identification, construct validity
   \vspace{0.5em}
   \textbf{Check that these exist:}
   \begin{itemize}
-    \item \texttt{CLAUDE.md} with the verification protocol
+    \item \texttt{CLAUDE.md} with your own verification rules, and your \texttt{expectations.md}
     \item Your merge script and \texttt{output/merged\_survey.csv}
     \item Your merge tests, and they pass
   \end{itemize}
@@ -271,32 +408,51 @@ Not covered:       identification, construct validity
   \alert{Start a new conversation. The old one carries Session 2's context.}
 \end{frame}
 
-\begin{frame}{Exercise Part 2: Specify and Estimate (25 min)}
+\begin{frame}{Exercise Part 2 (1/2): Audit and Extend Your Expectations (9 min)}
+  In your \texttt{session\_2} folder, \textbf{before any model is estimated}.
+
+  \vspace{0.3em}
   \begin{enumerate}
-    \setcounter{enumi}{3}
-    \item \textbf{Base model:} Logistic regression of \texttt{supports\_intervention} on \texttt{treatment}.
+    \small
+    \item \textbf{Audit your own \texttt{expectations.md}} (3 min). For each expectation, ask: where did it come from? what independent source checks it? what exact result passes?
     \begin{itemize}
-      \small
-      \item Use survey weights. What should the reference category be? Tell Claude Code explicitly.
-      \item \alert{Independent check:} the logistic of the intercept should equal the weighted control-group share, computed straight from the raw CSV
+      \footnotesize
+      \item Mark each one that is too vague to fail, reuses the code, or rests on a judgment. Rewrite those.
     \end{itemize}
 
     \vspace{0.2em}
-    \item \textbf{Add FX exposure.} Did the sample size change? Why or why not?
+    \item \textbf{Turn it into a matrix} (3 min): \texttt{docs/requirements\_matrix.md}, five columns: requirement, source, test, independent truth, passing condition. Add \textbf{at least four rows for the model} (reference arm, weights, outcome, sample). The requirements are yours.
+    \begin{itemize}
+      \footnotesize
+      \item Ask Claude Code to \emph{review} your rows for the three weak patterns. It reviews; it does not write them.
+    \end{itemize}
+
+    \vspace{0.2em}
+    \item \textbf{Tests for the new rows} (3 min), as in Session 2: tests first, read them before any model code. They should \alert{fail} now. Does each expected value come from the raw files?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise Part 2 (2/2): Specify and Estimate (16 min)}
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Base model:} Logistic regression of \texttt{supports\_intervention} on \texttt{treatment}, with survey weights. Tell Claude Code the reference category. Run your matrix tests.
+
+    \vspace{0.2em}
+    \item \textbf{Add FX exposure.} Did the sample size change? Why?
 
     \vspace{0.2em}
     \item \textbf{Add demographic controls:} age, female, education, urban/rural, income, left-right.
     \begin{itemize}
       \small
-      \item \alert{Before running: predict how many observations you will have.} Then check.
+      \item \alert{Predict your N first.} Add a matrix row and a test for it, then run the model.
     \end{itemize}
 
     \vspace{0.2em}
-    \item \textbf{Add an interaction} between treatment and FX exposure.
+    \item \textit{If time:} interact treatment with FX exposure.
   \end{enumerate}
 
   \vspace{0.4em}
-  {\small \alert{For every model, reconcile N:} rows in $-$ rows dropped (by reason) = N used.}
+  {\small \alert{For every model, reconcile N:} rows in $-$ rows dropped (by reason) $=$ N used. \textbf{If a test fails, fix the code or the row, and say which.}}
 \end{frame}
 
 \begin{frame}{Part 2 Debrief: What Happened to Your Sample?}
@@ -327,7 +483,7 @@ Not covered:       identification, construct validity
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 25: ROBUSTNESS WORKFLOW, LATEX IN VS CODE, EXERCISE PART 3  [0:35-1:08]
+%  BLOCK 25: ROBUSTNESS WORKFLOW, LATEX IN VS CODE, EXERCISE PART 3  [0:40-1:13]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{The Robustness Workflow}
@@ -351,7 +507,7 @@ Not covered:       identification, construct validity
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  LATEX IN VS CODE (taught before Part 3 asks for a compiled table)  [0:36-0:43]
+%  LATEX IN VS CODE (taught before Part 3 asks for a compiled table)  [0:41-0:48]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{\LaTeX{} Tables: Bringing Results Into Your Paper}
@@ -527,29 +683,23 @@ Ctrl+Alt+V  Open PDF preview
   \end{block}
 \end{frame}
 
-\begin{frame}{Exercise Part 3: Robustness and Output (25 min)}
+\begin{frame}{Exercise Part 3: Robustness, Output, and the Audit Report (25 min)}
+  \small
   \begin{enumerate}
-    \setcounter{enumi}{7}
-    \item \textbf{Generate robustness checks} from your base model:
-    \begin{itemize}
-      \item With and without survey weights
-      \item Different control sets (track how N changes each time!)
-      \item Collapse three treatment arms into ``any information'' vs.\ control
-      \item Restrict to complete cases so N is constant across specs
-    \end{itemize}
+    \setcounter{enumi}{6}
+    \item \textbf{Robustness variants:} with and without weights; different control sets (track N); ``any information'' vs.\ control; a subsample. \alert{Add a matrix row for each:} what must change, and what must stay the same?
 
-    \vspace{0.3em}
-    \item \textbf{Format as \LaTeX.} Produce a publication-style regression table with all specifications side by side, and compile to PDF.
-    \begin{itemize}
-      \small
-      \item Output manifest test: every specification appears in the table, each with its N
-    \end{itemize}
+    \vspace{0.2em}
+    \item \textbf{\LaTeX{} table,} all specifications side by side, compiled to PDF. Output-manifest test: every specification appears with its N, and the cells match the model output.
 
-    \vspace{0.3em}
-    \item \textbf{Audit report.} Ask Claude Code for \texttt{output/audit\_report.md}, in the format from the audit-report slide.
+    \vspace{0.2em}
+    \item \textbf{Audit report,} \texttt{output/audit\_report.md}, built from your matrix: each row $\rightarrow$ its test $\rightarrow$ its result. A row with no test goes under \textit{Not tested}. Read it as an adversary: are its gaps as visible as its passes?
 
-    \vspace{0.3em}
-    \item \textbf{Commit.} Save all scripts, tests, output, and the \LaTeX{} table.
+    \vspace{0.2em}
+    \item \textbf{Revise your \texttt{CLAUDE.md}.} Pick one gap the report exposed and write the rule that would have caught it, in your own words. Then compare your rules with a reference protocol. \hfill \hyperlink{refprotocol}{\beamergotobutton{Reference protocol}}
+
+    \vspace{0.2em}
+    \item \textbf{Commit} scripts, tests, matrix, output, table, report, and \texttt{CLAUDE.md}. (Git is next; if it is not set up yet, do it after the git frames.)
   \end{enumerate}
 \end{frame}
 
@@ -581,6 +731,7 @@ Ctrl+Alt+V  Open PDF preview
     \item How many of your robustness specifications were correct on the first try?
     \item What did you catch in the plan that you would have missed in the output?
     \item Did any test fail? Did Claude Code fix the code, or change the test?
+    \item Which matrix row did you have to rewrite, and why? Did any row end up with no independent truth?
   \end{enumerate}
 
   \vspace{0.5em}
@@ -590,7 +741,7 @@ Ctrl+Alt+V  Open PDF preview
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 26: GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:08-1:22]
+%  BLOCK 26: GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:13-1:27]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Why Git Matters for Agentic Coding}
@@ -957,7 +1108,7 @@ __pycache__/
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 27: LIVE DEMO, THE FULL LOOP  [1:22-1:30]
+%  BLOCK 27: LIVE DEMO, THE FULL LOOP  [1:27-1:35]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Live Demo: Building a Paper from Scratch}
@@ -1010,7 +1161,7 @@ __pycache__/
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:30-1:55]
+%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:35-2:00]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Exercise: Results $\rightarrow$ Paper (25 min)}
@@ -1066,7 +1217,7 @@ the table supports it. Do not edit any file.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 29: WHEN IT GOES WRONG  [1:55-2:01]
+%  BLOCK 29: WHEN IT GOES WRONG  [2:00-2:06]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{When It Goes Wrong: Four Failure Patterns}
@@ -1112,7 +1263,7 @@ the table supports it. Do not edit any file.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  CLOSE  [2:01]
+%  CLOSE  [2:06]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Next Session}
@@ -1155,6 +1306,7 @@ the table supports it. Do not edit any file.
     \hyperlink{gitextras}{C. Git extras and the standalone git practice exercise} & 10--20 \\
     \hyperlink{collab}{D. \textit{Reference only:} GitHub collaboration exercise (``Your Chapter'')} & --- \\
     \hyperlink{gitpull}{E. If \texttt{git pull} fights back} & 2 \\
+    \hyperlink{refprotocol}{F. A reference verification protocol (compare with your own rules)} & 3 \\
     \bottomrule
   \end{tabular}
 \end{frame}
@@ -1900,6 +2052,53 @@ git stash pop                     # skip if stash was empty
 
   \vfill
   \hyperlink{ritual}{\beamerreturnbutton{Back to the ritual}} \hfill \hyperlink{backmatter}{\beamerreturnbutton{Back matter}}
+\end{frame}
+
+\begin{frame}[fragile,label=refprotocol]{Reference Protocol (1/2)}
+  One reference protocol, part 1. Compare it with your own rules:
+
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+## Verification protocol (required)
+### Before implementing a step
+- State the expected inputs, keys, and row counts.
+- Write the verification tests first and show them to me.
+- Ask me before settling any research-design choice
+  (join type, reference category, sample, weights).
+  Mark any choice you proposed yourself.
+
+### Tests must be independent of the code they check
+- Take expected values from the raw files, a different
+  method, or values I give you. Never paste the
+  pipeline's own output in as the expected value.
+- Every step gets a row-count reconciliation (rows in -
+  rows dropped, by reason = rows out), data-integrity
+  checks, and a trace of at least 3 records from the
+  raw file to the final output.
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Reference Protocol (2/2)}
+  Part 2 of the reference protocol:
+
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+### Never make a failing test pass by
+- Editing expected values, deleting or loosening
+  assertions, suppressing warnings, or changing the
+  specification. Report the failure instead.
+
+### Before saying a step is done
+- Run the tests and show me the output.
+- Report what passed, failed, and was skipped, and what
+  remains unverified or needs my judgment.
+- Passing tests do not show the research design is
+  valid. Say what the tests do not cover.
+- If you cannot write an independent test, say so.
+  \end{lstlisting}
+
+  \vspace{0.3em}
+  {\small Full text: \texttt{docs/verification\_protocol.md} in this folder. \alert{CLAUDE.md is an instruction, not enforcement:} read the tests too.}
+  \vfill
+  \hyperlink{backmatter}{\beamerreturnbutton{Back matter}}
 \end{frame}
 
 \end{document}

@@ -93,8 +93,14 @@ These are the checks added by the verification section. Values were computed dir
 
 A runnable reference suite that checks all of these against the solution pipeline is in `session_2/tests/` (see its `README.md`). It is removed from the student branch by `sync_student.sh`.
 
-### Step 0 (install the protocol)
-- After the student copies `docs/verification_protocol.md` into `CLAUDE.md`, asking "What verification rules apply in this project?" should return a description of the protocol. If Claude Code does not describe it, the file is in the wrong folder or has the wrong name.
+### Step 4 (the participant's own `CLAUDE.md` rules)
+There is no single right answer; the reference protocol (`session_3/docs/verification_protocol.md`) is what Session 3 compares against. Rules worth seeing, each tied to something that happened in Part 1:
+- Expected values come from `expectations.md` or the raw files, never from the script's output.
+- Ask before choosing the join type (or any design choice), and mark anything Claude proposed itself.
+- Never edit a test or an expected value to make it pass; report the failure.
+- Report what was not tested, not only what passed.
+
+Weak rules to push back on: generic ("verify carefully"), unfalsifiable (no way to notice a violation), or copied from a slide.
 
 ### Step 1: the participant's `expectations.md`
 Everything step 1 asks is answerable from the codebook and a look at the CSVs:

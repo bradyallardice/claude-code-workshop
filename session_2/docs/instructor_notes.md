@@ -19,12 +19,12 @@ in `docs/instructor_answer_key.md`.
 | 0:44 | 17 | **Exercise:** build the county panel in plan mode, evaluate the plan, debrief | 25 |
 | 1:09 | 18 | Code can run and still be wrong, read the code | 3 |
 | 1:12 | 19 | Verification: two layers of tests through "passing is not the goal" | 10 |
-| 1:22 | 20 | Make it a rule in CLAUDE.md (1/2, 2/2) | 2 |
-| 1:24 | 21 | The Swiss franc shock: data and research question | 3 |
-| 1:27 | 22 | **Exercise Part 1:** learn the data and write expectations, merge in plan mode, verify, debrief | 35 |
-| 2:02 | — | Next Session | 1 |
+| 1:22 | 20 | Rules in CLAUDE.md come from failures (one frame) | 1 |
+| 1:23 | 21 | The Swiss franc shock: data and research question | 3 |
+| 1:26 | 22 | **Exercise Part 1:** learn the data and write expectations, merge in plan mode, verify, debrief, write your own CLAUDE.md rules | 35 |
+| 2:01 | — | Next Session | 1 |
 
-**Total: 123 minutes on paper.** The plan already runs Session 2 two minutes over.
+**Total: 122 minutes on paper.** The plan already runs Session 2 one minute over.
 By the queue rule, whatever doesn't fit moves to the start of Session 3.
 
 ---
@@ -133,8 +133,8 @@ Prompts for the first two demos are on the slides. **The "good prompt" demo has 
 - Two layers: software tests (does it run) vs. research tests (are the numbers right). The examples use today's data, so they preview Part 1.
 - Spend the most time on "Independent Tests" and "Test the Tests". In Part 1, the participant's own `expectations.md` is the independent source.
 
-### 20. Make it a rule (2 min)
-- The protocol is in `docs/verification_protocol.md`; Part 1 step 0 installs it. "CLAUDE.md is an instruction, not enforcement."
+### 20. Rules in CLAUDE.md come from failures (1 min)
+- One frame (1 min). The point: a rule is the record of a failure. Do **not** show or hand out a ready-made protocol. Participants write their own in Part 1 step 4, and Session 3 compares theirs with a reference (`session_3/docs/verification_protocol.md`, kept out of the Session 2 folder on purpose). "CLAUDE.md is an instruction, not enforcement."
 
 ### 21. Swiss franc data (3 min)
 - Background, files, research question. Point out that the demographics file has more rows than the survey: the join type is theirs to decide.
@@ -144,7 +144,8 @@ Prompts for the first two demos are on the slides. **The "good prompt" demo has 
 - Everything step 1 asks can be answered from the codebook. A complete `expectations.md` is sketched in the answer key ("Step 1").
 - Step 2 has Claude Code write its tests from their file, so the expectations reach it through a file, not the chat.
 - Test the tests: the duplicated row must belong to a **survey respondent** (answer key, "Fault injection").
-- Debrief (~6 min): start with "which of your expectations were wrong?", then "what did the data teach you that the codebook didn't?" Then reveal the expected numbers (the second debrief frame has a `\pause`).
+- **Step 4 (last 4 min): participants write their own `CLAUDE.md` rules.** There is no pasted protocol on purpose. They have just watched Claude Code work without rules, so each rule should come from something they saw: a test copying the script's output, a design choice made for them, a test edited to pass, an "all passed" with no caveats. Good rules are specific and name how a violation would show. Weak ones are generic ("be careful", "verify everything"). Don't hand out `session_3/docs/verification_protocol.md`; Session 3 compares their rules with it.
+- Debrief (~4 min): start with "which of your expectations were wrong?", then "what did the data teach you that the codebook didn't?" Then reveal the expected numbers (the second debrief frame has a `\pause`).
 - The automated version, with Claude checking against independent expectations, is shown in Session 4 (block 32). The earlier two-tab checker frames are in `slides/pending_session4_frames.tex`.
 
 ### Close

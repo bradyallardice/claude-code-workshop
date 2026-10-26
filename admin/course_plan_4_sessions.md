@@ -56,9 +56,9 @@ The intros block (15 min) assumes 8–10 participants, so a larger group shifts 
 | 17 | **Exercise:** build the county panel in plan mode, evaluate the plan, debrief | 25 | 1:09 |
 | 18 | Code can run and still be wrong, read the code | 3 | 1:12 |
 | 19 | Verification: two layers of tests, independent tests, write expectations first, trace samples, test-first cycle, test the tests, passing is not the goal | 10 | 1:22 |
-| 20 | Make it a rule in CLAUDE.md (1/2, 2/2) | 2 | 1:24 |
-| 21 | The Swiss franc shock: data and research question | 3 | 1:27 |
-| 22 | **Exercise Part 1.** Step 0 installs the verification protocol. Step 1, without Claude Code: participants learn the data from the codebook and write their own expectations (`expectations.md`). Then merge and explore in plan mode, with Claude writing the tests from `expectations.md`, and verify the output against their expectations, including testing the tests. Debrief: which expectations were wrong, and what did the data teach that the codebook didn't? Learning the data is never automated; the automated checking is shown in Session 4 (block 32). | 35 | 2:02 |
+| 20 | Rules in CLAUDE.md come from failures (one frame; no ready-made protocol) | 1 | 1:23 |
+| 21 | The Swiss franc shock: data and research question | 3 | 1:26 |
+| 22 | **Exercise Part 1.** Step 1, without Claude Code: participants learn the data from the codebook and write their own expectations (`expectations.md`). Then merge and explore in plan mode, with Claude writing the tests from `expectations.md`, and verify the output against their expectations, including testing the tests. Debrief: which expectations were wrong, and what did the data teach that the codebook didn't? Learning the data is never automated; the automated checking is shown in Session 4 (block 32). Step 4: participants write their own `CLAUDE.md` verification rules from what they saw; Session 3 compares them with a reference protocol. | 35 | 2:01 |
 
 **What the parallel-session material teaches:**
 
@@ -104,14 +104,14 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 
 ## Session 4 — Power use: search, swarms, connected tools, skills
 
-**Deck:** subagent frames from old `session5_slides.tex`, MCP and skills frames from old `session4_slides.tex`, the `claude-ignore` frame from old Session 5. Web search, prompt injection, LLM-as-coder, referee subagent, and sharing-with-coauthors material is new.
+**Deck:** subagent frames from old `session5_slides.tex`, MCP and skills frames from old `session4_slides.tex`, the `claude-ignore` frame from old Session 5. Web search, prompt injection, LLM-as-coder, referee subagent, workflows, and sharing-with-coauthors material is new.
 
 | # | Block | Min | Clock |
 |---|---|---|---|
 | — | Start-of-session ritual | 3 | 0:03 |
 | 30 | **Web search and research:** search and fetch, deep research, reading sources vs. trusting summaries, checking that citations exist. **Prompt injection** (web pages, PDFs, and emails can contain instructions to the agent) and **data exposure** (a connector grants access to the whole account). | 16 | 0:19 |
 | 31 | **Exercise:** search-backed literature scan, then spot-check every citation | 10 | 0:29 |
-| 32 | Subagents and swarms: what a subagent is, where it shines, triggering, fan-out, composition patterns, one agent or many, the subagent as verifier, token cost. Worked example: a **referee subagent** defined in a file and run on the Session 3 paper. Second example: the instructor's **automated version of the Session 2 Part 1 checks** (draft two-tab checker frames in `slides/pending_session4_frames.tex`). | 14 | 0:43 |
+| 32 | Subagents and swarms: what a subagent is, where it shines, triggering, fan-out, composition patterns, one agent or many, the subagent as verifier, token cost. **Workflows** (instructor demo only): a script that orchestrates many subagents in stages (fan out, then verify, then collect), run in the background; reproducible, but it multiplies token use, so it is opt-in and reserved for large parallel jobs. Presented as the scripted version of block 34's fan-out. Worked example: a **referee subagent** defined in a file and run on the Session 3 paper. Second example: the instructor's **automated version of the Session 2 Part 1 checks** (draft two-tab checker frames in `slides/pending_session4_frames.tex`). | 14 | 0:43 |
 | 33 | **LLMs as research coders:** a coding scheme as a measurement instrument, validating against hand codes, agreement | 5 | 0:48 |
 | 34 | **Exercise:** fan out agents to code climate mentions in Congressional Record speeches (`session_4/data/climate_speeches/`) in batches, compare with the reference codes (agreement rate, confusion matrix, failing categories), debrief ("would you report these codes in a paper?") | 20 | 1:08 |
 | 35 | Connecting tools: what an MCP is, the two-reason rule, Zotero demo, MCP as helper not substitute | 8 | 1:16 |
@@ -167,6 +167,7 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 | 4 | Web search block and literature-scan exercise | |
 | 4 | Prompt injection and data exposure frames | |
 | 4 | Fan-out / swarm frames | |
+| 4 | Workflow frames and instructor demo | What a workflow is, when it earns its cost, why it uses more tokens than a single session (fresh context per agent, verification stages). Demo script and its token cost to be decided; confirm the Workflow tool is available on the setup participants will use. |
 | 4 | LLM-as-coder frames | |
 | 4 | Review `coding_scheme.md` (draft) | Corpus (63 passages) and Claude-generated reference codes are done in `session_4/data/climate_speeches/` (see its README). Agreement against Claude codes is inflated by same-model agreement; make that a debrief point. |
 | 4 | Referee subagent definition file and example run | |
@@ -203,7 +204,7 @@ The slide files themselves (`slides/session5_slides.tex` etc.) are not yet renam
 
 ## Risks
 
-- **Usage limits.** Fan-out coding (Session 4) multiplies token use. On the $20 plan it is the point where participants are most likely to hit the 5-hour limit. Keep the coding corpus small.
+- **Usage limits.** Fan-out coding (Session 4) multiplies token use. On the $20 plan it is the point where participants are most likely to hit the 5-hour limit. Keep the coding corpus small. Workflows multiply this further, which is why they are instructor-demo only.
 - **No slack.** Sessions 2 and 3 are already 1–2 minutes over on paper. At the old pace (~1.3 min/frame), cumulative drift by the end of the course would be about 70 minutes, which cuts into Session 4's skills exercise and hooks.
 - **Session 1 variance.** Intros scale with group size, and the setup check has no break to absorb troubleshooting.
 - **Part 2 crosses a session boundary.** Participants must keep their Session 2 workspace intact between sessions.

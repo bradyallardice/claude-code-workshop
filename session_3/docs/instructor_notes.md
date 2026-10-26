@@ -14,16 +14,16 @@ carry the same block numbers and clock times. Student exercise text is in
 | Clock | # | Block | Frames | Min |
 |-------|---|-------|--------|-----|
 | 0:00 | — | Where we are, ritual (copy `session_3`, reopen `session_2`), check-in | 3 | 5 |
-| 0:05 | 23 | Verification extras: requirements-to-tests matrix, audit report, two more safeguards, delegate / verify / keep | 4 | 5 |
-| 0:10 | 24 | **Exercise Part 2:** reopen frame, specify and estimate, debrief | 3 | 25 |
-| 0:35 | 25 | Robustness workflow, **LaTeX in VS Code (bridge + 6 frames, moved here from block 26)**, **Exercise Part 3**, what to watch for, debrief | 11 | 33 |
-| 1:08 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
-| 1:22 | 27 | Live demo: building a paper, the full loop | 2 | 8 |
-| 1:30 | 28 | **Exercise: results → paper**, cross-check, debrief | 3 | 25 |
-| 1:55 | 29 | When it goes wrong: four failure patterns; correct / restart / do it yourself | 2 | 6 |
-| 2:01 | — | Next Session | 1 | 1 |
+| 0:05 | 23 | Verification extras: a bridge from Session 2's `expectations.md` to the matrix, how to build the matrix (sources, weak vs strong, format, example), how to read an audit report (questions, format, filled-in example), two more safeguards, delegate / verify / keep | 10 | 10 |
+| 0:15 | 24 | **Exercise Part 2:** reopen frame, extend expectations into a matrix, specify and estimate, debrief | 4 | 25 |
+| 0:40 | 25 | Robustness workflow, **LaTeX in VS Code (bridge + 6 frames, moved here from block 26)**, **Exercise Part 3**, what to watch for, debrief | 11 | 33 |
+| 1:13 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
+| 1:27 | 27 | Live demo: building a paper, the full loop | 2 | 8 |
+| 1:35 | 28 | **Exercise: results → paper**, cross-check, debrief | 3 | 25 |
+| 2:00 | 29 | When it goes wrong: four failure patterns; correct / restart / do it yourself | 2 | 6 |
+| 2:06 | — | Next Session | 1 | 1 |
 
-**Total: 122 minutes on paper.** The main flow is 45 frames (the footer counts only these). The back matter is 31 frames and is not counted.
+**Total: 127 minutes on paper**, 5 over the plan. Block 23 now teaches how to build the matrix and read the audit report instead of just showing them (+5). If you need the time back, the cheapest cuts are the check-in, then the "Two More Safeguards" frame. The main flow is 52 frames (the footer counts only these). The back matter is 33 frames and is not counted.
 By the queue rule, anything that does not fit moves to the start of Session 4.
 
 ---
@@ -34,18 +34,39 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 - Ritual: copy `session_3/`. **Everyone must also reopen their `session_2` copy** (new VS Code window). Part 2 continues in it.
 - The check-in is one frame. Keep it short; it is the first thing to cut.
 
-### 23. Verification extras (5 min)
-- Four frames in five minutes. The matrix and the audit report are the substance. "Two More Safeguards" now points back to the Session 2 checker tab: the critic reads the code, the checker never did.
+### 23. Verification extras (10 min)
+- **Don't re-teach Session 2.** Session 2 already covered the two layers of tests, independent tests, expectations first, tracing samples, the test-first cycle, testing the tests, and "passing is not the goal". Block 23 builds on it with two new tools: the **matrix** (the merge `expectations.md`, extended to every step and made accountable) and the **audit report** (the matrix after the work, with the gaps showing).
+- Frame order: the bridge (expectations → matrix → audit); where requirements come from; weak vs strong row (points back to Session 2's independence rule; the new content is the three ways a row goes weak); the five-column format; the filled-in matrix; what to ask of each audit section; the audit format; a filled-in excerpt of the real report (`session_2/tests/audit_report.md`); two more safeguards; delegate / verify / keep.
+- "Two More Safeguards": a fresh session as reviewer was introduced in Session 2's parallel-session benefits, so treat the critic prompt as an application of it. Cut this frame first if time is short.
 
-### 24. Exercise Part 2 (25 min)
+### 24. Exercise Part 2: matrix, tests, estimation (25 min)
 - Participants work in their **Session 2 folder**. Check that people are not working in `session_3`.
-- Anyone whose merge did not finish gets five minutes to finish it. If many people are in that state, Session 2's Part 1 overran: cut Part 2 to steps 4–6.
+- Anyone whose merge did not finish gets five minutes to finish it. If many people are in that state, Session 2's Part 1 overran: skip the optional interaction step.
+- **Structure: audit their own `expectations.md` (3) → extend it into a matrix (3) → tests for the new rows (3) → estimate (16).** The matrix is the point, and the audit is what makes Session 3 different from Session 2: the same expectations, now held against the three weak patterns. Expect most participants' `expectations.md` to have vague rows ("the merge looks right") and rows whose independent source is the pipeline. Anyone without an `expectations.md` from Session 2 starts the matrix from the codebook. Participants write their own requirements; Claude Code only reviews them for the three weak patterns from the weak/strong frame. If someone has Claude write the rows, ask them what a violation of each row would look like.
+- **Tests must fail before the model exists.** A test that passes with no model is testing nothing. Circulate and look for tests that read the pipeline's own output as the expected value.
+- Common weak rows to catch: "the model is correct" (too vague); expected N copied from the model output (reuses the code); "coefficients look reasonable" (a judgment, not a number).
 - Expected values and the debrief table are in `session_2/docs/instructor_answer_key.md` ("The Missing Data Trap"). Exact figures: 2,036 → 2,035 → 2,035; income alone 1,473 (562 missing); left-right alone 1,499 (536 missing); both 1,151 (884 dropped, 43%).
 - Watch for: the base model run unweighted (the intercept check catches it: logistic of the intercept should be 0.4455, not 0.4477); `income_quintile == 0` treated as missing; no sample accounting.
 
+**Reference matrix (what a good one looks like for this project; do not hand out).**
+
+| Requirement | Source | Test | Independent truth | Passing condition |
+|---|---|---|---|---|
+| Control is the reference arm | Design | Coefficient names; intercept meaning | Raw CSV, `cntrl` rows | No `cntrl` coefficient; intercept $=$ control arm |
+| Survey weights are used | Design | Intercept vs control share | Weighted control share from raw CSV (478 respondents) | logistic(intercept) $=0.4455$ within 1e-5 (unweighted would be 0.4477) |
+| Outcome built as defined | Codebook | Recode check | Raw `govt_intervention` | 1 for `some`/`big`; `DK` (230) coded 0; 8 missing stay missing |
+| Base model N | Codebook | N check | Rows with non-missing outcome | N $=2{,}036$ |
+| N explained for every model | Accounting | Rows in $-$ dropped by reason | Raw missingness counts | 2,035 (FX); 1,473 (income); 1,499 (left-right); 1,151 (both) |
+| Income 0 is valid | Codebook | Count of `income_quintile == 0` after cleaning | Raw demographics | 8 respondents kept, not missing |
+| Treatment arms intact | Design | Arm counts | Raw CSV | 480 / 549 / 520 / 495 |
+| (Part 3) Unweighted differs from weighted | Design | Compare info coefficients | Hand-computed unweighted fit | 0.290 vs 0.302; not equal |
+| (Part 3) Every specification is in the table with its N | Output | Manifest test | Model objects | All six columns present, N matches |
+
 ### 25. Robustness workflow, LaTeX in VS Code, and Part 3 (33 min)
+- **Step 10 closes the loop on `CLAUDE.md`.** Participants revise their own rules from a gap the audit report exposed, then compare with the reference protocol (`docs/verification_protocol.md`; back-matter block F). This is where the protocol is introduced: not as something to install, but as a comparison with rules they already wrote. If someone arrives without rules from Session 2, have them write two from the gaps in their audit report first.
+- **Part 3 builds on the matrix.** Each robustness variant gets a matrix row (what must change, what must stay). The audit report is built from the matrix: each row, its test, its result; rows with no test go under *Not tested*. A matrix that was never updated is the first thing to check if the report looks thin.
 - The "New to LaTeX?" button on the setup frame jumps to the back-matter basics and back. Use it only if someone asks.
-- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps the session total unchanged: block 25 runs 0:35–1:08 and block 26 runs 1:08–1:22.
+- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps their combined length unchanged: block 25 runs 0:40–1:13 and block 26 runs 1:13–1:27.
 - Also in the Session 2 folder. The point of the exercise is N tracking across specifications. The reference table is in the answer key ("Robustness Table Reference").
 - Step 11 (commit) comes before the git frames, so participants who have not yet seen `git init` leave it for later. Say so.
 - The "What to Watch For" and "Debrief" frames close the Swiss franc exercise.
@@ -91,7 +112,7 @@ History and Hungary coefficients are not significant in any column. Pseudo R² r
 - The render script writes a fragment (`\input`-able). `paper.tex` already loads `makecell` and `booktabs`. If compilation fails, it is nearly always a missing package or a wrong working directory for the script (it expects to run from `results_to_paper/`).
 - The Session 2 copy of `render_regression_table.py` differs: it writes a standalone document and prints the outcome label on the first row only. Don't use it for this exercise.
 - Participants must revert at least once. If no one does, ask someone to ask Claude Code for a deliberately worse paragraph and revert it.
-- The cross-check needs a fresh conversation, otherwise it re-reads its own reasoning. This is the Session 2 checker idea again.
+- The cross-check needs a fresh conversation, otherwise it re-reads its own reasoning. This is the fresh-session-as-independent-checker idea from Session 2's parallel-session frames.
 
 ### 29. When it goes wrong (6 min)
 - Two frames. The first is a reference table, so read the four patterns aloud rather than every cell. The second leads to "recent commit makes every option cheap".
@@ -117,5 +138,6 @@ History and Hungary coefficients are not significant in any column. Pseudo R² r
 | C. Git extras and the standalone git practice exercise | 8 | 10–20 |
 | D. *Reference only:* GitHub collaboration exercise ("Your Chapter") | 6 | — |
 | E. If `git pull` fights back | 1 | 2 |
+| F. A reference verification protocol (the file `docs/verification_protocol.md`) | 2 | 3 |
 
 Block C holds the old Session 3 git exercise (choose a project, initialize and commit, the cycle three times, debrief). It is no longer in the main flow because the results-to-paper exercise already practices commit, diff, revert.
