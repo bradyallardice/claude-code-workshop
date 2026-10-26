@@ -6,10 +6,9 @@ Output: tables/regression_table.tex, a tabular plus notes with NO document wrapp
         paper can pull it in with \\input{tables/regression_table.tex} inside its own
         table environment. Requires \\usepackage{booktabs} and \\usepackage{makecell}.
 
-Differs from session_2/scripts/render_regression_table.py in three ways: it writes a
-fragment instead of a standalone document, it labels each row with the coefficient name
-(the Session 2 version printed the outcome label on the first row and left the rest
-blank), and it takes its paths as arguments.
+The output is a fragment, not a standalone document, and each row is labelled with the
+coefficient name. The output folder is created if it is missing, and an existing output
+file is overwritten.
 
 Run from the session_3/results_to_paper folder:
     python scripts/render_regression_table.py
@@ -17,6 +16,7 @@ or give both paths:
     python scripts/render_regression_table.py results/regression_results.csv tables/regression_table.tex
 """
 
+import os
 import sys
 
 import pandas as pd
@@ -126,6 +126,9 @@ if __name__ == "__main__":
     csv_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_CSV_PATH
     tex_path = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_TEX_PATH
     tex_text = render_table(load_results(csv_path))
+    tex_folder = os.path.dirname(tex_path)
+    if tex_folder:
+        os.makedirs(tex_folder, exist_ok=True)
     with open(tex_path, "w") as tex_file:
         tex_file.write(tex_text)
     print(f"LaTeX table written to {tex_path}")
