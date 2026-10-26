@@ -93,7 +93,7 @@ group shifts everything later.
 - This is your troubleshooting window for anyone stuck at the setup check.
 - "What's Ahead" (1 frame) follows the debrief. It is the first thing to cut if behind.
 
-- `session_1/notes.md` (a scratch document with one deliberately over-long Summary paragraph) is for the terminal demo in block 5 if you want one: ask Claude Code from the terminal to edit just the Summary and leave the other sections alone. It ships to students but no slide references it.
+- `session_1/notes.md` is an optional prop for a terminal-edit demo (its own header: ask Claude Code from the terminal to edit one section and leave the others alone). No slide references it and it ships to students; skip it if you do not use it.
 
 ### 8. How Claude Code works, permissions, sensitive files (8 min)
 - Walk through the risk-level table. It's a useful reference; tell them they can come back to it.
