@@ -52,7 +52,9 @@ RAW_DIR = os.path.join(OUTPUT_DIR, "raw")
 # 118th Congress (2023-01-03 to 2025-01-03)
 DATE_START = "2023-01-03"
 DATE_END = "2025-01-03"
-N_DAYS = 7  # ~5-15 climate paragraphs per day -> roughly 50-100 passages
+TARGET_PASSAGES = 60  # enough for a 20-minute fan-out exercise
+MAX_PASSAGES_PER_DAY = 15
+MAX_DAYS = 40  # stop even if the target is not reached
 SEED = 20261026
 
 # Matches climate, climatic, climates, climatologist. Deliberately broad: it also
