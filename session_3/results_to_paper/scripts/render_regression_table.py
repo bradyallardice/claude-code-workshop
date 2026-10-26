@@ -86,7 +86,8 @@ def render_table(df):
     coef_order = (coefficient_rows.groupby("coef_type")["display_order"].min()
                   .sort_values().index.tolist())
 
-    lines = [r"\begin{tabular}{l" + "c" * len(specs) + "}",
+    lines = [r"\setlength{\tabcolsep}{4pt}",
+             r"\begin{tabular}{l" + "c" * len(specs) + "}",
              r"\toprule",
              "& " + " & ".join(spec_names) + r" \\",
              r"\midrule"]

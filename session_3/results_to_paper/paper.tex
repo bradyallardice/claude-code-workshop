@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{setspace}
+\onehalfspacing
+
+\title{Information and Support for Government Intervention:\\
+Evidence from the 2015 Swiss Franc Shock}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Data}
+
+We use a survey of 2{,}044 Polish adults fielded after the January 2015 removal of the Swiss franc exchange-rate floor. Respondents were randomly assigned to one of four conditions before being asked whether the government should intervene to help borrowers with foreign-currency loans: a control group with no information, a factual information group, a historical context group, and a group shown the Hungarian policy response. The outcome, \texttt{supports\_intervention}, equals one if the respondent supports some or big intervention and zero otherwise. Survey weights are used where noted.
+
+\section{Results}
+
+% TODO (exercise step 3): the results paragraph goes here, written by Claude Code from the
+% table below. Do not type numbers into this file yourself.
+
+Table~\ref{tab:main} reports logit coefficients for the effect of each information condition relative to the control group.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Effect of Information Conditions on Support for Intervention}
+  \label{tab:main}
+  \input{tables/regression_table.tex}
+\end{table}
+
+\end{document}
