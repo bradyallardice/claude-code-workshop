@@ -12,7 +12,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/claude_ignore_guard.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/scripts/claude_ignore_guard.sh\""
           }
         ]
       },
@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/reference_code_guard.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/scripts/reference_code_guard.sh\""
           }
         ]
       },
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/main_branch_guard.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/scripts/main_branch_guard.sh\""
           }
         ]
       }
@@ -41,11 +41,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/paper_compile_check.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/scripts/paper_compile_check.sh\""
           },
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/auto_commit_hook.sh"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/scripts/auto_commit_hook.sh\""
           }
         ]
       }

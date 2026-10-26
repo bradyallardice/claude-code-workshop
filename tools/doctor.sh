@@ -53,7 +53,7 @@ for candidate in "$HOME/claude-code-workshop" "$HOME/Documents/claude-code-works
     if [ -d "$candidate/.git" ]; then COURSE_REPO="$candidate"; break; fi
 done
 if [ -z "$COURSE_REPO" ]; then
-    fail "Course repo not found in ~, ~/Documents or ~/Desktop" "git clone https://github.com/bradyallardice/claude-code-workshop.git ~/claude-code-workshop" "F02"
+    fail "Course repo not found in ~, ~/Documents or ~/Desktop" "run the start-of-session command from github.com/bradyallardice/claude-code-workshop" "F02"
 else
     BRANCH="$(git -C "$COURSE_REPO" branch --show-current 2>/dev/null)"
     if [ "$BRANCH" != "student" ]; then
@@ -84,6 +84,9 @@ if have git; then
         pass "GitHub CLI logged in (git push over HTTPS will work)"
     elif [ -n "$HELPER" ] && [ "$PLATFORM" = "windows-gitbash" ]; then
         pass "git credential helper: $HELPER (Windows browser login)"
+    elif [ "$PLATFORM" = "mac" ] && printf "protocol=https\nhost=github.com\n\n" | git credential-osxkeychain get 2>/dev/null | grep -q "^password="; then
+        # Only tests that a saved GitHub credential exists; never prints it.
+        pass "GitHub credential saved in macOS Keychain"
     else
         warn "No GitHub login for git push (Session 4 and 5 need it)" "install GitHub CLI, then: gh auth login --web --git-protocol https [F05]"
     fi
@@ -102,50 +105,59 @@ fi
 
 # ---------------------------------------------------------------------------
 section "4. Python"
-# Find an interpreter that actually runs. On Windows, 'python3' can be a
-# Microsoft Store placeholder that exists on PATH but does not work.
-PYTHON=""
-for candidate in python3 python py; do
-    if have "$candidate" && "$candidate" -c "import sys" >/dev/null 2>&1; then
-        PYTHON="$candidate"; break
-    fi
-done
-if [ -z "$PYTHON" ]; then
-    fail "No working Python found (tried python3, python, py)" "install Python 3.12 from python.org (Windows: tick 'Add Python to PATH')" "F07"
-else
-    PY_VERSION="$("$PYTHON" -c 'import sys; print("%d.%d" % sys.version_info[:2])')"
-    PY_PATH="$("$PYTHON" -c 'import sys; print(sys.executable)')"
-    case "$PY_VERSION" in
-        3.11|3.12|3.13) pass "Python $PY_VERSION ($PY_PATH)" ;;
-        3.9|3.10) warn "Python $PY_VERSION is older than recommended" "works for most exercises; 3.11 or 3.12 preferred [F07]" ;;
-        *) fail "Python $PY_VERSION is not supported" "install Python 3.12 from python.org" "F07" ;;
-    esac
-
-    MISSING_PKGS="$("$PYTHON" - <<'PY'
-import importlib
+# Several Pythons on one machine is common, and the first one found is not
+# necessarily the one with the packages. Check every interpreter on PATH.
+# On Windows, 'python3' can be a Microsoft Store placeholder that does not run.
+PROBE='
+import sys, importlib
 missing = []
 for name in ["pandas", "numpy", "statsmodels", "scipy", "linearmodels", "matplotlib", "seaborn", "sklearn", "openpyxl"]:
     try:
         importlib.import_module(name)
     except Exception:
         missing.append("scikit-learn" if name == "sklearn" else name)
-print(" ".join(missing))
-PY
-)"
-    if [ -z "$MISSING_PKGS" ]; then
-        pass "All required Python packages import"
-    else
-        fail "Missing packages for $PY_PATH: $MISSING_PKGS" "$PYTHON -m pip install $MISSING_PKGS" "F08"
-    fi
+print("%d.%d|%s|%s" % (sys.version_info[0], sys.version_info[1], sys.executable, " ".join(missing)))
+'
+PY_ROWS=""; SEEN=""
+for candidate in python3 python py python3.11 python3.12 python3.13 python3.14; do
+    have "$candidate" || continue
+    ROW="$("$candidate" -c "$PROBE" 2>/dev/null)" || continue
+    EXE="$(echo "$ROW" | cut -d'|' -f2)"
+    case "$SEEN" in *"|$EXE|"*) continue ;; esac
+    SEEN="$SEEN|$EXE|"
+    PY_ROWS="$PY_ROWS$candidate|$ROW"$'\n'
+done
 
-    # Several Pythons on one machine is the usual cause of "I installed it but it says not found".
-    N_PYTHONS=$(for c in python3 python py python3.11 python3.12 python3.13; do
-        have "$c" && "$c" -c 'import sys; print(sys.executable)' 2>/dev/null
-    done | sort -u | wc -l | tr -d ' ')
-    if [ "$N_PYTHONS" -gt 1 ]; then
-        warn "$N_PYTHONS different Python installs on PATH" "always install with '$PYTHON -m pip install ...'; in VS Code pick the same interpreter [F08]"
+version_ge() { [ "$(printf '%s\n%s\n' "$2" "$1" | sort -t. -k1,1n -k2,2n | head -1)" = "$2" ]; }
+PY_VERSION=""; PYTHON=""
+if [ -z "$PY_ROWS" ]; then
+    fail "No working Python found (tried python3, python, py)" "install Python 3.12 from python.org (Windows: tick 'Add Python to PATH')" "F07"
+else
+    BEST=""
+    while IFS='|' read -r cmd ver exe missing; do
+        [ -z "$cmd" ] && continue
+        if [ -z "$missing" ] && version_ge "$ver" "3.9"; then BEST="$cmd|$ver|$exe|"; break; fi
+    done <<< "$PY_ROWS"
+    if [ -n "$BEST" ]; then
+        IFS='|' read -r PYTHON PY_VERSION PY_PATH _ <<< "$BEST"
+        pass "Python $PY_VERSION has all packages: use '$PYTHON' ($PY_PATH)"
+        version_ge "$PY_VERSION" "3.15" && warn "Python $PY_VERSION is very new" "it works now; if a later 'pip install' fails, install Python 3.12 [F07]"
+        while IFS='|' read -r cmd ver exe missing; do
+            [ -z "$cmd" ] || [ "$exe" = "$PY_PATH" ] && continue
+            if [ -n "$missing" ]; then WHY="missing: $missing"; else WHY="too old for the course"; fi
+            warn "Another Python on PATH: '$cmd' = $ver ($WHY)" "always use '$PYTHON -m pip install ...'; in VS Code select $PY_PATH [F08]"
+        done <<< "$PY_ROWS"
+    else
+        IFS='|' read -r PYTHON PY_VERSION PY_PATH MISSING_PKGS <<< "$(echo "$PY_ROWS" | head -1)"
+        if ! version_ge "$PY_VERSION" "3.9"; then
+            fail "Python $PY_VERSION ($PY_PATH) is too old" "install Python 3.12 from python.org" "F07"
+        else
+            fail "Missing packages for $PY_PATH: $MISSING_PKGS" "$PYTHON -m pip install $MISSING_PKGS" "F08"
+            version_ge "$PY_VERSION" "3.15" && warn "Python $PY_VERSION is very new; some packages may not install yet" "if pip fails, install Python 3.12 from python.org [F07]"
+        fi
     fi
 fi
+[ -z "$PYTHON" ] && PYTHON="python3"
 
 # ---------------------------------------------------------------------------
 section "5. VS Code"
