@@ -1,10 +1,44 @@
 # Session 4 Exercises
 
-Three exercises, all in your `session_4` copy. Open it in VS Code (`code .` from inside `session_4`) and start a new Claude Code conversation for each exercise.
+Four exercises, in the order you do them in the session, all in your `session_4` copy. Open it in VS Code (`code .` from inside `session_4`) and start a new Claude Code conversation for each exercise.
 
 ---
 
-## Exercise 1: Literature Scan, Then Check Every Citation (10 min)
+## Exercise 1: Mini Literature Review with Zotero (12 min)
+
+You have Zotero with the Zotero MCP connected, and the practice library (`docs/claude_code_zotero/`) imported as a collection named `claude_code_zotero`: nine papers on economic voting.
+
+Draft a **five-sentence literature review** on one of:
+
+- How economic conditions shape vote choice
+- Whether voters punish incumbents for bad economies
+- Whether voters respond to the local economy versus the national one
+
+Rules:
+
+- Every sentence cites at least one paper from `claude_code_zotero`.
+- Only use cite keys that actually exist in the collection.
+- Claude does the searching, full-text reading, and drafting.
+
+While it works, watch the tool calls. Did it run a Zotero search, or guess? Did it pull the full text, or cite from titles alone? Afterwards, spot-check one citation: open the paper in Zotero and ask whether your sentence represents what it argues.
+
+---
+
+## Exercise 2: Build a Skill (15 min)
+
+Working solo. You leave with one skill installed and tested.
+
+1. **Pick a convention (2 min).** Something you actually did in the last two weeks: a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
+2. **Route it (1 min).** Is this really a skill? Not project context, not an MCP. If a skill, is it verification or production?
+3. **Write `SKILL.md` (6 min).** A clear `name`, a `description` that says *when* to fire (and what it does not handle), and the instructions.
+4. **Install (1 min).** Save to `~/.claude/skills/<your-skill>/SKILL.md`.
+5. **Try it (5 min).** Open a **fresh** Claude Code session. Ask for a task that should trigger it. If it does not fire, the `description` is wrong: fix it and retry.
+
+**Leave with:** a folder with a real `SKILL.md`, one transcript where the skill fired on a real task, and one thing you would change now that you have seen it run.
+
+---
+
+## Exercise 3: Literature Scan, Then Check Every Citation (10 min)
 
 **Choose a narrow question from your own field.** Narrow means you could name the three most relevant papers if asked. "Does civil-service tenure affect corruption?" works; "political economy" does not.
 
@@ -42,7 +76,7 @@ How many papers passed all three columns? Which column failed most often?
 
 ---
 
-## Exercise 2: Fan Out the Coding (20 min)
+## Exercise 4: Fan Out the Coding (15 min)
 
 **Corpus:** 63 paragraphs of floor speech from the 118th Congress that contain the word "climate" (`data/climate_speeches/passages.csv`). **Scheme:** `data/climate_speeches/coding_scheme.md`.
 
@@ -63,13 +97,13 @@ passage_id, code to output/batch_N.csv.
 
 Check: do the files have the right columns? Do the codes match what the scheme allows? How much of your usage did two agents use? (Look at your usage display before and after.)
 
-### Step 2: Fan out the rest (6 min)
+### Step 2: Fan out the rest (4 min)
 
 Same prompt for the remaining passages, in batches. When all batches are done, merge them to `output/agent_codes.csv` with columns `passage_id`, `code`. Confirm the merged file has 63 rows and no duplicate `passage_id`.
 
 **Do not give the agents the `party` or `speaker_name` columns.** A coder who sees party can use it as a shortcut. Whether yours would have is something you can only know if you controlled what it saw.
 
-### Step 3: Compare (6 min)
+### Step 3: Compare (4 min)
 
 The instructor will give you the reference codes (`gold_codes.csv`) now. Put the file in `data/climate_speeches/`. Then ask Claude Code for:
 
@@ -79,7 +113,7 @@ The instructor will give you the reference codes (`gold_codes.csv`) now. Put the
 
 Then read the disagreements one at a time. For each, decide: was the agent wrong, was the reference wrong, or does the scheme not decide it?
 
-### Step 4: Check the computation (2 min)
+### Step 4: Check the computation (1 min)
 
 Verify one number by hand (count the diagonal of the matrix, divide by 63), or run:
 
@@ -96,15 +130,3 @@ and compare its output with what Claude Code reported.
 3. Would you report these codes in a paper? If not, what is the cheapest change that would make you willing?
 
 ---
-
-## Exercise 3: Build a Skill (25 min)
-
-Working solo. You leave with one skill installed and tested.
-
-1. **Pick a convention (3 min).** Something you actually did in the last two weeks: a format you enforce, an audit you redo by hand, context you retype. Not a hypothetical.
-2. **Route it (2 min).** Is this really a skill? Not project context, not an MCP. If a skill, is it verification or production?
-3. **Write `SKILL.md` (10 min).** A clear `name`, a `description` that says *when* to fire (and what it does not handle), and the instructions.
-4. **Install (1 min).** Save to `~/.claude/skills/<your-skill>/SKILL.md`.
-5. **Try it (9 min).** Open a **fresh** Claude Code session. Ask for a task that should trigger it. If it does not fire, the `description` is wrong: fix it and retry.
-
-**Leave with:** a folder with a real `SKILL.md`, one transcript where the skill fired on a real task, and one thing you would change now that you have seen it run.

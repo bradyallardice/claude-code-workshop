@@ -1,6 +1,6 @@
 # Coding Scheme: Climate Mentions in Congressional Speech
 
-**Status: DRAFT.** To be finalized by the instructor before the gold set is hand-coded.
+**Status: DRAFT, used as written for the Session 4 exercise.** The reference codes were produced by Claude from this scheme, not hand-coded (see `README.md`). Revise the scheme before any use in a real project, and recode the reference set by hand.
 
 ## Unit
 
