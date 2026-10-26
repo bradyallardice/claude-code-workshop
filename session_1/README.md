@@ -58,6 +58,15 @@ cd ~\my_workspace\session_1; code .
 ## Start here
 
 1. Open `slides/session1_slides.pdf`.
-2. Demo: the county-year panel build from `docs/demo_prompt.md`, using the
+2. Setup check: run `claude --version`, then compile `setup_check.tex` (open it
+   in VS Code and click the green Build arrow, or run
+   `latexmk -pdf setup_check.tex`). A PDF with a small table should appear.
+3. Demo: the county-year panel build from `docs/demo_prompt.md`, using the
    election and IPUMS data in `data/`.
-3. Exercise: `scripts/exercise_build_panel.py`.
+4. Exercise 1, your first commands: `scripts/exercise_build_panel.py`
+   (or the `.R` / `.do` version in the same folder).
+5. Exercise 2, build a `CLAUDE.md`: done in one of **your own** projects, in a
+   new VS Code window, not in this folder.
+
+**Keep your `my_workspace/session_1` copy after today.** Session 2's first
+exercise continues in it.

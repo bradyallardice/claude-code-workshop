@@ -24,3 +24,7 @@ __pycache__/
 *.toc
 *.vrb
 texput.log
+
+# Session 1 LaTeX setup check: students compile it inside their clone during pre-work,
+# and its PDF must not make `git status` look dirty
+session_1/setup_check.pdf
