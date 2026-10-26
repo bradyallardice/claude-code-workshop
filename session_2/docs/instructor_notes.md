@@ -42,6 +42,7 @@ By the queue rule, whatever doesn't fit moves to the start of Session 3.
   - Claude Code may notice that the file changed since it read it (its edit tools usually refuse to write a file that changed since they last read it) and merge instead of overwrite. That is fine to show as it happens: it is still the only shared memory, and the outcome depended on timing.
   - **Rehearse it beforehand, and keep a screenshot of a clean overwrite as fallback** (plan, "New material to build").
 - Benefits/risks frame: land "no shared memory except files" and "a tab already open won't see later CLAUDE.md edits". Session 4's automated checking builds on both.
+- **Summarizing demo (watch only):** summarize a conversation with real content, one that changed files, made decisions, and left work to do. The demo tabs have nothing to summarize: participants' tabs only read two files, and yours only wrote `data_notes.md`. A session from your own project (the one in the earlier live demo) works, prepared in advance. Use the Strategy 3 prompt on the slide before, save the summary to a file, then paste it into a fresh conversation and show that it picks up where the last one stopped.
 
 ### 15. Execution modes (5 min)
 - Plan mode is the recommended default for research. The "checkpoint" framing (catch the inner join before it happens) is key.
