@@ -5,7 +5,7 @@ The script visits Record days in a seeded random order and stops once
 TARGET_PASSAGES passages are collected. A fixed number of days does not work:
 many Record days are pro forma sessions during recesses with no debate. For
 each day visited, the script:
-  1. downloads the day's package ZIP from the GovInfo API (one request per day),
+  1. downloads the day's package ZIP from govinfo.gov (public, no key needed),
   2. keeps speech granules -- granules with at least one member tagged
      role="SPEAKING" in the day's MODS metadata (this drops the Daily Digest,
      bill lists, and other non-speech sections),
@@ -24,9 +24,11 @@ Outputs (session_4/data/climate_speeches/):
   - raw/                  cached text and speaker metadata per day, so reruns
                           do not spend API requests
 
-API key: set GOVINFO_API_KEY (free from api.data.gov). Without it the script
-uses DEMO_KEY, which is limited to roughly 10 requests per hour. If the limit is
-hit, rerun later: completed days are cached in raw/ and are not re-downloaded.
+API key: only the list of Record days uses the GovInfo API (one request, then
+cached in raw/package_list.json). Set GOVINFO_API_KEY (free from api.data.gov)
+or the script falls back to DEMO_KEY, which has hourly and daily caps. Day
+downloads use govinfo.gov's public content path and need no key; completed
+days are cached in raw/ and are not re-downloaded.
 
 Run from the project root: python session_4/scripts/build_climate_corpus.py
 """
@@ -37,6 +39,7 @@ import json
 import os
 import random
 import re
+import time
 import xml.etree.ElementTree as ET
 import zipfile
 from datetime import datetime, timezone
@@ -63,6 +66,9 @@ SEED = 20261026
 KEYWORD_PATTERN = re.compile(r"\bclimat\w*", re.IGNORECASE)
 
 API_BASE = "https://api.govinfo.gov"
+CONTENT_BASE = "https://www.govinfo.gov/content/pkg"
+USER_AGENT = "claude-code-workshop corpus builder (teaching materials)"
+DOWNLOAD_PAUSE_SECONDS = 2  # be polite to govinfo.gov between ~40 MB downloads
 MODS_NS = {"m": "http://www.loc.gov/mods/v3"}
 
 # Turn markers that open a member's paragraph, e.g. "Mr. SMITH of Texas.",
@@ -95,6 +101,13 @@ def api_get(url):
             "GovInfo rate limit reached. Completed days are cached in "
             f"{RAW_DIR}; rerun later or set GOVINFO_API_KEY."
         )
+    response.raise_for_status()
+    return response.content
+
+
+def public_get(url):
+    """GET a file from govinfo.gov's public content path and return the bytes."""
+    response = requests.get(url, timeout=300, headers={"User-Agent": USER_AGENT})
     response.raise_for_status()
     return response.content
 
@@ -198,7 +211,10 @@ def fetch_day(package_id, api_key):
             return json.load(f)
 
     print(f"  downloading {package_id} ...")
-    zip_bytes = api_get(f"{API_BASE}/packages/{package_id}/zip?api_key={api_key}")
+    # The day's ZIP comes from govinfo.gov's public content path, which needs no
+    # API key; DEMO_KEY also has a daily cap far too low for one ZIP per day.
+    zip_bytes = public_get(f"{CONTENT_BASE}/{package_id}.zip")
+    time.sleep(DOWNLOAD_PAUSE_SECONDS)
     kept = process_day_zip(zip_bytes, package_id)
     os.makedirs(RAW_DIR, exist_ok=True)
     with open(cache_path, "w") as f:
@@ -213,8 +229,11 @@ def split_paragraphs(text):
 
     A paragraph starts on a line indented by exactly two spaces; unindented lines
     continue it. Deeper-indented lines (centered section titles) and the bracketed
-    header lines end the current paragraph and are dropped.
+    header lines end the current paragraph and are dropped. Page-break markers
+    ("[[Page H5295]]", surrounded by blank lines) can fall mid-sentence, so they
+    are removed first rather than treated as paragraph boundaries.
     """
+    text = re.sub(r"\n\s*\n\[\[Page [^\]]+\]\]\n\s*\n", "\n", text)
     paragraphs, current = [], []
     for line in text.splitlines():
         if re.match(r"^  \S", line):
