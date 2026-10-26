@@ -1,0 +1,33 @@
+% Drop-in frame for the start-of-session ritual (replaces the old
+% clone / cp -r / cd / code . frame). Same layout conventions as session1_slides.tex.
+\begin{frame}[fragile]{Start of Every Session: One Command}
+  Open \textbf{github.com/bradyallardice/claude-code-workshop} and copy the command at the top of the page.
+  \vspace{0.3em}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \textbf{Mac (Terminal)}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny,breaklines=true]
+curl -fsSL https://raw.githubusercontent.com/
+  bradyallardice/claude-code-workshop/student/
+  tools/start_session.sh | bash -s -- 1
+    \end{lstlisting}
+    {\footnotesize Change the last number to today's session.}
+
+    \column{0.48\textwidth}
+    \textbf{Windows (PowerShell)}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny,breaklines=true]
+irm https://raw.githubusercontent.com/
+  bradyallardice/claude-code-workshop/student/
+  tools/start_session.ps1 | iex
+    \end{lstlisting}
+    {\footnotesize It asks which session.}
+  \end{columns}
+
+  \vspace{0.4em}
+  \begin{itemize}\small
+    \item Updates the course materials to \textbf{today's version}, backing up anything you changed
+    \item Copies today's folders into \texttt{my\_workspace}, \textbf{never overwriting} your work
+    \item Opens \texttt{my\_workspace} in VS Code: start Claude Code there
+    \item \textbf{Check:} the \emph{Materials version} in your READY box matches mine
+  \end{itemize}
+\end{frame}
