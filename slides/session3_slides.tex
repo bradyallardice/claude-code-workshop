@@ -295,26 +295,26 @@ Not covered:       identification, construct validity
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{An Audit Report, Filled In (Swiss Franc Project)}
+\begin{frame}[fragile]{An Audit Report, Filled In (Invented Example)}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize, columns=fixed, keepspaces=true]
-## Tests run        126 passed | 0 failed | 0 skipped | 5 known issues
-## Requirements     R1 Merge keeps every respondent ...... 7 tests, pass
-                    R3 Control is the reference arm ...... 2 tests, pass
-                    R5 N explained for every model ....... 15 tests, pass
-## Not tested       Stata and R versions; interaction coefficients (N only)
+## Tests run        58 passed | 0 failed | 1 skipped
+## Requirements     R1 Merge keeps every record ......... 4 tests, pass
+                    R2 Age restriction applied .......... 2 tests, pass
+                    R4 N explained for every model ...... 6 tests, pass
+## Not tested       R3 (weights): no independent value yet; R language version
 ## Numerical checks              pipeline    independent   tolerance
-  intercept vs logit(share)      -0.218726   -0.218726     1e-5
-  info coef, full controls        0.266587    0.266587     2e-6
+  rows after merge                 1,500        1,500        exact
+  weighted mean of outcome         0.5123       0.5123       1e-6
 ## Needs your call
-  - DK coded 0, not missing (230 respondents): the codebook's definition,
-    but a substantive choice.
-  - Income + left-right drops ~43% of respondents: the tests reconcile
-    the drop; they do not say complete cases are acceptable.
+  - Records under 18 dropped: a rule from the design document, but a
+    choice a referee could question.
+  - Complete cases only: the tests reconcile the rows dropped; they do
+    not say that dropping them is acceptable.
 ## Not covered     identification; construct validity of the outcome
   \end{lstlisting}
 
   \vspace{0.3em}
-  {\small Notice what the report does: it names two judgment calls and what it cannot show, instead of declaring the work correct.}
+  {\small This is an invented example, not your project's output. Notice what the report does: it lists a skipped test and an untested requirement, names two judgment calls, and says what it cannot show, instead of declaring the work correct.}
 \end{frame}
 
 \begin{frame}{Two More Safeguards}
