@@ -167,7 +167,8 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 | 4 | Web search block and literature-scan exercise | |
 | 4 | Prompt injection and data exposure frames | |
 | 4 | Fan-out / swarm frames | |
-| 4 | LLM-as-coder frames, plus **a corpus of ~50–100 short texts with a coding scheme and hand-coded gold labels** | Main prep cost. Nothing like it exists in the repo yet. |
+| 4 | LLM-as-coder frames | |
+| 4 | **Hand-code the gold set** in `session_4/data/climate_speeches/gold_codes.csv` after finalizing `coding_scheme.md` (draft) | The corpus is built (see that folder's README). The gold codes must be human and made before class. A second coder on a subset gives the human–human agreement benchmark. |
 | 4 | Referee subagent definition file and example run | |
 | 4 | Sharing-with-coauthors frame | |
 | 3, 4 | Back-matter index frames | |
