@@ -23,7 +23,7 @@ Built by [`session_4/scripts/build_climate_corpus.py`](../../scripts/build_clima
 5. **Speaker attribution.** Each paragraph is assigned to the speaker whose turn marker ("Mr. SMITH of Texas.") most recently opened it. Markers are matched against the MODS speaker list, which supplies party, state, chamber, and Bioguide ID. The `attribution` column records how each passage was assigned (`marker`, `single_speaker`, `presiding`, `unattributed`).
 6. **Cap.** At most 15 passages per day, drawn at random, so one long floor debate cannot dominate.
 
-To rebuild, run `python session_4/scripts/build_climate_corpus.py` from the project root. With the cache in `raw/`, a rebuild needs no network access. If the list of Record days has to be refetched, set `GOVINFO_API_KEY` (free from api.data.gov), because `DEMO_KEY` has low hourly and daily caps. A rebuild refuses to run if `gold_codes.csv` no longer matches the passage IDs.
+Participants do not need to rebuild: the exercise uses `passages.csv`. To rebuild, install `requests` (`python -m pip install requests`; it is not part of the course setup), then run `python session_4/scripts/build_climate_corpus.py` from the project root. With the cache in `raw/`, a rebuild needs no network access. If the list of Record days has to be refetched, set `GOVINFO_API_KEY` (free from api.data.gov), because `DEMO_KEY` has low hourly and daily caps. A rebuild refuses to run if `gold_codes.csv` no longer matches the passage IDs.
 
 ## Known limitations
 
