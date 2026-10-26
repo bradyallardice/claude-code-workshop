@@ -391,5 +391,10 @@ function buildIntakeSurvey() {
 
   Logger.log('Edit the form here:    ' + form.getEditUrl());
   Logger.log('Send students this:    ' + form.getPublishedUrl());
-  Logger.log('Number of questions:   ' + form.getItems().length);
+  // getItems() also returns section headers and page breaks; count only questions.
+  const layoutTypes = [FormApp.ItemType.PAGE_BREAK, FormApp.ItemType.SECTION_HEADER];
+  const questionCount = form.getItems()
+    .filter(item => layoutTypes.indexOf(item.getType()) === -1)
+    .length;
+  Logger.log('Number of questions:   ' + questionCount);
 }
