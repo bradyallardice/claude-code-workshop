@@ -66,7 +66,7 @@ git add .
 git commit -m "Add capstone starter files"
 ```
 
-`session_4/capstone-template/` is the source; your copy is the workspace. Do not edit the template.
+(If you are in the course repo root instead, the first line is `cp -r session_4/capstone-template [my_workspace]/capstone`.) `session_4/capstone-template/` is the source; your copy is the workspace. Do not edit the template.
 
 If `git init -b main` is rejected (git older than 2.28), run `git init` and then `git symbolic-ref HEAD refs/heads/main` before the first commit. The slides, hooks, and commands below all assume the branch is called `main`.
 
