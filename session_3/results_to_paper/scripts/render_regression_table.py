@@ -16,6 +16,7 @@ or give both paths:
     python scripts/render_regression_table.py results/regression_results.csv tables/regression_table.tex
 """
 
+import os
 import sys
 
 import pandas as pd
