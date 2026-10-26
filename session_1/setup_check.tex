@@ -1,0 +1,54 @@
+% setup_check.tex: confirms your LaTeX installation can build the Session 3 paper.
+%
+% It loads every package that the Session 3 paper skeleton and the regression-table
+% renderer (session_2/scripts/render_regression_table.py) use. If this compiles to a
+% PDF showing the table below, your setup is ready.
+%
+% How to compile:
+%   VS Code: open this file and click the green Build arrow (top right), or press
+%            Cmd+Option+B (Mac) / Ctrl+Alt+B (Windows). The PDF opens beside it.
+%   Terminal: latexmk -pdf setup_check.tex
+%
+% If it fails with "File `<name>.sty' not found", a package is missing: see the
+% Troubleshooting section of the pre-work guide.
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section*{Setup check}
+
+If you can read this, \LaTeX{} works. The table and equation below use the same
+packages as the Session 3 paper, so if they look right, you are ready.
+
+\begin{table}[H]
+  \centering
+  \caption{A test table}
+  \begin{tabular}{lcc}
+    \toprule
+    & \makecell{Model 1\\(baseline)} & \makecell{Model 2\\(controls)} \\
+    \midrule
+    Treatment & 0.12 & 0.10 \\
+              & (0.04) & (0.04) \\
+    \midrule
+    Observations & 1,000 & 1,000 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{equation}
+  y_{it} = \alpha_i + \beta \, \text{Treatment}_{it} + \varepsilon_{it}
+\end{equation}
+
+\end{document}

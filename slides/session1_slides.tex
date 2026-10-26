@@ -1,4 +1,5 @@
-% Module 1: What This Is and What You Can Do With It
+% Session 1: What It Is and How It Works
+% Structure and timings: admin/course_plan_4_sessions.md (blocks 1-13)
 % Beamer Presentation — Claude Code for Academic Researchers
 \documentclass[aspectratio=169, 11pt]{beamer}
 
@@ -136,18 +137,18 @@
     \toprule
     \textbf{Session} & \textbf{Focus} \\
     \midrule
-    1 & Introduction: what Claude Code is, what you can do with it, and how it works \\
+    1 & What it is and how it works: agentic coding, permissions, models, context, CLAUDE.md \\
     \midrule
-    2 & Research pipelines: from data to results --- cleaning, estimation, robustness, \LaTeX{} tables \\
+    2 & Context strategies, parallel sessions, plan mode, and the start of verification \\
     \midrule
-    3 & Git and \LaTeX{} in VS Code: version control and the integrated research environment \\
+    3 & From verified data to the paper: estimation, robustness, \LaTeX{} tables, git as the undo button, \LaTeX{} in VS Code \\
     \midrule
-    4 & Advanced Claude Code: skills, MCPs (Zotero, GitHub), subagents, hooks, and the final project \\
+    4 & Power use: web search, subagents, LLMs as research coders, MCPs, skills, and hooks \\
     \bottomrule
   \end{tabular}
 
   \vspace{0.6em}
-  {\footnotesize 4 sessions $\times$ 2 hours \quad$\vert$\quad 60--70\% hands-on \quad$\vert$\quad Pair programming throughout}
+  {\footnotesize 4 sessions $\times$ 2 hours \quad$\vert$\quad about half hands-on \quad$\vert$\quad Pair programming throughout}
 \end{frame}
 
 \begin{frame}{Core Framework}
@@ -183,13 +184,13 @@
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  MODULE 1 BEGINS
+%  PART A BEGINS
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}[plain]
   \centering
   \vfill
-  {\Large\textbf{Module 1}}\\[0.5em]
+  {\Large\textbf{Part A}}\\[0.5em]
   {\large What This Is and What You Can Do With It}\\[0.3em]
   {\small Demo + Exercise}
   \vfill
@@ -269,7 +270,7 @@ code .
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  SETUP CHECK
+%  SETUP CHECK  [block 2, ends 0:21]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Setup Check}
@@ -278,22 +279,20 @@ code .
   \vspace{0.5em}
   \begin{enumerate}
     \item Verify Claude Code: \lstinline{claude --version}
-    \item Launch Claude Code: \lstinline{claude}
+    \item Launch Claude Code: \lstinline{claude}\\
+      {\small Try a simple message: \lstinline{What files are in this directory?}}
+    \item Compile the test document: open \texttt{setup\_check.tex} and click the green \textbf{Build} arrow (top right)\\
+      {\small A PDF with a small table should open beside it. Terminal alternative: \lstinline{latexmk -pdf setup_check.tex}}
   \end{enumerate}
-
-  \vspace{0.8em}
-  You should see Claude Code's interface appear in your terminal.
-
-  \vspace{0.5em}
-  Try typing a simple message: \lstinline{What files are in this directory?}
 
   \vspace{1em}
   \textbf{If you completed pre-work:} help your neighbor.\\
-  \textbf{If you're stuck:} pair with someone who is set up. We'll troubleshoot at break.
+  \textbf{If you're stuck:} pair with someone who is set up and keep going. Tell me, and I'll come round during the first exercise.\\
+  {\small \LaTeX{} problems must be fixed before Session 3, which has no time to absorb them.}
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  OPENING DEMO  [0:00–2:00]
+%  OPENING DEMO  [block 3, 0:21–0:29]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Live Demo: The Task}
@@ -365,7 +364,7 @@ code .
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  WHAT JUST HAPPENED  [2:00–10:00]
+%  WHAT JUST HAPPENED  [block 3, ends 0:29]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{What Just Happened}
@@ -405,7 +404,7 @@ code .
 
 
 % ══════════════════════════════════════════════════════════════════
-%  THE CODING PARADIGM SPECTRUM  [10:00–16:00]
+%  THE CODING PARADIGM SPECTRUM  [block 4, 0:29–0:35]
 % ══════════════════════════════════════════════════════════════════
 
 % --- Paradigm 1: Manual Coding ---
@@ -560,7 +559,7 @@ code .
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  ORIENTATION: TERMINAL, VS CODE, FILE TYPES  [27:00–37:00]
+%  ORIENTATION: TERMINAL, VS CODE, FILE TYPES  [block 5, 0:35–0:49]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Where Does Claude Code Live?}
@@ -883,7 +882,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  WHAT IT CAN AND CANNOT DO  [16:00–19:00]
+%  WHAT IT CAN AND CANNOT DO  [block 6, 0:49–0:56]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{What Claude Code Can Do for Academic Research}
@@ -1002,7 +1001,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  WHY VERIFICATION MATTERS  [19:00–23:00]
+%  WHY VERIFICATION MATTERS  [block 6]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Why Verification Matters}
@@ -1026,7 +1025,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  THE CONTROL PRINCIPLE  [23:00–25:00]
+%  THE CONTROL PRINCIPLE  [block 6, ends 0:56]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{The Control Principle}
@@ -1042,7 +1041,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  EXERCISE  [37:00–47:00]
+%  EXERCISE: FIRST COMMANDS  [block 7, 0:56–1:11]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}[fragile]{Exercise: Your First Commands}
@@ -1074,7 +1073,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  PREVIEW  [47:00–50:00]
+%  PREVIEW  [1 min; first cut if behind]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{What's Ahead}
@@ -1094,7 +1093,7 @@ claude
 \end{frame}
 
 %% ══════════════════════════════════════════════════════════════════
-%%  PART B DIVIDER
+%%  PART B DIVIDER  [block 8, 1:11–1:19]
 %% ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Part B: How Claude Code Works}
@@ -1646,7 +1645,7 @@ claude
 
 
 % ══════════════════════════════════════════════════════════════════
-%  THE CONTEXT WINDOW  [8:00–12:00]
+%  THE CONTEXT WINDOW  [block 11, 1:31–1:40]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{The Context Window}
@@ -1673,7 +1672,7 @@ claude
   Errors compound when the agent loses track of earlier decisions.
 
   \vspace{0.5em}
-  \textbf{We will cover strategies for managing this in Module 3.}
+  \textbf{We will cover strategies for managing this in Session 2.}
 \end{frame}
 
 \begin{frame}{Practical Implication}
@@ -1689,7 +1688,7 @@ claude
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  CLAUDE.MD  [30:00–40:00]
+%  CONTEXT HIERARCHY, THEN CLAUDE.MD  [blocks 11–12, ends 1:45]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Where Claude Looks for Context}
@@ -1862,6 +1861,10 @@ Effect of historical migration on county-level outcomes.
   \end{alertblock}
 \end{frame}
 
+% ══════════════════════════════════════════════════════════════════
+%  EXERCISE: BUILD A CLAUDE.MD  [block 13, 1:45–1:57]
+% ══════════════════════════════════════════════════════════════════
+
 \begin{frame}{Exercise: Build a CLAUDE.md for Your Own Project}
   \small
   \textbf{Use one of your own projects,} in a fresh window so the project folder is the working directory.
@@ -1899,91 +1902,23 @@ Effect of historical migration on county-level outcomes.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  EXERCISE  [48:00–70:00]
+%  SESSION 1 SUMMARY  [1:57–2:00]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Exercise: Build the County Panel From Scratch}
-  In Module 1 you ran a pre-built script. Now \textbf{you} build it.
-
-  \vspace{0.3em}
-  \textbf{Same data, fresh start.} Work in pairs using plan mode.
-
-  \vspace{0.5em}
-  \begin{enumerate}
-    \item Write a \texttt{CLAUDE.md} for the project (use the template)
-    \item Switch Claude Code to \textbf{plan mode}
-    \item Ask Claude Code to build a county-year panel that merges election returns with IPUMS census demographics
-    \item \textbf{Before approving the plan}, you will need to:
-      \begin{itemize}
-        \item Read the codebooks to understand variable codings\\
-          {\small (What does \texttt{EDUC $\geq$ 10} mean? What does \texttt{RACE == 1} code?)}
-        \item Decide how to define key variables\\
-          {\small (Two-party vote share? College = bachelor's or higher?)}
-        \item Specify the merge: which keys, which join type, expected row counts
-      \end{itemize}
-    \item Review the plan, reject or revise as needed, then approve
-    \item Run the script and verify the output
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Evaluating the Plan}
-  When Claude Code proposes its plan, ask yourself:
-
-  \vspace{0.5em}
-  \begin{itemize}
-    \item Is it reading the \textbf{codebooks} or just guessing at variable meanings?
-    \item How is it coding \texttt{EDUC}, \texttt{RACE}, \texttt{HISPAN}?\\
-      {\small Do those match \textit{your} definitions?}
-    \item What join type is it using? Inner, left, or outer?\\
-      {\small What happens to counties that appear in one dataset but not the other?}
-    \item Is it filtering \texttt{mode == "TOTAL"} for election data?
-    \item Does it handle \texttt{COUNTYFIP == 0} (unidentified counties)?
-  \end{itemize}
-
-  \vspace{0.5em}
-  \alert{This is where your domain knowledge matters.}\\
-  Claude Code can write the code, but you decide what the variables mean.
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  DEBRIEF  [70:00–75:00]
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Debrief}
-  \begin{itemize}
-    \item What variable coding decisions did you make? Did Claude Code's default match yours?
-    \item Did anyone reject or modify the plan? What did you change?
-    \item How did your panel compare to the Module 1 version?
-  \end{itemize}
-
-  \vspace{0.8em}
-  \begin{block}{The Lesson}
-    \textbf{Writing a CLAUDE.md} forces you to be explicit about conventions you have kept implicit.
-
-    \vspace{0.3em}
-    \textbf{Reviewing plans} forces you to think about approach \textit{before} you see output.
-
-    \vspace{0.3em}
-    \textbf{Domain knowledge} is key for preventing errors.
-  \end{block}
-\end{frame}
-
-% ══════════════════════════════════════════════════════════════════
-%  SUMMARY
-% ══════════════════════════════════════════════════════════════════
-
-\begin{frame}{Module 2 Summary}
+\begin{frame}{Session 1 Summary}
   \begin{enumerate}
     \item Claude Code works with \textbf{files}, not interactive sessions
-    \item The \textbf{context window} limits what it can hold, so keep tasks focused
+    \item \textbf{You} set what it may do: permissions, and what stays out of the folder
     \item What you get out depends on \textbf{your skill, the context, and the model}
+    \item The \textbf{context window} limits what it can hold
     \item \textbf{CLAUDE.md} is your most powerful tool for preventing errors
     \item \textbf{Cost management} is a core skill, not an afterthought
   \end{enumerate}
 
   \vspace{1em}
   \centering
-  \textbf{Next: Module 3, Automating Research Tasks}
+  \textbf{Next session:} managing context, running sessions in parallel, plan mode, and verification\\[0.3em]
+  {\small \textbf{Keep your \texttt{my\_workspace/session\_1} folder:} Session 2's first exercise builds on it.}
 \end{frame}
 
 \end{document}

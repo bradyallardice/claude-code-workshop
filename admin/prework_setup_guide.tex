@@ -217,7 +217,7 @@ In Session 3 we will write and compile a \LaTeX{} paper directly inside VS Code,
   \item Run the installer and follow the defaults
 \end{itemize}
 If you want a smaller install, \textbf{BasicTeX} (roughly 100 MB) works for this workshop --- download it from the same page, then after installation run in Terminal:
-\cmd{sudo tlmgr update -\/-self\\sudo tlmgr install latexmk collection-fontsrecommended}
+\cmd{sudo tlmgr update -\/-self\\sudo tlmgr install latexmk collection-fontsrecommended booktabs makecell geometry setspace float caption lm}
 
 \plat{Windows --- TeX Live:}
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
@@ -231,6 +231,18 @@ If you are short on time or disk space, use the \textbf{MiKTeX} distribution ins
 Open a terminal and run:
 \cmd{pdflatex -\/-version}
 You should see a version number starting with \texttt{pdfTeX 3.x}. If the command is not found, close and reopen your terminal first. On Windows, you may need to log out and back in for the PATH to update.
+
+\subsection*{Compile the test document}
+A version number does not prove that a document will build. The course repo contains a short test file that loads every package the Session 3 paper uses. Compile it now, because Session 3 has no time to fix a \LaTeX{} install.
+\begin{itemize}[leftmargin=2em,itemsep=0pt]
+  \item In VS Code, choose File $\rightarrow$ Open Folder and open \texttt{claude-code-workshop/session\_1}
+  \item Open \texttt{setup\_check.tex} and click the green \textbf{Build} arrow at the top right
+  \item Keyboard alternative: Cmd+Option+B (Mac) or Ctrl+Alt+B (Windows)
+  \item A PDF with a small table and an equation should open beside the file
+\end{itemize}
+Terminal alternative:
+\cmd{cd \textasciitilde/claude-code-workshop/session\_1 \&\& latexmk -pdf setup\_check.tex}
+\textit{The build leaves a few files (\texttt{setup\_check.pdf}, \texttt{.aux}, \texttt{.log}) next to the test file. That is fine: the repo is set to ignore them, so \texttt{git status} stays clean and \texttt{git pull} is unaffected. If the build fails, see the two \LaTeX{} build entries under Troubleshooting.}
 
 \section*{Step 8: Install the GitHub MCP}
 An \textbf{MCP} (Model Context Protocol server) is how Claude Code talks to systems outside your project. The GitHub MCP lets Claude Code open pull requests, leave review comments, and create issues directly from the chat. We use it during the Session 4 collaborative story exercise. Setup takes 15--20 minutes and is too fiddly to do in the room.
@@ -394,6 +406,7 @@ Open a terminal (Mac: Terminal; Windows: PowerShell) and run each of the followi
 \textbf{Also confirm:}
 \begin{itemize}[leftmargin=2em,itemsep=0pt]
   \item VS Code opens and the Python, R, Claude Code, and LaTeX Workshop extensions are visible in the Extensions sidebar
+  \item \texttt{session\_1/setup\_check.tex} builds to a PDF showing a table and an equation (Step 7)
   \item The Claude Code extension panel responds when you type a message
   \item You have a GitHub account and have emailed me your GitHub username
   \item The \texttt{claude-code-workshop/} folder exists and \texttt{git status} inside it reports a clean working tree
@@ -419,6 +432,10 @@ Session 4 leans heavily on the Git workflow from Session 3. In the few days befo
 \textbf{Windows: Claude Code install fails:} Make sure Git for Windows is installed first (Step 2). Claude Code on Windows requires Git Bash internally.
 
 \textbf{LaTeX: \texttt{pdflatex} not found after installing:} On Mac, log out and log back in --- MacTeX updates PATH via a login item. On Windows, restart your computer after the TeX Live installer finishes.
+
+\textbf{LaTeX build: \texttt{File `<name>.sty' not found}:} A package is missing. With BasicTeX (Mac), run \texttt{sudo tlmgr install <name>} using the name from the error (e.g.\ \texttt{makecell}), then build again. With MiKTeX (Windows), allow the pop-up that offers to install the missing package, or open the MiKTeX Console and turn on ``install missing packages on-the-fly.'' Full MacTeX and TeX Live installs already include everything.
+
+\textbf{LaTeX build fails in VS Code on Windows with an error mentioning \texttt{latexmk} or Perl:} VS Code's Build button runs \texttt{latexmk}, which needs Perl, and MiKTeX does not include it. Install Strawberry Perl from \textbf{https://strawberryperl.com}, restart VS Code, and build again. To check the packages in the meantime, run \texttt{pdflatex setup\_check.tex} in the terminal, which does not need Perl.
 
 \textbf{LaTeX: installer is taking hours:} That is normal --- TeX Live's full scheme is several gigabytes. Let it run in the background. If it seems stuck, switch to MiKTeX (Windows) or BasicTeX (Mac).
 
