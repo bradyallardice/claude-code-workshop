@@ -67,6 +67,7 @@ by county_fips: gen dem_share_lag = dem_share[_n-1]
 gen swing     = dem_share - dem_share_lag
 gen abs_swing = abs(swing)
 
+drop if missing(abs_swing)
 gsort -abs_swing
 list county_fips county_name state year dem_share_lag dem_share swing ///
     in 1/20, noobs sep(0)
