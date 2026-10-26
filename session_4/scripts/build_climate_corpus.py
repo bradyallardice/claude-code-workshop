@@ -12,7 +12,9 @@ each day visited, the script:
   3. splits each speech into paragraphs and keeps every paragraph that matches
      KEYWORD_PATTERN (the unit of analysis is the paragraph),
   4. attributes each paragraph to a speaker using the turn markers in the text
-     ("Mr. MERKLEY.") matched against the MODS speaker list.
+     ("Mr. MERKLEY.") matched against the MODS speaker list,
+  5. keeps at most MAX_PASSAGES_PER_DAY of the day's passages (seeded random
+     draw), so that one long floor debate cannot dominate the corpus.
 
 Outputs (session_4/data/climate_speeches/):
   - passages.csv          one row per climate-mentioning paragraph (student-facing)
