@@ -128,9 +128,20 @@ git rm -f --quiet --ignore-unmatch session_3/option_b/output/merged_survey.csv
 
 # Session 4 capstone (moved from session_5): keep student-facing materials, remove instructor-only notes.
 git rm -f --quiet --ignore-unmatch session_4/capstone-template/INSTRUCTOR.md
+git rm -f --quiet --ignore-unmatch session_4/capstone-template/zotero/synthesis.md
 # Old Session 5 instructor notes, renamed on the move into session_4; the
 # instructor_notes.md pattern above does not match this filename.
 git rm -f --quiet --ignore-unmatch session_4/docs/instructor_notes_subagents_hooks.md
+
+# Session 4 Option B (moved from session_5; same answer files as the Session 3 copy)
+git rm -f -r --quiet --ignore-unmatch session_4/option_b/exercise_2/demo/
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/paper.pdf
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/summary_stats.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/main_table.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/tables/robustness_table.tex
+git rm -f --quiet --ignore-unmatch session_4/option_b/exercise_2/figures/fx_rate_figure.png
+git rm -f --quiet --ignore-unmatch session_4/option_b/output/merged_survey.csv
 
 # Remove slide source files and images (keep only PDFs)
 git rm -f -r --quiet --ignore-unmatch slides/img/
@@ -161,6 +172,13 @@ FORBIDDEN_PATHS=(
     session_1/docs/instructor_notes.md
     session_1/scripts/build_county_panel.py
     session_1/scripts/create_sample_data.py
+    session_4/capstone-template/INSTRUCTOR.md
+    session_4/capstone-template/zotero/synthesis.md
+    session_4/docs/instructor_notes_subagents_hooks.md
+    session_4/option_b/exercise_2/demo
+    session_4/option_b/exercise_2/paper.tex
+    session_4/option_b/exercise_2/paper.pdf
+    session_4/option_b/output/merged_survey.csv
 )
 LEAKS=$(git ls-files -- "${FORBIDDEN_PATHS[@]}")
 if [ -n "$LEAKS" ]; then
