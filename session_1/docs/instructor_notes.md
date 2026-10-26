@@ -66,6 +66,11 @@ group shifts everything later.
 - **Calibrate to the room.** If most participants are comfortable with the terminal, move faster and bank the time. If many are new to it, slow down.
 - Terminal: show `pwd`, `ls`, `cd` live if possible.
 - Why Python: acknowledge the room may prefer R/Stata. Be brief and non-defensive. The Stata port example is the bridge for Stata users.
+- **Stata port demo prep** (slides "Detour: Claude Code in the Terminal" and "Example: Porting a Stata .do File"). The slide runs `claude` in `~/my_workspace/session_1/stata_demo`, which on students' machines holds only `analysis.do`. Before you demo it:
+  - Run it from a copy of `session_1/stata_demo/` that does **not** contain `analysis.py`. `analysis.py` is the finished port (its docstring and `# DECISION:` flags are the answer); it exists only on teacher, and Claude would find it and read it instead of writing one. Copy just `analysis.do` into a scratch folder, or delete `analysis.py` from your copy.
+  - `analysis.do` reads `../output/county_panel.csv`. Put a panel at `<scratch>/output/county_panel.csv` (copy it from teacher `session_1/output/`) if you want Claude to be able to run the port; the explain-and-port part works without it.
+  - The variable names in `analysis.do` (`dem_share_2p`, `share_age_65_plus`, `median_wage`) deliberately do **not** match the teacher panel's columns (`dem_2p_share`, no age-65 or median-wage column). That is part of the demo: the point is that Claude flags the mismatch instead of guessing. Do not "fix" it.
+  - The header comment says the panel was "built earlier in the session"; that is the panel from the live demo in `~/claude_demo`, which is a different folder from the one you run this in.
 - `.py` vs. `.ipynb` and "why scripts": this framing matters for the rest of the course.
 - Virtual environments: keep it conceptual. Setup was in pre-work. Don't live-code `python3 -m venv` unless someone needs it.
 
