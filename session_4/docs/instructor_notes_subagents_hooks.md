@@ -34,7 +34,7 @@ No timings were ever written for this deck. The only clock is the Session 4 plan
 ### 2. Hook demo (audit log)
 
 - **Needs `jq`.** Check `command -v jq` on the machine you demo from; install it first if missing. Students who want to try it need it too.
-- The slide's hook reads the tool call as JSON on standard input (`jq -r '.tool_input.command'`). That is the same form the Session 4 back-matter example uses. The scripts in `session_4/capstone-template/.claude/scripts/` also read a JSON document from standard input, which is consistent. The previous version of this slide used a `$CLAUDE_TOOL_INPUT` variable; I could not find that variable in anything in the repo and replaced it.
+- The slide's hook reads the tool call as JSON on standard input (`jq -r '.tool_input.command'`). That is the same form the Session 4 back-matter example uses, and `docs/instructor_notes.md` (block 38 notes) records that the Claude Code docs say hooks receive event data as JSON on standard input. The scripts in `session_4/capstone-template/.claude/scripts/` also read a JSON document from standard input, which is consistent. The previous version of this slide read the command from a `$CLAUDE_TOOL_INPUT` variable; the Session 4 notes already replaced it for the same reason, and the old text survives only in `slides/archive/`.
 - **Not tested as an installed hook.** The Session 4 notes record the same caveat: it was only run as a shell pipeline. Install it once in a throwaway project's `.claude/settings.json` and confirm that a line appears in `~/research_log.txt` after a Bash call before presenting it. Remove it afterward, since it logs every command in that project.
 
 ### 3. `claude-ignore` demo
