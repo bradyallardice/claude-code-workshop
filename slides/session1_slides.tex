@@ -268,25 +268,6 @@ code .
 %  OPENING DEMO  [0:00–2:00]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Live Demo: The Data}
-  \textbf{Dataset 1: County Presidential Election Returns}
-  \begin{itemize}
-    \item Source: MIT Election Data + Science Lab
-    \item County-level vote totals by candidate and party, 2000--2024
-    \item ${\sim}$94{,}000 rows, one row per county $\times$ year $\times$ candidate
-    \item Variables: FIPS codes, candidate names, party, vote counts, vote mode
-  \end{itemize}
-
-  \vspace{0.5em}
-  \textbf{Dataset 2: IPUMS American Community Survey Microdata}
-  \begin{itemize}
-    \item Source: IPUMS USA (University of Minnesota)
-    \item Person-level survey records with demographic, economic, and geographic variables
-    \item ${\sim}$15 million rows per year, one row per person
-    \item Variables: age, education, employment, income, race, poverty status, county FIPS
-  \end{itemize}
-\end{frame}
-
 \begin{frame}{Live Demo: The Task}
   \textbf{Goal:} Link the election and demographic data, run a regression, and write up the results in a \LaTeX{} document.
 
@@ -305,6 +286,25 @@ code .
   \vspace{0.5em}
   In Stata or R, this takes well over an hour of careful coding.
 
+\end{frame}
+
+\begin{frame}{Live Demo: The Data}
+  \textbf{Dataset 1: County Presidential Election Returns}
+  \begin{itemize}
+    \item Source: MIT Election Data + Science Lab
+    \item County-level vote totals by candidate and party, 2000--2024
+    \item ${\sim}$94{,}000 rows, one row per county $\times$ year $\times$ candidate
+    \item Variables: FIPS codes, candidate names, party, vote counts, vote mode
+  \end{itemize}
+
+  \vspace{0.5em}
+  \textbf{Dataset 2: IPUMS American Community Survey Microdata}
+  \begin{itemize}
+    \item Source: IPUMS USA (University of Minnesota)
+    \item Person-level survey records with demographic, economic, and geographic variables
+    \item ${\sim}$15 million rows per year, one row per person
+    \item Variables: age, education, employment, income, race, poverty status, county FIPS
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Live Demo: Same Task, Two Ways}
@@ -374,24 +374,7 @@ code .
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{The RA Analogy}
-  \begin{block}{How to Think About Claude Code}
-    Claude Code is like a research assistant who is:
-    \begin{itemize}
-      \item Extremely fast
-      \item Has read a lot
-      \item Will \textbf{never} say ``I don't know how to do that''
-    \end{itemize}
-    \vspace{0.3em}
-    Instead, it will just do it wrong and hand it in.
-  \end{block}
 
-  \vspace{0.5em}
-  You have all managed RAs. You know how valuable, and how dangerous, that profile is.
-
-  \vspace{0.5em}
-  \textbf{This course teaches you to capture the value while managing the risk.}
-\end{frame}
 % ══════════════════════════════════════════════════════════════════
 %  THE CODING PARADIGM SPECTRUM  [10:00–16:00]
 % ══════════════════════════════════════════════════════════════════
@@ -957,6 +940,22 @@ claude
   \textbf{Using them well for research means overriding some of those defaults.}
 \end{frame}
 
+\begin{frame}{The RA Analogy}
+  \begin{block}{How to Think About Claude Code}
+    Claude Code is like a research assistant who is:
+    \begin{itemize}
+      \item Extremely fast
+      \item Has read a lot
+      \item Will \textbf{never} say ``I don't know how to do that''
+    \end{itemize}
+    \vspace{0.3em}
+    Instead, it will just do it wrong and hand it in.
+  \end{block}
+
+  \vspace{0.5em}
+  \textbf{This course teaches you to capture the value while managing the risk.}
+\end{frame}
+
 \begin{frame}{Do You Own It?}
   \begin{block}{}
     Pick any result your code produced. Without looking at the code:\\
@@ -1114,47 +1113,35 @@ claude
 % --- AI Skill Gap: the evidence ---
 \begin{frame}{AI Skill Gap}
   \small
-  Using AI is not the same as using it well. Three sources point the same way.
+  \begin{block}{Using AI is not using it well: 758 BCG consultants, randomly assigned}
+    \centering
+    \footnotesize
+    \begin{tabular}{@{}lcc@{}}
+      \toprule
+      & \textbf{Inside AI's frontier: quality} & \textbf{Outside: share correct} \\
+      \midrule
+      No AI                                  & baseline  & 84\% \\
+      GPT-4 only                             & +38\%     & 70\% \\
+      GPT-4 + prompt-engineering overview    & +42.5\%   & 60\% \\
+      \bottomrule
+    \end{tabular}
+  \end{block}
 
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \begin{column}{0.31\textwidth}
-      \begin{block}{Experiment (HBS/BCG)}
-        758 consultants, randomly assigned to GPT-4 or no AI.
-        \begin{itemize}
-          \item \textbf{Inside} the AI's frontier: 12\% more tasks, 25\% faster
-          \item \textbf{Outside} it: 19 points \emph{less} likely to be correct
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.31\textwidth}
-      \begin{block}{Firm survey (Cognizant)}
-        Trained vs.\ untrained workers reporting 20\%+ productivity gains:
-        \begin{itemize}
-          \item \textbf{64\%} of trained
-          \item \textbf{36\%} of untrained
-          \item Firms spend about 0.2\% of revenue on AI training
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.31\textwidth}
-      \begin{block}{Labor market (PwC)}
-        Wage premium on job postings requiring AI skills:
-        \begin{itemize}
-          \item 14\% globally in 2024
-          \item \textbf{62\%} in 2026
-        \end{itemize}
-      \end{block}
-    \end{column}
-  \end{columns}
+  \begin{block}{The same pattern elsewhere}
+    \footnotesize
+    \begin{itemize}
+      \item \textbf{Cognizant survey (self-reported):} 64\% of trained vs.\ 36\% of untrained report 20\%+ productivity gains
+      \item \textbf{PwC job postings:} AI-skill wage premium rose from 14\% (2024) to 62\% (2026)
+    \end{itemize}
+  \end{block}
 
-  \vspace{0.3em}
   \begin{alertblock}{The takeaway}
-    Access to the tool is not the scarce input. Knowing where it works, where it fails, and how to direct it is.
+    \footnotesize
+    Same tool for everyone. Training raised quality where AI was reliable and lowered accuracy where it was not. Knowing the difference is the skill.
   \end{alertblock}
 
-  \vspace{0.2em}
-  {\tiny Only the HBS/BCG result is experimental. Cognizant is self-reported; the PwC premium is an average over job postings, not individual pay. Sources: Dell'Acqua et al.\ (2023, working paper); Cognizant, ``No skills, no payoff''; PwC Global AI Jobs Barometer (2024, 2026).}
+  \vspace{-0.2em}
+  {\tiny Only HBS/BCG is experimental (Dell'Acqua et al.\ 2023). Overview vs.\ GPT only: $p=.03$ (quality), $.08$ (accuracy).}
 \end{frame}
 
 % --- The AI Skill Gap ---
