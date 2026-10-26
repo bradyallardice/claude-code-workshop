@@ -58,7 +58,7 @@ The intros block (15 min) assumes 8–10 participants, so a larger group shifts 
 | 19 | Verification: two layers of tests, independent tests, write expectations first, trace samples, test-first cycle, test the tests, passing is not the goal | 10 | 1:22 |
 | 20 | Make it a rule in CLAUDE.md (1/2, 2/2) | 2 | 1:24 |
 | 21 | The Swiss franc shock: data and research question | 3 | 1:27 |
-| 22 | **Exercise Part 1, two tabs.** *Builder:* step 0 installs the verification protocol, then merge and explore in plan mode. *Checker* (fresh tab, never sees the builder's conversation): writes expectations and checks from the codebook and research question only. Run the checker's checks on the builder's output. Debrief: where did the tabs disagree, which decisions had to be written into files, did anyone lose work to a collision? | 35 | 2:02 |
+| 22 | **Exercise Part 1.** Step 0 installs the verification protocol. Step 1, without Claude Code: participants learn the data from the codebook and write their own expectations (`expectations.md`). Then merge and explore in plan mode, with Claude writing the tests from `expectations.md`, and verify the output against their expectations, including testing the tests. Debrief: which expectations were wrong, and what did the data teach that the codebook didn't? Learning the data is never automated; the automated checking is shown in Session 4 (block 32). | 35 | 2:02 |
 
 **What the parallel-session material teaches:**
 
@@ -111,7 +111,7 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 | — | Start-of-session ritual | 3 | 0:03 |
 | 30 | **Web search and research:** search and fetch, deep research, reading sources vs. trusting summaries, checking that citations exist. **Prompt injection** (web pages, PDFs, and emails can contain instructions to the agent) and **data exposure** (a connector grants access to the whole account). | 16 | 0:19 |
 | 31 | **Exercise:** search-backed literature scan, then spot-check every citation | 10 | 0:29 |
-| 32 | Subagents and swarms: what a subagent is, where it shines, triggering, fan-out, composition patterns, one agent or many, the subagent as verifier, token cost. Worked example: a **referee subagent** defined in a file and run on the Session 3 paper. | 14 | 0:43 |
+| 32 | Subagents and swarms: what a subagent is, where it shines, triggering, fan-out, composition patterns, one agent or many, the subagent as verifier, token cost. Worked example: a **referee subagent** defined in a file and run on the Session 3 paper. Second example: the instructor's **automated version of the Session 2 Part 1 checks** (draft two-tab checker frames in `slides/pending_session4_frames.tex`). | 14 | 0:43 |
 | 33 | **LLMs as research coders:** a coding scheme as a measurement instrument, validating against hand codes, agreement | 5 | 0:48 |
 | 34 | **Exercise:** fan out agents to code climate mentions in Congressional Record speeches (`session_4/data/climate_speeches/`) in batches, compare with the hand-coded gold set (agreement rate, confusion matrix, failing categories), debrief ("would you report these codes in a paper?") | 20 | 1:08 |
 | 35 | Connecting tools: what an MCP is, the two-reason rule, Zotero demo, MCP as helper not substitute | 8 | 1:16 |
@@ -161,7 +161,7 @@ Claude Code may notice the collision in the demo and adapt. That is fine to show
 | 2 | Opening frame (where we are, ritual) | |
 | 2 | Parallel-tab version of "Demo: Keeping Tasks Focused", plus collision round | Rehearse it, and keep a screenshot as fallback |
 | 2 | Benefits/risks frame for parallel sessions | Includes the ChatGPT/claude.ai point |
-| 2 | Two-tab Part 1: builder and checker role cards, debrief frame | |
+| 2 | Part 1 frames: learn the data and write expectations, merge, verify, debrief | The two-tab checker frames moved to `slides/pending_session4_frames.tex` for block 32 |
 | 3 | "Reopen your Session 2 folder" instruction | Part 2 continues the S2 project |
 | 3 | Results → paper exercise and a paper skeleton `.tex` | |
 | 4 | Web search block and literature-scan exercise | |
@@ -203,7 +203,7 @@ The slide files themselves (`slides/session5_slides.tex` etc.) are not yet renam
 
 ## Risks
 
-- **Usage limits.** Two-tab Part 1 (Session 2) and fan-out coding (Session 4) each multiply token use. On the $20 plan these are the points where participants are most likely to hit the 5-hour limit. Keep the checker's job and the coding corpus small.
+- **Usage limits.** Fan-out coding (Session 4) multiplies token use. On the $20 plan it is the point where participants are most likely to hit the 5-hour limit. Keep the coding corpus small.
 - **No slack.** Sessions 2 and 3 are already 1–2 minutes over on paper. At the old pace (~1.3 min/frame), cumulative drift by the end of the course would be about 70 minutes, which cuts into Session 4's skills exercise and hooks.
 - **Session 1 variance.** Intros scale with group size, and the setup check has no break to absorb troubleshooting.
 - **Part 2 crosses a session boundary.** Participants must keep their Session 2 workspace intact between sessions.

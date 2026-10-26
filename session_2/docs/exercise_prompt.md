@@ -15,63 +15,43 @@ Read the codebook in `session_2/docs/codebook.md` before you begin.
 
 The survey randomly assigned respondents to one of four conditions before asking about intervention support: a control group (no information), a factual information group, a historical context group, and a Hungary policy comparison group. Your task is to estimate the effect of these treatments on support for government intervention, considering whether the respondent's own exposure to foreign currency loans moderates this effect.
 
-## Part 1: Merge and Explore, With Two Tabs (Session 2, 35 min)
+## Part 1: Learn the Data, Then Merge and Verify (Session 2, 35 min)
 
-You run two Claude Code tabs in your `session_2` folder. Each has one role.
+Learning the data is the part you never delegate. Write down what a correct merge must look like *before* Claude Code touches the data, then check its work against your list.
 
-- **Builder (tab 1)** installs the verification protocol, then merges and explores in plan mode. You direct it and make the design decisions.
-- **Checker (tab 2)** is a fresh tab that never sees the builder's conversation or code. Claude drafts the expectations and checks from the codebook and the research question; **you review them**.
+| Minutes | Step |
+|---------|------|
+| 0–2 | Step 0: install the verification protocol |
+| 2–12 | Step 1: learn the data and write your expectations, **without Claude Code** |
+| 12–24 | Step 2: merge and explore in plan mode |
+| 24–29 | Step 3: verify the output against your expectations |
+| 29–35 | Debrief |
 
-The tabs share nothing except files. Anything one tab needs to know, put in a file.
+0. **Install the verification protocol.** Copy `docs/verification_protocol.md` into a file named `CLAUDE.md` in your `session_2` folder. If you already have a `CLAUDE.md`, append it. Start Claude Code in the `session_2` folder and ask: "What verification rules apply in this project?" Its answer should describe the protocol.
 
-| Minutes | What happens |
-|---------|--------------|
-| 0–5 | Builder: install the protocol (step 0). Then open the checker tab and send its prompt |
-| 5–22 | Builder: merge and explore. Between plans, read the checker's expectations |
-| 22–27 | Run the checker's checks on the builder's output, and compare |
-| 27–35 | Debrief |
+1. **Learn the data and write your expectations, without Claude Code.** Read `docs/codebook.md` and open both CSV files in `data/`. Then write `expectations.md` in your `session_2` folder, answering:
+   - How many rows should the merged file have, and which key links the two files?
+   - Which join type, and why? What happens to survey respondents with no demographics row?
+   - Which variables have missing values, and how many do you expect?
+   - What does `income_quintile = 0` mean, and how must it be treated?
+   - For each answer: how would you check it?
 
-### Builder (tab 1)
+   These are your expectations. Claude Code writes its tests from this file.
 
-0. **Install the verification protocol.** Copy `docs/verification_protocol.md` into a file named `CLAUDE.md` in your `session_2` folder. If you already have a `CLAUDE.md`, append it. Start Claude Code in the `session_2` folder and ask: "What verification rules apply in this project?" Its answer should describe the protocol. Then open the checker tab (`Cmd+Shift+Esc` on Mac, `Ctrl+Shift+Esc` on Windows) and send it the prompt below.
-
-1. **Merge the demographics data into the survey**, in **plan mode**, and save the result as `output/merged_survey.csv`. Review every plan before approving.
+2. **Merge the demographics data into the survey**, in **plan mode**, and save the result as `output/merged_survey.csv`. Review every plan before approving.
+   - Tests first: "Write the merge tests from expectations.md." Read the tests before Claude Code writes the merge.
    - The demographics file has more rows than the survey. **You decide the join type.** Do not let Claude Code choose.
-   - Tests first: read the tests Claude Code writes before it writes the merge.
+   - Then explore the merged data: summary statistics, treatment group sizes, and the outcome distribution.
 
-2. **Explore the merged data.** Ask Claude Code for summary statistics, treatment group sizes, and the outcome distribution. Before you look at the output, write down what you expect to see.
-
-3. **Verify the merge.** Run the tests. Trace three respondents from the raw files to the merged data: one typical, one with a missing outcome, and one who is absent from the demographics file.
-
-### Checker (tab 2)
-
-Never paste anything from the builder's conversation into this tab. Send it:
-
-```
-You are an independent checker. Another session is merging
-data/swiss_franc_survey.csv with data/respondent_demographics.csv
-and will save output/merged_survey.csv. You will not see its code.
-Use only docs/codebook.md, the raw files in data/, and this
-research question: does information about the Swiss franc crisis
-increase support for government intervention?
-Do not open anything in scripts/, tests/, or output/.
-1. Write checks/expectations.md: what a correct merged file must
-   satisfy (rows, keys, columns, missing values, group sizes),
-   and where each expectation comes from.
-2. Write checks/check_merge.py, which takes a file path (default
-   output/merged_survey.csv) and tests every expectation.
-   Do not run it yet.
-```
-
-3. **Review `checks/expectations.md`.** Claude drafted it to save time, since you don't know this data well yet. Reviewing it is your job: correct anything wrong before any check runs.
-4. When the builder has saved its output, tell the checker: "Run checks/check_merge.py and report each result."
-5. **Test the checks:** "Copy the merged file with one row duplicated, run the checks on the copy, and show me which fail." Never edit the files in `data/`.
+3. **Verify it yourself.** Go down `expectations.md` and mark each item met or not met, with the evidence.
+   - Run the tests. Trace three respondents from the raw files to the merged data: one typical, one with a missing outcome, and one who is absent from the demographics file.
+   - Test the tests: make a **copy** of the demographics file with the row of one survey respondent duplicated, run the merge tests on the copy, and confirm that they fail. Never edit the files in `data/`.
 
 ### Debrief questions
 
-- Where did the builder's tests and the checker's checks disagree? Which one was right?
-- The checker never saw your decisions. Which ones did it need (join type, output path, ...), and which had to be written into a file to reach it?
-- Did anyone lose work to a collision, or find a tab stalled on a permission prompt?
+- Which of your expectations turned out to be wrong? Was the error yours, or Claude Code's?
+- What did you learn about the data that the codebook did not say outright?
+- Did Claude Code's tests check what you wrote, or something easier?
 
 ---
 

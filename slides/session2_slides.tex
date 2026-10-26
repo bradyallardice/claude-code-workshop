@@ -74,7 +74,7 @@
     \item Work within the context window, and run conversations in parallel
     \item Build the county panel in plan mode, reviewing the plan before it runs
     \item Learn the verification workflow: expectations first, tests that can fail
-    \item Merge the Swiss franc survey with two tabs: a builder and an independent checker
+    \item Learn the Swiss franc data, write your expectations, then merge and verify
   \end{enumerate}
 
   \vspace{0.5em}
@@ -1213,102 +1213,82 @@ copy and show me which tests fail.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 22: EXERCISE PART 1, TWO TABS  [1:27–2:02]
+%  BLOCK 22: EXERCISE PART 1, LEARN THE DATA, MERGE, VERIFY  [1:27–2:02]
 % ══════════════════════════════════════════════════════════════════
 
-\begin{frame}{Exercise Part 1: Merge and Explore, With Two Tabs (35 min)}
-  \small
-  \textbf{Two Claude Code tabs in your \texttt{session\_2} folder, each with a role card.}
+\begin{frame}{Exercise Part 1: Learn the Data, Then Merge and Verify (35 min)}
+  \textbf{Learning the data is the part you never delegate.} Write down what a correct merge must look like \textit{before} Claude Code touches the data, then check its work against your list.
 
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Builder (tab 1)}
-        Installs the verification protocol, then merges and explores in plan mode. You direct it and make the design decisions.
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Checker (tab 2)}
-        A fresh tab that never sees the builder's conversation or code. Claude drafts the expectations and checks from the codebook and research question; \textbf{you review them}.
-      \end{block}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.4em}
+  \vspace{0.6em}
   \begin{tabular}{@{}lL{0.78\textwidth}@{}}
     \toprule
-    0--5 min & Builder: install the protocol. Then open the checker tab and send its prompt \\
-    5--22 & Builder: merge and explore. Between plans, read the checker's expectations \\
-    22--27 & Run the checker's checks on the builder's output, and compare \\
-    27--35 & Debrief \\
+    0--2 min & Step 0: install the verification protocol \\
+    2--12 & Step 1: learn the data and write your expectations, \textbf{without Claude Code} \\
+    12--24 & Step 2: merge and explore in plan mode; Claude Code writes the tests from your expectations \\
+    24--29 & Step 3: verify the output against your expectations \\
+    29--35 & Debrief \\
     \bottomrule
   \end{tabular}
 
-  \vspace{0.4em}
-  \alert{Anything one tab needs to know, put in a file. The tabs share nothing else.}
+  \vspace{0.6em}
+  {\small In Session 4 you will see how to hand the \textit{checking} to Claude. The learning stays with you.}
 \end{frame}
 
-\begin{frame}{Role Card: Builder (Tab 1)}
+\begin{frame}{Part 1, Steps 0--1: Before Claude Code Touches the Data}
   \small
   \begin{enumerate}
     \setcounter{enumi}{-1}
-    \item \textbf{Install the verification protocol.} Copy \texttt{docs/verification\_protocol.md} into a file named \texttt{CLAUDE.md} in your \texttt{session\_2} folder (append it if you already have one). Start Claude Code and ask: \textit{``What verification rules apply in this project?''} Then open the checker tab and send its prompt.
+    \item \textbf{Install the verification protocol.} Copy \texttt{docs/verification\_protocol.md} into a file named \texttt{CLAUDE.md} in your \texttt{session\_2} folder (append it if you already have one). Ask Claude Code: \textit{``What verification rules apply in this project?''}
 
     \vspace{0.3em}
-    \item \textbf{Merge} the demographics data into the survey, in plan mode. Save the result as \texttt{output/merged\_survey.csv}.
+    \item \textbf{Learn the data and write your expectations, without Claude Code.} Read \texttt{docs/codebook.md} and open both CSV files. Then write \texttt{expectations.md} in your \texttt{session\_2} folder:
     \begin{itemize}
       \footnotesize
+      \item How many rows should the merged file have, and which key links the two files?
+      \item Which join type, and why? What happens to survey respondents with no demographics row?
+      \item Which variables have missing values, and how many do you expect?
+      \item What does \texttt{income\_quintile} $= 0$ mean, and how must it be treated?
+      \item For each answer: how would you check it?
+    \end{itemize}
+  \end{enumerate}
+
+  \vspace{0.3em}
+  \alert{These are your expectations. Claude Code writes its tests from this file.}
+\end{frame}
+
+\begin{frame}{Part 1, Steps 2--3: Merge, Then Check It Against Your List}
+  \small
+  \begin{enumerate}
+    \setcounter{enumi}{1}
+    \item \textbf{Merge} the demographics data into the survey, in plan mode. Save it as \texttt{output/merged\_survey.csv}.
+    \begin{itemize}
+      \footnotesize
+      \item Tests first: \textit{``Write the merge tests from expectations.md.''} Read them before it writes the merge.
       \item \alert{You decide the join type.} Do not let Claude Code choose.
-      \item Tests first: read the tests before it writes the merge
+      \item Then explore: summary statistics, treatment group sizes, outcome distribution.
     \end{itemize}
 
     \vspace{0.3em}
-    \item \textbf{Explore} the merged data: summary statistics, treatment group sizes, outcome distribution. \alert{First write down what you expect to see.}
-
-    \vspace{0.3em}
-    \item \textbf{Verify:} run the tests. Trace three respondents: typical, missing outcome, absent from the demographics file.
+    \item \textbf{Verify it yourself.} Go down \texttt{expectations.md} and mark each item met or not met, with the evidence.
+    \begin{itemize}
+      \footnotesize
+      \item Run the tests. Trace three respondents: typical, missing outcome, absent from the demographics file
+      \item Test the tests: in a \textit{copy} of the demographics file, duplicate the row of one \textbf{survey respondent}. The merge tests should fail.
+    \end{itemize}
   \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Role Card: Checker (Tab 2)}
-  \footnotesize
-  \textbf{Open a fresh tab} (\texttt{Cmd/Ctrl+Shift+Esc}). Never paste the builder's conversation into it. Send:
-
-  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-You are an independent checker. Another session is merging
-data/swiss_franc_survey.csv with data/respondent_demographics.csv
-and will save output/merged_survey.csv. You will not see its code.
-Use only docs/codebook.md, the raw files in data/, and this
-research question: does information about the Swiss franc crisis
-increase support for government intervention?
-Do not open anything in scripts/, tests/, or output/.
-1. Write checks/expectations.md: what a correct merged file must
-   satisfy (rows, keys, columns, missing values, group sizes),
-   and where each expectation comes from.
-2. Write checks/check_merge.py, which takes a file path (default
-   output/merged_survey.csv) and tests every expectation.
-   Do not run it yet.
-  \end{lstlisting}
-
-  \begin{enumerate}
-    \setcounter{enumi}{2}
-    \item \textbf{Review \texttt{checks/expectations.md}.} Claude drafted it to save time, since you don't know this data well yet. Reviewing it is your job: correct anything wrong before any check runs.
-    \item When the builder has saved its output: \textit{``Run checks/check\_merge.py and report each result.''}
-    \item \textbf{Test the checks:} \textit{``Copy the merged file with one row duplicated, run the checks on the copy, and show me which fail.''}
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Part 1 Debrief: Where Did the Tabs Disagree?}
+\begin{frame}{Part 1 Debrief: What Did Your Expectations Get Wrong?}
   \begin{itemize}
-    \item Where did the builder's tests and the checker's checks disagree? Which one was right?
-    \item The checker never saw your decisions. Which ones did it need (join type, output path, \ldots), and which had to be written into a file to reach it?
-    \item Did anyone lose work to a collision, or find a tab stalled on a permission prompt?
-    \item Did the checker's checks fail on the copy with a duplicated row?
+    \item Which of your expectations turned out to be wrong? Was the error yours, or Claude Code's?
+    \item What did you learn about the data that the codebook did not say outright?
+    \item Did Claude Code's tests check what you wrote, or something easier?
+    \item Did the tests fail on the copy with a duplicated survey respondent?
   \end{itemize}
 
   \vspace{0.8em}
   \begin{block}{The point}
-    A second session is independent only if nothing reaches it except what you choose to write down.
+    You can only verify work against expectations you hold. Writing them down is how you learn the data, and that part is not delegated.
   \end{block}
 \end{frame}
 
@@ -1325,11 +1305,11 @@ Do not open anything in scripts/, tests/, or output/.
     \item Treatment groups: 480 / 549 / 520 / 495
     \item Proportion supporting intervention: $\sim$0.479 (unweighted)
     \item FX exposure: 1,918 / 69 / 55
-    \item Test the checks: the duplicated row made the row-count and key checks fail
+    \item Test the tests: the duplicated row made the row-count and key tests fail
   \end{itemize}
 
   \vspace{0.5em}
-  Did your numbers match? Did the checker reach them without seeing any code?
+  Did your numbers match? Did Claude Code choose the right join type?
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════

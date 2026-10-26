@@ -1,0 +1,59 @@
+% Frames cut from session2_slides.tex on 2026-10-26: the two-tab "independent checker"
+% version of Part 1. Part 1 now has participants learn the data and write their own
+% expectations; the automated checking is shown in Session 4.
+% Destination: Session 4, block 32 of admin/course_plan_4_sessions.md (subagents: the
+% subagent as verifier), as an automated version of the Part 1 checks. Not compiled on
+% its own. The instructor has a more automated version of their own, which may
+% supersede these.
+%
+% Edits still needed when they land in Session 4:
+%   - Written as Part 1 role cards ("Tab 2", numbered steps 3-5, "the builder").
+%   - Session 4 participants have their Session 2 merge already, so the checker can run
+%     against it directly.
+%   - The answer key's "Automated checker" section has the expected values.
+
+% ══════════════════════════════════════════════════════════════════
+%  Two-tab checker (from Session 2 Part 1)
+% ══════════════════════════════════════════════════════════════════
+
+\begin{frame}[fragile]{Role Card: Checker (Tab 2)}
+  \footnotesize
+  \textbf{Open a fresh tab} (\texttt{Cmd/Ctrl+Shift+Esc}). Never paste the builder's conversation into it. Send:
+
+  \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+You are an independent checker. Another session is merging
+data/swiss_franc_survey.csv with data/respondent_demographics.csv
+and will save output/merged_survey.csv. You will not see its code.
+Use only docs/codebook.md, the raw files in data/, and this
+research question: does information about the Swiss franc crisis
+increase support for government intervention?
+Do not open anything in scripts/, tests/, or output/.
+1. Write checks/expectations.md: what a correct merged file must
+   satisfy (rows, keys, columns, missing values, group sizes),
+   and where each expectation comes from.
+2. Write checks/check_merge.py, which takes a file path (default
+   output/merged_survey.csv) and tests every expectation.
+   Do not run it yet.
+  \end{lstlisting}
+
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Review \texttt{checks/expectations.md}.} Claude drafted it to save time, since you don't know this data well yet. Reviewing it is your job: correct anything wrong before any check runs.
+    \item When the builder has saved its output: \textit{``Run checks/check\_merge.py and report each result.''}
+    \item \textbf{Test the checks:} \textit{``Copy the merged file with one row duplicated, run the checks on the copy, and show me which fail.''}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Part 1 Debrief: Where Did the Tabs Disagree?}
+  \begin{itemize}
+    \item Where did the builder's tests and the checker's checks disagree? Which one was right?
+    \item The checker never saw your decisions. Which ones did it need (join type, output path, \ldots), and which had to be written into a file to reach it?
+    \item Did anyone lose work to a collision, or find a tab stalled on a permission prompt?
+    \item Did the checker's checks fail on the copy with a duplicated row?
+  \end{itemize}
+
+  \vspace{0.8em}
+  \begin{block}{The point}
+    A second session is independent only if nothing reaches it except what you choose to write down.
+  \end{block}
+\end{frame}

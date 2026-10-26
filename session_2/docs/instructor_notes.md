@@ -21,7 +21,7 @@ in `docs/instructor_answer_key.md`.
 | 1:12 | 19 | Verification: two layers of tests through "passing is not the goal" | 10 |
 | 1:22 | 20 | Make it a rule in CLAUDE.md (1/2, 2/2) | 2 |
 | 1:24 | 21 | The Swiss franc shock: data and research question | 3 |
-| 1:27 | 22 | **Exercise Part 1, two tabs:** builder and checker, then debrief | 35 |
+| 1:27 | 22 | **Exercise Part 1:** learn the data and write expectations, merge in plan mode, verify, debrief | 35 |
 | 2:02 | — | Next Session | 1 |
 
 **Total: 123 minutes on paper.** The plan already runs Session 2 two minutes over.
@@ -41,7 +41,7 @@ By the queue rule, whatever doesn't fit moves to the start of Session 3.
 - **Collision round (watch only):** both tabs write `output/data_notes.md`. Participants don't run this one, which saves their tokens and their files.
   - Claude Code may notice that the file changed since it read it (its edit tools usually refuse to write a file that changed since they last read it) and merge instead of overwrite. That is fine to show as it happens: it is still the only shared memory, and the outcome depended on timing.
   - **Rehearse it beforehand, and keep a screenshot of a clean overwrite as fallback** (plan, "New material to build").
-- Benefits/risks frame: land "no shared memory except files" and "a tab already open won't see later CLAUDE.md edits". Part 1 depends on both.
+- Benefits/risks frame: land "no shared memory except files" and "a tab already open won't see later CLAUDE.md edits". Session 4's automated checking builds on both.
 
 ### 15. Execution modes (5 min)
 - Plan mode is the recommended default for research. The "checkpoint" framing (catch the inner join before it happens) is key.
@@ -67,21 +67,21 @@ By the queue rule, whatever doesn't fit moves to the start of Session 3.
 
 ### 19. Verification (10 min)
 - Two layers: software tests (does it run) vs. research tests (are the numbers right). The examples use today's data, so they preview Part 1.
-- Spend the most time on "Independent Tests" and "Test the Tests". Part 1's checker tab is the independent test made concrete.
+- Spend the most time on "Independent Tests" and "Test the Tests". In Part 1, the participant's own `expectations.md` is the independent source.
 
 ### 20. Make it a rule (2 min)
-- The protocol is in `docs/verification_protocol.md`; builder step 0 installs it. "CLAUDE.md is an instruction, not enforcement."
+- The protocol is in `docs/verification_protocol.md`; Part 1 step 0 installs it. "CLAUDE.md is an instruction, not enforcement."
 
 ### 21. Swiss franc data (3 min)
 - Background, files, research question. Point out that the demographics file has more rows than the survey: the join type is theirs to decide.
 
-### 22. Exercise Part 1, two tabs (35 min)
-- Order matters: the builder installs `CLAUDE.md` **before** the checker tab opens, so the checker also loads the protocol.
-- The checker's prompt forbids `scripts/`, `tests/` and `output/` until it is told to run its checks. Watch for participants pasting builder output into the checker; that breaks the independence.
-- Claude drafts the expectations **by design**: participants don't know this data well, and it saves time. Say so when you introduce the checker card. Their job is checker step 3, reviewing and correcting `expectations.md`, and that is where they stay in charge. Don't let them skip it. A common error to catch here: treating `income_quintile == 0` as missing.
-- Expected values and the disagreements worth surfacing are in the answer key ("Checker tab").
-- **Usage risk:** two tabs double token use. On the $20 plan this is one of the two points in the course where participants are most likely to hit the 5-hour limit. If someone hits it, pair them with a neighbor for the rest of the exercise.
-- Debrief (~8 min): start with "where did the tabs disagree?", then "which decisions had to be written into a file?" Then reveal the expected numbers (the second debrief frame has a `\pause`).
+### 22. Exercise Part 1: learn the data, merge, verify (35 min)
+- The core idea: **participants learn the data themselves.** Step 1 is done without Claude Code: the codebook, a look at the CSVs, then `expectations.md` written by hand. Enforce this. It is the part that never gets automated.
+- Everything step 1 asks can be answered from the codebook. A complete `expectations.md` is sketched in the answer key ("Step 1").
+- Step 2 has Claude Code write its tests from their file, so the expectations reach it through a file, not the chat.
+- Test the tests: the duplicated row must belong to a **survey respondent** (answer key, "Fault injection").
+- Debrief (~6 min): start with "which of your expectations were wrong?", then "what did the data teach you that the codebook didn't?" Then reveal the expected numbers (the second debrief frame has a `\pause`).
+- The automated version, with Claude checking against independent expectations, is shown in Session 4 (block 32). The earlier two-tab checker frames are in `slides/pending_session4_frames.tex`.
 
 ### Close
 - Next Session frame: **keep `my_workspace/session_2` as it is**, because Session 3's Part 2 continues in it. Check that `setup_check.tex` compiles before Session 3.
