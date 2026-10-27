@@ -37,7 +37,7 @@ Write-Host ("Workshop doctor - {0}  platform: windows  PowerShell {1}" -f (Get-D
 # ---------------------------------------------------------------------------
 Section "1. Folders"
 if ($HOME -match " ") {
-    Warn "Your home folder path contains a space: $HOME" "tell the instructor; Session 5 hooks need quoted paths [F01]"
+    Warn "Your home folder path contains a space: $HOME" "tell the instructor; hooks need quoted paths [F01]"
 } else {
     Pass "Home folder path has no spaces"
 }
@@ -246,8 +246,8 @@ if (-not $Quick -and (Have claude)) {
 }
 
 # ---------------------------------------------------------------------------
-Section "9. Node.js (needed only in Session 5)"
-if (Have npm) { Pass "npm found" } else { Write-Host "  ----  npm not found (install Node.js LTS before Session 5)" }
+Section "9. Node.js (optional; needed only for the claude-ignore demo)"
+if (Have npm) { Pass "npm found" } else { Write-Host "  ----  npm not found (install Node.js LTS if you want to try the claude-ignore demo)" }
 
 # ---------------------------------------------------------------------------
 Write-Host ""
