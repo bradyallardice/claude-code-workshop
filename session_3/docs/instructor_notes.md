@@ -17,12 +17,12 @@ carry the same block numbers and clock times. Student exercise text is in
 | 0:05 | 23 | Verification extras: a bridge from Session 2's `expectations.md` to the matrix, how to build the matrix (sources, weak vs strong, format, example), how to read an audit report (questions, format, filled-in example), two more safeguards, delegate / verify / keep | 10 | 10 |
 | 0:15 | 24 | **Exercise Part 2:** reopen frame, extend expectations into a matrix, specify and estimate, debrief | 4 | 25 |
 | 0:40 | 25, 27 | Robustness workflow, LaTeX in VS Code (bridge + setup + shortcuts), **live demo: building a paper (block 27, moved here)**, Problems pane and why it matters, **Exercise Part 3**, what to watch for, debrief | 12 | 41 |
-| 1:21 | 26 | Git as the undo button (12 frames), Overleaf bridge (2) | 14 | 14 |
-| 1:35 | 28 | "Demo: The Full Loop" diagram, **exercise: results → paper**, cross-check, debrief | 4 | 25 |
-| 2:00 | 29 | When it goes wrong: overview, one slide per pattern (looping, confidently wrong, scope creep, coherence loss), correct / restart / do it yourself | 6 | 8 |
-| 2:08 | — | Next Session | 1 | 1 |
+| 1:21 | 26 | Git as the undo button (12 frames), worktrees for parallel agents (2), Overleaf bridge (2) | 16 | 16 |
+| 1:37 | 28 | "Demo: The Full Loop" diagram, **exercise: results → paper**, cross-check, debrief | 4 | 25 |
+| 2:02 | 29 | When it goes wrong: overview, one slide per pattern (looping, confidently wrong, scope creep, coherence loss), correct / restart / do it yourself | 6 | 8 |
+| 2:10 | — | Next Session | 1 | 1 |
 
-**Total: 129 minutes on paper**, 7 over the plan. Block 23 now teaches how to build the matrix and read the audit report instead of just showing them (+5). If you need the time back, the cheapest cuts are the check-in, then the "Two More Safeguards" frame. The main flow is 56 frames (the footer counts only these). The back matter is 33 frames and is not counted.
+**Total: 131 minutes on paper**, 9 over the plan. Block 23 now teaches how to build the matrix and read the audit report instead of just showing them (+5). If you need the time back, the cheapest cuts are the check-in, then the "Two More Safeguards" frame. The main flow is 58 frames (the footer counts only these). The back matter is 33 frames and is not counted.
 By the queue rule, anything that does not fit moves to the start of Session 4.
 
 ---
@@ -65,13 +65,14 @@ By the queue rule, anything that does not fit moves to the start of Session 4.
 - **Step 10 closes the loop on `CLAUDE.md`.** Participants revise their own rules from a gap the audit report exposed, then compare with the reference protocol (`docs/verification_protocol.md`; back-matter block F). This is where the protocol is introduced: not as something to install, but as a comparison with rules they already wrote. If someone arrives without rules from Session 2, have them write two from the gaps in their audit report first.
 - **Part 3 builds on the matrix.** Each robustness variant gets a matrix row (what must change, what must stay). The audit report is built from the matrix: each row, its test, its result; rows with no test go under *Not tested*. A matrix that was never updated is the first thing to check if the report looks thin.
 - The "New to LaTeX?" button on the setup frame jumps to the back-matter basics and back. Use it only if someone asks.
-- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps their combined length unchanged: block 25 runs 0:40–1:21 (including the demo) and block 26 runs 1:21–1:35.
+- **Order change from the plan.** Part 3 asks for a compiled LaTeX table, so the seven LaTeX frames (bridge, Overleaf problem, solution, setup, shortcuts, Problems pane, why it matters) now come right after the robustness-workflow frame and before the exercise. They take about 7 minutes out of block 26, which keeps their combined length unchanged: block 25 runs 0:40–1:21 (including the demo) and block 26 runs 1:21–1:37.
 - Also in the Session 2 folder. The point of the exercise is N tracking across specifications. The reference table is in the answer key ("Robustness Table Reference").
 - Step 11 (commit) comes before the git frames, so participants who have not yet seen `git init` leave it for later. Say so.
 - The "What to Watch For" and "Debrief" frames close the Swiss franc exercise.
 
-### 26. Git as the undo button, Overleaf bridge (14 min)
-- 14 frames in 14 minutes. Fast frames: the `git add` and `git commit` frames. Slow down on "Your Undo Button" and "The Cycle".
+### 26. Git as the undo button, worktrees, Overleaf bridge (16 min)
+- **Worktrees (2 frames, after "Git and Data"):** the link back to Session 2's collision round. Two sessions in one folder overwrite each other; a worktree gives each its own folder and branch over one shared history. Say the caveat that matters for research projects: data, `.env`, and outputs are in `.gitignore`, so a new worktree does not contain them. Copy or link them. Demonstrate only if time allows (`git worktree add`, `git worktree list`); the point is the idea, not the commands. A branch is explained in one sentence on the slide; the branch frames are in back-matter block B.
+- 16 frames in 16 minutes. Fast frames: the `git add` and `git commit` frames. Slow down on "Your Undo Button" and "The Cycle".
 - The Overleaf bridge uses Overleaf's own git remote. No GitHub is involved, so don't mention accounts or tokens.
 - GitHub is in the back matter (block B). Don't open it unless asked.
 

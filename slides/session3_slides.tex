@@ -295,26 +295,26 @@ Not covered:       identification, construct validity
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{An Audit Report, Filled In (Invented Example)}
+\begin{frame}[fragile]{An Audit Report, Filled In (Swiss Franc Project)}
   \begin{lstlisting}[basicstyle=\ttfamily\scriptsize, columns=fixed, keepspaces=true]
-## Tests run        58 passed | 0 failed | 1 skipped
-## Requirements     R1 Merge keeps every record ......... 4 tests, pass
-                    R2 Age restriction applied .......... 2 tests, pass
-                    R4 N explained for every model ...... 6 tests, pass
-## Not tested       R3 (weights): no independent value yet; R language version
+## Tests run        126 passed | 0 failed | 0 skipped | 5 known issues
+## Requirements     R1 Merge keeps every respondent ...... 7 tests, pass
+                    R3 Control is the reference arm ...... 2 tests, pass
+                    R5 N explained for every model ....... 15 tests, pass
+## Not tested       Stata and R versions; interaction coefficients (N only)
 ## Numerical checks              pipeline    independent   tolerance
-  rows after merge                 1,500        1,500        exact
-  weighted mean of outcome         0.5123       0.5123       1e-6
+  intercept vs logit(share)      -0.218726   -0.218726     1e-5
+  info coef, full controls        0.266587    0.266587     2e-6
 ## Needs your call
-  - Records under 18 dropped: a rule from the design document, but a
-    choice a referee could question.
-  - Complete cases only: the tests reconcile the rows dropped; they do
-    not say that dropping them is acceptable.
+  - DK coded 0, not missing (230 respondents): the codebook's definition,
+    but a substantive choice.
+  - Income + left-right drops ~43% of respondents: the tests reconcile
+    the drop; they do not say complete cases are acceptable.
 ## Not covered     identification; construct validity of the outcome
   \end{lstlisting}
 
   \vspace{0.3em}
-  {\small This is an invented example, not your project's output. Notice what the report does: it lists a skipped test and an untested requirement, names two judgment calls, and says what it cannot show, instead of declaring the work correct.}
+  {\small Notice what the report does: it names two judgment calls and what it cannot show, instead of declaring the work correct.}
 \end{frame}
 
 \begin{frame}{Two More Safeguards}
@@ -428,7 +428,7 @@ Not covered:       identification, construct validity
     \end{itemize}
 
     \vspace{0.2em}
-    \item[\textbf{Then}] \textbf{Tests for the new rows} (3 min), as in Session 2: tests first, read them before any model code. They should \alert{fail} now. Does each expected value come from the raw files?
+    \item \textbf{Tests for the new rows} (3 min), as in Session 2: tests first, read them before any model code. They should \alert{fail} now. Does each expected value come from the raw files?
   \end{enumerate}
 \end{frame}
 
@@ -483,7 +483,7 @@ Not covered:       identification, construct validity
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 25: ROBUSTNESS WORKFLOW, LATEX IN VS CODE, EXERCISE PART 3  [0:40-1:13]
+%  BLOCK 25: ROBUSTNESS WORKFLOW, LATEX IN VS CODE, EXERCISE PART 3  [0:40-1:21]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{The Robustness Workflow}
@@ -770,7 +770,7 @@ Ctrl+Alt+V  Open PDF preview
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 26: GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:13-1:27]
+%  BLOCK 26: GIT AS THE UNDO BUTTON, OVERLEAF BRIDGE  [1:21-1:37]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Why Git Matters for Agentic Coding}
@@ -1092,6 +1092,67 @@ __pycache__/
   \end{block}
 \end{frame}
 
+\begin{frame}[fragile]{Worktrees: Two Folders, One History}
+  \textbf{The problem:} two Claude Code sessions in one folder edit the same files. Last writer wins (Session 2), and one \texttt{git diff} mixes both sessions' changes.
+
+  \vspace{0.4em}
+  \textbf{A worktree} is a second folder on its own branch, sharing the same git history. A branch is a named line of commits.
+
+  \vspace{0.4em}
+  \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+git worktree add ../project-robustness -b robustness
+git worktree list
+  \end{lstlisting}
+
+  \vspace{0.4em}
+  \begin{center}
+  \begin{tikzpicture}[
+    box/.style={draw=anthropic, fill=lightgray, rounded corners, minimum width=3.6cm, minimum height=0.8cm, align=center, font=\footnotesize},
+    arr/.style={<->, thick, color=accent}
+  ]
+    \node[box] (a) at (-3.2,0) {\texttt{project/}\\branch \texttt{main}};
+    \node[box] (b) at (3.2,0) {\texttt{project-robustness/}\\branch \texttt{robustness}};
+    \node[box, minimum width=3cm] (g) at (0,-1.5) {one shared \texttt{.git} history};
+    \draw[arr] (a.south) -- (g.north west);
+    \draw[arr] (b.south) -- (g.north east);
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Parallel Agents With Worktrees}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \textbf{The workflow}
+      \begin{enumerate}
+        \small
+        \item Commit your current work
+        \item One worktree per task
+        \item Open each folder in its own VS Code window, with Claude Code in each
+        \item Review and commit in each
+        \item Merge back from the main folder
+        \item Clean up
+      \end{enumerate}
+      \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+git merge robustness
+git worktree remove ../project-robustness
+      \end{lstlisting}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \textbf{Watch for}
+      \begin{itemize}
+        \small
+        \item \textbf{Ignored files are not copied.} \texttt{data/}, \texttt{.env}, and outputs in \texttt{.gitignore} are missing in the new folder
+        \item \textbf{One branch, one worktree}
+        \item \textbf{Same lines edited in both} means a merge conflict \hyperlink{merge-conflicts}{\beamergotobutton{Conflicts}}
+        \item \textbf{Two sessions cost twice} the tokens
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.3em}
+  {\small \textbf{Here:} one worktree estimates the robustness variants while another drafts the paper section. Different files, so they merge cleanly.}
+\end{frame}
+
 \begin{frame}{If Your Coauthors Are on Overleaf}
   Moving your paper into VS Code does not mean abandoning your coauthors.
 
@@ -1137,7 +1198,7 @@ __pycache__/
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:35-2:00]
+%  BLOCK 28: EXERCISE, RESULTS TO PAPER  [1:37-2:02]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Demo: The Full Loop}
@@ -1217,7 +1278,7 @@ the table supports it. Do not edit any file.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  BLOCK 29: WHEN IT GOES WRONG  [2:00-2:08]
+%  BLOCK 29: WHEN IT GOES WRONG  [2:02-2:10]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{When It Goes Wrong: Four Patterns}
@@ -1402,7 +1463,7 @@ arm, and sample rules in force before you continue.
 \end{frame}
 
 % ══════════════════════════════════════════════════════════════════
-%  CLOSE  [2:08]
+%  CLOSE  [2:10]
 % ══════════════════════════════════════════════════════════════════
 
 \begin{frame}{Next Session}
@@ -1410,14 +1471,15 @@ arm, and sample rules in force before you continue.
 
   \vspace{1em}
   \begin{itemize}
-    \item Connecting tools (MCP) and building a skill
     \item Web search and literature scans, and why you check every citation
     \item Subagents: fan out work, use one as a verifier, and run a referee on a paper
+    \item Connecting tools (MCP) and building a skill
   \end{itemize}
 
   \vspace{1em}
   \textbf{Before next session:}
   \begin{itemize}
+    \item \alert{Install Node.js (LTS)} from \texttt{nodejs.org}. Check \texttt{node --version} and \texttt{npm --version}. Session 4 installs the \texttt{claude-ignore} hook with \texttt{npm}.
     \item Make git a habit on one real project: commit before every Claude Code instruction
     \item Think of a topic in your field you could run a literature search on
   \end{itemize}
@@ -1979,14 +2041,14 @@ __pycache__/
 \end{frame}
 
 \begin{frame}{Exercise Part 1: Choose Your Project}
-  \textbf{Option 1: Your own research project}
+  \textbf{Option A: Your own research project}
   \begin{itemize}
     \item Open your project folder in VS Code: File → New Window → File → Open Folder
     \item Use whatever code and data you have in that project
   \end{itemize}
 
   \vspace{0.5em}
-  \textbf{Option 2: Practice sandbox}
+  \textbf{Option B: Practice sandbox}
   \begin{itemize}
     \item On your Desktop, create a new folder: \texttt{mkdir \textasciitilde/Desktop/session\_2\_git\_practice}
     \item Copy Session 2 materials into it: \texttt{cp -r \textasciitilde/my\_workspace/session\_2/* \textasciitilde/Desktop/session\_2\_git\_practice/}
@@ -2003,7 +2065,7 @@ __pycache__/
   \begin{enumerate}
     \item {\small \textbf{Create a \texttt{.gitignore}} FIRST:} In VS Code (File → New File → name it .gitignore) or terminal (\texttt{echo ".env" > .gitignore}). Ask Claude Code to help. Include \texttt{.env}, large data files, regenerated output, and system files.
 
-    {\small \alert{Important (Option 2):} You will find a \texttt{.env} file with fake practice credentials, treated here like real ones. Make sure it is in \texttt{.gitignore} so it is never committed.}
+    {\small \alert{Important (Option B):} You will find a \texttt{.env} file with my real credentials. Make sure it is in \texttt{.gitignore} so it is never committed.}
 
     \vspace{0.08em}
     \item {\small \textbf{Initialize git:}} \texttt{git init} then \texttt{git add -A \&\& git commit -m "Initial commit"}
@@ -2234,7 +2296,7 @@ git stash pop                     # skip if stash was empty
   \end{lstlisting}
 
   \vspace{0.3em}
-  {\small Full text: \texttt{session\_3/docs/verification\_protocol.md} (your \texttt{my\_workspace/session\_3} copy, not your \texttt{session\_2} folder). \alert{CLAUDE.md is an instruction, not enforcement:} read the tests too.}
+  {\small Full text: \texttt{docs/verification\_protocol.md} in this folder. \alert{CLAUDE.md is an instruction, not enforcement:} read the tests too.}
   \vfill
   \hyperlink{backmatter}{\beamerreturnbutton{Back matter}}
 \end{frame}
