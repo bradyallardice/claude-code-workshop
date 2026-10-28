@@ -1,29 +1,60 @@
 # Session 4
 
+## Start-of-session ritual
+
+Same one command as every session. It brings the course materials up to date, copies
+`session_4` and today's slides into `~/my_workspace`, and opens `~/my_workspace` in VS Code.
+
+**Work only in `~/my_workspace`.** The course repo (`~/claude-code-workshop`) is a
+read-only mirror that the command resets every time. If you edit inside it, your
+edits are saved aside (`git stash list`, and a `backup-<date>` branch), but they do
+not belong there.
+
+Copy the line for your computer, change the last number to today's session
+(`4` today), and run it.
+
+**Mac** (Terminal):
+```bash
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 4
+```
+
+**Windows** (PowerShell, not as Administrator). It asks which session:
+```powershell
+irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
+```
+
+If I fixed something since you last ran it, the command updates your copy of the
+folder without touching your work: a file you have **not** edited is replaced by my newer
+version; a file you **have** edited is never changed, and my newer version is saved next
+to it as `<name>.new`; files you created or deleted are left alone.
+
+Check that the **Materials version** in the READY box matches the one on the screen.
+If anything fails, see `tools/TROUBLESHOOTING.md`.
+
+### If the command does not work
+
+```bash
+cd ~/claude-code-workshop && git fetch origin && git reset --hard origin/student
+mkdir -p ~/my_workspace/slides && cp -r session_4/ ~/my_workspace/session_4/    # first time only
+cp slides/session4_slides.pdf ~/my_workspace/slides/
+cd ~/my_workspace && code .
+```
+(Windows: `cd ~\claude-code-workshop; git fetch origin; git reset --hard origin/student`, then copy
+`session_4` and `slides\session4_slides.pdf` into `~\my_workspace` by hand, then `cd ~\my_workspace; code .`.)
+The `reset` discards edits made inside the course repo; your `my_workspace` is not touched.
+
+### Open today's folder
+
+The command opens `my_workspace`. For today's exercises, open the `session_4` folder inside
+it (VS Code: File, Open Folder, `my_workspace/session_4`) and start Claude Code there.
+
+---
+
 Start here:
 
-1. Make sure you copied the Session 4 slides into your local course workspace.
-
-Replace `[my_workspace]` with wherever you keep your local course files.
-
-Choose exactly one slide-copy option:
-
-Option A: if you already have `[my_workspace]/slides/`, copy just today's PDF:
-
-```bash
-cp slides/session4_slides.pdf [my_workspace]/slides/
-```
-
-Option B: if you do not have a slides folder yet, copy the whole folder:
-
-```bash
-cp -r slides/ [my_workspace]/slides/
-```
-
-Do not run both Option A and Option B.
-
-2. Open `../slides/session4_slides.pdf` from your local Session 4 folder. If you are in the course repo root, open `slides/session4_slides.pdf`.
-3. From inside your copy of `session_4`, open `docs/exercise_prompt.md`. It has all four exercises (Zotero literature review, build a skill, literature scan, fan-out coding).
+1. Open the Session 4 slides: `~/my_workspace/slides/session4_slides.pdf` (copied there by the
+   command above).
+2. From inside your copy of `session_4`, open `docs/exercise_prompt.md`. It has all four exercises (Zotero literature review, build a skill, literature scan, fan-out coding).
 
 ## Before Exercise 1: import the practice Zotero library
 

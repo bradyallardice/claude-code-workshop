@@ -11,15 +11,21 @@
 #   2. Backs up anything you changed inside the course repo (git stash + a backup
 #      branch), then moves the repo to exactly the version the instructor published.
 #      It fetches only the latest snapshot, so there is nothing to merge or conflict.
-#   3. Copies today's folders into ~\my_workspace. A folder you already have there
-#      is NEVER overwritten.
+#   3. Brings today's folders in ~\my_workspace up to date:
+#        - a folder you do not have yet is copied in;
+#        - a file you have NOT edited is replaced by the instructor's newer version;
+#        - a file you HAVE edited is never touched: the newer version is saved beside it
+#          as <name>.new, and you decide what to keep;
+#        - files you created, and files you deleted, are left alone.
+#      (A small record of what was delivered last time is kept in ~\my_workspace\.workshop\.)
 #   4. Copies today's slides into ~\my_workspace\slides\ (always the newest version).
 #   5. Opens ~\my_workspace in VS Code.
+# Work only in ~\my_workspace. The course repo is a disposable mirror that this script resets.
 # If git does not work at all, it downloads a zip of the materials instead.
 #
 # Keep this file ASCII-only: Windows PowerShell 5.1 misreads other characters.
 # Settings for testing (students never need these):
-#   WORKSHOP_SESSION WORKSHOP_REPO_URL WORKSHOP_BRANCH WORKSHOP_HOME WORKSHOP_ZIP_URL WORKSHOP_NO_OPEN
+#   WORKSHOP_SESSION WORKSHOP_GITHUB_REPO WORKSHOP_REPO_URL WORKSHOP_BRANCH WORKSHOP_HOME WORKSHOP_ZIP_URL WORKSHOP_NO_OPEN
 
 function Start-WorkshopSession {
     param([string]$Session)
@@ -28,11 +34,14 @@ function Start-WorkshopSession {
     [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
     $ProgressPreference = "SilentlyContinue"
 
-    $RepoUrl = if ($env:WORKSHOP_REPO_URL) { $env:WORKSHOP_REPO_URL } else { "https://github.com/bradyallardice/claude-code-workshop.git" }
+    # ---- Where the public student repo lives. This is the one place in this script to change
+    # ---- if the repo is renamed or moved (admin/publishing.md lists the other files).
+    $GithubRepo = if ($env:WORKSHOP_GITHUB_REPO) { $env:WORKSHOP_GITHUB_REPO } else { "bradyallardice/claude-code-workshop" }
     $Branch = if ($env:WORKSHOP_BRANCH) { $env:WORKSHOP_BRANCH } else { "student" }
+    $RepoUrl = if ($env:WORKSHOP_REPO_URL) { $env:WORKSHOP_REPO_URL } else { "https://github.com/$GithubRepo.git" }
+    $ZipUrl = if ($env:WORKSHOP_ZIP_URL) { $env:WORKSHOP_ZIP_URL } else { "https://github.com/$GithubRepo/archive/refs/heads/$Branch.zip" }
+    $ManifestUrl = if ($env:WORKSHOP_MANIFEST_URL) { $env:WORKSHOP_MANIFEST_URL } else { "https://raw.githubusercontent.com/$GithubRepo/$Branch/tools/sessions.txt" }
     $Base = if ($env:WORKSHOP_HOME) { $env:WORKSHOP_HOME } else { $HOME }
-    $ZipUrl = if ($env:WORKSHOP_ZIP_URL) { $env:WORKSHOP_ZIP_URL } else { "https://github.com/bradyallardice/claude-code-workshop/archive/refs/heads/$Branch.zip" }
-    $ManifestUrl = if ($env:WORKSHOP_MANIFEST_URL) { $env:WORKSHOP_MANIFEST_URL } else { "https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/$Branch/tools/sessions.txt" }
     $Workspace = Join-Path $Base "my_workspace"
     $Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
 
@@ -204,17 +213,113 @@ function Start-WorkshopSession {
     Say ("Today's folders: " + ($Folders -join ", "))
 
     New-Item -ItemType Directory -Force $Workspace | Out-Null
-    foreach ($folder in $Folders) {
-        $Dest = Join-Path $Workspace $folder
+
+    # Delivery records use git's blob hash of the bytes on disk (same value as
+    # `git hash-object --no-filters`), computed here with .NET so no git call and no
+    # character-encoding problem with file names is involved. The same records are
+    # written by start_session.sh, so either script can update what the other delivered.
+    function LongPath($p) {
+        $full = [IO.Path]::GetFullPath($p)
+        if ($full.StartsWith("\\?\")) { return $full }
+        if ($full.StartsWith("\\")) { return "\\?\UNC\" + $full.Substring(2) }
+        return "\\?\" + $full
+    }
+    function Get-BlobHash($p) {
+        $bytes = [IO.File]::ReadAllBytes((LongPath $p))
+        $header = [Text.Encoding]::ASCII.GetBytes("blob " + $bytes.Length + [char]0)
+        $all = New-Object byte[] ($header.Length + $bytes.Length)
+        [Array]::Copy($header, 0, $all, 0, $header.Length)
+        [Array]::Copy($bytes, 0, $all, $header.Length, $bytes.Length)
+        $sha = [Security.Cryptography.SHA1]::Create()
+        try { return ([BitConverter]::ToString($sha.ComputeHash($all))).Replace("-", "").ToLower() }
+        finally { $sha.Dispose() }
+    }
+    $StateDir = Join-Path $Workspace ".workshop"
+    $Utf8NoBom = New-Object Text.UTF8Encoding $false
+    $script:NewFiles = @()
+
+    # Copy a new folder, or update an existing one without touching the student's work.
+    function Update-Folder($folder) {
         $Src = Join-Path $Repo $folder
-        if (Test-Path $Dest) {
-            Ok "Kept your existing $Dest (not overwritten)"
-        } elseif (Test-Path $Src) {
+        $Dest = Join-Path $Workspace $folder
+        $Mf = Join-Path $StateDir ($folder + ".manifest")
+        New-Item -ItemType Directory -Force $StateDir | Out-Null
+
+        # What the instructor published now: relative path (forward slashes) -> hash
+        $RepoRoot = (Resolve-Path $Repo).Path.TrimEnd("\")
+        $Up = [ordered]@{}
+        foreach ($f in (Get-ChildItem -LiteralPath $Src -Recurse -File -Force | Where-Object { $_.Name -ne ".DS_Store" } | Sort-Object FullName)) {
+            $rel = $f.FullName.Substring($RepoRoot.Length + 1).Replace("\", "/")
+            $Up[$rel] = Get-BlobHash $f.FullName
+        }
+
+        if (-not (Test-Path $Dest)) {
             # robocopy handles long paths; exit codes 0-7 mean success, 8+ mean failure.
             robocopy $Src $Dest /E /R:1 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
-            if ($LASTEXITCODE -ge 8) { Write-Host "`n  STOPPED Copy of $folder failed. Raise your red sticky note." -ForegroundColor Red; return }
+            if ($LASTEXITCODE -ge 8) { Write-Host "`n  STOPPED Copy of $folder failed. Raise your red sticky note." -ForegroundColor Red; return $false }
             $global:LASTEXITCODE = 0
+            $lines = @("#method=git") + @($Up.Keys | ForEach-Object { $Up[$_] + "`t" + $_ })
+            [IO.File]::WriteAllLines($Mf, $lines, $Utf8NoBom)
             Ok "Copied $folder into $Workspace"
+            return $true
+        }
+
+        # What was delivered last time
+        $Old = @{}
+        if (Test-Path $Mf) {
+            $mlines = [IO.File]::ReadAllLines($Mf)
+            if ($mlines.Count -gt 0 -and $mlines[0] -eq "#method=git") {
+                for ($i = 1; $i -lt $mlines.Count; $i++) {
+                    $tab = $mlines[$i].IndexOf("`t")
+                    if ($tab -gt 0) { $Old[$mlines[$i].Substring($tab + 1)] = $mlines[$i].Substring(0, $tab) }
+                }
+            }
+        }
+
+        # Decide file by file. old = hash delivered last time, ws = hash in the student's folder
+        # now, u = hash of the version published now.
+        #   not in your folder, delivered before             -> you deleted it: stays deleted
+        #   not in your folder, never delivered              -> new from the instructor: add it
+        #   same as published                                -> nothing to do
+        #   unchanged since delivered, newer one published   -> replace it
+        #   anything else (you edited it, or no record)      -> keep yours, save the new one as .new
+        # For the last case the record is set to the version just offered, so a student who adopts
+        # it (copies the .new over their file) gets silent updates from then on.
+        $NewMf = @("#method=git")
+        $nAdd = 0; $nUpd = 0; $nNew = 0; $nGone = 0
+        foreach ($rel in $Up.Keys) {
+            $u = $Up[$rel]
+            $wsPath = Join-Path $Workspace ($rel.Replace("/", "\"))
+            $srcPath = Join-Path $Repo ($rel.Replace("/", "\"))
+            $exists = [IO.File]::Exists((LongPath $wsPath))
+            if (-not $exists) {
+                if ($Old.ContainsKey($rel)) { $nGone++; $NewMf += ($Old[$rel] + "`t" + $rel) }
+                else {
+                    [IO.Directory]::CreateDirectory((LongPath (Split-Path $wsPath -Parent))) | Out-Null
+                    [IO.File]::Copy((LongPath $srcPath), (LongPath $wsPath), $true)
+                    $nAdd++; $NewMf += ($u + "`t" + $rel)
+                }
+                continue
+            }
+            $w = Get-BlobHash $wsPath
+            if ($w -eq $u) { $NewMf += ($u + "`t" + $rel) }
+            elseif ($Old.ContainsKey($rel) -and $Old[$rel] -eq $w) {
+                [IO.File]::Copy((LongPath $srcPath), (LongPath $wsPath), $true)
+                $nUpd++; $NewMf += ($u + "`t" + $rel)
+            } else {
+                [IO.File]::Copy((LongPath $srcPath), (LongPath ($wsPath + ".new")), $true)
+                $nNew++; $script:NewFiles += ($wsPath + ".new"); $NewMf += ($u + "`t" + $rel)
+            }
+        }
+        [IO.File]::WriteAllLines($Mf, $NewMf, $Utf8NoBom)
+        Ok "${folder}: $nUpd updated, $nAdd added, $nNew of your edited files have a newer version (saved as <name>.new)"
+        if ($nGone -gt 0) { Say "($nGone files you deleted were not restored)" }
+        return $true
+    }
+
+    foreach ($folder in $Folders) {
+        if (Test-Path (Join-Path $Repo $folder)) {
+            if (-not (Update-Folder $folder)) { return }
         } else {
             Note "$folder is not in the published materials yet; tell the instructor"
         }
@@ -238,6 +343,15 @@ function Start-WorkshopSession {
     Write-Host "  ================ READY ================"
     Write-Host "  Materials version: $Version"
     Write-Host "  Work in:           $Workspace"
+    Write-Host "  (Do not edit inside the course repo; it is reset every time you run this.)"
+    if ($script:NewFiles.Count -gt 0) {
+        Write-Host ""
+        Write-Host "  The instructor changed files you had already edited. Yours were NOT touched."
+        Write-Host "  The newer versions are next to them, ending in .new:"
+        foreach ($nf in $script:NewFiles) { Write-Host "    $nf" }
+        Write-Host "  Ask Claude Code to compare each pair and tell you what changed."
+        Write-Host ""
+    }
     if ($Opened) { Write-Host "  VS Code is opening that folder. Start Claude Code there." }
     else { Write-Host "  Open VS Code, then File > Open Folder > $Workspace" }
     Write-Host "  ======================================="

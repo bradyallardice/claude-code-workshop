@@ -2,73 +2,60 @@
 
 ## Start-of-session ritual
 
-Same as session 1: work on a **copy** of the session folder, not inside the
-shared course repo. The shared repo stays read-only for you, so I can push new
-material without breaking your work and you can edit, break, and redo freely.
+Same one command as every session. It brings the course materials up to date,
+updates today's folder in `~/my_workspace`, and opens `~/my_workspace` in VS Code.
 
-Replace `~/my_workspace` with wherever you keep your local course files.
+**Work only in `~/my_workspace`.** The course repo (`~/claude-code-workshop`) is a
+read-only mirror that the command resets every time. If you edit inside it, your
+edits are saved aside (`git stash list`, and a `backup-<date>` branch), but they do
+not belong there.
 
-### 1. Update the course repo
+Copy the line for your computer, change the last number to today's session
+(`2` today), and run it.
 
-**Already cloned?**
-
-Mac/Linux:
+**Mac** (Terminal):
 ```bash
-cd ~/claude-code-workshop && git pull
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 2
 ```
-Windows (PowerShell):
+
+**Windows** (PowerShell, not as Administrator). It asks which session:
 ```powershell
-cd ~\claude-code-workshop; git pull
+irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
 ```
 
-**First time?**
-```bash
-git clone https://github.com/bradyallardice/claude-code-workshop.git
-```
+If I fixed something since you last ran it, the command updates your copy of the
+folder without touching your work:
 
-### 2. Copy today's session folder into your workspace
+- a file you have **not** edited is replaced by my newer version;
+- a file you **have** edited is never changed: my newer version is saved next to it
+  as `<name>.new` and listed in the READY box (ask Claude Code to compare the two);
+- files you created, and files you deleted, are left alone.
 
-Mac/Linux:
-```bash
-cp -r session_2/ ~/my_workspace/session_2/
-```
-Windows (PowerShell):
-```powershell
-Copy-Item -Recurse session_2 ~\my_workspace\session_2
-```
+Check that the **Materials version** in the READY box matches the one on the screen.
+If anything fails, see `tools/TROUBLESHOOTING.md`.
 
-### 3. Open your copy in VS Code and work there
-
-Mac/Linux:
-```bash
-cd ~/my_workspace/session_2 && code .
-```
-Windows (PowerShell):
-```powershell
-cd ~\my_workspace\session_2; code .
-```
-
-### If `git pull` fights back
-
-If you committed work inside the course repo, `git pull` will complain. Run this
-recovery in the course repo, then continue with steps 2–3:
+### If the command does not work
 
 ```bash
-git stash -u                      # save uncommitted edits
-git branch backup-prework         # save any local commits
-git fetch origin
-git reset --hard origin/student   # match the server
-git stash pop                     # skip if stash was empty
+cd ~/claude-code-workshop && git fetch origin && git reset --hard origin/student
+mkdir -p ~/my_workspace && cp -r session_2/ ~/my_workspace/session_2/    # first time only
+cd ~/my_workspace && code .
 ```
+(Windows: `cd ~\claude-code-workshop; git fetch origin; git reset --hard origin/student`, then
+`Copy-Item -Recurse session_2 ~\my_workspace\session_2` the first time, then `cd ~\my_workspace; code .`.)
+The `reset` discards edits made inside the course repo; your `my_workspace` is not touched.
 
-Your old commits live on `backup-prework`. If that name already exists, add a
-suffix: `backup-prework-2`.
+### Open today's folder
+
+The command opens `my_workspace`. For today's exercises, open the `session_2` folder
+inside it (VS Code: File, Open Folder, `my_workspace/session_2`) and start Claude Code
+there. Keep your `session_1` copy too: today's first exercise runs in it.
 
 ---
 
 ## Start here
 
-1. Open `slides/session2_slides.pdf` (in the course repo you cloned, not in your `session_2` copy).
+1. Open `~/my_workspace/slides/session2_slides.pdf` (copied there by the command above).
 2. Demo, follow along: two Claude Code tabs at once in this folder (prompts on
    the slides).
 3. Exercise 1, the county panel in plan mode: in your **`my_workspace/session_1`**

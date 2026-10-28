@@ -10,23 +10,32 @@
 #   2. Backs up anything you changed inside the course repo (git stash + a backup
 #      branch), then moves the repo to exactly the version the instructor published.
 #      It fetches only the latest snapshot, so there is nothing to merge or conflict.
-#   3. Copies today's folders into ~/my_workspace. A folder you already have there
-#      is NEVER overwritten.
+#   3. Brings today's folders in ~/my_workspace up to date:
+#        - a folder you do not have yet is copied in;
+#        - a file you have NOT edited is replaced by the instructor's newer version;
+#        - a file you HAVE edited is never touched: the newer version is saved beside it
+#          as <name>.new, and you decide what to keep;
+#        - files you created, and files you deleted, are left alone.
+#      (A small record of what was delivered last time is kept in ~/my_workspace/.workshop/.)
 #   4. Copies today's slides into ~/my_workspace/slides/ (always the newest version).
 #   5. Opens ~/my_workspace in VS Code.
+# Work only in ~/my_workspace. The course repo is a disposable mirror that this script resets.
 # If git does not work at all, it downloads a zip of the materials instead.
 #
 # Settings for testing (students never need these):
-#   WORKSHOP_REPO_URL  WORKSHOP_BRANCH  WORKSHOP_HOME  WORKSHOP_ZIP_URL  WORKSHOP_NO_OPEN=1
+#   WORKSHOP_GITHUB_REPO  WORKSHOP_REPO_URL  WORKSHOP_BRANCH  WORKSHOP_HOME  WORKSHOP_ZIP_URL  WORKSHOP_NO_OPEN=1
 
 set -u
 
 SESSION="${1:-}"
-REPO_URL="${WORKSHOP_REPO_URL:-https://github.com/bradyallardice/claude-code-workshop.git}"
+# ---- Where the public student repo lives. This is the one place in this script to change
+# ---- if the repo is renamed or moved (admin/publishing.md lists the other files).
+GITHUB_REPO="${WORKSHOP_GITHUB_REPO:-bradyallardice/claude-code-workshop}"
 BRANCH="${WORKSHOP_BRANCH:-student}"
+REPO_URL="${WORKSHOP_REPO_URL:-https://github.com/$GITHUB_REPO.git}"
+ZIP_URL="${WORKSHOP_ZIP_URL:-https://github.com/$GITHUB_REPO/archive/refs/heads/$BRANCH.zip}"
+MANIFEST_URL="${WORKSHOP_MANIFEST_URL:-https://raw.githubusercontent.com/$GITHUB_REPO/$BRANCH/tools/sessions.txt}"
 BASE="${WORKSHOP_HOME:-$HOME}"
-ZIP_URL="${WORKSHOP_ZIP_URL:-https://github.com/bradyallardice/claude-code-workshop/archive/refs/heads/$BRANCH.zip}"
-MANIFEST_URL="${WORKSHOP_MANIFEST_URL:-https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/$BRANCH/tools/sessions.txt}"
 WORKSPACE="$BASE/my_workspace"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 
@@ -192,12 +201,98 @@ fi
 say "Today's folders: $(echo $FOLDERS | sed 's/ /, /g')"
 
 mkdir -p "$WORKSPACE" || die "Cannot create $WORKSPACE"
-for folder in $FOLDERS; do
-    if [ -e "$WORKSPACE/$folder" ]; then
-        ok "Kept your existing $WORKSPACE/$folder (not overwritten)"
-    elif [ -d "$REPO/$folder" ]; then
-        cp -R "$REPO/$folder" "$WORKSPACE/$folder" || die "Copy of $folder failed"
+
+# Hash method for the delivery records: git's blob hash of the bytes on disk (no line-ending
+# conversion), or plain SHA-1 if git is missing. The method is written into each record, and a
+# record made with a different method is ignored (every differing file then gets a .new).
+if have git; then HASH_METHOD="git"; elif have shasum || have sha1sum; then HASH_METHOD="sha1"; else HASH_METHOD="none"; fi
+STATE_DIR="$WORKSPACE/.workshop"
+TAB="$(printf '\t')"
+NEW_FILES=""
+
+# hash_list ROOT LISTFILE: prints "<hash><TAB><path>" for each path in LISTFILE (paths relative to ROOT).
+hash_list() {
+    local root="$1" list="$2" hashes p h
+    [ -s "$list" ] || return 0
+    case "$HASH_METHOD" in
+        git)
+            hashes="$list.h"
+            ( cd "$root" && git hash-object --no-filters --stdin-paths ) < "$list" > "$hashes"
+            paste -d "$TAB" "$hashes" "$list"
+            rm -f "$hashes" ;;
+        sha1)
+            while IFS= read -r p; do
+                if have shasum; then h="$(shasum -a 1 < "$root/$p" | cut -d' ' -f1)"; else h="$(sha1sum < "$root/$p" | cut -d' ' -f1)"; fi
+                printf '%s\t%s\n' "$h" "$p"
+            done < "$list" ;;
+        *) : ;;
+    esac
+}
+
+# update_folder FOLDER: copy it if it is new, otherwise update it without touching the student's work.
+update_folder() {
+    local folder="$1" up="$REPO/$1" ws="$WORKSPACE/$1" mf="$STATE_DIR/$1.manifest" tmp act p
+    local n_add=0 n_upd=0 n_new=0 n_gone=0
+    tmp="$(mktemp -d "${TMPDIR:-/tmp}/workshop-upd.XXXXXX")" || die "Cannot create a temporary folder"
+    mkdir -p "$(dirname "$mf")"
+    ( cd "$REPO" && find "$folder" -type f ! -name '.DS_Store' ) | LC_ALL=C sort > "$tmp/up.list"
+    hash_list "$REPO" "$tmp/up.list" > "$tmp/up.hash"
+
+    if [ ! -e "$ws" ]; then
+        cp -R "$up" "$ws" || die "Copy of $folder failed"
+        { echo "#method=$HASH_METHOD"; cat "$tmp/up.hash"; } > "$mf"
         ok "Copied $folder into $WORKSPACE"
+        rm -rf "$tmp"; return 0
+    fi
+
+    # Hash the student's copy of every file the instructor has published.
+    while IFS= read -r p; do [ -f "$WORKSPACE/$p" ] && printf '%s\n' "$p"; done < "$tmp/up.list" > "$tmp/ws.list"
+    hash_list "$WORKSPACE" "$tmp/ws.list" > "$tmp/ws.hash"
+    : > "$tmp/old.hash"
+    if [ -f "$mf" ] && [ "$(head -n 1 "$mf")" = "#method=$HASH_METHOD" ]; then tail -n +2 "$mf" > "$tmp/old.hash"; fi
+
+    # Decide file by file. old = hash delivered last time, ws = hash in the student's folder now,
+    # u = hash of the version published now.
+    #   not in your folder, delivered before                -> you deleted it: stays deleted (GONE)
+    #   not in your folder, never delivered                 -> new from the instructor (ADD)
+    #   same as published                                   -> nothing to do (SAME)
+    #   unchanged since delivered, newer one published      -> replace it (UPDATE)
+    #   anything else (you edited it, or no record)        -> keep yours, save the new one as .new (NEW)
+    # For NEW the record is set to the version just offered, so a student who adopts it (copies the
+    # .new over their file) gets silent updates from then on; a student who keeps their own file
+    # keeps getting a fresh .new beside it.
+    : > "$tmp/new.hash"
+    awk -F'\t' -v newmf="$tmp/new.hash" '
+        FILENAME == ARGV[1] { old[$2] = $1; next }
+        FILENAME == ARGV[2] { ws[$2] = $1; next }
+        { u = $1; p = $2
+          if (!(p in ws)) {
+              if (p in old) { print "GONE\t" p; print old[p] "\t" p >> newmf }
+              else          { print "ADD\t" p;  print u "\t" p >> newmf }
+          } else if (ws[p] == u)                     { print "SAME\t" p;   print u "\t" p >> newmf }
+          else if ((p in old) && old[p] == ws[p])    { print "UPDATE\t" p; print u "\t" p >> newmf }
+          else                                       { print "NEW\t" p;    print u "\t" p >> newmf }
+        }' "$tmp/old.hash" "$tmp/ws.hash" "$tmp/up.hash" > "$tmp/actions"
+
+    while IFS="$TAB" read -r act p; do
+        case "$act" in
+            ADD)    mkdir -p "$(dirname "$WORKSPACE/$p")"; cp -f "$REPO/$p" "$WORKSPACE/$p"; n_add=$((n_add + 1)) ;;
+            UPDATE) cp -f "$REPO/$p" "$WORKSPACE/$p"; n_upd=$((n_upd + 1)) ;;
+            NEW)    cp -f "$REPO/$p" "$WORKSPACE/$p.new"; n_new=$((n_new + 1)); NEW_FILES="${NEW_FILES}    $WORKSPACE/$p.new"$'\n' ;;
+            GONE)   n_gone=$((n_gone + 1)) ;;
+        esac
+    done < "$tmp/actions"
+    { echo "#method=$HASH_METHOD"; cat "$tmp/new.hash"; } > "$mf"
+
+    ok "$folder: $n_upd updated, $n_add added, $n_new of your edited files have a newer version (saved as <name>.new)"
+    [ "$n_gone" -gt 0 ] && say "($n_gone files you deleted were not restored)"
+    rm -rf "$tmp"
+    return 0
+}
+
+for folder in $FOLDERS; do
+    if [ -d "$REPO/$folder" ]; then
+        update_folder "$folder"
     else
         note "$folder is not in the published materials yet; tell the instructor"
     fi
@@ -224,6 +319,12 @@ echo ""
 printf "  \033[1m================ READY ================\033[0m\n"
 printf "  Materials version: %s\n" "$VERSION"
 printf "  Work in:           %s\n" "$WORKSPACE"
+printf "  (Do not edit inside the course repo; it is reset every time you run this.)\n"
+if [ -n "$NEW_FILES" ]; then
+    printf "\n  The instructor changed files you had already edited. Yours were NOT touched.\n"
+    printf "  The newer versions are next to them, ending in .new:\n%s" "$NEW_FILES"
+    printf "  Ask Claude Code to compare each pair and tell you what changed.\n\n"
+fi
 if [ "$OPENED" = "yes" ]; then
     printf "  VS Code is opening that folder. Start Claude Code there.\n"
 else

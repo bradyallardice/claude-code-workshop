@@ -3,3 +3,99 @@
 # name"). Applies to tools/*.sh and the capstone hooks.
 *.sh text eol=lf
 *.ps1 text eol=crlf
+
+# ----------------------------------------------------------------------------
+# Student export filter. tools/publish.sh builds the public student tree with
+# `git archive`, which leaves out every path marked export-ignore here.
+# These lines replace the removal pass of the old sync_student.sh.
+# Keep tools/student_forbidden.txt in step: publish.sh uses that file as an
+# independent check that nothing listed here slipped through.
+# Patterns are anchored to the repo root (they contain a slash or a leading /).
+# ----------------------------------------------------------------------------
+
+# Instructor-only top-level material
+/admin export-ignore
+/sync_student.sh export-ignore
+/make_demo_branch.sh export-ignore
+/start_demo.sh export-ignore
+/slides.tex export-ignore
+/tools/publish.sh export-ignore
+/tools/student_forbidden.txt export-ignore
+/.vscode/settings.json export-ignore
+
+# Slides: students get the PDFs only (no sources, images, or archive)
+/slides/img export-ignore
+/slides/archive export-ignore
+/slides/*.tex export-ignore
+
+# Patterns that apply in every session
+/session_*/docs/instructor_notes*.md export-ignore
+/session_*/docs/instructor_answer_key.md export-ignore
+/session_*/scripts/solution_* export-ignore
+/session_*/scripts/generate_fx_figure.* export-ignore
+/session_4/capstone-template/INSTRUCTOR.md export-ignore
+/session_4/github_collaboration_practice/INSTRUCTOR.md export-ignore
+
+# Session 1
+/session_1/output export-ignore
+/session_1/data/full export-ignore
+/session_1/demo_chat_upload export-ignore
+/session_1/build_panel.py export-ignore
+/session_1/build_county_panel.py export-ignore
+/session_1/demo_county_panel.py export-ignore
+/session_1/regression_ethnicity.py export-ignore
+/session_1/stata_demo/analysis.py export-ignore
+/session_1/docs/decisions.md export-ignore
+/session_1/docs/demo_prompt_correct.md export-ignore
+/session_1/scripts/build_county_panel.py export-ignore
+/session_1/scripts/create_sample_data.py export-ignore
+
+# Session 2
+/session_2/scripts/build_county_panel.py export-ignore
+/session_2/scripts/build_county_panel.R export-ignore
+/session_2/scripts/build_county_panel.do export-ignore
+/session_2/scripts/extract_regression_table.py export-ignore
+/session_2/scripts/render_regression_table.py export-ignore
+/session_2/scripts/swiss_franc_logit.py export-ignore
+/session_2/output/tab_swiss_franc_logit.* export-ignore
+/session_2/output/merged_survey.csv export-ignore
+/session_2/output/main_table.tex export-ignore
+/session_2/output/summary_stats.tex export-ignore
+/session_2/output/robustness_table.png export-ignore
+/session_2/output/robustness_table.tex export-ignore
+/session_2/tests export-ignore
+
+# Session 3
+/session_3/code export-ignore
+/session_3/demo_run export-ignore
+/session_3/data/course_participants.csv export-ignore
+/session_3/data/satisfaction.csv export-ignore
+/session_3/output/fx_rate_figure.png export-ignore
+/session_3/option_b/exercise_1 export-ignore
+/session_3/option_b/exercise_2/demo export-ignore
+/session_3/option_b/exercise_2/paper.tex export-ignore
+/session_3/option_b/exercise_2/paper.pdf export-ignore
+/session_3/option_b/exercise_2/tables/summary_stats.tex export-ignore
+/session_3/option_b/exercise_2/tables/main_table.tex export-ignore
+/session_3/option_b/exercise_2/tables/robustness_table.tex export-ignore
+/session_3/option_b/exercise_2/figures/fx_rate_figure.png export-ignore
+/session_3/option_b/output/merged_survey.csv export-ignore
+
+# Session 4
+/session_4/docs/methods_paragraph.md export-ignore
+/session_4/scripts/base_regression.py export-ignore
+/session_4/scripts/buggy_script.py export-ignore
+/session_4/demo_output export-ignore
+/session_4/option_b/exercise_1 export-ignore
+/session_4/option_b/exercise_2/demo export-ignore
+/session_4/option_b/exercise_2/paper.tex export-ignore
+/session_4/option_b/exercise_2/paper.pdf export-ignore
+/session_4/option_b/exercise_2/tables/summary_stats.tex export-ignore
+/session_4/option_b/exercise_2/tables/main_table.tex export-ignore
+/session_4/option_b/exercise_2/tables/robustness_table.tex export-ignore
+/session_4/option_b/exercise_2/figures/fx_rate_figure.png export-ignore
+/session_4/option_b/output/merged_survey.csv export-ignore
+/session_4/data/climate_speeches/gold_codes.csv export-ignore
+
+# Later sessions
+/session_8/scripts/api_template.py export-ignore

@@ -16,10 +16,18 @@ curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop
 irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
 ```
 
-It updates your copy of the course materials to today's version, copies today's
-folders into `my_workspace` (never overwriting work you already have there), copies
-today's slides, and opens `my_workspace` in VS Code. Check that the
-**Materials version** in the READY box matches the one on the screen.
+It updates your copy of the course materials to today's version, brings today's
+folders in `my_workspace` up to date, copies today's slides, and opens `my_workspace`
+in VS Code. Check that the **Materials version** in the READY box matches the one on
+the screen.
+
+**Work only in `~/my_workspace`.** The course repo (`~/claude-code-workshop`) is a
+read-only mirror that the command resets every time.
+
+When I fix something between sessions, the same command delivers it without touching
+your work: a file you have **not** edited is replaced by the newer version; a file you
+**have** edited is never changed, and the newer version is saved beside it as
+`<name>.new`; files you created or deleted are left alone.
 
 If anything fails: `tools/TROUBLESHOOTING.md`, or raise your red sticky note.
 
@@ -39,11 +47,9 @@ The full step-by-step instructions are in the Pre-Workshop Setup Guide distribut
 
 ### Verify Your Setup
 
-```bash
-# Clone the repo
-git clone https://github.com/bradyallardice/claude-code-workshop.git
-cd claude-code-workshop
+Run the one-command start above first (it downloads the course materials), then:
 
+```bash
 # Verify Git and Claude Code are installed
 git --version
 claude --version

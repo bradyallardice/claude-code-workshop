@@ -20,10 +20,18 @@
 Some tools split paths at spaces, and sync clients lock files while git is writing them. Clone the course repo straight into your home folder (`~/claude-code-workshop`), not into Desktop or Documents when those are synced by OneDrive. If your Windows username itself has a space, tell the instructor; the capstone template's hooks have been patched for this, but it is worth knowing.
 
 ### F02 — Course repo not found / wrong branch / out of date
-Run the start-of-session command from the top of https://github.com/bradyallardice/claude-code-workshop. It downloads the course repo if it is missing and moves it to today's published version whatever branch it is on.
+Run the start-of-session command from the top of https://github.com/bradyallardice/claude-code-workshop. It downloads the course repo if it is missing and moves it to today's published version whatever branch it is on. (If the course repo's address has changed since you first downloaded it, the command also handles that: your old copy is kept as `backup-<date>`.)
 
-### F03 — `git pull` refuses ("Your local changes would be overwritten")
-You edited files inside the course repo. Do not use `git pull`; run the start-of-session command instead. It saves your edits first (`git stash list` and a `backup-<date>` branch inside the course repo), then updates. From now on, work in `~/my_workspace`.
+### F03 — `git pull` refuses ("Your local changes would be overwritten" or "refusing to merge unrelated histories")
+You edited files inside the course repo, or the instructor republished the course repo from scratch. Do not use `git pull`; run the start-of-session command instead. It saves your edits first (`git stash list` and a `backup-<date>` branch inside the course repo), then resets the repo to the published version. From now on, work in `~/my_workspace`, never inside the course repo.
+
+If the command itself cannot run, this does the same by hand (it discards edits made inside the course repo, and never touches `my_workspace`):
+```bash
+cd ~/claude-code-workshop && git fetch origin && git reset --hard origin/student
+```
+
+### F03b — "Files you edited have newer versions" / files ending in `.new`
+Nothing is wrong. The instructor fixed a file you had already edited. Your file was not touched; the instructor's newer version is saved next to it as `<name>.new`. Ask Claude Code to compare the two and tell you what changed. To adopt the new version, copy the `.new` file over yours (the command then keeps that file up to date automatically); to keep yours, delete the `.new` file or ignore it.
 
 ### F04 — git missing, or "Please tell me who you are" on commit
 - Mac: run `git --version` and accept the Xcode tools prompt.

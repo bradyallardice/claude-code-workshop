@@ -28,7 +28,7 @@ Mark each expectation that is **too vague to fail**, **reuses the code it checks
 | Requirement | Source | Test | Independent truth | Passing condition |
 |---|---|---|---|---|
 
-Add **at least four rows for the model** (reference category, weights, outcome, sample). The requirements are yours: write them yourself. Two starter ideas: *the reference arm is control*, and *survey weights are used* (the logistic of the base-model intercept should equal the weighted control share, computed from the raw CSV). Then ask Claude Code to **review** your rows for the three weak patterns. It reviews; it does not write them.
+Add **at least four rows for the model**. The requirements are yours: write them yourself, from the research question, the design, and the codebook. Then ask Claude Code to **review** your rows for the three weak patterns. It reviews; it does not write them.
 
 ### Step B: Tests for the new rows (3 min)
 

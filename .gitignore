@@ -28,3 +28,6 @@ texput.log
 # Session 1 LaTeX setup check: students compile it inside their clone during pre-work,
 # and its PDF must not make `git status` look dirty
 session_1/setup_check.pdf
+
+# Claude Code agent worktrees (the auto-commit hook would otherwise commit them)
+.claude/worktrees/

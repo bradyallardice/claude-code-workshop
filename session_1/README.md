@@ -2,10 +2,11 @@
 
 ## Start-of-session ritual
 
-From now on, work on a **copy** of each session folder, not inside the shared
-course repo. The shared repo stays read-only for you: I can push new material
-anytime without breaking your work, and you can edit, break, and redo without
-worrying about the shared state. No merge conflicts.
+From now on, work in **`~/my_workspace`**, on your own copy of each session folder,
+and never inside the course repo (`~/claude-code-workshop`). The course repo is a
+read-only mirror that the command below resets every time. That is what lets me
+push new material or fix a mistake at any time without breaking your work, and lets
+you edit, break, and redo freely. No merge conflicts.
 
 Today is the first time. Do this together, live.
 
@@ -24,22 +25,29 @@ curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop
 irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
 ```
 
-It updates your copy of the course materials, copies today's folder into
-`~/my_workspace/session_1` (never overwriting work you already have there),
+It updates the course materials, copies today's folder into `~/my_workspace/session_1`,
 copies today's slides into `~/my_workspace/slides/`, and opens `~/my_workspace`
 in VS Code. Check that the **Materials version** in the READY box matches the
 one on the screen. If anything fails, see `tools/TROUBLESHOOTING.md`.
 
-### By hand (only if the command does not work)
+Run the same command at the start of every session. If I fixed something since you
+last ran it, it updates your copy without touching your work:
+
+- a file you have **not** edited is replaced by my newer version;
+- a file you **have** edited is never changed: my newer version is saved next to it
+  as `<name>.new` and listed in the READY box (ask Claude Code to compare the two);
+- files you created, and files you deleted, are left alone.
+
+### If the command does not work
 
 Mac/Linux:
 ```bash
 # First time only:
 git clone https://github.com/bradyallardice/claude-code-workshop.git
 # Every time:
-cd ~/claude-code-workshop && git pull
+cd ~/claude-code-workshop && git fetch origin && git reset --hard origin/student
 mkdir -p ~/my_workspace
-cp -r session_1/ ~/my_workspace/session_1/
+cp -r session_1/ ~/my_workspace/session_1/    # first time only
 cd ~/my_workspace && code .
 ```
 Windows (PowerShell):
@@ -47,11 +55,12 @@ Windows (PowerShell):
 # First time only:
 git clone https://github.com/bradyallardice/claude-code-workshop.git
 # Every time:
-cd ~\claude-code-workshop; git pull
+cd ~\claude-code-workshop; git fetch origin; git reset --hard origin/student
 New-Item -ItemType Directory -Force ~\my_workspace
-Copy-Item -Recurse session_1 ~\my_workspace\session_1
+Copy-Item -Recurse session_1 ~\my_workspace\session_1    # first time only
 cd ~\my_workspace; code .
 ```
+The `reset` discards edits made inside the course repo; your `my_workspace` is not touched.
 
 ### Where to run things
 

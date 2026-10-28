@@ -3,8 +3,8 @@
 # file and publishing is enough to change what students get.
 #
 # Format:  session | folders to copy into ~/my_workspace | slides PDF
-# Folders that already exist in the workspace are never overwritten, so a
-# session can list an earlier folder that students keep working in.
+# A folder that already exists in the workspace is updated, never replaced: files the student has
+# not edited are refreshed, edited files get a <name>.new beside them. So a session can list an earlier folder students keep working in.
 1 | session_1 | slides/session1_slides.pdf
 2 | session_2 | slides/session2_slides.pdf
 3 | session_2 session_3 | slides/session3_slides.pdf
