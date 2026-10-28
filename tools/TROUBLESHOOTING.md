@@ -8,7 +8,7 @@
 
 **Start of every session:** run the one command at the top of https://github.com/bradyallardice/claude-code-workshop. It fixes most of the problems below on its own (missing or out-of-date course repo, local edits blocking `git pull`, wrong folder opened).
 
-**The 90-second rule.** If a fix here does not work within 90 seconds, put your red sticky note up and keep working with your partner on their laptop. Do not debug alone in silence.
+**The 90-second rule.** If a fix here does not work within 90 seconds, ask for help and keep working with your partner on their laptop. Do not debug alone in silence.
 
 **Universal first move after installing anything:** quit VS Code completely (Mac: Cmd+Q; Windows: close every window) and close every terminal, then reopen. VS Code and terminals only see newly installed programs after a full restart.
 
@@ -146,7 +146,7 @@ Check with `ls -a` (or `Get-ChildItem -Force`) that `.claude` and `.claudeignore
 Your new repo's branch is called `master`. Rename it, then push: `git branch -M main` and `git push -u origin main`.
 
 ### F21 — Push rejected ("fetch first" / "non-fast-forward")
-Someone merged before you. `git pull --rebase origin main`, then push again. If it reports a conflict, raise your sticky note.
+Someone merged before you. `git pull --rebase origin main`, then push again. If it reports a conflict, ask for help.
 
 ### F22 — `npm install -g claudeignore` fails with EACCES (Mac)
 Skip the global install and run it through npx instead, from your project folder:

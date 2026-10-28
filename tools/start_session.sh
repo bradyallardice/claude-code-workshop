@@ -42,7 +42,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 say()  { printf "  %s\n" "$1"; }
 ok()   { printf "  \033[32mOK\033[0m    %s\n" "$1"; }
 note() { printf "  \033[33mNOTE\033[0m  %s\n" "$1"; }
-die()  { printf "\n  \033[31mSTOPPED\033[0m %s\n  Raise your red sticky note and show this screen.\n\n" "$1"; exit 1; }
+die()  { printf "\n  \033[31mSTOPPED\033[0m %s\n  Ask the instructor for help and show this screen.\n\n" "$1"; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
 case "$SESSION" in

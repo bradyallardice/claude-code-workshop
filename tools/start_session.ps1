@@ -256,7 +256,7 @@ function Start-WorkshopSession {
         if (-not (Test-Path $Dest)) {
             # robocopy handles long paths; exit codes 0-7 mean success, 8+ mean failure.
             robocopy $Src $Dest /E /R:1 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
-            if ($LASTEXITCODE -ge 8) { Write-Host "`n  STOPPED Copy of $folder failed. Raise your red sticky note." -ForegroundColor Red; return $false }
+            if ($LASTEXITCODE -ge 8) { Write-Host "`n  STOPPED Copy of $folder failed. Ask the instructor for help." -ForegroundColor Red; return $false }
             $global:LASTEXITCODE = 0
             $lines = @("#method=git") + @($Up.Keys | ForEach-Object { $Up[$_] + "`t" + $_ })
             [IO.File]::WriteAllLines($Mf, $lines, $Utf8NoBom)

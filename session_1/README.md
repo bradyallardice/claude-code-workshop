@@ -30,6 +30,11 @@ copies today's slides into `~/my_workspace/slides/`, and opens `~/my_workspace`
 in VS Code. Check that the **Materials version** in the READY box matches the
 one on the screen. If anything fails, see `tools/TROUBLESHOOTING.md`.
 
+**Finding `my_workspace` later:** it is a folder in your home folder, and the READY box
+prints its exact path on the line *Work in:*. On a Mac, open Finder and choose Go, then Home.
+On Windows, type `%USERPROFILE%` in the File Explorer address bar. You can also reopen it in
+VS Code with File, then Open Recent, or just run the command above again: it reopens the folder.
+
 Run the same command at the start of every session. If I fixed something since you
 last ran it, it updates your copy without touching your work:
 
@@ -76,7 +81,9 @@ start Claude Code there. The exercise scripts use paths such as
 1. Open the Session 1 slides: `~/my_workspace/slides/session1_slides.pdf`
    (copied there by the one-command start), or `slides/session1_slides.pdf` in
    the course repo.
-2. Setup check: run `claude --version`, then compile `session_1/setup_check.tex`
+2. Setup check: in VS Code, open a terminal (menu **Terminal, then New Terminal**, or
+   `Ctrl+` followed by the backtick key). It opens at the bottom of the window, inside
+   `my_workspace`. Type `claude --version` there and press Enter, then compile `session_1/setup_check.tex`
    (open it in VS Code and click the green Build arrow, or run
    `cd session_1 && latexmk -pdf setup_check.tex`). A PDF with a small table
    should appear.

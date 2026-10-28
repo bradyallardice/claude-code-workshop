@@ -29,7 +29,7 @@ your work: a file you have **not** edited is replaced by the newer version; a fi
 **have** edited is never changed, and the newer version is saved beside it as
 `<name>.new`; files you created or deleted are left alone.
 
-If anything fails: `tools/TROUBLESHOOTING.md`, or raise your red sticky note.
+If anything fails: `tools/TROUBLESHOOTING.md`.
 
 ## Setup
 
