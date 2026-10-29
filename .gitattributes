@@ -42,6 +42,7 @@
 /session_1/demo_chat_upload export-ignore
 /session_1/build_panel.py export-ignore
 /session_1/build_county_panel.py export-ignore
+/session_1/analyze_county_panel.py export-ignore
 /session_1/demo_county_panel.py export-ignore
 /session_1/regression_ethnicity.py export-ignore
 /session_1/stata_demo/analysis.py export-ignore

@@ -8,7 +8,8 @@ read-only mirror that the command below resets every time. That is what lets me
 push new material or fix a mistake at any time without breaking your work, and lets
 you edit, break, and redo freely. No merge conflicts.
 
-Today is the first time. Do this together, live.
+The pre-work guide had you run this once already. Today we run it again together, live, so
+everyone sees the same READY box and anyone whose run failed gets it fixed.
 
 ### One command
 
