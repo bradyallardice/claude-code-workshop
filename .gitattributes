@@ -52,6 +52,7 @@
 /session_1/scripts/create_sample_data.py export-ignore
 
 # Session 2
+/session_2/.env export-ignore
 /session_2/scripts/build_county_panel.py export-ignore
 /session_2/scripts/build_county_panel.R export-ignore
 /session_2/scripts/build_county_panel.do export-ignore

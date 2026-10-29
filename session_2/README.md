@@ -49,7 +49,8 @@ The `reset` discards edits made inside the course repo; your `my_workspace` is n
 
 The command opens `my_workspace`. For today's exercises, open the `session_2` folder
 inside it (VS Code: File, Open Folder, `my_workspace/session_2`) and start Claude Code
-there. Keep your `session_1` copy too: today's first exercise runs in it.
+there. Today's first exercise runs in `session_2/county_panel`, opened in its own window
+(see Start here, step 3).
 
 ---
 
@@ -58,11 +59,14 @@ there. Keep your `session_1` copy too: today's first exercise runs in it.
 1. Open `~/my_workspace/slides/session2_slides.pdf` (copied there by the command above).
 2. Demo, follow along: two Claude Code tabs at once in this folder (prompts on
    the slides).
-3. Exercise 1, the county panel in plan mode: in your **`my_workspace/session_1`**
-   copy from last session, opened in a new VS Code window (instructions on the
-   slides).
-4. Exercise 2: Part 1 of `docs/exercise_prompt.md`. Read `docs/codebook.md` to learn the Swiss franc shock data in `data/`, write
-   your expectations in `expectations.md` (it's in this folder) first, then merge and verify against them.
+3. Exercise 1, the county panel in plan mode: open the **`county_panel`** folder
+   inside this one in a new VS Code window. It is at
+   `/Users/<your name>/my_workspace/session_2/county_panel` (Mac) or
+   `C:\Users\<your name>\my_workspace\session_2\county_panel` (Windows), and it
+   already has a `CLAUDE.md`, the data, and the codebooks (step-by-step on the slides).
+4. Exercise 2: Part 1 of `docs/exercise_prompt.md`, in two halves. **1a:** read `docs/codebook.md` to learn the Swiss
+   franc shock data in `data/`, write your expectations in `expectations.md` (it's in this folder), have Claude Code
+   write and run a merge script in `scripts/`, and check the merge yourself against them. **1b**, after the lecture on tests: turn your expectations into a check script.
 
 **Keep this folder after today.** Parts 2 and 3 of the exercise (estimation,
 robustness, and a LaTeX table) are in Session 3, and continue here.

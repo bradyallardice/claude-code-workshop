@@ -12,7 +12,7 @@ Codebook: `session_2/docs/codebook.md`.
 
 ## Part 2: Matrix, Tests, and Estimation (25 min) — in your `session_2` folder
 
-Reopen your `my_workspace/session_2` folder in VS Code and start a new conversation. Your `CLAUDE.md` (your own verification rules from Session 2 step 4), your `expectations.md`, your merge script, and `output/merged_survey.csv` from Session 2 Part 1 should be there. If your merge did not finish, ask Claude Code to finish it and run its tests first; everything below depends on it.
+Reopen your `my_workspace/session_2` folder in VS Code and start a new conversation. Your `CLAUDE.md` (your own verification rules from Session 2 step 4), your `expectations.md`, your merge script, and `output/merged_survey.csv` from Session 2 Part 1 should be there. If your merge did not finish, ask Claude Code to finish it and run your check script first; everything below depends on it.
 
 ### Step A: Audit your own expectations, then extend them (6 min)
 
