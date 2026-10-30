@@ -4,23 +4,11 @@ Workshop materials for learning how to use Claude Code as an AI-powered research
 
 ## Start of every session: one command
 
-Do this at the start of **every** session. It brings your course materials up to date, puts
+Run this at the start of **every** session. It brings your course materials up to date, puts
 today's folders in `my_workspace` (in your home folder), copies today's slides, and opens
 `my_workspace` in VS Code. It never overwrites a file you have edited.
 
-### Mac
-
-1. **Open Terminal:** press `Cmd+Space`, type `Terminal`, press Enter. A window with a blinking
-   cursor opens.
-2. **Copy today's command** from the list below: click the copy icon at the right of the grey box
-   for today's session. (Do not retype it.)
-3. **Click in the Terminal window, press `Cmd+V`, then Enter.**
-4. **Wait** (1 to 2 minutes, longer the first time). Text scrolls by. Do not close the window.
-   If a window asks to install developer tools, click **Install**, wait for it to finish, then
-   run the command again.
-5. **Look for the READY box** and check that the **Materials version** matches the one your
-   instructor gives.
-6. **VS Code opens by itself.** Your instructor says which folder to open.
+### Mac (Terminal): copy today's session
 
 **Session 1**
 ```bash
@@ -42,21 +30,38 @@ curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop
 curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 4
 ```
 
-### Windows
+### Windows (PowerShell, not as administrator): it asks which session
+
+```powershell
+irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
+```
+
+Click the copy icon at the right of the grey box, paste, press Enter. Step by step:
+
+### Step by step: Mac
+
+1. **Open Terminal:** press `Cmd+Space`, type `Terminal`, press Enter. A window with a blinking
+   cursor opens.
+2. **Copy today's command** from above (the copy icon at the right of the grey box). Do not retype it.
+3. **Click in the Terminal window, press `Cmd+V`, then Enter.**
+4. **Wait** (1 to 2 minutes, longer the first time). Text scrolls by. Do not close the window.
+   If a window asks to install developer tools, click **Install**, wait for it to finish, then
+   run the command again.
+5. **Look for the READY box** and check that the **Materials version** matches the one your
+   instructor gives.
+6. **VS Code opens by itself.** Your instructor says which folder to open.
+
+### Step by step: Windows
 
 1. **Open PowerShell:** click Start, type `PowerShell`, click **Windows PowerShell** (a blue window).
    Do **not** choose "Run as administrator".
-2. **Copy the command** below: click the copy icon at the right of the grey box.
+2. **Copy the command** from above (the copy icon at the right of the grey box).
 3. **Click in the PowerShell window, press `Ctrl+V`, then Enter.**
 4. **It asks "Which session is today?"** Type today's session number (1, 2, 3 or 4) and press Enter.
 5. **Wait** (1 to 2 minutes, longer the first time). Do not close the window.
 6. **Look for the READY box** and check that the **Materials version** matches the one your
    instructor gives.
 7. **VS Code opens by itself.** Your instructor says which folder to open.
-
-```powershell
-irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
-```
 
 ### Afterwards
 
