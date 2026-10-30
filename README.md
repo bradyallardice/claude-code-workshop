@@ -4,32 +4,73 @@ Workshop materials for learning how to use Claude Code as an AI-powered research
 
 ## Start of every session: one command
 
-Copy the line for your computer, change the last number to today's session, and run it.
+Do this at the start of **every** session. It brings your course materials up to date, puts
+today's folders in `my_workspace` (in your home folder), copies today's slides, and opens
+`my_workspace` in VS Code. It never overwrites a file you have edited.
 
-**Mac** (Terminal):
+### Mac
+
+1. **Open Terminal:** press `Cmd+Space`, type `Terminal`, press Enter. A window with a blinking
+   cursor opens.
+2. **Copy today's command** from the list below: click the copy icon at the right of the grey box
+   for today's session. (Do not retype it.)
+3. **Click in the Terminal window, press `Cmd+V`, then Enter.**
+4. **Wait** (1 to 2 minutes, longer the first time). Text scrolls by. Do not close the window.
+   If a window asks to install developer tools, click **Install**, wait for it to finish, then
+   run the command again.
+5. **Look for the READY box** and check that the **Materials version** matches the one your
+   instructor gives.
+6. **VS Code opens by itself.** Your instructor says which folder to open.
+
+**Session 1**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 1
 ```
 
-**Windows** (PowerShell, not as Administrator). It asks which session:
+**Session 2**
+```bash
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 2
+```
+
+**Session 3**
+```bash
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 3
+```
+
+**Session 4**
+```bash
+curl -fsSL https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.sh | bash -s -- 4
+```
+
+### Windows
+
+1. **Open PowerShell:** click Start, type `PowerShell`, click **Windows PowerShell** (a blue window).
+   Do **not** choose "Run as administrator".
+2. **Copy the command** below: click the copy icon at the right of the grey box.
+3. **Click in the PowerShell window, press `Ctrl+V`, then Enter.**
+4. **It asks "Which session is today?"** Type today's session number (1, 2, 3 or 4) and press Enter.
+5. **Wait** (1 to 2 minutes, longer the first time). Do not close the window.
+6. **Look for the READY box** and check that the **Materials version** matches the one your
+   instructor gives.
+7. **VS Code opens by itself.** Your instructor says which folder to open.
+
 ```powershell
 irm https://raw.githubusercontent.com/bradyallardice/claude-code-workshop/student/tools/start_session.ps1 | iex
 ```
 
-It updates your copy of the course materials to today's version, brings today's
-folders in `my_workspace` up to date, copies today's slides, and opens `my_workspace`
-in VS Code. Check that the **Materials version** in the READY box matches the one on
-the screen.
+### Afterwards
 
-**Work only in `~/my_workspace`.** The course repo (`~/claude-code-workshop`) is a
-read-only mirror that the command resets every time.
+**Work only in `~/my_workspace`** (Mac: `/Users/<your name>/my_workspace`; Windows:
+`C:\Users\<your name>\my_workspace`). The course repo (`~/claude-code-workshop`) is a read-only
+mirror that the command resets every time.
 
-When I fix something between sessions, the same command delivers it without touching
-your work: a file you have **not** edited is replaced by the newer version; a file you
-**have** edited is never changed, and the newer version is saved beside it as
-`<name>.new`; files you created or deleted are left alone.
+When the instructor fixes something between sessions, the same command delivers it without
+touching your work: a file you have **not** edited is replaced by the newer version; a file you
+**have** edited is never changed, and the newer version is saved beside it as `<name>.new`;
+files you created or deleted are left alone.
 
-If anything fails: `tools/TROUBLESHOOTING.md`.
+**If anything fails or looks wrong:** do not debug alone. Ask for help and keep working with
+your partner, and see [`tools/TROUBLESHOOTING.md`](tools/TROUBLESHOOTING.md).
 
 ## Setup
 

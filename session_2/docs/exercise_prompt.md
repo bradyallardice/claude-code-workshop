@@ -40,10 +40,12 @@ Part 1 comes in two halves. **Part 1a** (steps 1, 2, 3a) is before the lecture o
 
    These are your expectations. Write them now, before the merge. Afterwards you add what you found under each one, but you never edit the expectation itself.
 
-2. **Merge the demographics data into the survey**, in **plan mode**, and save the result as `output/merged_survey.csv`. Review every plan before approving.
-   - **Make it a script.** Ask Claude Code to write the merge as a script in `scripts/`, in the language you use (`scripts/merge.do`, `scripts/merge.R` or `scripts/merge.py`), with the paths of the two input files and of the output file set at the top of the script, and to run it to produce `output/merged_survey.csv`. Step 3b and Session 3 build on this script.
-   - The demographics file has more rows than the survey. **You decide the join type.** Do not let Claude Code choose.
-   - Then explore the merged data: summary statistics, treatment group sizes, and the outcome distribution.
+2. **Merge the demographics data into the survey, in Plan mode.**
+   1. **Switch to Plan before you ask:** click the mode name under the message box. If it says Auto, change it to Plan.
+   2. **Ask for the merge as a script** in `scripts/`, in the language you use (`scripts/merge.do`, `scripts/merge.R` or `scripts/merge.py`), with the paths of the two input files and of the output file set at the top of the script, run to produce `output/merged_survey.csv`. Step 3b and Session 3 build on this script.
+   3. **Read the plan before you approve it**, as you did with the county panel. Does it name the key, use *your* join type, say what happens to survey respondents with no demographics row, and say how many rows it expects? If not, redirect it. The demographics file has more rows than the survey. **You decide the join type.** Do not let Claude Code choose.
+   4. **Approve, then carry it out in Manual mode**, so you see each change before it is made.
+   5. **Then explore** the merged data: summary statistics, treatment group sizes, and the outcome distribution.
 
 3a. **Check it yourself, without Claude Code.**
    - For each expectation, run the check yourself in the tool you use (for example Stata `count` or `duplicates report`, R `nrow()` or `anyDuplicated()`, or open the CSV), and fill in *What I found* under it: met or not met, with what you saw.
